@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from app.api.ontology import router as ontology_router
 from app.api.routes.health import router as health_router
+from app.api.routes.ontology import router as ontology_router
 from app.api.routes.root import router as root_router
 
 

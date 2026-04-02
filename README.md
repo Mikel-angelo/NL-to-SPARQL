@@ -1,6 +1,6 @@
 ﻿# NL-to-SPARQL
 
-FastAPI scaffold with a router-based app layout.
+FastAPI service for loading one ontology into Apache Jena Fuseki and storing one current ontology locally.
 
 ## Setup
 
@@ -16,18 +16,61 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-## Structure
+Docs are available at `http://127.0.0.1:8000/docs`.
 
-```text
-app/
-  api/
-    routes/
-  core/
-  services/
-  main.py
-```
+## Current Model
 
-Docs will be available at `http://127.0.0.1:8000/docs`.
+The framework keeps exactly one current ontology locally and exactly one current ontology dataset in Fuseki.
+
+When you load a new ontology:
+- the previous Fuseki dataset is removed after the new one is created and uploaded
+- the current ontology file is saved in `storage/current/`
+- runtime metadata is saved as `storage/current/metadata.json`
+- parsed ontology structure is saved as `storage/current/ontology_context.json`
+- step-by-step onboarding logs are saved as `storage/current/load.log`
+
+The current storage contains:
+- `storage/current/ontology.ttl` or `storage/current/ontology.owl` or `storage/current/ontology.rdf`
+- `storage/current/metadata.json`
+- `storage/current/ontology_context.json`
+- `storage/current/load.log`
+
+## API
+
+### `POST /ontology/load`
+
+Loads an ontology file into the framework and Fuseki.
+
+Accepted formats:
+- `.ttl`
+- `.owl`
+- `.rdf`
+
+## Service Split
+
+`OntologyOnboardingService`
+- validate the uploaded file
+- build dataset naming from filename + timestamp
+- replace the current Fuseki dataset
+- trigger ontology metadata extraction
+- save the current ontology file, metadata, ontology context, and load log
+
+`OntologyContextService`
+- parse ontology structure
+- parse classes
+- parse object properties
+- parse datatype properties
+- parse labels and comments
+- parse class hierarchy
+- parse prefixes
+- optionally collect instance-level statistics
+- build `ontology_context.json`
+
+`FusekiService`
+- create dataset
+- delete dataset
+- replace dataset
+- upload ontology RDF
 
 ## Fuseki With Docker Compose
 
@@ -45,8 +88,9 @@ Stop Fuseki:
 docker compose -f infra/docker/compose.yml down
 ```
 
-Fuseki UI will be available at `http://127.0.0.1:3030`.
-Datasets are not pre-created in Compose and can be created later as needed.
+Fuseki UI is available at `http://127.0.0.1:3030`.
 Fuseki data is stored at the project root in `fuseki-data`.
-Admin login: `admin`
-Admin password: `admin`
+
+Admin login:
+- username: `admin`
+- password: `admin`

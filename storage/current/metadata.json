@@ -1,0 +1,8 @@
+{
+  "loaded_at": "2026-04-02T07:54:58.837748+00:00",
+  "ontology_name": "my-building",
+  "source_filename": "my_building.ttl",
+  "dataset_name": "my-building-20260402-075458-837748",
+  "endpoint": "http://127.0.0.1:3030/my-building-20260402-075458-837748",
+  "ontology_file": "ontology.ttl"
+}

@@ -1,0 +1,9 @@
+2026-04-02T07:54:58.837753+00:00 Starting ontology onboarding
+2026-04-02T07:54:58.838913+00:00 Read 3503 bytes from uploaded ontology file
+2026-04-02T07:54:58.839979+00:00 Prepared upload for 'my_building.ttl' as dataset 'my-building-20260402-075458-837748'
+2026-04-02T07:54:58.841095+00:00 Replacing Fuseki dataset
+2026-04-02T07:55:01.533159+00:00 Fuseki dataset upload completed
+2026-04-02T07:55:01.533696+00:00 Extracting ontology context
+2026-04-02T07:55:01.540168+00:00 Ontology context extracted
+2026-04-02T07:55:01.540688+00:00 Writing current ontology files
+2026-04-02T07:55:01.546434+00:00 Onboarding completed in 2.71s
