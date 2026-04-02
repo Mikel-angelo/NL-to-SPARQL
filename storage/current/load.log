@@ -1,9 +1,9 @@
-2026-04-02T07:54:58.837753+00:00 Starting ontology onboarding
-2026-04-02T07:54:58.838913+00:00 Read 3503 bytes from uploaded ontology file
-2026-04-02T07:54:58.839979+00:00 Prepared upload for 'my_building.ttl' as dataset 'my-building-20260402-075458-837748'
-2026-04-02T07:54:58.841095+00:00 Replacing Fuseki dataset
-2026-04-02T07:55:01.533159+00:00 Fuseki dataset upload completed
-2026-04-02T07:55:01.533696+00:00 Extracting ontology context
-2026-04-02T07:55:01.540168+00:00 Ontology context extracted
-2026-04-02T07:55:01.540688+00:00 Writing current ontology files
-2026-04-02T07:55:01.546434+00:00 Onboarding completed in 2.71s
+2026-04-02T08:33:42.147974+00:00 Starting ontology onboarding
+2026-04-02T08:33:42.269446+00:00 Read 24141534 bytes from uploaded ontology file
+2026-04-02T08:33:42.270408+00:00 Prepared upload for 'HumanDO.owl' as dataset 'humando-20260402-083342-147942'
+2026-04-02T08:33:42.271446+00:00 Replacing Fuseki dataset
+2026-04-02T08:39:51.228292+00:00 Fuseki dataset upload completed
+2026-04-02T08:39:51.229394+00:00 Extracting ontology context
+2026-04-02T08:40:13.413130+00:00 Ontology context extracted
+2026-04-02T08:40:13.413757+00:00 Writing current ontology files
+2026-04-02T08:40:13.487960+00:00 Onboarding completed in 391.34s
