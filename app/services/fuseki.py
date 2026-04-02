@@ -1,3 +1,19 @@
+"""
+Responsible for all direct Apache Jena Fuseki interactions.
+
+Functions:
+    • create datasets
+    • delete datasets
+    • upload RDF files into a dataset
+    • replace the current dataset with a newly prepared one
+    • build the public dataset endpoint URL
+
+Outputs:
+    • Fuseki dataset lifecycle changes
+    • uploaded RDF content in Fuseki
+    • endpoint_url
+"""
+
 from dataclasses import dataclass
 
 import httpx
@@ -105,22 +121,16 @@ class FusekiService:
     async def replace_dataset(
         self,
         dataset_name: str,
-        filename: str,
-        content: bytes,
+        files: list[FusekiUploadPayload],
         previous_dataset_name: str | None,
     ) -> None:
-        """Creates the new dataset, uploads the ontology, then removes the previous dataset."""
+        """Creates the new dataset, uploads all RDF files, then removes the previous dataset."""
         dataset_created = False
         try:
             await self.create_dataset(dataset_name)
             dataset_created = True
-            await self.upload_rdf(
-                FusekiUploadPayload(
-                    dataset_name=dataset_name,
-                    filename=filename,
-                    content=content,
-                )
-            )
+            for payload in files:
+                await self.upload_rdf(payload)
             if previous_dataset_name and previous_dataset_name != dataset_name:
                 await self.delete_dataset(previous_dataset_name, ignore_missing=True)
         except Exception:

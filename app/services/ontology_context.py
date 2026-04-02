@@ -1,39 +1,34 @@
-import json
-from io import BytesIO
-from pathlib import Path
+"""
+Responsible for transforming the final ontology graph into the normalized internal representation.
+
+Functions:
+    • parse classes
+    • parse object properties
+    • parse datatype properties
+    • parse labels and comments
+    • parse class hierarchy
+    • parse prefixes
+    • collect instance-level statistics
+    • build the ontology_context.json payload
+
+Outputs:
+    • ontology_context.json content
+"""
 
 from rdflib import Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import OWL
 
 
-RDFLIB_FORMATS = {
-    ".ttl": "turtle",
-    ".owl": "xml",
-    ".rdf": "xml",
-}
-
-
 class OntologyContextService:
-    """Builds the normalized semantic representation of an ontology."""
+    """Extract the full normalized ontology context from the final graph."""
 
-    def extract_from_content(
-        self,
-        content: bytes,
-        suffix: str,
-        ontology_name: str,
-        source_filename: str,
-    ) -> dict[str, object]:
-        """Parses ontology content and returns the normalized ontology context."""
-        graph = Graph()
-        graph.parse(source=BytesIO(content), format=RDFLIB_FORMATS[suffix])
-        return self._build_ontology_context(graph, ontology_name, source_filename)
-
-    def _build_ontology_context(
+    def extract_context(
         self,
         graph: Graph,
         ontology_name: str,
         source_filename: str,
     ) -> dict[str, object]:
+        """Run the heavy semantic extraction step and build `ontology_context.json`."""
         class_uris = self._subjects_for_types(graph, {OWL.Class, RDFS.Class})
         object_property_uris = self._subjects_for_types(graph, {OWL.ObjectProperty})
         datatype_property_uris = self._subjects_for_types(graph, {OWL.DatatypeProperty})

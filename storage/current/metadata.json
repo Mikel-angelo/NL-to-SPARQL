@@ -1,8 +1,27 @@
 {
-  "loaded_at": "2026-04-02T08:33:42.147942+00:00",
-  "ontology_name": "humando",
-  "source_filename": "HumanDO.owl",
-  "dataset_name": "humando-20260402-083342-147942",
-  "endpoint": "http://127.0.0.1:3030/humando-20260402-083342-147942",
-  "ontology_file": "ontology.owl"
+  "loaded_at": "2026-04-02T09:28:05.217105+00:00",
+  "ontology_name": "soda-brick",
+  "source_filename": "soda_brick.ttl",
+  "dataset_name": "soda-brick-20260402-092805-217105",
+  "endpoint": "http://127.0.0.1:3030/soda-brick-20260402-092805-217105",
+  "ontology_file": "ontology.ttl",
+  "mode": "instances-only",
+  "triple_count": 65752,
+  "files_loaded": [
+    "ontology.ttl",
+    "schemas/schema-1.ttl",
+    "schemas/schema-2.ttl"
+  ],
+  "resolved_schemas": [
+    {
+      "source_namespace": "https://brickschema.org/schema/1.0.2/Brick#",
+      "url": "https://brickschema.org/schema/1.0.2/Brick.ttl",
+      "local_file": "schemas/schema-1.ttl"
+    },
+    {
+      "source_namespace": "https://brickschema.org/schema/Brick#",
+      "url": "https://brickschema.org/schema/Brick.ttl",
+      "local_file": "schemas/schema-2.ttl"
+    }
+  ]
 }
