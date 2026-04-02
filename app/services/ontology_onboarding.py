@@ -111,7 +111,11 @@ class OntologyOnboardingService:
             mode = self._ontology_schema_resolution_service.classify_mode(detection)
             load_log.log("mode_detected", mode=mode)
 
-            resolved = SchemaResolutionResult(resolved_files=[], attempted_urls=[])
+            resolved = SchemaResolutionResult(
+                resolved_files=[],
+                attempted_urls=[],
+                failed_urls=[],
+            )
             if mode == "instances-only":
                 load_log.log("schema_resolution_started")
                 resolved = await self._ontology_schema_resolution_service.resolve_schemas(initial_graph)
