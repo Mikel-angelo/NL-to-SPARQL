@@ -11,6 +11,7 @@ Functions:
 Outputs:
     • Fuseki dataset lifecycle changes
     • uploaded RDF content in Fuseki
+    • SPARQL query results
     • endpoint_url
 """
 
@@ -117,6 +118,36 @@ class FusekiService:
                 status_code=status.HTTP_502_BAD_GATEWAY,
                 detail=f"Failed to upload RDF to Fuseki: {response.text}",
             )
+
+    async def execute_query(self, dataset_name: str, query: str) -> dict[str, object]:
+        """Execute a SPARQL query against a Fuseki dataset and return the JSON response."""
+        try:
+            async with httpx.AsyncClient(timeout=self._upload_timeout) as client:
+                response = await client.post(
+                    f"{self.dataset_endpoint(dataset_name)}/query",
+                    data={"query": query},
+                    headers={"Accept": "application/sparql-results+json, application/json"},
+                    auth=self._auth,
+                )
+        except httpx.TimeoutException as exc:
+            raise HTTPException(
+                status_code=status.HTTP_504_GATEWAY_TIMEOUT,
+                detail="Timed out while executing the Fuseki query",
+            ) from exc
+
+        if response.status_code >= 400:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail=f"Failed to execute Fuseki query ({response.status_code}): {response.text}",
+            )
+
+        try:
+            return response.json()
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail="Fuseki returned a non-JSON response to the query",
+            ) from exc
 
     async def replace_dataset(
         self,

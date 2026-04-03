@@ -1,14 +1,27 @@
 {
-  "loaded_at": "2026-04-02T12:24:51.868578+00:00",
-  "ontology_name": "pizza",
-  "source_filename": "pizza.owl",
-  "dataset_name": "pizza-20260402-122451-868578",
-  "endpoint": "http://127.0.0.1:3030/pizza-20260402-122451-868578",
-  "ontology_file": "ontology.owl",
-  "mode": "mixed",
-  "triple_count": 2332,
+  "loaded_at": "2026-04-03T09:59:05.109659+00:00",
+  "ontology_name": "soda-brick",
+  "source_filename": "soda_brick.ttl",
+  "dataset_name": "soda-brick-20260403-095905-109659",
+  "endpoint": "http://127.0.0.1:3030/soda-brick-20260403-095905-109659",
+  "ontology_file": "ontology.ttl",
+  "mode": "instances-only",
+  "triple_count": 65752,
   "files_loaded": [
-    "ontology.owl"
+    "ontology.ttl",
+    "schemas/schema-1.ttl",
+    "schemas/schema-2.ttl"
   ],
-  "resolved_schemas": []
+  "resolved_schemas": [
+    {
+      "source_namespace": "https://brickschema.org/schema/1.0.2/Brick#",
+      "url": "https://brickschema.org/schema/1.0.2/Brick.ttl",
+      "local_file": "schemas/schema-1.ttl"
+    },
+    {
+      "source_namespace": "https://brickschema.org/schema/Brick#",
+      "url": "https://brickschema.org/schema/Brick.ttl",
+      "local_file": "schemas/schema-2.ttl"
+    }
+  ]
 }

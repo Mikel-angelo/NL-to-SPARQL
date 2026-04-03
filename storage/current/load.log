@@ -1,9 +1,12 @@
-{"timestamp": "2026-04-02T12:24:51.869860+00:00", "event": "upload_received", "source_filename": "pizza.owl", "dataset_name": "pizza-20260402-122451-868578", "bytes": 241414}
-{"timestamp": "2026-04-02T12:24:52.298584+00:00", "event": "parse_completed", "triple_count": 2332}
-{"timestamp": "2026-04-02T12:24:52.301566+00:00", "event": "detection_completed", "classes_count": 99, "properties_count": 8, "instances_count": 12}
-{"timestamp": "2026-04-02T12:24:52.302819+00:00", "event": "mode_detected", "mode": "mixed"}
-{"timestamp": "2026-04-02T12:24:52.353762+00:00", "event": "final_graph_ready", "triple_count": 2332}
-{"timestamp": "2026-04-02T12:24:52.361350+00:00", "event": "context_extraction_completed"}
-{"timestamp": "2026-04-02T12:24:52.374873+00:00", "event": "artifacts_saved", "files_loaded": ["ontology.owl"]}
-{"timestamp": "2026-04-02T12:24:59.085471+00:00", "event": "fuseki_loaded", "uploaded_files": 1}
-{"timestamp": "2026-04-02T12:24:59.086418+00:00", "event": "onboarding_completed", "elapsed_seconds": 7.22}
+{"timestamp": "2026-04-03T09:59:05.112931+00:00", "event": "upload_received", "source_filename": "soda_brick.ttl", "dataset_name": "soda-brick-20260403-095905-109659", "bytes": 187782}
+{"timestamp": "2026-04-03T09:59:05.289681+00:00", "event": "parse_completed", "triple_count": 3774}
+{"timestamp": "2026-04-03T09:59:05.292998+00:00", "event": "detection_completed", "classes_count": 0, "properties_count": 0, "instances_count": 1695}
+{"timestamp": "2026-04-03T09:59:05.293657+00:00", "event": "mode_detected", "mode": "instances-only"}
+{"timestamp": "2026-04-03T09:59:05.294594+00:00", "event": "schema_resolution_started"}
+{"timestamp": "2026-04-03T09:59:11.845670+00:00", "event": "schema_resolution_result", "resolved_schemas": 2, "attempted_urls": ["https://brickschema.org/schema/1.0.2/Brick#", "https://brickschema.org/schema/1.0.2/Brick", "https://brickschema.org/schema/1.0.2/Brick.owl", "https://brickschema.org/schema/1.0.2/Brick.rdf", "https://brickschema.org/schema/1.0.2/Brick.ttl", "https://brickschema.org/schema/Brick#", "https://brickschema.org/schema/Brick", "https://brickschema.org/schema/Brick.owl", "https://brickschema.org/schema/Brick.rdf", "https://brickschema.org/schema/Brick.ttl"], "failed_urls": []}
+{"timestamp": "2026-04-03T09:59:15.737891+00:00", "event": "schemas_added_to_graph", "added_schemas": 2}
+{"timestamp": "2026-04-03T09:59:15.738825+00:00", "event": "final_graph_ready", "triple_count": 65752}
+{"timestamp": "2026-04-03T09:59:16.021149+00:00", "event": "context_extraction_completed"}
+{"timestamp": "2026-04-03T09:59:16.064994+00:00", "event": "artifacts_saved", "files_loaded": ["ontology.ttl", "schemas/schema-1.ttl", "schemas/schema-2.ttl"]}
+{"timestamp": "2026-04-03T10:00:05.458431+00:00", "event": "fuseki_loaded", "uploaded_files": 3}
+{"timestamp": "2026-04-03T10:00:05.459518+00:00", "event": "onboarding_completed", "elapsed_seconds": 60.35}
