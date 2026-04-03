@@ -5,13 +5,15 @@ Functions:
     • parse uploaded ontology content into an initial RDF graph
     • run fast detection counts for classes, properties, and instances
     • classify the ontology as schema-only, mixed, or instances-only
-    • resolve external schemas heuristically for instances-only inputs
+    • analyze whether instance rdf:type values are covered by local class declarations
+    • resolve external schemas heuristically for missing instance-type namespaces
     • build the final graph from the original ontology plus resolved schemas
 
 Outputs:
     • initial RDF graph
     • detection counts
     • ontology mode
+    • schema coverage result
     • resolved schema files
     • final RDF graph
 """
@@ -50,6 +52,17 @@ class DetectionResult:
 
 
 @dataclass(frozen=True)
+class CoverageResult:
+    """Describes whether the uploaded graph declares the class URIs used by its instances."""
+
+    status: str
+    instance_type_uris: list[str]
+    declared_class_uris: list[str]
+    missing_class_uris: list[str]
+    missing_namespaces: list[str]
+
+
+@dataclass(frozen=True)
 class ResolvedSchemaFile:
     """One externally resolved schema file stored locally for the current run."""
 
@@ -70,7 +83,7 @@ class SchemaResolutionResult:
 
 
 class OntologySchemaResolutionService:
-    """Parse the uploaded ontology, detect its mode, and optionally resolve schemas."""
+    """Parse the uploaded ontology, classify its structure, analyze coverage, and resolve schemas."""
 
     async def parse_uploaded_content(self, content: bytes, suffix: str) -> Graph:
         """Parse the uploaded ontology file into the initial RDF graph."""
@@ -80,17 +93,14 @@ class OntologySchemaResolutionService:
 
     def detect(self, graph: Graph) -> DetectionResult:
         """Run a fast graph scan used to classify the ontology file."""
-        class_uris = self._subjects_for_types(graph, {OWL.Class})
+        class_uris = self._subjects_for_types(graph, {OWL.Class, RDFS.Class})
         object_property_uris = self._subjects_for_types(graph, {OWL.ObjectProperty})
         datatype_property_uris = self._subjects_for_types(graph, {OWL.DatatypeProperty})
 
-        instances: set[str] = set()
-        for subject, rdf_type in graph.subject_objects(RDF.type):
-            if not isinstance(subject, URIRef) or not isinstance(rdf_type, URIRef):
-                continue
-            if str(rdf_type) in SCHEMA_TYPE_URIS:
-                continue
-            instances.add(str(subject))
+        instances = {
+            str(subject)
+            for subject in self._instance_subjects(graph)
+        }
 
         return DetectionResult(
             classes_count=len(class_uris),
@@ -108,9 +118,41 @@ class OntologySchemaResolutionService:
             return "instances-only"
         return "schema-only"
 
+    def analyze_schema_coverage(self, graph: Graph) -> CoverageResult:
+        """Compare instance rdf:type class URIs with locally declared classes."""
+        instance_type_uris = self._instance_type_uris(graph)
+        declared_class_uris = self._subjects_for_types(graph, {OWL.Class, RDFS.Class})
+        declared_class_uri_strings = {str(class_uri) for class_uri in declared_class_uris}
+
+        missing_class_uris = sorted(
+            str(class_uri)
+            for class_uri in instance_type_uris
+            if str(class_uri) not in declared_class_uri_strings
+        )
+        missing_namespaces = sorted(
+            namespace
+            for namespace in {
+                self._namespace_of(URIRef(class_uri))
+                for class_uri in missing_class_uris
+            }
+            if namespace
+        )
+
+        return CoverageResult(
+            status="complete" if not missing_class_uris else "incomplete",
+            instance_type_uris=sorted(str(class_uri) for class_uri in instance_type_uris),
+            declared_class_uris=sorted(str(class_uri) for class_uri in declared_class_uris),
+            missing_class_uris=missing_class_uris,
+            missing_namespaces=missing_namespaces,
+        )
+
     async def resolve_schemas(self, graph: Graph) -> SchemaResolutionResult:
-        """Try to download external schemas referenced by rdf:type in instances-only files."""
-        namespaces = self._external_type_namespaces(graph)
+        """Resolve schemas for any instance-type namespaces missing from the local graph."""
+        coverage = self.analyze_schema_coverage(graph)
+        return await self.resolve_schemas_for_namespaces(coverage.missing_namespaces)
+
+    async def resolve_schemas_for_namespaces(self, namespaces: list[str]) -> SchemaResolutionResult:
+        """Try to download RDF schemas for the provided missing class namespaces."""
         attempted_urls: list[str] = []
         failed_urls: list[str] = []
         resolved_files: list[ResolvedSchemaFile] = []
@@ -177,20 +219,34 @@ class OntologySchemaResolutionService:
 
         return final_graph
 
-    def _external_type_namespaces(self, graph: Graph) -> list[str]:
-        namespaces: set[str] = set()
-        for _, rdf_type in graph.subject_objects(RDF.type):
-            if not isinstance(rdf_type, URIRef):
+    @staticmethod
+    def _instance_subjects(graph: Graph) -> set[URIRef]:
+        """Return subjects that look like domain instances rather than schema declarations."""
+        instances: set[URIRef] = set()
+        for subject, rdf_type in graph.subject_objects(RDF.type):
+            if not isinstance(subject, URIRef) or not isinstance(rdf_type, URIRef):
                 continue
             if str(rdf_type) in SCHEMA_TYPE_URIS:
                 continue
-            namespace = self._namespace_of(rdf_type)
-            if namespace:
-                namespaces.add(namespace)
-        return sorted(namespaces)
+            instances.add(subject)
+        return instances
+
+    def _instance_type_uris(self, graph: Graph) -> list[URIRef]:
+        """Return the distinct class URIs used in rdf:type assertions for domain instances."""
+        instance_subjects = self._instance_subjects(graph)
+        instance_type_uris: set[URIRef] = set()
+        for subject in instance_subjects:
+            for rdf_type in graph.objects(subject, RDF.type):
+                if not isinstance(rdf_type, URIRef):
+                    continue
+                if str(rdf_type) in SCHEMA_TYPE_URIS:
+                    continue
+                instance_type_uris.add(rdf_type)
+        return sorted(instance_type_uris, key=str)
 
     @staticmethod
     def _candidate_schema_urls(namespace: str) -> list[str]:
+        """Build a small set of likely schema-document URLs for one namespace."""
         base = namespace.rstrip("#/")
         return [
             namespace,
@@ -202,6 +258,7 @@ class OntologySchemaResolutionService:
 
     @staticmethod
     def _suffix_from_url_or_type(url: str, content_type: str) -> str | None:
+        """Infer which RDF parser to use from the response content type or URL suffix."""
         lowered_type = content_type.lower()
         lowered_url = url.lower()
         if "text/turtle" in lowered_type or lowered_url.endswith(".ttl"):
@@ -212,6 +269,7 @@ class OntologySchemaResolutionService:
 
     @staticmethod
     def _namespace_of(subject: URIRef) -> str | None:
+        """Extract the namespace portion of a URIRef using '#' or the final '/'."""
         text = str(subject)
         if "#" in text:
             head, _, _ = text.rpartition("#")
@@ -223,6 +281,7 @@ class OntologySchemaResolutionService:
 
     @staticmethod
     def _subjects_for_types(graph: Graph, rdf_types: set[URIRef]) -> list[URIRef]:
+        """Collect distinct URI subjects declared with any of the requested rdf:type values."""
         subjects: set[URIRef] = set()
         for rdf_type in rdf_types:
             for subject in graph.subjects(RDF.type, rdf_type):

@@ -34,6 +34,7 @@ from app.core.config import settings
 from app.services.fuseki import FusekiService, FusekiUploadPayload
 from app.services.ontology_context import OntologyContextService
 from app.services.ontology_schema_resolution import (
+    CoverageResult,
     OntologySchemaResolutionService,
     ResolvedSchemaFile,
     SchemaResolutionResult,
@@ -111,17 +112,30 @@ class OntologyOnboardingService:
             mode = self._ontology_schema_resolution_service.classify_mode(detection)
             load_log.log("mode_detected", mode=mode)
 
+            coverage = self._ontology_schema_resolution_service.analyze_schema_coverage(initial_graph)
+            load_log.log(
+                "coverage_analyzed",
+                status=coverage.status,
+                instance_type_count=len(coverage.instance_type_uris),
+                declared_class_count=len(coverage.declared_class_uris),
+                missing_class_count=len(coverage.missing_class_uris),
+                missing_namespaces=coverage.missing_namespaces,
+            )
+
             resolved = SchemaResolutionResult(
                 resolved_files=[],
                 attempted_urls=[],
                 failed_urls=[],
             )
-            if mode == "instances-only":
+            if coverage.missing_namespaces:
                 load_log.log("schema_resolution_started")
-                resolved = await self._ontology_schema_resolution_service.resolve_schemas(initial_graph)
+                resolved = await self._ontology_schema_resolution_service.resolve_schemas_for_namespaces(
+                    coverage.missing_namespaces
+                )
                 load_log.log(
                     "schema_resolution_result",
                     resolved_schemas=len(resolved.resolved_files),
+                    missing_class_uris=coverage.missing_class_uris,
                     attempted_urls=resolved.attempted_urls,
                     failed_urls=resolved.failed_urls,
                 )
@@ -130,7 +144,7 @@ class OntologyOnboardingService:
                 initial_graph,
                 resolved.resolved_files,
             )
-            if mode == "instances-only":
+            if resolved.resolved_files:
                 load_log.log(
                     "schemas_added_to_graph",
                     added_schemas=len(resolved.resolved_files),
@@ -151,6 +165,7 @@ class OntologyOnboardingService:
                 attempted_at=attempted_at,
                 upload=upload,
                 mode=mode,
+                coverage=coverage,
                 final_graph=final_graph,
                 resolved=resolved,
             )
@@ -216,6 +231,7 @@ class OntologyOnboardingService:
         attempted_at: datetime,
         upload: PreparedOntologyUpload,
         mode: str,
+        coverage: CoverageResult,
         final_graph: Graph,
         resolved: SchemaResolutionResult,
     ) -> dict[str, object]:
@@ -231,6 +247,13 @@ class OntologyOnboardingService:
             "endpoint": upload.endpoint,
             "ontology_file": upload.ontology_filename,
             "mode": mode,
+            "schema_coverage": {
+                "status": coverage.status,
+                "instance_type_uris": coverage.instance_type_uris,
+                "declared_class_uris": coverage.declared_class_uris,
+                "missing_class_uris": coverage.missing_class_uris,
+                "missing_namespaces": coverage.missing_namespaces,
+            },
             "triple_count": len(final_graph),
             "files_loaded": files_loaded,
             "resolved_schemas": [
