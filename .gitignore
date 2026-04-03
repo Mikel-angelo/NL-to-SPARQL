@@ -1,7 +1,36 @@
+# Python
 __pycache__/
 .pytest_cache/
 .venv/
 venv/
 *.pyc
 *.egg-info/
+
+# Fuseki
 fuseki-data/
+
+# =========================
+# Ontology generated data
+# =========================
+storage/
+data/
+*.owl
+*.ttl
+*.rdf
+
+# Metadata / context (generated)
+metadata.json
+ontology_context.json
+
+# =========================
+# RAG / embeddings
+# =========================
+*.faiss
+*.index
+*.db
+*.pkl
+
+# =========================
+# Logs
+# =========================
+*.log
