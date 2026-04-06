@@ -1,11 +1,17 @@
 {
-  "loaded_at": "2026-04-03T11:10:02.841649+00:00",
+  "loaded_at": "2026-04-06T09:20:48.602682+00:00",
   "ontology_name": "soda-brick",
   "source_filename": "soda_brick.ttl",
-  "dataset_name": "soda-brick-20260403-111002-841649",
-  "endpoint": "http://127.0.0.1:3030/soda-brick-20260403-111002-841649",
+  "dataset_name": "soda-brick-20260406-092048-602682",
+  "endpoint": "http://127.0.0.1:3030/soda-brick-20260406-092048-602682",
   "ontology_file": "ontology.ttl",
   "mode": "instances-only",
+  "initial_graph": {
+    "triple_count": 3774,
+    "classes_count": 0,
+    "instances_count": 1695,
+    "properties_count": 0
+  },
   "schema_coverage": {
     "status": "incomplete",
     "instance_type_uris": [
@@ -90,7 +96,6 @@
       "https://brickschema.org/schema/Brick#"
     ]
   },
-  "triple_count": 65752,
   "files_loaded": [
     "ontology.ttl",
     "schemas/schema-1.ttl",
@@ -107,5 +112,6 @@
       "url": "https://brickschema.org/schema/Brick.ttl",
       "local_file": "schemas/schema-2.ttl"
     }
-  ]
+  ],
+  "triple_count": 65752
 }

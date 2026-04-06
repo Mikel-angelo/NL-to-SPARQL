@@ -35,6 +35,7 @@ from app.services.fuseki import FusekiService, FusekiUploadPayload
 from app.services.onboarding.ontology_context import OntologyContextService
 from app.services.onboarding.ontology_schema_resolution import (
     CoverageResult,
+    DetectionResult,
     OntologySchemaResolutionService,
     ResolvedSchemaFile,
     SchemaResolutionResult,
@@ -121,6 +122,21 @@ class OntologyOnboardingService:
                 missing_class_count=len(coverage.missing_class_uris),
                 missing_namespaces=coverage.missing_namespaces,
             )
+            initial_metadata = self._build_metadata(
+                attempted_at=attempted_at,
+                upload=upload,
+                mode=mode,
+                detection=detection,
+                coverage=coverage,
+                initial_graph=initial_graph,
+            )
+            self._current_dir.mkdir(parents=True, exist_ok=True)
+            (self._current_dir / upload.ontology_filename).write_bytes(upload.content)
+            (self._current_dir / "metadata.json").write_text(
+                json.dumps(initial_metadata, indent=2),
+                encoding="utf-8",
+            )
+            load_log.flush()
 
             resolved = SchemaResolutionResult(
                 resolved_files=[],
@@ -165,7 +181,9 @@ class OntologyOnboardingService:
                 attempted_at=attempted_at,
                 upload=upload,
                 mode=mode,
+                detection=detection,
                 coverage=coverage,
+                initial_graph=initial_graph,
                 final_graph=final_graph,
                 resolved=resolved,
             )
@@ -231,15 +249,18 @@ class OntologyOnboardingService:
         attempted_at: datetime,
         upload: PreparedOntologyUpload,
         mode: str,
+        detection: DetectionResult,
         coverage: CoverageResult,
-        final_graph: Graph,
-        resolved: SchemaResolutionResult,
+        initial_graph: Graph,
+        final_graph: Graph | None = None,
+        resolved: SchemaResolutionResult | None = None,
     ) -> dict[str, object]:
         """Build the lightweight runtime metadata saved next to the ontology."""
+        resolved_files = resolved.resolved_files if resolved else []
         files_loaded = [upload.ontology_filename] + [
-            f"schemas/{schema_file.filename}" for schema_file in resolved.resolved_files
+            f"schemas/{schema_file.filename}" for schema_file in resolved_files
         ]
-        return {
+        metadata = {
             "loaded_at": attempted_at.isoformat(),
             "ontology_name": upload.ontology_name,
             "source_filename": upload.source_filename,
@@ -247,6 +268,12 @@ class OntologyOnboardingService:
             "endpoint": upload.endpoint,
             "ontology_file": upload.ontology_filename,
             "mode": mode,
+            "initial_graph": {
+                "triple_count": len(initial_graph),
+                "classes_count": detection.classes_count,
+                "instances_count": detection.instances_count,
+                "properties_count": detection.properties_count,
+            },
             "schema_coverage": {
                 "status": coverage.status,
                 "instance_type_uris": coverage.instance_type_uris,
@@ -254,7 +281,6 @@ class OntologyOnboardingService:
                 "missing_class_uris": coverage.missing_class_uris,
                 "missing_namespaces": coverage.missing_namespaces,
             },
-            "triple_count": len(final_graph),
             "files_loaded": files_loaded,
             "resolved_schemas": [
                 {
@@ -262,9 +288,12 @@ class OntologyOnboardingService:
                     "url": schema_file.url,
                     "local_file": f"schemas/{schema_file.filename}",
                 }
-                for schema_file in resolved.resolved_files
+                for schema_file in resolved_files
             ],
         }
+        if final_graph is not None:
+            metadata["triple_count"] = len(final_graph)
+        return metadata
 
     def _build_fuseki_uploads(
         self,
