@@ -1,6 +1,6 @@
 from fastapi import APIRouter, File, UploadFile
 
-from app.services.ontology_onboarding import OntologyOnboardingService
+from app.services.onboarding.ontology_onboarding import OntologyOnboardingService
 
 
 router = APIRouter(prefix="/ontology", tags=["ontology"])

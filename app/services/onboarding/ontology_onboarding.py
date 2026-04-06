@@ -32,8 +32,8 @@ from rdflib import Graph
 
 from app.core.config import settings
 from app.services.fuseki import FusekiService, FusekiUploadPayload
-from app.services.ontology_context import OntologyContextService
-from app.services.ontology_schema_resolution import (
+from app.services.onboarding.ontology_context import OntologyContextService
+from app.services.onboarding.ontology_schema_resolution import (
     CoverageResult,
     OntologySchemaResolutionService,
     ResolvedSchemaFile,
