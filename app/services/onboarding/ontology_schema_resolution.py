@@ -1,21 +1,21 @@
 """
-Responsible for the early ontology interpretation stage before full context extraction.
+Handle the early ontology interpretation stage before context extraction.
 
-Functions:
-    • parse uploaded ontology content into an initial RDF graph
-    • run fast detection counts for classes, properties, and instances
-    • classify the ontology as schema-only, mixed, or instances-only
-    • analyze whether instance rdf:type values are covered by local class declarations
-    • resolve external schemas heuristically for missing instance-type namespaces
-    • build the final graph from the original ontology plus resolved schemas
+Responsibilities:
+- parse uploaded ontology content into an initial RDF graph
+- run fast detection counts for classes, properties, and instances
+- classify the ontology as schema-only, mixed, or instances-only
+- analyze whether instance rdf:type values are covered by class declarations in the uploaded graph
+- resolve external schemas heuristically for missing instance-type namespaces
+- build the final graph from the uploaded graph plus any resolved schemas
 
 Outputs:
-    • initial RDF graph
-    • detection counts
-    • ontology mode
-    • schema coverage result
-    • resolved schema files
-    • final RDF graph
+- initial RDF graph
+- detection counts
+- ontology mode
+- schema coverage result
+- resolved schema files
+- final RDF graph
 """
 
 from dataclasses import dataclass
@@ -41,6 +41,7 @@ SCHEMA_TYPE_URIS = {
     str(OWL.Ontology),
     str(RDF.Property),
 }
+
 
 @dataclass(frozen=True)
 class DetectionResult:
@@ -119,7 +120,7 @@ class OntologySchemaResolutionService:
         return "schema-only"
 
     def analyze_schema_coverage(self, graph: Graph) -> CoverageResult:
-        """Compare instance rdf:type class URIs with locally declared classes."""
+        """Compare instance rdf:type class URIs with class declarations in the uploaded graph."""
         instance_type_uris = self._instance_type_uris(graph)
         declared_class_uris = self._subjects_for_types(graph, {OWL.Class, RDFS.Class})
         declared_class_uri_strings = {str(class_uri) for class_uri in declared_class_uris}
@@ -147,7 +148,7 @@ class OntologySchemaResolutionService:
         )
 
     async def resolve_schemas(self, graph: Graph) -> SchemaResolutionResult:
-        """Resolve schemas for any instance-type namespaces missing from the local graph."""
+        """Resolve schemas for any instance-type namespaces missing from the uploaded graph."""
         coverage = self.analyze_schema_coverage(graph)
         return await self.resolve_schemas_for_namespaces(coverage.missing_namespaces)
 

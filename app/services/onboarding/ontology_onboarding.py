@@ -1,23 +1,23 @@
 """
-Responsible for bringing a new ontology into the framework.
+Bring one uploaded ontology into the framework.
 
-Functions:
-    • accept ontology source (.owl, .ttl, .rdf)
-    • validate file format and file content
-    • assign dataset name from filename + timestamp
-    • orchestrate parsing, detection, classification, and optional schema resolution
-    • trigger ontology context extraction
-    • store current ontology artifacts locally
-    • create and replace the Fuseki dataset
-    • upload all loaded RDF files to Fuseki
-    • record onboarding progress in the current load log
+Responsibilities:
+- accept one ontology source (.owl, .ttl, .rdf)
+- validate file format and file content
+- assign a dataset name from filename + timestamp
+- orchestrate parsing, detection, classification, and optional schema resolution
+- trigger ontology context extraction
+- store the current ontology artifacts locally
+- create and replace the Fuseki dataset
+- upload all loaded RDF files to Fuseki
+- record onboarding progress in the current load log
 
 Outputs:
-    • dataset_name
-    • endpoint_url
-    • current metadata.json
-    • current ontology_context.json
-    • current load.log
+- dataset_name
+- endpoint
+- current metadata.json
+- current ontology_context.json
+- current load.log
 """
 
 from dataclasses import dataclass
@@ -33,6 +33,7 @@ from rdflib import Graph
 from app.core.config import settings
 from app.services.fuseki import FusekiService, FusekiUploadPayload
 from app.services.onboarding.ontology_context import OntologyContextService
+from app.services.onboarding.rag_index_service import RAGIndexService
 from app.services.onboarding.ontology_schema_resolution import (
     CoverageResult,
     DetectionResult,
@@ -66,6 +67,7 @@ class OntologyOnboardingService:
         fuseki_service: FusekiService | None = None,
         ontology_schema_resolution_service: OntologySchemaResolutionService | None = None,
         ontology_context_service: OntologyContextService | None = None,
+        rag_index_service: RAGIndexService | None = None,
         storage_dir: Path | None = None,
     ) -> None:
         self._fuseki_service = fuseki_service or FusekiService()
@@ -74,6 +76,7 @@ class OntologyOnboardingService:
         )
         self._ontology_context_service = ontology_context_service or OntologyContextService()
         self._storage_dir = storage_dir or Path(settings.storage_path)
+        self._rag_index_service = rag_index_service or RAGIndexService(storage_dir=self._storage_dir)
         self._current_dir = self._storage_dir / "current"
         self._schemas_dir = self._current_dir / "schemas"
 
@@ -203,6 +206,25 @@ class OntologyOnboardingService:
                 previous_dataset_name=previous_dataset_name,
             )
             load_log.log("fuseki_loaded", uploaded_files=len(upload_files))
+
+            # TODO: consider moving RAG index creation to a separate endpoint that can be called after onboarding completes, to avoid adding latency to the critical path of getting the ontology into Fuseki and available for querying
+            class_chunks = self._rag_index_service.create_class_chunks(ontology_context)
+            load_log.log("class_chunks_created", chunk_count=len(class_chunks))
+            self._save_class_chunks_metadata(metadata, len(class_chunks))
+            load_log.log(
+                "class_chunks_saved",
+                chunk_count=len(class_chunks),
+                path="storage/current/class_chunks.json",
+            )
+            texts = self._rag_index_service.extract_texts(class_chunks)
+            load_log.log("class_chunk_texts_extracted", text_count=len(texts))
+            vectors = self._rag_index_service.embed_chunks(texts)
+            load_log.log("class_chunk_embeddings_created", vector_count=len(vectors))
+            vector_index = self._rag_index_service.build_vector_index(vectors)
+            load_log.log("vector_index_created", entry_count=vector_index.ntotal)
+            index_path = self._rag_index_service.save_vector_index(vector_index)
+            self._save_vector_index_metadata(metadata, vector_index.ntotal, index_path.name)
+            load_log.log("vector_index_saved", entry_count=vector_index.ntotal, path=f"storage/current/{index_path.name}")
             load_log.log("onboarding_completed", elapsed_seconds=round(perf_counter() - started_at, 2))
             return {
                 "dataset_name": upload.dataset_name,
@@ -276,8 +298,6 @@ class OntologyOnboardingService:
             },
             "schema_coverage": {
                 "status": coverage.status,
-                "instance_type_uris": coverage.instance_type_uris,
-                "declared_class_uris": coverage.declared_class_uris,
                 "missing_class_uris": coverage.missing_class_uris,
                 "missing_namespaces": coverage.missing_namespaces,
             },
@@ -294,6 +314,35 @@ class OntologyOnboardingService:
         if final_graph is not None:
             metadata["triple_count"] = len(final_graph)
         return metadata
+
+    def _save_class_chunks_metadata(self, metadata: dict[str, object], chunk_count: int) -> None:
+        """Update the current metadata file after class chunk generation completes."""
+        files_loaded = metadata.setdefault("files_loaded", [])
+        if isinstance(files_loaded, list) and "class_chunks.json" not in files_loaded:
+            files_loaded.append("class_chunks.json")
+        metadata["class_chunks"] = {
+            "count": chunk_count,
+            "file": "class_chunks.json",
+        }
+        (self._current_dir / "metadata.json").write_text(
+            json.dumps(metadata, indent=2),
+            encoding="utf-8",
+        )
+
+    def _save_vector_index_metadata(self, metadata: dict[str, object], entry_count: int, filename: str) -> None:
+        """Update the current metadata file after vector index generation completes."""
+        files_loaded = metadata.setdefault("files_loaded", [])
+        if isinstance(files_loaded, list) and filename not in files_loaded:
+            files_loaded.append(filename)
+        metadata["vector_index"] = {
+            "entries": entry_count,
+            "file": filename,
+            "embedding_model": "all-MiniLM-L6-v2",
+        }
+        (self._current_dir / "metadata.json").write_text(
+            json.dumps(metadata, indent=2),
+            encoding="utf-8",
+        )
 
     def _build_fuseki_uploads(
         self,

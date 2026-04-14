@@ -3,3 +3,5 @@ httpx==0.28.1
 python-multipart==0.0.20
 rdflib==7.1.4
 uvicorn[standard]==0.35.0
+sentence-transformers==2.7.0
+faiss-cpu==1.13.2

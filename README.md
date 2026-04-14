@@ -1,6 +1,8 @@
-﻿# NL-to-SPARQL
+# NL-to-SPARQL
 
-FastAPI service for loading one ontology into Apache Jena Fuseki and storing one current ontology locally.
+FastAPI service for ontology onboarding into Apache Jena Fuseki, with local storage for one current ontology and its extracted runtime context.
+
+The repository name is `NL-to-SPARQL`, but the currently implemented API focuses on ontology loading, schema resolution, context extraction, and Fuseki dataset management. Natural-language-to-SPARQL runtime endpoints are not implemented yet.
 
 ## Setup
 
@@ -10,7 +12,21 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+## Prerequisites
+
+- Python 3.11+ is recommended
+- Apache Jena Fuseki must be running at `http://127.0.0.1:3030`
+- outbound HTTP access is required if you want automatic external schema resolution for missing class namespaces
+
 ## Run
+
+Start Fuseki first:
+
+```powershell
+docker compose -f infra/docker/compose.yml up -d
+```
+
+Then start the API:
 
 ```powershell
 uvicorn app.main:app --reload
@@ -57,9 +73,21 @@ Returns the current onboarding log as plain text.
 
 Returns the current runtime metadata JSON as plain text.
 
+### `GET /health`
+
+Returns a simple service health payload:
+
+```json
+{"status": "ok"}
+```
+
 ### `POST /ontology/load`
 
 Loads an ontology file into the framework and Fuseki.
+
+Notes:
+- Fuseki must already be running, otherwise the upload will fail during dataset replacement
+- schema resolution may issue outbound HTTP requests when instance class namespaces are missing from the uploaded ontology
 
 Accepted formats:
 - `.ttl`
@@ -94,7 +122,7 @@ Accepted formats:
 - parse labels and comments
 - parse class hierarchy
 - parse prefixes
-- optionally collect instance-level statistics
+- collect instance-level statistics
 - build `ontology_context.json`
 
 `FusekiService`

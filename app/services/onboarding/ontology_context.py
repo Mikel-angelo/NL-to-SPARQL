@@ -1,18 +1,18 @@
 """
-Responsible for transforming the final ontology graph into the normalized internal representation.
+Transform the final ontology graph into the normalized internal representation.
 
-Functions:
-    • parse classes
-    • parse object properties
-    • parse datatype properties
-    • parse labels and comments
-    • parse class hierarchy
-    • parse prefixes
-    • collect instance-level statistics
-    • build the ontology_context.json payload
+Responsibilities:
+- parse classes
+- parse object properties
+- parse datatype properties
+- parse labels and comments
+- parse class hierarchy
+- parse prefixes
+- collect instance-level statistics
+- build the ontology_context.json payload
 
 Outputs:
-    • ontology_context.json content
+- ontology_context.json content
 """
 
 from rdflib import Graph, Literal, RDF, RDFS, URIRef
@@ -28,7 +28,7 @@ class OntologyContextService:
         ontology_name: str,
         source_filename: str,
     ) -> dict[str, object]:
-        """Run the heavy semantic extraction step and build `ontology_context.json`."""
+        """Extract the normalized ontology context from the final graph."""
         class_uris = self._subjects_for_types(graph, {OWL.Class, RDFS.Class})
         object_property_uris = self._subjects_for_types(graph, {OWL.ObjectProperty})
         datatype_property_uris = self._subjects_for_types(graph, {OWL.DatatypeProperty})
