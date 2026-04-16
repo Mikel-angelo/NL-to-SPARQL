@@ -1,8 +1,24 @@
+"""
+Manual smoke test for the generated RAG artifacts.
+
+This script:
+- loads `storage/current/class_chunks.json`
+- loads `storage/current/index.faiss`
+- embeds a sample natural-language query with the same sentence-transformer model
+- runs a top-k FAISS search
+- prints the matching class chunks so you can inspect retrieval quality
+
+It is not a unit test. It is a quick end-to-end check that chunk generation,
+embedding compatibility, index persistence, and retrieval all work together.
+"""
+
 import json
 from pathlib import Path
 
 import faiss
 from sentence_transformers import SentenceTransformer
+
+from app.core.config import settings
 
 
 def main() -> None:
@@ -27,7 +43,7 @@ def main() -> None:
     print("Entries:", index.ntotal)
     print("Dimension:", index.d)
 
-    model = SentenceTransformer("all-MiniLM-L6-v2")
+    model = SentenceTransformer(settings.rag_embedding_model_name)
 
     query = "What types of actors exist in scenarios?"
     query_vector = model.encode([query], normalize_embeddings=True)

@@ -18,8 +18,6 @@ from app.core.config import settings
 class RAGIndexService:
     """Create retrieval chunks from ontology context data."""
 
-    _EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
-
     def __init__(self, storage_dir: Path | None = None) -> None:
         self._storage_dir = storage_dir or Path(settings.storage_path)
         self._current_dir = self._storage_dir / "current"
@@ -121,7 +119,7 @@ class RAGIndexService:
 
     def _embedding_model_instance(self) -> SentenceTransformer:
         if self._embedding_model is None:
-            self._embedding_model = SentenceTransformer(self._EMBEDDING_MODEL_NAME)
+            self._embedding_model = SentenceTransformer(settings.rag_embedding_model_name)
         return self._embedding_model
 
     @staticmethod

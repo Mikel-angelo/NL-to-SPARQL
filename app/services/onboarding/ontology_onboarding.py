@@ -337,7 +337,7 @@ class OntologyOnboardingService:
         metadata["vector_index"] = {
             "entries": entry_count,
             "file": filename,
-            "embedding_model": "all-MiniLM-L6-v2",
+            "embedding_model": settings.rag_embedding_model_name,
         }
         (self._current_dir / "metadata.json").write_text(
             json.dumps(metadata, indent=2),

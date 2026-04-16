@@ -12,6 +12,7 @@ class Settings:
     fuseki_admin_timeout_seconds: float = 180.0
     fuseki_upload_timeout_seconds: float = 600.0
     storage_path: str = "storage"
+    rag_embedding_model_name: str = "all-MiniLM-L6-v2"
 
 
 settings = Settings()
