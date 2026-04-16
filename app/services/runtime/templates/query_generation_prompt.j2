@@ -1,0 +1,44 @@
+System Role:
+{{ system_role }}
+
+Ontology Context From RAG:
+{% if ontology_name %}Ontology: {{ ontology_name }}
+{% endif %}{% if dataset_name %}Dataset: {{ dataset_name }}
+{% endif %}{% if triple_count %}Triple Count: {{ triple_count }}
+{% endif %}{% if retrieved_context %}
+{% for item in retrieved_context %}
+Result {{ item.rank or loop.index }}:
+Class Name: {{ item.class_name or "Unknown" }}
+Class URI: {{ item.class_uri or "Unknown" }}
+Text:
+{{ item.text or "" }}
+{% endfor %}
+{% else %}
+No retrieved ontology context was available.
+{% endif %}
+
+Auto-Generated Prefix Declarations:
+{% if prefix_declarations %}
+{% for declaration in prefix_declarations %}
+{{ declaration }}
+{% endfor %}
+{% else %}
+No prefix declarations were available.
+{% endif %}
+
+Optional Few-Shot Examples:
+{% if few_shot_examples %}
+{% for example in few_shot_examples %}
+Example {{ loop.index }} Question: {{ example.question }}
+Example {{ loop.index }} SPARQL:
+{{ example.sparql }}
+{% endfor %}
+{% else %}
+No few-shot examples provided.
+{% endif %}
+
+Output Format Instructions:
+{{ output_format_instructions }}
+
+User Question:
+{{ user_question }}

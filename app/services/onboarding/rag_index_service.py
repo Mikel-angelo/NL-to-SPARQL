@@ -32,6 +32,7 @@ class RAGIndexService:
         classes = ontology_context.get("classes", [])
         object_properties = ontology_context.get("object_properties", [])
         datatype_properties = ontology_context.get("datatype_properties", [])
+        parent_classes_by_uri = self._parent_classes_by_uri(classes)
 
         for class_data in classes:
             class_name = class_data.get("name") or class_data.get("label") or class_data.get("uri")
@@ -47,8 +48,16 @@ class RAGIndexService:
             ]
             class_uri = class_data.get("uri")
 
-            class_object_properties = self._properties_for_class(object_properties, class_uri)
-            class_datatype_properties = self._properties_for_class(datatype_properties, class_uri)
+            class_object_properties = self._properties_for_class_and_parents(
+                properties=object_properties,
+                class_uri=class_uri,
+                parent_classes_by_uri=parent_classes_by_uri,
+            )
+            class_datatype_properties = self._properties_for_class_and_parents(
+                properties=datatype_properties,
+                class_uri=class_uri,
+                parent_classes_by_uri=parent_classes_by_uri,
+            )
 
             text = self._build_chunk_text(
                 class_name=class_name,
@@ -123,7 +132,52 @@ class RAGIndexService:
         return self._embedding_model
 
     @staticmethod
-    def _properties_for_class(properties: list[dict], class_uri: str | None) -> list[str]:
+    def _parent_classes_by_uri(classes: list[dict]) -> dict[str, list[str]]:
+        parent_map: dict[str, list[str]] = {}
+        for class_data in classes:
+            class_uri = class_data.get("uri")
+            if not isinstance(class_uri, str) or not class_uri:
+                continue
+            parent_map[class_uri] = [
+                parent_uri
+                for parent_uri in class_data.get("parent_classes", [])
+                if isinstance(parent_uri, str) and parent_uri
+            ]
+        return parent_map
+
+    @classmethod
+    def _properties_for_class_and_parents(
+        cls,
+        properties: list[dict],
+        class_uri: str | None,
+        parent_classes_by_uri: dict[str, list[str]],
+    ) -> list[str]:
+        if not class_uri:
+            return []
+
+        collected_properties: set[str] = set()
+        visited: set[str] = set()
+        for related_class_uri in cls._class_lineage(class_uri, parent_classes_by_uri, visited):
+            collected_properties.update(cls._properties_for_class(properties, related_class_uri))
+        return sorted(collected_properties)
+
+    @staticmethod
+    def _class_lineage(
+        class_uri: str,
+        parent_classes_by_uri: dict[str, list[str]],
+        visited: set[str],
+    ) -> list[str]:
+        if class_uri in visited:
+            return []
+
+        visited.add(class_uri)
+        lineage = [class_uri]
+        for parent_uri in parent_classes_by_uri.get(class_uri, []):
+            lineage.extend(RAGIndexService._class_lineage(parent_uri, parent_classes_by_uri, visited))
+        return lineage
+
+    @staticmethod
+    def _properties_for_class(properties: list[dict], class_uri: str) -> list[str]:
         if not class_uri:
             return []
 

@@ -12,7 +12,14 @@ class Settings:
     fuseki_admin_timeout_seconds: float = 180.0
     fuseki_upload_timeout_seconds: float = 600.0
     storage_path: str = "storage"
+
     rag_embedding_model_name: str = "all-MiniLM-L6-v2"
+    runtime_retrieval_top_k: int = 10
+    ollama_url: str = "http://147.102.6.253:11500/api/generate"
+    ollama_model: str = "qwen2.5-coder:7b"
+    llm_timeout_seconds: float = 30.0
+    llm_temperature: float = 0.0
+    llm_num_ctx: int = 4096
 
 
 settings = Settings()

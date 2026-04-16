@@ -209,16 +209,24 @@ class OntologySchemaResolutionService:
     def build_final_graph(self, original_graph: Graph, schema_files: list[ResolvedSchemaFile]) -> Graph:
         """Combine the uploaded ontology graph with any resolved schemas."""
         final_graph = Graph()
+        self._copy_namespaces(final_graph, original_graph)
         for triple in original_graph:
             final_graph.add(triple)
 
         for schema_file in schema_files:
             schema_graph = Graph()
             schema_graph.parse(source=BytesIO(schema_file.content), format=RDFLIB_FORMATS[schema_file.suffix])
+            self._copy_namespaces(final_graph, schema_graph)
             for triple in schema_graph:
                 final_graph.add(triple)
 
         return final_graph
+
+    @staticmethod
+    def _copy_namespaces(target_graph: Graph, source_graph: Graph) -> None:
+        """Preserve explicit namespace bindings while merging graphs."""
+        for prefix, namespace in source_graph.namespaces():
+            target_graph.bind(prefix, namespace)
 
     @staticmethod
     def _instance_subjects(graph: Graph) -> set[URIRef]:

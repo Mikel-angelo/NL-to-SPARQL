@@ -109,10 +109,41 @@ class OntologyContextService:
 
     @staticmethod
     def _prefixes(graph: Graph) -> list[dict[str, str]]:
-        return sorted(
-            [{"prefix": prefix, "namespace": str(namespace)} for prefix, namespace in graph.namespaces()],
-            key=lambda item: item["prefix"],
-        )
+        used_namespaces = OntologyContextService._used_namespaces(graph)
+        prefixes: list[dict[str, str]] = []
+
+        for prefix, namespace in graph.namespaces():
+            namespace_text = str(namespace)
+            if namespace_text not in used_namespaces:
+                continue
+            prefixes.append(
+                {
+                    "prefix": ":" if prefix == "" else prefix,
+                    "namespace": namespace_text,
+                }
+            )
+
+        return sorted(prefixes, key=lambda item: item["prefix"])
+
+    @staticmethod
+    def _used_namespaces(graph: Graph) -> set[str]:
+        namespaces: set[str] = set()
+        for subject, predicate, object_value in graph:
+            for value in (subject, predicate, object_value):
+                if isinstance(value, URIRef):
+                    namespace = OntologyContextService._namespace_for(value)
+                    if namespace:
+                        namespaces.add(namespace)
+        return namespaces
+
+    @staticmethod
+    def _namespace_for(uri: URIRef) -> str:
+        text = str(uri)
+        if "#" in text:
+            return text.rsplit("#", 1)[0] + "#"
+        if "/" in text:
+            return text.rsplit("/", 1)[0] + "/"
+        return ""
 
     @staticmethod
     def _label_for(graph: Graph, subject: URIRef) -> str:
