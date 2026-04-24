@@ -11,7 +11,7 @@ from app.core.config import settings
 from app.services.fuseki import FusekiService
 from app.services.runtime.query_correction import QueryCorrectionService
 from app.services.runtime.query_execution import QueryExecutionService
-from app.services.runtime.query_generation import QueryGenerationService
+from app.services.runtime.query_generation import LLMClient, PromptBuilder, normalize_generated_query
 from app.services.runtime.query_validation import QueryValidationService
 from app.services.runtime.rag_retrieval_service import RAGRetrievalService
 
@@ -54,7 +54,8 @@ class QueryPipelineService:
         storage_dir: Path | None = None,
         fuseki_service: FusekiService | None = None,
         rag_retrieval_service: RAGRetrievalService | None = None,
-        query_generation_service: QueryGenerationService | None = None,
+        prompt_builder: PromptBuilder | None = None,
+        llm_client: LLMClient | None = None,
         query_validation_service: QueryValidationService | None = None,
         query_correction_service: QueryCorrectionService | None = None,
         query_execution_service: QueryExecutionService | None = None,
@@ -68,9 +69,10 @@ class QueryPipelineService:
         self._rag_retrieval_service = rag_retrieval_service or RAGRetrievalService(
             storage_dir=self._storage_dir
         )
-        self._query_generation_service = query_generation_service or QueryGenerationService(
+        self._prompt_builder = prompt_builder or PromptBuilder(
             storage_dir=self._storage_dir
         )
+        self._llm_client = llm_client or LLMClient()
         self._query_validation_service = query_validation_service or QueryValidationService()
         self._query_correction_service = query_correction_service or QueryCorrectionService()
         self._query_execution_service = query_execution_service or QueryExecutionService(
@@ -93,17 +95,19 @@ class QueryPipelineService:
             retrieved_context = self._rag_retrieval_service.retrieve(question)
             pipeline_log["chunks_retrieved"] = retrieved_context
 
-            prompt = self._query_generation_service.render_prompt(
+            prompt = self._prompt_builder.render_prompt(
                 question=question,
                 retrieved_context=retrieved_context,
                 metadata=metadata,
             )
             pipeline_log["prompt_generated"] = prompt
 
-            generated_sparql = await self._query_generation_service.generate_from_prompt(prompt)
+            generated_sparql = normalize_generated_query(
+                await self._llm_client.generate_text(prompt)
+            )
             pipeline_log["llm_generated_query"] = generated_sparql
-            corrected_sparql = None
 
+            corrected_sparql = None
             validation_result = self._query_validation_service.validate(
                 generated_sparql,
                 ontology_context=ontology_context,

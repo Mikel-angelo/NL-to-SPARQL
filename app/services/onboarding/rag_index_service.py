@@ -40,6 +40,11 @@ class RAGIndexService:
                 continue
 
             class_name = self._short_name(class_name)
+            class_label = class_data.get("label")
+            if isinstance(class_label, str):
+                class_label = class_label.strip()
+            else:
+                class_label = None
             description = self._description_for(class_data, class_name)
             parent_classes = [
                 self._short_name(parent_class)
@@ -61,6 +66,7 @@ class RAGIndexService:
 
             text = self._build_chunk_text(
                 class_name=class_name,
+                class_label=class_label,
                 description=description,
                 parent_classes=parent_classes,
                 object_properties=class_object_properties,
@@ -70,9 +76,11 @@ class RAGIndexService:
             class_chunks.append(
                 {
                     "class_name": class_name,
+                    "class_label": class_label,
                     "class_uri": class_uri,
                     "text": text,
                     "metadata": {
+                        "label": class_label,
                         "description": description,
                         "parent_classes": parent_classes,
                         "object_properties": class_object_properties,
@@ -205,6 +213,7 @@ class RAGIndexService:
     @staticmethod
     def _build_chunk_text(
         class_name: str,
+        class_label: str | None,
         description: str,
         parent_classes: list[str],
         object_properties: list[str],
@@ -214,9 +223,11 @@ class RAGIndexService:
         object_property_text = RAGIndexService._bullet_list(object_properties)
         datatype_property_text = RAGIndexService._bullet_list(datatype_properties)
         description_text = description or "No description available."
+        label_text = class_label or "No label available."
 
         return (
             f"Class: {class_name}\n\n"
+            f"Label: {label_text}\n\n"
             f"Description: {description_text}\n\n"
             f"Parent Classes:\n{parent_text}\n\n"
             f"Object Properties:\n{object_property_text}\n\n"

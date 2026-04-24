@@ -63,12 +63,17 @@
       background: var(--panel);
     }
 
-    input[type="file"] {
+    input[type="file"],
+    input[type="text"] {
       padding: 12px;
-      border: 1px dashed var(--border);
+      border: 1px solid var(--border);
       border-radius: 10px;
       background: #fff;
       font: inherit;
+    }
+
+    input[type="file"] {
+      border-style: dashed;
     }
 
     button {
@@ -120,6 +125,10 @@
       font: 0.95rem/1.45 Consolas, "Courier New", monospace;
       resize: vertical;
     }
+
+    #query-result {
+      min-height: 560px;
+    }
   </style>
 </head>
 <body>
@@ -143,13 +152,27 @@
       <h2>Metadata</h2>
       <textarea id="metadata" readonly placeholder="metadata.json will appear here"></textarea>
     </section>
+
+    <form id="query-form">
+      <input id="question-input" name="question" type="text" placeholder="Ask a question about the loaded ontology" required>
+      <button id="query-button" type="submit">Run query</button>
+    </form>
+
+    <section class="panel">
+      <h2>Query Pipeline JSON</h2>
+      <textarea id="query-result" readonly placeholder="query_pipeline_log.json will appear here after a query"></textarea>
+    </section>
   </main>
 
   <script>
     const form = document.getElementById("upload-form");
+    const queryForm = document.getElementById("query-form");
     const fileInput = document.getElementById("file-input");
+    const questionInput = document.getElementById("question-input");
     const uploadButton = document.getElementById("upload-button");
+    const queryButton = document.getElementById("query-button");
     const statusEl = document.getElementById("status");
+    const queryResultEl = document.getElementById("query-result");
     const loadLogEl = document.getElementById("load-log");
     const metadataEl = document.getElementById("metadata");
 
@@ -182,6 +205,21 @@
       }
     }
 
+    function latestQueryLogEntry(logText, fallbackPayload) {
+      try {
+        const log = JSON.parse(logText);
+        if (Array.isArray(log) && log.length > 0) {
+          return JSON.stringify(log[log.length - 1], null, 2);
+        }
+        if (log && typeof log === "object" && !Array.isArray(log)) {
+          return JSON.stringify(log, null, 2);
+        }
+      } catch (error) {
+        return JSON.stringify(fallbackPayload, null, 2);
+      }
+      return JSON.stringify(fallbackPayload, null, 2);
+    }
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const file = fileInput.files[0];
@@ -212,6 +250,44 @@
         setStatus(error.message, true);
       } finally {
         uploadButton.disabled = false;
+      }
+    });
+
+    queryForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const question = questionInput.value.trim();
+      if (!question) {
+        setStatus("Enter a question first.", true);
+        return;
+      }
+
+      queryButton.disabled = true;
+      queryResultEl.value = "";
+      setStatus("Running query pipeline ...");
+
+      try {
+        const response = await fetch("/query", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question })
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+          queryResultEl.value = JSON.stringify(payload, null, 2);
+          throw new Error(payload.detail || "Query failed");
+        }
+        const queryLogText = await readText(
+          "/query-pipeline-log",
+          JSON.stringify(payload, null, 2)
+        );
+        queryResultEl.value = latestQueryLogEntry(queryLogText, payload);
+        setStatus(`Query pipeline finished with status: ${payload.status}`);
+      } catch (error) {
+        setStatus(error.message, true);
+      } finally {
+        queryButton.disabled = false;
       }
     });
 

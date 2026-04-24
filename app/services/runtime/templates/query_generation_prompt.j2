@@ -1,17 +1,15 @@
 System Role:
 {{ system_role }}
 
-Ontology Context From RAG:
+Relevant Ontology Chunks:
 {% if ontology_name %}Ontology: {{ ontology_name }}
 {% endif %}{% if dataset_name %}Dataset: {{ dataset_name }}
-{% endif %}{% if triple_count %}Triple Count: {{ triple_count }}
 {% endif %}{% if retrieved_context %}
 {% for item in retrieved_context %}
-Result {{ item.rank or loop.index }}:
-Class Name: {{ item.class_name or "Unknown" }}
-Class URI: {{ item.class_uri or "Unknown" }}
-Text:
+Chunk {{ item.rank or loop.index }}:
+"""
 {{ item.text or "" }}
+"""
 {% endfor %}
 {% else %}
 No retrieved ontology context was available.

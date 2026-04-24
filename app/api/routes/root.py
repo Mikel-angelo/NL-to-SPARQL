@@ -31,3 +31,11 @@ async def read_metadata() -> PlainTextResponse:
     if not path.exists():
         raise HTTPException(status_code=404, detail="metadata.json not found")
     return PlainTextResponse(path.read_text(encoding="utf-8"))
+
+
+@router.get("/query-pipeline-log", response_class=PlainTextResponse)
+async def read_query_pipeline_log() -> PlainTextResponse:
+    path = _CURRENT_DIR / "query_pipeline_log.json"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="query_pipeline_log.json not found")
+    return PlainTextResponse(path.read_text(encoding="utf-8"))
