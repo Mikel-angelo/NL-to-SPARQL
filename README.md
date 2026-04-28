@@ -1,153 +1,38 @@
 # NL-to-SPARQL
 
-FastAPI service for ontology onboarding into Apache Jena Fuseki, with local storage for one current ontology and its extracted runtime context.
+This project turns an ontology into a reusable local package, then uses that package to answer natural-language questions by generating and running SPARQL.
 
-The repository name is `NL-to-SPARQL`, but the currently implemented API focuses on ontology loading, schema resolution, context extraction, and Fuseki dataset management. Natural-language-to-SPARQL runtime endpoints are not implemented yet.
+The main workflow is:
+
+1. Onboard an ontology into `ontology_packages/`.
+2. Query the generated package with `query.py`.
+3. Optionally use the FastAPI routes, which call the same underlying code.
+
+## Requirements
+
+- Python 3.11+
+- Docker, if you want to run the bundled Fuseki server
+- Apache Jena Fuseki available at `http://127.0.0.1:3030`
+- Access to the configured LLM API for query generation
+- Internet access only if onboarding needs to resolve missing external schemas
+
+Default runtime settings live in `app/core/config.py`:
+
+- Fuseki: `http://127.0.0.1:3030`
+- Fuseki admin login: `admin` / `admin`
+- Embedding model: `all-MiniLM-L6-v2`
+- Default LLM model: `qwen2.5-coder:7b`
+- LLM API URL: `http://147.102.6.253:11500/api/generate`
 
 ## Setup
 
+From the repository root:
+
 ```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
-
-## Prerequisites
-
-- Python 3.11+ is recommended
-- Apache Jena Fuseki must be running at `http://127.0.0.1:3030`
-- outbound HTTP access is required if you want automatic external schema resolution for missing class namespaces
-
-## Run
-
-Start Fuseki first:
-
-```powershell
-docker compose -f infra/docker/compose.yml up -d
-```
-
-Then start the API:
-
-```powershell
-uvicorn app.main:app --reload
-```
-
-Docs are available at `http://127.0.0.1:8000/docs`.
-
-## Current Model
-
-The framework keeps exactly one current ontology locally and exactly one current ontology dataset in Fuseki.
-
-When you load a new ontology:
-- the uploaded file is parsed first with RDFLib
-- a fast detection step classifies the file as `schema-only`, `mixed`, or `instances-only`
-- a schema-coverage step checks whether instance `rdf:type` class URIs are declared locally
-- missing class namespaces trigger heuristic schema resolution
-- a final in-memory graph is built from the uploaded ontology plus any resolved schemas
-- runtime metadata is saved as `storage/current/metadata.json`
-- parsed ontology structure is saved as `storage/current/ontology_context.json`
-- step-by-step onboarding logs are saved as `storage/current/load.log`
-- the previous Fuseki dataset is removed after the new dataset is created and all files are uploaded
-
-The current storage contains:
-- `storage/current/ontology.ttl` or `storage/current/ontology.owl` or `storage/current/ontology.rdf`
-- `storage/current/schemas/` when external schemas were resolved
-- `storage/current/metadata.json`
-- `storage/current/ontology_context.json`
-- `storage/current/load.log`
-
-## API
-
-### `GET /`
-
-Serves a simple static HTML page for:
-- uploading one ontology file to the existing onboarding endpoint
-- viewing the current `load.log`
-- viewing the current `metadata.json`
-
-### `GET /load-log`
-
-Returns the current onboarding log as plain text.
-
-### `GET /metadata`
-
-Returns the current runtime metadata JSON as plain text.
-
-### `GET /health`
-
-Returns a simple service health payload:
-
-```json
-{"status": "ok"}
-```
-
-### `POST /ontology/load`
-
-Loads an ontology file into the framework and Fuseki.
-
-Notes:
-- Fuseki must already be running, otherwise the upload will fail during dataset replacement
-- schema resolution may issue outbound HTTP requests when instance class namespaces are missing from the uploaded ontology
-
-Accepted formats:
-- `.ttl`
-- `.owl`
-- `.rdf`
-
-## Service Split
-
-`OntologyOnboardingService`
-- validate the uploaded file
-- build dataset naming from filename + timestamp
-- parse the initial graph
-- run fast detection and structural mode classification
-- analyze schema coverage for instance type URIs
-- resolve schemas for missing class namespaces when possible
-- build the final graph
-- save the current ontology file, metadata, ontology context, and load log
-- replace the current Fuseki dataset and upload all loaded files
-
-`OntologySchemaResolutionService`
-- parse the initial ontology graph
-- run fast detection counts
-- classify ontology mode
-- analyze schema coverage
-- resolve external schemas heuristically for missing class namespaces
-- build the final graph
-
-`OntologyContextService`
-- parse classes
-- parse object properties
-- parse datatype properties
-- parse labels and comments
-- parse class hierarchy
-- parse prefixes
-- collect instance-level statistics
-- build `ontology_context.json`
-
-`FusekiService`
-- create dataset
-- delete dataset
-- replace dataset
-- upload ontology RDF
-- execute SPARQL query against a dataset
-
-## Onboarding Flow
-
-1. `OntologyOnboardingService` validates the upload, normalizes the ontology name, and prepares the target Fuseki dataset name.
-2. `OntologySchemaResolutionService.parse_uploaded_content()` parses the uploaded bytes into the `initial_graph`.
-3. `OntologySchemaResolutionService.detect()` counts classes, properties, and instances for a coarse structural view of the file.
-4. `OntologySchemaResolutionService.classify_mode()` labels the file as `schema-only`, `mixed`, or `instances-only`. This is descriptive metadata, not the main resolution gate.
-5. `OntologySchemaResolutionService.analyze_schema_coverage()` compares instance `rdf:type` class URIs with locally declared classes and marks coverage as `complete` or `incomplete`.
-6. If coverage is incomplete, `OntologySchemaResolutionService.resolve_schemas_for_namespaces()` tries to download RDF schemas for the missing class namespaces.
-7. `OntologySchemaResolutionService.build_final_graph()` merges the uploaded graph with any resolved schemas into the `final_graph`.
-8. `OntologyContextService.extract_context()` reads the `final_graph` and builds the normalized `ontology_context.json` payload.
-9. `OntologyOnboardingService` writes the current ontology file, optional schema files, `metadata.json`, `ontology_context.json`, and `load.log` under `storage/current`.
-10. `FusekiService.replace_dataset()` creates the new Fuseki dataset, uploads the original ontology file plus any resolved schema files, and then removes the previous dataset.
-
-## Fuseki With Docker Compose
-
-Compose files live under `infra/docker`.
 
 Start Fuseki:
 
@@ -155,15 +40,290 @@ Start Fuseki:
 docker compose -f infra/docker/compose.yml up -d
 ```
 
-Stop Fuseki:
+Fuseki UI:
 
-```powershell
-docker compose -f infra/docker/compose.yml down
+```text
+http://127.0.0.1:3030
 ```
 
-Fuseki UI is available at `http://127.0.0.1:3030`.
-Fuseki data is stored at the project root in `fuseki-data`.
+## CLI Usage
 
-Admin login:
-- username: `admin`
-- password: `admin`
+There are two CLI commands:
+
+- `onboard.py`: creates an ontology package
+- `query.py`: queries an existing ontology package
+
+Both commands require explicit arguments. If a required argument is missing, Python argparse stops immediately, prints a usage error, and exits without running the pipeline.
+
+### `onboard.py`
+
+Use `onboard.py` when you want to prepare an ontology for querying.
+
+Required arguments:
+
+- one source argument:
+  - `--ontology path\to\file.ttl`
+  - or `--sparql-endpoint http://.../query`
+- `--output ontology_packages`
+
+You must provide exactly one source. Do not pass both `--ontology` and `--sparql-endpoint`.
+
+Basic file onboarding:
+
+```powershell
+.\.venv\Scripts\python.exe onboard.py --ontology resources\library\ontologies\eNOVATION.ttl --output ontology_packages
+```
+
+Accepted ontology formats:
+
+- `.ttl`
+- `.owl`
+- `.rdf`
+
+During onboarding, the CLI:
+
+- parses the ontology
+- resolves missing schemas when possible
+- extracts a normalized ontology context
+- creates retrieval chunks
+- builds a FAISS index
+- uploads the ontology data to Fuseki
+- creates a new package under `ontology_packages/`
+- marks that package as active for the API
+
+At the end, the command prints values like:
+
+```text
+Ontology package: C:\...\ontology_packages\enovation-20260427-184012-632861
+Dataset name: enovation-20260427-184012-632861
+Dataset endpoint: http://127.0.0.1:3030/enovation-20260427-184012-632861
+Query endpoint: http://127.0.0.1:3030/enovation-20260427-184012-632861/query
+Artifacts: ...\chunks.json | ...\index.faiss
+```
+
+Use the printed `Ontology package` path in the query command.
+
+Onboard an existing SPARQL endpoint instead of a local file:
+
+```powershell
+.\.venv\Scripts\python.exe onboard.py --sparql-endpoint http://127.0.0.1:3030/my-dataset/query --output ontology_packages
+```
+
+This creates the same package structure, but does not upload a new local ontology file to Fuseki.
+
+Optional onboarding arguments:
+
+- `--model`: save a different default LLM model in `settings.json`
+- `--chunking`: save a different chunking strategy name; defaults to `class_based`
+
+Supported chunking strategies:
+
+- `class_based`: one chunk per class with class label, description, and direct properties with ranges
+- `property_based`: one chunk per property with property label, description, domain classes, and range classes or datatypes
+- `composite`: one chunk per class neighbourhood with the class, direct properties, parent classes, and child classes
+
+Example:
+
+```powershell
+.\.venv\Scripts\python.exe onboard.py --ontology path\to\ontology.ttl --output ontology_packages --model qwen2.5-coder:7b
+```
+
+### `query.py`
+
+Use `query.py` when you already have an ontology package and want to ask a natural-language question.
+
+Required arguments:
+
+- `--question "your question"`
+
+Optional package argument:
+
+- `--package path\to\ontology-package`
+
+If you omit `--package`, the CLI uses the active package stored in:
+
+```text
+ontology_packages/.active_package
+```
+
+That file is updated automatically after successful onboarding. If no active package is set, the command fails with:
+
+```text
+No active ontology package is set
+```
+
+Basic query using the active package:
+
+```powershell
+.\.venv\Scripts\python.exe query.py --question "Which training centres offer CBRN exercises?"
+```
+
+Query a specific package:
+
+```powershell
+.\.venv\Scripts\python.exe query.py --package ontology_packages\enovation-20260427-184012-632861 --question "Which training centres offer CBRN exercises?"
+```
+
+The query command:
+
+- loads the package artifacts
+- retrieves the most relevant ontology chunks
+- generates SPARQL with the configured LLM
+- validates the SPARQL through formal validation stages
+- retries failed validation/execution through the LLM self-correction loop
+- runs the final SPARQL against the package query endpoint
+- writes a trace to `logs/query.log`
+
+The output includes:
+
+- `Answer`: raw SPARQL execution result
+- `Generated SPARQL`: the generated query
+- `Trace`: path to the query log
+- `Status`: pipeline status
+- `Errors`: validation or execution errors, if any
+
+The self-correction loop is controlled by:
+
+```text
+settings.correction_max_iterations = 3
+```
+
+Each query trace records the original generated query, every correction iteration, validation stage results, execution result, final query, and final status.
+
+Optional query arguments:
+
+- `--model`: use a different LLM model for this query only
+- `--endpoint`: use a different SPARQL query endpoint
+- `--k`: change how many chunks are retrieved
+
+Example with query overrides:
+
+```powershell
+.\.venv\Scripts\python.exe query.py --package ontology_packages\my-package --question "..." --model qwen2.5-coder:7b --k 5
+```
+
+## Package Layout
+
+Each onboarding run creates a self-contained package:
+
+```text
+ontology_packages/
+  <ontology-name>-<timestamp>/
+    metadata.json
+    ontology_context.json
+    settings.json
+    ontology/
+      source.ttl
+      schemas/
+    chunks/
+      chunks.json
+      index.faiss
+    logs/
+      onboard.log
+      query.log
+```
+
+Important files:
+
+- `metadata.json`: onboarding summary and artifact paths
+- `settings.json`: saved endpoint, model, and selected chunking strategy
+- `ontology_context.json`: normalized ontology structure used by the runtime
+- `chunks/chunks.json`: text chunks used for retrieval
+- `chunks/index.faiss`: vector index for retrieval
+- `logs/onboard.log`: onboarding trace
+- `logs/query.log`: query trace
+
+The active package path is stored in:
+
+```text
+ontology_packages/.active_package
+```
+
+Both the CLI query command and the FastAPI routes use this active package when no explicit package is provided.
+
+## FastAPI Usage
+
+Start the API:
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+Open the API docs:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Main routes:
+
+- `GET /health`: service health check
+- `GET /metadata`: metadata for the active package
+- `GET /load-log`: onboarding log for the active package
+- `GET /query-pipeline-log`: query log for the active package
+- `POST /ontology/load`: upload and onboard an ontology file
+- `POST /query`: query the active package
+
+`POST /ontology/load` accepts multipart form data:
+
+- `file`: ontology file, required
+- `chunking`: optional; one of `class_based`, `property_based`, or `composite`; defaults to `class_based`
+
+## RAG Module API
+
+The indexing and retrieval logic is available without running the full query pipeline:
+
+```python
+from app.domain.rag import build_index, retrieve_context, retrieve_text_chunks
+
+build_index("ontology_packages/my-package", chunking="composite")
+
+chunks = retrieve_context(
+    "ontology_packages/my-package",
+    "Which training centres offer CBRN exercises?",
+    k=5,
+)
+
+texts = retrieve_text_chunks(
+    "ontology_packages/my-package",
+    "Which training centres offer CBRN exercises?",
+    k=5,
+)
+```
+
+## Code Structure
+
+```text
+app/
+  api/routes/          HTTP routes
+  clients/             external clients such as Fuseki and LLM calls
+  core/config.py       default settings
+  domain/package.py    package discovery and active-package helpers
+  domain/ontology/
+    onboard_pipeline.py        full onboarding pipeline used by CLI and API
+    onboarding_extraction.py   source parsing, schema resolution, package JSON writing
+    context_builder.py         RDFLib graph -> ontology_context.json structure
+    schema_resolution.py       RDF parsing and schema coverage/resolution helpers
+  domain/rag/
+    chunking.py                chunk construction strategies
+    build_index.py             chunks/chunks.json and chunks/index.faiss building
+    retrieve_context.py        semantic chunk retrieval from a package
+  domain/runtime/      SPARQL prompt generation, validation, self-correction, execution
+    pipeline.py                 runtime query pipeline orchestration
+    prompt_renderer.py          Jinja2 prompt rendering
+    validation.py               formal SPARQL validation stages
+    correction_loop.py          LLM self-correction loop
+    templates/
+      query_generation_prompt.j2
+      query_correction_prompt.j2
+onboard.py             CLI wrapper for onboarding
+query.py               query CLI
+ontology_packages/     generated packages
+```
+
+## Notes
+
+- Each file-based onboarding run creates a new Fuseki dataset.
+- After a successful file-based onboarding run, the previous active Fuseki dataset is removed.
+- Package directories are timestamped, so repeated runs do not overwrite older packages.
+- If query generation fails, check that the configured LLM API URL and model are reachable.

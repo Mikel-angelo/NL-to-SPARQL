@@ -1,0 +1,2856 @@
+[
+  {
+    "chunk_type": "composite",
+    "class_name": "AgentClass",
+    "class_label": "AgentClass",
+    "class_uri": "http://purl.org/dc/terms/AgentClass",
+    "text": "Class Neighbourhood: AgentClass\n\nLabel: AgentClass\n\nDescription: No description available\n\nParent Classes:\n- Class\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "AgentClass",
+      "description": "No description available",
+      "parent_classes": [
+        "Class"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ActorType",
+    "class_label": "Actor Type",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ActorType",
+    "text": "Class Neighbourhood: ActorType\n\nLabel: Actor Type\n\nDescription: A controlled vocabulary class for pointing to the type of actor involved in a scenario role\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isActorTypeOf -> Exercise\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Actor Type",
+      "description": "A controlled vocabulary class for pointing to the type of actor involved in a scenario role",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isActorTypeOf -> Exercise"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "AfterActionReviewMethod",
+    "class_label": "After action review method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#AfterActionReviewMethod",
+    "text": "Class Neighbourhood: AfterActionReviewMethod\n\nLabel: After action review method\n\nDescription: A class representing evaluation methods based on structured post-exercise reflection to identify lessons learned, strengths, and areas for improvement\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "After action review method",
+      "description": "A class representing evaluation methods based on structured post-exercise reflection to identify lessons learned, strengths, and areas for improvement",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Audience",
+    "class_label": "Audience",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Audience",
+    "text": "Class Neighbourhood: Audience\n\nLabel: Audience\n\nDescription: Parent class of the different type of audiences\n\nParent Classes:\n- Thing\n\nChild Classes:\n- CivilProtection\n- CrisisManagers\n- DecisionMakers\n- FireRescueServices\n- FirstResponders\n- HealthHospitalMedicalPersonnel\n- InternationalOrganisations\n- MilitaryDefenceExperts\n- NationalMunicipalRegionalAuthorities\n- PoliceLawEnforcementAgencies\n- PrivateCompanies\n- SecondResponders\n- Students\n- TechnologyOperators\n\nDirect Object Properties:\n- isSOPAudienceOf -> SOP\n- isTrainingAudienceOf -> TrainingCourse\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Audience",
+      "description": "Parent class of the different type of audiences",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "CivilProtection",
+        "CrisisManagers",
+        "DecisionMakers",
+        "FireRescueServices",
+        "FirstResponders",
+        "HealthHospitalMedicalPersonnel",
+        "InternationalOrganisations",
+        "MilitaryDefenceExperts",
+        "NationalMunicipalRegionalAuthorities",
+        "PoliceLawEnforcementAgencies",
+        "PrivateCompanies",
+        "SecondResponders",
+        "Students",
+        "TechnologyOperators"
+      ],
+      "object_properties": [
+        "isSOPAudienceOf -> SOP",
+        "isTrainingAudienceOf -> TrainingCourse"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Biological",
+    "class_label": "Biological and Toxin",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Biological",
+    "text": "Class Neighbourhood: Biological\n\nLabel: Biological and Toxin\n\nDescription: Incidents involving biological agents such as viruses, bacteria, toxins, or spores\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Biological and Toxin",
+      "description": "Incidents involving biological agents such as viruses, bacteria, toxins, or spores",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CBRNNetwork",
+    "class_label": "CBRN Network",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CBRNNetwork",
+    "text": "Class Neighbourhood: CBRNNetwork\n\nLabel: CBRN Network\n\nDescription: Networks, partnerships, or collaborative structures focused on CBRN preparedness, response, knowledge-sharing, or capability development\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isNetworkConnectedTo -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "CBRN Network",
+      "description": "Networks, partnerships, or collaborative structures focused on CBRN preparedness, response, knowledge-sharing, or capability development",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isNetworkConnectedTo -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CENStandard",
+    "class_label": "CEN Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CENStandard",
+    "text": "Class Neighbourhood: CENStandard\n\nLabel: CEN Standard\n\nDescription: Standards developed by the European Committee for Standardization (CEN)\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "CEN Standard",
+      "description": "Standards developed by the European Committee for Standardization (CEN)",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Capacity",
+    "class_label": "Capacity",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Capacity",
+    "text": "Class Neighbourhood: Capacity\n\nLabel: Capacity\n\nDescription: Broad statements describing what a centre can do or provide\u2014capturing the scale, availability, or scope of its facilities and services. Capacities may be expressed quantitatively (e.g., \u201cTrains up to 100 people per month,\u201d \u201cOperates three BSL-3 laboratories\u201d) or qualitatively (e.g., \u201cProvides 24/7 crisis-room support,\u201d \u201cDelivers customised emergency response plans\u201d)\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isCapacityOf -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Capacity",
+      "description": "Broad statements describing what a centre can do or provide\u2014capturing the scale, availability, or scope of its facilities and services. Capacities may be expressed quantitatively (e.g., \u201cTrains up to 100 people per month,\u201d \u201cOperates three BSL-3 laboratories\u201d) or qualitatively (e.g., \u201cProvides 24/7 crisis-room support,\u201d \u201cDelivers customised emergency response plans\u201d)",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isCapacityOf -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Certificate",
+    "class_label": "Certificate",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Certificate",
+    "text": "Class Neighbourhood: Certificate\n\nLabel: Certificate\n\nDescription: Documentation issued to participants or trainees confirming successful completion of a training course, exercise, or competency-based activity\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isCertificateGrantedFor -> TrainingCourse\n- isCertificateIssuedBy -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Certificate",
+      "description": "Documentation issued to participants or trainees confirming successful completion of a training course, exercise, or competency-based activity",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isCertificateGrantedFor -> TrainingCourse",
+        "isCertificateIssuedBy -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Chemical",
+    "class_label": "Chemical",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Chemical",
+    "text": "Class Neighbourhood: Chemical\n\nLabel: Chemical\n\nDescription: Incidents involving chemical substances, including toxic industrial chemicals or chemical warfare agents\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Chemical",
+      "description": "Incidents involving chemical substances, including toxic industrial chemicals or chemical warfare agents",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CivilExercises",
+    "class_label": "Civil exercises",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CivilExercises",
+    "text": "Class Neighbourhood: CivilExercises\n\nLabel: Civil exercises\n\nDescription: Exercise-related services provided to civilian authorities or organisations\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Civil exercises",
+      "description": "Exercise-related services provided to civilian authorities or organisations",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CivilProtection",
+    "class_label": "Civil Protection",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CivilProtection",
+    "text": "Class Neighbourhood: CivilProtection\n\nLabel: Civil Protection\n\nDescription: An audience category representing civil protection personnel involved in emergency preparedness and disaster response\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Civil Protection",
+      "description": "An audience category representing civil protection personnel involved in emergency preparedness and disaster response",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CivilProtectionCollaboration",
+    "class_label": "Civil protection collaboration",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CivilProtectionCollaboration",
+    "text": "Class Neighbourhood: CivilProtectionCollaboration\n\nLabel: Civil protection collaboration\n\nDescription: Collaboration services involving civil protection authorities\n\nParent Classes:\n- CollaborationService\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Civil protection collaboration",
+      "description": "Collaboration services involving civil protection authorities",
+      "parent_classes": [
+        "CollaborationService"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ClassroomsLectureHalls",
+    "class_label": "Classroom and lecture halls",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ClassroomsLectureHalls",
+    "text": "Class Neighbourhood: ClassroomsLectureHalls\n\nLabel: Classroom and lecture halls\n\nDescription: Indoor instructional spaces used for theoretical training, briefings, simulations, and multimedia-supported learning\n\nParent Classes:\n- Facility\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Classroom and lecture halls",
+      "description": "Indoor instructional spaces used for theoretical training, briefings, simulations, and multimedia-supported learning",
+      "parent_classes": [
+        "Facility"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CollaborationService",
+    "class_label": "Collaboration service",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CollaborationService",
+    "text": "Class Neighbourhood: CollaborationService\n\nLabel: Collaboration service\n\nDescription: Services supporting cooperation, joint activities, or shared capabilities between the Training Centre and external partners\n\nParent Classes:\n- Service\n\nChild Classes:\n- CivilProtectionCollaboration\n- CrossBorderCollaboration\n- MultiAgencyCollaboration\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Collaboration service",
+      "description": "Services supporting cooperation, joint activities, or shared capabilities between the Training Centre and external partners",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [
+        "CivilProtectionCollaboration",
+        "CrossBorderCollaboration",
+        "MultiAgencyCollaboration"
+      ],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CollectiveProtectiveEquipmentCPE",
+    "class_label": "Collective Protective Equipment",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CollectiveProtectiveEquipmentCPE",
+    "text": "Class Neighbourhood: CollectiveProtectiveEquipmentCPE\n\nLabel: Collective Protective Equipment\n\nDescription: Equipment designed to protect groups of individuals, typically by providing shared protection against hazardous agents\n\nParent Classes:\n- Equipment\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Collective Protective Equipment",
+      "description": "Equipment designed to protect groups of individuals, typically by providing shared protection against hazardous agents",
+      "parent_classes": [
+        "Equipment"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CommandPostExerciseCPX",
+    "class_label": "Command post exercise CPX",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CommandPostExerciseCPX",
+    "text": "Class Neighbourhood: CommandPostExerciseCPX\n\nLabel: Command post exercise CPX\n\nDescription: Exercises where staff operate from command posts to manage a simulated incident, focusing on coordination, decision-making, and information management\n\nParent Classes:\n- Exercise\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Command post exercise CPX",
+      "description": "Exercises where staff operate from command posts to manage a simulated incident, focusing on coordination, decision-making, and information management",
+      "parent_classes": [
+        "Exercise"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Competence",
+    "class_label": "Competence",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Competence",
+    "text": "Class Neighbourhood: Competence\n\nLabel: Competence\n\nDescription: The specific skills, certifications, and qualifications that a centre possesses\u2014reflecting hands-on expertise in specialised subject areas. Examples include:\n\u2022 Collecting and handling toxin samples safely\n\u2022 On-site chemical detection and identification\n\u2022 Hospital triage procedures for CBRN incidents\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isCompetenceOf -> TrainingCentre\n- isCompetenceRequiredBy -> Unknown\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Competence",
+      "description": "The specific skills, certifications, and qualifications that a centre possesses\u2014reflecting hands-on expertise in specialised subject areas. Examples include:\n\u2022 Collecting and handling toxin samples safely\n\u2022 On-site chemical detection and identification\n\u2022 Hospital triage procedures for CBRN incidents",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isCompetenceOf -> TrainingCentre",
+        "isCompetenceRequiredBy -> Unknown"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Consumable",
+    "class_label": "Consumable",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Consumable",
+    "text": "Class Neighbourhood: Consumable\n\nLabel: Consumable\n\nDescription: Materials that are used up or require replenishment during training activities or operational responses\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Consumable",
+      "description": "Materials that are used up or require replenishment during training activities or operational responses",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CrisisManagers",
+    "class_label": "Crisis Managers",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CrisisManagers",
+    "text": "Class Neighbourhood: CrisisManagers\n\nLabel: Crisis Managers\n\nDescription: An audience category representing individuals responsible for coordinating decision-making and response actions during crises\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Crisis Managers",
+      "description": "An audience category representing individuals responsible for coordinating decision-making and response actions during crises",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CrossBorder",
+    "class_label": "Cross Border",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CrossBorder",
+    "text": "Class Neighbourhood: CrossBorder\n\nLabel: Cross Border\n\nDescription: Incidents that involve or affect multiple countries, requiring cross-border coordination and response mechanisms\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Cross Border",
+      "description": "Incidents that involve or affect multiple countries, requiring cross-border coordination and response mechanisms",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "CrossBorderCollaboration",
+    "class_label": "Cross border collaboration",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#CrossBorderCollaboration",
+    "text": "Class Neighbourhood: CrossBorderCollaboration\n\nLabel: Cross border collaboration\n\nDescription: Collaboration services involving partners across national borders\n\nParent Classes:\n- CollaborationService\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Cross border collaboration",
+      "description": "Collaboration services involving partners across national borders",
+      "parent_classes": [
+        "CollaborationService"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DIMTechnology",
+    "class_label": "DIM technology",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#DIMTechnology",
+    "text": "Class Neighbourhood: DIMTechnology\n\nLabel: DIM technology\n\nDescription: Detection, Identification, and Monitoring technologies used to detect, characterise, or monitor hazardous agents, following DIM classification in the STACCATO taxonomy\n\nParent Classes:\n- Technology\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "DIM technology",
+      "description": "Detection, Identification, and Monitoring technologies used to detect, characterise, or monitor hazardous agents, following DIM classification in the STACCATO taxonomy",
+      "parent_classes": [
+        "Technology"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DecisionMakers",
+    "class_label": "Desicion Makers",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#DecisionMakers",
+    "text": "Class Neighbourhood: DecisionMakers\n\nLabel: Desicion Makers\n\nDescription: An audience category representing senior officials with authority to make strategic decisions in crisis or emergency contexts\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Desicion Makers",
+      "description": "An audience category representing senior officials with authority to make strategic decisions in crisis or emergency contexts",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DecontaminationMethod",
+    "class_label": "Decontamination Method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#DecontaminationMethod",
+    "text": "Class Neighbourhood: DecontaminationMethod\n\nLabel: Decontamination Method\n\nDescription: A controlled vocabulary class including the methods used to neutralise, remove, or reduce hazardous agents in a CBRN context\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isDecomMethodEmployedBy -> DecontaminationTechnology\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Decontamination Method",
+      "description": "A controlled vocabulary class including the methods used to neutralise, remove, or reduce hazardous agents in a CBRN context",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isDecomMethodEmployedBy -> DecontaminationTechnology"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DecontaminationTechnology",
+    "class_label": "Decontamination technology",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#DecontaminationTechnology",
+    "text": "Class Neighbourhood: DecontaminationTechnology\n\nLabel: Decontamination technology\n\nDescription: Technologies used to neutralise, remove, or reduce hazardous agents, following DECON classification in the STACCATO taxonomy\n\nParent Classes:\n- Technology\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- employsDecomMethod -> DecontaminationMethod\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Decontamination technology",
+      "description": "Technologies used to neutralise, remove, or reduce hazardous agents, following DECON classification in the STACCATO taxonomy",
+      "parent_classes": [
+        "Technology"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "employsDecomMethod -> DecontaminationMethod"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DecontaminationZones",
+    "class_label": "Decontamination zones",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#DecontaminationZones",
+    "text": "Class Neighbourhood: DecontaminationZones\n\nLabel: Decontamination zones\n\nDescription: Areas equipped for practising or demonstrating decontamination procedures, including showers, tents, drainage systems, and related equipment\n\nParent Classes:\n- Facility\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Decontamination zones",
+      "description": "Areas equipped for practising or demonstrating decontamination procedures, including showers, tents, drainage systems, and related equipment",
+      "parent_classes": [
+        "Facility"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DomainOfUse",
+    "class_label": "Domain of use",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#DomainOfUse",
+    "text": "Class Neighbourhood: DomainOfUse\n\nLabel: Domain of use\n\nDescription: A controlled vocabulary class indicating the operational domain in which a capability, technology, or resource is applied\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isDomainOfUseOf -> Technology\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Domain of use",
+      "description": "A controlled vocabulary class indicating the operational domain in which a capability, technology, or resource is applied",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isDomainOfUseOf -> Technology"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ERPCapability",
+    "class_label": "ERP Capability",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ERPCapability",
+    "text": "Class Neighbourhood: ERPCapability\n\nLabel: ERP Capability\n\nDescription: The capability of a Training Centre to contact and coordinate with Emergency Response Plans (ERPs) in the context of chemical or biological threats. Civilian, military, forensic, or civil-protection-oriented emergency plans may be used to structure and prepare these responses\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isERPCapabilityOf -> EmergencyResponsePlan\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "ERP Capability",
+      "description": "The capability of a Training Centre to contact and coordinate with Emergency Response Plans (ERPs) in the context of chemical or biological threats. Civilian, military, forensic, or civil-protection-oriented emergency plans may be used to structure and prepare these responses",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isERPCapabilityOf -> EmergencyResponsePlan"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EUStandard",
+    "class_label": "EU Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EUStandard",
+    "text": "Class Neighbourhood: EUStandard\n\nLabel: EU Standard\n\nDescription: Standards, regulations, or guidelines issued by the European Union\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "EU Standard",
+      "description": "Standards, regulations, or guidelines issued by the European Union",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EarlyWarning",
+    "class_label": "Early warning",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EarlyWarning",
+    "text": "Class Neighbourhood: EarlyWarning\n\nLabel: Early warning\n\nDescription: Declares the capability of a Training Centre to provide early notification to external authorities at national or cross-border level\u2014such as civil protection agencies\u2014about a CB/T threat, provided that the centre possesses the appropriate DIM technologies to measure the hazard in real time with sufficient reliability\n\nParent Classes:\n- ResponseAction\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- earlyWarningForThreat -> ThreatAgent\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Early warning",
+      "description": "Declares the capability of a Training Centre to provide early notification to external authorities at national or cross-border level\u2014such as civil protection agencies\u2014about a CB/T threat, provided that the centre possesses the appropriate DIM technologies to measure the hazard in real time with sufficient reliability",
+      "parent_classes": [
+        "ResponseAction"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "earlyWarningForThreat -> ThreatAgent"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EarthquakeCollapseStructure",
+    "class_label": "Earthquake/ Collapse structure",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EarthquakeCollapseStructure",
+    "text": "Class Neighbourhood: EarthquakeCollapseStructure\n\nLabel: Earthquake/ Collapse structure\n\nDescription: Incidents involving structural collapse or damage caused by earthquakes or similar natural hazards\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Earthquake/ Collapse structure",
+      "description": "Incidents involving structural collapse or damage caused by earthquakes or similar natural hazards",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EmergencyResponsePlan",
+    "class_label": "Emergency response plan",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EmergencyResponsePlan",
+    "text": "Class Neighbourhood: EmergencyResponsePlan\n\nLabel: Emergency response plan\n\nDescription: Services contributing to the development, support, or review of emergency response plans\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- hasERPcapability -> ERPCapability\n- includesScenario -> Scenario\n- supportsResponse -> ResponseAction\n\nDirect Datatype Properties:\n- hasERPFrequency -> string",
+    "metadata": {
+      "label": "Emergency response plan",
+      "description": "Services contributing to the development, support, or review of emergency response plans",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "hasERPcapability -> ERPCapability",
+        "includesScenario -> Scenario",
+        "supportsResponse -> ResponseAction"
+      ],
+      "datatype_properties": [
+        "hasERPFrequency -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EnviromentalRiskAssesmentMethod",
+    "class_label": "Enviromental risk assesment method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EnviromentalRiskAssesmentMethod",
+    "text": "Class Neighbourhood: EnviromentalRiskAssesmentMethod\n\nLabel: Enviromental risk assesment method\n\nDescription: A class representing evaluation methods assessing environmental risks and potential impacts related to the exercise scenario\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Enviromental risk assesment method",
+      "description": "A class representing evaluation methods assessing environmental risks and potential impacts related to the exercise scenario",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Equipment",
+    "class_label": "Equipment",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Equipment",
+    "text": "Class Neighbourhood: Equipment\n\nLabel: Equipment\n\nDescription: Physical tools, devices, or instruments required to support training activities, exercises, or response operations\n\nParent Classes:\n- Resource\n\nChild Classes:\n- CollectiveProtectiveEquipmentCPE\n- MedicalEquipment\n- PersonalProtectiveEquipmentPPE\n\nDirect Object Properties:\n- isEquipmentOf -> Organisation\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Equipment",
+      "description": "Physical tools, devices, or instruments required to support training activities, exercises, or response operations",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [
+        "CollectiveProtectiveEquipmentCPE",
+        "MedicalEquipment",
+        "PersonalProtectiveEquipmentPPE"
+      ],
+      "object_properties": [
+        "isEquipmentOf -> Organisation"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EthicsConsiderationMethod",
+    "class_label": "Ethics consideration method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EthicsConsiderationMethod",
+    "text": "Class Neighbourhood: EthicsConsiderationMethod\n\nLabel: Ethics consideration method\n\nDescription: A class representing evaluation methods addressing ethical considerations such as participant safety, consent, and responsible conduct\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Ethics consideration method",
+      "description": "A class representing evaluation methods addressing ethical considerations such as participant safety, consent, and responsible conduct",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "EvaluationMethod",
+    "class_label": "Evaluation Method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#EvaluationMethod",
+    "text": "Class Neighbourhood: EvaluationMethod\n\nLabel: Evaluation Method\n\nDescription: A class representing the different methods used to evaluate the performance, effectiveness, or outcomes of a training exercise\n\nParent Classes:\n- Thing\n\nChild Classes:\n- AfterActionReviewMethod\n- EnviromentalRiskAssesmentMethod\n- EthicsConsiderationMethod\n- ObservationMethod\n- PerfomanceMetricsMethod\n- SafetySecurityPlanMethod\n- ScenarioSpecificCriteriaMethod\n\nDirect Object Properties:\n- isEvaluationMethodUsedBy -> ExerciseEvaluation\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Evaluation Method",
+      "description": "A class representing the different methods used to evaluate the performance, effectiveness, or outcomes of a training exercise",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "AfterActionReviewMethod",
+        "EnviromentalRiskAssesmentMethod",
+        "EthicsConsiderationMethod",
+        "ObservationMethod",
+        "PerfomanceMetricsMethod",
+        "SafetySecurityPlanMethod",
+        "ScenarioSpecificCriteriaMethod"
+      ],
+      "object_properties": [
+        "isEvaluationMethodUsedBy -> ExerciseEvaluation"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Exercise",
+    "class_label": "Exercise",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Exercise",
+    "text": "Class Neighbourhood: Exercise\n\nLabel: Exercise\n\nDescription: The type of exercises that the Training Center is capable to organise, classified as: Tabletop, Field Exercise, Command Post Exercise, Full-scale Exercise, based on the UCPM taxonomy.\n\nParent Classes:\n- Thing\n\nChild Classes:\n- CommandPostExerciseCPX\n- FieldExercise\n- FullScaleExerciseFSX\n- TableTopExerciseTTX\n\nDirect Object Properties:\n- hasActorType -> ActorType\n- hasExerciseEvaluation -> ExerciseEvaluation\n- hasExercisePhase -> ExercisePhase\n- hasExerciseType -> ExerciseType\n- hasParticipantRole -> Role\n- isBasedOnScenario -> Scenario\n- isExerciseOrganizedBy -> TrainingCentre\n- usesResource -> Resource\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Exercise",
+      "description": "The type of exercises that the Training Center is capable to organise, classified as: Tabletop, Field Exercise, Command Post Exercise, Full-scale Exercise, based on the UCPM taxonomy.",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "CommandPostExerciseCPX",
+        "FieldExercise",
+        "FullScaleExerciseFSX",
+        "TableTopExerciseTTX"
+      ],
+      "object_properties": [
+        "hasActorType -> ActorType",
+        "hasExerciseEvaluation -> ExerciseEvaluation",
+        "hasExercisePhase -> ExercisePhase",
+        "hasExerciseType -> ExerciseType",
+        "hasParticipantRole -> Role",
+        "isBasedOnScenario -> Scenario",
+        "isExerciseOrganizedBy -> TrainingCentre",
+        "usesResource -> Resource"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ExerciseEvaluation",
+    "class_label": "Exercise Evaluation",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ExerciseEvaluation",
+    "text": "Class Neighbourhood: ExerciseEvaluation\n\nLabel: Exercise Evaluation\n\nDescription: Processes and criteria used to assess the performance, outcomes, and effectiveness of a training exercise\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isExerciseEvaluationOf -> Exercise\n- usesEvaluationMethod -> EvaluationMethod\n- usesStandard -> Standard\n\nDirect Datatype Properties:\n- hasEvaluationComments -> string\n- hasEvaluationScore -> string\n- hasEvaluationdate -> string",
+    "metadata": {
+      "label": "Exercise Evaluation",
+      "description": "Processes and criteria used to assess the performance, outcomes, and effectiveness of a training exercise",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isExerciseEvaluationOf -> Exercise",
+        "usesEvaluationMethod -> EvaluationMethod",
+        "usesStandard -> Standard"
+      ],
+      "datatype_properties": [
+        "hasEvaluationComments -> string",
+        "hasEvaluationScore -> string",
+        "hasEvaluationdate -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ExercisePhase",
+    "class_label": "Exercise phase",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ExercisePhase",
+    "text": "Class Neighbourhood: ExercisePhase\n\nLabel: Exercise phase\n\nDescription: Phases of an exercise in which the centre has experience and can potentially contribute to exercises organised by other centres\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isExercisePhaseOf -> Exercise\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Exercise phase",
+      "description": "Phases of an exercise in which the centre has experience and can potentially contribute to exercises organised by other centres",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isExercisePhaseOf -> Exercise"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ExerciseType",
+    "class_label": "Exercise type",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ExerciseType",
+    "text": "Class Neighbourhood: ExerciseType\n\nLabel: Exercise type\n\nDescription: Controlled vocabulary used to classify exercises by type, such as civil or military\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isExerciseTypeOf -> Exercise\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Exercise type",
+      "description": "Controlled vocabulary used to classify exercises by type, such as civil or military",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isExerciseTypeOf -> Exercise"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ExternalLaboratorySupportService",
+    "class_label": "External laboratory support service",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ExternalLaboratorySupportService",
+    "text": "Class Neighbourhood: ExternalLaboratorySupportService\n\nLabel: External laboratory support service\n\nDescription: Services provided to or received from external laboratories, such as analytical support, sample processing, or specialised testing\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- supportsDetectionOf -> ThreatAgent\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "External laboratory support service",
+      "description": "Services provided to or received from external laboratories, such as analytical support, sample processing, or specialised testing",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "supportsDetectionOf -> ThreatAgent"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ExtraCapability",
+    "class_label": "Extra capability",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ExtraCapability",
+    "text": "Class Neighbourhood: ExtraCapability\n\nLabel: Extra capability\n\nDescription: Class representing additional capabilities offered by the centre that extend beyond its core functions or primary operational domains\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isExtraCapabilityOf -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Extra capability",
+      "description": "Class representing additional capabilities offered by the centre that extend beyond its core functions or primary operational domains",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isExtraCapabilityOf -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FEMAStandard",
+    "class_label": "FEMA Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FEMAStandard",
+    "text": "Class Neighbourhood: FEMAStandard\n\nLabel: FEMA Standard\n\nDescription: Standards or guidance documents issued by the U.S. Federal Emergency Management Agency\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "FEMA Standard",
+      "description": "Standards or guidance documents issued by the U.S. Federal Emergency Management Agency",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Facility",
+    "class_label": "Facility",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Facility",
+    "text": "Class Neighbourhood: Facility\n\nLabel: Facility\n\nDescription: Physical infrastructure and resources owned by the Training Centre that support training, exercises, and simulations related to hazardous incidents. Examples include classrooms and multimedia tools, simulation zones or training fields, specialised infrastructure such as decontamination units (showers, tents), containment or mock laboratories, CBRN protective gear storage and dressing areas, and command-and-control simulation rooms\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- ClassroomsLectureHalls\n- DecontaminationZones\n- FieldExerciseAreas\n- LiveAgentTrainingRanges\n- PPEStorageLogisticsSupportAreas\n- SimulationRooms\n\nDirect Object Properties:\n- isFacilityOf -> Organisation\n- isFacilityRequiredBy -> Service\n- isFacilityWhereScenarioOccurs -> Scenario\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Facility",
+      "description": "Physical infrastructure and resources owned by the Training Centre that support training, exercises, and simulations related to hazardous incidents. Examples include classrooms and multimedia tools, simulation zones or training fields, specialised infrastructure such as decontamination units (showers, tents), containment or mock laboratories, CBRN protective gear storage and dressing areas, and command-and-control simulation rooms",
+      "parent_classes": [],
+      "child_classes": [
+        "ClassroomsLectureHalls",
+        "DecontaminationZones",
+        "FieldExerciseAreas",
+        "LiveAgentTrainingRanges",
+        "PPEStorageLogisticsSupportAreas",
+        "SimulationRooms"
+      ],
+      "object_properties": [
+        "isFacilityOf -> Organisation",
+        "isFacilityRequiredBy -> Service",
+        "isFacilityWhereScenarioOccurs -> Scenario"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FieldExercise",
+    "class_label": "Field exercise",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FieldExercise",
+    "text": "Class Neighbourhood: FieldExercise\n\nLabel: Field exercise\n\nDescription: Exercises conducted in real operational environments, emphasizing practical response actions, deployment of resources, and on-site coordination\n\nParent Classes:\n- Exercise\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Field exercise",
+      "description": "Exercises conducted in real operational environments, emphasizing practical response actions, deployment of resources, and on-site coordination",
+      "parent_classes": [
+        "Exercise"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FieldExerciseAreas",
+    "class_label": "Field exercise areas",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FieldExerciseAreas",
+    "text": "Class Neighbourhood: FieldExerciseAreas\n\nLabel: Field exercise areas\n\nDescription: Outdoor training grounds or operational zones used for practical, scenario-based exercises and hands-on response activities\n\nParent Classes:\n- Facility\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Field exercise areas",
+      "description": "Outdoor training grounds or operational zones used for practical, scenario-based exercises and hands-on response activities",
+      "parent_classes": [
+        "Facility"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FireExplosion",
+    "class_label": "Fire/ Explosion",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FireExplosion",
+    "text": "Class Neighbourhood: FireExplosion\n\nLabel: Fire/ Explosion\n\nDescription: Incidents involving fires, explosions, or related combustion hazards\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Fire/ Explosion",
+      "description": "Incidents involving fires, explosions, or related combustion hazards",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FireRescueServices",
+    "class_label": "Fire Rescue Services",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FireRescueServices",
+    "text": "Class Neighbourhood: FireRescueServices\n\nLabel: Fire Rescue Services\n\nDescription: An audience category representing fire and rescue service personnel engaged in emergency response and incident management\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Fire Rescue Services",
+      "description": "An audience category representing fire and rescue service personnel engaged in emergency response and incident management",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FirstResponders",
+    "class_label": "First Responders",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FirstResponders",
+    "text": "Class Neighbourhood: FirstResponders\n\nLabel: First Responders\n\nDescription: An audience category representing frontline emergency responders directly involved in initial crisis operations\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "First Responders",
+      "description": "An audience category representing frontline emergency responders directly involved in initial crisis operations",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FullScaleExerciseFSX",
+    "class_label": "Full scale exercise FSX",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#FullScaleExerciseFSX",
+    "text": "Class Neighbourhood: FullScaleExerciseFSX\n\nLabel: Full scale exercise FSX\n\nDescription: Exercises involving full deployment of personnel, equipment, and infrastructure to simulate a highly realistic emergency response\n\nParent Classes:\n- Exercise\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Full scale exercise FSX",
+      "description": "Exercises involving full deployment of personnel, equipment, and infrastructure to simulate a highly realistic emergency response",
+      "parent_classes": [
+        "Exercise"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Gender",
+    "class_label": "Gender",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Gender",
+    "text": "Class Neighbourhood: Gender\n\nLabel: Gender\n\nDescription: Controlled vocabulary class to represent the different genders\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isGenderOf -> Person\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Gender",
+      "description": "Controlled vocabulary class to represent the different genders",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isGenderOf -> Person"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "HealthCrisis",
+    "class_label": "Health crisis",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#HealthCrisis",
+    "text": "Class Neighbourhood: HealthCrisis\n\nLabel: Health crisis\n\nDescription: Incidents involving widespread public health emergencies, such as epidemics, pandemics, or mass-casualty medical crises\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Health crisis",
+      "description": "Incidents involving widespread public health emergencies, such as epidemics, pandemics, or mass-casualty medical crises",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "HealthHospitalMedicalPersonnel",
+    "class_label": "Health Hospital Medical Personnel",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#HealthHospitalMedicalPersonnel",
+    "text": "Class Neighbourhood: HealthHospitalMedicalPersonnel\n\nLabel: Health Hospital Medical Personnel\n\nDescription: An audience category representing medical, hospital, and healthcare staff involved in emergency care, crisis response, or public health management\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Health Hospital Medical Personnel",
+      "description": "An audience category representing medical, hospital, and healthcare staff involved in emergency care, crisis response, or public health management",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ISOStandard",
+    "class_label": "ISO Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ISOStandard",
+    "text": "Class Neighbourhood: ISOStandard\n\nLabel: ISO Standard\n\nDescription: International standards published by the International Organization for Standardization (ISO)\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "ISO Standard",
+      "description": "International standards published by the International Organization for Standardization (ISO)",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Incident",
+    "class_label": "Incident",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Incident",
+    "text": "Class Neighbourhood: Incident\n\nLabel: Incident\n\nDescription: A structured description of a hazardous event used as the basis for a training exercise or simulated scenario. Incidents are linked to specific CB/T threats and define the context of the exercise (e.g., chemical spill at an airport, biotoxin release at a stadium, cross-border threat)\n\nParent Classes:\n- Thing\n\nChild Classes:\n- Biological\n- Chemical\n- CrossBorder\n- EarthquakeCollapseStructure\n- FireExplosion\n- HealthCrisis\n- RadiologicalAndNuclear\n\nDirect Object Properties:\n- isIncidentBasisFor -> Scenario\n- isIncidentTackledBy -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Incident",
+      "description": "A structured description of a hazardous event used as the basis for a training exercise or simulated scenario. Incidents are linked to specific CB/T threats and define the context of the exercise (e.g., chemical spill at an airport, biotoxin release at a stadium, cross-border threat)",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "Biological",
+        "Chemical",
+        "CrossBorder",
+        "EarthquakeCollapseStructure",
+        "FireExplosion",
+        "HealthCrisis",
+        "RadiologicalAndNuclear"
+      ],
+      "object_properties": [
+        "isIncidentBasisFor -> Scenario",
+        "isIncidentTackledBy -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "InnovativeTechnologiesTraining",
+    "class_label": "Innovative technologies training",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#InnovativeTechnologiesTraining",
+    "text": "Class Neighbourhood: InnovativeTechnologiesTraining\n\nLabel: Innovative technologies training\n\nDescription: Training courses focused on emerging or advanced technologies applied to CBRN or emergency-management contexts\n\nParent Classes:\n- TechnologyTraining\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Innovative technologies training",
+      "description": "Training courses focused on emerging or advanced technologies applied to CBRN or emergency-management contexts",
+      "parent_classes": [
+        "TechnologyTraining"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "InternationalOrganisations",
+    "class_label": "International Organsations",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#InternationalOrganisations",
+    "text": "Class Neighbourhood: InternationalOrganisations\n\nLabel: International Organsations\n\nDescription: An audience category representing international bodies and agencies participating in crisis management, coordination, or support activities\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "International Organsations",
+      "description": "An audience category representing international bodies and agencies participating in crisis management, coordination, or support activities",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "JointCivilMilitaryExercises",
+    "class_label": "Joint civil military exercises",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#JointCivilMilitaryExercises",
+    "text": "Class Neighbourhood: JointCivilMilitaryExercises\n\nLabel: Joint civil military exercises\n\nDescription: Services supporting exercises conducted jointly between civilian and military organisations\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Joint civil military exercises",
+      "description": "Services supporting exercises conducted jointly between civilian and military organisations",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "LiveAgentTrainingRanges",
+    "class_label": "Live-Agent training ranges",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#LiveAgentTrainingRanges",
+    "text": "Class Neighbourhood: LiveAgentTrainingRanges\n\nLabel: Live-Agent training ranges\n\nDescription: Specialised, controlled areas where training with live chemical, biological, or radiological agents can be safely conducted under authorised conditions\n\nParent Classes:\n- Facility\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Live-Agent training ranges",
+      "description": "Specialised, controlled areas where training with live chemical, biological, or radiological agents can be safely conducted under authorised conditions",
+      "parent_classes": [
+        "Facility"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "MedicalCBTTraining",
+    "class_label": "Medical CBT training",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#MedicalCBTTraining",
+    "text": "Class Neighbourhood: MedicalCBTTraining\n\nLabel: Medical CBT training\n\nDescription: Training courses focused on medical aspects of chemical, biological, or toxin (CB/T) incident management\n\nParent Classes:\n- TrainingCourse\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Medical CBT training",
+      "description": "Training courses focused on medical aspects of chemical, biological, or toxin (CB/T) incident management",
+      "parent_classes": [
+        "TrainingCourse"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "MedicalEquipment",
+    "class_label": "Medical Equipment",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#MedicalEquipment",
+    "text": "Class Neighbourhood: MedicalEquipment\n\nLabel: Medical Equipment\n\nDescription: Equipment used to provide medical care, monitoring, or support during training activities or emergency scenarios\n\nParent Classes:\n- Equipment\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Medical Equipment",
+      "description": "Equipment used to provide medical care, monitoring, or support during training activities or emergency scenarios",
+      "parent_classes": [
+        "Equipment"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "MilitaryDefenceExperts",
+    "class_label": "Military Defence Experts",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#MilitaryDefenceExperts",
+    "text": "Class Neighbourhood: MilitaryDefenceExperts\n\nLabel: Military Defence Experts\n\nDescription: An audience category representing defence and military personnel contributing expertise to crisis preparedness or operational response\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Military Defence Experts",
+      "description": "An audience category representing defence and military personnel contributing expertise to crisis preparedness or operational response",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "MilitaryExercises",
+    "class_label": "Military exercises",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#MilitaryExercises",
+    "text": "Class Neighbourhood: MilitaryExercises\n\nLabel: Military exercises\n\nDescription: Exercise-related services provided to military authorities or defence organisations\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Military exercises",
+      "description": "Exercise-related services provided to military authorities or defence organisations",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "MilitaryStandard",
+    "class_label": "Military Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#MilitaryStandard",
+    "text": "Class Neighbourhood: MilitaryStandard\n\nLabel: Military Standard\n\nDescription: Standards issued by military or defence authorities\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Military Standard",
+      "description": "Standards issued by military or defence authorities",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "MultiAgencyCollaboration",
+    "class_label": "Multi agency collaboration",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#MultiAgencyCollaboration",
+    "text": "Class Neighbourhood: MultiAgencyCollaboration\n\nLabel: Multi agency collaboration\n\nDescription: Collaboration services involving multiple agencies working jointly in training or preparedness activities\n\nParent Classes:\n- CollaborationService\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Multi agency collaboration",
+      "description": "Collaboration services involving multiple agencies working jointly in training or preparedness activities",
+      "parent_classes": [
+        "CollaborationService"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "NATOStandard",
+    "class_label": "NATO Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#NATOStandard",
+    "text": "Class Neighbourhood: NATOStandard\n\nLabel: NATO Standard\n\nDescription: Standards published by NATO, including STANAG documents and related interoperability requirements\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "NATO Standard",
+      "description": "Standards published by NATO, including STANAG documents and related interoperability requirements",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "National",
+    "class_label": "National",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#National",
+    "text": "Class Neighbourhood: National\n\nLabel: National\n\nDescription: National-level standards or regulations issued by governmental authorities within a specific country\n\nParent Classes:\n- Standard\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "National",
+      "description": "National-level standards or regulations issued by governmental authorities within a specific country",
+      "parent_classes": [
+        "Standard"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "NationalMunicipalRegionalAuthorities",
+    "class_label": "National Municipal Regional Authorities",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#NationalMunicipalRegionalAuthorities",
+    "text": "Class Neighbourhood: NationalMunicipalRegionalAuthorities\n\nLabel: National Municipal Regional Authorities\n\nDescription: An audience category representing public authorities at national, municipal, or regional level involved in governance, planning, or crisis management\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "National Municipal Regional Authorities",
+      "description": "An audience category representing public authorities at national, municipal, or regional level involved in governance, planning, or crisis management",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ObservationMethod",
+    "class_label": "Observation method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ObservationMethod",
+    "text": "Class Neighbourhood: ObservationMethod\n\nLabel: Observation method\n\nDescription: A class representing evaluation methods based on direct observation of participant actions, decisions, and interactions during the exercise\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Observation method",
+      "description": "A class representing evaluation methods based on direct observation of participant actions, decisions, and interactions during the exercise",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Organisation",
+    "class_label": "Organisation",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Organisation",
+    "text": "Class Neighbourhood: Organisation\n\nLabel: Organisation\n\nDescription: Formal institutions or agencies engaged in training, preparedness, response, or governance activities related to hazardous incidents\n\nParent Classes:\n- Thing\n\nChild Classes:\n- OrganisationalStakeholder\n- TrainingCentre\n\nDirect Object Properties:\n- collaboratesWith -> TrainingCentre\n- hasEquipment -> Equipment\n- hasFacility -> Facility\n- providesService -> Service\n- usesTechnology -> Technology\n\nDirect Datatype Properties:\n- hasSite -> string",
+    "metadata": {
+      "label": "Organisation",
+      "description": "Formal institutions or agencies engaged in training, preparedness, response, or governance activities related to hazardous incidents",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "OrganisationalStakeholder",
+        "TrainingCentre"
+      ],
+      "object_properties": [
+        "collaboratesWith -> TrainingCentre",
+        "hasEquipment -> Equipment",
+        "hasFacility -> Facility",
+        "providesService -> Service",
+        "usesTechnology -> Technology"
+      ],
+      "datatype_properties": [
+        "hasSite -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "OrganisationalStaffRole",
+    "class_label": "Organizational staff role",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#OrganisationalStaffRole",
+    "text": "Class Neighbourhood: OrganisationalStaffRole\n\nLabel: Organizational staff role\n\nDescription: Roles held by personnel contributing to the organisational or administrative functions of a training or emergency-management context\n\nParent Classes:\n- Role\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isOrganizationalStaffRoleOf -> TrainingCourse\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Organizational staff role",
+      "description": "Roles held by personnel contributing to the organisational or administrative functions of a training or emergency-management context",
+      "parent_classes": [
+        "Role"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isOrganizationalStaffRoleOf -> TrainingCourse"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "OrganisationalStakeholder",
+    "class_label": "Organizational stakeholder",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#OrganisationalStakeholder",
+    "text": "Class Neighbourhood: OrganisationalStakeholder\n\nLabel: Organizational stakeholder\n\nDescription: Institutions or agencies that have a direct interest in, support, or are affected by the Training Centre\u2019s activities. These include bodies with which the centre routinely engages or collaborates, such as ministries (Health, Defence, Interior), civil protection or environmental agencies, national security and intelligence services, regional or local authorities, fire and rescue services, police departments, hospitals, research institutes, and private-sector security providers\n\nParent Classes:\n- Organisation\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isStakeholderEngagedBy -> Unknown\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Organizational stakeholder",
+      "description": "Institutions or agencies that have a direct interest in, support, or are affected by the Training Centre\u2019s activities. These include bodies with which the centre routinely engages or collaborates, such as ministries (Health, Defence, Interior), civil protection or environmental agencies, national security and intelligence services, regional or local authorities, fire and rescue services, police departments, hospitals, research institutes, and private-sector security providers",
+      "parent_classes": [
+        "Organisation"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isStakeholderEngagedBy -> Unknown"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "OtherService",
+    "class_label": "Other service",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#OtherService",
+    "text": "Class Neighbourhood: OtherService\n\nLabel: Other service\n\nDescription: Additional services offered by the Training Centre that do not fall into predefined categories\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Other service",
+      "description": "Additional services offered by the Training Centre that do not fall into predefined categories",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "PPEStorageLogisticsSupportAreas",
+    "class_label": "PPE storage and logistics support areas",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#PPEStorageLogisticsSupportAreas",
+    "text": "Class Neighbourhood: PPEStorageLogisticsSupportAreas\n\nLabel: PPE storage and logistics support areas\n\nDescription: Spaces dedicated to storing, maintaining, and preparing personal protective equipment and associated logistical materials for training or exercise deployment\n\nParent Classes:\n- Facility\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "PPE storage and logistics support areas",
+      "description": "Spaces dedicated to storing, maintaining, and preparing personal protective equipment and associated logistical materials for training or exercise deployment",
+      "parent_classes": [
+        "Facility"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "PerfomanceMetricsMethod",
+    "class_label": "Perfomance metrics method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#PerfomanceMetricsMethod",
+    "text": "Class Neighbourhood: PerfomanceMetricsMethod\n\nLabel: Perfomance metrics method\n\nDescription: A class representing evaluation methods that use predefined indicators or metrics to assess performance and exercise effectiveness\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Perfomance metrics method",
+      "description": "A class representing evaluation methods that use predefined indicators or metrics to assess performance and exercise effectiveness",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Person",
+    "class_label": "Person or Group",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Person",
+    "text": "Class Neighbourhood: Person\n\nLabel: Person or Group\n\nDescription: Class representing a person or a group\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- Role\n\nDirect Object Properties:\n- hasAffiliation -> PersonAffiliation\n- hasGender -> Gender\n\nDirect Datatype Properties:\n- hasDateOfBirth -> date\n- hasName -> string\n- hasSurname -> string",
+    "metadata": {
+      "label": "Person or Group",
+      "description": "Class representing a person or a group",
+      "parent_classes": [],
+      "child_classes": [
+        "Role"
+      ],
+      "object_properties": [
+        "hasAffiliation -> PersonAffiliation",
+        "hasGender -> Gender"
+      ],
+      "datatype_properties": [
+        "hasDateOfBirth -> date",
+        "hasName -> string",
+        "hasSurname -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "PersonAffiliation",
+    "class_label": "Person or Group Affiliation",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#PersonAffiliation",
+    "text": "Class Neighbourhood: PersonAffiliation\n\nLabel: Person or Group Affiliation\n\nDescription: Controlled vocabulary class to indicate the affiliation of a person\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isAffiliationOf -> Person\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Person or Group Affiliation",
+      "description": "Controlled vocabulary class to indicate the affiliation of a person",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isAffiliationOf -> Person"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "PersonalProtectiveEquipmentPPE",
+    "class_label": "Personal Protective Equipment",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#PersonalProtectiveEquipmentPPE",
+    "text": "Class Neighbourhood: PersonalProtectiveEquipmentPPE\n\nLabel: Personal Protective Equipment\n\nDescription: Equipment worn by individuals to protect against exposure to hazardous agents during training or operational tasks\n\nParent Classes:\n- Equipment\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Personal Protective Equipment",
+      "description": "Equipment worn by individuals to protect against exposure to hazardous agents during training or operational tasks",
+      "parent_classes": [
+        "Equipment"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Personnel",
+    "class_label": "Personnel",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Personnel",
+    "text": "Class Neighbourhood: Personnel\n\nLabel: Personnel\n\nDescription: Human resources contributing skills, expertise, or operational capacity in training or response contexts\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Personnel",
+      "description": "Human resources contributing skills, expertise, or operational capacity in training or response contexts",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "PoliceLawEnforcementAgencies",
+    "class_label": "Police law enforcement agencies",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#PoliceLawEnforcementAgencies",
+    "text": "Class Neighbourhood: PoliceLawEnforcementAgencies\n\nLabel: Police law enforcement agencies\n\nDescription: An audience category representing police and law-enforcement personnel responsible for maintaining security and supporting crisis response\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Police law enforcement agencies",
+      "description": "An audience category representing police and law-enforcement personnel responsible for maintaining security and supporting crisis response",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "PrivateCompanies",
+    "class_label": "Private Companies",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#PrivateCompanies",
+    "text": "Class Neighbourhood: PrivateCompanies\n\nLabel: Private Companies\n\nDescription: An audience category representing private-sector organisations contributing to crisis preparedness, support activities, or infrastructure operations\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Private Companies",
+      "description": "An audience category representing private-sector organisations contributing to crisis preparedness, support activities, or infrastructure operations",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "RadiologicalAndNuclear",
+    "class_label": "Radiological and Nuclear",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#RadiologicalAndNuclear",
+    "text": "Class Neighbourhood: RadiologicalAndNuclear\n\nLabel: Radiological and Nuclear\n\nDescription: Incidents involving radiological or nuclear materials, including accidental releases or intentional dispersal events\n\nParent Classes:\n- Incident\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Radiological and Nuclear",
+      "description": "Incidents involving radiological or nuclear materials, including accidental releases or intentional dispersal events",
+      "parent_classes": [
+        "Incident"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Resource",
+    "class_label": "Resource",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Resource",
+    "text": "Class Neighbourhood: Resource\n\nLabel: Resource\n\nDescription: Personnel, equipment, infrastructure, or consumables required for executing a scenario, training activity, or operational response\n\nParent Classes:\n- Thing\n\nChild Classes:\n- Consumable\n- Equipment\n- Personnel\n- Technology\n- Vehicle\n\nDirect Object Properties:\n- isResourceRequiredBy -> Scenario\n- isResourceUsedBy -> Exercise\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Resource",
+      "description": "Personnel, equipment, infrastructure, or consumables required for executing a scenario, training activity, or operational response",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "Consumable",
+        "Equipment",
+        "Personnel",
+        "Technology",
+        "Vehicle"
+      ],
+      "object_properties": [
+        "isResourceRequiredBy -> Scenario",
+        "isResourceUsedBy -> Exercise"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ResponseAction",
+    "class_label": "Response action",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ResponseAction",
+    "text": "Class Neighbourhood: ResponseAction\n\nLabel: Response action\n\nDescription: Actions undertaken to manage, mitigate, or control the consequences of an incident during a training exercise or operational response\n\nParent Classes:\n- Thing\n\nChild Classes:\n- EarlyWarning\n\nDirect Object Properties:\n- followsSOP -> SOP\n- isActionRequiredBy -> Scenario\n- isResponseActionForThreat -> ThreatAgent\n- isResponseActionOf -> Incident\n- isResponseSupportedBy -> EmergencyResponsePlan\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Response action",
+      "description": "Actions undertaken to manage, mitigate, or control the consequences of an incident during a training exercise or operational response",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "EarlyWarning"
+      ],
+      "object_properties": [
+        "followsSOP -> SOP",
+        "isActionRequiredBy -> Scenario",
+        "isResponseActionForThreat -> ThreatAgent",
+        "isResponseActionOf -> Incident",
+        "isResponseSupportedBy -> EmergencyResponsePlan"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Role",
+    "class_label": "Role",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Role",
+    "text": "Class Neighbourhood: Role\n\nLabel: Role\n\nDescription: Functions or positions that a person may hold within training, organisational, or exercise contexts\n\nParent Classes:\n- Person\n\nChild Classes:\n- OrganisationalStaffRole\n- TrainerRole\n- TrainingParticipantRole\n\nDirect Object Properties:\n- participatesInExercise -> Exercise\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Role",
+      "description": "Functions or positions that a person may hold within training, organisational, or exercise contexts",
+      "parent_classes": [
+        "Person"
+      ],
+      "child_classes": [
+        "OrganisationalStaffRole",
+        "TrainerRole",
+        "TrainingParticipantRole"
+      ],
+      "object_properties": [
+        "participatesInExercise -> Exercise"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "SOP",
+    "class_label": "SOP",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#SOP",
+    "text": "Class Neighbourhood: SOP\n\nLabel: SOP\n\nDescription: The Standard Operating Procedures relevant to Seach and Rescue, CBRN Triage and Response etc. which are used by the Training Centers for training of the First Responders.\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- hasSOPAudience -> Audience\n- isSOPFollowedBy -> ResponseAction\n- isSOPRequiredBy -> ThreatAgent\n- isSOPUsedBy -> TrainingCentre\n\nDirect Datatype Properties:\n- hasSOPDeliveryMethod -> string",
+    "metadata": {
+      "label": "SOP",
+      "description": "The Standard Operating Procedures relevant to Seach and Rescue, CBRN Triage and Response etc. which are used by the Training Centers for training of the First Responders.",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "hasSOPAudience -> Audience",
+        "isSOPFollowedBy -> ResponseAction",
+        "isSOPRequiredBy -> ThreatAgent",
+        "isSOPUsedBy -> TrainingCentre"
+      ],
+      "datatype_properties": [
+        "hasSOPDeliveryMethod -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "SafetySecurityPlanMethod",
+    "class_label": "Safety security plan method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#SafetySecurityPlanMethod",
+    "text": "Class Neighbourhood: SafetySecurityPlanMethod\n\nLabel: Safety security plan method\n\nDescription: A class representing evaluation methods that review the adequacy and implementation of safety and security measures within the exercise\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Safety security plan method",
+      "description": "A class representing evaluation methods that review the adequacy and implementation of safety and security measures within the exercise",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Scenario",
+    "class_label": "Scenario",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Scenario",
+    "text": "Class Neighbourhood: Scenario\n\nLabel: Scenario\n\nDescription: A structured representation of a training exercise or simulated incident (e.g., \u201cChemical spill near a water supply,\u201d \u201cBiotoxin release during a stadium event,\u201d \u201cCross-border CB threat\u201d)\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isBasedOnIncident -> Incident\n- isScenarioBasisFor -> Exercise\n- isScenarioIncludedIn -> EmergencyResponsePlan\n- occursAt -> Facility\n- requiresAction -> ResponseAction\n- requiresResource -> Resource\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Scenario",
+      "description": "A structured representation of a training exercise or simulated incident (e.g., \u201cChemical spill near a water supply,\u201d \u201cBiotoxin release during a stadium event,\u201d \u201cCross-border CB threat\u201d)",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isBasedOnIncident -> Incident",
+        "isScenarioBasisFor -> Exercise",
+        "isScenarioIncludedIn -> EmergencyResponsePlan",
+        "occursAt -> Facility",
+        "requiresAction -> ResponseAction",
+        "requiresResource -> Resource"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ScenarioRole",
+    "class_label": "Scenario role",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ScenarioRole",
+    "text": "Class Neighbourhood: ScenarioRole\n\nLabel: Scenario role\n\nDescription: Roles defining the function or responsibilities of actors within a scenario\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isScenarioRoleOf -> Unknown\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Scenario role",
+      "description": "Roles defining the function or responsibilities of actors within a scenario",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isScenarioRoleOf -> Unknown"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ScenarioSpecificCriteriaMethod",
+    "class_label": "Scenario specific criteria method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ScenarioSpecificCriteriaMethod",
+    "text": "Class Neighbourhood: ScenarioSpecificCriteriaMethod\n\nLabel: Scenario specific criteria method\n\nDescription: A class representing evaluation methods that apply criteria tailored to the specific scenario, objectives, or threat conditions of the exercise\n\nParent Classes:\n- EvaluationMethod\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Scenario specific criteria method",
+      "description": "A class representing evaluation methods that apply criteria tailored to the specific scenario, objectives, or threat conditions of the exercise",
+      "parent_classes": [
+        "EvaluationMethod"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "SecondResponders",
+    "class_label": "Second Responders",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#SecondResponders",
+    "text": "Class Neighbourhood: SecondResponders\n\nLabel: Second Responders\n\nDescription: An audience category representing individuals or organisations providing follow-up support after initial emergency response actions\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Second Responders",
+      "description": "An audience category representing individuals or organisations providing follow-up support after initial emergency response actions",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Service",
+    "class_label": "Service",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Service",
+    "text": "Class Neighbourhood: Service\n\nLabel: Service\n\nDescription: Activities or support functions offered by the Training Centre to external partners, authorities, or other centres\n\nParent Classes:\n- Thing\n\nChild Classes:\n- CivilExercises\n- CollaborationService\n- EmergencyResponsePlan\n- ExternalLaboratorySupportService\n- JointCivilMilitaryExercises\n- MilitaryExercises\n- OtherService\n- TraineesTrainersExchange\n\nDirect Object Properties:\n- isServiceOfferedBy -> TrainingCentre\n- isServiceProvidedBy -> Organisation\n- requiresFacility -> Facility\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Service",
+      "description": "Activities or support functions offered by the Training Centre to external partners, authorities, or other centres",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "CivilExercises",
+        "CollaborationService",
+        "EmergencyResponsePlan",
+        "ExternalLaboratorySupportService",
+        "JointCivilMilitaryExercises",
+        "MilitaryExercises",
+        "OtherService",
+        "TraineesTrainersExchange"
+      ],
+      "object_properties": [
+        "isServiceOfferedBy -> TrainingCentre",
+        "isServiceProvidedBy -> Organisation",
+        "requiresFacility -> Facility"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "SimulationRooms",
+    "class_label": "Simulation rooms",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#SimulationRooms",
+    "text": "Class Neighbourhood: SimulationRooms\n\nLabel: Simulation rooms\n\nDescription: Indoor environments equipped with tools, software, or mock setups to simulate command-and-control conditions, incident rooms, or realistic operational scenarios\n\nParent Classes:\n- Facility\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Simulation rooms",
+      "description": "Indoor environments equipped with tools, software, or mock setups to simulate command-and-control conditions, incident rooms, or realistic operational scenarios",
+      "parent_classes": [
+        "Facility"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Standard",
+    "class_label": "Standard",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Standard",
+    "text": "Class Neighbourhood: Standard\n\nLabel: Standard\n\nDescription: Norms, guidelines, or technical requirements that define procedures, quality criteria, or operational expectations relevant to training, preparedness, or emergency response\n\nParent Classes:\n- Thing\n\nChild Classes:\n- CENStandard\n- EUStandard\n- FEMAStandard\n- ISOStandard\n- MilitaryStandard\n- NATOStandard\n- National\n\nDirect Object Properties:\n- isStandardCompliedWithBy -> Unknown\n- isStandardUsedBy -> ExerciseEvaluation\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Standard",
+      "description": "Norms, guidelines, or technical requirements that define procedures, quality criteria, or operational expectations relevant to training, preparedness, or emergency response",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "CENStandard",
+        "EUStandard",
+        "FEMAStandard",
+        "ISOStandard",
+        "MilitaryStandard",
+        "NATOStandard",
+        "National"
+      ],
+      "object_properties": [
+        "isStandardCompliedWithBy -> Unknown",
+        "isStandardUsedBy -> ExerciseEvaluation"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Students",
+    "class_label": "Students",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Students",
+    "text": "Class Neighbourhood: Students\n\nLabel: Students\n\nDescription: An audience category representing learners participating in training, educational programmes, or awareness activities related to crisis management\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Students",
+      "description": "An audience category representing learners participating in training, educational programmes, or awareness activities related to crisis management",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TCDiscipline",
+    "class_label": "Training Centre Discipline",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TCDiscipline",
+    "text": "Class Neighbourhood: TCDiscipline\n\nLabel: Training Centre Discipline\n\nDescription: Controlled vocabulary class of the different {C,B,RN} disciplines\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isTCDisciplineOf -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Training Centre Discipline",
+      "description": "Controlled vocabulary class of the different {C,B,RN} disciplines",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isTCDisciplineOf -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TCType",
+    "class_label": "Training Centre Type",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TCType",
+    "text": "Class Neighbourhood: TCType\n\nLabel: Training Centre Type\n\nDescription: Controlled vocabulary of the different types of a training centre\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isTCTypeOf -> TrainingCentre\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Training Centre Type",
+      "description": "Controlled vocabulary of the different types of a training centre",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "isTCTypeOf -> TrainingCentre"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TRLEnumeration",
+    "class_label": "TRL enumeration",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TRLEnumeration",
+    "text": "Class Neighbourhood: TRLEnumeration\n\nLabel: TRL enumeration\n\nDescription: Class representing the TRL readiness of a technology\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isTRLOf -> Technology\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "TRL enumeration",
+      "description": "Class representing the TRL readiness of a technology",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isTRLOf -> Technology"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TableTopExerciseTTX",
+    "class_label": "Table top exercise TTX",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TableTopExerciseTTX",
+    "text": "Class Neighbourhood: TableTopExerciseTTX\n\nLabel: Table top exercise TTX\n\nDescription: Discussion-based exercises held in an indoor setting, where participants explore scenarios, roles, and decisions without physical deployment\n\nParent Classes:\n- Exercise\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Table top exercise TTX",
+      "description": "Discussion-based exercises held in an indoor setting, where participants explore scenarios, roles, and decisions without physical deployment",
+      "parent_classes": [
+        "Exercise"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Technology",
+    "class_label": "Technology",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Technology",
+    "text": "Class Neighbourhood: Technology\n\nLabel: Technology\n\nDescription: Technologies used in CBRN contexts, classified into two main categories: Detection\u2013Identification\u2013Monitoring (DIM) and Decontamination (DECON). Each technology is characterised by its type (e.g., spectrometry) and its principle of operation (e.g., Tandem Mass Spectrometry MS/MS), following the STACCATO taxonomy. Technologies are linked to the relevant threat type (chemical, biological, toxin) and include information such as Technology Readiness Level (TRL)\n\nParent Classes:\n- Resource\n\nChild Classes:\n- DIMTechnology\n- DecontaminationTechnology\n\nDirect Object Properties:\n- hasDomainOfUse -> DomainOfUse\n- hasTRL -> TRLEnumeration\n- isTechnologyTrainedIn -> TechnologyTraining\n- isTechnologyUsedBy -> Organisation\n\nDirect Datatype Properties:\n- hasPrinciple -> string\n- hasTechnologyType -> string",
+    "metadata": {
+      "label": "Technology",
+      "description": "Technologies used in CBRN contexts, classified into two main categories: Detection\u2013Identification\u2013Monitoring (DIM) and Decontamination (DECON). Each technology is characterised by its type (e.g., spectrometry) and its principle of operation (e.g., Tandem Mass Spectrometry MS/MS), following the STACCATO taxonomy. Technologies are linked to the relevant threat type (chemical, biological, toxin) and include information such as Technology Readiness Level (TRL)",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [
+        "DIMTechnology",
+        "DecontaminationTechnology"
+      ],
+      "object_properties": [
+        "hasDomainOfUse -> DomainOfUse",
+        "hasTRL -> TRLEnumeration",
+        "isTechnologyTrainedIn -> TechnologyTraining",
+        "isTechnologyUsedBy -> Organisation"
+      ],
+      "datatype_properties": [
+        "hasPrinciple -> string",
+        "hasTechnologyType -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TechnologyOperators",
+    "class_label": "Technology operators",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TechnologyOperators",
+    "text": "Class Neighbourhood: TechnologyOperators\n\nLabel: Technology operators\n\nDescription: An audience category representing personnel responsible for operating technical systems, tools, or equipment in training or crisis scenarios\n\nParent Classes:\n- Audience\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Technology operators",
+      "description": "An audience category representing personnel responsible for operating technical systems, tools, or equipment in training or crisis scenarios",
+      "parent_classes": [
+        "Audience"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TechnologyTraining",
+    "class_label": "Technology Training",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TechnologyTraining",
+    "text": "Class Neighbourhood: TechnologyTraining\n\nLabel: Technology Training\n\nDescription: Training courses focused on the use, operation, or understanding of technologies relevant to CBRN preparedness or response\n\nParent Classes:\n- TrainingCourse\n\nChild Classes:\n- InnovativeTechnologiesTraining\n\nDirect Object Properties:\n- isTechnologyTrainingOfferedBy -> TrainingCentre\n- trainsOnTechnology -> Technology\n\nDirect Datatype Properties:\n- hasCreditPoints -> string\n- hasEvaluationCriterion -> string",
+    "metadata": {
+      "label": "Technology Training",
+      "description": "Training courses focused on the use, operation, or understanding of technologies relevant to CBRN preparedness or response",
+      "parent_classes": [
+        "TrainingCourse"
+      ],
+      "child_classes": [
+        "InnovativeTechnologiesTraining"
+      ],
+      "object_properties": [
+        "isTechnologyTrainingOfferedBy -> TrainingCentre",
+        "trainsOnTechnology -> Technology"
+      ],
+      "datatype_properties": [
+        "hasCreditPoints -> string",
+        "hasEvaluationCriterion -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ThreatAgent",
+    "class_label": "Threat agent",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#ThreatAgent",
+    "text": "Class Neighbourhood: ThreatAgent\n\nLabel: Threat agent\n\nDescription: Categories of hazardous agents that may be involved in an incident or training scenario, used to classify CBRN and toxin-related threats\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- hasResponseActionForThreat -> ResponseAction\n- isAddressedBy -> Unknown\n- isThreatDetectedBy -> ExternalLaboratorySupportService\n- isThreatInvolvedIn -> Unknown\n- isThreatWithEarlyWarning -> EarlyWarning\n- requiresSOP -> SOP\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Threat agent",
+      "description": "Categories of hazardous agents that may be involved in an incident or training scenario, used to classify CBRN and toxin-related threats",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "hasResponseActionForThreat -> ResponseAction",
+        "isAddressedBy -> Unknown",
+        "isThreatDetectedBy -> ExternalLaboratorySupportService",
+        "isThreatInvolvedIn -> Unknown",
+        "isThreatWithEarlyWarning -> EarlyWarning",
+        "requiresSOP -> SOP"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TraineesTrainersExchange",
+    "class_label": "Trainees trainers exchange",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TraineesTrainersExchange",
+    "text": "Class Neighbourhood: TraineesTrainersExchange\n\nLabel: Trainees trainers exchange\n\nDescription: Services enabling the exchange of trainees or trainers between centres or partner organisations\n\nParent Classes:\n- Service\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Trainees trainers exchange",
+      "description": "Services enabling the exchange of trainees or trainers between centres or partner organisations",
+      "parent_classes": [
+        "Service"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TrainerRole",
+    "class_label": "Trainer role",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TrainerRole",
+    "text": "Class Neighbourhood: TrainerRole\n\nLabel: Trainer role\n\nDescription: Roles held by individuals responsible for delivering, guiding, or supervising training activities\n\nParent Classes:\n- Role\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- teachesCourse -> TrainingCourse\n\nDirect Datatype Properties:\n- hasExpertise -> string",
+    "metadata": {
+      "label": "Trainer role",
+      "description": "Roles held by individuals responsible for delivering, guiding, or supervising training activities",
+      "parent_classes": [
+        "Role"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "teachesCourse -> TrainingCourse"
+      ],
+      "datatype_properties": [
+        "hasExpertise -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TrainingCentre",
+    "class_label": "Training centre",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TrainingCentre",
+    "text": "Class Neighbourhood: TrainingCentre\n\nLabel: Training centre\n\nDescription: Organisations that design, deliver, or host training activities, exercises, and capacity-building programmes related to hazardous incidents or CBRN preparedness\n\nParent Classes:\n- Organisation\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- connectsWithNetwork -> CBRNNetwork\n- hasCapacity -> Capacity\n- hasCompetence -> Competence\n- hasExtraCapability -> ExtraCapability\n- hasTCDiscipline -> TCDiscipline\n- hasTCType -> TCType\n- issuesCertificate -> Certificate\n- offersService -> Service\n- offersTechnologyTraining -> TechnologyTraining\n- offersTrainingMethod -> TrainingMethod\n- organizesExercise -> Exercise\n- providesTrainingCourse -> TrainingCourse\n- tacklesIncident -> Incident\n- usesSOP -> SOP\n\nDirect Datatype Properties:\n- hasAddress -> string\n- hasDistrict -> string\n- hasEmail -> string\n- hasIdentificationNumber -> string\n- hasOwnership -> string\n- hasRegion -> string\n- hasSectorAppointed -> string\n- hasYearOfEstablishment -> string",
+    "metadata": {
+      "label": "Training centre",
+      "description": "Organisations that design, deliver, or host training activities, exercises, and capacity-building programmes related to hazardous incidents or CBRN preparedness",
+      "parent_classes": [
+        "Organisation"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "connectsWithNetwork -> CBRNNetwork",
+        "hasCapacity -> Capacity",
+        "hasCompetence -> Competence",
+        "hasExtraCapability -> ExtraCapability",
+        "hasTCDiscipline -> TCDiscipline",
+        "hasTCType -> TCType",
+        "issuesCertificate -> Certificate",
+        "offersService -> Service",
+        "offersTechnologyTraining -> TechnologyTraining",
+        "offersTrainingMethod -> TrainingMethod",
+        "organizesExercise -> Exercise",
+        "providesTrainingCourse -> TrainingCourse",
+        "tacklesIncident -> Incident",
+        "usesSOP -> SOP"
+      ],
+      "datatype_properties": [
+        "hasAddress -> string",
+        "hasDistrict -> string",
+        "hasEmail -> string",
+        "hasIdentificationNumber -> string",
+        "hasOwnership -> string",
+        "hasRegion -> string",
+        "hasSectorAppointed -> string",
+        "hasYearOfEstablishment -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TrainingCourse",
+    "class_label": "Training course",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TrainingCourse",
+    "text": "Class Neighbourhood: TrainingCourse\n\nLabel: Training course\n\nDescription: Structured training offerings provided by the Training Centre to build knowledge, skills, or operational capabilities\n\nParent Classes:\n- Thing\n\nChild Classes:\n- MedicalCBTTraining\n- TechnologyTraining\n\nDirect Object Properties:\n- grantsCertificate -> Certificate\n- hasOrganizationalStaffRole -> OrganisationalStaffRole\n- hasTrainer -> TrainerRole\n- hasTrainingAudience -> Audience\n- hasTrainingParticipant -> TrainingParticipantRole\n- isTrainingCourseProvidedBy -> TrainingCentre\n\nDirect Datatype Properties:\n- hasAvailabilityLevel -> string\n- hasCourseFrequency -> string\n- hasDeliveryMethod -> string\n- hasEducationalActivityForm -> string\n- hasEducationalActivityType -> string\n- hasLength -> string\n- hasNumberOfParticipants -> string\n- hasNumberOfPerformedActivities -> string\n- hasPricePerCourse -> string\n- hasTotalCourseHours -> string",
+    "metadata": {
+      "label": "Training course",
+      "description": "Structured training offerings provided by the Training Centre to build knowledge, skills, or operational capabilities",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [
+        "MedicalCBTTraining",
+        "TechnologyTraining"
+      ],
+      "object_properties": [
+        "grantsCertificate -> Certificate",
+        "hasOrganizationalStaffRole -> OrganisationalStaffRole",
+        "hasTrainer -> TrainerRole",
+        "hasTrainingAudience -> Audience",
+        "hasTrainingParticipant -> TrainingParticipantRole",
+        "isTrainingCourseProvidedBy -> TrainingCentre"
+      ],
+      "datatype_properties": [
+        "hasAvailabilityLevel -> string",
+        "hasCourseFrequency -> string",
+        "hasDeliveryMethod -> string",
+        "hasEducationalActivityForm -> string",
+        "hasEducationalActivityType -> string",
+        "hasLength -> string",
+        "hasNumberOfParticipants -> string",
+        "hasNumberOfPerformedActivities -> string",
+        "hasPricePerCourse -> string",
+        "hasTotalCourseHours -> string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TrainingMethod",
+    "class_label": "Training method",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TrainingMethod",
+    "text": "Class Neighbourhood: TrainingMethod\n\nLabel: Training method\n\nDescription: Technique or approach used to deliver a lesson or practice a skill (classroom sessions, group discussions, VR simulations, etc.).\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isTrainingMethodOfferedBy -> TrainingCentre\n- isTrainingMethodUsedBy -> Unknown\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Training method",
+      "description": "Technique or approach used to deliver a lesson or practice a skill (classroom sessions, group discussions, VR simulations, etc.).",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isTrainingMethodOfferedBy -> TrainingCentre",
+        "isTrainingMethodUsedBy -> Unknown"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TrainingParticipantRole",
+    "class_label": "Training participant role",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#TrainingParticipantRole",
+    "text": "Class Neighbourhood: TrainingParticipantRole\n\nLabel: Training participant role\n\nDescription: Roles held by individuals taking part in training activities, exercises, or capacity-building sessions\n\nParent Classes:\n- Role\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- isTrainingParticipantOf -> TrainingCourse\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Training participant role",
+      "description": "Roles held by individuals taking part in training activities, exercises, or capacity-building sessions",
+      "parent_classes": [
+        "Role"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "isTrainingParticipantOf -> TrainingCourse"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Vehicle",
+    "class_label": "Vehicle",
+    "class_uri": "http://www.semanticweb.org/eNOVATION-ontology#Vehicle",
+    "text": "Class Neighbourhood: Vehicle\n\nLabel: Vehicle\n\nDescription: Transport assets used to support the movement of personnel, equipment, or materials in training or operational scenarios\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Vehicle",
+      "description": "Transport assets used to support the movement of personnel, equipment, or materials in training or operational scenarios",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "List",
+    "class_label": "List",
+    "class_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#List",
+    "text": "Class Neighbourhood: List\n\nLabel: List\n\nDescription: No description available\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "List",
+      "description": "No description available",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Class",
+    "class_label": "Class",
+    "class_uri": "http://www.w3.org/2000/01/rdf-schema#Class",
+    "text": "Class Neighbourhood: Class\n\nLabel: Class\n\nDescription: The class of classes.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- AgentClass\n- Datatype\n- Class\n- DeprecatedClass\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Class",
+      "description": "The class of classes.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [
+        "AgentClass",
+        "Datatype",
+        "Class",
+        "DeprecatedClass"
+      ],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Container",
+    "class_label": "Container",
+    "class_uri": "http://www.w3.org/2000/01/rdf-schema#Container",
+    "text": "Class Neighbourhood: Container\n\nLabel: Container\n\nDescription: The class of RDF containers.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Container",
+      "description": "The class of RDF containers.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ContainerMembershipProperty",
+    "class_label": "ContainerMembershipProperty",
+    "class_uri": "http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty",
+    "text": "Class Neighbourhood: ContainerMembershipProperty\n\nLabel: ContainerMembershipProperty\n\nDescription: The class of container membership properties, rdf:_1, rdf:_2, ..., all of which are sub-properties of 'member'.\n\nParent Classes:\n- Property\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "ContainerMembershipProperty",
+      "description": "The class of container membership properties, rdf:_1, rdf:_2, ..., all of which are sub-properties of 'member'.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Datatype",
+    "class_label": "Datatype",
+    "class_uri": "http://www.w3.org/2000/01/rdf-schema#Datatype",
+    "text": "Class Neighbourhood: Datatype\n\nLabel: Datatype\n\nDescription: The class of RDF datatypes.\n\nParent Classes:\n- Class\n\nChild Classes:\n- DataRange\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Datatype",
+      "description": "The class of RDF datatypes.",
+      "parent_classes": [
+        "Class"
+      ],
+      "child_classes": [
+        "DataRange"
+      ],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Literal",
+    "class_label": "Literal",
+    "class_uri": "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "text": "Class Neighbourhood: Literal\n\nLabel: Literal\n\nDescription: The class of literal values, eg. textual strings and integers.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Literal",
+      "description": "The class of literal values, eg. textual strings and integers.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Resource",
+    "class_label": "Resource",
+    "class_uri": "http://www.w3.org/2000/01/rdf-schema#Resource",
+    "text": "Class Neighbourhood: Resource\n\nLabel: Resource\n\nDescription: The class resource, everything.\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- Class\n- Container\n- Literal\n- AllDifferent\n- AllDisjointClasses\n- AllDisjointProperties\n- Annotation\n- Axiom\n- NegativePropertyAssertion\n- Ontology\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Resource",
+      "description": "The class resource, everything.",
+      "parent_classes": [],
+      "child_classes": [
+        "Class",
+        "Container",
+        "Literal",
+        "AllDifferent",
+        "AllDisjointClasses",
+        "AllDisjointProperties",
+        "Annotation",
+        "Axiom",
+        "NegativePropertyAssertion",
+        "Ontology"
+      ],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "AllDifferent",
+    "class_label": "AllDifferent",
+    "class_uri": "http://www.w3.org/2002/07/owl#AllDifferent",
+    "text": "Class Neighbourhood: AllDifferent\n\nLabel: AllDifferent\n\nDescription: The class of collections of pairwise different individuals.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "AllDifferent",
+      "description": "The class of collections of pairwise different individuals.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "AllDisjointClasses",
+    "class_label": "AllDisjointClasses",
+    "class_uri": "http://www.w3.org/2002/07/owl#AllDisjointClasses",
+    "text": "Class Neighbourhood: AllDisjointClasses\n\nLabel: AllDisjointClasses\n\nDescription: The class of collections of pairwise disjoint classes.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "AllDisjointClasses",
+      "description": "The class of collections of pairwise disjoint classes.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "AllDisjointProperties",
+    "class_label": "AllDisjointProperties",
+    "class_uri": "http://www.w3.org/2002/07/owl#AllDisjointProperties",
+    "text": "Class Neighbourhood: AllDisjointProperties\n\nLabel: AllDisjointProperties\n\nDescription: The class of collections of pairwise disjoint properties.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "AllDisjointProperties",
+      "description": "The class of collections of pairwise disjoint properties.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Annotation",
+    "class_label": "Annotation",
+    "class_uri": "http://www.w3.org/2002/07/owl#Annotation",
+    "text": "Class Neighbourhood: Annotation\n\nLabel: Annotation\n\nDescription: The class of annotated annotations for which the RDF serialization consists of an annotated subject, predicate and object.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Annotation",
+      "description": "The class of annotated annotations for which the RDF serialization consists of an annotated subject, predicate and object.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "AnnotationProperty",
+    "class_label": "AnnotationProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+    "text": "Class Neighbourhood: AnnotationProperty\n\nLabel: AnnotationProperty\n\nDescription: The class of annotation properties.\n\nParent Classes:\n- Property\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "AnnotationProperty",
+      "description": "The class of annotation properties.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "AsymmetricProperty",
+    "class_label": "AsymmetricProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#AsymmetricProperty",
+    "text": "Class Neighbourhood: AsymmetricProperty\n\nLabel: AsymmetricProperty\n\nDescription: The class of asymmetric properties.\n\nParent Classes:\n- ObjectProperty\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "AsymmetricProperty",
+      "description": "The class of asymmetric properties.",
+      "parent_classes": [
+        "ObjectProperty"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Axiom",
+    "class_label": "Axiom",
+    "class_uri": "http://www.w3.org/2002/07/owl#Axiom",
+    "text": "Class Neighbourhood: Axiom\n\nLabel: Axiom\n\nDescription: The class of annotated axioms for which the RDF serialization consists of an annotated subject, predicate and object.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Axiom",
+      "description": "The class of annotated axioms for which the RDF serialization consists of an annotated subject, predicate and object.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Class",
+    "class_label": "Class",
+    "class_uri": "http://www.w3.org/2002/07/owl#Class",
+    "text": "Class Neighbourhood: Class\n\nLabel: Class\n\nDescription: The class of OWL classes.\n\nParent Classes:\n- Class\n\nChild Classes:\n- Restriction\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Class",
+      "description": "The class of OWL classes.",
+      "parent_classes": [
+        "Class"
+      ],
+      "child_classes": [
+        "Restriction"
+      ],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DataRange",
+    "class_label": "DataRange",
+    "class_uri": "http://www.w3.org/2002/07/owl#DataRange",
+    "text": "Class Neighbourhood: DataRange\n\nLabel: DataRange\n\nDescription: The class of OWL data ranges, which are special kinds of datatypes. Note: The use of the IRI owl:DataRange has been deprecated as of OWL 2. The IRI rdfs:Datatype SHOULD be used instead.\n\nParent Classes:\n- Datatype\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "DataRange",
+      "description": "The class of OWL data ranges, which are special kinds of datatypes. Note: The use of the IRI owl:DataRange has been deprecated as of OWL 2. The IRI rdfs:Datatype SHOULD be used instead.",
+      "parent_classes": [
+        "Datatype"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DatatypeProperty",
+    "class_label": "DatatypeProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#DatatypeProperty",
+    "text": "Class Neighbourhood: DatatypeProperty\n\nLabel: DatatypeProperty\n\nDescription: The class of data properties.\n\nParent Classes:\n- Property\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "DatatypeProperty",
+      "description": "The class of data properties.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DeprecatedClass",
+    "class_label": "DeprecatedClass",
+    "class_uri": "http://www.w3.org/2002/07/owl#DeprecatedClass",
+    "text": "Class Neighbourhood: DeprecatedClass\n\nLabel: DeprecatedClass\n\nDescription: The class of deprecated classes.\n\nParent Classes:\n- Class\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "DeprecatedClass",
+      "description": "The class of deprecated classes.",
+      "parent_classes": [
+        "Class"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "DeprecatedProperty",
+    "class_label": "DeprecatedProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#DeprecatedProperty",
+    "text": "Class Neighbourhood: DeprecatedProperty\n\nLabel: DeprecatedProperty\n\nDescription: The class of deprecated properties.\n\nParent Classes:\n- Property\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "DeprecatedProperty",
+      "description": "The class of deprecated properties.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "FunctionalProperty",
+    "class_label": "FunctionalProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#FunctionalProperty",
+    "text": "Class Neighbourhood: FunctionalProperty\n\nLabel: FunctionalProperty\n\nDescription: The class of functional properties.\n\nParent Classes:\n- Property\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "FunctionalProperty",
+      "description": "The class of functional properties.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "InverseFunctionalProperty",
+    "class_label": "InverseFunctionalProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#InverseFunctionalProperty",
+    "text": "Class Neighbourhood: InverseFunctionalProperty\n\nLabel: InverseFunctionalProperty\n\nDescription: The class of inverse-functional properties.\n\nParent Classes:\n- ObjectProperty\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "InverseFunctionalProperty",
+      "description": "The class of inverse-functional properties.",
+      "parent_classes": [
+        "ObjectProperty"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "IrreflexiveProperty",
+    "class_label": "IrreflexiveProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#IrreflexiveProperty",
+    "text": "Class Neighbourhood: IrreflexiveProperty\n\nLabel: IrreflexiveProperty\n\nDescription: The class of irreflexive properties.\n\nParent Classes:\n- ObjectProperty\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "IrreflexiveProperty",
+      "description": "The class of irreflexive properties.",
+      "parent_classes": [
+        "ObjectProperty"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "NamedIndividual",
+    "class_label": "NamedIndividual",
+    "class_uri": "http://www.w3.org/2002/07/owl#NamedIndividual",
+    "text": "Class Neighbourhood: NamedIndividual\n\nLabel: NamedIndividual\n\nDescription: The class of named individuals.\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "NamedIndividual",
+      "description": "The class of named individuals.",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "NegativePropertyAssertion",
+    "class_label": "NegativePropertyAssertion",
+    "class_uri": "http://www.w3.org/2002/07/owl#NegativePropertyAssertion",
+    "text": "Class Neighbourhood: NegativePropertyAssertion\n\nLabel: NegativePropertyAssertion\n\nDescription: The class of negative property assertions.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "NegativePropertyAssertion",
+      "description": "The class of negative property assertions.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Nothing",
+    "class_label": "Nothing",
+    "class_uri": "http://www.w3.org/2002/07/owl#Nothing",
+    "text": "Class Neighbourhood: Nothing\n\nLabel: Nothing\n\nDescription: This is the empty class.\n\nParent Classes:\n- Thing\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Nothing",
+      "description": "This is the empty class.",
+      "parent_classes": [
+        "Thing"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ObjectProperty",
+    "class_label": "ObjectProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#ObjectProperty",
+    "text": "Class Neighbourhood: ObjectProperty\n\nLabel: ObjectProperty\n\nDescription: The class of object properties.\n\nParent Classes:\n- Property\n\nChild Classes:\n- AsymmetricProperty\n- InverseFunctionalProperty\n- IrreflexiveProperty\n- ReflexiveProperty\n- SymmetricProperty\n- TransitiveProperty\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "ObjectProperty",
+      "description": "The class of object properties.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [
+        "AsymmetricProperty",
+        "InverseFunctionalProperty",
+        "IrreflexiveProperty",
+        "ReflexiveProperty",
+        "SymmetricProperty",
+        "TransitiveProperty"
+      ],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Ontology",
+    "class_label": "Ontology",
+    "class_uri": "http://www.w3.org/2002/07/owl#Ontology",
+    "text": "Class Neighbourhood: Ontology\n\nLabel: Ontology\n\nDescription: The class of ontologies.\n\nParent Classes:\n- Resource\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Ontology",
+      "description": "The class of ontologies.",
+      "parent_classes": [
+        "Resource"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "OntologyProperty",
+    "class_label": "OntologyProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#OntologyProperty",
+    "text": "Class Neighbourhood: OntologyProperty\n\nLabel: OntologyProperty\n\nDescription: The class of ontology properties.\n\nParent Classes:\n- Property\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "OntologyProperty",
+      "description": "The class of ontology properties.",
+      "parent_classes": [
+        "Property"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ReflexiveProperty",
+    "class_label": "ReflexiveProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#ReflexiveProperty",
+    "text": "Class Neighbourhood: ReflexiveProperty\n\nLabel: ReflexiveProperty\n\nDescription: The class of reflexive properties.\n\nParent Classes:\n- ObjectProperty\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "ReflexiveProperty",
+      "description": "The class of reflexive properties.",
+      "parent_classes": [
+        "ObjectProperty"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Restriction",
+    "class_label": "Restriction",
+    "class_uri": "http://www.w3.org/2002/07/owl#Restriction",
+    "text": "Class Neighbourhood: Restriction\n\nLabel: Restriction\n\nDescription: The class of property restrictions.\n\nParent Classes:\n- Class\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Restriction",
+      "description": "The class of property restrictions.",
+      "parent_classes": [
+        "Class"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "SymmetricProperty",
+    "class_label": "SymmetricProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#SymmetricProperty",
+    "text": "Class Neighbourhood: SymmetricProperty\n\nLabel: SymmetricProperty\n\nDescription: The class of symmetric properties.\n\nParent Classes:\n- ObjectProperty\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "SymmetricProperty",
+      "description": "The class of symmetric properties.",
+      "parent_classes": [
+        "ObjectProperty"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Thing",
+    "class_label": "Thing",
+    "class_uri": "http://www.w3.org/2002/07/owl#Thing",
+    "text": "Class Neighbourhood: Thing\n\nLabel: Thing\n\nDescription: The class of OWL individuals.\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- Audience\n- CBRNNetwork\n- Capacity\n- Certificate\n- Competence\n- DecontaminationMethod\n- DomainOfUse\n- ERPCapability\n- EvaluationMethod\n- Exercise\n- ExerciseEvaluation\n- ExercisePhase\n- Incident\n- Organisation\n- Resource\n- ResponseAction\n- SOP\n- Scenario\n- ScenarioRole\n- Service\n- Standard\n- TRLEnumeration\n- ThreatAgent\n- TrainingCourse\n- TrainingMethod\n- NamedIndividual\n- Nothing\n\nDirect Object Properties:\n- bottomObjectProperty -> Thing\n- topObjectProperty -> Thing\n\nDirect Datatype Properties:\n- bottomDataProperty -> Literal\n- hasCount -> int\n- topDataProperty -> Literal",
+    "metadata": {
+      "label": "Thing",
+      "description": "The class of OWL individuals.",
+      "parent_classes": [],
+      "child_classes": [
+        "Audience",
+        "CBRNNetwork",
+        "Capacity",
+        "Certificate",
+        "Competence",
+        "DecontaminationMethod",
+        "DomainOfUse",
+        "ERPCapability",
+        "EvaluationMethod",
+        "Exercise",
+        "ExerciseEvaluation",
+        "ExercisePhase",
+        "Incident",
+        "Organisation",
+        "Resource",
+        "ResponseAction",
+        "SOP",
+        "Scenario",
+        "ScenarioRole",
+        "Service",
+        "Standard",
+        "TRLEnumeration",
+        "ThreatAgent",
+        "TrainingCourse",
+        "TrainingMethod",
+        "NamedIndividual",
+        "Nothing"
+      ],
+      "object_properties": [
+        "bottomObjectProperty -> Thing",
+        "topObjectProperty -> Thing"
+      ],
+      "datatype_properties": [
+        "bottomDataProperty -> Literal",
+        "hasCount -> int",
+        "topDataProperty -> Literal"
+      ]
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "TransitiveProperty",
+    "class_label": "TransitiveProperty",
+    "class_uri": "http://www.w3.org/2002/07/owl#TransitiveProperty",
+    "text": "Class Neighbourhood: TransitiveProperty\n\nLabel: TransitiveProperty\n\nDescription: The class of transitive properties.\n\nParent Classes:\n- ObjectProperty\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- None\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "TransitiveProperty",
+      "description": "The class of transitive properties.",
+      "parent_classes": [
+        "ObjectProperty"
+      ],
+      "child_classes": [],
+      "object_properties": [],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Collection",
+    "class_label": "Collection",
+    "class_uri": "http://www.w3.org/2004/02/skos/core#Collection",
+    "text": "Class Neighbourhood: Collection\n\nLabel: Collection\n\nDescription: No description available\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- OrderedCollection\n\nDirect Object Properties:\n- member -> Unknown\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Collection",
+      "description": "No description available",
+      "parent_classes": [],
+      "child_classes": [
+        "OrderedCollection"
+      ],
+      "object_properties": [
+        "member -> Unknown"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "Concept",
+    "class_label": "Concept",
+    "class_uri": "http://www.w3.org/2004/02/skos/core#Concept",
+    "text": "Class Neighbourhood: Concept\n\nLabel: Concept\n\nDescription: No description available\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- semanticRelation -> Concept\n- topConceptOf -> ConceptScheme\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Concept",
+      "description": "No description available",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "semanticRelation -> Concept",
+        "topConceptOf -> ConceptScheme"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "ConceptScheme",
+    "class_label": "Concept Scheme",
+    "class_uri": "http://www.w3.org/2004/02/skos/core#ConceptScheme",
+    "text": "Class Neighbourhood: ConceptScheme\n\nLabel: Concept Scheme\n\nDescription: Concept Scheme\n\nParent Classes:\n- None (top-level class)\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- hasTopConcept -> Concept\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Concept Scheme",
+      "description": "Concept Scheme",
+      "parent_classes": [],
+      "child_classes": [],
+      "object_properties": [
+        "hasTopConcept -> Concept"
+      ],
+      "datatype_properties": []
+    }
+  },
+  {
+    "chunk_type": "composite",
+    "class_name": "OrderedCollection",
+    "class_label": "Ordered Collection",
+    "class_uri": "http://www.w3.org/2004/02/skos/core#OrderedCollection",
+    "text": "Class Neighbourhood: OrderedCollection\n\nLabel: Ordered Collection\n\nDescription: Ordered Collection\n\nParent Classes:\n- Collection\n\nChild Classes:\n- None\n\nDirect Object Properties:\n- memberList -> List\n\nDirect Datatype Properties:\n- None",
+    "metadata": {
+      "label": "Ordered Collection",
+      "description": "Ordered Collection",
+      "parent_classes": [
+        "Collection"
+      ],
+      "child_classes": [],
+      "object_properties": [
+        "memberList -> List"
+      ],
+      "datatype_properties": []
+    }
+  }
+]

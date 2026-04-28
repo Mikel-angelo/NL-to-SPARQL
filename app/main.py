@@ -1,3 +1,5 @@
+"""FastAPI application entry point for the ontology-package workflow."""
+
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -8,6 +10,7 @@ from app.core.config import settings
 
 
 def create_app() -> FastAPI:
+    """Create the web app and register the static UI plus API routes."""
     app = FastAPI(
         title=settings.app_name,
         version=settings.app_version,

@@ -1,0 +1,3314 @@
+[
+  {
+    "chunk_type": "property",
+    "property_name": "addressesThreat",
+    "property_label": "addresses threat",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#addressesThreat",
+    "text": "Property: addressesThreat\n\nLabel: addresses threat\n\nDescription: Property to connect a resource to the threat agent it addresses\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- ThreatAgent",
+    "metadata": {
+      "label": "addresses threat",
+      "description": "Property to connect a resource to the threat agent it addresses",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "ThreatAgent"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "collaboratesWith",
+    "property_label": "collaborates with",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#collaboratesWith",
+    "text": "Property: collaboratesWith\n\nLabel: collaborates with\n\nDescription: Property that connects an Organization with a Training Centre it works with\n\nType: object_property\n\nDomain Classes:\n- Organisation\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "collaborates with",
+      "description": "Property that connects an Organization with a Training Centre it works with",
+      "property_type": "object_property",
+      "domain": [
+        "Organisation"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "compliesWithStandard",
+    "property_label": "complies with Standard",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#compliesWithStandard",
+    "text": "Property: compliesWithStandard\n\nLabel: complies with Standard\n\nDescription: Property to indicate with which standard an external laboratory service complies with\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- Standard",
+    "metadata": {
+      "label": "complies with Standard",
+      "description": "Property to indicate with which standard an external laboratory service complies with",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "Standard"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "connectsWithNetwork",
+    "property_label": "connects with network",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#connectsWithNetwork",
+    "text": "Property: connectsWithNetwork\n\nLabel: connects with network\n\nDescription: Property to connect a training centre to its relative network\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- CBRNNetwork",
+    "metadata": {
+      "label": "connects with network",
+      "description": "Property to connect a training centre to its relative network",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "CBRNNetwork"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "earlyWarningForThreat",
+    "property_label": "early warning for threat",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#earlyWarningForThreat",
+    "text": "Property: earlyWarningForThreat\n\nLabel: early warning for threat\n\nDescription: Property to connect an early warning response to the respective threat agent\n\nType: object_property\n\nDomain Classes:\n- EarlyWarning\n\nRange Classes or Datatypes:\n- ThreatAgent",
+    "metadata": {
+      "label": "early warning for threat",
+      "description": "Property to connect an early warning response to the respective threat agent",
+      "property_type": "object_property",
+      "domain": [
+        "EarlyWarning"
+      ],
+      "range": [
+        "ThreatAgent"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "employsDecomMethod",
+    "property_label": "employs decontamination method",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#employsDecomMethod",
+    "text": "Property: employsDecomMethod\n\nLabel: employs decontamination method\n\nDescription: Property to connect a decontamination technology with the employed method\n\nType: object_property\n\nDomain Classes:\n- DecontaminationTechnology\n\nRange Classes or Datatypes:\n- DecontaminationMethod",
+    "metadata": {
+      "label": "employs decontamination method",
+      "description": "Property to connect a decontamination technology with the employed method",
+      "property_type": "object_property",
+      "domain": [
+        "DecontaminationTechnology"
+      ],
+      "range": [
+        "DecontaminationMethod"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "engagesWithStakeholders",
+    "property_label": "engages with stakeholders",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#engagesWithStakeholders",
+    "text": "Property: engagesWithStakeholders\n\nLabel: engages with stakeholders\n\nDescription: Property to indicate with which stakeholders a training centre engages\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- OrganisationalStakeholder",
+    "metadata": {
+      "label": "engages with stakeholders",
+      "description": "Property to indicate with which stakeholders a training centre engages",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "OrganisationalStakeholder"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "followsSOP",
+    "property_label": "follows SOP",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#followsSOP",
+    "text": "Property: followsSOP\n\nLabel: follows SOP\n\nDescription: property to show what SOP follows a response action\n\nType: object_property\n\nDomain Classes:\n- ResponseAction\n\nRange Classes or Datatypes:\n- SOP",
+    "metadata": {
+      "label": "follows SOP",
+      "description": "property to show what SOP follows a response action",
+      "property_type": "object_property",
+      "domain": [
+        "ResponseAction"
+      ],
+      "range": [
+        "SOP"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "grantsCertificate",
+    "property_label": "grants certificate",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#grantsCertificate",
+    "text": "Property: grantsCertificate\n\nLabel: grants certificate\n\nDescription: Property to indicate the certificate granted by a training course\n\nType: object_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- Certificate",
+    "metadata": {
+      "label": "grants certificate",
+      "description": "Property to indicate the certificate granted by a training course",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "Certificate"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasActorType",
+    "property_label": "has actor type",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasActorType",
+    "text": "Property: hasActorType\n\nLabel: has actor type\n\nDescription: This property specifies what type of actor a scenario role uses.\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- ActorType",
+    "metadata": {
+      "label": "has actor type",
+      "description": "This property specifies what type of actor a scenario role uses.",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "ActorType"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasAffiliation",
+    "property_label": "has affiliation",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasAffiliation",
+    "text": "Property: hasAffiliation\n\nLabel: has affiliation\n\nDescription: Property used  to indicate the corresponding affiliation of a person or a group\n\nType: object_property\n\nDomain Classes:\n- Person\n\nRange Classes or Datatypes:\n- PersonAffiliation",
+    "metadata": {
+      "label": "has affiliation",
+      "description": "Property used  to indicate the corresponding affiliation of a person or a group",
+      "property_type": "object_property",
+      "domain": [
+        "Person"
+      ],
+      "range": [
+        "PersonAffiliation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasCapacity",
+    "property_label": "has capacity",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasCapacity",
+    "text": "Property: hasCapacity\n\nLabel: has capacity\n\nDescription: Property to connect a Training centre to its capacity\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- Capacity",
+    "metadata": {
+      "label": "has capacity",
+      "description": "Property to connect a Training centre to its capacity",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "Capacity"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasCompetence",
+    "property_label": "has competence",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasCompetence",
+    "text": "Property: hasCompetence\n\nLabel: has competence\n\nDescription: Property to connect a training centre to its competence\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- Competence",
+    "metadata": {
+      "label": "has competence",
+      "description": "Property to connect a training centre to its competence",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "Competence"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasDomainOfUse",
+    "property_label": "has domain of use",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasDomainOfUse",
+    "text": "Property: hasDomainOfUse\n\nLabel: has domain of use\n\nDescription: Property to connect a technology to its domain of use\n\nType: object_property\n\nDomain Classes:\n- Technology\n\nRange Classes or Datatypes:\n- DomainOfUse",
+    "metadata": {
+      "label": "has domain of use",
+      "description": "Property to connect a technology to its domain of use",
+      "property_type": "object_property",
+      "domain": [
+        "Technology"
+      ],
+      "range": [
+        "DomainOfUse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasERPcapability",
+    "property_label": "has ERP capability",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasERPcapability",
+    "text": "Property: hasERPcapability\n\nLabel: has ERP capability\n\nDescription: Property to connect ERP class to ERP capability\n\nType: object_property\n\nDomain Classes:\n- EmergencyResponsePlan\n\nRange Classes or Datatypes:\n- ERPCapability",
+    "metadata": {
+      "label": "has ERP capability",
+      "description": "Property to connect ERP class to ERP capability",
+      "property_type": "object_property",
+      "domain": [
+        "EmergencyResponsePlan"
+      ],
+      "range": [
+        "ERPCapability"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEquipment",
+    "property_label": "has equipment",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEquipment",
+    "text": "Property: hasEquipment\n\nLabel: has equipment\n\nDescription: Property to connect an organization (training centre) to its equipment\n\nType: object_property\n\nDomain Classes:\n- Organisation\n\nRange Classes or Datatypes:\n- Equipment",
+    "metadata": {
+      "label": "has equipment",
+      "description": "Property to connect an organization (training centre) to its equipment",
+      "property_type": "object_property",
+      "domain": [
+        "Organisation"
+      ],
+      "range": [
+        "Equipment"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasExerciseEvaluation",
+    "property_label": "has exercise evaluation",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasExerciseEvaluation",
+    "text": "Property: hasExerciseEvaluation\n\nLabel: has exercise evaluation\n\nDescription: Property to connect an exercise with its evaluation\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- ExerciseEvaluation",
+    "metadata": {
+      "label": "has exercise evaluation",
+      "description": "Property to connect an exercise with its evaluation",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "ExerciseEvaluation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasExercisePhase",
+    "property_label": "has exercise phase",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasExercisePhase",
+    "text": "Property: hasExercisePhase\n\nLabel: has exercise phase\n\nDescription: Property to connect an exercise with the phase the centre has knowledge\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- ExercisePhase",
+    "metadata": {
+      "label": "has exercise phase",
+      "description": "Property to connect an exercise with the phase the centre has knowledge",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "ExercisePhase"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasExerciseType",
+    "property_label": "has exercise type",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasExerciseType",
+    "text": "Property: hasExerciseType\n\nLabel: has exercise type\n\nDescription: Property to connect an exercise with its type\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- ExerciseType",
+    "metadata": {
+      "label": "has exercise type",
+      "description": "Property to connect an exercise with its type",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "ExerciseType"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasExtraCapability",
+    "property_label": "has extra capability",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasExtraCapability",
+    "text": "Property: hasExtraCapability\n\nLabel: has extra capability\n\nDescription: Property to connect a training centre to its extra capabilities\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- ExtraCapability",
+    "metadata": {
+      "label": "has extra capability",
+      "description": "Property to connect a training centre to its extra capabilities",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "ExtraCapability"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasFacility",
+    "property_label": "has facility",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasFacility",
+    "text": "Property: hasFacility\n\nLabel: has facility\n\nDescription: Property to connect an organization with its facility\n\nType: object_property\n\nDomain Classes:\n- Organisation\n\nRange Classes or Datatypes:\n- Facility",
+    "metadata": {
+      "label": "has facility",
+      "description": "Property to connect an organization with its facility",
+      "property_type": "object_property",
+      "domain": [
+        "Organisation"
+      ],
+      "range": [
+        "Facility"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasGender",
+    "property_label": "has gender",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasGender",
+    "text": "Property: hasGender\n\nLabel: has gender\n\nDescription: Property to connect a Person to its gender\n\nType: object_property\n\nDomain Classes:\n- Person\n\nRange Classes or Datatypes:\n- Gender",
+    "metadata": {
+      "label": "has gender",
+      "description": "Property to connect a Person to its gender",
+      "property_type": "object_property",
+      "domain": [
+        "Person"
+      ],
+      "range": [
+        "Gender"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasOrganizationalStaffRole",
+    "property_label": "has organizational staff role",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasOrganizationalStaffRole",
+    "text": "Property: hasOrganizationalStaffRole\n\nLabel: has organizational staff role\n\nDescription: Property to connect a training course to its organizational staff roles\n\nType: object_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- OrganisationalStaffRole",
+    "metadata": {
+      "label": "has organizational staff role",
+      "description": "Property to connect a training course to its organizational staff roles",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "OrganisationalStaffRole"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasParticipantRole",
+    "property_label": "has participant role",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasParticipantRole",
+    "text": "Property: hasParticipantRole\n\nLabel: has participant role\n\nDescription: Property linking an Exercise to the Role that participates in it\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- Role",
+    "metadata": {
+      "label": "has participant role",
+      "description": "Property linking an Exercise to the Role that participates in it",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "Role"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasResponseAction",
+    "property_label": "has response action",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasResponseAction",
+    "text": "Property: hasResponseAction\n\nLabel: has response action\n\nDescription: Property to connect an Incident with the response action of a training centre\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has response action",
+      "description": "Property to connect an Incident with the response action of a training centre",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasResponseActionForThreat",
+    "property_label": "has response action for threat",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasResponseActionForThreat",
+    "text": "Property: hasResponseActionForThreat\n\nLabel: has response action for threat\n\nDescription: Property linking a threat agent to the response action that addresses it\n\nType: object_property\n\nDomain Classes:\n- ThreatAgent\n\nRange Classes or Datatypes:\n- ResponseAction",
+    "metadata": {
+      "label": "has response action for threat",
+      "description": "Property linking a threat agent to the response action that addresses it",
+      "property_type": "object_property",
+      "domain": [
+        "ThreatAgent"
+      ],
+      "range": [
+        "ResponseAction"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasSOPAudience",
+    "property_label": "has SOP audience",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasSOPAudience",
+    "text": "Property: hasSOPAudience\n\nLabel: has SOP audience\n\nDescription: Property that connects an SOP to its audience\n\nType: object_property\n\nDomain Classes:\n- SOP\n\nRange Classes or Datatypes:\n- Audience",
+    "metadata": {
+      "label": "has SOP audience",
+      "description": "Property that connects an SOP to its audience",
+      "property_type": "object_property",
+      "domain": [
+        "SOP"
+      ],
+      "range": [
+        "Audience"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasScenarioRole",
+    "property_label": "has scenario role",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasScenarioRole",
+    "text": "Property: hasScenarioRole\n\nLabel: has scenario role\n\nDescription: Property to connect an exercise or a scenario to a scenario role\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- ScenarioRole",
+    "metadata": {
+      "label": "has scenario role",
+      "description": "Property to connect an exercise or a scenario to a scenario role",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "ScenarioRole"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTCDiscipline",
+    "property_label": "has Training Centre Discipline",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTCDiscipline",
+    "text": "Property: hasTCDiscipline\n\nLabel: has Training Centre Discipline\n\nDescription: Property to connect a training centre to its discipline(s)\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- TCDiscipline",
+    "metadata": {
+      "label": "has Training Centre Discipline",
+      "description": "Property to connect a training centre to its discipline(s)",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "TCDiscipline"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTCType",
+    "property_label": "has Training centre type",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTCType",
+    "text": "Property: hasTCType\n\nLabel: has Training centre type\n\nDescription: Property to indicate the type of a training centre\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- TCType",
+    "metadata": {
+      "label": "has Training centre type",
+      "description": "Property to indicate the type of a training centre",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "TCType"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTRL",
+    "property_label": "has TRL",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTRL",
+    "text": "Property: hasTRL\n\nLabel: has TRL\n\nDescription: Property to connect a technology to its TRL\n\nType: object_property\n\nDomain Classes:\n- Technology\n\nRange Classes or Datatypes:\n- TRLEnumeration",
+    "metadata": {
+      "label": "has TRL",
+      "description": "Property to connect a technology to its TRL",
+      "property_type": "object_property",
+      "domain": [
+        "Technology"
+      ],
+      "range": [
+        "TRLEnumeration"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTrainer",
+    "property_label": "has trainer",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTrainer",
+    "text": "Property: hasTrainer\n\nLabel: has trainer\n\nDescription: Property linking a TrainingCourse to the TrainerRole that teaches it\n\nType: object_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- TrainerRole",
+    "metadata": {
+      "label": "has trainer",
+      "description": "Property linking a TrainingCourse to the TrainerRole that teaches it",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "TrainerRole"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTrainingAudience",
+    "property_label": "has training audience",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTrainingAudience",
+    "text": "Property: hasTrainingAudience\n\nLabel: has training audience\n\nDescription: Property that connects Training courses and Technology Trainings to their audience\n\nType: object_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- Audience",
+    "metadata": {
+      "label": "has training audience",
+      "description": "Property that connects Training courses and Technology Trainings to their audience",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "Audience"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTrainingParticipant",
+    "property_label": "has training participant",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTrainingParticipant",
+    "text": "Property: hasTrainingParticipant\n\nLabel: has training participant\n\nDescription: Property to connect a training course to a participant\n\nType: object_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- TrainingParticipantRole",
+    "metadata": {
+      "label": "has training participant",
+      "description": "Property to connect a training course to a participant",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "TrainingParticipantRole"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "includesScenario",
+    "property_label": "includes scenario",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#includesScenario",
+    "text": "Property: includesScenario\n\nLabel: includes scenario\n\nDescription: Property to show what scenario an ERP includes\n\nType: object_property\n\nDomain Classes:\n- EmergencyResponsePlan\n\nRange Classes or Datatypes:\n- Scenario",
+    "metadata": {
+      "label": "includes scenario",
+      "description": "Property to show what scenario an ERP includes",
+      "property_type": "object_property",
+      "domain": [
+        "EmergencyResponsePlan"
+      ],
+      "range": [
+        "Scenario"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "involvesThreat",
+    "property_label": "involves threat",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#involvesThreat",
+    "text": "Property: involvesThreat\n\nLabel: involves threat\n\nDescription: Property to connect an incident or a scenario to the threat agent it involves\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- ThreatAgent",
+    "metadata": {
+      "label": "involves threat",
+      "description": "Property to connect an incident or a scenario to the threat agent it involves",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "ThreatAgent"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isActionRequiredBy",
+    "property_label": "is action required by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isActionRequiredBy",
+    "text": "Property: isActionRequiredBy\n\nLabel: is action required by\n\nDescription: Property linking a ResponseAction to the Scenario that requires it\n\nType: object_property\n\nDomain Classes:\n- ResponseAction\n\nRange Classes or Datatypes:\n- Scenario",
+    "metadata": {
+      "label": "is action required by",
+      "description": "Property linking a ResponseAction to the Scenario that requires it",
+      "property_type": "object_property",
+      "domain": [
+        "ResponseAction"
+      ],
+      "range": [
+        "Scenario"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isActorTypeOf",
+    "property_label": "is actor type of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isActorTypeOf",
+    "text": "Property: isActorTypeOf\n\nLabel: is actor type of\n\nDescription: Property linking an ActorType to the Exercise that uses it\n\nType: object_property\n\nDomain Classes:\n- ActorType\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "is actor type of",
+      "description": "Property linking an ActorType to the Exercise that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "ActorType"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isAddressedBy",
+    "property_label": "is addressed by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isAddressedBy",
+    "text": "Property: isAddressedBy\n\nLabel: is addressed by\n\nDescription: Property linking a ThreatAgent to the Resource or EmergencyResponsePlan that addresses it\n\nType: object_property\n\nDomain Classes:\n- ThreatAgent\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is addressed by",
+      "description": "Property linking a ThreatAgent to the Resource or EmergencyResponsePlan that addresses it",
+      "property_type": "object_property",
+      "domain": [
+        "ThreatAgent"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isAffiliationOf",
+    "property_label": "is affiliation of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isAffiliationOf",
+    "text": "Property: isAffiliationOf\n\nLabel: is affiliation of\n\nDescription: Property linking a PersonAffiliation to the Person it belongs to\n\nType: object_property\n\nDomain Classes:\n- PersonAffiliation\n\nRange Classes or Datatypes:\n- Person",
+    "metadata": {
+      "label": "is affiliation of",
+      "description": "Property linking a PersonAffiliation to the Person it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "PersonAffiliation"
+      ],
+      "range": [
+        "Person"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isBasedOnIncident",
+    "property_label": "is based on incident",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isBasedOnIncident",
+    "text": "Property: isBasedOnIncident\n\nLabel: is based on incident\n\nDescription: Property to connect a scenario to the incident its based on\n\nType: object_property\n\nDomain Classes:\n- Scenario\n\nRange Classes or Datatypes:\n- Incident",
+    "metadata": {
+      "label": "is based on incident",
+      "description": "Property to connect a scenario to the incident its based on",
+      "property_type": "object_property",
+      "domain": [
+        "Scenario"
+      ],
+      "range": [
+        "Incident"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isBasedOnScenario",
+    "property_label": "is based on scenario",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isBasedOnScenario",
+    "text": "Property: isBasedOnScenario\n\nLabel: is based on scenario\n\nDescription: Property to connect an exercise to the scenario it is based\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- Scenario",
+    "metadata": {
+      "label": "is based on scenario",
+      "description": "Property to connect an exercise to the scenario it is based",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "Scenario"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isCapacityOf",
+    "property_label": "is capacity of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isCapacityOf",
+    "text": "Property: isCapacityOf\n\nLabel: is capacity of\n\nDescription: Property linking a Capacity to the TrainingCentre it belongs to\n\nType: object_property\n\nDomain Classes:\n- Capacity\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is capacity of",
+      "description": "Property linking a Capacity to the TrainingCentre it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "Capacity"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isCertificateGrantedFor",
+    "property_label": "is certificate granted for",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isCertificateGrantedFor",
+    "text": "Property: isCertificateGrantedFor\n\nLabel: is certificate granted for\n\nDescription: Property linking a Certificate to the TrainingCourse that grants it\n\nType: object_property\n\nDomain Classes:\n- Certificate\n\nRange Classes or Datatypes:\n- TrainingCourse",
+    "metadata": {
+      "label": "is certificate granted for",
+      "description": "Property linking a Certificate to the TrainingCourse that grants it",
+      "property_type": "object_property",
+      "domain": [
+        "Certificate"
+      ],
+      "range": [
+        "TrainingCourse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isCertificateIssuedBy",
+    "property_label": "is certificate issued by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isCertificateIssuedBy",
+    "text": "Property: isCertificateIssuedBy\n\nLabel: is certificate issued by\n\nDescription: Property linking a Certificate to the TrainingCentre that issued it\n\nType: object_property\n\nDomain Classes:\n- Certificate\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is certificate issued by",
+      "description": "Property linking a Certificate to the TrainingCentre that issued it",
+      "property_type": "object_property",
+      "domain": [
+        "Certificate"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isCompetenceOf",
+    "property_label": "is competence of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isCompetenceOf",
+    "text": "Property: isCompetenceOf\n\nLabel: is competence of\n\nDescription: Property linking a Competence to the TrainingCentre it belongs to\n\nType: object_property\n\nDomain Classes:\n- Competence\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is competence of",
+      "description": "Property linking a Competence to the TrainingCentre it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "Competence"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isCompetenceRequiredBy",
+    "property_label": "is competence required by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isCompetenceRequiredBy",
+    "text": "Property: isCompetenceRequiredBy\n\nLabel: is competence required by\n\nDescription: Property linking a Competence to the Capacity or Service that requires it\n\nType: object_property\n\nDomain Classes:\n- Competence\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is competence required by",
+      "description": "Property linking a Competence to the Capacity or Service that requires it",
+      "property_type": "object_property",
+      "domain": [
+        "Competence"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isDecomMethodEmployedBy",
+    "property_label": "is decontamination method employed by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isDecomMethodEmployedBy",
+    "text": "Property: isDecomMethodEmployedBy\n\nLabel: is decontamination method employed by\n\nDescription: Property linking a DecontaminationMethod to the DecontaminationTechnology that employs it\n\nType: object_property\n\nDomain Classes:\n- DecontaminationMethod\n\nRange Classes or Datatypes:\n- DecontaminationTechnology",
+    "metadata": {
+      "label": "is decontamination method employed by",
+      "description": "Property linking a DecontaminationMethod to the DecontaminationTechnology that employs it",
+      "property_type": "object_property",
+      "domain": [
+        "DecontaminationMethod"
+      ],
+      "range": [
+        "DecontaminationTechnology"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isDomainOfUseOf",
+    "property_label": "is domain of use of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isDomainOfUseOf",
+    "text": "Property: isDomainOfUseOf\n\nLabel: is domain of use of\n\nDescription: Property linking a DomainOfUse to the Technology it is associated with\n\nType: object_property\n\nDomain Classes:\n- DomainOfUse\n\nRange Classes or Datatypes:\n- Technology",
+    "metadata": {
+      "label": "is domain of use of",
+      "description": "Property linking a DomainOfUse to the Technology it is associated with",
+      "property_type": "object_property",
+      "domain": [
+        "DomainOfUse"
+      ],
+      "range": [
+        "Technology"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isERPCapabilityOf",
+    "property_label": "is ERP capability of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isERPCapabilityOf",
+    "text": "Property: isERPCapabilityOf\n\nLabel: is ERP capability of\n\nDescription: Property linking an ERPCapability to the EmergencyResponsePlan it belongs to\n\nType: object_property\n\nDomain Classes:\n- ERPCapability\n\nRange Classes or Datatypes:\n- EmergencyResponsePlan",
+    "metadata": {
+      "label": "is ERP capability of",
+      "description": "Property linking an ERPCapability to the EmergencyResponsePlan it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "ERPCapability"
+      ],
+      "range": [
+        "EmergencyResponsePlan"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isEquipmentOf",
+    "property_label": "is equipment of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isEquipmentOf",
+    "text": "Property: isEquipmentOf\n\nLabel: is equipment of\n\nDescription: Property linking an Equipment to the Organisation it belongs to\n\nType: object_property\n\nDomain Classes:\n- Equipment\n\nRange Classes or Datatypes:\n- Organisation",
+    "metadata": {
+      "label": "is equipment of",
+      "description": "Property linking an Equipment to the Organisation it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "Equipment"
+      ],
+      "range": [
+        "Organisation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isEvaluationMethodUsedBy",
+    "property_label": "is evaluation method used by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isEvaluationMethodUsedBy",
+    "text": "Property: isEvaluationMethodUsedBy\n\nLabel: is evaluation method used by\n\nDescription: Property linking an EvaluationMethod to the ExerciseEvaluation that uses it\n\nType: object_property\n\nDomain Classes:\n- EvaluationMethod\n\nRange Classes or Datatypes:\n- ExerciseEvaluation",
+    "metadata": {
+      "label": "is evaluation method used by",
+      "description": "Property linking an EvaluationMethod to the ExerciseEvaluation that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "EvaluationMethod"
+      ],
+      "range": [
+        "ExerciseEvaluation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isExerciseEvaluationOf",
+    "property_label": "is exercise evaluation of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isExerciseEvaluationOf",
+    "text": "Property: isExerciseEvaluationOf\n\nLabel: is exercise evaluation of\n\nDescription: Property linking an ExerciseEvaluation to the Exercise it evaluates\n\nType: object_property\n\nDomain Classes:\n- ExerciseEvaluation\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "is exercise evaluation of",
+      "description": "Property linking an ExerciseEvaluation to the Exercise it evaluates",
+      "property_type": "object_property",
+      "domain": [
+        "ExerciseEvaluation"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isExerciseOrganizedBy",
+    "property_label": "is exercise organized by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isExerciseOrganizedBy",
+    "text": "Property: isExerciseOrganizedBy\n\nLabel: is exercise organized by\n\nDescription: Property linking an Exercise to the TrainingCentre that organizes it\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is exercise organized by",
+      "description": "Property linking an Exercise to the TrainingCentre that organizes it",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isExercisePhaseOf",
+    "property_label": "is exercise phase of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isExercisePhaseOf",
+    "text": "Property: isExercisePhaseOf\n\nLabel: is exercise phase of\n\nDescription: Property linking an ExercisePhase to the Exercise it belongs to\n\nType: object_property\n\nDomain Classes:\n- ExercisePhase\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "is exercise phase of",
+      "description": "Property linking an ExercisePhase to the Exercise it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "ExercisePhase"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isExerciseTypeOf",
+    "property_label": "is exercise type of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isExerciseTypeOf",
+    "text": "Property: isExerciseTypeOf\n\nLabel: is exercise type of\n\nDescription: Property linking an ExerciseType to the Exercise it characterizes\n\nType: object_property\n\nDomain Classes:\n- ExerciseType\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "is exercise type of",
+      "description": "Property linking an ExerciseType to the Exercise it characterizes",
+      "property_type": "object_property",
+      "domain": [
+        "ExerciseType"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isExtraCapabilityOf",
+    "property_label": "is extra capability of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isExtraCapabilityOf",
+    "text": "Property: isExtraCapabilityOf\n\nLabel: is extra capability of\n\nDescription: Property linking an ExtraCapability to the TrainingCentre it belongs to\n\nType: object_property\n\nDomain Classes:\n- ExtraCapability\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is extra capability of",
+      "description": "Property linking an ExtraCapability to the TrainingCentre it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "ExtraCapability"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isFacilityOf",
+    "property_label": "is facility of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isFacilityOf",
+    "text": "Property: isFacilityOf\n\nLabel: is facility of\n\nDescription: Property linking a Facility to the Organisation it belongs to\n\nType: object_property\n\nDomain Classes:\n- Facility\n\nRange Classes or Datatypes:\n- Organisation",
+    "metadata": {
+      "label": "is facility of",
+      "description": "Property linking a Facility to the Organisation it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "Facility"
+      ],
+      "range": [
+        "Organisation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isFacilityRequiredBy",
+    "property_label": "is facility required by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isFacilityRequiredBy",
+    "text": "Property: isFacilityRequiredBy\n\nLabel: is facility required by\n\nDescription: Property linking a Facility to the Service that requires it\n\nType: object_property\n\nDomain Classes:\n- Facility\n\nRange Classes or Datatypes:\n- Service",
+    "metadata": {
+      "label": "is facility required by",
+      "description": "Property linking a Facility to the Service that requires it",
+      "property_type": "object_property",
+      "domain": [
+        "Facility"
+      ],
+      "range": [
+        "Service"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isFacilityWhereScenarioOccurs",
+    "property_label": "is facility where scenario occurs",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isFacilityWhereScenarioOccurs",
+    "text": "Property: isFacilityWhereScenarioOccurs\n\nLabel: is facility where scenario occurs\n\nDescription: Property linking a Facility to the Scenario that occurs there\n\nType: object_property\n\nDomain Classes:\n- Facility\n\nRange Classes or Datatypes:\n- Scenario",
+    "metadata": {
+      "label": "is facility where scenario occurs",
+      "description": "Property linking a Facility to the Scenario that occurs there",
+      "property_type": "object_property",
+      "domain": [
+        "Facility"
+      ],
+      "range": [
+        "Scenario"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isGenderOf",
+    "property_label": "is gender of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isGenderOf",
+    "text": "Property: isGenderOf\n\nLabel: is gender of\n\nDescription: Property linking a Gender to the Person it characterizes\n\nType: object_property\n\nDomain Classes:\n- Gender\n\nRange Classes or Datatypes:\n- Person",
+    "metadata": {
+      "label": "is gender of",
+      "description": "Property linking a Gender to the Person it characterizes",
+      "property_type": "object_property",
+      "domain": [
+        "Gender"
+      ],
+      "range": [
+        "Person"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isIncidentBasisFor",
+    "property_label": "is incident basis for",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isIncidentBasisFor",
+    "text": "Property: isIncidentBasisFor\n\nLabel: is incident basis for\n\nDescription: Property linking an Incident to the Scenario that is based on it\n\nType: object_property\n\nDomain Classes:\n- Incident\n\nRange Classes or Datatypes:\n- Scenario",
+    "metadata": {
+      "label": "is incident basis for",
+      "description": "Property linking an Incident to the Scenario that is based on it",
+      "property_type": "object_property",
+      "domain": [
+        "Incident"
+      ],
+      "range": [
+        "Scenario"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isIncidentTackledBy",
+    "property_label": "is incident tackled by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isIncidentTackledBy",
+    "text": "Property: isIncidentTackledBy\n\nLabel: is incident tackled by\n\nDescription: Property linking an Incident to the TrainingCentre that tackles it\n\nType: object_property\n\nDomain Classes:\n- Incident\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is incident tackled by",
+      "description": "Property linking an Incident to the TrainingCentre that tackles it",
+      "property_type": "object_property",
+      "domain": [
+        "Incident"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isNetworkConnectedTo",
+    "property_label": "is network connected to",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isNetworkConnectedTo",
+    "text": "Property: isNetworkConnectedTo\n\nLabel: is network connected to\n\nDescription: Property linking a CBRNNetwork to the TrainingCentre that is connected to it\n\nType: object_property\n\nDomain Classes:\n- CBRNNetwork\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is network connected to",
+      "description": "Property linking a CBRNNetwork to the TrainingCentre that is connected to it",
+      "property_type": "object_property",
+      "domain": [
+        "CBRNNetwork"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isOrganizationalStaffRoleOf",
+    "property_label": "is organizational staff role of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isOrganizationalStaffRoleOf",
+    "text": "Property: isOrganizationalStaffRoleOf\n\nLabel: is organizational staff role of\n\nDescription: Property linking an OrganisationalStaffRole to the TrainingCourse it is associated with\n\nType: object_property\n\nDomain Classes:\n- OrganisationalStaffRole\n\nRange Classes or Datatypes:\n- TrainingCourse",
+    "metadata": {
+      "label": "is organizational staff role of",
+      "description": "Property linking an OrganisationalStaffRole to the TrainingCourse it is associated with",
+      "property_type": "object_property",
+      "domain": [
+        "OrganisationalStaffRole"
+      ],
+      "range": [
+        "TrainingCourse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isResourceRequiredBy",
+    "property_label": "is resource required by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isResourceRequiredBy",
+    "text": "Property: isResourceRequiredBy\n\nLabel: is resource required by\n\nDescription: Property linking a Resource to the Scenario that requires it\n\nType: object_property\n\nDomain Classes:\n- Resource\n\nRange Classes or Datatypes:\n- Scenario",
+    "metadata": {
+      "label": "is resource required by",
+      "description": "Property linking a Resource to the Scenario that requires it",
+      "property_type": "object_property",
+      "domain": [
+        "Resource"
+      ],
+      "range": [
+        "Scenario"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isResourceUsedBy",
+    "property_label": "is resource used by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isResourceUsedBy",
+    "text": "Property: isResourceUsedBy\n\nLabel: is resource used by\n\nDescription: Property linking a Resource to the Exercise that uses it\n\nType: object_property\n\nDomain Classes:\n- Resource\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "is resource used by",
+      "description": "Property linking a Resource to the Exercise that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "Resource"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isResponseActionForThreat",
+    "property_label": "is response action for threat",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isResponseActionForThreat",
+    "text": "Property: isResponseActionForThreat\n\nLabel: is response action for threat\n\nDescription: Property to show for what threat is the response action (also early warning)\n\nType: object_property\n\nDomain Classes:\n- ResponseAction\n\nRange Classes or Datatypes:\n- ThreatAgent",
+    "metadata": {
+      "label": "is response action for threat",
+      "description": "Property to show for what threat is the response action (also early warning)",
+      "property_type": "object_property",
+      "domain": [
+        "ResponseAction"
+      ],
+      "range": [
+        "ThreatAgent"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isResponseActionOf",
+    "property_label": "is response action of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isResponseActionOf",
+    "text": "Property: isResponseActionOf\n\nLabel: is response action of\n\nDescription: Property linking a ResponseAction to the Incident it is associated with\n\nType: object_property\n\nDomain Classes:\n- ResponseAction\n\nRange Classes or Datatypes:\n- Incident",
+    "metadata": {
+      "label": "is response action of",
+      "description": "Property linking a ResponseAction to the Incident it is associated with",
+      "property_type": "object_property",
+      "domain": [
+        "ResponseAction"
+      ],
+      "range": [
+        "Incident"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isResponseSupportedBy",
+    "property_label": "is response supported by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isResponseSupportedBy",
+    "text": "Property: isResponseSupportedBy\n\nLabel: is response supported by\n\nDescription: Property linking a ResponseAction to the EmergencyResponsePlan that supports it\n\nType: object_property\n\nDomain Classes:\n- ResponseAction\n\nRange Classes or Datatypes:\n- EmergencyResponsePlan",
+    "metadata": {
+      "label": "is response supported by",
+      "description": "Property linking a ResponseAction to the EmergencyResponsePlan that supports it",
+      "property_type": "object_property",
+      "domain": [
+        "ResponseAction"
+      ],
+      "range": [
+        "EmergencyResponsePlan"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isSOPAudienceOf",
+    "property_label": "is SOP audience of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isSOPAudienceOf",
+    "text": "Property: isSOPAudienceOf\n\nLabel: is SOP audience of\n\nDescription: Property linking an Audience to the SOP it is associated with\n\nType: object_property\n\nDomain Classes:\n- Audience\n\nRange Classes or Datatypes:\n- SOP",
+    "metadata": {
+      "label": "is SOP audience of",
+      "description": "Property linking an Audience to the SOP it is associated with",
+      "property_type": "object_property",
+      "domain": [
+        "Audience"
+      ],
+      "range": [
+        "SOP"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isSOPFollowedBy",
+    "property_label": "is SOP followed by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isSOPFollowedBy",
+    "text": "Property: isSOPFollowedBy\n\nLabel: is SOP followed by\n\nDescription: Property linking an SOP to the ResponseAction that follows it\n\nType: object_property\n\nDomain Classes:\n- SOP\n\nRange Classes or Datatypes:\n- ResponseAction",
+    "metadata": {
+      "label": "is SOP followed by",
+      "description": "Property linking an SOP to the ResponseAction that follows it",
+      "property_type": "object_property",
+      "domain": [
+        "SOP"
+      ],
+      "range": [
+        "ResponseAction"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isSOPRequiredBy",
+    "property_label": "is SOP required by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isSOPRequiredBy",
+    "text": "Property: isSOPRequiredBy\n\nLabel: is SOP required by\n\nDescription: Property linking an SOP to the ThreatAgent that requires it\n\nType: object_property\n\nDomain Classes:\n- SOP\n\nRange Classes or Datatypes:\n- ThreatAgent",
+    "metadata": {
+      "label": "is SOP required by",
+      "description": "Property linking an SOP to the ThreatAgent that requires it",
+      "property_type": "object_property",
+      "domain": [
+        "SOP"
+      ],
+      "range": [
+        "ThreatAgent"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isSOPUsedBy",
+    "property_label": "is SOP used by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isSOPUsedBy",
+    "text": "Property: isSOPUsedBy\n\nLabel: is SOP used by\n\nDescription: Property linking an SOP to the TrainingCentre that uses it\n\nType: object_property\n\nDomain Classes:\n- SOP\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is SOP used by",
+      "description": "Property linking an SOP to the TrainingCentre that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "SOP"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isScenarioBasisFor",
+    "property_label": "is scenario basis for",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isScenarioBasisFor",
+    "text": "Property: isScenarioBasisFor\n\nLabel: is scenario basis for\n\nDescription: Property linking a Scenario to the Exercise that is based on it\n\nType: object_property\n\nDomain Classes:\n- Scenario\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "is scenario basis for",
+      "description": "Property linking a Scenario to the Exercise that is based on it",
+      "property_type": "object_property",
+      "domain": [
+        "Scenario"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isScenarioIncludedIn",
+    "property_label": "is scenario included in",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isScenarioIncludedIn",
+    "text": "Property: isScenarioIncludedIn\n\nLabel: is scenario included in\n\nDescription: Property linking a Scenario to the EmergencyResponsePlan that includes it\n\nType: object_property\n\nDomain Classes:\n- Scenario\n\nRange Classes or Datatypes:\n- EmergencyResponsePlan",
+    "metadata": {
+      "label": "is scenario included in",
+      "description": "Property linking a Scenario to the EmergencyResponsePlan that includes it",
+      "property_type": "object_property",
+      "domain": [
+        "Scenario"
+      ],
+      "range": [
+        "EmergencyResponsePlan"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isScenarioRoleOf",
+    "property_label": "is scenario role of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isScenarioRoleOf",
+    "text": "Property: isScenarioRoleOf\n\nLabel: is scenario role of\n\nDescription: Property linking a ScenarioRole to the Exercise or Scenario it belongs to\n\nType: object_property\n\nDomain Classes:\n- ScenarioRole\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is scenario role of",
+      "description": "Property linking a ScenarioRole to the Exercise or Scenario it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "ScenarioRole"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isServiceOfferedBy",
+    "property_label": "is service offered by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isServiceOfferedBy",
+    "text": "Property: isServiceOfferedBy\n\nLabel: is service offered by\n\nDescription: Property linking a Service to the TrainingCentre that offers it\n\nType: object_property\n\nDomain Classes:\n- Service\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is service offered by",
+      "description": "Property linking a Service to the TrainingCentre that offers it",
+      "property_type": "object_property",
+      "domain": [
+        "Service"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isServiceProvidedBy",
+    "property_label": "is service provided by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isServiceProvidedBy",
+    "text": "Property: isServiceProvidedBy\n\nLabel: is service provided by\n\nDescription: Property linking a Service to the Organisation that provides it\n\nType: object_property\n\nDomain Classes:\n- Service\n\nRange Classes or Datatypes:\n- Organisation",
+    "metadata": {
+      "label": "is service provided by",
+      "description": "Property linking a Service to the Organisation that provides it",
+      "property_type": "object_property",
+      "domain": [
+        "Service"
+      ],
+      "range": [
+        "Organisation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isStakeholderEngagedBy",
+    "property_label": "is stakeholder engaged by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isStakeholderEngagedBy",
+    "text": "Property: isStakeholderEngagedBy\n\nLabel: is stakeholder engaged by\n\nDescription: Property linking an OrganisationalStakeholder to the TrainingCentre or TrainingCourse that engages with it\n\nType: object_property\n\nDomain Classes:\n- OrganisationalStakeholder\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is stakeholder engaged by",
+      "description": "Property linking an OrganisationalStakeholder to the TrainingCentre or TrainingCourse that engages with it",
+      "property_type": "object_property",
+      "domain": [
+        "OrganisationalStakeholder"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isStandardCompliedWithBy",
+    "property_label": "is standard complied with by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isStandardCompliedWithBy",
+    "text": "Property: isStandardCompliedWithBy\n\nLabel: is standard complied with by\n\nDescription: Property linking a Standard to the ExternalLaboratorySupportService, SOP, or TrainingCourse that complies with it\n\nType: object_property\n\nDomain Classes:\n- Standard\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is standard complied with by",
+      "description": "Property linking a Standard to the ExternalLaboratorySupportService, SOP, or TrainingCourse that complies with it",
+      "property_type": "object_property",
+      "domain": [
+        "Standard"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isStandardUsedBy",
+    "property_label": "is standard used by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isStandardUsedBy",
+    "text": "Property: isStandardUsedBy\n\nLabel: is standard used by\n\nDescription: Property linking a Standard to the ExerciseEvaluation that uses it\n\nType: object_property\n\nDomain Classes:\n- Standard\n\nRange Classes or Datatypes:\n- ExerciseEvaluation",
+    "metadata": {
+      "label": "is standard used by",
+      "description": "Property linking a Standard to the ExerciseEvaluation that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "Standard"
+      ],
+      "range": [
+        "ExerciseEvaluation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTCDisciplineOf",
+    "property_label": "is Training Centre Discipline of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTCDisciplineOf",
+    "text": "Property: isTCDisciplineOf\n\nLabel: is Training Centre Discipline of\n\nDescription: Property linking a TCDiscipline to the TrainingCentre it belongs to\n\nType: object_property\n\nDomain Classes:\n- TCDiscipline\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is Training Centre Discipline of",
+      "description": "Property linking a TCDiscipline to the TrainingCentre it belongs to",
+      "property_type": "object_property",
+      "domain": [
+        "TCDiscipline"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTCTypeOf",
+    "property_label": "is Training Centre type of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTCTypeOf",
+    "text": "Property: isTCTypeOf\n\nLabel: is Training Centre type of\n\nDescription: Property linking a TCType to the TrainingCentre it classifies\n\nType: object_property\n\nDomain Classes:\n- TCType\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is Training Centre type of",
+      "description": "Property linking a TCType to the TrainingCentre it classifies",
+      "property_type": "object_property",
+      "domain": [
+        "TCType"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTRLOf",
+    "property_label": "is TRL of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTRLOf",
+    "text": "Property: isTRLOf\n\nLabel: is TRL of\n\nDescription: Property linking a TRLEnumeration to the Technology it is associated with\n\nType: object_property\n\nDomain Classes:\n- TRLEnumeration\n\nRange Classes or Datatypes:\n- Technology",
+    "metadata": {
+      "label": "is TRL of",
+      "description": "Property linking a TRLEnumeration to the Technology it is associated with",
+      "property_type": "object_property",
+      "domain": [
+        "TRLEnumeration"
+      ],
+      "range": [
+        "Technology"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTechnologyTrainedIn",
+    "property_label": "is technology trained in",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTechnologyTrainedIn",
+    "text": "Property: isTechnologyTrainedIn\n\nLabel: is technology trained in\n\nDescription: Property linking a Technology to the TechnologyTraining that trains on it\n\nType: object_property\n\nDomain Classes:\n- Technology\n\nRange Classes or Datatypes:\n- TechnologyTraining",
+    "metadata": {
+      "label": "is technology trained in",
+      "description": "Property linking a Technology to the TechnologyTraining that trains on it",
+      "property_type": "object_property",
+      "domain": [
+        "Technology"
+      ],
+      "range": [
+        "TechnologyTraining"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTechnologyTrainingOfferedBy",
+    "property_label": "is technology training offered by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTechnologyTrainingOfferedBy",
+    "text": "Property: isTechnologyTrainingOfferedBy\n\nLabel: is technology training offered by\n\nDescription: Property linking a TechnologyTraining to the TrainingCentre that offers it\n\nType: object_property\n\nDomain Classes:\n- TechnologyTraining\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is technology training offered by",
+      "description": "Property linking a TechnologyTraining to the TrainingCentre that offers it",
+      "property_type": "object_property",
+      "domain": [
+        "TechnologyTraining"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTechnologyUsedBy",
+    "property_label": "is technology used by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTechnologyUsedBy",
+    "text": "Property: isTechnologyUsedBy\n\nLabel: is technology used by\n\nDescription: Property linking a Technology to the Organisation that uses it\n\nType: object_property\n\nDomain Classes:\n- Technology\n\nRange Classes or Datatypes:\n- Organisation",
+    "metadata": {
+      "label": "is technology used by",
+      "description": "Property linking a Technology to the Organisation that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "Technology"
+      ],
+      "range": [
+        "Organisation"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isThreatDetectedBy",
+    "property_label": "is threat detected by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isThreatDetectedBy",
+    "text": "Property: isThreatDetectedBy\n\nLabel: is threat detected by\n\nDescription: Property linking a ThreatAgent to the ExternalLaboratorySupportService that detects it\n\nType: object_property\n\nDomain Classes:\n- ThreatAgent\n\nRange Classes or Datatypes:\n- ExternalLaboratorySupportService",
+    "metadata": {
+      "label": "is threat detected by",
+      "description": "Property linking a ThreatAgent to the ExternalLaboratorySupportService that detects it",
+      "property_type": "object_property",
+      "domain": [
+        "ThreatAgent"
+      ],
+      "range": [
+        "ExternalLaboratorySupportService"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isThreatInvolvedIn",
+    "property_label": "is threat involved in",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isThreatInvolvedIn",
+    "text": "Property: isThreatInvolvedIn\n\nLabel: is threat involved in\n\nDescription: Property linking a ThreatAgent to the Incident or Scenario it is involved in\n\nType: object_property\n\nDomain Classes:\n- ThreatAgent\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is threat involved in",
+      "description": "Property linking a ThreatAgent to the Incident or Scenario it is involved in",
+      "property_type": "object_property",
+      "domain": [
+        "ThreatAgent"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isThreatWithEarlyWarning",
+    "property_label": "is threat with early warning",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isThreatWithEarlyWarning",
+    "text": "Property: isThreatWithEarlyWarning\n\nLabel: is threat with early warning\n\nDescription: Property linking a ThreatAgent to the EarlyWarning associated with it\n\nType: object_property\n\nDomain Classes:\n- ThreatAgent\n\nRange Classes or Datatypes:\n- EarlyWarning",
+    "metadata": {
+      "label": "is threat with early warning",
+      "description": "Property linking a ThreatAgent to the EarlyWarning associated with it",
+      "property_type": "object_property",
+      "domain": [
+        "ThreatAgent"
+      ],
+      "range": [
+        "EarlyWarning"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTrainingAudienceOf",
+    "property_label": "is training audience of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTrainingAudienceOf",
+    "text": "Property: isTrainingAudienceOf\n\nLabel: is training audience of\n\nDescription: Property linking an Audience to the TrainingCourse it is associated with\n\nType: object_property\n\nDomain Classes:\n- Audience\n\nRange Classes or Datatypes:\n- TrainingCourse",
+    "metadata": {
+      "label": "is training audience of",
+      "description": "Property linking an Audience to the TrainingCourse it is associated with",
+      "property_type": "object_property",
+      "domain": [
+        "Audience"
+      ],
+      "range": [
+        "TrainingCourse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTrainingCourseProvidedBy",
+    "property_label": "is training course provided by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTrainingCourseProvidedBy",
+    "text": "Property: isTrainingCourseProvidedBy\n\nLabel: is training course provided by\n\nDescription: Property linking a TrainingCourse to the TrainingCentre that provides it\n\nType: object_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is training course provided by",
+      "description": "Property linking a TrainingCourse to the TrainingCentre that provides it",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTrainingMethodOfferedBy",
+    "property_label": "is training method offered by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTrainingMethodOfferedBy",
+    "text": "Property: isTrainingMethodOfferedBy\n\nLabel: is training method offered by\n\nDescription: Property linking a TrainingMethod to the TrainingCentre that offers it\n\nType: object_property\n\nDomain Classes:\n- TrainingMethod\n\nRange Classes or Datatypes:\n- TrainingCentre",
+    "metadata": {
+      "label": "is training method offered by",
+      "description": "Property linking a TrainingMethod to the TrainingCentre that offers it",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingMethod"
+      ],
+      "range": [
+        "TrainingCentre"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTrainingMethodUsedBy",
+    "property_label": "is training method used by",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTrainingMethodUsedBy",
+    "text": "Property: isTrainingMethodUsedBy\n\nLabel: is training method used by\n\nDescription: Property linking a TrainingMethod to the Exercise or TrainingCourse that uses it\n\nType: object_property\n\nDomain Classes:\n- TrainingMethod\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is training method used by",
+      "description": "Property linking a TrainingMethod to the Exercise or TrainingCourse that uses it",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingMethod"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isTrainingParticipantOf",
+    "property_label": "is training participant of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isTrainingParticipantOf",
+    "text": "Property: isTrainingParticipantOf\n\nLabel: is training participant of\n\nDescription: Property linking a TrainingParticipantRole to the TrainingCourse it participates in\n\nType: object_property\n\nDomain Classes:\n- TrainingParticipantRole\n\nRange Classes or Datatypes:\n- TrainingCourse",
+    "metadata": {
+      "label": "is training participant of",
+      "description": "Property linking a TrainingParticipantRole to the TrainingCourse it participates in",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingParticipantRole"
+      ],
+      "range": [
+        "TrainingCourse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "issuesCertificate",
+    "property_label": "issues certificate",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#issuesCertificate",
+    "text": "Property: issuesCertificate\n\nLabel: issues certificate\n\nDescription: Property to indicate the certificate issued by a training centre\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- Certificate",
+    "metadata": {
+      "label": "issues certificate",
+      "description": "Property to indicate the certificate issued by a training centre",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "Certificate"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "occursAt",
+    "property_label": "occurs at",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#occursAt",
+    "text": "Property: occursAt\n\nLabel: occurs at\n\nDescription: Property to indicate in what facility a scenario occurs\n\nType: object_property\n\nDomain Classes:\n- Scenario\n\nRange Classes or Datatypes:\n- Facility",
+    "metadata": {
+      "label": "occurs at",
+      "description": "Property to indicate in what facility a scenario occurs",
+      "property_type": "object_property",
+      "domain": [
+        "Scenario"
+      ],
+      "range": [
+        "Facility"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "offersService",
+    "property_label": "offers service",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#offersService",
+    "text": "Property: offersService\n\nLabel: offers service\n\nDescription: Property to connect a training centre to the offered services\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- Service",
+    "metadata": {
+      "label": "offers service",
+      "description": "Property to connect a training centre to the offered services",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "Service"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "offersTechnologyTraining",
+    "property_label": "offers technology training",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#offersTechnologyTraining",
+    "text": "Property: offersTechnologyTraining\n\nLabel: offers technology training\n\nDescription: Property to show the technology trainings a centre can offer\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- TechnologyTraining",
+    "metadata": {
+      "label": "offers technology training",
+      "description": "Property to show the technology trainings a centre can offer",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "TechnologyTraining"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "offersTrainingMethod",
+    "property_label": "offers training method",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#offersTrainingMethod",
+    "text": "Property: offersTrainingMethod\n\nLabel: offers training method\n\nDescription: Property to indicate what training method the centre offers\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- TrainingMethod",
+    "metadata": {
+      "label": "offers training method",
+      "description": "Property to indicate what training method the centre offers",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "TrainingMethod"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "organizesExercise",
+    "property_label": "organizes exercise",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#organizesExercise",
+    "text": "Property: organizesExercise\n\nLabel: organizes exercise\n\nDescription: Property to indicate which training centre is organizing an exercise\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "organizes exercise",
+      "description": "Property to indicate which training centre is organizing an exercise",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "participatesInExercise",
+    "property_label": "participates in exercise",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#participatesInExercise",
+    "text": "Property: participatesInExercise\n\nLabel: participates in exercise\n\nDescription: Property to indicate in what exercise a role participtes\n\nType: object_property\n\nDomain Classes:\n- Role\n\nRange Classes or Datatypes:\n- Exercise",
+    "metadata": {
+      "label": "participates in exercise",
+      "description": "Property to indicate in what exercise a role participtes",
+      "property_type": "object_property",
+      "domain": [
+        "Role"
+      ],
+      "range": [
+        "Exercise"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "providesService",
+    "property_label": "provides service",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#providesService",
+    "text": "Property: providesService\n\nLabel: provides service\n\nDescription: Property to connect an organisation to a service it offers\n\nType: object_property\n\nDomain Classes:\n- Organisation\n\nRange Classes or Datatypes:\n- Service",
+    "metadata": {
+      "label": "provides service",
+      "description": "Property to connect an organisation to a service it offers",
+      "property_type": "object_property",
+      "domain": [
+        "Organisation"
+      ],
+      "range": [
+        "Service"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "providesTrainingCourse",
+    "property_label": "provides training course",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#providesTrainingCourse",
+    "text": "Property: providesTrainingCourse\n\nLabel: provides training course\n\nDescription: Property to indicate what training courses the centre provides\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- TrainingCourse",
+    "metadata": {
+      "label": "provides training course",
+      "description": "Property to indicate what training courses the centre provides",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "TrainingCourse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "requiresAction",
+    "property_label": "requires action",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#requiresAction",
+    "text": "Property: requiresAction\n\nLabel: requires action\n\nDescription: Property to connect a scenario to its response action\n\nType: object_property\n\nDomain Classes:\n- Scenario\n\nRange Classes or Datatypes:\n- ResponseAction",
+    "metadata": {
+      "label": "requires action",
+      "description": "Property to connect a scenario to its response action",
+      "property_type": "object_property",
+      "domain": [
+        "Scenario"
+      ],
+      "range": [
+        "ResponseAction"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "requiresCompetence",
+    "property_label": "requires competence",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#requiresCompetence",
+    "text": "Property: requiresCompetence\n\nLabel: requires competence\n\nDescription: Property to connect the capacity of a training centre or one service offering to the required competence\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- Competence",
+    "metadata": {
+      "label": "requires competence",
+      "description": "Property to connect the capacity of a training centre or one service offering to the required competence",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "Competence"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "requiresFacility",
+    "property_label": "requires facility",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#requiresFacility",
+    "text": "Property: requiresFacility\n\nLabel: requires facility\n\nDescription: Property to indicate the facility required for a service\n\nType: object_property\n\nDomain Classes:\n- Service\n\nRange Classes or Datatypes:\n- Facility",
+    "metadata": {
+      "label": "requires facility",
+      "description": "Property to indicate the facility required for a service",
+      "property_type": "object_property",
+      "domain": [
+        "Service"
+      ],
+      "range": [
+        "Facility"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "requiresResource",
+    "property_label": "requires resource",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#requiresResource",
+    "text": "Property: requiresResource\n\nLabel: requires resource\n\nDescription: Property to connect a scenario to the resource it requires\n\nType: object_property\n\nDomain Classes:\n- Scenario\n\nRange Classes or Datatypes:\n- Resource",
+    "metadata": {
+      "label": "requires resource",
+      "description": "Property to connect a scenario to the resource it requires",
+      "property_type": "object_property",
+      "domain": [
+        "Scenario"
+      ],
+      "range": [
+        "Resource"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "requiresSOP",
+    "property_label": "requires SOP",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#requiresSOP",
+    "text": "Property: requiresSOP\n\nLabel: requires SOP\n\nDescription: Property to sho what SOP a threat agents requires\n\nType: object_property\n\nDomain Classes:\n- ThreatAgent\n\nRange Classes or Datatypes:\n- SOP",
+    "metadata": {
+      "label": "requires SOP",
+      "description": "Property to sho what SOP a threat agents requires",
+      "property_type": "object_property",
+      "domain": [
+        "ThreatAgent"
+      ],
+      "range": [
+        "SOP"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "supportsDetectionOf",
+    "property_label": "supports detection of",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#supportsDetectionOf",
+    "text": "Property: supportsDetectionOf\n\nLabel: supports detection of\n\nDescription: Property to connect an external lab to the threat agents it detects\n\nType: object_property\n\nDomain Classes:\n- ExternalLaboratorySupportService\n\nRange Classes or Datatypes:\n- ThreatAgent",
+    "metadata": {
+      "label": "supports detection of",
+      "description": "Property to connect an external lab to the threat agents it detects",
+      "property_type": "object_property",
+      "domain": [
+        "ExternalLaboratorySupportService"
+      ],
+      "range": [
+        "ThreatAgent"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "supportsResponse",
+    "property_label": "supports response",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#supportsResponse",
+    "text": "Property: supportsResponse\n\nLabel: supports response\n\nDescription: Property to indicate what response action an ERP supports\n\nType: object_property\n\nDomain Classes:\n- EmergencyResponsePlan\n\nRange Classes or Datatypes:\n- ResponseAction",
+    "metadata": {
+      "label": "supports response",
+      "description": "Property to indicate what response action an ERP supports",
+      "property_type": "object_property",
+      "domain": [
+        "EmergencyResponsePlan"
+      ],
+      "range": [
+        "ResponseAction"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "tacklesIncident",
+    "property_label": "tackles incident",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#tacklesIncident",
+    "text": "Property: tacklesIncident\n\nLabel: tackles incident\n\nDescription: Property to indicate what type of incident a tc tackles\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- Incident",
+    "metadata": {
+      "label": "tackles incident",
+      "description": "Property to indicate what type of incident a tc tackles",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "Incident"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "teachesCourse",
+    "property_label": "teaches course",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#teachesCourse",
+    "text": "Property: teachesCourse\n\nLabel: teaches course\n\nDescription: Property to connect a trainer to the respective course\n\nType: object_property\n\nDomain Classes:\n- TrainerRole\n\nRange Classes or Datatypes:\n- TrainingCourse",
+    "metadata": {
+      "label": "teaches course",
+      "description": "Property to connect a trainer to the respective course",
+      "property_type": "object_property",
+      "domain": [
+        "TrainerRole"
+      ],
+      "range": [
+        "TrainingCourse"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "trainsOnTechnology",
+    "property_label": "trains on technology",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#trainsOnTechnology",
+    "text": "Property: trainsOnTechnology\n\nLabel: trains on technology\n\nDescription: Property to indicate in what technology a technology training trains on\n\nType: object_property\n\nDomain Classes:\n- TechnologyTraining\n\nRange Classes or Datatypes:\n- Technology",
+    "metadata": {
+      "label": "trains on technology",
+      "description": "Property to indicate in what technology a technology training trains on",
+      "property_type": "object_property",
+      "domain": [
+        "TechnologyTraining"
+      ],
+      "range": [
+        "Technology"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "usesEvaluationMethod",
+    "property_label": "uses evaluation method",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#usesEvaluationMethod",
+    "text": "Property: usesEvaluationMethod\n\nLabel: uses evaluation method\n\nDescription: Property to indicate the evaluation methods used to evaluate an exercise\n\nType: object_property\n\nDomain Classes:\n- ExerciseEvaluation\n\nRange Classes or Datatypes:\n- EvaluationMethod",
+    "metadata": {
+      "label": "uses evaluation method",
+      "description": "Property to indicate the evaluation methods used to evaluate an exercise",
+      "property_type": "object_property",
+      "domain": [
+        "ExerciseEvaluation"
+      ],
+      "range": [
+        "EvaluationMethod"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "usesResource",
+    "property_label": "uses resource",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#usesResource",
+    "text": "Property: usesResource\n\nLabel: uses resource\n\nDescription: Property to cnnect an exercise to the resource it uses\n\nType: object_property\n\nDomain Classes:\n- Exercise\n\nRange Classes or Datatypes:\n- Resource",
+    "metadata": {
+      "label": "uses resource",
+      "description": "Property to cnnect an exercise to the resource it uses",
+      "property_type": "object_property",
+      "domain": [
+        "Exercise"
+      ],
+      "range": [
+        "Resource"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "usesSOP",
+    "property_label": "uses SOP",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#usesSOP",
+    "text": "Property: usesSOP\n\nLabel: uses SOP\n\nDescription: Property to connect a training centre with the SOPs it uses\n\nType: object_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- SOP",
+    "metadata": {
+      "label": "uses SOP",
+      "description": "Property to connect a training centre with the SOPs it uses",
+      "property_type": "object_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "SOP"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "usesStandard",
+    "property_label": "uses standard",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#usesStandard",
+    "text": "Property: usesStandard\n\nLabel: uses standard\n\nDescription: Property to connect an exercise evaluation to its standard\n\nType: object_property\n\nDomain Classes:\n- ExerciseEvaluation\n\nRange Classes or Datatypes:\n- Standard",
+    "metadata": {
+      "label": "uses standard",
+      "description": "Property to connect an exercise evaluation to its standard",
+      "property_type": "object_property",
+      "domain": [
+        "ExerciseEvaluation"
+      ],
+      "range": [
+        "Standard"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "usesTechnology",
+    "property_label": "uses technology",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#usesTechnology",
+    "text": "Property: usesTechnology\n\nLabel: uses technology\n\nDescription: Property to connect a training centre (organization) to a technology it uses\n\nType: object_property\n\nDomain Classes:\n- Organisation\n\nRange Classes or Datatypes:\n- Technology",
+    "metadata": {
+      "label": "uses technology",
+      "description": "Property to connect a training centre (organization) to a technology it uses",
+      "property_type": "object_property",
+      "domain": [
+        "Organisation"
+      ],
+      "range": [
+        "Technology"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "usesTrainingMethod",
+    "property_label": "uses training method",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#usesTrainingMethod",
+    "text": "Property: usesTrainingMethod\n\nLabel: uses training method\n\nDescription: Property to indicate which training method an exercise uses\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- TrainingMethod",
+    "metadata": {
+      "label": "uses training method",
+      "description": "Property to indicate which training method an exercise uses",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "TrainingMethod"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "bottomObjectProperty",
+    "property_label": "bottomObjectProperty",
+    "property_uri": "http://www.w3.org/2002/07/owl#bottomObjectProperty",
+    "text": "Property: bottomObjectProperty\n\nLabel: bottomObjectProperty\n\nDescription: The object property that does not relate any two individuals.\n\nType: object_property\n\nDomain Classes:\n- Thing\n\nRange Classes or Datatypes:\n- Thing",
+    "metadata": {
+      "label": "bottomObjectProperty",
+      "description": "The object property that does not relate any two individuals.",
+      "property_type": "object_property",
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Thing"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "topObjectProperty",
+    "property_label": "topObjectProperty",
+    "property_uri": "http://www.w3.org/2002/07/owl#topObjectProperty",
+    "text": "Property: topObjectProperty\n\nLabel: topObjectProperty\n\nDescription: The object property that relates every two individuals.\n\nType: object_property\n\nDomain Classes:\n- Thing\n\nRange Classes or Datatypes:\n- Thing",
+    "metadata": {
+      "label": "topObjectProperty",
+      "description": "The object property that relates every two individuals.",
+      "property_type": "object_property",
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Thing"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "broadMatch",
+    "property_label": "has broader match",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#broadMatch",
+    "text": "Property: broadMatch\n\nLabel: has broader match\n\nDescription: has broader match\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has broader match",
+      "description": "has broader match",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "broader",
+    "property_label": "has broader",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#broader",
+    "text": "Property: broader\n\nLabel: has broader\n\nDescription: Broader concepts are typically rendered as parents in a concept hierarchy (tree).\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has broader",
+      "description": "Broader concepts are typically rendered as parents in a concept hierarchy (tree).",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "broaderTransitive",
+    "property_label": "has broader transitive",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#broaderTransitive",
+    "text": "Property: broaderTransitive\n\nLabel: has broader transitive\n\nDescription: has broader transitive\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has broader transitive",
+      "description": "has broader transitive",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "closeMatch",
+    "property_label": "has close match",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#closeMatch",
+    "text": "Property: closeMatch\n\nLabel: has close match\n\nDescription: has close match\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has close match",
+      "description": "has close match",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "exactMatch",
+    "property_label": "has exact match",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#exactMatch",
+    "text": "Property: exactMatch\n\nLabel: has exact match\n\nDescription: skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has exact match",
+      "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTopConcept",
+    "property_label": "has top concept",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#hasTopConcept",
+    "text": "Property: hasTopConcept\n\nLabel: has top concept\n\nDescription: has top concept\n\nType: object_property\n\nDomain Classes:\n- ConceptScheme\n\nRange Classes or Datatypes:\n- Concept",
+    "metadata": {
+      "label": "has top concept",
+      "description": "has top concept",
+      "property_type": "object_property",
+      "domain": [
+        "ConceptScheme"
+      ],
+      "range": [
+        "Concept"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "inScheme",
+    "property_label": "is in scheme",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#inScheme",
+    "text": "Property: inScheme\n\nLabel: is in scheme\n\nDescription: is in scheme\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- ConceptScheme",
+    "metadata": {
+      "label": "is in scheme",
+      "description": "is in scheme",
+      "property_type": "object_property",
+      "domain": [],
+      "range": [
+        "ConceptScheme"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "mappingRelation",
+    "property_label": "is in mapping relation with",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#mappingRelation",
+    "text": "Property: mappingRelation\n\nLabel: is in mapping relation with\n\nDescription: These concept mapping relations mirror semantic relations, and the data model defined below is similar (with the exception of skos:exactMatch) to the data model defined for semantic relations. A distinct vocabulary is provided for concept mapping relations, to provide a convenient way to differentiate links within a concept scheme from links between concept schemes. However, this pattern of usage is not a formal requirement of the SKOS data model, and relies on informal definitions of best practice.\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is in mapping relation with",
+      "description": "These concept mapping relations mirror semantic relations, and the data model defined below is similar (with the exception of skos:exactMatch) to the data model defined for semantic relations. A distinct vocabulary is provided for concept mapping relations, to provide a convenient way to differentiate links within a concept scheme from links between concept schemes. However, this pattern of usage is not a formal requirement of the SKOS data model, and relies on informal definitions of best practice.",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "member",
+    "property_label": "has member",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#member",
+    "text": "Property: member\n\nLabel: has member\n\nDescription: has member\n\nType: object_property\n\nDomain Classes:\n- Collection\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has member",
+      "description": "has member",
+      "property_type": "object_property",
+      "domain": [
+        "Collection"
+      ],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "memberList",
+    "property_label": "has member list",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#memberList",
+    "text": "Property: memberList\n\nLabel: has member list\n\nDescription: For any resource, every item in the list given as the value of the\n      skos:memberList property is also a value of the skos:member property.\n\nType: object_property\n\nDomain Classes:\n- OrderedCollection\n\nRange Classes or Datatypes:\n- List",
+    "metadata": {
+      "label": "has member list",
+      "description": "For any resource, every item in the list given as the value of the\n      skos:memberList property is also a value of the skos:member property.",
+      "property_type": "object_property",
+      "domain": [
+        "OrderedCollection"
+      ],
+      "range": [
+        "List"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "narrowMatch",
+    "property_label": "has narrower match",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#narrowMatch",
+    "text": "Property: narrowMatch\n\nLabel: has narrower match\n\nDescription: has narrower match\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has narrower match",
+      "description": "has narrower match",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "narrower",
+    "property_label": "has narrower",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#narrower",
+    "text": "Property: narrower\n\nLabel: has narrower\n\nDescription: Narrower concepts are typically rendered as children in a concept hierarchy (tree).\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has narrower",
+      "description": "Narrower concepts are typically rendered as children in a concept hierarchy (tree).",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "narrowerTransitive",
+    "property_label": "has narrower transitive",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#narrowerTransitive",
+    "text": "Property: narrowerTransitive\n\nLabel: has narrower transitive\n\nDescription: has narrower transitive\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has narrower transitive",
+      "description": "has narrower transitive",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "related",
+    "property_label": "has related",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#related",
+    "text": "Property: related\n\nLabel: has related\n\nDescription: skos:related is disjoint with skos:broaderTransitive\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has related",
+      "description": "skos:related is disjoint with skos:broaderTransitive",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "relatedMatch",
+    "property_label": "has related match",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#relatedMatch",
+    "text": "Property: relatedMatch\n\nLabel: has related match\n\nDescription: has related match\n\nType: object_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has related match",
+      "description": "has related match",
+      "property_type": "object_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "semanticRelation",
+    "property_label": "is in semantic relation with",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#semanticRelation",
+    "text": "Property: semanticRelation\n\nLabel: is in semantic relation with\n\nDescription: is in semantic relation with\n\nType: object_property\n\nDomain Classes:\n- Concept\n\nRange Classes or Datatypes:\n- Concept",
+    "metadata": {
+      "label": "is in semantic relation with",
+      "description": "is in semantic relation with",
+      "property_type": "object_property",
+      "domain": [
+        "Concept"
+      ],
+      "range": [
+        "Concept"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "topConceptOf",
+    "property_label": "is top concept in scheme",
+    "property_uri": "http://www.w3.org/2004/02/skos/core#topConceptOf",
+    "text": "Property: topConceptOf\n\nLabel: is top concept in scheme\n\nDescription: is top concept in scheme\n\nType: object_property\n\nDomain Classes:\n- Concept\n\nRange Classes or Datatypes:\n- ConceptScheme",
+    "metadata": {
+      "label": "is top concept in scheme",
+      "description": "is top concept in scheme",
+      "property_type": "object_property",
+      "domain": [
+        "Concept"
+      ],
+      "range": [
+        "ConceptScheme"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "alternative",
+    "property_label": "alternative",
+    "property_uri": "http://purl.org/dc/terms/alternative",
+    "text": "Property: alternative\n\nLabel: alternative\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "alternative",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "available",
+    "property_label": "available",
+    "property_uri": "http://purl.org/dc/terms/available",
+    "text": "Property: available\n\nLabel: available\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "available",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "bibliographicCitation",
+    "property_label": "bibliographicCitation",
+    "property_uri": "http://purl.org/dc/terms/bibliographicCitation",
+    "text": "Property: bibliographicCitation\n\nLabel: bibliographicCitation\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "bibliographicCitation",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "created",
+    "property_label": "created",
+    "property_uri": "http://purl.org/dc/terms/created",
+    "text": "Property: created\n\nLabel: created\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "created",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "date",
+    "property_label": "date",
+    "property_uri": "http://purl.org/dc/terms/date",
+    "text": "Property: date\n\nLabel: date\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "date",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "dateAccepted",
+    "property_label": "dateAccepted",
+    "property_uri": "http://purl.org/dc/terms/dateAccepted",
+    "text": "Property: dateAccepted\n\nLabel: dateAccepted\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "dateAccepted",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "dateCopyrighted",
+    "property_label": "dateCopyrighted",
+    "property_uri": "http://purl.org/dc/terms/dateCopyrighted",
+    "text": "Property: dateCopyrighted\n\nLabel: dateCopyrighted\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "dateCopyrighted",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "dateSubmitted",
+    "property_label": "dateSubmitted",
+    "property_uri": "http://purl.org/dc/terms/dateSubmitted",
+    "text": "Property: dateSubmitted\n\nLabel: dateSubmitted\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "dateSubmitted",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "identifier",
+    "property_label": "identifier",
+    "property_uri": "http://purl.org/dc/terms/identifier",
+    "text": "Property: identifier\n\nLabel: identifier\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "identifier",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "issued",
+    "property_label": "issued",
+    "property_uri": "http://purl.org/dc/terms/issued",
+    "text": "Property: issued\n\nLabel: issued\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "issued",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "modified",
+    "property_label": "modified",
+    "property_uri": "http://purl.org/dc/terms/modified",
+    "text": "Property: modified\n\nLabel: modified\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "modified",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "title",
+    "property_label": "title",
+    "property_uri": "http://purl.org/dc/terms/title",
+    "text": "Property: title\n\nLabel: title\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- Literal",
+    "metadata": {
+      "label": "title",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": [
+        "Literal"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "valid",
+    "property_label": "valid",
+    "property_uri": "http://purl.org/dc/terms/valid",
+    "text": "Property: valid\n\nLabel: valid\n\nDescription: No description available\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "valid",
+      "description": "No description available",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasAddress",
+    "property_label": "has address",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasAddress",
+    "text": "Property: hasAddress\n\nLabel: has address\n\nDescription: The address of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has address",
+      "description": "The address of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasAvailabilityLevel",
+    "property_label": "has availability level",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasAvailabilityLevel",
+    "text": "Property: hasAvailabilityLevel\n\nLabel: has availability level\n\nDescription: The availability level of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has availability level",
+      "description": "The availability level of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasComment",
+    "property_label": "has comment",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasComment",
+    "text": "Property: hasComment\n\nLabel: has comment\n\nDescription: A universal datatype property to register the comments made for each relevant input\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has comment",
+      "description": "A universal datatype property to register the comments made for each relevant input",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasCount",
+    "property_label": "has count",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasCount",
+    "text": "Property: hasCount\n\nLabel: has count\n\nDescription: A universal property used when needed to express the number of an individual entry\n\nType: datatype_property\n\nDomain Classes:\n- Thing\n\nRange Classes or Datatypes:\n- int",
+    "metadata": {
+      "label": "has count",
+      "description": "A universal property used when needed to express the number of an individual entry",
+      "property_type": "datatype_property",
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "int"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasCourseFrequency",
+    "property_label": "has course frequencye",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasCourseFrequency",
+    "text": "Property: hasCourseFrequency\n\nLabel: has course frequencye\n\nDescription: The frequency of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has course frequencye",
+      "description": "The frequency of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasCreditPoints",
+    "property_label": "has credit points",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasCreditPoints",
+    "text": "Property: hasCreditPoints\n\nLabel: has credit points\n\nDescription: The credit points of a technology training\n\nType: datatype_property\n\nDomain Classes:\n- TechnologyTraining\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has credit points",
+      "description": "The credit points of a technology training",
+      "property_type": "datatype_property",
+      "domain": [
+        "TechnologyTraining"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasDateOfBirth",
+    "property_label": "has date of birth",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasDateOfBirth",
+    "text": "Property: hasDateOfBirth\n\nLabel: has date of birth\n\nDescription: The date of birth of a person\n\nType: datatype_property\n\nDomain Classes:\n- Person\n\nRange Classes or Datatypes:\n- date",
+    "metadata": {
+      "label": "has date of birth",
+      "description": "The date of birth of a person",
+      "property_type": "datatype_property",
+      "domain": [
+        "Person"
+      ],
+      "range": [
+        "date"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasDeliveryMethod",
+    "property_label": "has delivery method",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasDeliveryMethod",
+    "text": "Property: hasDeliveryMethod\n\nLabel: has delivery method\n\nDescription: The delivery method of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has delivery method",
+      "description": "The delivery method of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasDistrict",
+    "property_label": "has district",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasDistrict",
+    "text": "Property: hasDistrict\n\nLabel: has district\n\nDescription: The district of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has district",
+      "description": "The district of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasERPFrequency",
+    "property_label": "has ERP frequency",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasERPFrequency",
+    "text": "Property: hasERPFrequency\n\nLabel: has ERP frequency\n\nDescription: The ERP frequency of an emergency response plan\n\nType: datatype_property\n\nDomain Classes:\n- EmergencyResponsePlan\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has ERP frequency",
+      "description": "The ERP frequency of an emergency response plan",
+      "property_type": "datatype_property",
+      "domain": [
+        "EmergencyResponsePlan"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEducationalActivityForm",
+    "property_label": "has educational activity form",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEducationalActivityForm",
+    "text": "Property: hasEducationalActivityForm\n\nLabel: has educational activity form\n\nDescription: The educational activity form of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has educational activity form",
+      "description": "The educational activity form of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEducationalActivityType",
+    "property_label": "has educational activity type",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEducationalActivityType",
+    "text": "Property: hasEducationalActivityType\n\nLabel: has educational activity type\n\nDescription: The educational activity type of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has educational activity type",
+      "description": "The educational activity type of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEmail",
+    "property_label": "has email",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEmail",
+    "text": "Property: hasEmail\n\nLabel: has email\n\nDescription: Email of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has email",
+      "description": "Email of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEvaluationComments",
+    "property_label": "has evaluation comments",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEvaluationComments",
+    "text": "Property: hasEvaluationComments\n\nLabel: has evaluation comments\n\nDescription: The evaluation comments of an exercise\n\nType: datatype_property\n\nDomain Classes:\n- ExerciseEvaluation\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has evaluation comments",
+      "description": "The evaluation comments of an exercise",
+      "property_type": "datatype_property",
+      "domain": [
+        "ExerciseEvaluation"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEvaluationCriterion",
+    "property_label": "has evaluation criterion",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEvaluationCriterion",
+    "text": "Property: hasEvaluationCriterion\n\nLabel: has evaluation criterion\n\nDescription: The evaluation criterion of a technology training\n\nType: datatype_property\n\nDomain Classes:\n- TechnologyTraining\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has evaluation criterion",
+      "description": "The evaluation criterion of a technology training",
+      "property_type": "datatype_property",
+      "domain": [
+        "TechnologyTraining"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEvaluationScore",
+    "property_label": "has evaluation score",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEvaluationScore",
+    "text": "Property: hasEvaluationScore\n\nLabel: has evaluation score\n\nDescription: The evaluation score of an exercise as a string\n\nType: datatype_property\n\nDomain Classes:\n- ExerciseEvaluation\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has evaluation score",
+      "description": "The evaluation score of an exercise as a string",
+      "property_type": "datatype_property",
+      "domain": [
+        "ExerciseEvaluation"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasEvaluationdate",
+    "property_label": "has evaluation date",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasEvaluationdate",
+    "text": "Property: hasEvaluationdate\n\nLabel: has evaluation date\n\nDescription: The evaluation date of an exercise\n\nType: datatype_property\n\nDomain Classes:\n- ExerciseEvaluation\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has evaluation date",
+      "description": "The evaluation date of an exercise",
+      "property_type": "datatype_property",
+      "domain": [
+        "ExerciseEvaluation"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasExpertise",
+    "property_label": "has expertise",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasExpertise",
+    "text": "Property: hasExpertise\n\nLabel: has expertise\n\nDescription: The expertise of a trainer\n\nType: datatype_property\n\nDomain Classes:\n- TrainerRole\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has expertise",
+      "description": "The expertise of a trainer",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainerRole"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasIdentificationNumber",
+    "property_label": "has identification number",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasIdentificationNumber",
+    "text": "Property: hasIdentificationNumber\n\nLabel: has identification number\n\nDescription: The identification number of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has identification number",
+      "description": "The identification number of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasLength",
+    "property_label": "has length",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasLength",
+    "text": "Property: hasLength\n\nLabel: has length\n\nDescription: The length of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has length",
+      "description": "The length of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasName",
+    "property_label": "has name",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasName",
+    "text": "Property: hasName\n\nLabel: has name\n\nDescription: The name of a person\n\nType: datatype_property\n\nDomain Classes:\n- Person\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has name",
+      "description": "The name of a person",
+      "property_type": "datatype_property",
+      "domain": [
+        "Person"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasNumberOfParticipants",
+    "property_label": "has number of participants",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasNumberOfParticipants",
+    "text": "Property: hasNumberOfParticipants\n\nLabel: has number of participants\n\nDescription: The number of participants of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has number of participants",
+      "description": "The number of participants of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasNumberOfPerformedActivities",
+    "property_label": "has number of performed activities",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasNumberOfPerformedActivities",
+    "text": "Property: hasNumberOfPerformedActivities\n\nLabel: has number of performed activities\n\nDescription: The number of performed activities of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has number of performed activities",
+      "description": "The number of performed activities of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasOwnership",
+    "property_label": "has ownership",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasOwnership",
+    "text": "Property: hasOwnership\n\nLabel: has ownership\n\nDescription: The ownership of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has ownership",
+      "description": "The ownership of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasPoC",
+    "property_label": "has person of contact",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasPoC",
+    "text": "Property: hasPoC\n\nLabel: has person of contact\n\nDescription: The Person of contact of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "has person of contact",
+      "description": "The Person of contact of a training centre",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasPricePerCourse",
+    "property_label": "has price per course",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasPricePerCourse",
+    "text": "Property: hasPricePerCourse\n\nLabel: has price per course\n\nDescription: The price per course of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has price per course",
+      "description": "The price per course of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasPrinciple",
+    "property_label": "has principle",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasPrinciple",
+    "text": "Property: hasPrinciple\n\nLabel: has principle\n\nDescription: The principle of a technology (the technological background of a technology)\n\nType: datatype_property\n\nDomain Classes:\n- Technology\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has principle",
+      "description": "The principle of a technology (the technological background of a technology)",
+      "property_type": "datatype_property",
+      "domain": [
+        "Technology"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasRegion",
+    "property_label": "has region",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasRegion",
+    "text": "Property: hasRegion\n\nLabel: has region\n\nDescription: Region of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has region",
+      "description": "Region of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasSOPDeliveryMethod",
+    "property_label": "has SOP delivery method",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasSOPDeliveryMethod",
+    "text": "Property: hasSOPDeliveryMethod\n\nLabel: has SOP delivery method\n\nDescription: The delivery method of an SOP\n\nType: datatype_property\n\nDomain Classes:\n- SOP\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has SOP delivery method",
+      "description": "The delivery method of an SOP",
+      "property_type": "datatype_property",
+      "domain": [
+        "SOP"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasSectorAppointed",
+    "property_label": "has sector appointed",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasSectorAppointed",
+    "text": "Property: hasSectorAppointed\n\nLabel: has sector appointed\n\nDescription: Appointed sector of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has sector appointed",
+      "description": "Appointed sector of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasSite",
+    "property_label": "has site",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasSite",
+    "text": "Property: hasSite\n\nLabel: has site\n\nDescription: The site of an organisation\n\nType: datatype_property\n\nDomain Classes:\n- Organisation\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has site",
+      "description": "The site of an organisation",
+      "property_type": "datatype_property",
+      "domain": [
+        "Organisation"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasSurname",
+    "property_label": "has surname",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasSurname",
+    "text": "Property: hasSurname\n\nLabel: has surname\n\nDescription: The full surname of a Person\n\nType: datatype_property\n\nDomain Classes:\n- Person\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has surname",
+      "description": "The full surname of a Person",
+      "property_type": "datatype_property",
+      "domain": [
+        "Person"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTechnologyType",
+    "property_label": "has technology type",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTechnologyType",
+    "text": "Property: hasTechnologyType\n\nLabel: has technology type\n\nDescription: The type of a technology\n\nType: datatype_property\n\nDomain Classes:\n- Technology\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has technology type",
+      "description": "The type of a technology",
+      "property_type": "datatype_property",
+      "domain": [
+        "Technology"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTotalCourseHours",
+    "property_label": "has total course hours",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTotalCourseHours",
+    "text": "Property: hasTotalCourseHours\n\nLabel: has total course hours\n\nDescription: Total course hours of a training course\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCourse\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has total course hours",
+      "description": "Total course hours of a training course",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCourse"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasTrainingFrequency",
+    "property_label": "has training frequency",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasTrainingFrequency",
+    "text": "Property: hasTrainingFrequency\n\nLabel: has training frequency\n\nDescription: Training frequency of a technology training\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has training frequency",
+      "description": "Training frequency of a technology training",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "hasYearOfEstablishment",
+    "property_label": "has year of establishment",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#hasYearOfEstablishment",
+    "text": "Property: hasYearOfEstablishment\n\nLabel: has year of establishment\n\nDescription: The year of establishment of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- TrainingCentre\n\nRange Classes or Datatypes:\n- string",
+    "metadata": {
+      "label": "has year of establishment",
+      "description": "The year of establishment of a training centre",
+      "property_type": "datatype_property",
+      "domain": [
+        "TrainingCentre"
+      ],
+      "range": [
+        "string"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "isOfLegalForm",
+    "property_label": "is of legal form",
+    "property_uri": "http://www.semanticweb.org/eNOVATION-ontology#isOfLegalForm",
+    "text": "Property: isOfLegalForm\n\nLabel: is of legal form\n\nDescription: The legal form of a training centre\n\nType: datatype_property\n\nDomain Classes:\n- None\n\nRange Classes or Datatypes:\n- None",
+    "metadata": {
+      "label": "is of legal form",
+      "description": "The legal form of a training centre",
+      "property_type": "datatype_property",
+      "domain": [],
+      "range": []
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "bottomDataProperty",
+    "property_label": "bottomDataProperty",
+    "property_uri": "http://www.w3.org/2002/07/owl#bottomDataProperty",
+    "text": "Property: bottomDataProperty\n\nLabel: bottomDataProperty\n\nDescription: The data property that does not relate any individual to any data value.\n\nType: datatype_property\n\nDomain Classes:\n- Thing\n\nRange Classes or Datatypes:\n- Literal",
+    "metadata": {
+      "label": "bottomDataProperty",
+      "description": "The data property that does not relate any individual to any data value.",
+      "property_type": "datatype_property",
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Literal"
+      ]
+    }
+  },
+  {
+    "chunk_type": "property",
+    "property_name": "topDataProperty",
+    "property_label": "topDataProperty",
+    "property_uri": "http://www.w3.org/2002/07/owl#topDataProperty",
+    "text": "Property: topDataProperty\n\nLabel: topDataProperty\n\nDescription: The data property that relates every individual to every data value.\n\nType: datatype_property\n\nDomain Classes:\n- Thing\n\nRange Classes or Datatypes:\n- Literal",
+    "metadata": {
+      "label": "topDataProperty",
+      "description": "The data property that relates every individual to every data value.",
+      "property_type": "datatype_property",
+      "domain": [
+        "Thing"
+      ],
+      "range": [
+        "Literal"
+      ]
+    }
+  }
+]

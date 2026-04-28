@@ -1,14 +1,16 @@
+"""HTTP route for running the runtime query pipeline against the active package."""
+
 from typing import Any
 
 from pydantic import BaseModel, Field
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 
-from app.services.runtime.query_pipeline import QueryPipelineService
+from app.core.config import settings
+from app.domain.package import DomainError, PackageNotFoundError, get_active_package
+from app.domain.runtime import run_query_pipeline
 
 
 router = APIRouter(prefix="/query", tags=["query"])
-
-query_pipeline_service = QueryPipelineService()
 
 
 class QueryRequest(BaseModel):
@@ -30,10 +32,30 @@ class QueryResponse(BaseModel):
     execution_result: dict[str, Any] | None
     status: str
     errors: list[str] | None
+    trace_path: str
 
 
 @router.post("", response_model=QueryResponse)
 async def run_query(request: QueryRequest) -> dict[str, object]:
     """Run the runtime query pipeline for one natural-language question."""
-    result = await query_pipeline_service.run(question=request.question)
-    return result.to_dict()
+    try:
+        result = await run_query_pipeline(
+            request.question,
+            get_active_package(settings.ontology_packages_path),
+        )
+        return result.to_dict()
+    except PackageNotFoundError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(exc),
+        ) from exc
+    except DomainError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(exc),
+        ) from exc
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(exc),
+        ) from exc

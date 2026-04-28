@@ -1,0 +1,18 @@
+You generated a SPARQL query that failed validation or execution.
+
+Original question:
+{{ original_question }}
+
+Failed query:
+{{ failed_query }}
+
+Validation/execution errors:
+{% if validation_errors %}
+{% for error in validation_errors %}
+- {{ error }}
+{% endfor %}
+{% else %}
+- No explicit error message was provided.
+{% endif %}
+
+Return only a corrected SPARQL query. Do not include explanations, markdown fences, or extra text.
