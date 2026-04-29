@@ -1,7 +1,9 @@
-"""Parse ontology sources, resolve schemas, and build the final RDF graph.
+"""Prepare the `FinalGraph` used by ontology onboarding.
 
-This module stays in the onboarding domain because it prepares the graph that
-feeds both `ontology_context.json` and index construction.
+This module analyzes a loaded RDF graph, classifies it as schema-only, mixed, or
+instances-only, checks whether instance classes are declared, optionally resolves
+missing schema namespaces, and merges resolved schema triples into the final RDF
+graph. It does not read source files or write package artifacts.
 """
 
 from __future__ import annotations
@@ -63,19 +65,45 @@ class ResolvedSchemaFile:
 
 
 @dataclass(frozen=True)
-class SchemaResolutionResult:
-    """Outcome of the optional schema-resolution step."""
+class ResolvedSchemas:
+    """Schemas discovered while preparing the final graph."""
 
     resolved_files: list[ResolvedSchemaFile]
     attempted_urls: list[str]
     failed_urls: list[str]
 
 
-async def parse_uploaded_content(content: bytes, suffix: str) -> Graph:
-    """Parse the uploaded ontology file into an RDF graph."""
-    graph = Graph()
-    graph.parse(source=BytesIO(content), format=RDFLIB_FORMATS[suffix])
-    return graph
+@dataclass(frozen=True)
+class FinalGraph:
+    """Prepared ontology graph plus the analysis that produced it."""
+
+    initial_graph: Graph
+    graph: Graph
+    mode: str
+    detection: DetectionResult
+    coverage: CoverageResult
+    resolved_schemas: ResolvedSchemas
+
+
+async def prepare_final_graph(initial_graph: Graph, *, resolve_missing_schemas: bool = True) -> FinalGraph:
+    """Analyze and enrich one loaded RDF graph."""
+    detection = detect_graph(initial_graph)
+    mode = classify_mode(detection)
+    coverage = analyze_schema_coverage(initial_graph)
+    resolved_schemas = (
+        await resolve_schemas_for_namespaces(coverage.missing_namespaces)
+        if resolve_missing_schemas
+        else ResolvedSchemas(resolved_files=[], attempted_urls=[], failed_urls=[])
+    )
+    graph = build_final_graph(initial_graph, resolved_schemas.resolved_files)
+    return FinalGraph(
+        initial_graph=initial_graph,
+        graph=graph,
+        mode=mode,
+        detection=detection,
+        coverage=coverage,
+        resolved_schemas=resolved_schemas,
+    )
 
 
 def detect_graph(graph: Graph) -> DetectionResult:
@@ -129,7 +157,7 @@ def analyze_schema_coverage(graph: Graph) -> CoverageResult:
     )
 
 
-async def resolve_schemas_for_namespaces(namespaces: list[str]) -> SchemaResolutionResult:
+async def resolve_schemas_for_namespaces(namespaces: list[str]) -> ResolvedSchemas:
     """Try to download RDF schemas for the provided missing class namespaces."""
     attempted_urls: list[str] = []
     failed_urls: list[str] = []
@@ -177,7 +205,7 @@ async def resolve_schemas_for_namespaces(namespaces: list[str]) -> SchemaResolut
                 )
                 break
 
-    return SchemaResolutionResult(
+    return ResolvedSchemas(
         resolved_files=resolved_files,
         attempted_urls=attempted_urls,
         failed_urls=failed_urls,

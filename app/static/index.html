@@ -63,8 +63,16 @@
       background: var(--panel);
     }
 
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
     input[type="file"],
-    input[type="text"] {
+    input[type="text"],
+    select {
       padding: 12px;
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -138,6 +146,14 @@
 
     <form id="upload-form">
       <input id="file-input" name="file" type="file" accept=".ttl,.owl,.rdf" required>
+      <label>
+        Chunking strategy
+        <select id="chunking-select" name="chunking">
+          <option value="class_based" selected>Class based</option>
+          <option value="property_based">Property based</option>
+          <option value="composite">Composite</option>
+        </select>
+      </label>
       <button id="upload-button" type="submit">Upload ontology</button>
     </form>
 
@@ -168,6 +184,7 @@
     const form = document.getElementById("upload-form");
     const queryForm = document.getElementById("query-form");
     const fileInput = document.getElementById("file-input");
+    const chunkingSelect = document.getElementById("chunking-select");
     const questionInput = document.getElementById("question-input");
     const uploadButton = document.getElementById("upload-button");
     const queryButton = document.getElementById("query-button");
@@ -233,6 +250,7 @@
 
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("chunking", chunkingSelect.value);
 
       try {
         const response = await fetch("/ontology/load", {

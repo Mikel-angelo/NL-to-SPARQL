@@ -1,7 +1,8 @@
-"""Build the normalized ontology context dictionary from an RDF graph.
+"""Build the `ontology_context.json` payload from an RDF graph.
 
-This module does not manage files or onboarding state. It only converts a
-prepared RDFLib graph into the structure saved as `ontology_context.json`.
+This module converts a prepared RDFLib graph into the runtime ontology context:
+prefixes, classes, object/datatype properties, class hierarchy, and instance
+statistics. It does not write the JSON file itself.
 """
 
 from __future__ import annotations
@@ -10,13 +11,13 @@ from rdflib import Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import OWL
 
 
-def extract_ontology_context(
+def build_ontology_context(
     graph: Graph,
     *,
     ontology_name: str,
     source_filename: str,
 ) -> dict[str, object]:
-    """Return the normalized ontology context stored in `ontology_context.json`."""
+    """Return the ontology context stored in `ontology_context.json`."""
     class_uris = _subjects_for_types(graph, {OWL.Class, RDFS.Class})
     object_property_uris = _subjects_for_types(graph, {OWL.ObjectProperty})
     datatype_property_uris = _subjects_for_types(graph, {OWL.DatatypeProperty})

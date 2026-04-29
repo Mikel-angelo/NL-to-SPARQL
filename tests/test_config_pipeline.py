@@ -12,7 +12,10 @@ import numpy as np
 from rdflib import Graph
 
 from app.domain import package as package_module
-from app.domain.ontology import extract_metadata
+from app.domain.ontology.graph_preparation import prepare_final_graph
+from app.domain.ontology.ontology_context import build_ontology_context
+from app.domain.ontology.package_writer import OntologyPackageArtifacts, write_ontology_package
+from app.domain.ontology.source_loader import LoadedOntologySource, load_ontology_file
 from app.domain.package import get_active_package
 from app.domain.rag import build_index, retrieve_text_chunks
 from app.domain.rag.chunking import build_chunks
@@ -83,17 +86,70 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             "results": {"bindings": []},
         }
 
-    async def test_file_extraction_and_runtime_artifacts_create_expected_layout(self) -> None:
-        extraction = await extract_metadata(
-            str(self.ontology_path),
-            self.package_dir,
-            source_mode="file",
-            dataset_name="example-dataset",
-            query_endpoint="http://example.test/dataset/query",
+    async def _prepare_file_package(
+        self,
+        *,
+        dataset_name: str = "example-dataset",
+        query_endpoint: str = "http://example.test/dataset/query",
+    ) -> OntologyPackageArtifacts:
+        source = await load_ontology_file(str(self.ontology_path))
+        final_graph = await prepare_final_graph(source.graph)
+        ontology_context = build_ontology_context(
+            final_graph.graph,
+            ontology_name="ontology",
+            source_filename=self.ontology_path.name,
         )
+        return write_ontology_package(
+            package_dir=self.package_dir,
+            source=source,
+            final_graph=final_graph,
+            ontology_name="ontology",
+            ontology_context=ontology_context,
+            dataset_name=dataset_name,
+            query_endpoint=query_endpoint,
+            default_model=None,
+            chunking="class_based",
+        )
+
+    async def _prepare_endpoint_package(
+        self,
+        *,
+        endpoint: str = "http://example.test/sparql",
+    ) -> OntologyPackageArtifacts:
+        graph = Graph()
+        graph.parse(data=ONTOLOGY_TTL, format="turtle")
+        source = LoadedOntologySource(
+            graph=graph,
+            source_mode="sparql_endpoint",
+            source_name=endpoint,
+            source_path=None,
+            content=None,
+            suffix=None,
+            query_endpoint=endpoint,
+        )
+        final_graph = await prepare_final_graph(source.graph, resolve_missing_schemas=False)
+        ontology_context = build_ontology_context(
+            final_graph.graph,
+            ontology_name="sparql",
+            source_filename=endpoint,
+        )
+        return write_ontology_package(
+            package_dir=self.package_dir,
+            source=source,
+            final_graph=final_graph,
+            ontology_name="sparql",
+            ontology_context=ontology_context,
+            dataset_name=None,
+            query_endpoint=endpoint,
+            default_model=None,
+            chunking="class_based",
+        )
+
+    async def test_file_extraction_and_runtime_artifacts_create_expected_layout(self) -> None:
+        artifacts = await self._prepare_file_package()
         artifact_result = build_index(self.package_dir, chunking="class_based")
 
-        self.assertEqual(extraction.metadata["source_mode"], "file")
+        self.assertEqual(artifacts.metadata["source_mode"], "file")
         self.assertTrue((self.package_dir / "ontology").exists())
         self.assertTrue((self.package_dir / "metadata.json").exists())
         self.assertTrue((self.package_dir / "ontology_context.json").exists())
@@ -104,17 +160,11 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(artifact_result.index_path.parent.name, "chunks")
 
     async def test_chunking_strategies_build_class_property_and_composite_chunks(self) -> None:
-        extraction = await extract_metadata(
-            str(self.ontology_path),
-            self.package_dir,
-            source_mode="file",
-            dataset_name="example-dataset",
-            query_endpoint="http://example.test/dataset/query",
-        )
+        artifacts = await self._prepare_file_package()
 
-        class_chunks = build_chunks(extraction.ontology_context, "class_based")
-        property_chunks = build_chunks(extraction.ontology_context, "property_based")
-        composite_chunks = build_chunks(extraction.ontology_context, "composite")
+        class_chunks = build_chunks(artifacts.ontology_context, "class_based")
+        property_chunks = build_chunks(artifacts.ontology_context, "property_based")
+        composite_chunks = build_chunks(artifacts.ontology_context, "composite")
 
         self.assertTrue(any(chunk["chunk_type"] == "class" for chunk in class_chunks))
         self.assertTrue(any(chunk.get("property_name") == "worksAt" for chunk in property_chunks))
@@ -125,34 +175,15 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(any("Employee" in str(chunk.get("text")) for chunk in composite_chunks))
 
     async def test_endpoint_extraction_creates_config_without_source_file(self) -> None:
-        graph = Graph()
-        graph.parse(data=ONTOLOGY_TTL, format="turtle")
-        self._patch(
-            __import__("app.domain.ontology.onboarding_extraction", fromlist=["_graph_from_sparql_endpoint"]),
-            "_graph_from_sparql_endpoint",
-            self._fake_graph_from_endpoint(graph),
-        )
-
-        extraction = await extract_metadata(
-            "http://example.test/sparql",
-            self.package_dir,
-            source_mode="sparql_endpoint",
-            query_endpoint="http://example.test/sparql",
-        )
+        artifacts = await self._prepare_endpoint_package()
         build_index(self.package_dir, chunking="class_based")
 
-        self.assertEqual(extraction.metadata["source_mode"], "sparql_endpoint")
+        self.assertEqual(artifacts.metadata["source_mode"], "sparql_endpoint")
         self.assertFalse(any(path.name.startswith("source.") for path in (self.package_dir / "ontology").glob("*")))
-        self.assertEqual(extraction.settings["query_endpoint"], "http://example.test/sparql")
+        self.assertEqual(artifacts.settings["query_endpoint"], "http://example.test/sparql")
 
     async def test_run_query_pipeline_uses_config_artifacts(self) -> None:
-        await extract_metadata(
-            str(self.ontology_path),
-            self.package_dir,
-            source_mode="file",
-            dataset_name="example-dataset",
-            query_endpoint="http://example.test/dataset/query",
-        )
+        await self._prepare_file_package()
         build_index(self.package_dir, chunking="class_based")
 
         result = await run_query_pipeline(
@@ -167,13 +198,7 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertGreaterEqual(len(result.retrieved_context), 1)
 
     async def test_rag_retrieve_text_chunks_returns_plain_text(self) -> None:
-        await extract_metadata(
-            str(self.ontology_path),
-            self.package_dir,
-            source_mode="file",
-            dataset_name="example-dataset",
-            query_endpoint="http://example.test/dataset/query",
-        )
+        await self._prepare_file_package()
         build_index(self.package_dir, chunking="class_based")
 
         chunks = retrieve_text_chunks(self.package_dir, "Which places exist?", k=2)
@@ -258,13 +283,7 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result.iterations[0]["execution"]["code"], "EXECUTION_OK")
 
     async def test_active_package_pointer_can_drive_runtime_pipeline(self) -> None:
-        await extract_metadata(
-            str(self.ontology_path),
-            self.package_dir,
-            source_mode="file",
-            dataset_name="example-dataset",
-            query_endpoint="http://example.test/dataset/query",
-        )
+        await self._prepare_file_package()
         build_index(self.package_dir, chunking="class_based")
 
         packages_root = self.root / "ontology_packages-root"
@@ -281,15 +300,6 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("correction_iterations", latest_trace)
         self.assertEqual(latest_trace["correction_iterations"][0]["validation"]["is_valid"], True)
         self.assertEqual(latest_trace["correction_iterations"][0]["execution"]["code"], "EXECUTION_OK")
-
-    @staticmethod
-    def _fake_graph_from_endpoint(graph: Graph):
-        async def _inner(endpoint: str) -> Graph:
-            del endpoint
-            return graph
-
-        return _inner
-
 
 if __name__ == "__main__":
     unittest.main()

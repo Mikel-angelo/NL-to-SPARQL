@@ -1,8 +1,9 @@
-"""Coordinate the full ontology onboarding pipeline.
+"""Run the top-level ontology onboarding workflows.
 
-This domain module is called by both the root-level CLI `onboard.py` and the
-HTTP API. It runs extraction, index building, optional Fuseki upload, and active
-package activation.
+File onboarding loads RDF, prepares the final graph, builds `ontology_context.json`,
+writes package artifacts, builds the RAG index, uploads the package data to Fuseki,
+and activates the package. Endpoint onboarding follows the same package/index flow
+but uses the existing SPARQL endpoint instead of creating a Fuseki dataset.
 """
 
 from __future__ import annotations
@@ -13,12 +14,16 @@ from pathlib import Path
 import json
 
 from app.clients.fuseki import FusekiService, FusekiUploadPayload
-from app.domain.ontology.onboarding_extraction import ExtractionResult, extract_metadata
+from app.domain.ontology.graph_preparation import prepare_final_graph
+from app.domain.ontology.ontology_context import build_ontology_context
+from app.domain.ontology.package_writer import (
+    OntologyPackageArtifacts,
+    append_onboard_log,
+    write_ontology_package,
+)
+from app.domain.ontology.source_loader import SUPPORTED_SUFFIXES, load_ontology_file, load_sparql_endpoint
 from app.domain.package import get_active_package, set_active_package
 from app.domain.rag import build_index
-
-
-SUPPORTED_SUFFIXES = {".ttl", ".owl", ".rdf"}
 
 
 @dataclass(frozen=True)
@@ -59,12 +64,25 @@ async def onboard_ontology_file(
     package_dir = Path(packages_root).resolve() / dataset_name
     query_endpoint = f"{fuseki_service.dataset_endpoint(dataset_name)}/query"
 
-    _emit_status(status_callback, package_dir, "extracting_metadata", source=str(source_file))
-    extraction = await extract_metadata(
+    _emit_status(status_callback, package_dir, "loading_source", source=str(source_file))
+    source = await load_ontology_file(
         str(source_file),
-        package_dir,
-        source_mode="file",
-        source_filename_override=effective_source_filename,
+        source_filename=effective_source_filename,
+    )
+    _emit_status(status_callback, package_dir, "preparing_graph", source=str(source_file))
+    final_graph = await prepare_final_graph(source.graph)
+    ontology_context = build_ontology_context(
+        final_graph.graph,
+        ontology_name=ontology_name,
+        source_filename=effective_source_filename,
+    )
+    _emit_status(status_callback, package_dir, "writing_package", source=str(source_file))
+    artifacts = write_ontology_package(
+        package_dir=package_dir,
+        source=source,
+        final_graph=final_graph,
+        ontology_name=ontology_name,
+        ontology_context=ontology_context,
         dataset_name=dataset_name,
         query_endpoint=query_endpoint,
         default_model=default_model,
@@ -78,7 +96,7 @@ async def onboard_ontology_file(
     uploads = _build_fuseki_uploads(
         dataset_name=dataset_name,
         source_filename=effective_source_filename,
-        extraction=extraction,
+        artifacts=artifacts,
     )
     await fuseki_service.replace_dataset(
         dataset_name=dataset_name,
@@ -123,11 +141,24 @@ async def onboard_sparql_endpoint(
     timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f")
     package_dir = Path(packages_root).resolve() / f"{_slugify_endpoint(endpoint)}-{timestamp}"
 
-    _emit_status(status_callback, package_dir, "extracting_metadata", source=endpoint)
-    await extract_metadata(
-        endpoint,
-        package_dir,
-        source_mode="sparql_endpoint",
+    _emit_status(status_callback, package_dir, "loading_source", source=endpoint)
+    source = await load_sparql_endpoint(endpoint)
+    _emit_status(status_callback, package_dir, "preparing_graph", source=endpoint)
+    final_graph = await prepare_final_graph(source.graph, resolve_missing_schemas=False)
+    ontology_name = _slugify_endpoint(endpoint)
+    ontology_context = build_ontology_context(
+        final_graph.graph,
+        ontology_name=ontology_name,
+        source_filename=endpoint,
+    )
+    _emit_status(status_callback, package_dir, "writing_package", source=endpoint)
+    write_ontology_package(
+        package_dir=package_dir,
+        source=source,
+        final_graph=final_graph,
+        ontology_name=ontology_name,
+        ontology_context=ontology_context,
+        dataset_name=None,
         query_endpoint=endpoint,
         default_model=default_model,
         chunking=chunking,
@@ -164,16 +195,16 @@ def _build_fuseki_uploads(
     *,
     dataset_name: str,
     source_filename: str,
-    extraction: ExtractionResult,
+    artifacts: OntologyPackageArtifacts,
 ) -> list[FusekiUploadPayload]:
-    if extraction.source_path is None:
+    if artifacts.source_path is None:
         raise ValueError("Expected a copied ontology source file in the ontology package")
 
     uploads = [
         FusekiUploadPayload(
             dataset_name=dataset_name,
             filename=source_filename,
-            content=extraction.source_path.read_bytes(),
+            content=artifacts.source_path.read_bytes(),
         )
     ]
     uploads.extend(
@@ -182,7 +213,7 @@ def _build_fuseki_uploads(
             filename=schema_file.filename,
             content=schema_file.content,
         )
-        for schema_file in extraction.resolved_schemas
+        for schema_file in artifacts.resolved_schemas
     )
     return uploads
 
@@ -230,13 +261,4 @@ def _emit_status(
 
 
 def _append_onboard_log(package_dir: Path, event: str, **details: object) -> None:
-    log_path = package_dir / "logs" / "onboard.log"
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    entry = {
-        "timestamp": datetime.now(UTC).isoformat(),
-        "event": event,
-        **details,
-    }
-    with log_path.open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(entry))
-        handle.write("\n")
+    append_onboard_log(package_dir / "logs" / "onboard.log", event, **details)

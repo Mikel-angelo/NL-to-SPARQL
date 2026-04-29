@@ -269,6 +269,8 @@ Main routes:
 - `file`: ontology file, required
 - `chunking`: optional; one of `class_based`, `property_based`, or `composite`; defaults to `class_based`
 
+The static UI at `GET /` exposes the same upload route and includes a chunking strategy selector.
+
 ## RAG Module API
 
 The indexing and retrieval logic is available without running the full query pipeline:
@@ -300,10 +302,11 @@ app/
   core/config.py       default settings
   domain/package.py    package discovery and active-package helpers
   domain/ontology/
-    onboard_pipeline.py        full onboarding pipeline used by CLI and API
-    onboarding_extraction.py   source parsing, schema resolution, package JSON writing
-    context_builder.py         RDFLib graph -> ontology_context.json structure
-    schema_resolution.py       RDF parsing and schema coverage/resolution helpers
+    onboarding_workflow.py     top-level onboarding workflow used by CLI and API
+    source_loader.py           local file or SPARQL endpoint -> RDFLib graph
+    graph_preparation.py       graph detection, schema resolution, and FinalGraph creation
+    ontology_context.py        RDFLib graph -> ontology_context.json structure
+    package_writer.py          metadata/settings/context/source/schema artifact writing
   domain/rag/
     chunking.py                chunk construction strategies
     build_index.py             chunks/chunks.json and chunks/index.faiss building
