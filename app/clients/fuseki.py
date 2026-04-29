@@ -160,6 +160,30 @@ class FusekiService:
                     pass
             raise
 
+    async def reload_active_dataset(
+        self,
+        dataset_name: str,
+        files: list[FusekiUploadPayload],
+        previous_dataset_name: str | None,
+    ) -> None:
+        """Recreate one dataset from package files, then remove the previous active dataset."""
+        dataset_created = False
+        try:
+            await self.delete_dataset(dataset_name, ignore_missing=True)
+            await self.create_dataset(dataset_name)
+            dataset_created = True
+            for payload in files:
+                await self.upload_rdf(payload)
+            if previous_dataset_name and previous_dataset_name != dataset_name:
+                await self.delete_dataset(previous_dataset_name, ignore_missing=True)
+        except Exception:
+            if dataset_created:
+                try:
+                    await self.delete_dataset(dataset_name, ignore_missing=True)
+                except HTTPException:
+                    pass
+            raise
+
     def dataset_endpoint(self, dataset_name: str) -> str:
         """Return the base endpoint URL for one dataset."""
         return f"{self._base_url}/{dataset_name}"

@@ -13,9 +13,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 import json
 
-from app.clients.fuseki import FusekiService, FusekiUploadPayload
+from app.clients.fuseki import FusekiService
 from app.domain.ontology.graph_preparation import prepare_final_graph
 from app.domain.ontology.ontology_context import build_ontology_context
+from app.domain.ontology.package_activation import build_fuseki_uploads_from_package
 from app.domain.ontology.package_writer import (
     OntologyPackageArtifacts,
     append_onboard_log,
@@ -59,9 +60,9 @@ async def onboard_ontology_file(
 
     effective_source_filename = source_filename or source_file.name
     ontology_name = _slugify_filename(effective_source_filename)
-    timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f")
-    dataset_name = f"{ontology_name}-{timestamp}"
-    package_dir = Path(packages_root).resolve() / dataset_name
+    packages_root_path = Path(packages_root).resolve()
+    dataset_name = _unique_timestamped_name(packages_root_path, ontology_name)
+    package_dir = packages_root_path / dataset_name
     query_endpoint = f"{fuseki_service.dataset_endpoint(dataset_name)}/query"
 
     _emit_status(status_callback, package_dir, "loading_source", source=str(source_file))
@@ -93,11 +94,7 @@ async def onboard_ontology_file(
     artifact_result = build_index(package_dir, chunking=chunking)
 
     _emit_status(status_callback, package_dir, "uploading_to_fuseki", dataset_name=dataset_name)
-    uploads = _build_fuseki_uploads(
-        dataset_name=dataset_name,
-        source_filename=effective_source_filename,
-        artifacts=artifacts,
-    )
+    uploads = build_fuseki_uploads_from_package(package_dir, dataset_name=dataset_name)
     await fuseki_service.replace_dataset(
         dataset_name=dataset_name,
         files=uploads,
@@ -138,8 +135,11 @@ async def onboard_sparql_endpoint(
     status_callback: callable | None = None,
 ) -> OnboardingResult:
     """Build one package from an existing SPARQL endpoint and optionally activate it."""
-    timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f")
-    package_dir = Path(packages_root).resolve() / f"{_slugify_endpoint(endpoint)}-{timestamp}"
+    packages_root_path = Path(packages_root).resolve()
+    package_dir = packages_root_path / _unique_timestamped_name(
+        packages_root_path,
+        _slugify_endpoint(endpoint),
+    )
 
     _emit_status(status_callback, package_dir, "loading_source", source=endpoint)
     source = await load_sparql_endpoint(endpoint)
@@ -191,33 +191,6 @@ async def onboard_sparql_endpoint(
     )
 
 
-def _build_fuseki_uploads(
-    *,
-    dataset_name: str,
-    source_filename: str,
-    artifacts: OntologyPackageArtifacts,
-) -> list[FusekiUploadPayload]:
-    if artifacts.source_path is None:
-        raise ValueError("Expected a copied ontology source file in the ontology package")
-
-    uploads = [
-        FusekiUploadPayload(
-            dataset_name=dataset_name,
-            filename=source_filename,
-            content=artifacts.source_path.read_bytes(),
-        )
-    ]
-    uploads.extend(
-        FusekiUploadPayload(
-            dataset_name=dataset_name,
-            filename=schema_file.filename,
-            content=schema_file.content,
-        )
-        for schema_file in artifacts.resolved_schemas
-    )
-    return uploads
-
-
 def _previous_dataset_name(packages_root: str | Path) -> str | None:
     try:
         active_root = get_active_package(packages_root)
@@ -247,6 +220,17 @@ def _slugify_endpoint(endpoint: str) -> str:
     tail = text.rsplit("/", 1)[-1]
     normalized = tail.lower().replace("_", "-")
     return "-".join(part for part in normalized.split("-") if part) or "endpoint"
+
+
+def _unique_timestamped_name(root: Path, base_name: str) -> str:
+    timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M")
+    stem = f"{base_name}-{timestamp}"
+    candidate = stem
+    index = 2
+    while (root / candidate).exists():
+        candidate = f"{stem}-{index}"
+        index += 1
+    return candidate
 
 
 def _emit_status(

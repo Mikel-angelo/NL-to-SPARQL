@@ -1,12 +1,12 @@
 QUERY RUN
-Run ID: 20260429-092701-216192
-Run At: 2026-04-29T09:27:01.216192+00:00
+Run ID: 20260429-1510-3
+Run At: 2026-04-29T15:10Z
 Status: completed
 Dataset: enovation-20260429-090134-362794
 Endpoint: http://127.0.0.1:3030/enovation-20260429-090134-362794/query
 
 QUESTION
-What type of audiences exist?
+Which training centres have both military and civilian type designations?
 
 GENERATION PROMPT
 System Role:
@@ -17,68 +17,89 @@ Ontology label, not a SPARQL prefix: enovation
 Dataset label, not a SPARQL prefix: enovation-20260429-090134-362794
 Chunk 1:
 """
-Class: Audience
+Class: MilitaryStandard
 
-Label: Audience
+Label: Military Standard
 
-Description: Parent class of the different type of audiences
+Description: Standards issued by military or defence authorities
 
 Object Properties:
-- isSOPAudienceOf -> SOP
-- isTrainingAudienceOf -> TrainingCourse
+- None
 
 Datatype Properties:
 - None
 """
 Chunk 2:
 """
-Class: Students
+Class: Service
 
-Label: Students
+Label: Service
 
-Description: An audience category representing learners participating in training, educational programmes, or awareness activities related to crisis management
+Description: Activities or support functions offered by the Training Centre to external partners, authorities, or other centres
 
 Object Properties:
-- None
+- isServiceOfferedBy -> TrainingCentre
+- isServiceProvidedBy -> Organisation
+- requiresFacility -> Facility
 
 Datatype Properties:
 - None
 """
 Chunk 3:
 """
-Class: DecisionMakers
+Class: TCType
 
-Label: Desicion Makers
+Label: Training Centre Type
 
-Description: An audience category representing senior officials with authority to make strategic decisions in crisis or emergency contexts
+Description: Controlled vocabulary of the different types of a training centre
 
 Object Properties:
-- None
+- isTCTypeOf -> TrainingCentre
 
 Datatype Properties:
 - None
 """
 Chunk 4:
 """
-Class: PrivateCompanies
+Class: TrainingCentre
 
-Label: Private Companies
+Label: Training centre
 
-Description: An audience category representing private-sector organisations contributing to crisis preparedness, support activities, or infrastructure operations
+Description: Organisations that design, deliver, or host training activities, exercises, and capacity-building programmes related to hazardous incidents or CBRN preparedness
 
 Object Properties:
-- None
+- connectsWithNetwork -> CBRNNetwork
+- hasCapacity -> Capacity
+- hasCompetence -> Competence
+- hasExtraCapability -> ExtraCapability
+- hasTCDiscipline -> TCDiscipline
+- hasTCType -> TCType
+- issuesCertificate -> Certificate
+- offersService -> Service
+- offersTechnologyTraining -> TechnologyTraining
+- offersTrainingMethod -> TrainingMethod
+- organizesExercise -> Exercise
+- providesTrainingCourse -> TrainingCourse
+- tacklesIncident -> Incident
+- usesSOP -> SOP
 
 Datatype Properties:
-- None
+- hasAddress -> string
+- hasDistrict -> string
+- hasEmail -> string
+- hasIdentificationNumber -> string
+- hasOwnership -> string
+- hasRegion -> string
+- hasSectorAppointed -> string
+- hasYearOfEstablishment -> string
 """
 Chunk 5:
 """
-Class: FirstResponders
+Class: TraineesTrainersExchange
 
-Label: First Responders
+Label: Trainees trainers exchange
 
-Description: An audience category representing frontline emergency responders directly involved in initial crisis operations
+Description: Services enabling the exchange of trainees or trainers between centres or partner organisations
 
 Object Properties:
 - None
@@ -88,11 +109,11 @@ Datatype Properties:
 """
 Chunk 6:
 """
-Class: NationalMunicipalRegionalAuthorities
+Class: JointCivilMilitaryExercises
 
-Label: National Municipal Regional Authorities
+Label: Joint civil military exercises
 
-Description: An audience category representing public authorities at national, municipal, or regional level involved in governance, planning, or crisis management
+Description: Services supporting exercises conducted jointly between civilian and military organisations
 
 Object Properties:
 - None
@@ -102,11 +123,11 @@ Datatype Properties:
 """
 Chunk 7:
 """
-Class: InternationalOrganisations
+Class: MilitaryDefenceExperts
 
-Label: International Organsations
+Label: Military Defence Experts
 
-Description: An audience category representing international bodies and agencies participating in crisis management, coordination, or support activities
+Description: An audience category representing defence and military personnel contributing expertise to crisis preparedness or operational response
 
 Object Properties:
 - None
@@ -116,11 +137,11 @@ Datatype Properties:
 """
 Chunk 8:
 """
-Class: FireRescueServices
+Class: MilitaryExercises
 
-Label: Fire Rescue Services
+Label: Military exercises
 
-Description: An audience category representing fire and rescue service personnel engaged in emergency response and incident management
+Description: Exercise-related services provided to military authorities or defence organisations
 
 Object Properties:
 - None
@@ -130,31 +151,35 @@ Datatype Properties:
 """
 Chunk 9:
 """
-Class: SecondResponders
+Class: OrganisationalStakeholder
 
-Label: Second Responders
+Label: Organizational stakeholder
 
-Description: An audience category representing individuals or organisations providing follow-up support after initial emergency response actions
+Description: Institutions or agencies that have a direct interest in, support, or are affected by the Training Centre’s activities. These include bodies with which the centre routinely engages or collaborates, such as ministries (Health, Defence, Interior), civil protection or environmental agencies, national security and intelligence services, regional or local authorities, fire and rescue services, police departments, hospitals, research institutes, and private-sector security providers
 
 Object Properties:
-- None
+- isStakeholderEngagedBy -> Unknown
 
 Datatype Properties:
 - None
 """
 Chunk 10:
 """
-Class: HealthHospitalMedicalPersonnel
+Class: Organisation
 
-Label: Health Hospital Medical Personnel
+Label: Organisation
 
-Description: An audience category representing medical, hospital, and healthcare staff involved in emergency care, crisis response, or public health management
+Description: Formal institutions or agencies engaged in training, preparedness, response, or governance activities related to hazardous incidents
 
 Object Properties:
-- None
+- collaboratesWith -> TrainingCentre
+- hasEquipment -> Equipment
+- hasFacility -> Facility
+- providesService -> Service
+- usesTechnology -> Technology
 
 Datatype Properties:
-- None
+- hasSite -> string
 """
 
 Auto-Generated Prefix Declarations:
@@ -174,18 +199,30 @@ Prefix Usage Rules:
 - If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
 - Unknown prefixes will fail validation.
 
+Result Shape Rules:
+- When the answer variable is an entity/resource, prefer returning a human-readable label variable instead of only the entity URI.
+- Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
+- Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
+- If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
+- Do not invent label properties or label prefixes.
+
 Optional Few-Shot Examples:
 No few-shot examples provided.
 
 Output Format Instructions:
-Return only one valid SPARQL query. Use either full URIs in angle brackets or the provided prefix declarations. Only prefixes listed under Auto-Generated Prefix Declarations are allowed. Ontology and dataset names are labels, not SPARQL prefixes. Use the ':' prefix for terms in the default ontology namespace when it is listed. Do not invent prefixes, classes, properties, or namespaces. Do not include explanations, markdown fences, or extra text.
+Return only one valid SPARQL query. Use either full URIs in angle brackets or the provided prefix declarations. Only prefixes listed under Auto-Generated Prefix Declarations are allowed. Ontology and dataset names are labels, not SPARQL prefixes. Use the ':' prefix for terms in the default ontology namespace when it is listed. When returning ontology entities, prefer human-readable labels when label predicates are available. Do not invent prefixes, classes, properties, or namespaces. Do not include explanations, markdown fences, or extra text.
 
 User Question:
-What type of audiences exist?
+Which training centres have both military and civilian type designations?
 
 INITIAL GENERATED QUERY
-SELECT ?audienceType WHERE {
-  ?audienceType rdf:type :Audience .
+SELECT ?trainingCentreLabel WHERE {
+  ?trainingCentre a :TrainingCentre ;
+                  :hasTCType ?tcType .
+  ?tcType a :TCType ;
+            rdfs:label ?tcTypeLabel .
+  FILTER (CONTAINS(?tcTypeLabel, "military") && CONTAINS(?tcTypeLabel, "civilian")) .
+  OPTIONAL { ?trainingCentre rdfs:label ?trainingCentreLabel }
 }
 
 ATTEMPTS
@@ -193,8 +230,13 @@ ATTEMPTS
 Iteration 1: completed
 Validation: VALIDATION_OK
 Query:
-SELECT ?audienceType WHERE {
-  ?audienceType rdf:type :Audience .
+SELECT ?trainingCentreLabel WHERE {
+  ?trainingCentre a :TrainingCentre ;
+                  :hasTCType ?tcType .
+  ?tcType a :TCType ;
+            rdfs:label ?tcTypeLabel .
+  FILTER (CONTAINS(?tcTypeLabel, "military") && CONTAINS(?tcTypeLabel, "civilian")) .
+  OPTIONAL { ?trainingCentre rdfs:label ?trainingCentreLabel }
 }
 Execution: EXECUTION_OK
 
@@ -209,8 +251,13 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?audienceType WHERE {
-  ?audienceType rdf:type :Audience .
+SELECT ?trainingCentreLabel WHERE {
+  ?trainingCentre a :TrainingCentre ;
+                  :hasTCType ?tcType .
+  ?tcType a :TCType ;
+            rdfs:label ?tcTypeLabel .
+  FILTER (CONTAINS(?tcTypeLabel, "military") && CONTAINS(?tcTypeLabel, "civilian")) .
+  OPTIONAL { ?trainingCentre rdfs:label ?trainingCentreLabel }
 }
 
 FINAL ERRORS

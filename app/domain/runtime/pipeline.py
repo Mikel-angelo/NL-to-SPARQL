@@ -129,10 +129,10 @@ async def run_query_pipeline(
     )
 
     run_at = datetime.now(UTC)
-    run_id = _run_id(run_at)
+    run_id = _run_id(run_at, query_readable_runs_dir(root))
     trace_payload = {
         "run_id": run_id,
-        "run_at": run_at.isoformat(),
+        "run_at": run_at.strftime("%Y-%m-%dT%H:%MZ"),
         "question_asked": question,
         "dataset_name": _dataset_name(metadata, root.name),
         "dataset_endpoint": effective_endpoint,
@@ -321,8 +321,14 @@ def _dataset_name(metadata: dict[str, object], fallback: str) -> str:
     return fallback
 
 
-def _run_id(run_at: datetime) -> str:
-    return run_at.strftime("%Y%m%d-%H%M%S-%f")
+def _run_id(run_at: datetime, runs_dir: Path) -> str:
+    stem = run_at.strftime("%Y%m%d-%H%M")
+    candidate = stem
+    index = 2
+    while (runs_dir / f"{candidate}.txt").exists():
+        candidate = f"{stem}-{index}"
+        index += 1
+    return candidate
 
 
 def _validation_summary(validation: dict[str, object]) -> str:

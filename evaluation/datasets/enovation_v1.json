@@ -1,0 +1,1130 @@
+{
+  "dataset_name": "enovation_v1",
+  "ontology_file": "eNOVATION.ttl",
+  "source": "custom",
+  "description": "Evaluation dataset for the eNOVATION CBRN Training Centre ontology. 40 questions across three complexity tiers and multiple query shapes.",
+  "questions": [
+    {
+      "id": "Q001",
+      "nl_question": "List all training centres.",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?label . }",
+      "gold_answers": [
+        {
+          "label": "UCLouvain-CTMA"
+        },
+        {
+          "label": "CAMPUS VESTA APB"
+        },
+        {
+          "label": "JCBRN Defence CoE"
+        },
+        {
+          "label": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        },
+        {
+          "label": "WMP UK CBRN"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q002",
+      "nl_question": "What is the email address of CAMPUS VESTA?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?email WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?label ; enov:hasEmail ?email . FILTER(CONTAINS(LCASE(STR(?label)), \"campus\")) }",
+      "gold_answers": [
+        {
+          "email": "euprojects@campusvesta.be"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "factoid",
+      "notes": null
+    },
+    {
+      "id": "Q003",
+      "nl_question": "What year was UCLouvain-CTMA established?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?label ; enov:hasYearOfEstablishment ?year . FILTER(CONTAINS(LCASE(STR(?label)), \"uclouvain\")) }",
+      "gold_answers": [
+        {
+          "year": "2009"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "factoid",
+      "notes": null
+    },
+    {
+      "id": "Q004",
+      "nl_question": "What are all the available CBRN disciplines?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?disc rdf:type enov:TCDiscipline ; rdfs:label ?label . }",
+      "gold_answers": [
+        {
+          "label": "B"
+        },
+        {
+          "label": "C"
+        },
+        {
+          "label": "RN"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q005",
+      "nl_question": "What training courses does UCLouvain-CTMA provide?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:providesTrainingCourse ?course . ?course rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"uclouvain\")) }",
+      "gold_answers": [
+        {
+          "label": "Decontamination procedures training capability"
+        },
+        {
+          "label": "Medical CBT training to doctors/ nurses"
+        },
+        {
+          "label": "Victims treatment protocols training capability"
+        },
+        {
+          "label": "Biological threats: sampling,  detection, and identification.\nBio and toxin decontamination \n(the exact title can be different for each lecture)"
+        },
+        {
+          "label": "Innovative technologies training of UCLouvain-CTMA"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q006",
+      "nl_question": "Which training centres specialize in the B discipline?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?label ; enov:hasTCDiscipline ?disc . ?disc rdfs:label ?dLabel . FILTER(STR(?dLabel) = \"B\") }",
+      "gold_answers": [
+        {
+          "label": "UCLouvain-CTMA"
+        },
+        {
+          "label": "CAMPUS VESTA APB"
+        },
+        {
+          "label": "JCBRN Defence CoE"
+        },
+        {
+          "label": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q007",
+      "nl_question": "What is the TRL of 'Real-time PCR (qPCR)'?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tech rdf:type enov:Technology ; rdfs:label ?tLabel . ?tech enov:hasTRL ?trl . ?trl rdfs:label ?label . FILTER(STR(?tLabel) = \"Real-time PCR (qPCR)\") }",
+      "gold_answers": [
+        {
+          "label": "TRL 9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "factoid",
+      "notes": null
+    },
+    {
+      "id": "Q008",
+      "nl_question": "What facilities does JCBRN Defence CoE have?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasFacility ?fac . ?fac rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"jcbrn\")) }",
+      "gold_answers": [
+        {
+          "label": "Classroom and Lecture halls of JCBRNDCoE"
+        },
+        {
+          "label": "Decontamination zones of  of JCBRNDCoE"
+        },
+        {
+          "label": "Field exercise areas of   of JCBRNDCoE"
+        },
+        {
+          "label": "Live agents training ranges  of JCBRNDCoE"
+        },
+        {
+          "label": "PPE storage and logistics support areas  of JCBRNDCoE"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q009",
+      "nl_question": "What training methods does CAMPUS VESTA offer?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:offersTrainingMethod ?method . ?method rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"campus\")) }",
+      "gold_answers": [
+        {
+          "label": "AR/VR based sessions"
+        },
+        {
+          "label": "Classroom-based learning"
+        },
+        {
+          "label": "E-learning"
+        },
+        {
+          "label": "Group discussion"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q010",
+      "nl_question": "Who is the target audience for the course 'CBRN Trainer Course'?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?course rdf:type enov:TrainingCourse ; rdfs:label ?cLabel . ?course enov:hasTrainingAudience ?aud . ?aud rdfs:label ?label . FILTER(STR(?cLabel) = \"CBRN Trainer Course\") }",
+      "gold_answers": [
+        {
+          "label": "Police/ Law enforcement agencies audience"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q011",
+      "nl_question": "Which CBRN networks is UCLouvain-CTMA connected to?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:connectsWithNetwork ?net . ?net rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"uclouvain\")) }",
+      "gold_answers": [
+        {
+          "label": "CoU Morocco"
+        },
+        {
+          "label": "DG ECHO rescEU"
+        },
+        {
+          "label": "CBRN DG HERA European Commision project"
+        },
+        {
+          "label": "European Commision CBRN DG HOME"
+        },
+        {
+          "label": "EU member states Civil Protection agencies"
+        },
+        {
+          "label": "MOVBEC CBRN network project"
+        },
+        {
+          "label": "REA CBRN Network project"
+        },
+        {
+          "label": "TeamUp CBRN Network project"
+        },
+        {
+          "label": "eNOVATION CBRN network project"
+        },
+        {
+          "label": "eNOTICE EU Network of CBRN Training Centers"
+        },
+        {
+          "label": "eNOTICE-2 EU Network of CBRN Training Centers"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q012",
+      "nl_question": "What SOPs does UCLouvain-CTMA follow?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?label WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:usesSOP ?sop . ?sop rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"uclouvain\")) }",
+      "gold_answers": [
+        {
+          "label": "SOPs for Biological assays"
+        },
+        {
+          "label": "SOPs for Decontamination"
+        },
+        {
+          "label": "SOPs for Deployment (Transportation,site selection and requirement, lab setup, waste management)"
+        },
+        {
+          "label": "SOPs for Interoperability"
+        },
+        {
+          "label": "SOPs for Staff selection"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q013",
+      "nl_question": "Which training centres engage with civil protection agencies as stakeholders?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:engagesWithStakeholders ?sh . ?sh rdfs:label ?shLabel . FILTER(CONTAINS(LCASE(STR(?shLabel)), \"civil protection\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        },
+        {
+          "tcLabel": "WMP UK CBRN"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q014",
+      "nl_question": "Which training centres are connected to the eNOVATION network?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:connectsWithNetwork ?net . ?net rdfs:label ?netLabel . FILTER(CONTAINS(LCASE(STR(?netLabel)), \"enovation\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        },
+        {
+          "tcLabel": "WMP UK CBRN"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q015",
+      "nl_question": "What is the total number of training courses?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?course) AS ?totalCourses) WHERE { ?course rdf:type enov:TrainingCourse . }",
+      "gold_answers": [
+        {
+          "totalCourses": "62"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null
+    },
+    {
+      "id": "Q016",
+      "nl_question": "How many training courses does each training centre provide?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?tcLabel (COUNT(?course) AS ?courseCount) WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:providesTrainingCourse ?course . } GROUP BY ?tcLabel ORDER BY DESC(?courseCount)",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "courseCount": "33"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "courseCount": "12"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "courseCount": "8"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "courseCount": "7"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "courseCount": "5"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q017",
+      "nl_question": "Which training centres provide courses targeted at first responders?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:providesTrainingCourse ?course . ?course enov:hasTrainingAudience ?aud . ?aud rdfs:label ?audLabel . FILTER(CONTAINS(LCASE(STR(?audLabel)), \"first responders\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        },
+        {
+          "tcLabel": "WMP UK CBRN"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q018",
+      "nl_question": "What technologies does UCLouvain-CTMA use and what is their TRL?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?techLabel ?trlLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:usesTechnology ?tech . ?tech rdfs:label ?techLabel . ?tech enov:hasTRL ?trl . ?trl rdfs:label ?trlLabel . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"uclouvain\")) }",
+      "gold_answers": [
+        {
+          "techLabel": "Functional assays (e.g. cell-based assays, enzymatic activity tests)",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Isothermal amplification (e.g. LAMP)",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Nucleic Acid-based Assays (e.g., PCR for genes encoding toxin components),",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Rapid Diagnostic Tests (RDT) based on pathogen-specific antibodies - Immunoassays",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Surface plasmon resonance (SPR)",
+          "trlLabel": "TRL 7"
+        },
+        {
+          "techLabel": "High throughput Sequencing On-site (e.g. Oxford Nanopore Technology MinION)",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Real-time PCR (qPCR)",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Foam disinfectants",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Gaseous disinfectants/vapours \n(e.g., hydrogen peroxide vapour (HPV), ozone, chlorine dioxide)",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Liquid disinfectants (e.g. sodium hypochlorite (bleach), peracetic acid)",
+          "trlLabel": "TRL 9"
+        },
+        {
+          "techLabel": "Solid disinfectants (granular or tablet form, e.g., calcium hypochlorite)",
+          "trlLabel": "TRL 9"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q019",
+      "nl_question": "Which training centres offer both classroom-based learning and e-learning?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:offersTrainingMethod ?m1 . ?tc enov:offersTrainingMethod ?m2 . ?m1 rdfs:label ?l1 . ?m2 rdfs:label ?l2 . FILTER(CONTAINS(LCASE(STR(?l1)), \"classroom\")) FILTER(CONTAINS(LCASE(STR(?l2)), \"e-learning\") || CONTAINS(LCASE(STR(?l2)), \"elearning\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q020",
+      "nl_question": "What exercises does CAMPUS VESTA organize and what type are they?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?exLabel ?typeLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:organizesExercise ?ex . ?ex rdfs:label ?exLabel . ?ex enov:hasExerciseType ?etype . ?etype rdfs:label ?typeLabel . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"campus\")) }",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q021",
+      "nl_question": "Which training centres have both live agent training ranges and simulation rooms?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasFacility ?f1 . ?tc enov:hasFacility ?f2 . ?f1 rdf:type enov:LiveAgentTrainingRanges . ?f2 rdf:type enov:SimulationRooms . }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q022",
+      "nl_question": "What services does each training centre offer?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel ?serviceLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:offersService ?svc . ?svc rdfs:label ?serviceLabel . } ORDER BY ?tcLabel",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Civil Exercises of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Civil protection collaboration service of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Cross-Border collaboration service of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Exchange of trainees and trainers service of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Joint Activities (JA) service of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Military exercises service of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "serviceLabel": "Multi Agency collaboration service of CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Civil Exercises of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Civil protection collaboration service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Cross border collaboration service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Emergency response plan service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Exchange of trainees and trainers service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "External laboratory support service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Joint Activities (JA) service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Military exercises service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "serviceLabel": "Multi Agency collaboration service of JCBRNDCoE"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "Civil Exercises Service of UCLouvain_CTMA"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "Civil Protection collaboration service of UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "Cross border collaboration service of UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "Exchange of trainees and trainers of UCLouvain-CTMA with other Centers"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "External laboratory support service of UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "Joint Activities exercises of UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "serviceLabel": "Multi Agency collaboration service of UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "Civil exercises of UCSC"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "Civil protection collaboration service of"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "Emergency response plan service of UCSC"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "Exchange of trainees and trainers service of UCSC"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "External laboratory support service of UCSC"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "Joint Activities service of UCSC"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "serviceLabel": "Multi Agency collaboration service of UCSC"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "Civil exercise service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "Civil protection collaboration service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "Emergency response plan service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "External laboratory support service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "Joint exercise service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "Military exercises service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "Multi Agency collaboration service of WMP"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "serviceLabel": "WMP provides 24/7 Operational Support to the UK emergency services related to CBRN. NCBRNC also manages the UK CBRN capabilities- access to PPE and DIM equipment"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q023",
+      "nl_question": "Which courses have more than 20 total course hours?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?courseLabel ?hours WHERE { ?course rdf:type enov:TrainingCourse ; rdfs:label ?courseLabel . ?course enov:hasTotalCourseHours ?hours . FILTER(?hours > 20) } ORDER BY DESC(?hours)",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q024",
+      "nl_question": "What incidents does UCLouvain-CTMA tackle?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?incLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:tacklesIncident ?inc . ?inc rdfs:label ?incLabel . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"uclouvain\")) }",
+      "gold_answers": [
+        {
+          "incLabel": "Biological Incident of UCLouvain"
+        },
+        {
+          "incLabel": "Health crisis incident"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q025",
+      "nl_question": "How many technologies does each training centre use?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?tcLabel (COUNT(DISTINCT ?tech) AS ?techCount) WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:usesTechnology ?tech . } GROUP BY ?tcLabel ORDER BY DESC(?techCount)",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "techCount": "11"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "techCount": "4"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "techCount": "2"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "techCount": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q026",
+      "nl_question": "For each training centre, what are its disciplines and type?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel ?discLabel ?typeLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasTCDiscipline ?disc . ?disc rdfs:label ?discLabel . ?tc enov:hasTCType ?tctype . ?tctype rdfs:label ?typeLabel . } ORDER BY ?tcLabel",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "discLabel": "B",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "discLabel": "B",
+          "typeLabel": "Military type"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "discLabel": "C",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "discLabel": "C",
+          "typeLabel": "Military type"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "discLabel": "RN",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "discLabel": "RN",
+          "typeLabel": "Military type"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "B",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "B",
+          "typeLabel": "Joint Activity type of training centre"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "B",
+          "typeLabel": "Military type"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "C",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "C",
+          "typeLabel": "Joint Activity type of training centre"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "C",
+          "typeLabel": "Military type"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "RN",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "RN",
+          "typeLabel": "Joint Activity type of training centre"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "discLabel": "RN",
+          "typeLabel": "Military type"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "discLabel": "B",
+          "typeLabel": "Civilian type"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "discLabel": "B",
+          "typeLabel": "Joint Activity type of training centre"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "discLabel": "C",
+          "typeLabel": "Joint Activity type of training centre"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q027",
+      "nl_question": "Which training centres use decontamination technologies?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel ?techLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:usesTechnology ?tech . ?tech rdf:type enov:DecontaminationTechnology . ?tech rdfs:label ?techLabel . }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "techLabel": "Foam disinfectants"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "techLabel": "Gaseous disinfectants/vapours \n(e.g., hydrogen peroxide vapour (HPV), ozone, chlorine dioxide)"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "techLabel": "Liquid disinfectants (e.g. sodium hypochlorite (bleach), peracetic acid)"
+        },
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "techLabel": "Solid disinfectants (granular or tablet form, e.g., calcium hypochlorite)"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "techLabel": "Chemical Products"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "techLabel": "Physical Methods"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "techLabel": "Limited decontamination capability (only for safely undressing police personnel)."
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q028",
+      "nl_question": "Which training centres provide innovative technologies training?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:providesTrainingCourse ?course . ?course rdf:type enov:InnovativeTechnologiesTraining . }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        },
+        {
+          "tcLabel": "WMP UK CBRN"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q029",
+      "nl_question": "How many networks is each training centre connected to?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?tcLabel (COUNT(DISTINCT ?net) AS ?networkCount) WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:connectsWithNetwork ?net . } GROUP BY ?tcLabel ORDER BY DESC(?networkCount)",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA",
+          "networkCount": "11"
+        },
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "networkCount": "9"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE",
+          "networkCount": "5"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "networkCount": "4"
+        },
+        {
+          "tcLabel": "WMP UK CBRN",
+          "networkCount": "3"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q030",
+      "nl_question": "What evaluation methods are used by exercises organized by CAMPUS VESTA?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?methodLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:organizesExercise ?ex . ?ex enov:usesEvaluationMethod ?method . ?method rdfs:label ?methodLabel . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"campus\")) }",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q031",
+      "nl_question": "Which training centre has the most training courses?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?tcLabel (COUNT(?course) AS ?courseCount) WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:providesTrainingCourse ?course . } GROUP BY ?tcLabel ORDER BY DESC(?courseCount) LIMIT 1",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "courseCount": "33"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "single-edge",
+      "question_type": "factoid",
+      "notes": null
+    },
+    {
+      "id": "Q032",
+      "nl_question": "Which training centres specialize in all three CBRN disciplines (B, C, and RN)?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasTCDiscipline ?d1 . ?tc enov:hasTCDiscipline ?d2 . ?tc enov:hasTCDiscipline ?d3 . ?d1 rdfs:label \"B\" . ?d2 rdfs:label \"C\" . ?d3 rdfs:label \"RN\" . }",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q033",
+      "nl_question": "Which training centres provide courses for both military defence experts and first responders?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:providesTrainingCourse ?c1 . ?c1 enov:hasTrainingAudience ?a1 . ?a1 rdfs:label ?a1Label . ?tc enov:providesTrainingCourse ?c2 . ?c2 enov:hasTrainingAudience ?a2 . ?a2 rdfs:label ?a2Label . FILTER(CONTAINS(LCASE(STR(?a1Label)), \"military\")) FILTER(CONTAINS(LCASE(STR(?a2Label)), \"first responders\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q034",
+      "nl_question": "Which training centre was established earliest?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?tcLabel ?year WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasYearOfEstablishment ?year . } ORDER BY ?year LIMIT 1",
+      "gold_answers": [
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli",
+          "year": "1964"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "single-edge",
+      "question_type": "factoid",
+      "notes": null
+    },
+    {
+      "id": "Q035",
+      "nl_question": "Which training centres have more than 5 facilities?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?tcLabel (COUNT(?fac) AS ?facCount) WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasFacility ?fac . } GROUP BY ?tcLabel HAVING (COUNT(?fac) > 5)",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB",
+          "facCount": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q036",
+      "nl_question": "Which training centres both organize field exercises and use biological SOPs?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:organizesExercise ?ex . ?ex rdf:type enov:FieldExercise . ?tc enov:usesSOP ?sop . ?sop rdfs:label ?sopLabel . FILTER(CONTAINS(LCASE(STR(?sopLabel)), \"biological\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q037",
+      "nl_question": "For each audience type, how many courses are targeted at them?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT ?audLabel (COUNT(DISTINCT ?course) AS ?courseCount) WHERE { ?course rdf:type enov:TrainingCourse . ?course enov:hasTrainingAudience ?aud . ?aud rdfs:label ?audLabel . } GROUP BY ?audLabel ORDER BY DESC(?courseCount)",
+      "gold_answers": [
+        {
+          "audLabel": "Police/ Law enforcement agencies audience",
+          "courseCount": "42"
+        },
+        {
+          "audLabel": "First responders audience",
+          "courseCount": "34"
+        },
+        {
+          "audLabel": "First rescue services audience",
+          "courseCount": "32"
+        },
+        {
+          "audLabel": "Crisis managers audience",
+          "courseCount": "30"
+        },
+        {
+          "audLabel": "Decision makers audience",
+          "courseCount": "30"
+        },
+        {
+          "audLabel": "Second responders audience",
+          "courseCount": "30"
+        },
+        {
+          "audLabel": "Civil protection audience",
+          "courseCount": "29"
+        },
+        {
+          "audLabel": "Technology operators audience",
+          "courseCount": "29"
+        },
+        {
+          "audLabel": "Health/ Hospital medical personnel audience",
+          "courseCount": "28"
+        },
+        {
+          "audLabel": "Military Defence experts audience",
+          "courseCount": "27"
+        },
+        {
+          "audLabel": "National/ Municipal regional authorities audience",
+          "courseCount": "27"
+        },
+        {
+          "audLabel": "International organizations audience",
+          "courseCount": "26"
+        },
+        {
+          "audLabel": "Private companies audience",
+          "courseCount": "21"
+        },
+        {
+          "audLabel": "Students audience",
+          "courseCount": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q038",
+      "nl_question": "Which training centres use technologies with TRL 9?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:usesTechnology ?tech . ?tech enov:hasTRL ?trl . ?trl rdfs:label ?trlLabel . FILTER(CONTAINS(STR(?trlLabel), \"9\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "UCLouvain-CTMA"
+        },
+        {
+          "tcLabel": "UCSC Catholic University of the Sacred Heart for the Fondazione Policlinico Gemelli"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "chain",
+      "question_type": "list",
+      "notes": null
+    },
+    {
+      "id": "Q039",
+      "nl_question": "What is the average number of course hours across all training courses?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (AVG(?hours) AS ?avgHours) WHERE { ?course rdf:type enov:TrainingCourse . ?course enov:hasTotalCourseHours ?hours . }",
+      "gold_answers": [
+        {}
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "single-edge",
+      "question_type": "factoid",
+      "notes": null
+    },
+    {
+      "id": "Q040",
+      "nl_question": "Which training centres have both military and civilian type designations?",
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?tcLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:hasTCType ?t1 . ?tc enov:hasTCType ?t2 . ?t1 rdfs:label ?l1 . ?t2 rdfs:label ?l2 . FILTER(CONTAINS(LCASE(STR(?l1)), \"military\")) FILTER(CONTAINS(LCASE(STR(?l2)), \"civilian\")) }",
+      "gold_answers": [
+        {
+          "tcLabel": "CAMPUS VESTA APB"
+        },
+        {
+          "tcLabel": "JCBRN Defence CoE"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null
+    }
+  ]
+}

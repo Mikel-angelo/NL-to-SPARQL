@@ -46,6 +46,7 @@ def render_query_generation_prompt(
             "Only prefixes listed under Auto-Generated Prefix Declarations are allowed. "
             "Ontology and dataset names are labels, not SPARQL prefixes. "
             "Use the ':' prefix for terms in the default ontology namespace when it is listed. "
+            "When returning ontology entities, prefer human-readable labels when label predicates are available. "
             "Do not invent prefixes, classes, properties, or namespaces. "
             "Do not include explanations, markdown fences, or extra text."
         ),

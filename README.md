@@ -1,12 +1,14 @@
-# NL-to-SPARQL
+﻿# NL-to-SPARQL
 
 This project turns an ontology into a reusable local package, then uses that package to answer natural-language questions by generating and running SPARQL.
 
 The main workflow is:
 
 1. Onboard an ontology into `ontology_packages/`.
-2. Query the generated package with `query.py`.
-3. Optionally use the FastAPI routes, which call the same underlying code.
+2. Activate the package when you want it loaded into the managed Fuseki instance.
+3. Query the active package with `query.py`.
+4. Optionally evaluate the active package with `evaluate.py`.
+5. Optionally use the FastAPI routes, which call the same underlying code.
 
 ## Requirements
 
@@ -48,12 +50,14 @@ http://127.0.0.1:3030
 
 ## CLI Usage
 
-There are two CLI commands:
+There are four main CLI commands:
 
 - `onboard.py`: creates an ontology package
-- `query.py`: queries an existing ontology package
+- `activate.py`: makes an existing package active for runtime querying
+- `query.py`: queries the active ontology package
+- `evaluate.py`: runs an evaluation dataset against the active package
 
-Both commands require explicit arguments. If a required argument is missing, Python argparse stops immediately, prints a usage error, and exits without running the pipeline.
+These commands require explicit arguments where noted. If a required argument is missing, Python argparse stops immediately, prints a usage error, and exits without running the pipeline.
 
 ### `onboard.py`
 
@@ -80,7 +84,7 @@ Accepted ontology formats:
 - `.owl`
 - `.rdf`
 
-During onboarding, the CLI:
+During file onboarding, the CLI:
 
 - parses the ontology
 - resolves missing schemas when possible
@@ -89,19 +93,19 @@ During onboarding, the CLI:
 - builds a FAISS index
 - uploads the ontology data to Fuseki
 - creates a new package under `ontology_packages/`
-- marks that package as active for the API
+- marks that package as active for the CLI and API
 
 At the end, the command prints values like:
 
 ```text
-Ontology package: C:\...\ontology_packages\enovation-20260427-184012-632861
-Dataset name: enovation-20260427-184012-632861
-Dataset endpoint: http://127.0.0.1:3030/enovation-20260427-184012-632861
-Query endpoint: http://127.0.0.1:3030/enovation-20260427-184012-632861/query
+Ontology package: C:\...\ontology_packages\enovation-20260427-1840
+Dataset name: enovation-20260427-1840
+Dataset endpoint: http://127.0.0.1:3030/enovation-20260427-1840
+Query endpoint: http://127.0.0.1:3030/enovation-20260427-1840/query
 Artifacts: ...\chunks.json | ...\index.faiss
 ```
 
-Use the printed `Ontology package` path in the query command.
+Use the printed `Ontology package` path with `activate.py` if you later need to switch back to this package.
 
 Onboard an existing SPARQL endpoint instead of a local file:
 
@@ -128,40 +132,63 @@ Example:
 .\.venv\Scripts\python.exe onboard.py --ontology path\to\ontology.ttl --output ontology_packages --model qwen2.5-coder:7b
 ```
 
+### `activate.py`
+
+Use `activate.py` when you want an existing package to become the active runtime package.
+
+```powershell
+.\.venv\Scripts\python.exe activate.py --package ontology_packages\enovation-20260427-1840
+```
+
+For file-based packages, activation always reloads the package into Fuseki:
+
+- deletes any existing Fuseki dataset with the package dataset name
+- recreates that dataset
+- uploads `ontology/source.*`
+- uploads files from `ontology/schemas/`
+- writes `ontology_packages/.active_package`
+- removes the previously active local Fuseki dataset when it is different
+
+For SPARQL-endpoint packages, activation only marks the package active. The endpoint is externally managed, so this project does not upload or recreate that dataset.
+
 ### `query.py`
 
-Use `query.py` when you already have an ontology package and want to ask a natural-language question.
+Use `query.py` when the ontology package you want to query is already active. There is one supported query path: activate the package first, then query the active package.
+
+For local file packages, "active" means two things:
+
+- `ontology_packages/.active_package` points at the package directory
+- the package's dataset has been loaded into the managed Fuseki server
+
+Run `activate.py` before querying an older local package. `query.py` has no package selector. It always uses `ontology_packages/.active_package`.
 
 Required arguments:
 
 - `--question "your question"`
 
-Optional package argument:
-
-- `--package path\to\ontology-package`
-
-If you omit `--package`, the CLI uses the active package stored in:
+The CLI uses the active package stored in:
 
 ```text
 ontology_packages/.active_package
 ```
 
-That file is updated automatically after successful onboarding. If no active package is set, the command fails with:
+That file is updated automatically after successful onboarding and activation. If no active package is set, the command fails with:
 
 ```text
 No active ontology package is set
 ```
 
-Basic query using the active package:
+Safe query flow for a local file package:
 
 ```powershell
+.\.venv\Scripts\python.exe activate.py --package ontology_packages\enovation-20260427-1840
 .\.venv\Scripts\python.exe query.py --question "Which training centres offer CBRN exercises?"
 ```
 
-Query a specific package:
+Query using the currently active package:
 
 ```powershell
-.\.venv\Scripts\python.exe query.py --package ontology_packages\enovation-20260427-184012-632861 --question "Which training centres offer CBRN exercises?"
+.\.venv\Scripts\python.exe query.py --question "Which training centres offer CBRN exercises?"
 ```
 
 The query command:
@@ -202,13 +229,12 @@ logs/query-runs/<run-id>.txt
 Optional query arguments:
 
 - `--model`: use a different LLM model for this query only
-- `--endpoint`: use a different SPARQL query endpoint
-- `--k`: change how many chunks are retrieved
+- `--k`: change the retrieval top-k, meaning how many ontology chunks are retrieved for the prompt
 
 Example with query overrides:
 
 ```powershell
-.\.venv\Scripts\python.exe query.py --package ontology_packages\my-package --question "..." --model qwen2.5-coder:7b --k 5
+.\.venv\Scripts\python.exe query.py --question "..." --model qwen2.5-coder:7b --k 5
 ```
 
 ## Package Layout
@@ -252,7 +278,37 @@ The active package path is stored in:
 ontology_packages/.active_package
 ```
 
-Both the CLI query command and the FastAPI routes use this active package when no explicit package is provided.
+The CLI query command and FastAPI routes use this active package. For local file packages, this is the only runtime path because activation is what reloads Fuseki.
+
+## Evaluation
+
+Use `evaluate.py` to run a dataset of natural-language questions and gold SPARQL answers against one package.
+
+```powershell
+.\.venv\Scripts\python.exe activate.py --package ontology_packages\enovation-20260427-1840
+.\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840
+```
+
+Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.
+
+Important behavior:
+
+- the requested package must already be the active package
+- evaluation does not activate or reload packages automatically
+- the configured query endpoint is checked once before timed question execution starts
+- outputs are written under `<package>/evaluation/<run-id>/` by default
+- questions with empty `gold_answers` are run but marked `missing_gold` / unscored
+- unscored questions count toward latency, validation, execution, and correction metrics, but not correctness metrics
+- `--k` is retrieval top-k, not the correction iteration count
+
+Evaluation output files:
+
+- `index.txt`: one-line status summary for every question
+- `results.json`: per-question pipeline output, answers, traces, and scoring status
+- `metrics.json`: aggregate metrics
+- `report.txt`: readable summary
+- `queries.jsonl`: compact machine-readable one-record-per-question log
+- `queries/Qxxx.txt`: readable per-question debugging files with gold query, final query, answers, diff, and trace paths
 
 ## FastAPI Usage
 
@@ -276,6 +332,8 @@ Main routes:
 - `GET /query-pipeline-log`: query log for the active package
 - `POST /ontology/load`: upload and onboard an ontology file
 - `POST /query`: query the active package
+
+The API has no package selector for `/query`. It always queries the active package. For local file packages, activate the package first so Fuseki is loaded with the matching dataset.
 
 `POST /ontology/load` accepts multipart form data:
 
@@ -315,6 +373,7 @@ app/
   core/config.py       default settings
   domain/package.py    package discovery and active-package helpers
   domain/ontology/
+    package_activation.py      package activation and Fuseki reload behavior
     onboarding_workflow.py     top-level onboarding workflow used by CLI and API
     source_loader.py           local file or SPARQL endpoint -> RDFLib graph
     graph_preparation.py       graph detection, schema resolution, and FinalGraph creation
@@ -334,14 +393,21 @@ app/
     templates/
       query_generation_prompt.j2
       query_correction_prompt.j2
-onboard.py             CLI wrapper for onboarding
+activate.py            package activation CLI
+evaluate.py            direct package evaluation CLI
+onboard.py             onboarding CLI
 query.py               query CLI
+evaluation/            evaluation datasets, runner, answer comparison, and metrics
 ontology_packages/     generated packages
 ```
 
 ## Notes
 
-- Each file-based onboarding run creates a new Fuseki dataset.
-- After a successful file-based onboarding run, the previous active Fuseki dataset is removed.
+- Each file-based onboarding run creates a new package and Fuseki dataset.
+- File package activation recreates that package's Fuseki dataset from package artifacts.
+- After successful file onboarding or activation, the previous active local Fuseki dataset is removed.
+- `query.py` never accepts a package path or endpoint override. Activation is the operation that chooses the package and guarantees the managed Fuseki dataset matches it.
 - Package directories are timestamped, so repeated runs do not overwrite older packages.
 - If query generation fails, check that the configured LLM API URL and model are reachable.
+
+

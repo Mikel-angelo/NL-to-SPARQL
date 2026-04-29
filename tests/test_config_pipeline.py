@@ -14,6 +14,7 @@ from rdflib import Graph
 from app.domain import package as package_module
 from app.domain.ontology.graph_preparation import prepare_final_graph
 from app.domain.ontology.ontology_context import build_ontology_context
+from app.domain.ontology.package_activation import activate_package, build_fuseki_uploads_from_package
 from app.domain.ontology.package_writer import OntologyPackageArtifacts, write_ontology_package
 from app.domain.ontology.source_loader import LoadedOntologySource, load_ontology_file
 from app.domain.package import get_active_package
@@ -26,6 +27,15 @@ from app.domain.runtime import query_generation as query_generation_module
 from app.domain.runtime import sparql_execution as sparql_execution_module
 from app.domain.runtime.prompt_renderer import render_correction_prompt, render_query_generation_prompt
 from app.domain.runtime.validation import validate_query
+from evaluation.answer_comparison import compare_results
+from evaluation.dataset_schema import EvaluationDataset
+from evaluation.experiment_runner import (
+    ExperimentConfig,
+    ExperimentRunner,
+    ensure_requested_package_is_active,
+    save_experiment,
+)
+from evaluation.metrics import AggregatedMetrics, aggregate_metrics, compute_question_metrics
 
 index_module = import_module("app.domain.rag.build_index")
 
@@ -239,6 +249,9 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("provided prefix declarations", prompt)
         self.assertIn("Ontology label, not a SPARQL prefix", prompt)
         self.assertIn("Do not use the ontology label or dataset label as a prefix", prompt)
+        self.assertIn("prefer returning a human-readable label variable", prompt)
+        self.assertIn("Use `rdfs:label` for labels", prompt)
+        self.assertIn("COALESCE", prompt)
         self.assertIn("Which places exist?", prompt)
         self.assertNotIn(":ActorType", prompt)
 
@@ -260,6 +273,8 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("PREFIX ex: <http://example.com/>", prompt)
         self.assertIn("Do not use the ontology label or dataset label as a prefix", prompt)
         self.assertIn("Do not invent prefixes", prompt)
+        self.assertIn("prefer returning a human-readable label variable", prompt)
+        self.assertIn("Use `rdfs:label` for labels", prompt)
 
     def test_validation_returns_formal_stage_results(self) -> None:
         result = validate_query(
@@ -345,6 +360,223 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(latest_trace["correction_iterations"][0]["validation_summary"], "VALIDATION_OK")
         self.assertEqual(latest_trace["correction_iterations"][0]["errors"], [])
         self.assertEqual(latest_trace["correction_iterations"][0]["execution"]["code"], "EXECUTION_OK")
+
+    async def test_activation_builds_uploads_and_reloads_local_package(self) -> None:
+        await self._prepare_file_package(dataset_name="example-dataset")
+        packages_root = self.root / "ontology_packages-root"
+        previous_package = self.root / "previous"
+        previous_package.mkdir()
+        (previous_package / "metadata.json").write_text(
+            json.dumps({"dataset_name": "previous-dataset", "source_mode": "file"}),
+            encoding="utf-8",
+        )
+        package_module.set_active_package(packages_root, previous_package)
+
+        uploads = build_fuseki_uploads_from_package(self.package_dir, dataset_name="example-dataset")
+        self.assertEqual(uploads[0].dataset_name, "example-dataset")
+        self.assertEqual(uploads[0].filename, self.ontology_path.name)
+        self.assertGreater(len(uploads[0].content), 0)
+
+        fake_fuseki = FakeFusekiService()
+        result = await activate_package(
+            self.package_dir,
+            packages_root=packages_root,
+            fuseki_service=fake_fuseki,
+        )
+
+        self.assertTrue(result.reloaded)
+        self.assertEqual(result.dataset_name, "example-dataset")
+        self.assertEqual(get_active_package(packages_root), self.package_dir.resolve())
+        self.assertEqual(fake_fuseki.reloads[0][0], "example-dataset")
+        self.assertEqual(fake_fuseki.reloads[0][2], "previous-dataset")
+
+    async def test_activation_of_sparql_endpoint_does_not_upload(self) -> None:
+        await self._prepare_endpoint_package(endpoint="http://example.test/sparql")
+        packages_root = self.root / "ontology_packages-root"
+        previous_package = self.root / "previous"
+        previous_package.mkdir()
+        (previous_package / "metadata.json").write_text(
+            json.dumps({"dataset_name": "previous-dataset", "source_mode": "file"}),
+            encoding="utf-8",
+        )
+        package_module.set_active_package(packages_root, previous_package)
+
+        fake_fuseki = FakeFusekiService()
+        result = await activate_package(
+            self.package_dir,
+            packages_root=packages_root,
+            fuseki_service=fake_fuseki,
+        )
+
+        self.assertFalse(result.reloaded)
+        self.assertEqual(result.source_mode, "sparql_endpoint")
+        self.assertEqual(fake_fuseki.reloads, [])
+        self.assertEqual(fake_fuseki.deleted, [("previous-dataset", True)])
+
+    async def test_evaluation_requires_requested_package_to_be_active(self) -> None:
+        await self._prepare_file_package()
+        packages_root = self.root / "ontology_packages-root"
+        other_package = self.root / "other"
+        other_package.mkdir()
+        package_module.set_active_package(packages_root, other_package)
+
+        with self.assertRaises(package_module.DomainError):
+            ensure_requested_package_is_active(self.package_dir, packages_root)
+
+    async def test_evaluation_marks_empty_gold_answers_unscored(self) -> None:
+        await self._prepare_file_package()
+        build_index(self.package_dir, chunking="class_based")
+
+        dataset = EvaluationDataset(
+            dataset_name="stub_eval",
+            ontology_file="ontology.ttl",
+            source="custom",
+            questions=[
+                {
+                    "id": "Q001",
+                    "nl_question": "Which places exist?",
+                    "gold_sparql": "SELECT * WHERE { ?s ?p ?o }",
+                    "gold_answers": [],
+                    "complexity_tier": "simple",
+                    "query_shape": "single-edge",
+                    "question_type": "list",
+                }
+            ],
+        )
+        runner = ExperimentRunner(
+            ExperimentConfig(package_dir=self.package_dir, model_name="stub-model")
+        )
+
+        experiment, metrics = await runner.run_experiment(dataset)
+
+        self.assertEqual(len(experiment.results), 1)
+        self.assertFalse(experiment.results[0].is_scored)
+        self.assertEqual(experiment.results[0].scoring_status, "missing_gold")
+        self.assertEqual(metrics.num_questions, 1)
+        self.assertEqual(metrics.num_scored, 0)
+        self.assertEqual(metrics.num_unscored, 1)
+
+    def test_correctness_metrics_exclude_unscored_questions(self) -> None:
+        scored_dataset = EvaluationDataset(
+            dataset_name="stub_eval",
+            ontology_file="ontology.ttl",
+            source="custom",
+            questions=[
+                {
+                    "id": "Q001",
+                    "nl_question": "Question 1",
+                    "gold_sparql": "SELECT * WHERE { ?s ?p ?o }",
+                    "gold_answers": [{"x": "A"}],
+                    "complexity_tier": "simple",
+                    "query_shape": "single-edge",
+                    "question_type": "list",
+                },
+                {
+                    "id": "Q002",
+                    "nl_question": "Question 2",
+                    "gold_sparql": "SELECT * WHERE { ?s ?p ?o }",
+                    "gold_answers": [],
+                    "complexity_tier": "simple",
+                    "query_shape": "single-edge",
+                    "question_type": "list",
+                },
+            ],
+        )
+        scored_result = evaluation_question_result("Q001", [{"x": "A"}], [{"x": "A"}], True)
+        unscored_result = evaluation_question_result("Q002", [], [{"x": "B"}], False)
+
+        scored_metrics = compute_question_metrics(
+            scored_result,
+            compare_results(scored_result.final_answers, scored_dataset.questions[0].gold_answers),
+            complexity_tier="simple",
+            query_shape="single-edge",
+        )
+        unscored_metrics = compute_question_metrics(
+            unscored_result,
+            None,
+            complexity_tier="simple",
+            query_shape="single-edge",
+        )
+        aggregate = aggregate_metrics([scored_metrics, unscored_metrics], dataset_name="stub_eval")
+
+        self.assertEqual(aggregate.num_questions, 2)
+        self.assertEqual(aggregate.num_scored, 1)
+        self.assertEqual(aggregate.num_unscored, 1)
+        self.assertEqual(aggregate.execution_accuracy, 1.0)
+
+    def test_evaluation_save_writes_readable_query_logs(self) -> None:
+        from evaluation.dataset_schema import ExperimentRun
+
+        result = evaluation_question_result("Q001", [{"x": "A"}], [{"x": "B"}], True)
+        result.nl_question = "Question one?"
+        result.final_sparql = "SELECT ?x WHERE { ?s ?p ?x }"
+        result.comparison = {
+            "exact_match": False,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "missing_rows": [("A",)],
+            "extra_rows": [("B",)],
+        }
+        experiment = ExperimentRun(
+            experiment_id="stub_eval",
+            dataset_name="stub_dataset",
+            package_dir=str(self.package_dir),
+            model_name="stub-model",
+            results=[result],
+        )
+
+        saved = save_experiment(
+            experiment,
+            AggregatedMetrics(dataset_name="stub_dataset", model_name="stub-model"),
+            self.root / "eval-output",
+        )
+
+        self.assertTrue(saved["index"].exists())
+        self.assertTrue(saved["queries_jsonl"].exists())
+        self.assertTrue((saved["queries_dir"] / "Q001.txt").exists())
+        index_text = saved["index"].read_text(encoding="utf-8")
+        question_text = (saved["queries_dir"] / "Q001.txt").read_text(encoding="utf-8")
+        self.assertIn("Q001 FAIL", index_text)
+        self.assertIn("QUESTION Q001", question_text)
+        self.assertIn("GOLD SPARQL", question_text)
+        self.assertIn("FINAL SPARQL", question_text)
+        self.assertIn("DIFF", question_text)
+
+
+class FakeFusekiService:
+    def __init__(self) -> None:
+        self.reloads: list[tuple[str, list[object], str | None]] = []
+        self.deleted: list[tuple[str, bool]] = []
+
+    async def reload_active_dataset(self, dataset_name, files, previous_dataset_name):
+        self.reloads.append((dataset_name, files, previous_dataset_name))
+
+    async def delete_dataset(self, dataset_name, ignore_missing=False):
+        self.deleted.append((dataset_name, ignore_missing))
+
+
+def evaluation_question_result(question_id, gold_answers, final_answers, is_scored):
+    from evaluation.dataset_schema import IterationLog, QuestionResult
+
+    return QuestionResult(
+        question_id=question_id,
+        nl_question="Question",
+        gold_sparql="SELECT * WHERE { ?s ?p ?o }",
+        gold_answers=gold_answers,
+        final_answers=final_answers,
+        status="completed",
+        is_scored=is_scored,
+        scoring_status="scored" if is_scored else "missing_gold",
+        iterations=[
+            IterationLog(
+                iteration=1,
+                generated_sparql="SELECT * WHERE { ?s ?p ?o }",
+                validation_stages={"syntactic": True},
+            )
+        ],
+        total_iterations=1,
+    )
 
 if __name__ == "__main__":
     unittest.main()

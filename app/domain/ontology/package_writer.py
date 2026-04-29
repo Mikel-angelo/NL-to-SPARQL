@@ -96,7 +96,7 @@ def append_onboard_log(path: Path, event: str, **details: object) -> None:
     """Append one JSON event to the onboarding log."""
     path.parent.mkdir(parents=True, exist_ok=True)
     entry = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": _minute_timestamp(datetime.now(UTC)),
         "event": event,
         **details,
     }
@@ -140,7 +140,7 @@ def _build_metadata(
     )
 
     return {
-        "loaded_at": attempted_at.isoformat(),
+        "loaded_at": _minute_timestamp(attempted_at),
         "ontology_name": ontology_name,
         "source_filename": source_filename,
         "source_mode": source_mode,
@@ -190,3 +190,7 @@ def _settings_payload(
         "correction_max_iterations": settings.correction_max_iterations,
         "llm_api_url": settings.llm_api_url,
     }
+
+
+def _minute_timestamp(value: datetime) -> str:
+    return value.strftime("%Y-%m-%dT%H:%MZ")

@@ -1,36 +1,50 @@
-# Python
+# Python/runtime
 __pycache__/
+*.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual envs
 .venv/
 venv/
-*.pyc
-*.egg-info/
 
-# Fuseki
+# Local env/config
+.env
+.env.*
+!.env.example
+
+# Fuseki runtime data
 fuseki-data/
 
-# =========================
-# Ontology generated data
-# =========================
+# Generated ontology packages and runtime state
+ontology_packages/
+!ontology_packages/.gitkeep
+
+# Query/evaluation outputs if package fixtures are ever tracked
+ontology_packages/**/logs/
+ontology_packages/**/evaluation/
+ontology_packages/**/chunks/*.faiss
+ontology_packages/**/chunks/index.faiss
+ontology_packages/.active_package
+
+# Local generated package folders accidentally created at repo root
+enovation/
+enovation-*/
+
+# Generic generated files
 storage/
 data/
-*.owl
-*.ttl
-*.rdf
-
-# Metadata / context (generated)
-metadata.json
-ontology_context.json
-
-# =========================
-# RAG / embeddings
-# =========================
 *.faiss
 *.index
 *.db
 *.pkl
-
-# =========================
-# Logs
-# =========================
 *.log
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
