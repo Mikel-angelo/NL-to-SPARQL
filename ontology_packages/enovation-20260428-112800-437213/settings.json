@@ -1,9 +1,0 @@
-{
-  "source_mode": "file",
-  "query_endpoint": "http://127.0.0.1:3030/enovation-20260428-112800-437213/query",
-  "dataset_name": "enovation-20260428-112800-437213",
-  "default_model": "qwen2.5-coder:7b",
-  "chunking_strategy": "class_based",
-  "retrieval_top_k": 10,
-  "llm_api_url": "http://147.102.6.253:11500/api/generate"
-}

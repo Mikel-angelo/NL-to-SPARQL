@@ -1,9 +1,0 @@
-{
-  "source_mode": "file",
-  "query_endpoint": "http://127.0.0.1:3030/enovation-20260427-184012-632861/query",
-  "dataset_name": "enovation-20260427-184012-632861",
-  "default_model": "qwen2.5-coder:7b",
-  "chunking_strategy": "class_based",
-  "retrieval_top_k": 10,
-  "ollama_url": "http://147.102.6.253:11500/api/generate"
-}
