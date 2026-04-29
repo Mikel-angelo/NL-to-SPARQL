@@ -20,8 +20,10 @@ from app.domain.package import get_active_package
 from app.domain.rag import build_index, retrieve_text_chunks
 from app.domain.rag.chunking import build_chunks
 from app.domain.rag.retrieve_context import RetrievedChunk
-from app.domain.runtime import generate_with_correction, run_query_pipeline
-from app.domain.runtime import correction_loop as correction_loop_module
+from app.domain.runtime import run_query_attempts, run_query_pipeline
+from app.domain.runtime import query_correction as query_correction_module
+from app.domain.runtime import query_generation as query_generation_module
+from app.domain.runtime import sparql_execution as sparql_execution_module
 from app.domain.runtime.prompt_renderer import render_correction_prompt, render_query_generation_prompt
 from app.domain.runtime.validation import validate_query
 
@@ -64,8 +66,9 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.ontology_path.write_text(ONTOLOGY_TTL, encoding="utf-8")
 
         self._patch(index_module, "embed_texts", deterministic_embeddings)
-        self._patch(correction_loop_module, "generate_text", self._fake_generate_text)
-        self._patch(correction_loop_module, "execute_sparql_query", self._fake_execute_query)
+        self._patch(query_generation_module, "generate_text", self._fake_generate_text)
+        self._patch(query_correction_module, "generate_text", self._fake_generate_text)
+        self._patch(sparql_execution_module, "execute_sparql_query", self._fake_execute_query)
 
     def tearDown(self) -> None:
         self._tempdir.cleanup()
@@ -195,6 +198,10 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result.status, "completed")
         self.assertIn("SELECT", result.generated_sparql or "")
         self.assertTrue(Path(result.trace_path).exists())
+        self.assertTrue(Path(result.readable_trace_path).exists())
+        readable_trace = Path(result.readable_trace_path).read_text(encoding="utf-8")
+        self.assertIn("GENERATION PROMPT", readable_trace)
+        self.assertIn("INITIAL GENERATED QUERY", readable_trace)
         self.assertGreaterEqual(len(result.retrieved_context), 1)
 
     async def test_rag_retrieve_text_chunks_returns_plain_text(self) -> None:
@@ -229,6 +236,9 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertIn("Class: Place", prompt)
         self.assertIn("PREFIX ex: <http://example.com/>", prompt)
+        self.assertIn("provided prefix declarations", prompt)
+        self.assertIn("Ontology label, not a SPARQL prefix", prompt)
+        self.assertIn("Do not use the ontology label or dataset label as a prefix", prompt)
         self.assertIn("Which places exist?", prompt)
         self.assertNotIn(":ActorType", prompt)
 
@@ -237,11 +247,19 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             original_question="Which places exist?",
             failed_query="SELECT ?x WHERE { ?s ?p ?o }",
             validation_errors=["SELECT variables are not bound in WHERE: x"],
+            ontology_context={
+                "prefixes": [
+                    {"prefix": "ex", "namespace": "http://example.com/"},
+                ]
+            },
         )
 
         self.assertIn("Original question:", prompt)
         self.assertIn("Failed query:", prompt)
         self.assertIn("SELECT variables are not bound in WHERE: x", prompt)
+        self.assertIn("PREFIX ex: <http://example.com/>", prompt)
+        self.assertIn("Do not use the ontology label or dataset label as a prefix", prompt)
+        self.assertIn("Do not invent prefixes", prompt)
 
     def test_validation_returns_formal_stage_results(self) -> None:
         result = validate_query(
@@ -261,10 +279,32 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         )
         self.assertTrue(all(stage.passed for stage in result.stages))
 
-    async def test_generate_with_correction_returns_iteration_log(self) -> None:
-        result = await generate_with_correction(
+    def test_validation_allows_known_prefixes_and_rejects_unknown_prefixes(self) -> None:
+        ontology_context = {
+            "object_properties": [{"uri": "http://example.com/worksAt"}],
+            "datatype_properties": [],
+            "classes": [],
+            "prefixes": [{"prefix": "ex", "namespace": "http://example.com/"}],
+        }
+
+        known = validate_query(
+            "SELECT ?place WHERE { ?person ex:worksAt ?place . }",
+            ontology_context=ontology_context,
+        )
+        unknown = validate_query(
+            "SELECT ?place WHERE { ?person bad:worksAt ?place . }",
+            ontology_context=ontology_context,
+        )
+
+        self.assertTrue(known.is_valid)
+        self.assertIn("PREFIX ex: <http://example.com/>", known.normalized_query)
+        self.assertFalse(unknown.is_valid)
+        self.assertTrue(any("bad" in error for error in unknown.errors))
+
+    async def test_run_query_attempts_returns_iteration_log(self) -> None:
+        result = await run_query_attempts(
             question="Which places exist?",
-            initial_prompt="prompt",
+            generation_prompt="prompt",
             ontology_context={
                 "object_properties": [{"uri": "http://example.com/worksAt"}],
                 "datatype_properties": [],
@@ -298,7 +338,12 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         trace_payload = json.loads(Path(result.trace_path).read_text(encoding="utf-8"))
         latest_trace = trace_payload[-1]
         self.assertIn("correction_iterations", latest_trace)
+        self.assertIn("run_id", latest_trace)
+        self.assertIn("readable_trace_path", result.to_dict())
         self.assertEqual(latest_trace["correction_iterations"][0]["validation"]["is_valid"], True)
+        self.assertEqual(latest_trace["correction_iterations"][0]["status"], "completed")
+        self.assertEqual(latest_trace["correction_iterations"][0]["validation_summary"], "VALIDATION_OK")
+        self.assertEqual(latest_trace["correction_iterations"][0]["errors"], [])
         self.assertEqual(latest_trace["correction_iterations"][0]["execution"]["code"], "EXECUTION_OK")
 
 if __name__ == "__main__":

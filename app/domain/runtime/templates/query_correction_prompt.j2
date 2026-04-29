@@ -15,4 +15,19 @@ Validation/execution errors:
 - No explicit error message was provided.
 {% endif %}
 
-Return only a corrected SPARQL query. Do not include explanations, markdown fences, or extra text.
+Available Prefix Declarations:
+{% if prefix_declarations %}
+{% for declaration in prefix_declarations %}
+{{ declaration }}
+{% endfor %}
+{% else %}
+No prefix declarations were available.
+{% endif %}
+
+Prefix Usage Rules:
+- Use only the prefix declarations listed above.
+- Do not use the ontology label or dataset label as a prefix.
+- If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
+- Unknown prefixes will fail validation.
+
+Return only a corrected SPARQL query. Use either full URIs in angle brackets or the available prefix declarations. Do not invent prefixes, classes, properties, or namespaces. Do not include explanations, markdown fences, or extra text.

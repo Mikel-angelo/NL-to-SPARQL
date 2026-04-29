@@ -73,6 +73,14 @@ def query_log_path(package_dir: str | Path) -> Path:
     return logs_dir(package_dir) / "query.log"
 
 
+def query_readable_latest_path(package_dir: str | Path) -> Path:
+    return logs_dir(package_dir) / "query-latest.txt"
+
+
+def query_readable_runs_dir(package_dir: str | Path) -> Path:
+    return logs_dir(package_dir) / "query-runs"
+
+
 def source_path(package_dir: str | Path, suffix: str) -> Path:
     return ontology_dir(package_dir) / f"source{suffix}"
 

@@ -2,8 +2,8 @@ System Role:
 {{ system_role }}
 
 Relevant Ontology Chunks:
-{% if ontology_name %}Ontology: {{ ontology_name }}
-{% endif %}{% if dataset_name %}Dataset: {{ dataset_name }}
+{% if ontology_name %}Ontology label, not a SPARQL prefix: {{ ontology_name }}
+{% endif %}{% if dataset_name %}Dataset label, not a SPARQL prefix: {{ dataset_name }}
 {% endif %}{% if retrieved_context %}
 {% for item in retrieved_context %}
 Chunk {{ item.rank or loop.index }}:
@@ -23,6 +23,12 @@ Auto-Generated Prefix Declarations:
 {% else %}
 No prefix declarations were available.
 {% endif %}
+
+Prefix Usage Rules:
+- Use only the prefix declarations listed above.
+- Do not use the ontology label or dataset label as a prefix.
+- If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
+- Unknown prefixes will fail validation.
 
 Optional Few-Shot Examples:
 {% if few_shot_examples %}

@@ -1,8 +1,16 @@
 """Run the ontology-package runtime query pipeline.
 
-Runtime starts once an ontology package already exists. This module retrieves
-context for a question, renders the prompt, validates/corrects the result, and
-executes the generated SPARQL.
+The runtime pipeline starts after onboarding has produced an ontology package.
+This module is the runtime orchestrator: it reads package metadata/settings,
+retrieves relevant RAG chunks, renders the initial generation prompt, runs the
+candidate-query attempt loop, persists the query trace, and returns the response
+shape used by the CLI and API.
+
+The attempt loop also lives here on purpose. Each iteration validates the
+candidate SPARQL, executes it when validation passes, records validation and
+execution outcomes, and asks the LLM for a corrected candidate when needed.
+Helper modules perform individual actions only: query generation, correction
+generation, endpoint execution, prompt rendering, and formal validation.
 """
 
 from __future__ import annotations
@@ -10,25 +18,34 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-import json
 
 from app.core.config import settings
 from app.domain.package import (
     metadata_path,
     ontology_context_path,
     query_log_path,
+    query_readable_latest_path,
+    query_readable_runs_dir,
     read_json_file,
     resolve_package_dir,
     settings_path,
 )
 from app.domain.rag import RetrievedChunk, retrieve_context
-from app.domain.runtime.correction_loop import generate_with_correction
+from app.domain.runtime import query_correction, query_generation, sparql_execution
 from app.domain.runtime.prompt_renderer import render_query_generation_prompt
+from app.domain.runtime.query_trace import write_query_trace, write_readable_query_trace
+from app.domain.runtime.validation import ValidationStageResult, validate_query
 
 
 @dataclass(frozen=True)
 class QueryPipelineResult:
-    """Structured query-pipeline output."""
+    """Response returned by the public runtime pipeline.
+
+    This result is intentionally close to the API response and CLI output. It
+    includes the package/query metadata, retrieved context that influenced the
+    prompt, generated and corrected SPARQL states, the endpoint execution result,
+    final status, errors, and the path to the persisted trace.
+    """
 
     question: str
     dataset_name: str
@@ -41,6 +58,7 @@ class QueryPipelineResult:
     status: str
     errors: list[str] | None
     trace_path: str
+    readable_trace_path: str
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -55,6 +73,7 @@ class QueryPipelineResult:
             "status": self.status,
             "errors": self.errors,
             "trace_path": self.trace_path,
+            "readable_trace_path": self.readable_trace_path,
         }
 
 
@@ -66,7 +85,13 @@ async def run_query_pipeline(
     endpoint: str | None = None,
     k: int | None = None,
 ) -> QueryPipelineResult:
-    """Run retrieve -> generate -> validate/correct -> execute using one ontology package."""
+    """Answer one natural-language question using one ontology package.
+
+    Package values from `settings.json` are used by default. `model`, `endpoint`,
+    and `k` are per-call overrides for the LLM model, SPARQL query endpoint, and
+    retrieval depth. The function writes one trace entry to `logs/query.log` and
+    returns the same runtime state in structured form.
+    """
     root = resolve_package_dir(package_dir)
     metadata = read_json_file(metadata_path(root))
     ontology_context = read_json_file(ontology_context_path(root))
@@ -87,16 +112,15 @@ async def run_query_pipeline(
         k=effective_k,
     )
     retrieved_payload = [item.to_dict() for item in retrieved_context]
-    # Retrieval is the first runtime step because it depends on the question.
     prompt = render_query_generation_prompt(
         question=question,
         retrieved_context=retrieved_context,
         metadata=metadata,
         ontology_context=ontology_context,
     )
-    correction_result = await generate_with_correction(
+    attempt_result = await run_query_attempts(
         question=question,
-        initial_prompt=prompt,
+        generation_prompt=prompt,
         ontology_context=ontology_context,
         endpoint_url=effective_endpoint,
         model=effective_model,
@@ -104,54 +128,168 @@ async def run_query_pipeline(
         k_max=max_iterations,
     )
 
+    run_at = datetime.now(UTC)
+    run_id = _run_id(run_at)
     trace_payload = {
-        "run_at": datetime.now(UTC).isoformat(),
+        "run_id": run_id,
+        "run_at": run_at.isoformat(),
         "question_asked": question,
         "dataset_name": _dataset_name(metadata, root.name),
         "dataset_endpoint": effective_endpoint,
         "retrieved_context": retrieved_payload,
         "prompt_generated": prompt,
-        "llm_generated_query": correction_result.original_query,
+        "llm_generated_query": attempt_result.original_query,
         "max_correction_iterations": max_iterations,
-        "correction_iterations": correction_result.iterations,
-        "corrected_sparql": correction_result.corrected_query,
-        "validated_sparql": correction_result.validated_query,
-        "final_query": correction_result.final_query,
-        "execution_result": correction_result.execution_result,
-        "status": correction_result.status,
-        "errors": correction_result.errors,
+        "correction_iterations": attempt_result.iterations,
+        "corrected_sparql": attempt_result.corrected_query,
+        "validated_sparql": attempt_result.validated_query,
+        "final_query": attempt_result.final_query,
+        "execution_result": attempt_result.execution_result,
+        "status": attempt_result.status,
+        "errors": attempt_result.errors,
     }
     trace_path = write_query_trace(query_log_path(root), trace_payload)
+    readable_trace_path = write_readable_query_trace(
+        latest_path=query_readable_latest_path(root),
+        runs_dir=query_readable_runs_dir(root),
+        run_id=run_id,
+        payload=trace_payload,
+    )
 
     return QueryPipelineResult(
         question=question,
         dataset_name=_dataset_name(metadata, root.name),
         dataset_endpoint=effective_endpoint,
         retrieved_context=retrieved_payload,
-        generated_sparql=correction_result.original_query,
-        validated_sparql=correction_result.validated_query,
-        corrected_sparql=correction_result.corrected_query,
-        execution_result=correction_result.execution_result,
-        status=correction_result.status,
-        errors=correction_result.errors,
+        generated_sparql=attempt_result.original_query,
+        validated_sparql=attempt_result.validated_query,
+        corrected_sparql=attempt_result.corrected_query,
+        execution_result=attempt_result.execution_result,
+        status=attempt_result.status,
+        errors=attempt_result.errors,
         trace_path=str(trace_path),
+        readable_trace_path=str(readable_trace_path),
     )
 
 
-def write_query_trace(path: Path, payload: dict[str, object]) -> Path:
-    """Append the latest trace and also persist a readable JSON array."""
-    existing: list[dict[str, object]] = []
-    if path.exists():
-        try:
-            loaded = json.loads(path.read_text(encoding="utf-8"))
-            if isinstance(loaded, list):
-                existing = [item for item in loaded if isinstance(item, dict)]
-        except (OSError, json.JSONDecodeError):
-            existing = []
-    existing.append(payload)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(existing, indent=2), encoding="utf-8")
-    return path
+@dataclass(frozen=True)
+class QueryAttemptResult:
+    """Final state produced by the candidate-query attempt loop.
+
+    `original_query` is the first LLM candidate. `corrected_query` is the last
+    correction candidate, if any correction was requested. `validated_query` is
+    set only when a candidate passes formal validation and endpoint execution
+    succeeds. `iterations` is the trace-ready attempt log stored under
+    `correction_iterations` for backward-compatible trace shape.
+    """
+
+    original_query: str
+    final_query: str
+    validated_query: str | None
+    corrected_query: str | None
+    execution_result: dict[str, object] | None
+    status: str
+    errors: list[str] | None
+    iterations: list[dict[str, object]]
+
+
+async def run_query_attempts(
+    *,
+    question: str,
+    generation_prompt: str,
+    ontology_context: dict[str, object],
+    endpoint_url: str,
+    model: str,
+    llm_api_url: str,
+    k_max: int = 3,
+) -> QueryAttemptResult:
+    """Run the generate -> validate -> execute -> correct loop.
+
+    The first candidate is generated from `generation_prompt`. Each attempt runs
+    formal validation against `ontology_context`; valid candidates are executed
+    against `endpoint_url`. Validation failures and execution errors are passed
+    to the correction helper to produce the next candidate until one succeeds or
+    `k_max` attempts have been recorded.
+    """
+    generated_query = await query_generation.generate_initial_query(
+        generation_prompt,
+        model=model,
+        llm_api_url=llm_api_url,
+    )
+    current_query = generated_query
+    corrected_query = None
+    execution_result = None
+    status = "failed"
+    errors: list[str] | None = None
+    final_query = generated_query
+    validated_query = None
+    iterations: list[dict[str, object]] = []
+
+    for iteration in range(1, max(1, k_max) + 1):
+        validation_result = validate_query(current_query, ontology_context=ontology_context)
+        iteration_payload: dict[str, object] = {
+            "iteration": iteration,
+            "status": "validation_failed",
+            "query": current_query,
+            "validation": validation_result.to_dict(),
+            "validation_summary": _validation_summary(validation_result.to_dict()),
+            "errors": validation_result.errors,
+            "execution": None,
+        }
+
+        execution_stage: ValidationStageResult | None = None
+        if validation_result.is_valid:
+            try:
+                execution_result = await sparql_execution.execute_sparql_query(
+                    endpoint_url,
+                    validation_result.normalized_query,
+                )
+                execution_stage = sparql_execution.execution_stage_result()
+                status = "completed"
+                errors = None
+                validated_query = validation_result.normalized_query
+                final_query = validation_result.normalized_query
+                iteration_payload["status"] = "completed"
+                iteration_payload["errors"] = []
+                iteration_payload["execution"] = execution_stage.to_dict()
+                iterations.append(iteration_payload)
+                break
+            except Exception as exc:
+                execution_stage = sparql_execution.execution_stage_result(exc)
+                errors = [execution_stage.message or execution_stage.code]
+                iteration_payload["status"] = "execution_failed"
+                iteration_payload["errors"] = errors
+        else:
+            errors = validation_result.errors
+
+        if execution_stage is not None:
+            iteration_payload["execution"] = execution_stage.to_dict()
+        iterations.append(iteration_payload)
+
+        if iteration >= max(1, k_max):
+            final_query = validation_result.normalized_query
+            break
+
+        current_query = await query_correction.correct_query(
+            question=question,
+            failed_query=current_query,
+            validation_errors=errors or [],
+            ontology_context=ontology_context,
+            model=model,
+            llm_api_url=llm_api_url,
+        )
+        corrected_query = current_query
+
+    return QueryAttemptResult(
+        original_query=generated_query,
+        final_query=final_query,
+        validated_query=validated_query,
+        corrected_query=corrected_query,
+        execution_result=execution_result,
+        status=status,
+        errors=errors,
+        iterations=iterations,
+    )
 
 
 def _string_setting(payload: dict[str, object], key: str, default: str) -> str:
@@ -181,3 +319,19 @@ def _dataset_name(metadata: dict[str, object], fallback: str) -> str:
     if isinstance(name, str) and name.strip():
         return name.strip()
     return fallback
+
+
+def _run_id(run_at: datetime) -> str:
+    return run_at.strftime("%Y%m%d-%H%M%S-%f")
+
+
+def _validation_summary(validation: dict[str, object]) -> str:
+    stages = validation.get("stages")
+    if not isinstance(stages, list):
+        return "VALIDATION_UNKNOWN"
+    failed_codes = [
+        str(stage.get("code"))
+        for stage in stages
+        if isinstance(stage, dict) and not stage.get("passed") and isinstance(stage.get("code"), str)
+    ]
+    return ", ".join(failed_codes) if failed_codes else "VALIDATION_OK"

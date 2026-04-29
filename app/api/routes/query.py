@@ -33,6 +33,7 @@ class QueryResponse(BaseModel):
     status: str
     errors: list[str] | None
     trace_path: str
+    readable_trace_path: str
 
 
 @router.post("", response_model=QueryResponse)

@@ -1,4 +1,11 @@
-"""Formal validation stages for generated SPARQL."""
+"""Formal validation stages for generated SPARQL.
+
+This module validates a candidate query before endpoint execution. It normalizes
+missing ontology prefixes, checks SPARQL parser syntax, verifies prefixes and
+ontology vocabulary references against `ontology_context.json`, and applies a
+small set of structural checks. It does not call the LLM, render prompts, or
+execute queries against a SPARQL endpoint.
+"""
 
 from __future__ import annotations
 
@@ -10,7 +17,11 @@ from rdflib.plugins.sparql.parser import parseQuery
 
 @dataclass(frozen=True)
 class ValidationStageResult:
-    """Result for one validation stage."""
+    """Result for one named validation stage.
+
+    `code` is intended for stable programmatic traces, while `message` is a
+    human-readable explanation included only when the stage fails.
+    """
 
     stage: str
     passed: bool
@@ -28,7 +39,12 @@ class ValidationStageResult:
 
 @dataclass(frozen=True)
 class QueryValidationResult:
-    """Validation outcome for one candidate SPARQL query."""
+    """Validation outcome for one candidate SPARQL query.
+
+    `normalized_query` includes ontology prefixes injected from the package
+    context when they were missing from the generated query. `errors` is the
+    ordered list of failed-stage messages/codes passed to correction prompts.
+    """
 
     is_valid: bool
     errors: list[str]
@@ -49,7 +65,12 @@ def validate_query(
     *,
     ontology_context: dict[str, object] | None = None,
 ) -> QueryValidationResult:
-    """Run syntactic, prefix, vocabulary, and structural validation."""
+    """Run all formal validation stages for one candidate query.
+
+    The stages are intentionally deterministic and local: syntax parsing,
+    prefix availability, vocabulary membership, and structural sanity checks.
+    Endpoint execution is handled later by the runtime pipeline.
+    """
     context = ontology_context or {}
     normalized_query = _normalized_query(query, context)
     stages = [
@@ -152,13 +173,6 @@ def _structural_validation(query: str, ontology_context: dict[str, object]) -> V
         )
 
     return _pass("structural", "STRUCTURE_OK")
-
-
-def execution_stage_result(error: Exception | None = None) -> ValidationStageResult:
-    """Build the execution-stage validation result."""
-    if error is None:
-        return _pass("execution", "EXECUTION_OK")
-    return _fail("execution", "EXECUTION_ERROR", f"SPARQL endpoint execution failed: {error}")
 
 
 def _normalized_query(query: str, ontology_context: dict[str, object]) -> str:

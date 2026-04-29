@@ -169,26 +169,35 @@ The query command:
 - loads the package artifacts
 - retrieves the most relevant ontology chunks
 - generates SPARQL with the configured LLM
-- validates the SPARQL through formal validation stages
-- retries failed validation/execution through the LLM self-correction loop
-- runs the final SPARQL against the package query endpoint
-- writes a trace to `logs/query.log`
+- validates each candidate query through formal validation stages
+- executes a candidate only after validation passes
+- asks the LLM for a corrected candidate when validation or execution fails
+- writes a machine trace to `logs/query.log`
+- writes readable text traces to `logs/query-latest.txt` and `logs/query-runs/`
 
 The output includes:
 
 - `Answer`: raw SPARQL execution result
 - `Generated SPARQL`: the generated query
 - `Trace`: path to the query log
+- `Readable trace`: path to the plain-text query trace
 - `Status`: pipeline status
 - `Errors`: validation or execution errors, if any
 
-The self-correction loop is controlled by:
+The runtime attempt loop is controlled by:
 
 ```text
 settings.correction_max_iterations = 3
 ```
 
-Each query trace records the original generated query, every correction iteration, validation stage results, execution result, final query, and final status.
+Each JSON query trace records the original generated query, every correction iteration, validation stage results, execution result, final query, and final status. Each iteration also includes scan-friendly fields: `status`, `validation_summary`, and `errors`.
+
+For debugging prompts and generated SPARQL, prefer the readable text trace:
+
+```text
+logs/query-latest.txt
+logs/query-runs/<run-id>.txt
+```
 
 Optional query arguments:
 
@@ -221,6 +230,8 @@ ontology_packages/
     logs/
       onboard.log
       query.log
+      query-latest.txt
+      query-runs/
 ```
 
 Important files:
@@ -231,7 +242,9 @@ Important files:
 - `chunks/chunks.json`: text chunks used for retrieval
 - `chunks/index.faiss`: vector index for retrieval
 - `logs/onboard.log`: onboarding trace
-- `logs/query.log`: query trace
+- `logs/query.log`: machine-readable query trace JSON
+- `logs/query-latest.txt`: latest human-readable query trace
+- `logs/query-runs/`: timestamped human-readable query traces
 
 The active package path is stored in:
 
@@ -313,9 +326,11 @@ app/
     retrieve_context.py        semantic chunk retrieval from a package
   domain/runtime/      SPARQL prompt generation, validation, self-correction, execution
     pipeline.py                 runtime query pipeline orchestration
+    query_generation.py          initial LLM query generation and output normalization
+    query_correction.py          correction prompt rendering plus corrected-query generation
+    sparql_execution.py          SPARQL endpoint execution
     prompt_renderer.py          Jinja2 prompt rendering
     validation.py               formal SPARQL validation stages
-    correction_loop.py          LLM self-correction loop
     templates/
       query_generation_prompt.j2
       query_correction_prompt.j2

@@ -1,11 +1,10 @@
-"""Runtime SPARQL generation, validation, and execution."""
+"""Public runtime query pipeline APIs."""
 
-from app.domain.runtime.correction_loop import CorrectionLoopResult, generate_with_correction
-from app.domain.runtime.pipeline import QueryPipelineResult, run_query_pipeline
+from app.domain.runtime.pipeline import QueryAttemptResult, QueryPipelineResult, run_query_attempts, run_query_pipeline
 
 __all__ = [
-    "CorrectionLoopResult",
+    "QueryAttemptResult",
     "QueryPipelineResult",
-    "generate_with_correction",
+    "run_query_attempts",
     "run_query_pipeline",
 ]
