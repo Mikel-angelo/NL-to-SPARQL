@@ -53,6 +53,7 @@ class QueryPipelineResult:
     retrieved_context: list[dict[str, object]]
     chunking_strategy: str
     retrieval_top_k: int
+    correction_max_iterations: int
     generated_sparql: str | None
     validated_sparql: str | None
     corrected_sparql: str | None
@@ -70,6 +71,7 @@ class QueryPipelineResult:
             "retrieved_context": self.retrieved_context,
             "chunking_strategy": self.chunking_strategy,
             "retrieval_top_k": self.retrieval_top_k,
+            "correction_max_iterations": self.correction_max_iterations,
             "generated_sparql": self.generated_sparql,
             "validated_sparql": self.validated_sparql,
             "corrected_sparql": self.corrected_sparql,
@@ -89,14 +91,15 @@ async def run_query_pipeline(
     endpoint: str | None = None,
     k: int | None = None,
     chunking: str | None = None,
+    corrections: int | None = None,
 ) -> QueryPipelineResult:
     """Answer one natural-language question using one ontology package.
 
     Package values from `settings.json` are used by default. `model`, `endpoint`,
-    `k`, and `chunking` are per-call overrides for the LLM model, SPARQL query
-    endpoint, retrieval depth, and retrieval index strategy. The function writes
-    one trace entry to `logs/query.log` and returns the same runtime state in
-    structured form.
+    `k`, `chunking`, and `corrections` are per-call overrides for the LLM model,
+    SPARQL query endpoint, retrieval depth, retrieval index strategy, and
+    correction loop limit. The function writes one trace entry to
+    `logs/query.log` and returns the same runtime state in structured form.
     """
     root = resolve_package_dir(package_dir)
     metadata = read_json_file(metadata_path(root))
@@ -111,7 +114,11 @@ async def run_query_pipeline(
     )
     effective_k = k or _int_setting(settings_payload, "retrieval_top_k", settings.runtime_retrieval_top_k)
     effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
-    max_iterations = _int_setting(settings_payload, "correction_max_iterations", settings.correction_max_iterations)
+    max_iterations = corrections or _int_setting(
+        settings_payload,
+        "correction_max_iterations",
+        settings.correction_max_iterations,
+    )
 
     retrieved_context = retrieve_context(
         root,
@@ -147,6 +154,7 @@ async def run_query_pipeline(
         "dataset_endpoint": effective_endpoint,
         "chunking_strategy": effective_chunking,
         "retrieval_top_k": effective_k,
+        "correction_max_iterations": max_iterations,
         "retrieved_context": retrieved_payload,
         "prompt_generated": prompt,
         "llm_generated_query": attempt_result.original_query,
@@ -174,6 +182,7 @@ async def run_query_pipeline(
         retrieved_context=retrieved_payload,
         chunking_strategy=effective_chunking,
         retrieval_top_k=effective_k,
+        correction_max_iterations=max_iterations,
         generated_sparql=attempt_result.original_query,
         validated_sparql=attempt_result.validated_query,
         corrected_sparql=attempt_result.corrected_query,

@@ -12,10 +12,10 @@ flowchart TD
     preflight[preflight_endpoint\nASK WHERE before timed run]
     dataset[load_dataset]
     output[choose output directory\n<package>/evaluation/<dataset>-<minute>]
-    config[ExperimentConfig\npackage_dir\nmodel_name\nrequested/package/effective top-k\nrequested/package/effective chunking]
+    config[ExperimentConfig\npackage_dir\nmodel_name\nretrieval top-k\nchunking strategy\ncorrection attempts]
     runner[ExperimentRunner.run_experiment]
     question[for each EvaluationQuestion]
-    pipeline[run_query_pipeline\nuses same package\npasses model + effective top-k + chunking]
+    pipeline[run_query_pipeline\nuses same package\npasses model + top-k + chunking]
     answers[extract_answers_from_sparql_json]
     qresult[QuestionResult\nfinal SPARQL\nanswers\niterations\ntrace paths\nlatency]
     scored{gold_answers present?}
@@ -69,7 +69,7 @@ Each question stores:
 - comparison details for scored questions
 - iteration summaries from the runtime trace
 - trace paths back to package-level query logs
-- latency and pipeline config, including requested, package-default, and effective retrieval top-k and chunking strategy
+- latency and pipeline config, including retrieval top-k, chunking strategy, and correction attempts
 
 ## Metrics Split
 
@@ -107,4 +107,5 @@ ontology_packages/<package>/evaluation/<run>/
 - Unscored questions count toward operational metrics, not correctness metrics.
 - `--k` controls retrieval top-k for the underlying query pipeline.
 - `--chunking` selects one prebuilt package index for the underlying query pipeline.
-- `run_config.json` is the concentrated record of requested, package-default, and effective runtime settings for the evaluation run.
+- `--corrections` controls the maximum correction loop attempts for each evaluated question.
+- `run_config.json` is the concentrated record of the actual runtime settings used for the evaluation run.

@@ -36,25 +36,17 @@ class ExperimentConfig:
 
     package_dir: Path
     model_name: str = ""
-    requested_top_k: int | None = None
-    package_top_k: int | None = None
-    effective_top_k: int | None = None
-    requested_chunking_strategy: str | None = None
-    package_default_chunking_strategy: str | None = None
-    effective_chunking_strategy: str = "class_based"
-    endpoint_timeout_seconds: float = 30.0
+    retrieval_top_k: int = 10
+    chunking_strategy: str = "class_based"
+    correction_max_iterations: int | None = None
 
     def to_dict(self) -> dict[str, object]:
         return {
             "package_dir": str(self.package_dir),
             "model_name": self.model_name,
-            "requested_retrieval_top_k": self.requested_top_k,
-            "package_retrieval_top_k": self.package_top_k,
-            "effective_retrieval_top_k": self.effective_top_k,
-            "requested_chunking_strategy": self.requested_chunking_strategy,
-            "package_default_chunking_strategy": self.package_default_chunking_strategy,
-            "effective_chunking_strategy": self.effective_chunking_strategy,
-            "endpoint_timeout_seconds": self.endpoint_timeout_seconds,
+            "retrieval_top_k": self.retrieval_top_k,
+            "chunking_strategy": self.chunking_strategy,
+            "correction_max_iterations": self.correction_max_iterations,
             "runner": "direct_package",
         }
 
@@ -137,8 +129,9 @@ class ExperimentRunner:
                 question.nl_question,
                 self.config.package_dir,
                 model=self.config.model_name or None,
-                k=self.config.effective_top_k,
-                chunking=self.config.effective_chunking_strategy,
+                k=self.config.retrieval_top_k,
+                chunking=self.config.chunking_strategy,
+                corrections=self.config.correction_max_iterations,
             )
             result.total_latency_ms = (time.perf_counter() - started) * 1000
             result.status = pipeline_result.status
@@ -231,7 +224,7 @@ def save_experiment(
     run_file.write_text(_model_json(experiment), encoding="utf-8")
     metrics_file.write_text(json.dumps(metrics.to_dict(), indent=2), encoding="utf-8")
     config_file.write_text(json.dumps(_run_config_payload(experiment), indent=2), encoding="utf-8")
-    report_file.write_text(format_metrics_report(metrics), encoding="utf-8")
+    report_file.write_text(format_experiment_report(experiment, metrics), encoding="utf-8")
     readable_files = write_evaluation_query_logs(output, experiment)
     return {
         "results": run_file,
@@ -253,12 +246,14 @@ def write_evaluation_query_logs(output_dir: Path, experiment: ExperimentRun) -> 
         f"Evaluation: {experiment.experiment_id}",
         f"Dataset: {experiment.dataset_name}",
         f"Package: {experiment.package_dir}",
-        f"Chunking: {experiment.pipeline_config.get('effective_chunking_strategy')}",
-        f"Retrieval top-k: {experiment.pipeline_config.get('effective_retrieval_top_k')}",
+        f"Chunking: {experiment.pipeline_config.get('chunking_strategy')}",
+        f"Retrieval top-k: {experiment.pipeline_config.get('retrieval_top_k')}",
         "",
     ]
     with jsonl_file.open("w", encoding="utf-8") as jsonl:
         for result in experiment.results:
+            if not result.pipeline_config:
+                result.pipeline_config = dict(experiment.pipeline_config)
             jsonl.write(json.dumps(_model_dict(result), ensure_ascii=False) + "\n")
             (queries_dir / f"{_safe_filename(result.question_id)}.txt").write_text(
                 format_question_log(result),
@@ -268,6 +263,22 @@ def write_evaluation_query_logs(output_dir: Path, experiment: ExperimentRun) -> 
 
     index_file.write_text("\n".join(index_lines) + "\n", encoding="utf-8")
     return {"index": index_file, "queries_jsonl": jsonl_file, "queries_dir": queries_dir}
+
+
+def format_experiment_report(experiment: ExperimentRun, metrics: AggregatedMetrics) -> str:
+    """Format the human-readable evaluation report with run configuration first."""
+    config = experiment.pipeline_config
+    header = (
+        "Run Configuration\n"
+        f"Experiment: {experiment.experiment_id}\n"
+        f"Dataset: {experiment.dataset_name}\n"
+        f"Package: {experiment.package_dir}\n"
+        f"Model: {experiment.model_name}\n"
+        f"Retrieval top-k: {config.get('retrieval_top_k')}\n"
+        f"Chunking: {config.get('chunking_strategy')}\n"
+        f"Correction attempts max: {config.get('correction_max_iterations')}\n"
+    )
+    return header + "\n" + format_metrics_report(metrics)
 
 
 def format_index_line(result: QuestionResult) -> str:
@@ -339,12 +350,9 @@ def format_question_log(result: QuestionResult) -> str:
             "PIPELINE",
             f"Iterations: {result.total_iterations}",
             f"Latency ms: {result.total_latency_ms:.0f}",
-            f"Requested retrieval top-k: {result.pipeline_config.get('requested_retrieval_top_k')}",
-            f"Package retrieval top-k: {result.pipeline_config.get('package_retrieval_top_k')}",
-            f"Effective retrieval top-k: {result.pipeline_config.get('effective_retrieval_top_k')}",
-            f"Requested chunking strategy: {result.pipeline_config.get('requested_chunking_strategy')}",
-            f"Package default chunking strategy: {result.pipeline_config.get('package_default_chunking_strategy')}",
-            f"Effective chunking strategy: {result.pipeline_config.get('effective_chunking_strategy')}",
+            f"Retrieval top-k: {result.pipeline_config.get('retrieval_top_k')}",
+            f"Chunking strategy: {result.pipeline_config.get('chunking_strategy')}",
+            f"Correction attempts max: {result.pipeline_config.get('correction_max_iterations')}",
             f"Trace: {result.trace_path or ''}",
             f"Readable trace: {result.readable_trace_path or ''}",
         ]
@@ -408,24 +416,21 @@ async def run_from_cli(args: argparse.Namespace) -> dict[str, Path]:
 
     dataset = load_dataset(args.dataset)
     output_dir = Path(args.output) if args.output else default_output_dir(package_dir, dataset.dataset_name)
-    package_default_chunking = _string_setting(package_settings, "default_chunking_strategy")
     config = ExperimentConfig(
         package_dir=package_dir,
         model_name=args.model or "",
-        requested_top_k=args.k,
-        package_top_k=_int_setting(package_settings, "retrieval_top_k"),
-        effective_top_k=args.k or _int_setting(package_settings, "retrieval_top_k") or settings.runtime_retrieval_top_k,
-        requested_chunking_strategy=args.chunking,
-        package_default_chunking_strategy=package_default_chunking,
-        effective_chunking_strategy=args.chunking or package_default_chunking or "class_based",
-        endpoint_timeout_seconds=args.preflight_timeout,
+        retrieval_top_k=args.k or _int_setting(package_settings, "retrieval_top_k") or settings.runtime_retrieval_top_k,
+        chunking_strategy=args.chunking or _string_setting(package_settings, "default_chunking_strategy") or "class_based",
+        correction_max_iterations=args.corrections
+        or _int_setting(package_settings, "correction_max_iterations")
+        or settings.correction_max_iterations,
     )
     runner = ExperimentRunner(config)
     experiment, metrics = await runner.run_experiment(dataset, prefix_map=prefix_map_from_package(package_dir))
     saved = save_experiment(experiment, metrics, output_dir)
 
     print()
-    print(format_metrics_report(metrics))
+    print(format_experiment_report(experiment, metrics))
     print()
     print(f"Results: {saved['results']}")
     print(f"Metrics: {saved['metrics']}")
@@ -441,6 +446,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", default="", help="Optional model override")
     parser.add_argument("--k", type=int, default=None, help="Optional retrieval top-k override")
     parser.add_argument("--chunking", choices=SUPPORTED_CHUNKING_ORDER, default=None, help="Optional retrieval index strategy override")
+    parser.add_argument("--corrections", type=int, default=None, help="Optional correction attempt limit")
     parser.add_argument("--output", default="", help="Optional output directory. Defaults to <package>/evaluation/<run-id>/")
     parser.add_argument("--preflight-timeout", type=float, default=30.0, help="Endpoint preflight timeout in seconds")
     return parser.parse_args()

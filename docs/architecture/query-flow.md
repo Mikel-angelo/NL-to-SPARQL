@@ -8,7 +8,7 @@ flowchart TD
     active[get_active_package]
     pipeline[run_query_pipeline]
     package[read package artifacts\nmetadata.json\nsettings.json\nontology_context.json]
-    config[resolve runtime settings\nmodel\nquery_endpoint\nretrieval top-k\nchunking strategy\nmax correction iterations]
+    config[resolve runtime settings\nmodel\nquery_endpoint\nretrieval top-k\nchunking strategy\ncorrection attempts]
     retrieve[retrieve_context\nuses selected indexes/<strategy>\nand k retrieved chunks]
     prompt[render_query_generation_prompt\nquery_generation_prompt.j2]
     prompt_fields[prompt fields\nquestion\nretrieved chunks\nprefix declarations\nontology/dataset labels\noutput + label rules]
@@ -116,3 +116,4 @@ ontology_packages/<package>/logs/
 - Candidate SPARQL is executed only after validation passes.
 - Validation or execution failures can trigger correction attempts.
 - `--k` is retrieval top-k, not correction iterations.
+- `--corrections` is the maximum number of correction loop attempts for that query.

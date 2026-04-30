@@ -220,10 +220,12 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             self.package_dir,
             model="stub-model",
             chunking="property_based",
+            corrections=2,
         )
 
         self.assertEqual(result.status, "completed")
         self.assertEqual(result.chunking_strategy, "property_based")
+        self.assertEqual(result.correction_max_iterations, 2)
         self.assertIn("SELECT", result.generated_sparql or "")
         self.assertTrue(Path(result.trace_path).exists())
         self.assertTrue(Path(result.readable_trace_path).exists())
@@ -396,6 +398,7 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("correction_iterations", latest_trace)
         self.assertIn("run_id", latest_trace)
         self.assertIn("readable_trace_path", result.to_dict())
+        self.assertIn("correction_max_iterations", result.to_dict())
         self.assertEqual(latest_trace["correction_iterations"][0]["validation"]["is_valid"], True)
         self.assertEqual(latest_trace["correction_iterations"][0]["status"], "completed")
         self.assertEqual(latest_trace["correction_iterations"][0]["validation_summary"], "VALIDATION_OK")
@@ -503,10 +506,9 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             ExperimentConfig(
                 package_dir=self.package_dir,
                 model_name="stub-model",
-                package_top_k=10,
-                effective_top_k=10,
-                package_default_chunking_strategy="class_based",
-                effective_chunking_strategy="class_based",
+                retrieval_top_k=10,
+                chunking_strategy="class_based",
+                correction_max_iterations=3,
             )
         )
 
@@ -587,8 +589,9 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             package_dir=str(self.package_dir),
             model_name="stub-model",
             pipeline_config={
-                "effective_retrieval_top_k": 5,
-                "effective_chunking_strategy": "class_based",
+                "retrieval_top_k": 5,
+                "chunking_strategy": "class_based",
+                "correction_max_iterations": 3,
             },
             results=[result],
         )
@@ -605,13 +608,20 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue((saved["queries_dir"] / "Q001.txt").exists())
         index_text = saved["index"].read_text(encoding="utf-8")
         question_text = (saved["queries_dir"] / "Q001.txt").read_text(encoding="utf-8")
+        report_text = saved["report"].read_text(encoding="utf-8")
         self.assertIn("Q001 FAIL", index_text)
+        self.assertIn("Run Configuration", report_text)
+        self.assertIn("Retrieval top-k: 5", report_text)
+        self.assertIn("Chunking: class_based", report_text)
+        self.assertIn("Correction attempts max: 3", report_text)
+        self.assertIn("Evaluation Report: stub_dataset x stub-model", report_text)
         self.assertIn("QUESTION Q001", question_text)
         self.assertIn("GOLD SPARQL", question_text)
         self.assertIn("FINAL SPARQL", question_text)
         self.assertIn("DIFF", question_text)
-        self.assertIn("Effective retrieval top-k", question_text)
-        self.assertIn("Effective chunking strategy", question_text)
+        self.assertIn("Retrieval top-k: 5", question_text)
+        self.assertIn("Chunking strategy: class_based", question_text)
+        self.assertIn("Correction attempts max: 3", question_text)
 
 
 class FakeFusekiService:

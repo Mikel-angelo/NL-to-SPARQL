@@ -234,11 +234,12 @@ Optional query arguments:
 - `--model`: use a different LLM model for this query only
 - `--k`: change the retrieval top-k, meaning how many ontology chunks are retrieved for the prompt
 - `--chunking`: choose which prebuilt package index to retrieve from: `class_based`, `property_based`, or `composite`
+- `--corrections`: change the maximum number of validation/execution correction attempts
 
 Example with query overrides:
 
 ```powershell
-.\.venv\Scripts\python.exe query.py --question "..." --model qwen2.5-coder:7b --k 5 --chunking property_based
+.\.venv\Scripts\python.exe query.py --question "..." --model qwen2.5-coder:7b --k 5 --chunking property_based --corrections 3
 ```
 
 ## Package Layout
@@ -303,7 +304,7 @@ Use `evaluate.py` to run a dataset of natural-language questions and gold SPARQL
 Example with explicit retrieval settings:
 
 ```powershell
-.\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --k 5 --chunking property_based
+.\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --k 5 --chunking property_based --corrections 3
 ```
 
 Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.
@@ -318,12 +319,13 @@ Important behavior:
 - unscored questions count toward latency, validation, execution, and correction metrics, but not correctness metrics
 - `--k` is retrieval top-k, not the correction iteration count
 - `--chunking` chooses which prebuilt package index to retrieve from
-- evaluation records requested, package-default, and effective retrieval top-k and chunking strategy in one concentrated file: `run_config.json`
+- `--corrections` chooses the maximum correction loop attempts for each question
+- evaluation records the actual retrieval top-k, chunking strategy, and correction attempts in one concentrated file: `run_config.json`
 
 Evaluation output files:
 
 - `index.txt`: one-line status summary for every question
-- `run_config.json`: experiment id, dataset, package, model, requested/package/effective retrieval top-k, and requested/package/effective chunking strategy
+- `run_config.json`: experiment id, dataset, package, model, retrieval top-k, chunking strategy, and correction attempts
 - `results.json`: per-question pipeline output, answers, traces, and scoring status
 - `metrics.json`: aggregate metrics
 - `report.txt`: readable summary
@@ -360,6 +362,7 @@ The API has no package selector for `/query`. It always queries the active packa
 - `question`: natural-language question, required
 - `k`: optional retrieval top-k override
 - `chunking`: optional retrieval index strategy override, one of `class_based`, `property_based`, or `composite`
+- `corrections`: optional correction attempt limit
 
 `POST /ontology/load` accepts multipart form data:
 

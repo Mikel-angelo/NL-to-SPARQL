@@ -20,6 +20,7 @@ class QueryRequest(BaseModel):
     question: str = Field(min_length=1)
     k: int | None = Field(default=None, ge=1)
     chunking: Literal["class_based", "property_based", "composite"] | None = None
+    corrections: int | None = Field(default=None, ge=1)
 
 
 class QueryResponse(BaseModel):
@@ -31,6 +32,7 @@ class QueryResponse(BaseModel):
     retrieved_context: list[dict[str, Any]]
     chunking_strategy: str
     retrieval_top_k: int
+    correction_max_iterations: int
     generated_sparql: str | None
     validated_sparql: str | None
     corrected_sparql: str | None
@@ -50,6 +52,7 @@ async def run_query(request: QueryRequest) -> dict[str, object]:
             get_active_package(settings.ontology_packages_path),
             k=request.k,
             chunking=request.chunking,
+            corrections=request.corrections,
         )
         return result.to_dict()
     except PackageNotFoundError as exc:

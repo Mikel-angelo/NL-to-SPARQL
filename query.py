@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--question", required=True, help="Natural-language question")
     parser.add_argument("--model", help="Optional model override")
     parser.add_argument("--k", type=int, help="Optional retrieval top-k override")
+    parser.add_argument("--corrections", type=int, help="Optional correction attempt limit")
     parser.add_argument(
         "--chunking",
         choices=SUPPORTED_CHUNKING_ORDER,
@@ -44,9 +45,11 @@ async def main() -> None:
         model=args.model,
         k=args.k,
         chunking=args.chunking,
+        corrections=args.corrections,
     )
     print(f"Chunking: {result.chunking_strategy}")
     print(f"Retrieval top-k: {result.retrieval_top_k}")
+    print(f"Correction attempts max: {result.correction_max_iterations}")
     print(f"Answer: {result.execution_result}")
     print(f"Generated SPARQL:\n{result.generated_sparql or ''}")
     print(f"Trace: {result.trace_path}")
