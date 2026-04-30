@@ -24,7 +24,7 @@ from app.domain.ontology.package_writer import (
 )
 from app.domain.ontology.source_loader import SUPPORTED_SUFFIXES, load_ontology_file, load_sparql_endpoint
 from app.domain.package import get_active_package, set_active_package
-from app.domain.rag import build_index
+from app.domain.rag import build_all_indexes
 
 
 @dataclass(frozen=True)
@@ -47,6 +47,7 @@ async def onboard_ontology_file(
     packages_root: str | Path,
     fuseki_service: FusekiService,
     source_filename: str | None = None,
+    package_name: str | None = None,
     default_model: str | None = None,
     chunking: str = "class_based",
     activate_package: bool = True,
@@ -59,7 +60,7 @@ async def onboard_ontology_file(
         raise ValueError("Only .ttl, .owl, and .rdf files are supported")
 
     effective_source_filename = source_filename or source_file.name
-    ontology_name = _slugify_filename(effective_source_filename)
+    ontology_name = _slugify_name(package_name) if package_name else _slugify_filename(effective_source_filename)
     packages_root_path = Path(packages_root).resolve()
     dataset_name = _unique_timestamped_name(packages_root_path, ontology_name)
     package_dir = packages_root_path / dataset_name
@@ -90,8 +91,9 @@ async def onboard_ontology_file(
         chunking=chunking,
     )
 
-    _emit_status(status_callback, package_dir, "building_index", chunking=chunking)
-    artifact_result = build_index(package_dir, chunking=chunking)
+    _emit_status(status_callback, package_dir, "building_indexes", default_chunking=chunking)
+    artifact_results = build_all_indexes(package_dir)
+    default_artifact_result = _default_index_result(artifact_results, chunking)
 
     _emit_status(status_callback, package_dir, "uploading_to_fuseki", dataset_name=dataset_name)
     uploads = build_fuseki_uploads_from_package(package_dir, dataset_name=dataset_name)
@@ -111,7 +113,7 @@ async def onboard_ontology_file(
         "onboarding_completed",
         completed_package=str(package_dir),
         dataset_name=dataset_name,
-        chunk_count=artifact_result.chunk_count,
+        chunk_count=default_artifact_result.chunk_count,
     )
     return OnboardingResult(
         package_dir=package_dir,
@@ -119,9 +121,9 @@ async def onboard_ontology_file(
         dataset_endpoint=fuseki_service.dataset_endpoint(dataset_name),
         query_endpoint=query_endpoint,
         source_mode="file",
-        chunks_path=artifact_result.chunks_path,
-        index_path=artifact_result.index_path,
-        chunk_count=artifact_result.chunk_count,
+        chunks_path=default_artifact_result.chunks_path,
+        index_path=default_artifact_result.index_path,
+        chunk_count=default_artifact_result.chunk_count,
     )
 
 
@@ -131,21 +133,19 @@ async def onboard_sparql_endpoint(
     packages_root: str | Path,
     default_model: str | None = None,
     chunking: str = "class_based",
+    package_name: str | None = None,
     activate_package: bool = True,
     status_callback: callable | None = None,
 ) -> OnboardingResult:
     """Build one package from an existing SPARQL endpoint and optionally activate it."""
     packages_root_path = Path(packages_root).resolve()
-    package_dir = packages_root_path / _unique_timestamped_name(
-        packages_root_path,
-        _slugify_endpoint(endpoint),
-    )
+    ontology_name = _slugify_name(package_name) if package_name else _slugify_endpoint(endpoint)
+    package_dir = packages_root_path / _unique_timestamped_name(packages_root_path, ontology_name)
 
     _emit_status(status_callback, package_dir, "loading_source", source=endpoint)
     source = await load_sparql_endpoint(endpoint)
     _emit_status(status_callback, package_dir, "preparing_graph", source=endpoint)
     final_graph = await prepare_final_graph(source.graph, resolve_missing_schemas=False)
-    ontology_name = _slugify_endpoint(endpoint)
     ontology_context = build_ontology_context(
         final_graph.graph,
         ontology_name=ontology_name,
@@ -164,8 +164,9 @@ async def onboard_sparql_endpoint(
         chunking=chunking,
     )
 
-    _emit_status(status_callback, package_dir, "building_index", chunking=chunking)
-    artifact_result = build_index(package_dir, chunking=chunking)
+    _emit_status(status_callback, package_dir, "building_indexes", default_chunking=chunking)
+    artifact_results = build_all_indexes(package_dir)
+    default_artifact_result = _default_index_result(artifact_results, chunking)
 
     if activate_package:
         set_active_package(packages_root, package_dir)
@@ -177,7 +178,7 @@ async def onboard_sparql_endpoint(
         "onboarding_completed",
         completed_package=str(package_dir),
         dataset_name=None,
-        chunk_count=artifact_result.chunk_count,
+        chunk_count=default_artifact_result.chunk_count,
     )
     return OnboardingResult(
         package_dir=package_dir,
@@ -185,9 +186,9 @@ async def onboard_sparql_endpoint(
         dataset_endpoint=None,
         query_endpoint=endpoint,
         source_mode="sparql_endpoint",
-        chunks_path=artifact_result.chunks_path,
-        index_path=artifact_result.index_path,
-        chunk_count=artifact_result.chunk_count,
+        chunks_path=default_artifact_result.chunks_path,
+        index_path=default_artifact_result.index_path,
+        chunk_count=default_artifact_result.chunk_count,
     )
 
 
@@ -210,16 +211,30 @@ def _previous_dataset_name(packages_root: str | Path) -> str | None:
     return dataset_name if isinstance(dataset_name, str) and dataset_name.strip() else None
 
 
+def _default_index_result(results: list[object], chunking: str):
+    for result in results:
+        if getattr(result, "chunking", None) == chunking:
+            return result
+    return results[0]
+
+
 def _slugify_filename(filename: str) -> str:
     stem = Path(filename).stem.lower()
-    return "-".join(part for part in stem.replace("_", "-").split("-") if part) or "ontology"
+    return _slugify_name(stem)
 
 
 def _slugify_endpoint(endpoint: str) -> str:
     text = endpoint.rstrip("/")
     tail = text.rsplit("/", 1)[-1]
-    normalized = tail.lower().replace("_", "-")
-    return "-".join(part for part in normalized.split("-") if part) or "endpoint"
+    return _slugify_name(tail) or "endpoint"
+
+
+def _slugify_name(value: str | None) -> str:
+    if not value:
+        return "ontology"
+    normalized = value.lower().replace("_", "-")
+    allowed = "".join(char if char.isalnum() or char == "-" else "-" for char in normalized)
+    return "-".join(part for part in allowed.split("-") if part) or "ontology"
 
 
 def _unique_timestamped_name(root: Path, base_name: str) -> str:

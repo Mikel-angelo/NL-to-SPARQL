@@ -6,27 +6,30 @@ This diagram shows the main runtime surfaces of the project and how ontology pac
 flowchart LR
     file[Ontology file\n.ttl .owl .rdf]
     endpoint[External SPARQL endpoint]
-    onboard[onboard.py\nonboarding_workflow]
+    onboard_entry[Onboarding entrypoints\nonboard.py\nPOST /ontology/load]
+    onboard[onboarding_workflow]
     package[Ontology package\nmetadata + context + chunks + settings]
     active[Active package pointer\nontology_packages/.active_package]
+    activate[Activation\nset_active_package]
+    fuseki_client[FusekiService\nupload/reload]
+    sparql_exec[sparql_execution\nHTTP query endpoint]
     fuseki[(Managed Fuseki dataset)]
     query[query.py / POST /query\nruntime pipeline]
     eval[evaluate.py\nevaluation runner]
     llm[LLM API]
 
-    file --> onboard
-    endpoint --> onboard
+    file --> onboard_entry
+    endpoint --> onboard_entry
+    onboard_entry --> onboard
     onboard --> package
-    onboard --> active
-    onboard --> fuseki
+    package --> activate --> active
+    package -->|file source upload| fuseki_client --> fuseki
 
-    package --> active
     active --> query
     active --> eval
-    active --> fuseki
 
     query --> llm
-    query --> fuseki
+    query --> sparql_exec --> fuseki
     eval --> query
 ```
 
@@ -34,11 +37,12 @@ flowchart LR
 
 | Area | Main entrypoint | Main domain modules |
 |---|---|---|
-| Onboarding | `onboard.py` | `app/domain/ontology/onboarding_workflow.py` |
+| Onboarding | `onboard.py`, `POST /ontology/load` in `app/api/routes/ontology.py` | `app/domain/ontology/onboarding_workflow.py` |
 | Activation | `activate.py` | `app/domain/ontology/package_activation.py` |
 | Querying | `query.py`, `app/api/routes/query.py` | `app/domain/runtime/pipeline.py` |
 | Evaluation | `evaluate.py` | `evaluation/experiment_runner.py` |
-| Fuseki integration | n/a | `app/clients/fuseki.py` |
+| Fuseki upload/reload integration | n/a | `app/clients/fuseki.py` |
+| Runtime SPARQL execution | n/a | `app/domain/runtime/sparql_execution.py` |
 | LLM integration | n/a | `app/clients/llm.py` |
 | Package state | n/a | `app/domain/package.py` |
 

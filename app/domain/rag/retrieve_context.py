@@ -41,14 +41,16 @@ def retrieve_context(
     question: str,
     *,
     k: int = 5,
+    chunking: str | None = None,
 ) -> list[RetrievedChunk]:
     """Return the top-k retrieved chunks for one question."""
     root = resolve_package_dir(package_dir)
     settings_payload = read_json_file(settings_path(root))
     effective_k = max(1, k or int(_number_setting(settings_payload, "retrieval_top_k", settings.runtime_retrieval_top_k)))
+    effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
 
-    chunks = read_json_list(chunks_path(root))
-    index = faiss.read_index(str(index_path(root)))
+    chunks = read_json_list(chunks_path(root, effective_chunking))
+    index = faiss.read_index(str(index_path(root, effective_chunking)))
     query_vector = index_module.embed_texts([question.strip()])
     search_k = min(effective_k, index.ntotal)
     distances, indices = index.search(query_vector, k=search_k)
@@ -77,11 +79,12 @@ def retrieve_text_chunks(
     question: str,
     *,
     k: int = 5,
+    chunking: str | None = None,
 ) -> list[str]:
     """Return only retrieved chunk text for simple callers."""
     return [
         chunk.text
-        for chunk in retrieve_context(package_dir, question, k=k)
+        for chunk in retrieve_context(package_dir, question, k=k, chunking=chunking)
         if isinstance(chunk.text, str)
     ]
 
@@ -89,3 +92,8 @@ def retrieve_text_chunks(
 def _number_setting(payload: dict[str, object], key: str, default: int) -> int:
     value = payload.get(key)
     return int(value) if isinstance(value, (int, float)) else default
+
+
+def _string_setting(payload: dict[str, object], key: str, default: str) -> str:
+    value = payload.get(key)
+    return value if isinstance(value, str) and value.strip() else default

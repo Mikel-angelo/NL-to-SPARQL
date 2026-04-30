@@ -48,6 +48,8 @@ def render_readable_query_trace(payload: dict[str, object]) -> str:
         f"Status: {_text(payload.get('status'))}",
         f"Dataset: {_text(payload.get('dataset_name'))}",
         f"Endpoint: {_text(payload.get('dataset_endpoint'))}",
+        f"Chunking: {_text(payload.get('chunking_strategy'))}",
+        f"Retrieval top-k: {_text(payload.get('retrieval_top_k'))}",
         "",
         "QUESTION",
         _text(payload.get("question_asked")),

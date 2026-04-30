@@ -11,6 +11,7 @@ import asyncio
 
 from app.core.config import settings
 from app.domain.package import PackageNotFoundError, get_active_package
+from app.domain.rag import SUPPORTED_CHUNKING_ORDER
 from app.domain.runtime import run_query_pipeline
 
 
@@ -19,6 +20,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--question", required=True, help="Natural-language question")
     parser.add_argument("--model", help="Optional model override")
     parser.add_argument("--k", type=int, help="Optional retrieval top-k override")
+    parser.add_argument(
+        "--chunking",
+        choices=SUPPORTED_CHUNKING_ORDER,
+        help="Optional retrieval index strategy override",
+    )
     return parser.parse_args()
 
 
@@ -37,10 +43,14 @@ async def main() -> None:
         package_dir,
         model=args.model,
         k=args.k,
+        chunking=args.chunking,
     )
+    print(f"Chunking: {result.chunking_strategy}")
+    print(f"Retrieval top-k: {result.retrieval_top_k}")
     print(f"Answer: {result.execution_result}")
     print(f"Generated SPARQL:\n{result.generated_sparql or ''}")
     print(f"Trace: {result.trace_path}")
+    print(f"Readable trace: {result.readable_trace_path}")
     print(f"Status: {result.status}")
     if result.errors:
         print(f"Errors: {result.errors}")

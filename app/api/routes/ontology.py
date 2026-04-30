@@ -18,12 +18,12 @@ async def load_ontology(
     file: UploadFile = File(...),
     chunking: str = Form("class_based"),
 ) -> dict[str, str]:
-    """Create an ontology package, build its index, upload it to Fuseki, and activate it."""
+    """Create a package, build all indexes, upload it to Fuseki, and activate it."""
     if chunking not in SUPPORTED_CHUNKING_STRATEGIES:
         supported = ", ".join(sorted(SUPPORTED_CHUNKING_STRATEGIES))
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Unsupported chunking strategy: {chunking}. Supported values: {supported}",
+            detail=f"Unsupported default chunking strategy: {chunking}. Supported values: {supported}",
         )
 
     source_filename = file.filename or "ontology"

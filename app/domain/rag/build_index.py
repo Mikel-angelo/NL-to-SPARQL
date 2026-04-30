@@ -1,8 +1,7 @@
 """Build RAG retrieval artifacts for an ontology package.
 
-This module builds `chunks/chunks.json` and `chunks/index.faiss` from an
-existing `ontology_context.json`. Onboarding calls it after extraction, and it
-can also be called directly by API/CLI surfaces that only rebuild retrieval.
+This module builds `indexes/<strategy>/chunks.json` and
+`indexes/<strategy>/index.faiss` from an existing `ontology_context.json`.
 """
 
 from __future__ import annotations
@@ -20,15 +19,14 @@ from app.domain.package import (
     PackageNotFoundError,
     chunks_path,
     index_path,
+    index_strategy_dir,
     metadata_path,
     read_json_file,
     resolve_package_dir,
-    chunks_dir,
-    settings_path,
     write_json_file,
     ontology_context_path,
 )
-from app.domain.rag.chunking import build_chunks
+from app.domain.rag.chunking import SUPPORTED_CHUNKING_ORDER, build_chunks
 
 
 _EMBEDDING_MODEL: SentenceTransformer | None = None
@@ -64,11 +62,11 @@ def build_index(
     vectors = embed_texts(texts)
     index = build_vector_index(vectors)
 
-    chunk_dir = chunks_dir(root)
+    chunk_dir = index_strategy_dir(root, chunking)
     chunk_dir.mkdir(parents=True, exist_ok=True)
-    chunks_file = chunks_path(root)
+    chunks_file = chunks_path(root, chunking)
     chunks_file.write_text(json.dumps(chunks, indent=2), encoding="utf-8")
-    index_file = index_path(root)
+    index_file = index_path(root, chunking)
     faiss.write_index(index, str(index_file))
 
     files_loaded = metadata.setdefault("files_loaded", [])
@@ -79,18 +77,22 @@ def build_index(
             files_loaded.append(relative_chunks)
         if relative_index not in files_loaded:
             files_loaded.append(relative_index)
-    metadata["runtime_artifacts"] = {
+    runtime_artifacts = metadata.setdefault("runtime_artifacts", {})
+    if not isinstance(runtime_artifacts, dict):
+        runtime_artifacts = {}
+    indexes = runtime_artifacts.setdefault("indexes", {})
+    if not isinstance(indexes, dict):
+        indexes = {}
+    indexes[chunking] = {
         "chunking_strategy": chunking,
         "chunks_file": chunks_file.relative_to(root).as_posix(),
         "index_file": index_file.relative_to(root).as_posix(),
         "count": len(chunks),
         "embedding_model": settings.rag_embedding_model_name,
     }
+    runtime_artifacts["indexes"] = indexes
+    metadata["runtime_artifacts"] = runtime_artifacts
     write_json_file(metadata_path(root), metadata)
-
-    settings_payload = read_json_file(settings_path(root))
-    settings_payload["chunking_strategy"] = chunking
-    write_json_file(settings_path(root), settings_payload)
 
     return IndexBuildResult(
         package_dir=root,
@@ -100,6 +102,14 @@ def build_index(
         chunk_count=len(chunks),
         embedding_model=settings.rag_embedding_model_name,
     )
+
+
+def build_all_indexes(package_dir: str | Path) -> list[IndexBuildResult]:
+    """Build every supported chunking strategy for one ontology package."""
+    return [
+        build_index(package_dir, chunking=chunking)
+        for chunking in SUPPORTED_CHUNKING_ORDER
+    ]
 
 
 def embed_texts(texts: list[str]) -> np.ndarray:

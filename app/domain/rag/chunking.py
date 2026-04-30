@@ -4,6 +4,7 @@ from __future__ import annotations
 
 
 SUPPORTED_CHUNKING_STRATEGIES = {"class_based", "property_based", "composite"}
+SUPPORTED_CHUNKING_ORDER = ("class_based", "property_based", "composite")
 
 
 def build_chunks(ontology_context: dict[str, object], chunking: str) -> list[dict[str, object]]:

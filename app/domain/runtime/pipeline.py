@@ -51,6 +51,8 @@ class QueryPipelineResult:
     dataset_name: str
     dataset_endpoint: str
     retrieved_context: list[dict[str, object]]
+    chunking_strategy: str
+    retrieval_top_k: int
     generated_sparql: str | None
     validated_sparql: str | None
     corrected_sparql: str | None
@@ -66,6 +68,8 @@ class QueryPipelineResult:
             "dataset_name": self.dataset_name,
             "dataset_endpoint": self.dataset_endpoint,
             "retrieved_context": self.retrieved_context,
+            "chunking_strategy": self.chunking_strategy,
+            "retrieval_top_k": self.retrieval_top_k,
             "generated_sparql": self.generated_sparql,
             "validated_sparql": self.validated_sparql,
             "corrected_sparql": self.corrected_sparql,
@@ -84,13 +88,15 @@ async def run_query_pipeline(
     model: str | None = None,
     endpoint: str | None = None,
     k: int | None = None,
+    chunking: str | None = None,
 ) -> QueryPipelineResult:
     """Answer one natural-language question using one ontology package.
 
     Package values from `settings.json` are used by default. `model`, `endpoint`,
-    and `k` are per-call overrides for the LLM model, SPARQL query endpoint, and
-    retrieval depth. The function writes one trace entry to `logs/query.log` and
-    returns the same runtime state in structured form.
+    `k`, and `chunking` are per-call overrides for the LLM model, SPARQL query
+    endpoint, retrieval depth, and retrieval index strategy. The function writes
+    one trace entry to `logs/query.log` and returns the same runtime state in
+    structured form.
     """
     root = resolve_package_dir(package_dir)
     metadata = read_json_file(metadata_path(root))
@@ -104,12 +110,14 @@ async def run_query_pipeline(
         _string_setting(metadata, "query_endpoint", ""),
     )
     effective_k = k or _int_setting(settings_payload, "retrieval_top_k", settings.runtime_retrieval_top_k)
+    effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
     max_iterations = _int_setting(settings_payload, "correction_max_iterations", settings.correction_max_iterations)
 
     retrieved_context = retrieve_context(
         root,
         question,
         k=effective_k,
+        chunking=effective_chunking,
     )
     retrieved_payload = [item.to_dict() for item in retrieved_context]
     prompt = render_query_generation_prompt(
@@ -121,6 +129,7 @@ async def run_query_pipeline(
     attempt_result = await run_query_attempts(
         question=question,
         generation_prompt=prompt,
+        retrieved_context=retrieved_context,
         ontology_context=ontology_context,
         endpoint_url=effective_endpoint,
         model=effective_model,
@@ -136,6 +145,8 @@ async def run_query_pipeline(
         "question_asked": question,
         "dataset_name": _dataset_name(metadata, root.name),
         "dataset_endpoint": effective_endpoint,
+        "chunking_strategy": effective_chunking,
+        "retrieval_top_k": effective_k,
         "retrieved_context": retrieved_payload,
         "prompt_generated": prompt,
         "llm_generated_query": attempt_result.original_query,
@@ -161,6 +172,8 @@ async def run_query_pipeline(
         dataset_name=_dataset_name(metadata, root.name),
         dataset_endpoint=effective_endpoint,
         retrieved_context=retrieved_payload,
+        chunking_strategy=effective_chunking,
+        retrieval_top_k=effective_k,
         generated_sparql=attempt_result.original_query,
         validated_sparql=attempt_result.validated_query,
         corrected_sparql=attempt_result.corrected_query,
@@ -197,6 +210,7 @@ async def run_query_attempts(
     *,
     question: str,
     generation_prompt: str,
+    retrieved_context: list[RetrievedChunk],
     ontology_context: dict[str, object],
     endpoint_url: str,
     model: str,
@@ -274,6 +288,7 @@ async def run_query_attempts(
             question=question,
             failed_query=current_query,
             validation_errors=errors or [],
+            retrieved_context=retrieved_context,
             ontology_context=ontology_context,
             model=model,
             llm_api_url=llm_api_url,

@@ -1,6 +1,7 @@
 """HTTP route for running the runtime query pipeline against the active package."""
 
 from typing import Any
+from typing import Literal
 
 from pydantic import BaseModel, Field
 from fastapi import APIRouter, HTTPException, status
@@ -17,6 +18,8 @@ class QueryRequest(BaseModel):
     """Request body for the runtime NL-to-SPARQL route."""
 
     question: str = Field(min_length=1)
+    k: int | None = Field(default=None, ge=1)
+    chunking: Literal["class_based", "property_based", "composite"] | None = None
 
 
 class QueryResponse(BaseModel):
@@ -26,6 +29,8 @@ class QueryResponse(BaseModel):
     dataset_name: str
     dataset_endpoint: str
     retrieved_context: list[dict[str, Any]]
+    chunking_strategy: str
+    retrieval_top_k: int
     generated_sparql: str | None
     validated_sparql: str | None
     corrected_sparql: str | None
@@ -43,6 +48,8 @@ async def run_query(request: QueryRequest) -> dict[str, object]:
         result = await run_query_pipeline(
             request.question,
             get_active_package(settings.ontology_packages_path),
+            k=request.k,
+            chunking=request.chunking,
         )
         return result.to_dict()
     except PackageNotFoundError as exc:

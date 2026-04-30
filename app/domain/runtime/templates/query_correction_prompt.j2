@@ -3,6 +3,18 @@ You generated a SPARQL query that failed validation or execution.
 Original question:
 {{ original_question }}
 
+Relevant Ontology Chunks:
+{% if retrieved_context %}
+{% for item in retrieved_context %}
+Chunk {{ item.rank or loop.index }}:
+"""
+{{ item.text or "" }}
+"""
+{% endfor %}
+{% else %}
+No retrieved ontology context was available.
+{% endif %}
+
 Failed query:
 {{ failed_query }}
 

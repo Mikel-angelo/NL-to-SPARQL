@@ -59,6 +59,7 @@ def render_correction_prompt(
     original_question: str,
     failed_query: str,
     validation_errors: list[str],
+    retrieved_context: list[RetrievedChunk] | list[dict[str, object]] | None = None,
     ontology_context: dict[str, object] | None = None,
 ) -> str:
     """Render the correction prompt for one failed runtime attempt.
@@ -71,6 +72,7 @@ def render_correction_prompt(
         original_question=original_question.strip(),
         failed_query=failed_query.strip(),
         validation_errors=validation_errors,
+        retrieved_context=_retrieved_context_payload(retrieved_context or []),
         prefix_declarations=prefix_declarations(ontology_context or {}),
     )
 
@@ -98,6 +100,23 @@ def prefix_declarations(ontology_context: dict[str, object]) -> list[str]:
         else:
             declarations.append(f"PREFIX {prefix}: <{namespace}>")
     return declarations
+
+
+def _retrieved_context_payload(
+    retrieved_context: list[RetrievedChunk] | list[dict[str, object]],
+) -> list[dict[str, object]]:
+    payload = []
+    for index, item in enumerate(retrieved_context, 1):
+        if isinstance(item, RetrievedChunk):
+            payload.append({"rank": item.rank, "text": item.text})
+        elif isinstance(item, dict):
+            payload.append(
+                {
+                    "rank": item.get("rank", index),
+                    "text": item.get("text", ""),
+                }
+            )
+    return payload
 
 
 def _template_environment() -> Environment:

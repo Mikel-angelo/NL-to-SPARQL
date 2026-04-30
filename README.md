@@ -102,7 +102,7 @@ Ontology package: C:\...\ontology_packages\enovation-20260427-1840
 Dataset name: enovation-20260427-1840
 Dataset endpoint: http://127.0.0.1:3030/enovation-20260427-1840
 Query endpoint: http://127.0.0.1:3030/enovation-20260427-1840/query
-Artifacts: ...\chunks.json | ...\index.faiss
+Artifacts: ...\indexes\class_based\chunks.json | ...\indexes\class_based\index.faiss
 ```
 
 Use the printed `Ontology package` path with `activate.py` if you later need to switch back to this package.
@@ -117,10 +117,11 @@ This creates the same package structure, but does not upload a new local ontolog
 
 Optional onboarding arguments:
 
+- `--name`: save a readable package/dataset name base; a minute timestamp is appended
 - `--model`: save a different default LLM model in `settings.json`
-- `--chunking`: save a different chunking strategy name; defaults to `class_based`
+- `--chunking`: choose the default retrieval index strategy saved in `settings.json`; all supported indexes are still built
 
-Supported chunking strategies:
+Supported retrieval index strategies:
 
 - `class_based`: one chunk per class with class label, description, and direct properties with ranges
 - `property_based`: one chunk per property with property label, description, domain classes, and range classes or datatypes
@@ -129,8 +130,10 @@ Supported chunking strategies:
 Example:
 
 ```powershell
-.\.venv\Scripts\python.exe onboard.py --ontology path\to\ontology.ttl --output ontology_packages --model qwen2.5-coder:7b
+.\.venv\Scripts\python.exe onboard.py --ontology path\to\ontology.ttl --output ontology_packages --name enovation --chunking composite --model qwen2.5-coder:7b
 ```
+
+That package contains `class_based`, `property_based`, and `composite` indexes. `--chunking composite` only makes `composite` the default for later queries and evaluations that do not pass a chunking override.
 
 ### `activate.py`
 
@@ -230,11 +233,12 @@ Optional query arguments:
 
 - `--model`: use a different LLM model for this query only
 - `--k`: change the retrieval top-k, meaning how many ontology chunks are retrieved for the prompt
+- `--chunking`: choose which prebuilt package index to retrieve from: `class_based`, `property_based`, or `composite`
 
 Example with query overrides:
 
 ```powershell
-.\.venv\Scripts\python.exe query.py --question "..." --model qwen2.5-coder:7b --k 5
+.\.venv\Scripts\python.exe query.py --question "..." --model qwen2.5-coder:7b --k 5 --chunking property_based
 ```
 
 ## Package Layout
@@ -250,9 +254,16 @@ ontology_packages/
     ontology/
       source.ttl
       schemas/
-    chunks/
-      chunks.json
-      index.faiss
+    indexes/
+      class_based/
+        chunks.json
+        index.faiss
+      property_based/
+        chunks.json
+        index.faiss
+      composite/
+        chunks.json
+        index.faiss
     logs/
       onboard.log
       query.log
@@ -263,10 +274,10 @@ ontology_packages/
 Important files:
 
 - `metadata.json`: onboarding summary and artifact paths
-- `settings.json`: saved endpoint, model, and selected chunking strategy
+- `settings.json`: saved endpoint, model, `default_chunking_strategy`, retrieval top-k, and correction iteration limit
 - `ontology_context.json`: normalized ontology structure used by the runtime
-- `chunks/chunks.json`: text chunks used for retrieval
-- `chunks/index.faiss`: vector index for retrieval
+- `indexes/<strategy>/chunks.json`: text chunks for one retrieval strategy
+- `indexes/<strategy>/index.faiss`: vector index for one retrieval strategy
 - `logs/onboard.log`: onboarding trace
 - `logs/query.log`: machine-readable query trace JSON
 - `logs/query-latest.txt`: latest human-readable query trace
@@ -289,6 +300,12 @@ Use `evaluate.py` to run a dataset of natural-language questions and gold SPARQL
 .\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840
 ```
 
+Example with explicit retrieval settings:
+
+```powershell
+.\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --k 5 --chunking property_based
+```
+
 Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.
 
 Important behavior:
@@ -300,10 +317,13 @@ Important behavior:
 - questions with empty `gold_answers` are run but marked `missing_gold` / unscored
 - unscored questions count toward latency, validation, execution, and correction metrics, but not correctness metrics
 - `--k` is retrieval top-k, not the correction iteration count
+- `--chunking` chooses which prebuilt package index to retrieve from
+- evaluation records requested, package-default, and effective retrieval top-k and chunking strategy in one concentrated file: `run_config.json`
 
 Evaluation output files:
 
 - `index.txt`: one-line status summary for every question
+- `run_config.json`: experiment id, dataset, package, model, requested/package/effective retrieval top-k, and requested/package/effective chunking strategy
 - `results.json`: per-question pipeline output, answers, traces, and scoring status
 - `metrics.json`: aggregate metrics
 - `report.txt`: readable summary
@@ -335,32 +355,40 @@ Main routes:
 
 The API has no package selector for `/query`. It always queries the active package. For local file packages, activate the package first so Fuseki is loaded with the matching dataset.
 
+`POST /query` accepts:
+
+- `question`: natural-language question, required
+- `k`: optional retrieval top-k override
+- `chunking`: optional retrieval index strategy override, one of `class_based`, `property_based`, or `composite`
+
 `POST /ontology/load` accepts multipart form data:
 
 - `file`: ontology file, required
-- `chunking`: optional; one of `class_based`, `property_based`, or `composite`; defaults to `class_based`
+- `chunking`: optional default retrieval index strategy; all supported indexes are built
 
-The static UI at `GET /` exposes the same upload route and includes a chunking strategy selector.
+The static UI at `GET /` exposes the same upload route and includes a default chunking strategy selector.
 
 ## RAG Module API
 
 The indexing and retrieval logic is available without running the full query pipeline:
 
 ```python
-from app.domain.rag import build_index, retrieve_context, retrieve_text_chunks
+from app.domain.rag import build_all_indexes, retrieve_context, retrieve_text_chunks
 
-build_index("ontology_packages/my-package", chunking="composite")
+build_all_indexes("ontology_packages/my-package")
 
 chunks = retrieve_context(
     "ontology_packages/my-package",
     "Which training centres offer CBRN exercises?",
     k=5,
+    chunking="composite",
 )
 
 texts = retrieve_text_chunks(
     "ontology_packages/my-package",
     "Which training centres offer CBRN exercises?",
     k=5,
+    chunking="property_based",
 )
 ```
 
@@ -381,8 +409,8 @@ app/
     package_writer.py          metadata/settings/context/source/schema artifact writing
   domain/rag/
     chunking.py                chunk construction strategies
-    build_index.py             chunks/chunks.json and chunks/index.faiss building
-    retrieve_context.py        semantic chunk retrieval from a package
+    build_index.py             indexes/<strategy>/chunks.json and index.faiss building
+    retrieve_context.py        semantic chunk retrieval from a selected package index
   domain/runtime/      SPARQL prompt generation, validation, self-correction, execution
     pipeline.py                 runtime query pipeline orchestration
     query_generation.py          initial LLM query generation and output normalization

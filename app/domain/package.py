@@ -33,7 +33,7 @@ def ensure_package_dirs(package_dir: str | Path) -> Path:
     ontology_dir(root).mkdir(parents=True, exist_ok=True)
     schemas_dir(root).mkdir(parents=True, exist_ok=True)
     logs_dir(root).mkdir(parents=True, exist_ok=True)
-    chunks_dir(root).mkdir(parents=True, exist_ok=True)
+    indexes_dir(root).mkdir(parents=True, exist_ok=True)
     return root
 
 
@@ -49,8 +49,12 @@ def logs_dir(package_dir: str | Path) -> Path:
     return resolve_package_dir(package_dir) / "logs"
 
 
-def chunks_dir(package_dir: str | Path) -> Path:
-    return resolve_package_dir(package_dir) / "chunks"
+def indexes_dir(package_dir: str | Path) -> Path:
+    return resolve_package_dir(package_dir) / "indexes"
+
+
+def index_strategy_dir(package_dir: str | Path, chunking: str) -> Path:
+    return indexes_dir(package_dir) / chunking
 
 
 def metadata_path(package_dir: str | Path) -> Path:
@@ -85,12 +89,12 @@ def source_path(package_dir: str | Path, suffix: str) -> Path:
     return ontology_dir(package_dir) / f"source{suffix}"
 
 
-def chunks_path(package_dir: str | Path) -> Path:
-    return chunks_dir(package_dir) / "chunks.json"
+def chunks_path(package_dir: str | Path, chunking: str = "class_based") -> Path:
+    return index_strategy_dir(package_dir, chunking) / "chunks.json"
 
 
-def index_path(package_dir: str | Path) -> Path:
-    return chunks_dir(package_dir) / "index.faiss"
+def index_path(package_dir: str | Path, chunking: str = "class_based") -> Path:
+    return index_strategy_dir(package_dir, chunking) / "index.faiss"
 
 
 def read_json_file(path: Path) -> dict[str, object]:

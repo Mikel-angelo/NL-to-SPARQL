@@ -14,11 +14,12 @@ from rdflib import Graph
 from app.domain import package as package_module
 from app.domain.ontology.graph_preparation import prepare_final_graph
 from app.domain.ontology.ontology_context import build_ontology_context
+from app.domain.ontology.onboarding_workflow import onboard_ontology_file
 from app.domain.ontology.package_activation import activate_package, build_fuseki_uploads_from_package
 from app.domain.ontology.package_writer import OntologyPackageArtifacts, write_ontology_package
 from app.domain.ontology.source_loader import LoadedOntologySource, load_ontology_file
 from app.domain.package import get_active_package
-from app.domain.rag import build_index, retrieve_text_chunks
+from app.domain.rag import SUPPORTED_CHUNKING_ORDER, build_all_indexes, build_index, retrieve_text_chunks
 from app.domain.rag.chunking import build_chunks
 from app.domain.rag.retrieve_context import RetrievedChunk
 from app.domain.runtime import run_query_attempts, run_query_pipeline
@@ -167,10 +168,25 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue((self.package_dir / "metadata.json").exists())
         self.assertTrue((self.package_dir / "ontology_context.json").exists())
         self.assertTrue((self.package_dir / "settings.json").exists())
+        self.assertEqual(artifacts.settings["default_chunking_strategy"], "class_based")
+        self.assertNotIn("chunking_strategy", artifacts.settings)
         self.assertTrue(artifact_result.chunks_path.exists())
         self.assertTrue(artifact_result.index_path.exists())
-        self.assertEqual(artifact_result.chunks_path.parent.name, "chunks")
-        self.assertEqual(artifact_result.index_path.parent.name, "chunks")
+        self.assertEqual(artifact_result.chunks_path.parent.name, "class_based")
+        self.assertEqual(artifact_result.index_path.parent.name, "class_based")
+        self.assertEqual(artifact_result.chunks_path.parent.parent.name, "indexes")
+        self.assertEqual(artifact_result.index_path.parent.parent.name, "indexes")
+
+    async def test_build_all_indexes_creates_every_supported_strategy(self) -> None:
+        await self._prepare_file_package()
+
+        results = build_all_indexes(self.package_dir)
+
+        self.assertEqual([result.chunking for result in results], list(SUPPORTED_CHUNKING_ORDER))
+        for result in results:
+            self.assertTrue(result.chunks_path.exists())
+            self.assertTrue(result.index_path.exists())
+            self.assertEqual(result.chunks_path.parent.name, result.chunking)
 
     async def test_chunking_strategies_build_class_property_and_composite_chunks(self) -> None:
         artifacts = await self._prepare_file_package()
@@ -197,19 +213,22 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_run_query_pipeline_uses_config_artifacts(self) -> None:
         await self._prepare_file_package()
-        build_index(self.package_dir, chunking="class_based")
+        build_all_indexes(self.package_dir)
 
         result = await run_query_pipeline(
             "Which places exist?",
             self.package_dir,
             model="stub-model",
+            chunking="property_based",
         )
 
         self.assertEqual(result.status, "completed")
+        self.assertEqual(result.chunking_strategy, "property_based")
         self.assertIn("SELECT", result.generated_sparql or "")
         self.assertTrue(Path(result.trace_path).exists())
         self.assertTrue(Path(result.readable_trace_path).exists())
         readable_trace = Path(result.readable_trace_path).read_text(encoding="utf-8")
+        self.assertIn("Chunking: property_based", readable_trace)
         self.assertIn("GENERATION PROMPT", readable_trace)
         self.assertIn("INITIAL GENERATED QUERY", readable_trace)
         self.assertGreaterEqual(len(result.retrieved_context), 1)
@@ -260,6 +279,16 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             original_question="Which places exist?",
             failed_query="SELECT ?x WHERE { ?s ?p ?o }",
             validation_errors=["SELECT variables are not bound in WHERE: x"],
+            retrieved_context=[
+                RetrievedChunk(
+                    rank=1,
+                    score=0.1,
+                    class_name="Place",
+                    class_uri="http://example.com/Place",
+                    text="Class: Place\nObject Properties:\n- worksAt -> Place",
+                    metadata=None,
+                )
+            ],
             ontology_context={
                 "prefixes": [
                     {"prefix": "ex", "namespace": "http://example.com/"},
@@ -268,6 +297,8 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         )
 
         self.assertIn("Original question:", prompt)
+        self.assertIn("Relevant Ontology Chunks:", prompt)
+        self.assertIn("Class: Place", prompt)
         self.assertIn("Failed query:", prompt)
         self.assertIn("SELECT variables are not bound in WHERE: x", prompt)
         self.assertIn("PREFIX ex: <http://example.com/>", prompt)
@@ -320,6 +351,16 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         result = await run_query_attempts(
             question="Which places exist?",
             generation_prompt="prompt",
+            retrieved_context=[
+                RetrievedChunk(
+                    rank=1,
+                    score=0.1,
+                    class_name="Place",
+                    class_uri="http://example.com/Place",
+                    text="Class: Place",
+                    metadata=None,
+                )
+            ],
             ontology_context={
                 "object_properties": [{"uri": "http://example.com/worksAt"}],
                 "datatype_properties": [],
@@ -390,6 +431,21 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(fake_fuseki.reloads[0][0], "example-dataset")
         self.assertEqual(fake_fuseki.reloads[0][2], "previous-dataset")
 
+    async def test_onboarding_package_name_sets_dataset_name_base(self) -> None:
+        fake_fuseki = FakeFusekiService()
+
+        result = await onboard_ontology_file(
+            self.ontology_path,
+            packages_root=self.root / "named-packages",
+            fuseki_service=fake_fuseki,
+            package_name="enovation class based",
+            activate_package=False,
+        )
+
+        self.assertTrue(result.dataset_name.startswith("enovation-class-based-"))
+        self.assertEqual(result.package_dir.name, result.dataset_name)
+        self.assertEqual(fake_fuseki.replacements[0][0], result.dataset_name)
+
     async def test_activation_of_sparql_endpoint_does_not_upload(self) -> None:
         await self._prepare_endpoint_package(endpoint="http://example.test/sparql")
         packages_root = self.root / "ontology_packages-root"
@@ -444,7 +500,14 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             ],
         )
         runner = ExperimentRunner(
-            ExperimentConfig(package_dir=self.package_dir, model_name="stub-model")
+            ExperimentConfig(
+                package_dir=self.package_dir,
+                model_name="stub-model",
+                package_top_k=10,
+                effective_top_k=10,
+                package_default_chunking_strategy="class_based",
+                effective_chunking_strategy="class_based",
+            )
         )
 
         experiment, metrics = await runner.run_experiment(dataset)
@@ -523,6 +586,10 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             dataset_name="stub_dataset",
             package_dir=str(self.package_dir),
             model_name="stub-model",
+            pipeline_config={
+                "effective_retrieval_top_k": 5,
+                "effective_chunking_strategy": "class_based",
+            },
             results=[result],
         )
 
@@ -532,6 +599,7 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             self.root / "eval-output",
         )
 
+        self.assertTrue(saved["run_config"].exists())
         self.assertTrue(saved["index"].exists())
         self.assertTrue(saved["queries_jsonl"].exists())
         self.assertTrue((saved["queries_dir"] / "Q001.txt").exists())
@@ -542,15 +610,24 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("GOLD SPARQL", question_text)
         self.assertIn("FINAL SPARQL", question_text)
         self.assertIn("DIFF", question_text)
+        self.assertIn("Effective retrieval top-k", question_text)
+        self.assertIn("Effective chunking strategy", question_text)
 
 
 class FakeFusekiService:
     def __init__(self) -> None:
         self.reloads: list[tuple[str, list[object], str | None]] = []
+        self.replacements: list[tuple[str, list[object], str | None]] = []
         self.deleted: list[tuple[str, bool]] = []
 
     async def reload_active_dataset(self, dataset_name, files, previous_dataset_name):
         self.reloads.append((dataset_name, files, previous_dataset_name))
+
+    async def replace_dataset(self, dataset_name, files, previous_dataset_name):
+        self.replacements.append((dataset_name, files, previous_dataset_name))
+
+    def dataset_endpoint(self, dataset_name):
+        return f"http://example.test/{dataset_name}"
 
     async def delete_dataset(self, dataset_name, ignore_missing=False):
         self.deleted.append((dataset_name, ignore_missing))
