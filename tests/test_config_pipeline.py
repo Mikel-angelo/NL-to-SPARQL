@@ -272,7 +272,8 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("provided prefix declarations", prompt)
         self.assertIn("Ontology label, not a SPARQL prefix", prompt)
         self.assertIn("Do not use the ontology label or dataset label as a prefix", prompt)
-        self.assertIn("prefer returning a human-readable label variable", prompt)
+        self.assertIn("return the label variable instead of the entity URI", prompt)
+        self.assertIn("Return an entity URI only when the question explicitly asks for URIs", prompt)
         self.assertIn("Use `rdfs:label` for labels", prompt)
         self.assertIn("COALESCE", prompt)
         self.assertIn("Which places exist?", prompt)
@@ -308,7 +309,8 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("PREFIX ex: <http://example.com/>", prompt)
         self.assertIn("Do not use the ontology label or dataset label as a prefix", prompt)
         self.assertIn("Do not invent prefixes", prompt)
-        self.assertIn("prefer returning a human-readable label variable", prompt)
+        self.assertIn("return the label variable instead of the entity URI", prompt)
+        self.assertIn("Return an entity URI only when the question explicitly asks for URIs", prompt)
         self.assertIn("Use `rdfs:label` for labels", prompt)
 
     def test_validation_returns_formal_stage_results(self) -> None:
@@ -350,6 +352,57 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("PREFIX ex: <http://example.com/>", known.normalized_query)
         self.assertFalse(unknown.is_valid)
         self.assertTrue(any("bad" in error for error in unknown.errors))
+
+    def test_validation_allows_aggregate_alias_without_group_by(self) -> None:
+        result = validate_query(
+            "SELECT (COUNT(?person) AS ?totalPeople) WHERE { ?person a <http://example.com/Person> . }",
+            ontology_context={
+                "object_properties": [],
+                "datatype_properties": [],
+                "classes": [{"uri": "http://example.com/Person"}],
+                "prefixes": [],
+            },
+        )
+
+        self.assertTrue(result.is_valid)
+
+    def test_validation_requires_group_by_for_non_aggregate_select_variables(self) -> None:
+        missing_group = validate_query(
+            "SELECT ?place (COUNT(?person) AS ?count) WHERE { ?person <http://example.com/worksAt> ?place . }",
+            ontology_context={
+                "object_properties": [{"uri": "http://example.com/worksAt"}],
+                "datatype_properties": [],
+                "classes": [],
+                "prefixes": [],
+            },
+        )
+        grouped = validate_query(
+            "SELECT ?place (COUNT(?person) AS ?count) WHERE { ?person <http://example.com/worksAt> ?place . } GROUP BY ?place",
+            ontology_context={
+                "object_properties": [{"uri": "http://example.com/worksAt"}],
+                "datatype_properties": [],
+                "classes": [],
+                "prefixes": [],
+            },
+        )
+
+        self.assertFalse(missing_group.is_valid)
+        self.assertIn("GROUP BY must be present", " ".join(missing_group.errors))
+        self.assertTrue(grouped.is_valid)
+
+    def test_validation_rejects_unbound_aggregate_input_variables(self) -> None:
+        result = validate_query(
+            "SELECT (COUNT(?missing) AS ?count) WHERE { ?person a <http://example.com/Person> . }",
+            ontology_context={
+                "object_properties": [],
+                "datatype_properties": [],
+                "classes": [{"uri": "http://example.com/Person"}],
+                "prefixes": [],
+            },
+        )
+
+        self.assertFalse(result.is_valid)
+        self.assertIn("Aggregate variables are not bound in WHERE: missing", result.errors)
 
     async def test_run_query_attempts_returns_iteration_log(self) -> None:
         result = await run_query_attempts(

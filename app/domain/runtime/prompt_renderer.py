@@ -15,6 +15,45 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from app.domain.rag import RetrievedChunk
 
 
+SYSTEM_ROLE = (
+    "You are an expert SPARQL query generator. "
+    "Use only the provided ontology context and URIs. "
+    "Do not invent classes, properties, or namespaces."
+)
+
+CORRECTION_SYSTEM_ROLE = "You generated a SPARQL query that failed validation or execution."
+
+PROMPT_RULES = """Prefix Usage Rules:
+- Use only the prefix declarations listed above.
+- Do not use the ontology label or dataset label as a prefix.
+- If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
+- Unknown prefixes will fail validation.
+
+Result Shape Rules:
+- If the answer includes an ontology entity/resource and `rdfs:label` is available, return the label variable instead of the entity URI.
+- Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
+- Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
+- If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
+- Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
+- Do not invent label properties or label prefixes."""
+
+OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
+- Return only one valid SPARQL query.
+- Use either full URIs in angle brackets or the provided prefix declarations.
+- Only prefixes listed under Auto-Generated Prefix Declarations are allowed.
+- Ontology and dataset names are labels, not SPARQL prefixes.
+- Use the ':' prefix for terms in the default ontology namespace when it is listed.
+- Do not invent prefixes, classes, properties, or namespaces.
+- Do not include explanations, markdown fences, or extra text."""
+
+CORRECTION_OUTPUT_FORMAT_INSTRUCTIONS = (
+    "Return only a corrected SPARQL query. "
+    "Use either full URIs in angle brackets or the available prefix declarations. "
+    "Do not invent prefixes, classes, properties, or namespaces. "
+    "Do not include explanations, markdown fences, or extra text."
+)
+
+
 def render_query_generation_prompt(
     *,
     question: str,
@@ -30,26 +69,14 @@ def render_query_generation_prompt(
     """
     template = _template_environment().get_template("query_generation_prompt.j2")
     return template.render(
-        system_role=(
-            "You are an expert SPARQL query generator. "
-            "Use only the provided ontology context and URIs. "
-            "Do not invent classes, properties, or namespaces."
-        ),
+        system_role=SYSTEM_ROLE,
         ontology_name=metadata.get("ontology_name") if isinstance(metadata.get("ontology_name"), str) else None,
         dataset_name=metadata.get("dataset_name") if isinstance(metadata.get("dataset_name"), str) else None,
         retrieved_context=[{"rank": item.rank, "text": item.text} for item in retrieved_context],
         prefix_declarations=prefix_declarations(ontology_context),
+        prompt_rules=PROMPT_RULES,
         few_shot_examples=[],
-        output_format_instructions=(
-            "Return only one valid SPARQL query. "
-            "Use either full URIs in angle brackets or the provided prefix declarations. "
-            "Only prefixes listed under Auto-Generated Prefix Declarations are allowed. "
-            "Ontology and dataset names are labels, not SPARQL prefixes. "
-            "Use the ':' prefix for terms in the default ontology namespace when it is listed. "
-            "When returning ontology entities, prefer human-readable labels when label predicates are available. "
-            "Do not invent prefixes, classes, properties, or namespaces. "
-            "Do not include explanations, markdown fences, or extra text."
-        ),
+        output_format_instructions=OUTPUT_FORMAT_INSTRUCTIONS,
         user_question=question.strip(),
     )
 
@@ -69,11 +96,14 @@ def render_correction_prompt(
     """
     template = _template_environment().get_template("query_correction_prompt.j2")
     return template.render(
+        system_role=CORRECTION_SYSTEM_ROLE,
         original_question=original_question.strip(),
         failed_query=failed_query.strip(),
         validation_errors=validation_errors,
         retrieved_context=_retrieved_context_payload(retrieved_context or []),
         prefix_declarations=prefix_declarations(ontology_context or {}),
+        prompt_rules=PROMPT_RULES,
+        output_format_instructions=CORRECTION_OUTPUT_FORMAT_INSTRUCTIONS,
     )
 
 

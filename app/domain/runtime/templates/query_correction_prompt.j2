@@ -1,4 +1,5 @@
-You generated a SPARQL query that failed validation or execution.
+System Role:
+{{ system_role }}
 
 Original question:
 {{ original_question }}
@@ -36,17 +37,6 @@ Available Prefix Declarations:
 No prefix declarations were available.
 {% endif %}
 
-Prefix Usage Rules:
-- Use only the prefix declarations listed above.
-- Do not use the ontology label or dataset label as a prefix.
-- If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
-- Unknown prefixes will fail validation.
+{{ prompt_rules }}
 
-Result Shape Rules:
-- When the answer variable is an entity/resource, prefer returning a human-readable label variable instead of only the entity URI.
-- Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
-- Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
-- If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
-- Do not invent label properties or label prefixes.
-
-Return only a corrected SPARQL query. Use either full URIs in angle brackets or the available prefix declarations. Do not invent prefixes, classes, properties, or namespaces. Do not include explanations, markdown fences, or extra text.
+{{ output_format_instructions }}

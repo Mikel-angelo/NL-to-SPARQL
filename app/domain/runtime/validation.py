@@ -140,14 +140,17 @@ def _structural_validation(query: str, ontology_context: dict[str, object]) -> V
     del ontology_context
     body = _query_body(query)
     upper_body = body.upper()
+
     if not upper_body.startswith(("SELECT", "ASK", "CONSTRUCT", "DESCRIBE")):
         return _fail(
             "structural",
             "QUERY_FORM_INVALID",
             "Generated query must start with SELECT, ASK, CONSTRUCT, or DESCRIBE",
         )
+
     if "WHERE" not in upper_body:
         return _fail("structural", "WHERE_MISSING", "Generated query must contain a WHERE clause")
+
     if "{" not in body or "}" not in body:
         return _fail(
             "structural",
@@ -157,20 +160,44 @@ def _structural_validation(query: str, ontology_context: dict[str, object]) -> V
 
     select_vars = _select_variables(body)
     where_vars = _where_variables(body)
-    missing_vars = sorted(var for var in select_vars if var not in where_vars)
-    if missing_vars:
+
+    aggregate_aliases = _aggregate_aliases(body)
+    aggregate_input_vars = _aggregate_input_variables(body)
+    normal_select_vars = sorted(var for var in select_vars if var not in aggregate_aliases)
+
+    missing_normal_vars = sorted(var for var in normal_select_vars if var not in where_vars)
+    if missing_normal_vars:
         return _fail(
             "structural",
             "SELECT_VARIABLE_NOT_BOUND",
-            f"SELECT variables are not bound in WHERE: {', '.join(missing_vars)}",
+            f"SELECT variables are not bound in WHERE: {', '.join(missing_normal_vars)}",
         )
 
-    if _has_aggregation(body) and "GROUP BY" not in upper_body:
+    missing_aggregate_input_vars = sorted(var for var in aggregate_input_vars if var not in where_vars)
+    if missing_aggregate_input_vars:
         return _fail(
             "structural",
-            "GROUP_BY_MISSING",
-            "GROUP BY must be present when aggregation functions are used",
+            "AGGREGATE_VARIABLE_NOT_BOUND",
+            f"Aggregate variables are not bound in WHERE: {', '.join(missing_aggregate_input_vars)}",
         )
+
+    if _has_aggregation(body):
+        grouped_vars = _group_by_variables(body)
+        ungrouped_vars = sorted(var for var in normal_select_vars if var not in grouped_vars)
+
+        if normal_select_vars and "GROUP BY" not in upper_body:
+            return _fail(
+                "structural",
+                "GROUP_BY_MISSING",
+                "GROUP BY must be present when aggregation is used with non-aggregate SELECT variables",
+            )
+
+        if ungrouped_vars:
+            return _fail(
+                "structural",
+                "GROUP_BY_VARIABLE_MISSING",
+                f"Non-aggregate SELECT variables must appear in GROUP BY: {', '.join(ungrouped_vars)}",
+            )
 
     return _pass("structural", "STRUCTURE_OK")
 
@@ -343,6 +370,36 @@ def _where_variables(query_body: str) -> set[str]:
 
 def _has_aggregation(query_body: str) -> bool:
     return bool(re.search(r"(?i)\b(COUNT|SUM|AVG|MIN|MAX|GROUP_CONCAT|SAMPLE)\s*\(", query_body))
+
+
+def _aggregate_aliases(query_body: str) -> set[str]:
+    pattern = re.compile(
+        r"\(\s*(COUNT|SUM|AVG|MIN|MAX|GROUP_CONCAT|SAMPLE)\s*\([^)]*\)\s+AS\s+\?([A-Za-z_][\w-]*)\s*\)",
+        re.IGNORECASE,
+    )
+    return {match.group(2) for match in pattern.finditer(query_body)}
+
+
+def _aggregate_input_variables(query_body: str) -> set[str]:
+    vars_: set[str] = set()
+    pattern = re.compile(
+        r"\b(COUNT|SUM|AVG|MIN|MAX|GROUP_CONCAT|SAMPLE)\s*\((.*?)\)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    for match in pattern.finditer(query_body):
+        vars_.update(re.findall(r"\?([A-Za-z_][\w-]*)", match.group(2)))
+    return vars_
+
+
+def _group_by_variables(query_body: str) -> set[str]:
+    match = re.search(
+        r"\bGROUP\s+BY\b(.*?)(ORDER\s+BY|LIMIT|OFFSET|HAVING|$)",
+        query_body,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not match:
+        return set()
+    return set(re.findall(r"\?([A-Za-z_][\w-]*)", match.group(1)))
 
 
 def _pass(stage: str, code: str) -> ValidationStageResult:

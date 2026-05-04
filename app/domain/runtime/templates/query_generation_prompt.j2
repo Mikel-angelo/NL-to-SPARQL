@@ -24,18 +24,7 @@ Auto-Generated Prefix Declarations:
 No prefix declarations were available.
 {% endif %}
 
-Prefix Usage Rules:
-- Use only the prefix declarations listed above.
-- Do not use the ontology label or dataset label as a prefix.
-- If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
-- Unknown prefixes will fail validation.
-
-Result Shape Rules:
-- When the answer variable is an entity/resource, prefer returning a human-readable label variable instead of only the entity URI.
-- Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
-- Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
-- If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
-- Do not invent label properties or label prefixes.
+{{ prompt_rules }}
 
 Optional Few-Shot Examples:
 {% if few_shot_examples %}
@@ -48,7 +37,6 @@ Example {{ loop.index }} SPARQL:
 No few-shot examples provided.
 {% endif %}
 
-Output Format Instructions:
 {{ output_format_instructions }}
 
 User Question:
