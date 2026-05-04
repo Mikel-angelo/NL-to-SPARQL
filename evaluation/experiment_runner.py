@@ -1,21 +1,18 @@
 """Run evaluation datasets against prepared ontology packages.
 
-This module is the main evaluation entry point used by `evaluate.py`. It takes
-an active ontology package plus a dataset JSON file, runs each natural-language
-question through the same runtime pipeline used by `query.py`, compares the
-generated answer rows with the dataset's gold answers, aggregates metrics, and
-writes machine-readable plus human-readable artifacts.
+This module takes an active ontology package plus a dataset JSON file, runs each
+natural-language question through the same runtime pipeline used by `query.py`,
+compares generated answer rows with the dataset's gold answers, aggregates
+metrics, and writes machine-readable plus human-readable artifacts.
 
-The file currently also contains CLI orchestration and report formatting. The
-core execution path is `ExperimentRunner.run_experiment()`, while
-`run_from_cli()` handles package checks, endpoint preflight, dataset loading,
-configuration defaults, and output persistence.
+The root-level `evaluate.py` owns CLI parsing. The core execution path here is
+`ExperimentRunner.run_experiment()`, while `run_from_cli()` handles package
+checks, endpoint preflight, dataset loading, configuration defaults, and output
+persistence after arguments have already been parsed.
 """
 
 from __future__ import annotations
 
-import argparse
-import asyncio
 import json
 import time
 from dataclasses import asdict, dataclass
@@ -34,7 +31,6 @@ from app.domain.package import (
     resolve_package_dir,
     settings_path,
 )
-from app.domain.rag import SUPPORTED_CHUNKING_ORDER
 from app.domain.runtime import run_query_pipeline
 
 from .answer_comparison import ComparisonResult, compare_results
@@ -455,8 +451,8 @@ def default_output_dir(package_dir: str | Path, dataset_name: str) -> Path:
     return candidate
 
 
-async def run_from_cli(args: argparse.Namespace) -> dict[str, Path]:
-    """CLI orchestration for direct package evaluation.
+async def run_from_cli(args) -> dict[str, Path]:
+    """Run direct package evaluation from parsed CLI-like arguments.
 
     This resolves and checks the package, preflights its SPARQL endpoint, loads
     the dataset, builds effective runtime configuration from CLI overrides plus
@@ -494,21 +490,6 @@ async def run_from_cli(args: argparse.Namespace) -> dict[str, Path]:
     print(f"Run config: {saved['run_config']}")
     print(f"Report:  {saved['report']}")
     return saved
-
-
-def parse_args() -> argparse.Namespace:
-    """Parse CLI flags for `evaluate.py` / direct module execution."""
-    parser = argparse.ArgumentParser(description="Evaluate a prepared ontology package.")
-    parser.add_argument("--dataset", required=True, help="Evaluation dataset JSON path")
-    parser.add_argument("--package", required=True, help="Active package directory path or name")
-    parser.add_argument("--model", default="", help="Optional model override")
-    parser.add_argument("--k", type=int, default=None, help="Optional retrieval top-k override")
-    parser.add_argument("--chunking", choices=SUPPORTED_CHUNKING_ORDER, default=None, help="Optional retrieval index strategy override")
-    parser.add_argument("--corrections", type=int, default=None, help="Optional correction attempt limit")
-    parser.add_argument("--output", default="", help="Optional output directory. Defaults to <package>/evaluation/<run-id>/")
-    parser.add_argument("--preflight-timeout", type=float, default=30.0, help="Endpoint preflight timeout in seconds")
-    return parser.parse_args()
-
 
 def _iteration_logs_from_trace(trace_path: str) -> list[IterationLog]:
     path = Path(trace_path)
@@ -604,13 +585,3 @@ def _float(value: object) -> str:
 def _value(value: object) -> str:
     return "" if value is None else str(value)
 
-
-async def main() -> None:
-    try:
-        await run_from_cli(parse_args())
-    except (DomainError, httpx.HTTPError) as exc:
-        raise SystemExit(str(exc)) from exc
-
-
-if __name__ == "__main__":
-    asyncio.run(main())

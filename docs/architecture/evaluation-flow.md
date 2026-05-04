@@ -42,7 +42,8 @@ flowchart TD
 | Step | Function / Module |
 |---|---|
 | Root CLI wrapper | `evaluate.py::main` |
-| CLI parsing and orchestration | `parse_args()`, `run_from_cli()` in `evaluation/experiment_runner.py` |
+| CLI parsing | `evaluate.py::parse_args` |
+| CLI orchestration | `run_from_cli()` in `evaluation/experiment_runner.py` |
 | Active package assertion | `ensure_requested_package_is_active()` in `experiment_runner.py` |
 | Package endpoint lookup | `read_json_file(settings_path(package_dir))` in `run_from_cli()` |
 | Endpoint preflight | `preflight_endpoint()` in `experiment_runner.py` |
