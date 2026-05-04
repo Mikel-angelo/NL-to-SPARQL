@@ -33,9 +33,19 @@ Result Shape Rules:
 - If the answer includes an ontology entity/resource and `rdfs:label` is available, return the label variable instead of the entity URI.
 - Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
 - Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
+- For aggregate queries grouped by an ontology entity/resource, do not return only the grouping URI. Join the resource to its label and return the label variable as the displayed answer. Group by both the resource and the label when needed.
 - If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
 - Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
-- Do not invent label properties or label prefixes."""
+- Do not invent label properties or label prefixes.
+
+Result Shape Example:
+For questions that count or group resources, expose the resource label:
+SELECT ?entityLabel (COUNT(?item) AS ?count)
+WHERE {
+  ?entity :someProperty ?item .
+  ?entity rdfs:label ?entityLabel .
+}
+GROUP BY ?entityLabel"""
 
 OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
 - Return only one valid SPARQL query.
