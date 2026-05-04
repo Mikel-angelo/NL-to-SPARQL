@@ -89,6 +89,9 @@ def render_readable_query_trace(payload: dict[str, object]) -> str:
             "FINAL QUERY",
             _text(payload.get("final_query")),
             "",
+            "FINAL RESULTS",
+            *_render_execution_result(payload.get("execution_result")),
+            "",
             "FINAL ERRORS",
         ]
     )
@@ -99,6 +102,36 @@ def render_readable_query_trace(payload: dict[str, object]) -> str:
         lines.append("- None")
     lines.append("")
     return "\n".join(lines)
+
+
+def _render_execution_result(value: object) -> list[str]:
+    if not isinstance(value, dict):
+        return ["No execution result was recorded."]
+
+    if "boolean" in value:
+        return [f"ASK result: {_text(value.get('boolean'))}"]
+
+    head = value.get("head")
+    vars_ = head.get("vars") if isinstance(head, dict) else None
+    results = value.get("results")
+    bindings = results.get("bindings") if isinstance(results, dict) else None
+    if not isinstance(vars_, list) or not isinstance(bindings, list):
+        return [json.dumps(value, indent=2)]
+
+    clean_vars = [_text(var) for var in vars_]
+    lines = [f"Variables: {', '.join(clean_vars)}", f"Rows: {len(bindings)}"]
+    for index, row in enumerate(bindings, 1):
+        if not isinstance(row, dict):
+            continue
+        values = []
+        for var in clean_vars:
+            cell = row.get(var)
+            if isinstance(cell, dict):
+                values.append(f"{var}={_text(cell.get('value'))}")
+            else:
+                values.append(f"{var}=")
+        lines.append(f"{index}. " + " | ".join(values))
+    return lines
 
 
 def _items(value: object) -> list[dict[str, object]]:
