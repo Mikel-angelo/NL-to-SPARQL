@@ -112,7 +112,7 @@ async def run_query_pipeline(
         "query_endpoint",
         _string_setting(metadata, "query_endpoint", ""),
     )
-    effective_k = k or _int_setting(settings_payload, "retrieval_top_k", settings.runtime_retrieval_top_k)
+    effective_k = k or _default_retrieval_top_k(settings_payload)
     effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
     max_iterations = corrections or _int_setting(
         settings_payload,
@@ -324,6 +324,11 @@ def _string_setting(payload: dict[str, object], key: str, default: str) -> str:
 def _int_setting(payload: dict[str, object], key: str, default: int) -> int:
     value = payload.get(key)
     return int(value) if isinstance(value, (int, float)) else default
+
+
+def _default_retrieval_top_k(settings_payload: dict[str, object]) -> int:
+    """Read the package default retrieval depth."""
+    return _int_setting(settings_payload, "default_retrieval_top_k", settings.runtime_retrieval_top_k)
 
 
 def _llm_api_url(settings_payload: dict[str, object]) -> str:

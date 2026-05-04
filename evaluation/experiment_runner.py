@@ -1,4 +1,16 @@
-"""Direct package evaluator for NL-to-SPARQL experiments."""
+"""Run evaluation datasets against prepared ontology packages.
+
+This module is the main evaluation entry point used by `evaluate.py`. It takes
+an active ontology package plus a dataset JSON file, runs each natural-language
+question through the same runtime pipeline used by `query.py`, compares the
+generated answer rows with the dataset's gold answers, aggregates metrics, and
+writes machine-readable plus human-readable artifacts.
+
+The file currently also contains CLI orchestration and report formatting. The
+core execution path is `ExperimentRunner.run_experiment()`, while
+`run_from_cli()` handles package checks, endpoint preflight, dataset loading,
+configuration defaults, and output persistence.
+"""
 
 from __future__ import annotations
 
@@ -32,7 +44,13 @@ from .metrics import AggregatedMetrics, aggregate_metrics, compute_question_metr
 
 @dataclass(frozen=True)
 class ExperimentConfig:
-    """Configuration for one direct package evaluation run."""
+    """Runtime configuration for one direct package evaluation run.
+
+    These fields are the controlled variables of an experiment: package,
+    optional model override, retrieval top-k, chunking strategy, and correction
+    loop limit. The same payload is saved to `run_config.json` so evaluation
+    results can be interpreted later.
+    """
 
     package_dir: Path
     model_name: str = ""
@@ -52,7 +70,7 @@ class ExperimentConfig:
 
 
 class ExperimentRunner:
-    """Run a dataset through the runtime pipeline using an explicit package."""
+    """Execute all questions in one dataset against one package configuration."""
 
     def __init__(self, config: ExperimentConfig):
         self.config = config
@@ -63,6 +81,11 @@ class ExperimentRunner:
         *,
         prefix_map: dict[str, str] | None = None,
     ) -> tuple[ExperimentRun, AggregatedMetrics]:
+        """Run every dataset question and return raw results plus aggregate metrics.
+
+        `prefix_map` is used only for answer comparison, allowing prefixed gold
+        answers and full-URI generated answers to compare equal.
+        """
         timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M")
         model_label = self.config.model_name or "package-default"
         experiment_id = f"{dataset.dataset_name}_{model_label}_{timestamp}".replace(":", "-").replace("/", "-")
@@ -111,6 +134,7 @@ class ExperimentRunner:
         question,
         prefix_map: dict[str, str] | None,
     ) -> tuple[QuestionResult, ComparisonResult | None]:
+        """Run one question through the runtime pipeline and score it if possible."""
         is_scored = bool(question.gold_answers)
         result = QuestionResult(
             question_id=question.id,
@@ -160,7 +184,12 @@ class ExperimentRunner:
 
 
 def extract_answers_from_sparql_json(execution_result: dict[str, object] | None) -> list[dict[str, str]] | None:
-    """Flatten SPARQL JSON results into comparison rows."""
+    """Flatten runtime SPARQL JSON output into rows accepted by `compare_results()`.
+
+    Returns `None` when the pipeline produced no execution result. Boolean ASK
+    responses are represented as a single row with a `result` value so they can
+    use the same comparison path as SELECT rows.
+    """
     if execution_result is None:
         return None
     if "boolean" in execution_result:
@@ -186,7 +215,11 @@ def extract_answers_from_sparql_json(execution_result: dict[str, object] | None)
 
 
 async def preflight_endpoint(endpoint: str, *, timeout: float) -> None:
-    """Check the configured SPARQL endpoint once before timed evaluation starts."""
+    """Verify the package query endpoint is reachable before timed evaluation.
+
+    This avoids recording many per-question failures when the selected Fuseki
+    dataset is not loaded or the endpoint is unavailable.
+    """
     async with httpx.AsyncClient(timeout=timeout) as client:
         response = await client.post(
             endpoint,
@@ -197,7 +230,12 @@ async def preflight_endpoint(endpoint: str, *, timeout: float) -> None:
 
 
 def ensure_requested_package_is_active(package_dir: str | Path, packages_root: str | Path) -> Path:
-    """Return the resolved package path if it is the active package."""
+    """Resolve a package reference and require it to match `.active_package`.
+
+    Evaluation does not activate packages automatically. For local file
+    packages, activation is what reloads Fuseki, so this check prevents running
+    a dataset against stale endpoint contents.
+    """
     requested = resolve_package_reference(package_dir, packages_root)
     active = get_active_package(packages_root).resolve()
     if requested.resolve() != active:
@@ -213,7 +251,12 @@ def save_experiment(
     metrics: AggregatedMetrics,
     output_dir: str | Path,
 ) -> dict[str, Path]:
-    """Save raw results, aggregate metrics, and readable evaluation logs."""
+    """Persist all artifacts for one evaluation run.
+
+    The output directory receives JSON results, JSON metrics, `run_config.json`,
+    a top-level report, an index of question outcomes, compact JSONL question
+    records, and one readable text file per question.
+    """
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     run_file = output / "results.json"
@@ -236,7 +279,7 @@ def save_experiment(
 
 
 def write_evaluation_query_logs(output_dir: Path, experiment: ExperimentRun) -> dict[str, Path]:
-    """Write compact per-question logs owned by one evaluation run."""
+    """Write the question-level readable and JSONL logs for one run."""
     queries_dir = output_dir / "queries"
     queries_dir.mkdir(parents=True, exist_ok=True)
     index_file = output_dir / "index.txt"
@@ -266,7 +309,7 @@ def write_evaluation_query_logs(output_dir: Path, experiment: ExperimentRun) -> 
 
 
 def format_experiment_report(experiment: ExperimentRun, metrics: AggregatedMetrics) -> str:
-    """Format the human-readable evaluation report with run configuration first."""
+    """Format the run-level report with configuration followed by metrics."""
     config = experiment.pipeline_config
     header = (
         "Run Configuration\n"
@@ -282,7 +325,7 @@ def format_experiment_report(experiment: ExperimentRun, metrics: AggregatedMetri
 
 
 def format_index_line(result: QuestionResult) -> str:
-    """Return one scan-friendly row for the evaluation index."""
+    """Return one compact status line for `index.txt`."""
     if not result.is_scored:
         marker = "UNSCORED"
         f1 = ""
@@ -298,7 +341,12 @@ def format_index_line(result: QuestionResult) -> str:
 
 
 def format_question_log(result: QuestionResult) -> str:
-    """Format one evaluated question as plain text for debugging."""
+    """Format one evaluated question as a standalone debugging report.
+
+    The log includes scoring status, gold and generated SPARQL, gold and
+    generated answers, row-level diff information, runtime configuration, and
+    links to the detailed runtime traces.
+    """
     comparison = result.comparison or {}
     lines = [
         f"QUESTION {result.question_id}",
@@ -363,11 +411,13 @@ def format_question_log(result: QuestionResult) -> str:
 
 
 def load_dataset(path: str | Path) -> EvaluationDataset:
+    """Load and validate a dataset JSON file using `EvaluationDataset`."""
     payload = json.loads(Path(path).read_text(encoding="utf-8"))
     return EvaluationDataset(**payload)
 
 
 def prefix_map_from_package(package_dir: str | Path) -> dict[str, str]:
+    """Extract ontology prefixes from a package for normalized answer comparison."""
     context = read_json_file(ontology_context_path(package_dir))
     prefixes = context.get("prefixes")
     prefix_map = {}
@@ -393,6 +443,7 @@ def _string_setting(payload: dict[str, object], key: str) -> str | None:
 
 
 def default_output_dir(package_dir: str | Path, dataset_name: str) -> Path:
+    """Return a timestamped, non-overwriting output directory under the package."""
     root = resolve_package_dir(package_dir) / "evaluation"
     timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M")
     stem = f"{dataset_name}-{timestamp}"
@@ -405,6 +456,12 @@ def default_output_dir(package_dir: str | Path, dataset_name: str) -> Path:
 
 
 async def run_from_cli(args: argparse.Namespace) -> dict[str, Path]:
+    """CLI orchestration for direct package evaluation.
+
+    This resolves and checks the package, preflights its SPARQL endpoint, loads
+    the dataset, builds effective runtime configuration from CLI overrides plus
+    package defaults, runs the experiment, saves artifacts, and prints a summary.
+    """
     package_dir = ensure_requested_package_is_active(args.package, settings.ontology_packages_path)
     package_settings = read_json_file(settings_path(package_dir))
     endpoint = package_settings.get("query_endpoint")
@@ -419,7 +476,7 @@ async def run_from_cli(args: argparse.Namespace) -> dict[str, Path]:
     config = ExperimentConfig(
         package_dir=package_dir,
         model_name=args.model or "",
-        retrieval_top_k=args.k or _int_setting(package_settings, "retrieval_top_k") or settings.runtime_retrieval_top_k,
+        retrieval_top_k=args.k or _int_setting(package_settings, "default_retrieval_top_k") or settings.runtime_retrieval_top_k,
         chunking_strategy=args.chunking or _string_setting(package_settings, "default_chunking_strategy") or "class_based",
         correction_max_iterations=args.corrections
         or _int_setting(package_settings, "correction_max_iterations")
@@ -440,6 +497,7 @@ async def run_from_cli(args: argparse.Namespace) -> dict[str, Path]:
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse CLI flags for `evaluate.py` / direct module execution."""
     parser = argparse.ArgumentParser(description="Evaluate a prepared ontology package.")
     parser.add_argument("--dataset", required=True, help="Evaluation dataset JSON path")
     parser.add_argument("--package", required=True, help="Active package directory path or name")

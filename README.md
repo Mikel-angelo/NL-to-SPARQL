@@ -75,7 +75,7 @@ You must provide exactly one source. Do not pass both `--ontology` and `--sparql
 Basic file onboarding:
 
 ```powershell
-.\.venv\Scripts\python.exe onboard.py --ontology resources\library\ontologies\eNOVATION.ttl --output ontology_packages
+python onboard.py --ontology resources\library\ontologies\eNOVATION.ttl --output ontology_packages
 ```
 
 Accepted ontology formats:
@@ -89,7 +89,7 @@ During file onboarding, the CLI:
 - parses the ontology
 - resolves missing schemas when possible
 - extracts a normalized ontology context
-- creates retrieval chunks
+- creates retrieval chunks. right now: "class_based", "property_based", "composite"
 - builds a FAISS index
 - uploads the ontology data to Fuseki
 - creates a new package under `ontology_packages/`
@@ -110,7 +110,7 @@ Use the printed `Ontology package` path with `activate.py` if you later need to 
 Onboard an existing SPARQL endpoint instead of a local file:
 
 ```powershell
-.\.venv\Scripts\python.exe onboard.py --sparql-endpoint http://127.0.0.1:3030/my-dataset/query --output ontology_packages
+python onboard.py --sparql-endpoint http://127.0.0.1:3030/my-dataset/query --output ontology_packages
 ```
 
 This creates the same package structure, but does not upload a new local ontology file to Fuseki.
@@ -130,7 +130,7 @@ Supported retrieval index strategies:
 Example:
 
 ```powershell
-.\.venv\Scripts\python.exe onboard.py --ontology path\to\ontology.ttl --output ontology_packages --name enovation --chunking composite --model qwen2.5-coder:7b
+python onboard.py --ontology path\to\ontology.ttl --output ontology_packages --name enovation --chunking composite --model qwen2.5-coder:7b
 ```
 
 That package contains `class_based`, `property_based`, and `composite` indexes. `--chunking composite` only makes `composite` the default for later queries and evaluations that do not pass a chunking override.
@@ -140,7 +140,7 @@ That package contains `class_based`, `property_based`, and `composite` indexes. 
 Use `activate.py` when you want an existing package to become the active runtime package.
 
 ```powershell
-.\.venv\Scripts\python.exe activate.py --package ontology_packages\enovation-20260427-1840
+python activate.py --package ontology_packages\enovation-20260427-1840
 ```
 
 For file-based packages, activation always reloads the package into Fuseki:
@@ -184,14 +184,14 @@ No active ontology package is set
 Safe query flow for a local file package:
 
 ```powershell
-.\.venv\Scripts\python.exe activate.py --package ontology_packages\enovation-20260427-1840
-.\.venv\Scripts\python.exe query.py --question "Which training centres offer CBRN exercises?"
+python activate.py --package ontology_packages\enovation-20260427-1840
+python query.py --question "Which training centres offer CBRN exercises?"
 ```
 
 Query using the currently active package:
 
 ```powershell
-.\.venv\Scripts\python.exe query.py --question "Which training centres offer CBRN exercises?"
+python query.py --question "Which training centres offer CBRN exercises?"
 ```
 
 The query command:
@@ -239,7 +239,7 @@ Optional query arguments:
 Example with query overrides:
 
 ```powershell
-.\.venv\Scripts\python.exe query.py --question "..." --model qwen2.5-coder:7b --k 5 --chunking property_based --corrections 3
+python query.py --question "..." --model qwen2.5-coder:7b --k 5 --chunking property_based --corrections 3
 ```
 
 ## Package Layout
@@ -275,7 +275,7 @@ ontology_packages/
 Important files:
 
 - `metadata.json`: onboarding summary and artifact paths
-- `settings.json`: saved endpoint, model, `default_chunking_strategy`, retrieval top-k, and correction iteration limit
+- `settings.json`: saved endpoint, model, `default_chunking_strategy`, `default_retrieval_top_k`, and correction iteration limit
 - `ontology_context.json`: normalized ontology structure used by the runtime
 - `indexes/<strategy>/chunks.json`: text chunks for one retrieval strategy
 - `indexes/<strategy>/index.faiss`: vector index for one retrieval strategy
@@ -297,14 +297,14 @@ The CLI query command and FastAPI routes use this active package. For local file
 Use `evaluate.py` to run a dataset of natural-language questions and gold SPARQL answers against one package.
 
 ```powershell
-.\.venv\Scripts\python.exe activate.py --package ontology_packages\enovation-20260427-1840
-.\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840
+python activate.py --package ontology_packages\enovation-20260427-1840
+python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840
 ```
 
 Example with explicit retrieval settings:
 
 ```powershell
-.\.venv\Scripts\python.exe evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --k 5 --chunking property_based --corrections 3
+python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --k 5 --chunking property_based --corrections 3
 ```
 
 Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.

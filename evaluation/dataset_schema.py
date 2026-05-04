@@ -1,4 +1,14 @@
-"""Pydantic models for NL-to-SPARQL evaluation datasets and results."""
+"""Typed data contracts for NL-to-SPARQL evaluation.
+
+This module defines the JSON shape for evaluation datasets and for the result
+artifacts written after an experiment run. The rest of the evaluation package
+uses these models to keep file I/O, scoring, and reporting aligned.
+
+The input side is `EvaluationDataset`, which contains many
+`EvaluationQuestion` records. The output side is `ExperimentRun`, which contains
+one `QuestionResult` per question plus the runtime configuration used for the
+run.
+"""
 
 from __future__ import annotations
 
@@ -9,7 +19,11 @@ from pydantic import BaseModel, Field
 
 
 class QueryShape(str, Enum):
-    """Structural shape of the gold SPARQL query."""
+    """Coarse structural shape of the gold SPARQL query.
+
+    These labels are used for grouped metrics, for example execution accuracy
+    by `single-edge` versus `chain` questions.
+    """
 
     SINGLE_EDGE = "single-edge"
     CHAIN = "chain"
@@ -20,7 +34,7 @@ class QueryShape(str, Enum):
 
 
 class ComplexityTier(str, Enum):
-    """Broad complexity category."""
+    """Human-assigned difficulty tier for a question."""
 
     SIMPLE = "simple"
     MEDIUM = "medium"
@@ -28,7 +42,7 @@ class ComplexityTier(str, Enum):
 
 
 class QuestionType(str, Enum):
-    """Expected answer format."""
+    """Expected answer format for the question."""
 
     LIST = "list"
     BOOLEAN = "boolean"
@@ -37,7 +51,7 @@ class QuestionType(str, Enum):
 
 
 class DatasetSource(str, Enum):
-    """Origin of the dataset."""
+    """Origin or benchmark family for the dataset."""
 
     CUSTOM = "custom"
     QALD = "qald"
@@ -46,7 +60,14 @@ class DatasetSource(str, Enum):
 
 
 class EvaluationQuestion(BaseModel):
-    """A single natural-language question with gold references."""
+    """One benchmark item.
+
+    `nl_question` is sent to the runtime pipeline. `gold_sparql` is the
+    reference query used to build or validate `gold_answers`. Non-empty
+    `gold_answers` make the question scored; an empty list currently means the
+    evaluation runner executes the question but excludes it from correctness
+    metrics.
+    """
 
     id: str = Field(..., description="Unique question identifier, e.g. Q001")
     nl_question: str = Field(..., description="The natural-language question")
@@ -62,7 +83,7 @@ class EvaluationQuestion(BaseModel):
 
 
 class EvaluationDataset(BaseModel):
-    """A complete evaluation dataset for one ontology."""
+    """A complete set of evaluation questions for one ontology or endpoint."""
 
     dataset_name: str = Field(..., description="Unique dataset identifier")
     ontology_file: str = Field(..., description="Ontology filename used by the dataset")
@@ -85,7 +106,11 @@ class EvaluationDataset(BaseModel):
 
 
 class IterationLog(BaseModel):
-    """Log of one generation, validation, and execution attempt."""
+    """Compact log of one runtime attempt for one evaluated question.
+
+    The runtime trace is richer; this model keeps only the fields needed by
+    metrics and readable evaluation reports.
+    """
 
     iteration: int
     generated_sparql: str
@@ -95,7 +120,12 @@ class IterationLog(BaseModel):
 
 
 class QuestionResult(BaseModel):
-    """Complete result for one evaluated question."""
+    """Evaluation output for one question.
+
+    This stores the final SPARQL candidate, generated answer rows, scoring
+    status, comparison details, attempt logs, latency, pipeline configuration,
+    and links to the runtime traces that explain how the answer was produced.
+    """
 
     question_id: str
     nl_question: str
@@ -125,7 +155,7 @@ class QuestionResult(BaseModel):
 
 
 class ExperimentRun(BaseModel):
-    """A full evaluation run against one package and one dataset."""
+    """All question results for one dataset run against one ontology package."""
 
     experiment_id: str
     dataset_name: str

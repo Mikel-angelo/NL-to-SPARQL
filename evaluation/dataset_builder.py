@@ -1,21 +1,19 @@
-"""
-Dataset Builder Utility
-=======================
-Helps create and validate evaluation datasets by executing gold SPARQL
-queries against a Fuseki endpoint and capturing the result sets.
+"""Maintain evaluation dataset JSON files.
 
-Usage:
-    # Populate gold answers for a dataset (fills in gold_answers from Fuseki)
-    python -m evaluation.dataset_builder \
-        --dataset evaluation/datasets/enovation_v1.json \
-        --endpoint http://127.0.0.1:3030/my-dataset/query \
-        --populate
+This utility is used before running experiments. Given a dataset that already
+contains natural-language questions and gold SPARQL, it can execute each gold
+query against a Fuseki endpoint, save the returned rows as `gold_answers`, and
+later validate that those saved answers still match the endpoint.
 
-    # Validate that all gold SPARQL queries execute successfully
-    python -m evaluation.dataset_builder \
-        --dataset evaluation/datasets/enovation_v1.json \
-        --endpoint http://127.0.0.1:3030/my-dataset/query \
-        --validate
+It intentionally works on raw JSON dictionaries instead of the Pydantic schema
+models so it can preserve hand-authored dataset fields and comments encoded as
+ordinary JSON properties. It is a dataset maintenance tool, not the experiment
+runner.
+
+Examples:
+    python -m evaluation.dataset_builder --dataset evaluation/datasets/enovation_v1.json --endpoint http://127.0.0.1:3030/my-dataset/query --populate
+    python -m evaluation.dataset_builder --dataset evaluation/datasets/enovation_v1.json --endpoint http://127.0.0.1:3030/my-dataset/query --validate
+    python -m evaluation.dataset_builder --dataset evaluation/datasets/enovation_v1.json --stats
 """
 
 from __future__ import annotations
@@ -28,7 +26,7 @@ import httpx
 
 
 def execute_sparql(endpoint: str, sparql: str, timeout: int = 30) -> dict:
-    """Execute a SPARQL query against a Fuseki endpoint and return raw results."""
+    """Execute one gold SPARQL query and return the raw SPARQL JSON response."""
     response = httpx.post(
         endpoint,
         data={"query": sparql},
@@ -40,7 +38,12 @@ def execute_sparql(endpoint: str, sparql: str, timeout: int = 30) -> dict:
 
 
 def extract_bindings(raw_result: dict) -> list[dict[str, str]]:
-    """Extract simplified bindings from a Fuseki SPARQL JSON response."""
+    """Convert SPARQL JSON bindings into simple `{variable: value}` rows.
+
+    The evaluation dataset stores only the lexical value for each binding. Type,
+    datatype, and language metadata are ignored here; answer comparison later
+    performs its own normalization on the stored strings.
+    """
     bindings = raw_result.get("results", {}).get("bindings", [])
     return [
         {var: binding[var]["value"] for var in binding}
@@ -49,9 +52,11 @@ def extract_bindings(raw_result: dict) -> list[dict[str, str]]:
 
 
 def populate_gold_answers(dataset_path: str, endpoint: str, timeout: int = 30):
-    """
-    Execute all gold SPARQL queries and fill in the gold_answers field.
-    Saves the updated dataset back to the same file.
+    """Execute every `gold_sparql` query and update `gold_answers` in place.
+
+    Questions with empty gold SPARQL are skipped. The dataset file is rewritten
+    after processing so successful rows are preserved even if some questions
+    fail. Failures are reported to stdout for manual cleanup.
     """
     path = Path(dataset_path)
     dataset = json.loads(path.read_text(encoding="utf-8"))
@@ -99,9 +104,11 @@ def populate_gold_answers(dataset_path: str, endpoint: str, timeout: int = 30):
 
 
 def validate_dataset(dataset_path: str, endpoint: str, timeout: int = 30):
-    """
-    Validate all gold SPARQL queries: check they parse, execute, and return
-    the expected gold_answers.
+    """Check saved gold answers against fresh endpoint execution.
+
+    This is a maintenance check for dataset drift. It verifies that each gold
+    query still runs and that the returned rows match the stored `gold_answers`
+    by simple raw-value comparison.
     """
     path = Path(dataset_path)
     dataset = json.loads(path.read_text(encoding="utf-8"))
@@ -161,7 +168,7 @@ def validate_dataset(dataset_path: str, endpoint: str, timeout: int = 30):
 
 
 def show_stats(dataset_path: str):
-    """Print dataset statistics."""
+    """Print quick dataset coverage statistics for manual inspection."""
     path = Path(dataset_path)
     dataset = json.loads(path.read_text(encoding="utf-8"))
     questions = dataset.get("questions", [])

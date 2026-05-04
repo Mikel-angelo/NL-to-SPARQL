@@ -186,7 +186,7 @@ def _settings_payload(
         "dataset_name": dataset_name,
         "default_model": default_model or settings.default_llm_model,
         "default_chunking_strategy": chunking,
-        "retrieval_top_k": settings.runtime_retrieval_top_k,
+        "default_retrieval_top_k": settings.runtime_retrieval_top_k,
         "correction_max_iterations": settings.correction_max_iterations,
         "llm_api_url": settings.llm_api_url,
     }

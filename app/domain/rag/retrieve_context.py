@@ -46,7 +46,7 @@ def retrieve_context(
     """Return the top-k retrieved chunks for one question."""
     root = resolve_package_dir(package_dir)
     settings_payload = read_json_file(settings_path(root))
-    effective_k = max(1, k or int(_number_setting(settings_payload, "retrieval_top_k", settings.runtime_retrieval_top_k)))
+    effective_k = max(1, k or _number_setting(settings_payload, "default_retrieval_top_k", settings.runtime_retrieval_top_k))
     effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
 
     chunks = read_json_list(chunks_path(root, effective_chunking))

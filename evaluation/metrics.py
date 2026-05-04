@@ -1,4 +1,13 @@
-"""Aggregate evaluation results into correctness and runtime metrics."""
+"""Compute per-question and aggregate evaluation metrics.
+
+The experiment runner produces `QuestionResult` objects and, when a question is
+scored, an `answer_comparison.ComparisonResult`. This module turns those raw
+outputs into metrics that are easier to report and compare across runs.
+
+Correctness metrics use only scored questions. Pipeline reliability and
+efficiency metrics use every question that was executed, including unscored
+questions, because they still reveal runtime behavior.
+"""
 
 from __future__ import annotations
 
@@ -11,7 +20,12 @@ from .dataset_schema import ComplexityTier, QueryShape, QuestionResult
 
 @dataclass
 class QuestionMetrics:
-    """Metrics for a single evaluated question."""
+    """Metric values derived from one `QuestionResult`.
+
+    This is the bridge between raw pipeline output and aggregate reporting. It
+    stores correctness fields, validation/execution status, correction behavior,
+    latency, and grouping labels such as complexity tier and query shape.
+    """
 
     question_id: str
     is_scored: bool = True
@@ -41,7 +55,12 @@ class QuestionMetrics:
 
 @dataclass
 class AggregatedMetrics:
-    """Dataset-level metrics for one run."""
+    """Dataset-level summary for one experiment run.
+
+    Accuracy/F1 fields are computed over scored questions only. Runtime and
+    reliability fields are computed over all questions. Grouped maps contain
+    metrics by complexity tier and query shape when those groups are present.
+    """
 
     dataset_name: str = ""
     model_name: str = ""
@@ -80,7 +99,12 @@ def compute_question_metrics(
     complexity_tier: Optional[str] = None,
     query_shape: Optional[str] = None,
 ) -> QuestionMetrics:
-    """Compute metrics for one question. Correctness is omitted for unscored questions."""
+    """Compute one `QuestionMetrics` record from raw question output.
+
+    If `comparison` is `None`, correctness values stay at zero and the caller
+    should mark the question as unscored. Validation flags are inferred from the
+    first and last iteration logs.
+    """
     qm = QuestionMetrics(
         question_id=question_result.question_id,
         is_scored=question_result.is_scored,
@@ -119,7 +143,12 @@ def aggregate_metrics(
     dataset_name: str = "",
     model_name: str = "",
 ) -> AggregatedMetrics:
-    """Aggregate per-question metrics. Correctness denominators use scored questions only."""
+    """Aggregate question-level metrics into one run-level summary.
+
+    The denominator for execution accuracy, macro precision, macro recall, and
+    macro F1 is the number of scored questions. Syntactic validity, execution
+    success, latency, and iteration averages use all executed questions.
+    """
     if not question_metrics:
         return AggregatedMetrics(dataset_name=dataset_name, model_name=model_name)
 
@@ -179,7 +208,7 @@ def aggregate_metrics(
 
 
 def format_metrics_report(agg: AggregatedMetrics) -> str:
-    """Format aggregated metrics as plain ASCII text."""
+    """Render aggregate metrics as the plain-text report body."""
     lines = [
         "=" * 60,
         f"Evaluation Report: {agg.dataset_name} x {agg.model_name}",

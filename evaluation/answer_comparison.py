@@ -1,4 +1,16 @@
-"""Deterministic normalization and comparison of SPARQL result sets."""
+"""Compare generated SPARQL answers with gold answers.
+
+The runtime and the gold query can return the same logical answer with small
+surface differences: URI values may be written as full IRIs or prefixed names,
+typed literals may include datatype suffixes, numbers may differ only by
+formatting, and result variables may have different names. This module
+normalizes those cases before scoring.
+
+The public entry point is `compare_results()`. It returns exact match,
+precision, recall, F1, and the missing/extra normalized rows used by evaluation
+reports. It deliberately does not execute SPARQL or know about datasets; it only
+compares already-materialized result rows.
+"""
 
 from __future__ import annotations
 
@@ -8,7 +20,12 @@ from typing import Optional
 
 
 def normalize_uri(value: str, prefix_map: Optional[dict[str, str]] = None) -> str:
-    """Normalize a URI or prefixed name for comparison."""
+    """Return a canonical URI string for full IRIs, angle-bracket IRIs, or prefixed names.
+
+    `prefix_map` maps prefixes such as `ex` to namespaces. When provided,
+    `ex:Thing` and `http://example/.../Thing` can compare equal. Unknown
+    prefixes are left unchanged so mismatches remain visible in the diff.
+    """
     value = value.strip()
     if value.startswith("<") and value.endswith(">"):
         value = value[1:-1]
@@ -21,7 +38,13 @@ def normalize_uri(value: str, prefix_map: Optional[dict[str, str]] = None) -> st
 
 
 def normalize_literal(value: str) -> str:
-    """Normalize literal spelling, numeric forms, booleans, language tags, and datatypes."""
+    """Return a canonical literal string for answer comparison.
+
+    This removes common RDF literal wrappers, language tags, and datatype
+    suffixes, then normalizes numeric and boolean spellings. The goal is to
+    avoid penalizing harmless serialization differences while preserving the
+    literal's logical value.
+    """
     value = value.strip()
 
     datatype_match = re.match(r'^"?(.*?)"?\^\^<?[^>]+>?$', value)
@@ -53,7 +76,7 @@ def normalize_literal(value: str) -> str:
 
 
 def normalize_value(value: str, prefix_map: Optional[dict[str, str]] = None) -> str:
-    """Normalize one SPARQL result value as a URI or literal."""
+    """Normalize one SPARQL result cell as either a URI-like value or a literal."""
     value = value.strip()
     is_uri = (
         value.startswith("http://")
@@ -73,7 +96,12 @@ def normalize_row(
     row: dict[str, str],
     prefix_map: Optional[dict[str, str]] = None,
 ) -> tuple[str, ...]:
-    """Normalize one result row. Variable names are ignored."""
+    """Normalize one result row into a sorted tuple of values.
+
+    Variable names are intentionally ignored. For evaluation, a row containing
+    `?x = Alice` is treated the same as a row containing `?label = Alice`.
+    Values are sorted so column order does not affect equality.
+    """
     return tuple(sorted(normalize_value(str(value), prefix_map) for value in row.values()))
 
 
@@ -81,13 +109,18 @@ def normalize_result_set(
     results: list[dict[str, str]],
     prefix_map: Optional[dict[str, str]] = None,
 ) -> set[tuple[str, ...]]:
-    """Normalize an entire result set into comparable tuples."""
+    """Normalize all result rows into a set suitable for exact and partial matching."""
     return {normalize_row(row, prefix_map) for row in results}
 
 
 @dataclass
 class ComparisonResult:
-    """Result of comparing generated answers against gold answers."""
+    """Scoring details for one generated-vs-gold answer comparison.
+
+    `exact_match` is true only when no normalized rows are missing or extra.
+    Precision/recall/F1 are computed over normalized row sets. `missing_rows`
+    and `extra_rows` are stored for readable evaluation logs.
+    """
 
     exact_match: bool = False
     precision: float = 0.0
@@ -113,7 +146,13 @@ def compare_results(
     gold: list[dict[str, str]],
     prefix_map: Optional[dict[str, str]] = None,
 ) -> ComparisonResult:
-    """Compare generated and gold result sets using QALD-style precision/recall/F1."""
+    """Compare generated and gold result sets using normalized row-set overlap.
+
+    `generated=None` represents a pipeline failure or non-result, while an empty
+    list represents a successful query that returned no rows. Empty gold answers
+    are handled explicitly so unscored questions can still be represented
+    consistently by the caller.
+    """
     result = ComparisonResult(gold_is_empty=len(gold) == 0)
 
     if generated is None:
