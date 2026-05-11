@@ -14,6 +14,20 @@ from app.core.config import settings
 from app.domain.runtime.validation import ValidationStageResult
 
 
+async def preflight_sparql_endpoint(endpoint: str) -> None:
+    """Verify the configured SPARQL endpoint is reachable before a query run."""
+    if not endpoint:
+        raise ValueError("No SPARQL query endpoint is configured")
+
+    async with httpx.AsyncClient(timeout=settings.fuseki_upload_timeout_seconds) as client:
+        response = await client.post(
+            endpoint,
+            data={"query": "ASK WHERE { ?s ?p ?o }"},
+            headers={"Accept": "application/sparql-results+json, application/json"},
+        )
+        response.raise_for_status()
+
+
 async def execute_sparql_query(endpoint: str, query: str) -> dict[str, object]:
     """Execute one SPARQL query against an explicit endpoint URL.
 

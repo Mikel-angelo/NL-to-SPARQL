@@ -10,9 +10,10 @@ import argparse
 import asyncio
 
 from app.core.config import settings
-from app.domain.package import PackageNotFoundError, get_active_package
+from app.domain.package import PackageNotFoundError, get_active_package, read_json_file, settings_path
 from app.domain.rag import SUPPORTED_CHUNKING_ORDER
 from app.domain.runtime import run_query_pipeline
+from app.domain.runtime.sparql_execution import preflight_sparql_endpoint
 
 
 def parse_args() -> argparse.Namespace:
@@ -38,6 +39,12 @@ async def main() -> None:
         raise SystemExit(str(exc)) from exc
 
     print(f"Using active ontology package: {package_dir}")
+    package_settings = read_json_file(settings_path(package_dir))
+    endpoint = package_settings.get("query_endpoint")
+    if not isinstance(endpoint, str) or not endpoint.strip():
+        raise SystemExit(f"Active package has no query_endpoint: {package_dir}")
+    print(f"Preflight endpoint: {endpoint}")
+    await preflight_sparql_endpoint(endpoint)
 
     result = await run_query_pipeline(
         args.question,

@@ -197,6 +197,7 @@ python query.py --question "Which training centres offer CBRN exercises?"
 The query command:
 
 - loads the package artifacts
+- preflights the active package's configured SPARQL endpoint with `ASK WHERE { ?s ?p ?o }`
 - retrieves the most relevant ontology chunks
 - generates SPARQL with the configured LLM
 - validates each candidate query through formal validation stages
@@ -437,7 +438,7 @@ ontology_packages/     generated packages
 - Each file-based onboarding run creates a new package and Fuseki dataset.
 - File package activation recreates that package's Fuseki dataset from package artifacts.
 - After successful file onboarding or activation, the previous active local Fuseki dataset is removed.
-- `query.py` never accepts a package path or endpoint override. Activation is the operation that chooses the package and guarantees the managed Fuseki dataset matches it.
+- `query.py` never accepts a package path or endpoint override. Activation is the operation that chooses the package and guarantees the managed Fuseki dataset matches it; the CLI also preflights the package endpoint before querying.
 - Package directories are timestamped, so repeated runs do not overwrite older packages.
 - If query generation fails, check that the configured LLM API URL and model are reachable.
 
