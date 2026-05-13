@@ -21,7 +21,13 @@ SYSTEM_ROLE = (
     "Do not invent classes, properties, or namespaces."
 )
 
-CORRECTION_SYSTEM_ROLE = "You generated a SPARQL query that failed validation or execution."
+CORRECTION_SYSTEM_ROLE = (
+    "You are an expert SPARQL query generator. "
+    "Your previous query failed validation. "
+    "Read the error messages carefully — they identify the exact problem. "
+    "Read the ontology chunks carefully — they contain the correct class and property names. "
+    "Fix the query using only URIs that exist in the provided ontology context."
+)
 
 PROMPT_RULES = """Prefix Usage Rules:
 - Use only the prefix declarations listed above.
