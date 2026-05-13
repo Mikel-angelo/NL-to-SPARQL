@@ -29,6 +29,17 @@ PROMPT_RULES = """Prefix Usage Rules:
 - If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
 - Unknown prefixes will fail validation.
 
+Entity Matching Rules:
+- Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA, :UCLouvain-CTMA).
+- Instance URIs are opaque identifiers that cannot be guessed from labels.
+- Always find instances by class and label using this pattern:
+  ?entity rdf:type :ClassName ; rdfs:label ?label .
+  FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
+- Use LCASE and CONTAINS for partial, case-insensitive matching.
+- When the question names a specific entity, extract the key words for the FILTER.
+  Example: "CAMPUS VESTA" → FILTER(CONTAINS(LCASE(STR(?label)), "campus vesta"))
+- When no specific entity is named, omit the FILTER to match all instances.
+
 Result Shape Rules:
 - If the answer includes an ontology entity/resource and `rdfs:label` is available, return the label variable instead of the entity URI.
 - Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
@@ -45,7 +56,14 @@ WHERE {
   ?entity :someProperty ?item .
   ?entity rdfs:label ?entityLabel .
 }
-GROUP BY ?entityLabel"""
+GROUP BY ?entityLabel
+
+Strict Constraints:
+- Only use class and property names that appear in the Relevant Ontology Chunks above.
+- If the exact property name is not visible in the chunks, re-read them carefully before writing the query. Do not guess or invent property names.
+- Every variable in SELECT must appear in the WHERE clause.
+- Do not use OPTIONAL unless the question explicitly implies some data may be missing.
+"""
 
 OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
 - Return only one valid SPARQL query.
