@@ -10,6 +10,7 @@ execute queries against a SPARQL endpoint.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from difflib import get_close_matches
 import re
 
 from rdflib.plugins.sparql.parser import parseQuery
@@ -115,25 +116,61 @@ def _prefix_validation(query: str, ontology_context: dict[str, object]) -> Valid
 def _vocabulary_validation(query: str, ontology_context: dict[str, object]) -> ValidationStageResult:
     class_uris, property_uris = _ontology_vocabulary(ontology_context)
     prefix_map = {**_ontology_prefixes(ontology_context), **_declared_prefixes(query)}
-    unknown: list[str] = []
+    unknown_properties: list[str] = []
+    unknown_classes: list[str] = []
 
     for predicate_uri in _predicate_uris(query, prefix_map):
         if _is_builtin_predicate(predicate_uri):
             continue
         if predicate_uri not in property_uris:
-            unknown.append(predicate_uri)
+            unknown_properties.append(predicate_uri)
 
     for class_uri in _rdf_type_object_uris(query, prefix_map):
         if class_uri not in class_uris:
-            unknown.append(class_uri)
+            unknown_classes.append(class_uri)
 
-    if unknown:
-        return _fail(
-            "vocabulary",
-            "VOCABULARY_UNKNOWN_URI",
-            f"Query references unknown ontology class/property URIs: {', '.join(sorted(set(unknown)))}",
-        )
-    return _pass("vocabulary", "VOCABULARY_OK")
+    all_unknown = unknown_properties + unknown_classes
+    if not all_unknown:
+        return _pass("vocabulary", "VOCABULARY_OK")
+
+    # Build vocabulary index for fuzzy-match suggestions
+    property_index = _build_vocabulary_index(ontology_context, "properties")
+    class_index = _build_vocabulary_index(ontology_context, "classes")
+
+    suggestion_lines: list[str] = []
+
+    for uri in sorted(set(unknown_properties)):
+        local_name = _local_name(uri)
+        suggestions = _suggest_corrections(local_name, property_index)
+        if suggestions:
+            formatted = "; ".join(
+                f"'{s['local_name']}' ({s['detail']})" for s in suggestions
+            )
+            suggestion_lines.append(
+                f"Unknown property '{local_name}' — did you mean: {formatted}?"
+            )
+        else:
+            suggestion_lines.append(
+                f"Unknown property '{local_name}' — no close match found in ontology."
+            )
+
+    for uri in sorted(set(unknown_classes)):
+        local_name = _local_name(uri)
+        suggestions = _suggest_corrections(local_name, class_index)
+        if suggestions:
+            formatted = "; ".join(
+                f"'{s['local_name']}' ({s['detail']})" for s in suggestions
+            )
+            suggestion_lines.append(
+                f"Unknown class '{local_name}' — did you mean: {formatted}?"
+            )
+        else:
+            suggestion_lines.append(
+                f"Unknown class '{local_name}' — no close match found in ontology."
+            )
+
+    message = " | ".join(suggestion_lines)
+    return _fail("vocabulary", "VOCABULARY_UNKNOWN_URI", message)
 
 
 def _structural_validation(query: str, ontology_context: dict[str, object]) -> ValidationStageResult:
@@ -287,6 +324,134 @@ def _uris_from_entries(entries: object) -> set[str]:
         if isinstance(item, dict) and isinstance(item.get("uri"), str):
             uris.add(str(item["uri"]))
     return uris
+
+
+# ── Fuzzy-match suggestion helpers ────────────────────────────────────────────
+
+
+def _local_name(uri: str) -> str:
+    """Extract the local name from a full URI (after # or last /)."""
+    if "#" in uri:
+        return uri.split("#")[-1]
+    return uri.rstrip("/").rsplit("/", 1)[-1]
+
+
+def _build_vocabulary_index(
+    ontology_context: dict[str, object],
+    kind: str,
+) -> dict[str, dict[str, str]]:
+    """Build a local-name → {uri, local_name, detail} index for fuzzy matching.
+
+    `kind` is either "properties" or "classes".
+
+    For properties, `detail` includes domain → range when available.
+    For classes, `detail` includes the class label.
+    """
+    index: dict[str, dict[str, str]] = {}
+
+    if kind == "properties":
+        for section_key in ("object_properties", "datatype_properties"):
+            entries = ontology_context.get(section_key, [])
+            if not isinstance(entries, list):
+                continue
+            for item in entries:
+                if not isinstance(item, dict):
+                    continue
+                uri = item.get("uri")
+                if not isinstance(uri, str):
+                    continue
+                local = _local_name(uri)
+                # Build a human-readable detail string with domain/range
+                domain = _first_label_or_name(item.get("domains", item.get("domain")))
+                range_ = _first_label_or_name(item.get("ranges", item.get("range")))
+                if domain and range_:
+                    detail = f"{domain} → {range_}"
+                elif domain:
+                    detail = f"domain: {domain}"
+                elif range_:
+                    detail = f"range: {range_}"
+                else:
+                    detail = section_key.replace("_", " ").rstrip("s")
+                index[local] = {"uri": uri, "local_name": local, "detail": detail}
+
+    elif kind == "classes":
+        entries = ontology_context.get("classes", [])
+        if isinstance(entries, list):
+            for item in entries:
+                if not isinstance(item, dict):
+                    continue
+                uri = item.get("uri")
+                if not isinstance(uri, str):
+                    continue
+                local = _local_name(uri)
+                label = item.get("label", local)
+                detail = f"class: {label}" if isinstance(label, str) else f"class: {local}"
+                index[local] = {"uri": uri, "local_name": local, "detail": detail}
+
+    return index
+
+
+def _first_label_or_name(value: object) -> str:
+    """Extract a readable name from a domain/range field.
+
+    The field may be a string, a list of strings, a list of dicts with 'label'
+    or 'uri' keys, or None.
+    """
+    if isinstance(value, str):
+        return _local_name(value) if "/" in value or "#" in value else value
+    if isinstance(value, list) and value:
+        first = value[0]
+        if isinstance(first, str):
+            return _local_name(first) if "/" in first or "#" in first else first
+        if isinstance(first, dict):
+            label = first.get("label") or first.get("uri")
+            if isinstance(label, str):
+                return _local_name(label) if "/" in label or "#" in label else label
+    return ""
+
+
+def _suggest_corrections(
+    unknown_local_name: str,
+    vocabulary_index: dict[str, dict[str, str]],
+    max_suggestions: int = 2,
+    cutoff: float = 0.45,
+) -> list[dict[str, str]]:
+    """Find the closest matching vocabulary entries for an unknown local name.
+
+    Uses difflib.get_close_matches on the local names. The cutoff of 0.45 is
+    intentionally lenient — it's better to suggest a wrong match (the LLM can
+    evaluate it) than to miss a correct one.
+    """
+    known_names = list(vocabulary_index.keys())
+    if not known_names:
+        return []
+
+    # Try exact case-insensitive match first
+    lower_map = {k.lower(): k for k in known_names}
+    if unknown_local_name.lower() in lower_map:
+        key = lower_map[unknown_local_name.lower()]
+        return [vocabulary_index[key]]
+
+    # Fuzzy match on local names
+    matches = get_close_matches(
+        unknown_local_name,
+        known_names,
+        n=max_suggestions,
+        cutoff=cutoff,
+    )
+
+    if not matches:
+        # Try case-insensitive fuzzy match as fallback
+        lower_known = {k.lower(): k for k in known_names}
+        lower_matches = get_close_matches(
+            unknown_local_name.lower(),
+            list(lower_known.keys()),
+            n=max_suggestions,
+            cutoff=cutoff,
+        )
+        matches = [lower_known[m] for m in lower_matches]
+
+    return [vocabulary_index[m] for m in matches if m in vocabulary_index]
 
 
 def _predicate_uris(query: str, prefix_map: dict[str, str]) -> set[str]:
