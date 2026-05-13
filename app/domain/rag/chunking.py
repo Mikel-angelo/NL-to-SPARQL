@@ -167,6 +167,11 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
             properties=datatype_properties if isinstance(datatype_properties, list) else [],
             class_uri=class_uri_text,
         )
+        incoming_object_properties = _incoming_properties_for_class(
+            properties=object_properties if isinstance(object_properties, list) else [],
+            class_uri=class_uri_text,
+            class_names_by_uri=class_names_by_uri,
+        )
 
         text = _build_composite_chunk_text(
             class_name=class_name,
@@ -176,6 +181,7 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
             child_classes=child_classes,
             object_properties=class_object_properties,
             datatype_properties=class_datatype_properties,
+            incoming_object_properties=incoming_object_properties,
         )
 
         composite_chunks.append(
@@ -192,6 +198,7 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
                     "child_classes": child_classes,
                     "object_properties": class_object_properties,
                     "datatype_properties": class_datatype_properties,
+                    "incoming_object_properties": incoming_object_properties,
                 },
             }
         )
@@ -253,6 +260,37 @@ def _properties_for_class(properties: list[dict[str, object]], class_uri: str | 
     return sorted(set(related))
 
 
+def _incoming_properties_for_class(
+    properties: list[dict[str, object]],
+    class_uri: str | None,
+    class_names_by_uri: dict[str, str],
+) -> list[str]:
+    """Find properties where this class appears as the range (i.e., is the target).
+
+    Returns lines like: "providesTrainingCourse (from TrainingCentre)"
+    """
+    if not class_uri:
+        return []
+
+    incoming = []
+    for property_data in properties:
+        ranges = property_data.get("range", [])
+        if not isinstance(ranges, list) or class_uri not in ranges:
+            continue
+        property_name = property_data.get("name") or property_data.get("label") or property_data.get("uri")
+        if not property_name:
+            continue
+        domains = property_data.get("domain", [])
+        source_names = []
+        if isinstance(domains, list):
+            for domain_uri in domains:
+                if isinstance(domain_uri, str):
+                    source_names.append(class_names_by_uri.get(domain_uri, _short_name(domain_uri)))
+        source_text = ", ".join(source_names) if source_names else "unknown source"
+        incoming.append(f"{_short_name(str(property_name))} (from {source_text})")
+    return sorted(set(incoming))
+
+
 def _build_class_chunk_text(
     *,
     class_name: str,
@@ -305,9 +343,11 @@ def _build_composite_chunk_text(
     child_classes: list[str],
     object_properties: list[str],
     datatype_properties: list[str],
+    incoming_object_properties: list[str] | None = None,
 ) -> str:
     label_text = class_label or "No label available."
     description_text = description or "No description available."
+    incoming_text = _bullet_list(incoming_object_properties or [])
     return (
         f"Class Neighbourhood: {class_name}\n\n"
         f"Label: {label_text}\n\n"
@@ -315,7 +355,8 @@ def _build_composite_chunk_text(
         f"Parent Classes:\n{_bullet_list(parent_classes, empty_label='None (top-level class)')}\n\n"
         f"Child Classes:\n{_bullet_list(child_classes)}\n\n"
         f"Direct Object Properties:\n{_bullet_list(object_properties)}\n\n"
-        f"Direct Datatype Properties:\n{_bullet_list(datatype_properties)}"
+        f"Direct Datatype Properties:\n{_bullet_list(datatype_properties)}\n\n"
+        f"Incoming Object Properties (this class is the target):\n{incoming_text}"
     )
 
 
