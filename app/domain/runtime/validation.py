@@ -251,9 +251,59 @@ def _normalized_query(query: str, ontology_context: dict[str, object]) -> str:
             continue
         declarations.append(f"PREFIX : <{namespace}>" if prefix == "" else f"PREFIX {prefix}: <{namespace}>")
 
-    if not declarations:
-        return query_body
-    return "\n".join([*declarations, "", query_body])
+    if declarations:
+        query_body = "\n".join([*declarations, "", query_body])
+
+    # Fix bare ontology names missing their ':' prefix
+    query_body = _fix_bare_ontology_names(query_body, ontology_context)
+
+    return query_body
+
+
+def _fix_bare_ontology_names(query: str, ontology_context: dict[str, object]) -> str:
+    """Prepend ':' to bare ontology property/class names that are missing their prefix.
+
+    LLMs sometimes generate `hasFacility` instead of `:hasFacility`. This function
+    detects known ontology local names appearing as bare words (not preceded by a
+    prefix like `:`, `rdf:`, etc.) and adds the default namespace prefix.
+
+    Only names that exactly match a known property or class local name are fixed.
+    SPARQL keywords, variables, and already-prefixed terms are left untouched.
+    """
+    known = _known_local_names(ontology_context)
+    if not known:
+        return query
+
+    # Build alternation from known names, longest first to prevent partial matches
+    sorted_names = sorted(known, key=len, reverse=True)
+    names_pattern = "|".join(re.escape(name) for name in sorted_names)
+
+    # Match bare names that appear:
+    #   - after whitespace, semicolon, open brace/paren, or comma (but NOT after : ? $ < / # ")
+    #   - before whitespace, semicolon, period, close brace/paren, comma, or question mark
+    pattern = re.compile(
+        r"(?<=[\s;{(,])(" + names_pattern + r")(?=[\s;.},)?])"
+    )
+    return pattern.sub(r":\1", query)
+
+
+def _known_local_names(ontology_context: dict[str, object]) -> set[str]:
+    """Collect all known property and class local names from the ontology context."""
+    names: set[str] = set()
+    for section in ("object_properties", "datatype_properties", "classes"):
+        entries = ontology_context.get(section, [])
+        if not isinstance(entries, list):
+            continue
+        for item in entries:
+            if not isinstance(item, dict):
+                continue
+            uri = item.get("uri")
+            if isinstance(uri, str) and uri:
+                local = _local_name(uri)
+                # Skip very short names that could collide with SPARQL syntax
+                if len(local) > 2:
+                    names.add(local)
+    return names
 
 
 def _query_body(query: str) -> str:
