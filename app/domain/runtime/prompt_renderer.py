@@ -94,6 +94,7 @@ def render_query_generation_prompt(
     retrieved_context: list[RetrievedChunk],
     metadata: dict[str, object],
     ontology_context: dict[str, object],
+    few_shot_examples: list[dict[str, str]] | None = None,
 ) -> str:
     """Render the first-query generation prompt.
 
@@ -109,7 +110,7 @@ def render_query_generation_prompt(
         retrieved_context=[{"rank": item.rank, "text": item.text} for item in retrieved_context],
         prefix_declarations=prefix_declarations(ontology_context),
         prompt_rules=PROMPT_RULES,
-        few_shot_examples=[],
+        few_shot_examples=few_shot_examples or [],
         output_format_instructions=OUTPUT_FORMAT_INSTRUCTIONS,
         user_question=question.strip(),
     )

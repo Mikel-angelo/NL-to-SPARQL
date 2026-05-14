@@ -35,7 +35,7 @@ from app.domain.runtime import query_correction, query_generation, sparql_execut
 from app.domain.runtime.prompt_renderer import render_query_generation_prompt
 from app.domain.runtime.query_trace import write_query_trace, write_readable_query_trace
 from app.domain.runtime.validation import ValidationStageResult, validate_query
-
+from app.domain.rag.few_shot_retrieval import retrieve_few_shot_examples
 
 @dataclass(frozen=True)
 class QueryPipelineResult:
@@ -127,11 +127,13 @@ async def run_query_pipeline(
         chunking=effective_chunking,
     )
     retrieved_payload = [item.to_dict() for item in retrieved_context]
+    few_shot_examples = retrieve_few_shot_examples(root, question, n=3)
     prompt = render_query_generation_prompt(
         question=question,
         retrieved_context=retrieved_context,
         metadata=metadata,
         ontology_context=ontology_context,
+        few_shot_examples=few_shot_examples,
     )
     attempt_result = await run_query_attempts(
         question=question,
