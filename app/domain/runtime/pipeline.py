@@ -268,15 +268,36 @@ async def run_query_attempts(
                     validation_result.normalized_query,
                 )
                 execution_stage = sparql_execution.execution_stage_result()
-                status = "completed"
-                errors = None
                 validated_query = validation_result.normalized_query
                 final_query = validation_result.normalized_query
-                iteration_payload["status"] = "completed"
-                iteration_payload["errors"] = []
-                iteration_payload["execution"] = execution_stage.to_dict()
-                iterations.append(iteration_payload)
-                break
+
+                # Check for empty results on SELECT queries
+                is_empty = _is_empty_select_result(execution_result, validation_result.normalized_query)
+
+                if is_empty and iteration < max(1, k_max):
+                    # Empty result on a SELECT — trigger correction with guidance
+                    errors = [
+                        "Query executed successfully but returned 0 results. "
+                        "Common causes: (1) An entity was referenced by a constructed URI "
+                        "instead of using rdfs:label with FILTER — instance URIs cannot be "
+                        "guessed from labels. Use the pattern: ?entity rdf:type :ClassName ; "
+                        "rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?label)), \"search term\")). "
+                        "(2) A property name is close but not exactly correct — re-read the "
+                        "ontology chunks carefully."
+                    ]
+                    status = "completed"
+                    iteration_payload["status"] = "executed_empty"
+                    iteration_payload["errors"] = errors
+                    iteration_payload["execution"] = execution_stage.to_dict()
+                else:
+                    # Non-empty result or last iteration — accept the result
+                    status = "completed"
+                    errors = None
+                    iteration_payload["status"] = "completed"
+                    iteration_payload["errors"] = []
+                    iteration_payload["execution"] = execution_stage.to_dict()
+                    iterations.append(iteration_payload)
+                    break
             except Exception as exc:
                 execution_stage = sparql_execution.execution_stage_result(exc)
                 errors = [execution_stage.message or execution_stage.code]
@@ -370,3 +391,30 @@ def _validation_summary(validation: dict[str, object]) -> str:
         if isinstance(stage, dict) and not stage.get("passed") and isinstance(stage.get("code"), str)
     ]
     return ", ".join(failed_codes) if failed_codes else "VALIDATION_OK"
+
+
+def _is_empty_select_result(execution_result: dict[str, object] | None, query: str) -> bool:
+    """Check if a SELECT query returned zero result rows.
+
+    Returns False for ASK/CONSTRUCT/DESCRIBE queries (where empty bindings
+    are expected or the result format differs).
+    """
+    if execution_result is None:
+        return False
+
+    # Only trigger for SELECT queries
+    query_upper = query.strip().lstrip("PREFIX").strip()
+    # Find the actual query form after prefix declarations
+    for line in query.splitlines():
+        stripped = line.strip().upper()
+        if stripped and not stripped.startswith("PREFIX"):
+            if not stripped.startswith("SELECT"):
+                return False
+            break
+
+    bindings = execution_result.get("results", {})
+    if isinstance(bindings, dict):
+        rows = bindings.get("bindings", [])
+        if isinstance(rows, list):
+            return len(rows) == 0
+    return False
