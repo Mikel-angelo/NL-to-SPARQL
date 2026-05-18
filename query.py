@@ -54,6 +54,7 @@ async def main() -> None:
         chunking=args.chunking,
         corrections=args.corrections,
     )
+    print(f"Model: {result.model_name}")
     print(f"Chunking: {result.chunking_strategy}")
     print(f"Retrieval top-k: {result.retrieval_top_k}")
     print(f"Correction attempts max: {result.correction_max_iterations}")

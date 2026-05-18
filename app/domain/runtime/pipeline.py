@@ -50,6 +50,7 @@ class QueryPipelineResult:
     question: str
     dataset_name: str
     dataset_endpoint: str
+    model_name: str
     retrieved_context: list[dict[str, object]]
     chunking_strategy: str
     retrieval_top_k: int
@@ -68,6 +69,7 @@ class QueryPipelineResult:
             "question": self.question,
             "dataset_name": self.dataset_name,
             "dataset_endpoint": self.dataset_endpoint,
+            "model_name": self.model_name,
             "retrieved_context": self.retrieved_context,
             "chunking_strategy": self.chunking_strategy,
             "retrieval_top_k": self.retrieval_top_k,
@@ -95,30 +97,28 @@ async def run_query_pipeline(
 ) -> QueryPipelineResult:
     """Answer one natural-language question using one ontology package.
 
-    Package values from `settings.json` are used by default. `model`, `endpoint`,
-    `k`, `chunking`, and `corrections` are per-call overrides for the LLM model,
+    Runtime defaults come from `app.core.config`. `model`, `endpoint`, `k`,
+    `chunking`, and `corrections` are per-call overrides for the LLM model,
     SPARQL query endpoint, retrieval depth, retrieval index strategy, and
-    correction loop limit. The function writes one trace entry to
-    `logs/query.log` and returns the same runtime state in structured form.
+    correction loop limit. Package settings provide package infrastructure such
+    as the query endpoint, not experiment defaults. The function writes one
+    trace entry to `logs/query.log` and returns the same runtime state in
+    structured form.
     """
     root = resolve_package_dir(package_dir)
     metadata = read_json_file(metadata_path(root))
     ontology_context = read_json_file(ontology_context_path(root))
     settings_payload = read_json_file(settings_path(root))
 
-    effective_model = model or _string_setting(settings_payload, "default_model", settings.default_llm_model)
+    effective_model = model or settings.default_llm_model
     effective_endpoint = endpoint or _string_setting(
         settings_payload,
         "query_endpoint",
         _string_setting(metadata, "query_endpoint", ""),
     )
-    effective_k = k or _default_retrieval_top_k(settings_payload)
-    effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
-    max_iterations = corrections or _int_setting(
-        settings_payload,
-        "correction_max_iterations",
-        settings.correction_max_iterations,
-    )
+    effective_k = k or settings.runtime_retrieval_top_k
+    effective_chunking = chunking or settings.default_chunking_strategy
+    max_iterations = corrections or settings.correction_max_iterations
 
     retrieved_context = retrieve_context(
         root,
@@ -142,7 +142,7 @@ async def run_query_pipeline(
         ontology_context=ontology_context,
         endpoint_url=effective_endpoint,
         model=effective_model,
-        llm_api_url=_llm_api_url(settings_payload),
+        llm_api_url=settings.llm_api_url,
         k_max=max_iterations,
     )
 
@@ -154,6 +154,8 @@ async def run_query_pipeline(
         "question_asked": question,
         "dataset_name": _dataset_name(metadata, root.name),
         "dataset_endpoint": effective_endpoint,
+        "model_name": effective_model,
+        "llm_api_url": settings.llm_api_url,
         "chunking_strategy": effective_chunking,
         "retrieval_top_k": effective_k,
         "correction_max_iterations": max_iterations,
@@ -181,6 +183,7 @@ async def run_query_pipeline(
         question=question,
         dataset_name=_dataset_name(metadata, root.name),
         dataset_endpoint=effective_endpoint,
+        model_name=effective_model,
         retrieved_context=retrieved_payload,
         chunking_strategy=effective_chunking,
         retrieval_top_k=effective_k,
@@ -342,25 +345,6 @@ async def run_query_attempts(
 def _string_setting(payload: dict[str, object], key: str, default: str) -> str:
     value = payload.get(key)
     return value if isinstance(value, str) and value.strip() else default
-
-
-def _int_setting(payload: dict[str, object], key: str, default: int) -> int:
-    value = payload.get(key)
-    return int(value) if isinstance(value, (int, float)) else default
-
-
-def _default_retrieval_top_k(settings_payload: dict[str, object]) -> int:
-    """Read the package default retrieval depth."""
-    return _int_setting(settings_payload, "default_retrieval_top_k", settings.runtime_retrieval_top_k)
-
-
-def _llm_api_url(settings_payload: dict[str, object]) -> str:
-    """Read the generic LLM URL, with backward compatibility for older packages."""
-    return _string_setting(
-        settings_payload,
-        "llm_api_url",
-        _string_setting(settings_payload, "ollama_url", settings.llm_api_url),
-    )
 
 
 def _dataset_name(metadata: dict[str, object], fallback: str) -> str:

@@ -22,13 +22,6 @@ def parse_args() -> argparse.Namespace:
     source_group.add_argument("--sparql-endpoint", help="Existing SPARQL query endpoint to inspect")
     parser.add_argument("--output", required=True, help="Output ontology packages directory")
     parser.add_argument("--name", help="Optional package/dataset name base. A minute timestamp is appended.")
-    parser.add_argument("--model", help="Default model to save in settings.json")
-    parser.add_argument(
-        "--chunking",
-        default="class_based",
-        choices=["class_based", "property_based", "composite"],
-        help="Default retrieval index strategy saved in settings.json. All supported indexes are built.",
-    )
     return parser.parse_args()
 
 
@@ -45,8 +38,6 @@ async def main() -> None:
             fuseki_service=fuseki_service,
             source_filename=Path(args.ontology).name,
             package_name=args.name,
-            default_model=args.model,
-            chunking=args.chunking,
             status_callback=_print_status,
         )
         print(f"Ontology package: {result.package_dir}")
@@ -59,8 +50,6 @@ async def main() -> None:
     result = await onboard_sparql_endpoint(
         args.sparql_endpoint,
         packages_root=output_root,
-        default_model=args.model,
-        chunking=args.chunking,
         package_name=args.name,
         status_callback=_print_status,
     )
@@ -73,7 +62,7 @@ def _print_status(event: str, **details: object) -> None:
     if event == "loading_source":
         print(f"[1/4] Loading source and extracting ontology context from {details.get('source')}")
     elif event == "building_indexes":
-        print(f"[2/4] Building retrieval indexes (default: {details.get('default_chunking')})")
+        print("[2/4] Building retrieval indexes")
     elif event == "uploading_to_fuseki":
         print(f"[3/4] Uploading dataset to Fuseki: {details.get('dataset_name')}")
     elif event == "package_activated":

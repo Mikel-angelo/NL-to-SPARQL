@@ -49,7 +49,7 @@ flowchart TD
 | Active package lookup | `get_active_package()` in `app/domain/package.py` |
 | Runtime orchestration | `run_query_pipeline()` in `app/domain/runtime/pipeline.py` |
 | Attempt loop | `run_query_attempts()` in `pipeline.py` |
-| Runtime settings | `settings.json`, `app/core/config.py`, `_string_setting()`, `_int_setting()` in `pipeline.py` |
+| Runtime settings | CLI/API overrides, then `app/core/config.py`; package settings provide endpoint infrastructure |
 | Retrieve chunks from selected index | `retrieve_context(..., k=effective_k, chunking=effective_chunking)` in `app/domain/rag/retrieve_context.py` |
 | Render initial prompt | `render_query_generation_prompt()` in `prompt_renderer.py` |
 | Initial prompt template | `app/domain/runtime/templates/query_generation_prompt.j2` |
@@ -113,6 +113,7 @@ ontology_packages/<package>/logs/
 - `query.py` always uses the active package.
 - `query.py` has no package argument and no endpoint override.
 - `query.py --chunking` selects one prebuilt package index; it does not rebuild indexes.
+- If model, top-k, chunking, or corrections are omitted, `app/core/config.py` supplies the defaults.
 - Candidate SPARQL is executed only after validation passes.
 - Validation or execution failures can trigger correction attempts.
 - `--k` is retrieval top-k, not correction iterations.

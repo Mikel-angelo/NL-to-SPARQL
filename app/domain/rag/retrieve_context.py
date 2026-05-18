@@ -9,7 +9,7 @@ from pathlib import Path
 import faiss
 
 from app.core.config import settings
-from app.domain.package import chunks_path, index_path, read_json_file, read_json_list, resolve_package_dir, settings_path
+from app.domain.package import chunks_path, index_path, read_json_list, resolve_package_dir
 
 index_module = import_module("app.domain.rag.build_index")
 
@@ -45,9 +45,8 @@ def retrieve_context(
 ) -> list[RetrievedChunk]:
     """Return the top-k retrieved chunks for one question."""
     root = resolve_package_dir(package_dir)
-    settings_payload = read_json_file(settings_path(root))
-    effective_k = max(1, k or _number_setting(settings_payload, "default_retrieval_top_k", settings.runtime_retrieval_top_k))
-    effective_chunking = chunking or _string_setting(settings_payload, "default_chunking_strategy", "class_based")
+    effective_k = max(1, k or settings.runtime_retrieval_top_k)
+    effective_chunking = chunking or settings.default_chunking_strategy
 
     chunks = read_json_list(chunks_path(root, effective_chunking))
     index = faiss.read_index(str(index_path(root, effective_chunking)))
@@ -88,12 +87,3 @@ def retrieve_text_chunks(
         if isinstance(chunk.text, str)
     ]
 
-
-def _number_setting(payload: dict[str, object], key: str, default: int) -> int:
-    value = payload.get(key)
-    return int(value) if isinstance(value, (int, float)) else default
-
-
-def _string_setting(payload: dict[str, object], key: str, default: str) -> str:
-    value = payload.get(key)
-    return value if isinstance(value, str) and value.strip() else default

@@ -118,8 +118,6 @@ This creates the same package structure, but does not upload a new local ontolog
 Optional onboarding arguments:
 
 - `--name`: save a readable package/dataset name base; a minute timestamp is appended
-- `--model`: save a different default LLM model in `settings.json`
-- `--chunking`: choose the default retrieval index strategy saved in `settings.json`; all supported indexes are still built
 
 Supported retrieval index strategies:
 
@@ -130,10 +128,10 @@ Supported retrieval index strategies:
 Example:
 
 ```powershell
-python onboard.py --ontology path\to\ontology.ttl --output ontology_packages --name enovation --chunking composite --model qwen2.5-coder:7b
+python onboard.py --ontology path\to\ontology.ttl --output ontology_packages --name enovation
 ```
 
-That package contains `class_based`, `property_based`, and `composite` indexes. `--chunking composite` only makes `composite` the default for later queries and evaluations that do not pass a chunking override.
+That package contains `class_based`, `property_based`, and `composite` indexes. Model, retrieval top-k, chunking strategy, and correction attempts are runtime/evaluation settings, not package settings.
 
 ### `activate.py`
 
@@ -276,7 +274,7 @@ ontology_packages/
 Important files:
 
 - `metadata.json`: onboarding summary and artifact paths
-- `settings.json`: saved endpoint, model, `default_chunking_strategy`, `default_retrieval_top_k`, and correction iteration limit
+- `settings.json`: package infrastructure such as source mode, dataset name, and query endpoint
 - `ontology_context.json`: normalized ontology structure used by the runtime
 - `indexes/<strategy>/chunks.json`: text chunks for one retrieval strategy
 - `indexes/<strategy>/index.faiss`: vector index for one retrieval strategy
@@ -305,7 +303,7 @@ python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ont
 Example with explicit retrieval settings:
 
 ```powershell
-python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --k 5 --chunking property_based --corrections 3
+python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --model qwen2.5-coder:32b --k 5 --chunking property_based --corrections 3
 ```
 
 Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.
@@ -321,7 +319,8 @@ Important behavior:
 - `--k` is retrieval top-k, not the correction iteration count
 - `--chunking` chooses which prebuilt package index to retrieve from
 - `--corrections` chooses the maximum correction loop attempts for each question
-- evaluation records the actual retrieval top-k, chunking strategy, and correction attempts in one concentrated file: `run_config.json`
+- when CLI flags are omitted, evaluation uses `app/core/config.py` defaults, not package defaults
+- evaluation records the actual model, retrieval top-k, chunking strategy, and correction attempts in one concentrated file: `run_config.json`
 
 Evaluation output files:
 
@@ -361,6 +360,7 @@ The API has no package selector for `/query`. It always queries the active packa
 `POST /query` accepts:
 
 - `question`: natural-language question, required
+- `model`: optional LLM model override
 - `k`: optional retrieval top-k override
 - `chunking`: optional retrieval index strategy override, one of `class_based`, `property_based`, or `composite`
 - `corrections`: optional correction attempt limit
@@ -368,9 +368,8 @@ The API has no package selector for `/query`. It always queries the active packa
 `POST /ontology/load` accepts multipart form data:
 
 - `file`: ontology file, required
-- `chunking`: optional default retrieval index strategy; all supported indexes are built
 
-The static UI at `GET /` exposes the same upload route and includes a default chunking strategy selector.
+The static UI at `GET /` exposes the same upload and query routes.
 
 ## RAG Module API
 

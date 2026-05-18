@@ -43,16 +43,16 @@ class ExperimentConfig:
     """Runtime configuration for one direct package evaluation run.
 
     These fields are the controlled variables of an experiment: package,
-    optional model override, retrieval top-k, chunking strategy, and correction
-    loop limit. The same payload is saved to `run_config.json` so evaluation
-    results can be interpreted later.
+    model, retrieval top-k, chunking strategy, and correction loop limit. Values
+    are resolved before the run from CLI overrides plus `app.core.config`, then
+    saved to `run_config.json` so evaluation results can be interpreted later.
     """
 
     package_dir: Path
-    model_name: str = ""
-    retrieval_top_k: int = 10
-    chunking_strategy: str = "class_based"
-    correction_max_iterations: int | None = None
+    model_name: str
+    retrieval_top_k: int
+    chunking_strategy: str
+    correction_max_iterations: int
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -83,7 +83,7 @@ class ExperimentRunner:
         answers and full-URI generated answers to compare equal.
         """
         timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M")
-        model_label = self.config.model_name or "package-default"
+        model_label = self.config.model_name
         experiment_id = f"{dataset.dataset_name}_{model_label}_{timestamp}".replace(":", "-").replace("/", "-")
 
         experiment = ExperimentRun(
@@ -148,7 +148,7 @@ class ExperimentRunner:
             pipeline_result = await run_query_pipeline(
                 question.nl_question,
                 self.config.package_dir,
-                model=self.config.model_name or None,
+                model=self.config.model_name,
                 k=self.config.retrieval_top_k,
                 chunking=self.config.chunking_strategy,
                 corrections=self.config.correction_max_iterations,
@@ -428,16 +428,6 @@ def prefix_map_from_package(package_dir: str | Path) -> dict[str, str]:
     return prefix_map
 
 
-def _int_setting(payload: dict[str, object], key: str) -> int | None:
-    value = payload.get(key)
-    return int(value) if isinstance(value, (int, float)) else None
-
-
-def _string_setting(payload: dict[str, object], key: str) -> str | None:
-    value = payload.get(key)
-    return value if isinstance(value, str) and value.strip() else None
-
-
 def default_output_dir(package_dir: str | Path, dataset_name: str) -> Path:
     """Return a timestamped, non-overwriting output directory under the package."""
     root = resolve_package_dir(package_dir) / "evaluation"
@@ -456,7 +446,7 @@ async def run_from_cli(args) -> dict[str, Path]:
 
     This resolves and checks the package, preflights its SPARQL endpoint, loads
     the dataset, builds effective runtime configuration from CLI overrides plus
-    package defaults, runs the experiment, saves artifacts, and prints a summary.
+    global defaults, runs the experiment, saves artifacts, and prints a summary.
     """
     package_dir = ensure_requested_package_is_active(args.package, settings.ontology_packages_path)
     package_settings = read_json_file(settings_path(package_dir))
@@ -464,20 +454,25 @@ async def run_from_cli(args) -> dict[str, Path]:
     if not isinstance(endpoint, str) or not endpoint.strip():
         raise DomainError(f"Active package has no query_endpoint: {package_dir}")
 
-    print(f"Preflight endpoint: {endpoint}")
-    await preflight_endpoint(endpoint, timeout=args.preflight_timeout)
-
     dataset = load_dataset(args.dataset)
     output_dir = Path(args.output) if args.output else default_output_dir(package_dir, dataset.dataset_name)
     config = ExperimentConfig(
         package_dir=package_dir,
-        model_name=args.model or "",
-        retrieval_top_k=args.k or _int_setting(package_settings, "default_retrieval_top_k") or settings.runtime_retrieval_top_k,
-        chunking_strategy=args.chunking or _string_setting(package_settings, "default_chunking_strategy") or "class_based",
-        correction_max_iterations=args.corrections
-        or _int_setting(package_settings, "correction_max_iterations")
-        or settings.correction_max_iterations,
+        model_name=args.model or settings.default_llm_model,
+        retrieval_top_k=args.k or settings.runtime_retrieval_top_k,
+        chunking_strategy=args.chunking or settings.default_chunking_strategy,
+        correction_max_iterations=args.corrections or settings.correction_max_iterations,
     )
+    print("Evaluation config")
+    print(f"Package: {config.package_dir}")
+    print(f"Dataset: {dataset.dataset_name}")
+    print(f"Model: {config.model_name}")
+    print(f"Chunking: {config.chunking_strategy}")
+    print(f"Retrieval top-k: {config.retrieval_top_k}")
+    print(f"Correction attempts max: {config.correction_max_iterations}")
+    print(f"Preflight endpoint: {endpoint}")
+    await preflight_endpoint(endpoint, timeout=args.preflight_timeout)
+
     runner = ExperimentRunner(config)
     experiment, metrics = await runner.run_experiment(dataset, prefix_map=prefix_map_from_package(package_dir))
     saved = save_experiment(experiment, metrics, output_dir)

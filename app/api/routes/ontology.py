@@ -1,11 +1,10 @@
 """HTTP route for onboarding an uploaded ontology into an ontology package."""
 
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile, status
+from fastapi import APIRouter, File, HTTPException, UploadFile, status
 
 from app.clients.fuseki import FusekiService
 from app.core.config import settings
 from app.domain.ontology import onboard_ontology_file
-from app.domain.rag.chunking import SUPPORTED_CHUNKING_STRATEGIES
 
 
 router = APIRouter(prefix="/ontology", tags=["ontology"])
@@ -16,16 +15,8 @@ _SUPPORTED_SUFFIXES = {".ttl", ".owl", ".rdf"}
 @router.post("/load")
 async def load_ontology(
     file: UploadFile = File(...),
-    chunking: str = Form("class_based"),
 ) -> dict[str, str]:
     """Create a package, build all indexes, upload it to Fuseki, and activate it."""
-    if chunking not in SUPPORTED_CHUNKING_STRATEGIES:
-        supported = ", ".join(sorted(SUPPORTED_CHUNKING_STRATEGIES))
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Unsupported default chunking strategy: {chunking}. Supported values: {supported}",
-        )
-
     source_filename = file.filename or "ontology"
     suffix = source_filename[source_filename.rfind("."):].lower() if "." in source_filename else ""
     if suffix not in _SUPPORTED_SUFFIXES:
@@ -55,7 +46,6 @@ async def load_ontology(
             packages_root=packages_root,
             fuseki_service=_FUSEKI_SERVICE,
             source_filename=source_filename,
-            chunking=chunking,
         )
     except ValueError as exc:
         raise HTTPException(
@@ -70,5 +60,4 @@ async def load_ontology(
         "package_dir": str(result.package_dir),
         "dataset_name": result.dataset_name,
         "endpoint": result.dataset_endpoint,
-        "chunking": chunking,
     }

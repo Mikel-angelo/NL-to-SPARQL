@@ -14,7 +14,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 import json
 
-from app.core.config import settings
 from app.domain.package import (
     ensure_package_dirs,
     logs_dir,
@@ -50,8 +49,6 @@ def write_ontology_package(
     ontology_context: dict[str, object],
     dataset_name: str | None,
     query_endpoint: str | None,
-    default_model: str | None,
-    chunking: str,
 ) -> OntologyPackageArtifacts:
     """Persist source, metadata, settings, and ontology context artifacts."""
     root = ensure_package_dirs(package_dir)
@@ -76,8 +73,6 @@ def write_ontology_package(
         source_mode=source.source_mode,
         query_endpoint=query_endpoint,
         dataset_name=dataset_name,
-        default_model=default_model,
-        chunking=chunking,
     )
     write_json_file(settings_path(root), settings_payload)
     append_onboard_log(logs_dir(root) / "onboard.log", "metadata_extracted", metadata=metadata)
@@ -177,18 +172,11 @@ def _settings_payload(
     source_mode: str,
     query_endpoint: str | None,
     dataset_name: str | None,
-    default_model: str | None,
-    chunking: str,
 ) -> dict[str, object]:
     return {
         "source_mode": source_mode,
         "query_endpoint": query_endpoint,
         "dataset_name": dataset_name,
-        "default_model": default_model or settings.default_llm_model,
-        "default_chunking_strategy": chunking,
-        "default_retrieval_top_k": settings.runtime_retrieval_top_k,
-        "correction_max_iterations": settings.correction_max_iterations,
-        "llm_api_url": settings.llm_api_url,
     }
 
 

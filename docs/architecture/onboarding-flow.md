@@ -17,7 +17,6 @@ flowchart TD
     merge[build_final_graph]
     context[build_ontology_context]
     write[write_ontology_package]
-    strategy[default chunking strategy\nsaved in settings.json]
     build_all[build_all_indexes]
     chunks[build_chunks per strategy]
     index[build_index per strategy\nembeddings + FAISS]
@@ -36,7 +35,7 @@ flowchart TD
     resolve -->|endpoint onboarding skips schema downloads| merge
     merge --> context
     context --> write
-    write --> strategy --> build_all --> chunks --> index
+    write --> build_all --> chunks --> index
     index --> result
 
     write --> uploads
@@ -64,7 +63,6 @@ flowchart TD
 | Merge resolved schemas | `build_final_graph()` in `graph_preparation.py` |
 | Build context JSON | `build_ontology_context()` in `ontology_context.py` |
 | Write package artifacts | `write_ontology_package()` in `package_writer.py` |
-| Select default chunking strategy | `--chunking` in `onboard.py`; saved in `settings.json` by `write_ontology_package()` |
 | Build chunks | `build_chunks()` in `app/domain/rag/chunking.py` |
 | Build every package index | `build_all_indexes()` in `app/domain/rag/build_index.py` |
 | Build embeddings and one FAISS index | `build_index()` in `app/domain/rag/build_index.py` |
@@ -96,6 +94,6 @@ ontology_packages/<package>/
 - Endpoint onboarding creates a package but does not upload to managed Fuseki.
 - Endpoint onboarding skips external schema downloads by calling `prepare_final_graph(..., resolve_missing_schemas=False)`.
 - Onboarding builds all supported retrieval index strategies into `indexes/<strategy>/`.
-- The selected `--chunking` value is only the default strategy saved for query and evaluation runs.
+- Model, retrieval top-k, chunking strategy, and correction attempts are not package settings; runtime and evaluation resolve them from explicit inputs or `app/core/config.py`.
 - The ontology mode and schema coverage are saved into `metadata.json`.
 - Package directories are durable artifacts; Fuseki is reloadable runtime state.

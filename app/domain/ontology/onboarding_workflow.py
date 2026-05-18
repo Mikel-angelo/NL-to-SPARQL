@@ -14,6 +14,7 @@ from pathlib import Path
 import json
 
 from app.clients.fuseki import FusekiService
+from app.core.config import settings
 from app.domain.ontology.graph_preparation import prepare_final_graph
 from app.domain.ontology.ontology_context import build_ontology_context
 from app.domain.ontology.package_activation import build_fuseki_uploads_from_package
@@ -48,8 +49,6 @@ async def onboard_ontology_file(
     fuseki_service: FusekiService,
     source_filename: str | None = None,
     package_name: str | None = None,
-    default_model: str | None = None,
-    chunking: str = "class_based",
     activate_package: bool = True,
     status_callback: callable | None = None,
 ) -> OnboardingResult:
@@ -87,13 +86,11 @@ async def onboard_ontology_file(
         ontology_context=ontology_context,
         dataset_name=dataset_name,
         query_endpoint=query_endpoint,
-        default_model=default_model,
-        chunking=chunking,
     )
 
-    _emit_status(status_callback, package_dir, "building_indexes", default_chunking=chunking)
+    _emit_status(status_callback, package_dir, "building_indexes")
     artifact_results = build_all_indexes(package_dir)
-    default_artifact_result = _default_index_result(artifact_results, chunking)
+    default_artifact_result = _default_index_result(artifact_results, settings.default_chunking_strategy)
 
     _emit_status(status_callback, package_dir, "uploading_to_fuseki", dataset_name=dataset_name)
     uploads = build_fuseki_uploads_from_package(package_dir, dataset_name=dataset_name)
@@ -131,8 +128,6 @@ async def onboard_sparql_endpoint(
     endpoint: str,
     *,
     packages_root: str | Path,
-    default_model: str | None = None,
-    chunking: str = "class_based",
     package_name: str | None = None,
     activate_package: bool = True,
     status_callback: callable | None = None,
@@ -160,13 +155,11 @@ async def onboard_sparql_endpoint(
         ontology_context=ontology_context,
         dataset_name=None,
         query_endpoint=endpoint,
-        default_model=default_model,
-        chunking=chunking,
     )
 
-    _emit_status(status_callback, package_dir, "building_indexes", default_chunking=chunking)
+    _emit_status(status_callback, package_dir, "building_indexes")
     artifact_results = build_all_indexes(package_dir)
-    default_artifact_result = _default_index_result(artifact_results, chunking)
+    default_artifact_result = _default_index_result(artifact_results, settings.default_chunking_strategy)
 
     if activate_package:
         set_active_package(packages_root, package_dir)

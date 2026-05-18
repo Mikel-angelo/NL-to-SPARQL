@@ -121,8 +121,6 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             ontology_context=ontology_context,
             dataset_name=dataset_name,
             query_endpoint=query_endpoint,
-            default_model=None,
-            chunking="class_based",
         )
 
     async def _prepare_endpoint_package(
@@ -155,8 +153,6 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             ontology_context=ontology_context,
             dataset_name=None,
             query_endpoint=endpoint,
-            default_model=None,
-            chunking="class_based",
         )
 
     async def test_file_extraction_and_runtime_artifacts_create_expected_layout(self) -> None:
@@ -168,8 +164,10 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue((self.package_dir / "metadata.json").exists())
         self.assertTrue((self.package_dir / "ontology_context.json").exists())
         self.assertTrue((self.package_dir / "settings.json").exists())
-        self.assertEqual(artifacts.settings["default_chunking_strategy"], "class_based")
-        self.assertEqual(artifacts.settings["default_retrieval_top_k"], 10)
+        self.assertNotIn("default_model", artifacts.settings)
+        self.assertNotIn("default_chunking_strategy", artifacts.settings)
+        self.assertNotIn("default_retrieval_top_k", artifacts.settings)
+        self.assertNotIn("correction_max_iterations", artifacts.settings)
         self.assertNotIn("chunking_strategy", artifacts.settings)
         self.assertNotIn("retrieval_top_k", artifacts.settings)
         self.assertTrue(artifact_result.chunks_path.exists())
@@ -445,6 +443,7 @@ class PackagePipelineTests(unittest.IsolatedAsyncioTestCase):
             "Which places exist?",
             get_active_package(packages_root),
             model="stub-model",
+            corrections=1,
         )
         self.assertEqual(result.status, "completed")
         self.assertEqual(result.dataset_endpoint, "http://example.test/dataset/query")
