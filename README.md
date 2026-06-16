@@ -297,13 +297,13 @@ Use `evaluate.py` to run a dataset of natural-language questions and gold SPARQL
 
 ```powershell
 python activate.py --package ontology_packages\enovation-20260427-1840
-python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840
+python evaluate.py --dataset evaluation\datasets\eNOVATION_eval_dataset.json --package ontology_packages\enovation-20260427-1840
 ```
 
 Example with explicit retrieval settings:
 
 ```powershell
-python evaluate.py --dataset evaluation\datasets\enovation_v1.json --package ontology_packages\enovation-20260427-1840 --model qwen2.5-coder:32b --k 5 --chunking property_based --corrections 3
+python evaluate.py --dataset evaluation\datasets\eNOVATION_eval_dataset.json --package ontology_packages\enovation-20260427-1840 --model qwen2.5-coder:32b --k 5 --chunking property_based --corrections 3
 ```
 
 Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.
