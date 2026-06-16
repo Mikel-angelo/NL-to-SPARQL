@@ -1,0 +1,326 @@
+{
+  "dataset_name": "spider_voter_1_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for voter_1. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/voter_1.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "voter_1_001",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/area_code_state> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "305"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many states are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "voter_1_002",
+      "gold_sparql": "SELECT ?T1_contestant_number ?T1_contestant_name WHERE { ?T1 a <http://valuenet/ontop/contestants> . ?T1 <http://valuenet/ontop/contestant_number> ?T1_contestant_number . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . } ORDER BY DESC (?T1_contestant_name)",
+      "gold_answers": [
+        {
+          "T1_contestant_number": "2",
+          "T1_contestant_name": "Tabatha Gehling"
+        },
+        {
+          "T1_contestant_number": "8",
+          "T1_contestant_name": "Nita Coster"
+        },
+        {
+          "T1_contestant_number": "11",
+          "T1_contestant_name": "Loraine NygrenTania Mattioli"
+        },
+        {
+          "T1_contestant_number": "9",
+          "T1_contestant_name": "Kurt Walser"
+        },
+        {
+          "T1_contestant_number": "3",
+          "T1_contestant_name": "Kelly Clauss"
+        },
+        {
+          "T1_contestant_number": "6",
+          "T1_contestant_name": "Jessie Eichman"
+        },
+        {
+          "T1_contestant_number": "4",
+          "T1_contestant_name": "Jessie Alloway"
+        },
+        {
+          "T1_contestant_number": "10",
+          "T1_contestant_name": "Ericka Dieter"
+        },
+        {
+          "T1_contestant_number": "1",
+          "T1_contestant_name": "Edwina Burnam"
+        },
+        {
+          "T1_contestant_number": "7",
+          "T1_contestant_name": "Allie Rogalski"
+        },
+        {
+          "T1_contestant_number": "5",
+          "T1_contestant_name": "Alana Bregman"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the contestant numbers and names, ordered by contestant name descending."
+    },
+    {
+      "id": "Q003",
+      "original_id": "voter_1_003",
+      "gold_sparql": "SELECT ?T1_vote_id ?T1_phone_number ?T1_state WHERE { ?T1 a <http://valuenet/ontop/votes> . ?T1 <http://valuenet/ontop/vote_id> ?T1_vote_id . ?T1 <http://valuenet/ontop/phone_number> ?T1_phone_number . ?T1 <http://valuenet/ontop/state> ?T1_state . }",
+      "gold_answers": [
+        {
+          "T1_vote_id": "5",
+          "T1_phone_number": "5112677315",
+          "T1_state": "NJ"
+        },
+        {
+          "T1_vote_id": "1",
+          "T1_phone_number": "7182887233",
+          "T1_state": "NY"
+        },
+        {
+          "T1_vote_id": "3",
+          "T1_phone_number": "6209222712",
+          "T1_state": "CA"
+        },
+        {
+          "T1_vote_id": "2",
+          "T1_phone_number": "7148407040",
+          "T1_state": "NY"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the vote ids, phone numbers and states of all votes."
+    },
+    {
+      "id": "Q004",
+      "original_id": "voter_1_004",
+      "gold_sparql": "SELECT (max( ?T1_area_code) as ?aggregation_T1_area_code_50 ) (min( ?T1_area_code) as ?aggregation_T1_area_code_29 ) WHERE { ?T1 a <http://valuenet/ontop/area_code_state> . ?T1 <http://valuenet/ontop/area_code> ?T1_area_code . ?T1 <http://valuenet/ontop/area_code> ?T1_area_code . }",
+      "gold_answers": [
+        {
+          "aggregation_T1_area_code_50": "989",
+          "aggregation_T1_area_code_29": "201"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the maximum and minimum values of area codes?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "voter_1_005",
+      "gold_sparql": "SELECT (max( ?T1_created) as ?aggregation_T1_created_28 ) WHERE { ?T1 a <http://valuenet/ontop/votes> . ?T1 <http://valuenet/ontop/created> ?T1_created . ?T1 <http://valuenet/ontop/state> ?T1_state . FILTER(?T1_state = 'CA') . }",
+      "gold_answers": [
+        {
+          "aggregation_T1_created_28": "2018-03-09T19:03:39"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is last date created of votes from the state 'CA'?"
+    },
+    {
+      "id": "Q006",
+      "original_id": "voter_1_006",
+      "gold_sparql": "SELECT ?T1_contestant_name WHERE { ?T1 a <http://valuenet/ontop/contestants> . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . FILTER(?T1_contestant_name != 'Jessie Alloway') . }",
+      "gold_answers": [
+        {
+          "T1_contestant_name": "Allie Rogalski"
+        },
+        {
+          "T1_contestant_name": "Nita Coster"
+        },
+        {
+          "T1_contestant_name": "Alana Bregman"
+        },
+        {
+          "T1_contestant_name": "Kurt Walser"
+        },
+        {
+          "T1_contestant_name": "Jessie Eichman"
+        },
+        {
+          "T1_contestant_name": "Tabatha Gehling"
+        },
+        {
+          "T1_contestant_name": "Loraine NygrenTania Mattioli"
+        },
+        {
+          "T1_contestant_name": "Kelly Clauss"
+        },
+        {
+          "T1_contestant_name": "Edwina Burnam"
+        },
+        {
+          "T1_contestant_name": "Ericka Dieter"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the contestants whose names are not 'Jessie Alloway'"
+    },
+    {
+      "id": "Q007",
+      "original_id": "voter_1_007",
+      "gold_sparql": "SELECT DISTINCT ?T1_state ?T1_created WHERE { ?T1 a <http://valuenet/ontop/votes> . ?T1 <http://valuenet/ontop/state> ?T1_state . ?T1 <http://valuenet/ontop/created> ?T1_created . }",
+      "gold_answers": [
+        {
+          "T1_state": "NJ",
+          "T1_created": "2018-03-09T19:03:40"
+        },
+        {
+          "T1_state": "NY",
+          "T1_created": "2018-03-09T19:03:21"
+        },
+        {
+          "T1_state": "CA",
+          "T1_created": "2018-03-09T19:03:39"
+        },
+        {
+          "T1_state": "NY",
+          "T1_created": "2018-03-09T19:03:36"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the distinct states and create time of all votes?"
+    },
+    {
+      "id": "Q008",
+      "original_id": "voter_1_008",
+      "gold_sparql": "SELECT ?T1_contestant_number ?T1_contestant_name WHERE { ?T1 a <http://valuenet/ontop/contestants> . ?T2 a <http://valuenet/ontop/votes> . ?T2 <http://valuenet/ontop/ref-contestant_number> ?T1 . ?T1 <http://valuenet/ontop/contestant_number> ?T1_contestant_number . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . ?T1 <http://valuenet/ontop/contestant_number> ?T1_contestant_number . } GROUP BY ?T1_contestant_number ?T1_contestant_name HAVING(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "T1_contestant_number": "3",
+          "T1_contestant_name": "Kelly Clauss"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the contestant numbers and names of the contestants who had at least two votes?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "voter_1_009",
+      "gold_sparql": "SELECT ?T1_contestant_number (count( *) as ?aggregation_all) ?T1_contestant_name WHERE { ?T1 a <http://valuenet/ontop/contestants> . ?T3 a <http://valuenet/ontop/votes> . ?T3 <http://valuenet/ontop/ref-contestant_number> ?T1 . ?T1 <http://valuenet/ontop/contestant_number> ?T1_contestant_number . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . ?T1 <http://valuenet/ontop/contestant_number> ?T1_contestant_number . } GROUP BY ?T1_contestant_number ?T1_contestant_name ORDER BY ASC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_contestant_number": "5",
+          "aggregation_all": "1",
+          "T1_contestant_name": "Alana Bregman"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Of all the contestants who got voted, what is the contestant number and name of the contestant who got least votes?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "voter_1_010",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/votes> . ?T1 <http://valuenet/ontop/state> ?T1_state . ?T1 <http://valuenet/ontop/state> ?T1_state . FILTER(?T1_state = 'NY' || ?T1_state = 'CA') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the number of votes from state 'NY' or 'CA'?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "voter_1_011",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/contestants> . ?T1 <http://valuenet/ontop/contestant_number> ?T1_contestant_number . FILTER NOT EXISTS {{SELECT ?T22_contestant_number WHERE { ?T22 a <http://valuenet/ontop/votes> . ?T22 <http://valuenet/ontop/contestant_number> ?T22_contestant_number . } } FILTER(?T1_contestant_number in (?T22_contestant_number)) . } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "8"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many contestants did not get voted?"
+    },
+    {
+      "id": "Q012",
+      "original_id": "voter_1_012",
+      "gold_sparql": "SELECT ?T1_area_code WHERE { ?T1 a <http://valuenet/ontop/area_code_state> . ?T2 a <http://valuenet/ontop/votes> . ?T2 <http://valuenet/ontop/state> ?state . ?T1 <http://valuenet/ontop/state> ?state . ?T1 <http://valuenet/ontop/area_code> ?T1_area_code . } GROUP BY ?T1_area_code ORDER BY DESC (count(*)) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_area_code": "212"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the area code in which the most voters voted?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "voter_1_013",
+      "gold_sparql": "SELECT ?T1_created ?T1_state ?T1_phone_number WHERE { ?T1 a <http://valuenet/ontop/votes> . ?T2 a <http://valuenet/ontop/contestants> . ?T1 <http://valuenet/ontop/ref-contestant_number> ?T2 . ?T1 <http://valuenet/ontop/created> ?T1_created . ?T1 <http://valuenet/ontop/state> ?T1_state . ?T1 <http://valuenet/ontop/phone_number> ?T1_phone_number . ?T2 <http://valuenet/ontop/contestant_name> ?T2_contestant_name . FILTER(?T2_contestant_name = 'Tabatha Gehling') . }",
+      "gold_answers": [
+        {
+          "T1_created": "2018-03-09T19:03:21",
+          "T1_state": "NY",
+          "T1_phone_number": "7182887233"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the create dates, states, and phone numbers of the votes that were for the contestant named 'Tabatha Gehling'?"
+    },
+    {
+      "id": "Q014",
+      "original_id": "voter_1_014",
+      "gold_sparql": "SELECT ?T1_contestant_name WHERE { ?T1 a <http://valuenet/ontop/contestants> . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . ?T1 <http://valuenet/ontop/contestant_name> ?T1_contestant_name . FILTER(contains (?T1_contestant_name, 'al')) . }",
+      "gold_answers": [
+        {
+          "T1_contestant_name": "Allie Rogalski"
+        },
+        {
+          "T1_contestant_name": "Kurt Walser"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the names of the contestants whose names contain the substring 'Al' ."
+    }
+  ]
+}

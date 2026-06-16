@@ -1,0 +1,204 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/museum#> .
+@prefix ns2: <http://valuenet/ontop/visit#> .
+@prefix ns3: <http://valuenet/ontop/visitor#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns1:museum_id a owl:DatatypeProperty ;
+    rdfs:domain :museum ;
+    rdfs:range xsd:integer .
+
+ns1:name a owl:DatatypeProperty ;
+    rdfs:domain :museum ;
+    rdfs:range xsd:string .
+
+ns1:num_of_staff a owl:DatatypeProperty ;
+    rdfs:domain :museum ;
+    rdfs:range xsd:integer .
+
+ns1:open_year a owl:DatatypeProperty ;
+    rdfs:domain :museum ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/museum/museum_id=3> a :museum ;
+    ns1:museum_id 3 ;
+    ns1:name "Jefferson Development Museum" ;
+    ns1:num_of_staff 18 ;
+    ns1:open_year 2010 .
+
+<http://valuenet/ontop/museum/museum_id=5> a :museum ;
+    ns1:museum_id 5 ;
+    ns1:name "RiverPark Museum" ;
+    ns1:num_of_staff 16 ;
+    ns1:open_year 2008 .
+
+<http://valuenet/ontop/museum/museum_id=6> a :museum ;
+    ns1:museum_id 6 ;
+    ns1:name "Place Tower Museum" ;
+    ns1:num_of_staff 16 ;
+    ns1:open_year 2008 .
+
+<http://valuenet/ontop/museum/museum_id=7> a :museum ;
+    ns1:museum_id 7 ;
+    ns1:name "Central City District Residential Museum" ;
+    ns1:num_of_staff 15 ;
+    ns1:open_year 2010 .
+
+ns2:museum_id a owl:DatatypeProperty ;
+    rdfs:domain :visit ;
+    rdfs:range xsd:integer .
+
+ns2:num_of_ticket a owl:DatatypeProperty ;
+    rdfs:domain :visit ;
+    rdfs:range xsd:integer .
+
+ns2:ref-museum_id a owl:ObjectProperty ;
+    rdfs:domain :visit ;
+    rdfs:range :museum .
+
+ns2:ref-visitor_id a owl:ObjectProperty ;
+    rdfs:domain :visit ;
+    rdfs:range :visitor .
+
+ns2:total_spent a owl:DatatypeProperty ;
+    rdfs:domain :visit ;
+    rdfs:range xsd:double .
+
+ns2:visitor_id a owl:DatatypeProperty ;
+    rdfs:domain :visit ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/visit/museum_id=1;visitor_id=5> a :visit ;
+    ns2:museum_id 1 ;
+    ns2:num_of_ticket 20 ;
+    ns2:ref-museum_id <http://valuenet/ontop/museum/museum_id=1> ;
+    ns2:ref-visitor_id <http://valuenet/ontop/visitor/id=5> ;
+    ns2:total_spent 3.2014e+02 ;
+    ns2:visitor_id 5 .
+
+<http://valuenet/ontop/visit/museum_id=2;visitor_id=3> a :visit ;
+    ns2:museum_id 2 ;
+    ns2:num_of_ticket 24 ;
+    ns2:ref-museum_id <http://valuenet/ontop/museum/museum_id=2> ;
+    ns2:ref-visitor_id <http://valuenet/ontop/visitor/id=3> ;
+    ns2:total_spent 2.0998e+02 ;
+    ns2:visitor_id 3 .
+
+<http://valuenet/ontop/visit/museum_id=2;visitor_id=5> a :visit ;
+    ns2:museum_id 2 ;
+    ns2:num_of_ticket 4 ;
+    ns2:ref-museum_id <http://valuenet/ontop/museum/museum_id=2> ;
+    ns2:ref-visitor_id <http://valuenet/ontop/visitor/id=5> ;
+    ns2:total_spent 8.998e+01 ;
+    ns2:visitor_id 5 .
+
+<http://valuenet/ontop/visit/museum_id=4;visitor_id=3> a :visit ;
+    ns2:museum_id 4 ;
+    ns2:num_of_ticket 10 ;
+    ns2:ref-museum_id <http://valuenet/ontop/museum/museum_id=4> ;
+    ns2:ref-visitor_id <http://valuenet/ontop/visitor/id=3> ;
+    ns2:total_spent 3.2044e+02 ;
+    ns2:visitor_id 3 .
+
+<http://valuenet/ontop/visit/museum_id=4;visitor_id=6> a :visit ;
+    ns2:museum_id 4 ;
+    ns2:num_of_ticket 3 ;
+    ns2:ref-museum_id <http://valuenet/ontop/museum/museum_id=4> ;
+    ns2:ref-visitor_id <http://valuenet/ontop/visitor/id=6> ;
+    ns2:total_spent 2.044e+01 ;
+    ns2:visitor_id 6 .
+
+<http://valuenet/ontop/visit/museum_id=8;visitor_id=6> a :visit ;
+    ns2:museum_id 8 ;
+    ns2:num_of_ticket 2 ;
+    ns2:ref-museum_id <http://valuenet/ontop/museum/museum_id=8> ;
+    ns2:ref-visitor_id <http://valuenet/ontop/visitor/id=6> ;
+    ns2:total_spent 1.998e+01 ;
+    ns2:visitor_id 6 .
+
+ns3:age a owl:DatatypeProperty ;
+    rdfs:domain :visitor ;
+    rdfs:range xsd:integer .
+
+ns3:id a owl:DatatypeProperty ;
+    rdfs:domain :visitor ;
+    rdfs:range xsd:integer .
+
+ns3:level_of_membership a owl:DatatypeProperty ;
+    rdfs:domain :visitor ;
+    rdfs:range xsd:integer .
+
+ns3:name a owl:DatatypeProperty ;
+    rdfs:domain :visitor ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/visitor/id=1> a :visitor ;
+    ns3:age 35 ;
+    ns3:id 1 ;
+    ns3:level_of_membership 8 ;
+    ns3:name "Gonzalo Higuaín " .
+
+<http://valuenet/ontop/visitor/id=2> a :visitor ;
+    ns3:age 28 ;
+    ns3:id 2 ;
+    ns3:level_of_membership 5 ;
+    ns3:name "Guti Midfielder" .
+
+<http://valuenet/ontop/visitor/id=4> a :visitor ;
+    ns3:age 56 ;
+    ns3:id 4 ;
+    ns3:level_of_membership 2 ;
+    ns3:name "Raúl Brown" .
+
+<http://valuenet/ontop/museum/museum_id=1> a :museum ;
+    ns1:museum_id 1 ;
+    ns1:name "Plaza Museum" ;
+    ns1:num_of_staff 62 ;
+    ns1:open_year 2000 .
+
+<http://valuenet/ontop/museum/museum_id=8> a :museum ;
+    ns1:museum_id 8 ;
+    ns1:name "ZirMed Gateway Museum" ;
+    ns1:num_of_staff 12 ;
+    ns1:open_year 2009 .
+
+<http://valuenet/ontop/museum/museum_id=2> a :museum ;
+    ns1:museum_id 2 ;
+    ns1:name "Capital Plaza Museum" ;
+    ns1:num_of_staff 25 ;
+    ns1:open_year 2012 .
+
+<http://valuenet/ontop/museum/museum_id=4> a :museum ;
+    ns1:museum_id 4 ;
+    ns1:name "Willow Grande Museum" ;
+    ns1:num_of_staff 17 ;
+    ns1:open_year 2011 .
+
+<http://valuenet/ontop/visitor/id=3> a :visitor ;
+    ns3:age 27 ;
+    ns3:id 3 ;
+    ns3:level_of_membership 1 ;
+    ns3:name "Arjen Robben" .
+
+<http://valuenet/ontop/visitor/id=5> a :visitor ;
+    ns3:age 36 ;
+    ns3:id 5 ;
+    ns3:level_of_membership 6 ;
+    ns3:name "Fernando Gago" .
+
+<http://valuenet/ontop/visitor/id=6> a :visitor ;
+    ns3:age 25 ;
+    ns3:id 6 ;
+    ns3:level_of_membership 1 ;
+    ns3:name "Rafael van der Vaart" .
+
+:visitor a owl:Class .
+
+:visit a owl:Class .
+
+:museum a owl:Class .
+

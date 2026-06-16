@@ -43,6 +43,9 @@ data/
 *.pkl
 *.log
 
+# Large local RDF dumps
+resources/library/SciQA/*.nt
+
 # OS/editor
 .DS_Store
 Thumbs.db

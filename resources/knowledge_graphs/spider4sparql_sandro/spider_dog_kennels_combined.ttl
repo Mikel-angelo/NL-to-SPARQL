@@ -1,0 +1,1112 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/owners#> .
+@prefix ns2: <http://valuenet/ontop/treatments#> .
+@prefix ns3: <http://valuenet/ontop/dogs#> .
+@prefix ns4: <http://valuenet/ontop/professionals#> .
+@prefix ns5: <http://valuenet/ontop/breeds#> .
+@prefix ns6: <http://valuenet/ontop/sizes#> .
+@prefix ns7: <http://valuenet/ontop/treatment_types#> .
+@prefix ns8: <http://valuenet/ontop/charges#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns5:breed_code a owl:DatatypeProperty ;
+    rdfs:domain :breeds ;
+    rdfs:range xsd:string .
+
+ns5:breed_name a owl:DatatypeProperty ;
+    rdfs:domain :breeds ;
+    rdfs:range xsd:string .
+
+ns8:charge_amount a owl:DatatypeProperty ;
+    rdfs:domain :charges ;
+    rdfs:range xsd:decimal .
+
+ns8:charge_id a owl:DatatypeProperty ;
+    rdfs:domain :charges ;
+    rdfs:range xsd:integer .
+
+ns8:charge_type a owl:DatatypeProperty ;
+    rdfs:domain :charges ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/charges/charge_id=1> a :charges ;
+    ns8:charge_amount 98.0000 ;
+    ns8:charge_id 1 ;
+    ns8:charge_type "Daily Accommodation" .
+
+<http://valuenet/ontop/charges/charge_id=2> a :charges ;
+    ns8:charge_amount 322.0000 ;
+    ns8:charge_id 2 ;
+    ns8:charge_type "Drugs" .
+
+<http://valuenet/ontop/charges/charge_id=3> a :charges ;
+    ns8:charge_amount 640.0000 ;
+    ns8:charge_id 3 ;
+    ns8:charge_type "Health Check" .
+
+ns3:abandoned_yn a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:integer .
+
+ns3:age a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:integer .
+
+ns3:breed_code a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:string .
+
+ns3:date_adopted a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:dateTime .
+
+ns3:date_arrived a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:dateTime .
+
+ns3:date_departed a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:dateTime .
+
+ns3:date_of_birth a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:dateTime .
+
+ns3:dog_id a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:integer .
+
+ns3:gender a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:string .
+
+ns3:name a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:string .
+
+ns3:owner_id a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:integer .
+
+ns3:ref-breed_code a owl:ObjectProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range :breeds .
+
+ns3:ref-owner_id a owl:ObjectProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range :owners .
+
+ns3:ref-size_code a owl:ObjectProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range :sizes .
+
+ns3:size_code a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:string .
+
+ns3:weight a owl:DatatypeProperty ;
+    rdfs:domain :dogs ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/dogs/dog_id=11> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 3 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-03-14T08:05:18"^^xsd:dateTime ;
+    ns3:date_arrived "2017-07-25T15:19:07"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T15:05:16"^^xsd:dateTime ;
+    ns3:date_of_birth "2012-10-14T14:44:37"^^xsd:dateTime ;
+    ns3:dog_id 11 ;
+    ns3:gender "0" ;
+    ns3:name "Betty" ;
+    ns3:owner_id 13 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=13> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=LGE> ;
+    ns3:size_code "LGE" ;
+    ns3:weight "8.16" .
+
+<http://valuenet/ontop/dogs/dog_id=3> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 8 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-03-07T21:45:43"^^xsd:dateTime ;
+    ns3:date_arrived "2017-06-25T10:14:05"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T10:25:46"^^xsd:dateTime ;
+    ns3:date_of_birth "2008-05-19T15:54:49"^^xsd:dateTime ;
+    ns3:dog_id 3 ;
+    ns3:gender "1" ;
+    ns3:name "Mavis" ;
+    ns3:owner_id 1 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=1> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "8.04" .
+
+<http://valuenet/ontop/dogs/dog_id=5> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 4 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-02-27T11:54:35"^^xsd:dateTime ;
+    ns3:date_arrived "2017-10-25T00:55:34"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T04:50:22"^^xsd:dateTime ;
+    ns3:date_of_birth "2018-03-17T04:05:12"^^xsd:dateTime ;
+    ns3:dog_id 5 ;
+    ns3:gender "0" ;
+    ns3:name "Jeffrey" ;
+    ns3:owner_id 7 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=7> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "1.39" .
+
+<http://valuenet/ontop/dogs/dog_id=6> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 9 ;
+    ns3:breed_code "HUS" ;
+    ns3:date_adopted "2018-03-08T15:03:00"^^xsd:dateTime ;
+    ns3:date_arrived "2017-04-15T09:25:31"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T13:07:04"^^xsd:dateTime ;
+    ns3:date_of_birth "2015-02-26T21:31:22"^^xsd:dateTime ;
+    ns3:dog_id 6 ;
+    ns3:gender "1" ;
+    ns3:name "Merritt" ;
+    ns3:owner_id 5 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=HUS> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=5> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "9.8" .
+
+<http://valuenet/ontop/dogs/dog_id=8> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 2 ;
+    ns3:breed_code "ESK" ;
+    ns3:date_adopted "2018-03-23T16:02:04"^^xsd:dateTime ;
+    ns3:date_arrived "2017-10-16T20:06:21"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T02:47:40"^^xsd:dateTime ;
+    ns3:date_of_birth "2013-02-20T14:50:56"^^xsd:dateTime ;
+    ns3:dog_id 8 ;
+    ns3:gender "0" ;
+    ns3:name "George" ;
+    ns3:owner_id 14 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=ESK> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=14> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=SML> ;
+    ns3:size_code "SML" ;
+    ns3:weight "8.95" .
+
+<http://valuenet/ontop/dogs/dog_id=9> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 4 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-02-25T23:45:30"^^xsd:dateTime ;
+    ns3:date_arrived "2018-01-17T11:44:16"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T06:46:07"^^xsd:dateTime ;
+    ns3:date_of_birth "2012-05-31T08:01:36"^^xsd:dateTime ;
+    ns3:dog_id 9 ;
+    ns3:gender "1" ;
+    ns3:name "Bessie" ;
+    ns3:owner_id 2 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=2> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "3.52" .
+
+ns1:cell_number a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:city a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:email_address a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:first_name a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:home_phone a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:last_name a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:owner_id a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:integer .
+
+ns1:state a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:street a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+ns1:zip_code a owl:DatatypeProperty ;
+    rdfs:domain :owners ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/owners/owner_id=15> a :owners ;
+    ns1:cell_number "341.667.8085" ;
+    ns1:city "South Daisyfurt" ;
+    ns1:email_address "ybergstrom@example.com" ;
+    ns1:first_name "Heather" ;
+    ns1:home_phone "893-862-5295x61709" ;
+    ns1:last_name "Hauck" ;
+    ns1:owner_id 15 ;
+    ns1:state "Pennsylvania" ;
+    ns1:street "1858 Jan Park" ;
+    ns1:zip_code "22693" .
+
+<http://valuenet/ontop/owners/owner_id=4> a :owners ;
+    ns1:cell_number "739-136-7202" ;
+    ns1:city "Brakusfurt" ;
+    ns1:email_address "marks.gail@example.org" ;
+    ns1:first_name "Tre" ;
+    ns1:home_phone "1-332-849-1908" ;
+    ns1:last_name "Hamill" ;
+    ns1:owner_id 4 ;
+    ns1:state "Florida" ;
+    ns1:street "692 Jaskolski Forges" ;
+    ns1:zip_code "87304" .
+
+<http://valuenet/ontop/owners/owner_id=9> a :owners ;
+    ns1:cell_number "+00(2)4323592985" ;
+    ns1:city "East Hillardberg" ;
+    ns1:email_address "fschoen@example.net" ;
+    ns1:first_name "Adelle" ;
+    ns1:home_phone "066.264.7885" ;
+    ns1:last_name "Ondricka" ;
+    ns1:owner_id 9 ;
+    ns1:state "Washington" ;
+    ns1:street "9212 Rosenbaum Lights" ;
+    ns1:zip_code "92406" .
+
+ns4:cell_number a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:city a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:email_address a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:first_name a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:home_phone a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:last_name a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:professional_id a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:integer .
+
+ns4:role_code a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:state a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:street a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+ns4:zip_code a owl:DatatypeProperty ;
+    rdfs:domain :professionals ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/professionals/professional_id=1> a :professionals ;
+    ns4:cell_number "(275)939-2435x80863" ;
+    ns4:city "West Heidi" ;
+    ns4:email_address "deanna.schuster@example.com" ;
+    ns4:first_name "Taryn" ;
+    ns4:home_phone " + 71(6)2898266914" ;
+    ns4:last_name "Braun" ;
+    ns4:professional_id 1 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Indiana" ;
+    ns4:street "6915 Oberbrunner Point Suite 491 Gleasonville, LA " ;
+    ns4:zip_code "06646" .
+
+<http://valuenet/ontop/professionals/professional_id=11> a :professionals ;
+    ns4:cell_number "609- 405- 2990 " ;
+    ns4:city "Raynorfort" ;
+    ns4:email_address "west.eula@example.net" ;
+    ns4:first_name "Brady" ;
+    ns4:home_phone "(920)304-4499x59146" ;
+    ns4:last_name "Pouros" ;
+    ns4:professional_id 11 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Alabama" ;
+    ns4:street "09615 McKenzie Stravenue Apt. 128 West Elliottview" ;
+    ns4:zip_code "07412" .
+
+<http://valuenet/ontop/professionals/professional_id=12> a :professionals ;
+    ns4:cell_number "1-181-670-9466 " ;
+    ns4:city "Juddton" ;
+    ns4:email_address "marquardt.furman@example.org" ;
+    ns4:first_name "Winfield" ;
+    ns4:home_phone "246-951-0080x76716" ;
+    ns4:last_name "Christiansen" ;
+    ns4:professional_id 12 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "Utah" ;
+    ns4:street "92912 Langworth Valleys Apt. 743 Thompsonborough, " ;
+    ns4:zip_code "34041" .
+
+<http://valuenet/ontop/professionals/professional_id=13> a :professionals ;
+    ns4:cell_number "880-659-7577x736" ;
+    ns4:city "Borisside" ;
+    ns4:email_address "delphine29@example.com" ;
+    ns4:first_name "Ericka" ;
+    ns4:home_phone "346.594.3739 " ;
+    ns4:last_name "Murazik" ;
+    ns4:professional_id 13 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "Wyoming" ;
+    ns4:street "7783 Abraham Alley Port Madelynhaven, KY 59172-273" ;
+    ns4:zip_code "17902" .
+
+<http://valuenet/ontop/professionals/professional_id=15> a :professionals ;
+    ns4:cell_number "1-258-285-4707x8020" ;
+    ns4:city "North Adelberttown" ;
+    ns4:email_address "jeichmann@example.com" ;
+    ns4:first_name "Lesly" ;
+    ns4:home_phone "1-138-287-3775 " ;
+    ns4:last_name "Walter" ;
+    ns4:professional_id 15 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Montana" ;
+    ns4:street "63949 Keeling Landing Apt. 502 Johnsview, SD 06780" ;
+    ns4:zip_code "98844" .
+
+<http://valuenet/ontop/professionals/professional_id=2> a :professionals ;
+    ns4:cell_number "889- 940- 2676 " ;
+    ns4:city "North Odellfurt" ;
+    ns4:email_address "lucile.shanahan@example.org" ;
+    ns4:first_name "Jayson" ;
+    ns4:home_phone " + 02(1)0259033559" ;
+    ns4:last_name "Ullrich" ;
+    ns4:professional_id 2 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Connecticut" ;
+    ns4:street "88665 Terence Lodge Apt. 904 Corneliusfort, NC 194" ;
+    ns4:zip_code "43129" .
+
+<http://valuenet/ontop/professionals/professional_id=3> a :professionals ;
+    ns4:cell_number "(369)908-7311x065" ;
+    ns4:city "Jaceton" ;
+    ns4:email_address "uboehm@example.org" ;
+    ns4:first_name "Olaf" ;
+    ns4:home_phone "325- 155- 0801x7005" ;
+    ns4:last_name "Watsica" ;
+    ns4:professional_id 3 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Wisconsin" ;
+    ns4:street "68589 Bradly Manor New Audrey, IN 91497 " ;
+    ns4:zip_code "77129" .
+
+ns6:size_code a owl:DatatypeProperty ;
+    rdfs:domain :sizes ;
+    rdfs:range xsd:string .
+
+ns6:size_description a owl:DatatypeProperty ;
+    rdfs:domain :sizes ;
+    rdfs:range xsd:string .
+
+ns7:treatment_type_code a owl:DatatypeProperty ;
+    rdfs:domain :treatment_types ;
+    rdfs:range xsd:string .
+
+ns7:treatment_type_description a owl:DatatypeProperty ;
+    rdfs:domain :treatment_types ;
+    rdfs:range xsd:string .
+
+ns2:cost_of_treatment a owl:DatatypeProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range xsd:decimal .
+
+ns2:date_of_treatment a owl:DatatypeProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range xsd:dateTime .
+
+ns2:dog_id a owl:DatatypeProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range xsd:integer .
+
+ns2:professional_id a owl:DatatypeProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range xsd:integer .
+
+ns2:ref-dog_id a owl:ObjectProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range :dogs .
+
+ns2:ref-professional_id a owl:ObjectProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range :professionals .
+
+ns2:ref-treatment_type_code a owl:ObjectProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range :treatment_types .
+
+ns2:treatment_id a owl:DatatypeProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range xsd:integer .
+
+ns2:treatment_type_code a owl:DatatypeProperty ;
+    rdfs:domain :treatments ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/treatments/treatment_id=1> a :treatments ;
+    ns2:cost_of_treatment 567.0000 ;
+    ns2:date_of_treatment "2018-03-19T04:39:54"^^xsd:dateTime ;
+    ns2:dog_id 14 ;
+    ns2:professional_id 9 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=14> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=9> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=WALK> ;
+    ns2:treatment_id 1 ;
+    ns2:treatment_type_code "WALK" .
+
+<http://valuenet/ontop/treatments/treatment_id=10> a :treatments ;
+    ns2:cost_of_treatment 681.0000 ;
+    ns2:date_of_treatment "2018-02-28T17:09:43"^^xsd:dateTime ;
+    ns2:dog_id 10 ;
+    ns2:professional_id 7 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=10> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=7> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=WALK> ;
+    ns2:treatment_id 10 ;
+    ns2:treatment_type_code "WALK" .
+
+<http://valuenet/ontop/treatments/treatment_id=11> a :treatments ;
+    ns2:cost_of_treatment 514.0000 ;
+    ns2:date_of_treatment "2018-03-13T12:22:58"^^xsd:dateTime ;
+    ns2:dog_id 15 ;
+    ns2:professional_id 5 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=15> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=5> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=VAC> ;
+    ns2:treatment_id 11 ;
+    ns2:treatment_type_code "VAC" .
+
+<http://valuenet/ontop/treatments/treatment_id=12> a :treatments ;
+    ns2:cost_of_treatment 428.0000 ;
+    ns2:date_of_treatment "2018-03-16T10:27:36"^^xsd:dateTime ;
+    ns2:dog_id 13 ;
+    ns2:professional_id 9 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=13> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=9> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=EXAM> ;
+    ns2:treatment_id 12 ;
+    ns2:treatment_type_code "EXAM" .
+
+<http://valuenet/ontop/treatments/treatment_id=13> a :treatments ;
+    ns2:cost_of_treatment 945.0000 ;
+    ns2:date_of_treatment "2018-02-26T09:08:53"^^xsd:dateTime ;
+    ns2:dog_id 7 ;
+    ns2:professional_id 8 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=7> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=8> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=VAC> ;
+    ns2:treatment_id 13 ;
+    ns2:treatment_type_code "VAC" .
+
+<http://valuenet/ontop/treatments/treatment_id=14> a :treatments ;
+    ns2:cost_of_treatment 349.0000 ;
+    ns2:date_of_treatment "2018-03-04T20:33:43"^^xsd:dateTime ;
+    ns2:dog_id 10 ;
+    ns2:professional_id 9 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=10> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=9> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=WALK> ;
+    ns2:treatment_id 14 ;
+    ns2:treatment_type_code "WALK" .
+
+<http://valuenet/ontop/treatments/treatment_id=15> a :treatments ;
+    ns2:cost_of_treatment 656.0000 ;
+    ns2:date_of_treatment "2018-03-15T19:10:02"^^xsd:dateTime ;
+    ns2:dog_id 1 ;
+    ns2:professional_id 6 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=1> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=6> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=WALK> ;
+    ns2:treatment_id 15 ;
+    ns2:treatment_type_code "WALK" .
+
+<http://valuenet/ontop/treatments/treatment_id=2> a :treatments ;
+    ns2:cost_of_treatment 147.0000 ;
+    ns2:date_of_treatment "2018-03-15T20:25:34"^^xsd:dateTime ;
+    ns2:dog_id 4 ;
+    ns2:professional_id 10 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=4> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=10> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=VAC> ;
+    ns2:treatment_id 2 ;
+    ns2:treatment_type_code "VAC" .
+
+<http://valuenet/ontop/treatments/treatment_id=3> a :treatments ;
+    ns2:cost_of_treatment 429.0000 ;
+    ns2:date_of_treatment "2018-03-08T05:26:23"^^xsd:dateTime ;
+    ns2:dog_id 14 ;
+    ns2:professional_id 4 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=14> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=4> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=EXAM> ;
+    ns2:treatment_id 3 ;
+    ns2:treatment_type_code "EXAM" .
+
+<http://valuenet/ontop/treatments/treatment_id=4> a :treatments ;
+    ns2:cost_of_treatment 266.0000 ;
+    ns2:date_of_treatment "2018-03-01T04:14:46"^^xsd:dateTime ;
+    ns2:dog_id 2 ;
+    ns2:professional_id 8 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=2> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=8> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=VAC> ;
+    ns2:treatment_id 4 ;
+    ns2:treatment_type_code "VAC" .
+
+<http://valuenet/ontop/treatments/treatment_id=5> a :treatments ;
+    ns2:cost_of_treatment 668.0000 ;
+    ns2:date_of_treatment "2018-03-23T13:52:10"^^xsd:dateTime ;
+    ns2:dog_id 12 ;
+    ns2:professional_id 14 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=12> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=14> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=VAC> ;
+    ns2:treatment_id 5 ;
+    ns2:treatment_type_code "VAC" .
+
+<http://valuenet/ontop/treatments/treatment_id=6> a :treatments ;
+    ns2:cost_of_treatment 313.0000 ;
+    ns2:date_of_treatment "2018-03-11T04:23:15"^^xsd:dateTime ;
+    ns2:dog_id 10 ;
+    ns2:professional_id 4 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=10> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=4> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=EXAM> ;
+    ns2:treatment_id 6 ;
+    ns2:treatment_type_code "EXAM" .
+
+<http://valuenet/ontop/treatments/treatment_id=7> a :treatments ;
+    ns2:cost_of_treatment 852.0000 ;
+    ns2:date_of_treatment "2018-03-10T11:45:58"^^xsd:dateTime ;
+    ns2:dog_id 15 ;
+    ns2:professional_id 14 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=15> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=14> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=EXAM> ;
+    ns2:treatment_id 7 ;
+    ns2:treatment_type_code "EXAM" .
+
+<http://valuenet/ontop/treatments/treatment_id=8> a :treatments ;
+    ns2:cost_of_treatment 407.0000 ;
+    ns2:date_of_treatment "2018-03-24T22:25:58"^^xsd:dateTime ;
+    ns2:dog_id 2 ;
+    ns2:professional_id 6 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=2> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=6> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=EXAM> ;
+    ns2:treatment_id 8 ;
+    ns2:treatment_type_code "EXAM" .
+
+<http://valuenet/ontop/treatments/treatment_id=9> a :treatments ;
+    ns2:cost_of_treatment 139.0000 ;
+    ns2:date_of_treatment "2018-03-14T19:10:40"^^xsd:dateTime ;
+    ns2:dog_id 14 ;
+    ns2:professional_id 10 ;
+    ns2:ref-dog_id <http://valuenet/ontop/dogs/dog_id=14> ;
+    ns2:ref-professional_id <http://valuenet/ontop/professionals/professional_id=10> ;
+    ns2:ref-treatment_type_code <http://valuenet/ontop/treatment_types/treatment_type_code=WALK> ;
+    ns2:treatment_id 9 ;
+    ns2:treatment_type_code "WALK" .
+
+<http://valuenet/ontop/dogs/dog_id=1> a :dogs ;
+    ns3:abandoned_yn 1 ;
+    ns3:age 6 ;
+    ns3:breed_code "ESK" ;
+    ns3:date_adopted "2018-03-06T16:32:11"^^xsd:dateTime ;
+    ns3:date_arrived "2017-09-08T20:10:13"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T06:58:44"^^xsd:dateTime ;
+    ns3:date_of_birth "2012-01-27T05:11:53"^^xsd:dateTime ;
+    ns3:dog_id 1 ;
+    ns3:gender "1" ;
+    ns3:name "Kacey" ;
+    ns3:owner_id 3 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=ESK> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=3> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=LGE> ;
+    ns3:size_code "LGE" ;
+    ns3:weight "7.57" .
+
+<http://valuenet/ontop/dogs/dog_id=12> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 8 ;
+    ns3:breed_code "HUS" ;
+    ns3:date_adopted "2018-03-05T06:05:23"^^xsd:dateTime ;
+    ns3:date_arrived "2017-10-24T04:45:13"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T14:15:41"^^xsd:dateTime ;
+    ns3:date_of_birth "2009-04-12T06:02:48"^^xsd:dateTime ;
+    ns3:dog_id 12 ;
+    ns3:gender "0" ;
+    ns3:name "Holden" ;
+    ns3:owner_id 12 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=HUS> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=12> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "6.92" .
+
+<http://valuenet/ontop/dogs/dog_id=13> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 2 ;
+    ns3:breed_code "HUS" ;
+    ns3:date_adopted "2018-03-21T10:41:18"^^xsd:dateTime ;
+    ns3:date_arrived "2018-01-02T03:15:29"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T05:07:47"^^xsd:dateTime ;
+    ns3:date_of_birth "2012-05-03T21:42:25"^^xsd:dateTime ;
+    ns3:dog_id 13 ;
+    ns3:gender "0" ;
+    ns3:name "Jesus" ;
+    ns3:owner_id 8 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=HUS> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=8> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=SML> ;
+    ns3:size_code "SML" ;
+    ns3:weight "5.16" .
+
+<http://valuenet/ontop/dogs/dog_id=4> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 5 ;
+    ns3:breed_code "ESK" ;
+    ns3:date_adopted "2018-03-18T15:12:50"^^xsd:dateTime ;
+    ns3:date_arrived "2017-04-20T00:58:55"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-24T19:12:22"^^xsd:dateTime ;
+    ns3:date_of_birth "2008-10-09T22:38:53"^^xsd:dateTime ;
+    ns3:dog_id 4 ;
+    ns3:gender "0" ;
+    ns3:name "Houston" ;
+    ns3:owner_id 14 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=ESK> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=14> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=LGE> ;
+    ns3:size_code "LGE" ;
+    ns3:weight "2.18" .
+
+<http://valuenet/ontop/dogs/dog_id=7> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 2 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-02-27T00:27:57"^^xsd:dateTime ;
+    ns3:date_arrived "2017-05-06T08:03:52"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T06:29:10"^^xsd:dateTime ;
+    ns3:date_of_birth "2017-09-19T05:39:09"^^xsd:dateTime ;
+    ns3:dog_id 7 ;
+    ns3:gender "1" ;
+    ns3:name "Narciso" ;
+    ns3:owner_id 3 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=3> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "9.48" .
+
+<http://valuenet/ontop/owners/owner_id=1> a :owners ;
+    ns1:cell_number "478.978.0729" ;
+    ns1:city "Lake Tia" ;
+    ns1:email_address "lynn81@example.org" ;
+    ns1:first_name "Nora" ;
+    ns1:home_phone "1-682-845-0116x63235" ;
+    ns1:last_name "Haley" ;
+    ns1:owner_id 1 ;
+    ns1:state "Wisconsin" ;
+    ns1:street "0647 Hintz Village Apt. 024" ;
+    ns1:zip_code "93165" .
+
+<http://valuenet/ontop/owners/owner_id=10> a :owners ;
+    ns1:cell_number "559.874.3011x989" ;
+    ns1:city "New Margaretteborough" ;
+    ns1:email_address "ymaggio@example.com" ;
+    ns1:first_name "Lorenz" ;
+    ns1:home_phone "085.557.0379x84348" ;
+    ns1:last_name "Nicolas" ;
+    ns1:owner_id 10 ;
+    ns1:state "SouthDakota" ;
+    ns1:street "59509 Mellie Mountain" ;
+    ns1:zip_code "78297" .
+
+<http://valuenet/ontop/owners/owner_id=11> a :owners ;
+    ns1:cell_number "762.589.6117x1328" ;
+    ns1:city "Port Zackery" ;
+    ns1:email_address "pearlie18@example.com" ;
+    ns1:first_name "Gay" ;
+    ns1:home_phone "130-796-4589x05454" ;
+    ns1:last_name "Feil" ;
+    ns1:owner_id 11 ;
+    ns1:state "Indiana" ;
+    ns1:street "60352 Kayleigh Crossing Suite 700" ;
+    ns1:zip_code "35747" .
+
+<http://valuenet/ontop/owners/owner_id=12> a :owners ;
+    ns1:cell_number "1-739-421-2225x38148" ;
+    ns1:city "East Maribelbury" ;
+    ns1:email_address "christy49@example.org" ;
+    ns1:first_name "Orlando" ;
+    ns1:home_phone "363.948.1090" ;
+    ns1:last_name "Price" ;
+    ns1:owner_id 12 ;
+    ns1:state "Mississippi" ;
+    ns1:street "89011 Kertzmann Spring Suite 642" ;
+    ns1:zip_code "11990" .
+
+<http://valuenet/ontop/owners/owner_id=13> a :owners ;
+    ns1:cell_number "633.455.3045x85484" ;
+    ns1:city "Beerton" ;
+    ns1:email_address "wpfeffer@example.net" ;
+    ns1:first_name "Cindy" ;
+    ns1:home_phone "(094)747-5094x8134" ;
+    ns1:last_name "Schmitt" ;
+    ns1:owner_id 13 ;
+    ns1:state "NorthDakota" ;
+    ns1:street "6950 Katherine Forges Apt. 630" ;
+    ns1:zip_code "36871" .
+
+<http://valuenet/ontop/owners/owner_id=2> a :owners ;
+    ns1:cell_number "(722)768-5439x484" ;
+    ns1:city "Port Reannamouth" ;
+    ns1:email_address "ykris@example.com" ;
+    ns1:first_name "Melisa" ;
+    ns1:home_phone "(799)563-0260x454" ;
+    ns1:last_name "DuBuque" ;
+    ns1:owner_id 2 ;
+    ns1:state "Virginia" ;
+    ns1:street "1204 Mae Highway Apt. 107" ;
+    ns1:zip_code "45244" .
+
+<http://valuenet/ontop/owners/owner_id=5> a :owners ;
+    ns1:cell_number "1-626-264-7659x1697" ;
+    ns1:city "Lake Valentin" ;
+    ns1:email_address "zboncak.madonna@example.net" ;
+    ns1:first_name "Johann" ;
+    ns1:home_phone "(544)034-1670" ;
+    ns1:last_name "Fisher" ;
+    ns1:owner_id 5 ;
+    ns1:state "NorthDakota" ;
+    ns1:street "68118 Daniel Row" ;
+    ns1:zip_code "61019" .
+
+<http://valuenet/ontop/owners/owner_id=6> a :owners ;
+    ns1:cell_number "+70(4)9217952551" ;
+    ns1:city "Lake Carleyborough" ;
+    ns1:email_address "margaretta.runte@example.net" ;
+    ns1:first_name "Kade" ;
+    ns1:home_phone "318-052-6573" ;
+    ns1:last_name "Rippin" ;
+    ns1:owner_id 6 ;
+    ns1:state "Arizona" ;
+    ns1:street "51934 Treutel Harbor" ;
+    ns1:zip_code "25609" .
+
+<http://valuenet/ontop/owners/owner_id=7> a :owners ;
+    ns1:cell_number "121.381.3316x6535" ;
+    ns1:city "Lake Jennyferfort" ;
+    ns1:email_address "angeline99@example.com" ;
+    ns1:first_name "Emelie" ;
+    ns1:home_phone "(058)997-7627" ;
+    ns1:last_name "Mertz" ;
+    ns1:owner_id 7 ;
+    ns1:state "NewYork" ;
+    ns1:street "2417 Keara Stravenue Apt. 146" ;
+    ns1:zip_code "00589" .
+
+<http://valuenet/ontop/owners/owner_id=8> a :owners ;
+    ns1:cell_number "(783)271-6744x4507" ;
+    ns1:city "South Afton" ;
+    ns1:email_address "kturner@example.net" ;
+    ns1:first_name "Rolando" ;
+    ns1:home_phone "01802479758" ;
+    ns1:last_name "Prohaska" ;
+    ns1:owner_id 8 ;
+    ns1:state "Arkansas" ;
+    ns1:street "57382 Yost Ridges" ;
+    ns1:zip_code "86010" .
+
+<http://valuenet/ontop/professionals/professional_id=5> a :professionals ;
+    ns4:cell_number "011.193.9081x3186" ;
+    ns4:city "New Laurytown" ;
+    ns4:email_address "mekhi.little@example.org" ;
+    ns4:first_name "Danny" ;
+    ns4:home_phone "1-609-566-2752x25197" ;
+    ns4:last_name "Considine" ;
+    ns4:professional_id 5 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "Hawaii" ;
+    ns4:street "188 VonRueden Tunnel Suite 630 North Macibury, NV " ;
+    ns4:zip_code "84515" .
+
+<http://valuenet/ontop/professionals/professional_id=7> a :professionals ;
+    ns4:cell_number "499- 434- 0215x1628" ;
+    ns4:city "McLaughlinfort" ;
+    ns4:email_address "lambert62@example.org" ;
+    ns4:first_name "Velva" ;
+    ns4:home_phone "022.529.0550x1319" ;
+    ns4:last_name "Hayes" ;
+    ns4:professional_id 7 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "NorthCarolina" ;
+    ns4:street "44234 Marvin Shoals Suite 659 North Frances, AL 23" ;
+    ns4:zip_code "67980" .
+
+<http://valuenet/ontop/dogs/dog_id=15> a :dogs ;
+    ns3:abandoned_yn 1 ;
+    ns3:age 1 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-03-10T15:06:43"^^xsd:dateTime ;
+    ns3:date_arrived "2017-12-29T23:24:13"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-24T19:36:59"^^xsd:dateTime ;
+    ns3:date_of_birth "2008-05-30T12:51:34"^^xsd:dateTime ;
+    ns3:dog_id 15 ;
+    ns3:gender "1" ;
+    ns3:name "Evangeline" ;
+    ns3:owner_id 10 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=10> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "4.01" .
+
+<http://valuenet/ontop/dogs/dog_id=2> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 9 ;
+    ns3:breed_code "BUL" ;
+    ns3:date_adopted "2018-03-25T08:12:51"^^xsd:dateTime ;
+    ns3:date_arrived "2017-12-22T05:02:02"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T02:11:32"^^xsd:dateTime ;
+    ns3:date_of_birth "2013-02-13T05:15:21"^^xsd:dateTime ;
+    ns3:dog_id 2 ;
+    ns3:gender "0" ;
+    ns3:name "Hipolito" ;
+    ns3:owner_id 11 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=BUL> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=11> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=LGE> ;
+    ns3:size_code "LGE" ;
+    ns3:weight "1.72" .
+
+<http://valuenet/ontop/owners/owner_id=3> a :owners ;
+    ns1:cell_number "481-483-9083x37986" ;
+    ns1:city "Barrettburgh" ;
+    ns1:email_address "hudson.favian@example.com" ;
+    ns1:first_name "Jaclyn" ;
+    ns1:home_phone "916.976.9480x13851" ;
+    ns1:last_name "Stoltenberg" ;
+    ns1:owner_id 3 ;
+    ns1:state "Vermont" ;
+    ns1:street "2635 Caitlyn Plains" ;
+    ns1:zip_code "02647" .
+
+<http://valuenet/ontop/professionals/professional_id=10> a :professionals ;
+    ns4:cell_number "461-801-2600 " ;
+    ns4:city "New Maryjane" ;
+    ns4:email_address "jerrod.bahringer@example.org" ;
+    ns4:first_name "Domenica" ;
+    ns4:home_phone "(230)338-3342x585" ;
+    ns4:last_name "Jacobs" ;
+    ns4:professional_id 10 ;
+    ns4:role_code "Employee" ;
+    ns4:state "California" ;
+    ns4:street "7284 Torphy Flats Apt. 610 Diannaburgh, SC 78560 " ;
+    ns4:zip_code "54312" .
+
+<http://valuenet/ontop/professionals/professional_id=14> a :professionals ;
+    ns4:cell_number "1-185-137-1945x409" ;
+    ns4:city "East Ila" ;
+    ns4:email_address "cole.margarita@example.org" ;
+    ns4:first_name "Sigurd" ;
+    ns4:home_phone "971.048.3763x9404" ;
+    ns4:last_name "Frami" ;
+    ns4:professional_id 14 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Connecticut" ;
+    ns4:street "390 Bryce Drive North Dock, LA 65357-7228" ;
+    ns4:zip_code "41215" .
+
+<http://valuenet/ontop/professionals/professional_id=4> a :professionals ;
+    ns4:cell_number "00230569697" ;
+    ns4:city "Domenickton" ;
+    ns4:email_address "lourdes.lowe@example.net" ;
+    ns4:first_name "Vernice" ;
+    ns4:home_phone "312.216.3352 " ;
+    ns4:last_name "Tillman" ;
+    ns4:professional_id 4 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "Mississippi" ;
+    ns4:street "72532 Hane Course Lake Berylland, ND 95283 " ;
+    ns4:zip_code "02281" .
+
+<http://valuenet/ontop/professionals/professional_id=6> a :professionals ;
+    ns4:cell_number "139- 321- 7313 " ;
+    ns4:city "Baileymouth" ;
+    ns4:email_address "jacynthe.mclaughlin@example.net" ;
+    ns4:first_name "Ruben" ;
+    ns4:home_phone " + 43(5)1132733868" ;
+    ns4:last_name "O'Reilly" ;
+    ns4:professional_id 6 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "NewMexico" ;
+    ns4:street "17286 Waters Green East Bernadinefort, CA 89573 " ;
+    ns4:zip_code "52476" .
+
+<http://valuenet/ontop/professionals/professional_id=8> a :professionals ;
+    ns4:cell_number "328.842.3792 " ;
+    ns4:city "Kirastad" ;
+    ns4:email_address "goyette.roosevelt@example.net" ;
+    ns4:first_name "Karley" ;
+    ns4:home_phone "891.475.2256 " ;
+    ns4:last_name "Hyatt" ;
+    ns4:professional_id 8 ;
+    ns4:role_code "Employee" ;
+    ns4:state "Indiana" ;
+    ns4:street "36895 Eli Ferry Port Marcelle, FL 45712 " ;
+    ns4:zip_code "33020" .
+
+<http://valuenet/ontop/sizes/size_code=SML> a :sizes ;
+    ns6:size_code "SML" ;
+    ns6:size_description "Small" .
+
+<http://valuenet/ontop/dogs/dog_id=10> a :dogs ;
+    ns3:abandoned_yn 0 ;
+    ns3:age 9 ;
+    ns3:breed_code "HUS" ;
+    ns3:date_adopted "2018-03-18T07:47:40"^^xsd:dateTime ;
+    ns3:date_arrived "2017-12-29T06:08:26"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-25T04:42:14"^^xsd:dateTime ;
+    ns3:date_of_birth "2012-07-11T17:15:10"^^xsd:dateTime ;
+    ns3:dog_id 10 ;
+    ns3:gender "0" ;
+    ns3:name "Troy" ;
+    ns3:owner_id 6 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=HUS> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=6> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "8.96" .
+
+<http://valuenet/ontop/dogs/dog_id=14> a :dogs ;
+    ns3:abandoned_yn 1 ;
+    ns3:age 4 ;
+    ns3:breed_code "ESK" ;
+    ns3:date_adopted "2018-03-13T12:47:15"^^xsd:dateTime ;
+    ns3:date_arrived "2017-06-18T19:45:38"^^xsd:dateTime ;
+    ns3:date_departed "2018-03-24T23:48:59"^^xsd:dateTime ;
+    ns3:date_of_birth "2010-11-11T07:11:53"^^xsd:dateTime ;
+    ns3:dog_id 14 ;
+    ns3:gender "0" ;
+    ns3:name "Lyric" ;
+    ns3:owner_id 14 ;
+    ns3:ref-breed_code <http://valuenet/ontop/breeds/breed_code=ESK> ;
+    ns3:ref-owner_id <http://valuenet/ontop/owners/owner_id=14> ;
+    ns3:ref-size_code <http://valuenet/ontop/sizes/size_code=MED> ;
+    ns3:size_code "MED" ;
+    ns3:weight "4.36" .
+
+<http://valuenet/ontop/owners/owner_id=14> a :owners ;
+    ns1:cell_number "(257)399-3116" ;
+    ns1:city "West Leonard" ;
+    ns1:email_address "edythe62@example.org" ;
+    ns1:first_name "Rachelle" ;
+    ns1:home_phone "1-346-655-5842x768" ;
+    ns1:last_name "Funk" ;
+    ns1:owner_id 14 ;
+    ns1:state "Maryland" ;
+    ns1:street "15828 Spencer Extensions" ;
+    ns1:zip_code "22731" .
+
+<http://valuenet/ontop/professionals/professional_id=9> a :professionals ;
+    ns4:cell_number "962-983-8109x3509" ;
+    ns4:city "South Rockyport" ;
+    ns4:email_address "schneider.kathryne@example.org" ;
+    ns4:first_name "Monte" ;
+    ns4:home_phone "320-508-6023 " ;
+    ns4:last_name "Kshlerin" ;
+    ns4:professional_id 9 ;
+    ns4:role_code "Veterenarian" ;
+    ns4:state "South Carolina" ;
+    ns4:street "07073 Brenna Ways Suite 089 Lowehaven, KY 93275-96" ;
+    ns4:zip_code "80775" .
+
+<http://valuenet/ontop/breeds/breed_code=ESK> a :breeds ;
+    ns5:breed_code "ESK" ;
+    ns5:breed_name "Eskimo" .
+
+<http://valuenet/ontop/breeds/breed_code=HUS> a :breeds ;
+    ns5:breed_code "HUS" ;
+    ns5:breed_name "Husky" .
+
+<http://valuenet/ontop/sizes/size_code=LGE> a :sizes ;
+    ns6:size_code "LGE" ;
+    ns6:size_description "Large" .
+
+<http://valuenet/ontop/treatment_types/treatment_type_code=EXAM> a :treatment_types ;
+    ns7:treatment_type_code "EXAM" ;
+    ns7:treatment_type_description "Physical examination" .
+
+<http://valuenet/ontop/treatment_types/treatment_type_code=VAC> a :treatment_types ;
+    ns7:treatment_type_code "VAC" ;
+    ns7:treatment_type_description "Vaccination" .
+
+<http://valuenet/ontop/treatment_types/treatment_type_code=WALK> a :treatment_types ;
+    ns7:treatment_type_code "WALK" ;
+    ns7:treatment_type_description "Take for a Walk" .
+
+:breeds a owl:Class .
+
+:charges a owl:Class .
+
+:sizes a owl:Class .
+
+:treatment_types a owl:Class .
+
+<http://valuenet/ontop/breeds/breed_code=BUL> a :breeds ;
+    ns5:breed_code "BUL" ;
+    ns5:breed_name "Bulldog" .
+
+<http://valuenet/ontop/sizes/size_code=MED> a :sizes ;
+    ns6:size_code "MED" ;
+    ns6:size_description "Medium" .
+
+:treatments a owl:Class .
+
+:owners a owl:Class .
+
+:professionals a owl:Class .
+
+:dogs a owl:Class .
+

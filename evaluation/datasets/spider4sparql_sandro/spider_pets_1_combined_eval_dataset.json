@@ -1,0 +1,1172 @@
+{
+  "dataset_name": "spider_pets_1_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for pets_1. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/pets_1.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "pets_1_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . FILTER(?t1_weight > 10) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of pets whose weight is heavier than 10."
+    },
+    {
+      "id": "Q002",
+      "original_id": "pets_1_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . FILTER(?t1_weight > 10) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many pets have a greater weight than 10?"
+    },
+    {
+      "id": "Q003",
+      "original_id": "pets_1_003",
+      "gold_sparql": "select ?t1_weight where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . } order by asc (?t1_pet_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_weight": "9.30000019"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the weight of the youngest dog."
+    },
+    {
+      "id": "Q004",
+      "original_id": "pets_1_004",
+      "gold_sparql": "select ?t1_weight where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . } order by asc (?t1_pet_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_weight": "9.30000019"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "How much does the youngest dog weigh?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "pets_1_005",
+      "gold_sparql": "select (max( ?t1_weight) as ?aggregation_t1_weight_64 ) ?t1_pettype where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . } group by ?t1_pettype",
+      "gold_answers": [
+        {
+          "aggregation_t1_weight_64": "13.3999996",
+          "t1_pettype": "dog"
+        },
+        {
+          "aggregation_t1_weight_64": "12.0",
+          "t1_pettype": "cat"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the maximum weight for each type of pet. List the maximum weight and pet type."
+    },
+    {
+      "id": "Q006",
+      "original_id": "pets_1_006",
+      "gold_sparql": "select (max( ?t1_weight) as ?aggregation_t1_weight_64 ) ?t1_pettype where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . } group by ?t1_pettype",
+      "gold_answers": [
+        {
+          "aggregation_t1_weight_64": "13.3999996",
+          "t1_pettype": "dog"
+        },
+        {
+          "aggregation_t1_weight_64": "12.0",
+          "t1_pettype": "cat"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the maximum weight and type for each type of pet."
+    },
+    {
+      "id": "Q007",
+      "original_id": "pets_1_007",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t13 a <http://valuenet/ontop/has_pet> . ?t2 a <http://valuenet/ontop/student> . ?t13 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/age> ?t2_age . FILTER(?t2_age > 20) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find number of pets owned by students who are older than 20."
+    },
+    {
+      "id": "Q008",
+      "original_id": "pets_1_008",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t13 a <http://valuenet/ontop/has_pet> . ?t2 a <http://valuenet/ontop/student> . ?t13 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/age> ?t2_age . FILTER(?t2_age > 20) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many pets are owned by students that have an age greater than 20?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "pets_1_009",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/pets> . ?t13 a <http://valuenet/ontop/has_pet> . ?t13 <http://valuenet/ontop/ref-pet> ?t1 . ?t2 <http://valuenet/ontop/sex> ?t2_sex . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . ?t2 a <http://valuenet/ontop/student> . ?t13 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/sex> ?t2_sex . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . FILTER(?t2_sex = 'F' && ?t1_pettype = 'dog') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of dog pets that are raised by female students (with sex F)."
+    },
+    {
+      "id": "Q010",
+      "original_id": "pets_1_010",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/pets> . ?t13 a <http://valuenet/ontop/has_pet> . ?t13 <http://valuenet/ontop/ref-pet> ?t1 . ?t2 <http://valuenet/ontop/sex> ?t2_sex . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . ?t2 a <http://valuenet/ontop/student> . ?t13 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/sex> ?t2_sex . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . FILTER(?t2_sex = 'F' && ?t1_pettype = 'dog') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many dog pets are raised by female students?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "pets_1_011",
+      "gold_sparql": "select distinct (count(distinct ?t1_pettype) as ?aggregation_t1_pettype_98 ) where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_pettype_98": "2"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of distinct type of pets."
+    },
+    {
+      "id": "Q012",
+      "original_id": "pets_1_012",
+      "gold_sparql": "select distinct (count(distinct ?t1_pettype) as ?aggregation_t1_pettype_98 ) where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_pettype_98": "2"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many different types of pet are there?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "pets_1_013",
+      "gold_sparql": "select distinct ?t1_fname where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . FILTER(?t3_pettype = 'cat' || ?t3_pettype = 'dog') . }",
+      "gold_answers": [
+        {
+          "t1_fname": "Linda"
+        },
+        {
+          "t1_fname": "Tracy"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the first name of students who have cat or dog pet."
+    },
+    {
+      "id": "Q014",
+      "original_id": "pets_1_014",
+      "gold_sparql": "select distinct ?t1_fname where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . FILTER(?t3_pettype = 'cat' || ?t3_pettype = 'dog') . }",
+      "gold_answers": [
+        {
+          "t1_fname": "Linda"
+        },
+        {
+          "t1_fname": "Tracy"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the first names of every student who has a cat or dog as a pet?"
+    },
+    {
+      "id": "Q015",
+      "original_id": "pets_1_015",
+      "gold_sparql": "select distinct ?t1_fname where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . FILTER(?t3_pettype = 'cat' || ?t3_pettype = 'dog') . }",
+      "gold_answers": [
+        {
+          "t1_fname": "Linda"
+        },
+        {
+          "t1_fname": "Tracy"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the first name of students who have both cat and dog pets ."
+    },
+    {
+      "id": "Q016",
+      "original_id": "pets_1_016",
+      "gold_sparql": "select distinct ?t1_fname where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . FILTER(?t3_pettype = 'cat') . FILTER (?t1_fname in (?t4_fname)) . ?t4 a <http://valuenet/ontop/student> . ?t5 a <http://valuenet/ontop/has_pet> . ?t5 <http://valuenet/ontop/ref-stu> ?t4 . ?t4 <http://valuenet/ontop/fname> ?t4_fname . ?t4 <http://valuenet/ontop/stuid> ?t4_stuid . ?t6 <http://valuenet/ontop/pettype> ?t6_pettype . ?t6 a <http://valuenet/ontop/pets> . ?t5 <http://valuenet/ontop/ref-pet> ?t6 . ?t4 <http://valuenet/ontop/fname> ?t4_fname . ?t4 <http://valuenet/ontop/stuid> ?t4_stuid . ?t6 <http://valuenet/ontop/pettype> ?t6_pettype . FILTER(?t6_pettype = 'dog') . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the students' first names who have both cats and dogs as pets?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "pets_1_017",
+      "gold_sparql": "select ?t1_major ?t1_age where { ?t1 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/major> ?t1_major . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . Filter not exists {{select ?t22_stuid where { ?t22 a <http://valuenet/ontop/student> . ?t23 a <http://valuenet/ontop/has_pet> . ?t23 <http://valuenet/ontop/ref-stu> ?t22 . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t24 <http://valuenet/ontop/pettype> ?t24_pettype . ?t24 a <http://valuenet/ontop/pets> . ?t23 <http://valuenet/ontop/ref-pet> ?t24 . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t24 <http://valuenet/ontop/pettype> ?t24_pettype . FILTER(?t24_pettype = 'cat') . } } FILTER (?t1_stuid in (?t22_stuid))} }",
+      "gold_answers": [
+        {
+          "t1_major": "600",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "26"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "540",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "21"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "16"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "22"
+        },
+        {
+          "t1_major": "50",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "21"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "27"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "22"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "100",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "50",
+          "t1_age": "26"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "540",
+          "t1_age": "18"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the major and age of students who do not have a cat pet."
+    },
+    {
+      "id": "Q018",
+      "original_id": "pets_1_018",
+      "gold_sparql": "select ?t1_major ?t1_age where { ?t1 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/major> ?t1_major . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . Filter not exists {{select ?t22_stuid where { ?t22 a <http://valuenet/ontop/student> . ?t23 a <http://valuenet/ontop/has_pet> . ?t23 <http://valuenet/ontop/ref-stu> ?t22 . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t24 <http://valuenet/ontop/pettype> ?t24_pettype . ?t24 a <http://valuenet/ontop/pets> . ?t23 <http://valuenet/ontop/ref-pet> ?t24 . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t24 <http://valuenet/ontop/pettype> ?t24_pettype . FILTER(?t24_pettype = 'cat') . } } FILTER (?t1_stuid in (?t22_stuid))} }",
+      "gold_answers": [
+        {
+          "t1_major": "600",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "26"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "540",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "21"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "16"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "22"
+        },
+        {
+          "t1_major": "50",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "21"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "19"
+        },
+        {
+          "t1_major": "550",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "27"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "22"
+        },
+        {
+          "t1_major": "520",
+          "t1_age": "18"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "100",
+          "t1_age": "17"
+        },
+        {
+          "t1_major": "50",
+          "t1_age": "26"
+        },
+        {
+          "t1_major": "600",
+          "t1_age": "20"
+        },
+        {
+          "t1_major": "540",
+          "t1_age": "18"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What major is every student who does not own a cat as a pet, and also how old are they?"
+    },
+    {
+      "id": "Q019",
+      "original_id": "pets_1_019",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_stuid as ?col1) where { ?t1 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . }} MINUS {select (?t2_stuid as ?col1) where { ?t2 a <http://valuenet/ontop/student> . ?t3 a <http://valuenet/ontop/has_pet> . ?t3 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t4 <http://valuenet/ontop/pettype> ?t4_pettype . ?t4 a <http://valuenet/ontop/pets> . ?t3 <http://valuenet/ontop/ref-pet> ?t4 . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t4 <http://valuenet/ontop/pettype> ?t4_pettype . FILTER(?t4_pettype = 'cat') . } } }",
+      "gold_answers": [
+        {
+          "col1": "1002"
+        },
+        {
+          "col1": "1005"
+        },
+        {
+          "col1": "1033"
+        },
+        {
+          "col1": "1026"
+        },
+        {
+          "col1": "1022"
+        },
+        {
+          "col1": "1007"
+        },
+        {
+          "col1": "1012"
+        },
+        {
+          "col1": "1019"
+        },
+        {
+          "col1": "1030"
+        },
+        {
+          "col1": "1032"
+        },
+        {
+          "col1": "1015"
+        },
+        {
+          "col1": "1016"
+        },
+        {
+          "col1": "1020"
+        },
+        {
+          "col1": "1034"
+        },
+        {
+          "col1": "1006"
+        },
+        {
+          "col1": "1021"
+        },
+        {
+          "col1": "1027"
+        },
+        {
+          "col1": "1008"
+        },
+        {
+          "col1": "1023"
+        },
+        {
+          "col1": "1014"
+        },
+        {
+          "col1": "1028"
+        },
+        {
+          "col1": "1003"
+        },
+        {
+          "col1": "1009"
+        },
+        {
+          "col1": "1031"
+        },
+        {
+          "col1": "1017"
+        },
+        {
+          "col1": "1011"
+        },
+        {
+          "col1": "1025"
+        },
+        {
+          "col1": "1018"
+        },
+        {
+          "col1": "1010"
+        },
+        {
+          "col1": "1029"
+        },
+        {
+          "col1": "1035"
+        },
+        {
+          "col1": "1004"
+        },
+        {
+          "col1": "1024"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the id of students who do not have a cat pet."
+    },
+    {
+      "id": "Q020",
+      "original_id": "pets_1_020",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_stuid as ?col1) where { ?t1 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . }} MINUS {select (?t2_stuid as ?col1) where { ?t2 a <http://valuenet/ontop/student> . ?t3 a <http://valuenet/ontop/has_pet> . ?t3 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t4 <http://valuenet/ontop/pettype> ?t4_pettype . ?t4 a <http://valuenet/ontop/pets> . ?t3 <http://valuenet/ontop/ref-pet> ?t4 . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . ?t4 <http://valuenet/ontop/pettype> ?t4_pettype . FILTER(?t4_pettype = 'cat') . } } }",
+      "gold_answers": [
+        {
+          "col1": "1002"
+        },
+        {
+          "col1": "1005"
+        },
+        {
+          "col1": "1033"
+        },
+        {
+          "col1": "1026"
+        },
+        {
+          "col1": "1022"
+        },
+        {
+          "col1": "1007"
+        },
+        {
+          "col1": "1012"
+        },
+        {
+          "col1": "1019"
+        },
+        {
+          "col1": "1030"
+        },
+        {
+          "col1": "1032"
+        },
+        {
+          "col1": "1015"
+        },
+        {
+          "col1": "1016"
+        },
+        {
+          "col1": "1020"
+        },
+        {
+          "col1": "1034"
+        },
+        {
+          "col1": "1006"
+        },
+        {
+          "col1": "1021"
+        },
+        {
+          "col1": "1027"
+        },
+        {
+          "col1": "1008"
+        },
+        {
+          "col1": "1023"
+        },
+        {
+          "col1": "1014"
+        },
+        {
+          "col1": "1028"
+        },
+        {
+          "col1": "1003"
+        },
+        {
+          "col1": "1009"
+        },
+        {
+          "col1": "1031"
+        },
+        {
+          "col1": "1017"
+        },
+        {
+          "col1": "1011"
+        },
+        {
+          "col1": "1025"
+        },
+        {
+          "col1": "1018"
+        },
+        {
+          "col1": "1010"
+        },
+        {
+          "col1": "1029"
+        },
+        {
+          "col1": "1035"
+        },
+        {
+          "col1": "1004"
+        },
+        {
+          "col1": "1024"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the ids of the students who do not own cats as pets?"
+    },
+    {
+      "id": "Q021",
+      "original_id": "pets_1_021",
+      "gold_sparql": "select ?t1_fname ?t1_age where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . FILTER(?t3_pettype = 'dog') . Filter not exists {{select ?t24_stuid where { ?t24 a <http://valuenet/ontop/student> . ?t25 a <http://valuenet/ontop/has_pet> . ?t25 <http://valuenet/ontop/ref-stu> ?t24 . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t26 <http://valuenet/ontop/pettype> ?t26_pettype . ?t26 a <http://valuenet/ontop/pets> . ?t25 <http://valuenet/ontop/ref-pet> ?t26 . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t26 <http://valuenet/ontop/pettype> ?t26_pettype . FILTER(?t26_pettype = 'cat') . } } FILTER (?t1_stuid in (?t24_stuid))} }",
+      "gold_answers": [
+        {
+          "t1_fname": "Tracy",
+          "t1_age": "19"
+        },
+        {
+          "t1_fname": "Tracy",
+          "t1_age": "19"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the first name and age of students who have a dog but do not have a cat as a pet."
+    },
+    {
+      "id": "Q022",
+      "original_id": "pets_1_022",
+      "gold_sparql": "select ?t1_fname ?t1_age where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . FILTER(?t3_pettype = 'dog') . Filter not exists {{select ?t24_stuid where { ?t24 a <http://valuenet/ontop/student> . ?t25 a <http://valuenet/ontop/has_pet> . ?t25 <http://valuenet/ontop/ref-stu> ?t24 . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t26 <http://valuenet/ontop/pettype> ?t26_pettype . ?t26 a <http://valuenet/ontop/pets> . ?t25 <http://valuenet/ontop/ref-pet> ?t26 . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t24 <http://valuenet/ontop/stuid> ?t24_stuid . ?t26 <http://valuenet/ontop/pettype> ?t26_pettype . FILTER(?t26_pettype = 'cat') . } } FILTER (?t1_stuid in (?t24_stuid))} }",
+      "gold_answers": [
+        {
+          "t1_fname": "Tracy",
+          "t1_age": "19"
+        },
+        {
+          "t1_fname": "Tracy",
+          "t1_age": "19"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the first name of every student who has a dog but does not have a cat?"
+    },
+    {
+      "id": "Q023",
+      "original_id": "pets_1_023",
+      "gold_sparql": "select ?t1_pettype ?t1_weight where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . } order by asc (?t1_pet_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_pettype": "dog",
+          "t1_weight": "9.30000019"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the type and weight of the youngest pet."
+    },
+    {
+      "id": "Q024",
+      "original_id": "pets_1_024",
+      "gold_sparql": "select ?t1_pettype ?t1_weight where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . } order by asc (?t1_pet_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_pettype": "dog",
+          "t1_weight": "9.30000019"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What type of pet is the youngest animal, and how much does it weigh?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "pets_1_025",
+      "gold_sparql": "select ?t1_petid ?t1_weight where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/petid> ?t1_petid . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . FILTER(?t1_pet_age > 1) . }",
+      "gold_answers": [
+        {
+          "t1_petid": "2002",
+          "t1_weight": "13.3999996"
+        },
+        {
+          "t1_petid": "2001",
+          "t1_weight": "12.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the id and weight of all pets whose age is older than 1."
+    },
+    {
+      "id": "Q026",
+      "original_id": "pets_1_026",
+      "gold_sparql": "select ?t1_petid ?t1_weight where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/petid> ?t1_petid . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . FILTER(?t1_pet_age > 1) . }",
+      "gold_answers": [
+        {
+          "t1_petid": "2002",
+          "t1_weight": "13.3999996"
+        },
+        {
+          "t1_petid": "2001",
+          "t1_weight": "12.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the id and weight of every pet who is older than 1?"
+    },
+    {
+      "id": "Q027",
+      "original_id": "pets_1_027",
+      "gold_sparql": "select (avg( ?t1_pet_age) as ?aggregation_t1_pet_age_2 ) (max( ?t1_pet_age) as ?aggregation_t1_pet_age_13 ) ?t1_pettype where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . } group by ?t1_pettype",
+      "gold_answers": [
+        {
+          "aggregation_t1_pet_age_2": "1.5",
+          "aggregation_t1_pet_age_13": "2",
+          "t1_pettype": "dog"
+        },
+        {
+          "aggregation_t1_pet_age_2": "3.0",
+          "aggregation_t1_pet_age_13": "3",
+          "t1_pettype": "cat"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the average and maximum age for each type of pet."
+    },
+    {
+      "id": "Q028",
+      "original_id": "pets_1_028",
+      "gold_sparql": "select (avg( ?t1_pet_age) as ?aggregation_t1_pet_age_2 ) (max( ?t1_pet_age) as ?aggregation_t1_pet_age_13 ) ?t1_pettype where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . ?t1 <http://valuenet/ontop/pet_age> ?t1_pet_age . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . } group by ?t1_pettype",
+      "gold_answers": [
+        {
+          "aggregation_t1_pet_age_2": "1.5",
+          "aggregation_t1_pet_age_13": "2",
+          "t1_pettype": "dog"
+        },
+        {
+          "aggregation_t1_pet_age_2": "3.0",
+          "aggregation_t1_pet_age_13": "3",
+          "t1_pettype": "cat"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average and maximum age for each pet type?"
+    },
+    {
+      "id": "Q029",
+      "original_id": "pets_1_029",
+      "gold_sparql": "select (avg( ?t1_weight) as ?aggregation_t1_weight_83 ) ?t1_pettype where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . } group by ?t1_pettype",
+      "gold_answers": [
+        {
+          "aggregation_t1_weight_83": "11.349999895",
+          "t1_pettype": "dog"
+        },
+        {
+          "aggregation_t1_weight_83": "12.0",
+          "t1_pettype": "cat"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the average weight for each pet type."
+    },
+    {
+      "id": "Q030",
+      "original_id": "pets_1_030",
+      "gold_sparql": "select (avg( ?t1_weight) as ?aggregation_t1_weight_83 ) ?t1_pettype where { ?t1 a <http://valuenet/ontop/pets> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/pettype> ?t1_pettype . } group by ?t1_pettype",
+      "gold_answers": [
+        {
+          "aggregation_t1_weight_83": "11.349999895",
+          "t1_pettype": "dog"
+        },
+        {
+          "aggregation_t1_weight_83": "12.0",
+          "t1_pettype": "cat"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average weight for each type of pet?"
+    },
+    {
+      "id": "Q031",
+      "original_id": "pets_1_031",
+      "gold_sparql": "select distinct ?t1_fname ?t1_age where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . }",
+      "gold_answers": [
+        {
+          "t1_fname": "Tracy",
+          "t1_age": "19"
+        },
+        {
+          "t1_fname": "Linda",
+          "t1_age": "18"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the first name and age of students who have a pet."
+    },
+    {
+      "id": "Q032",
+      "original_id": "pets_1_032",
+      "gold_sparql": "select distinct ?t1_fname ?t1_age where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . }",
+      "gold_answers": [
+        {
+          "t1_fname": "Tracy",
+          "t1_age": "19"
+        },
+        {
+          "t1_fname": "Linda",
+          "t1_age": "18"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the different first names and ages of the students who do have pets?"
+    },
+    {
+      "id": "Q033",
+      "original_id": "pets_1_033",
+      "gold_sparql": "select ?t1_petid where { ?t1 a <http://valuenet/ontop/has_pet> . ?t2 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/ref-stu> ?t2 . ?t1 <http://valuenet/ontop/petid> ?t1_petid . ?t2 <http://valuenet/ontop/lname> ?t2_lname . FILTER(?t2_lname = 'Smith') . }",
+      "gold_answers": [
+        {
+          "t1_petid": "2001"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the id of the pet owned by student whose last name is ‚ÄòSmith‚Äô."
+    },
+    {
+      "id": "Q034",
+      "original_id": "pets_1_034",
+      "gold_sparql": "select ?t1_petid where { ?t1 a <http://valuenet/ontop/has_pet> . ?t2 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/ref-stu> ?t2 . ?t1 <http://valuenet/ontop/petid> ?t1_petid . ?t2 <http://valuenet/ontop/lname> ?t2_lname . FILTER(?t2_lname = 'Smith') . }",
+      "gold_answers": [
+        {
+          "t1_petid": "2001"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the id of the pet owned by the student whose last name is 'Smith'?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "pets_1_035",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t2_stuid where { ?t13 a <http://valuenet/ontop/has_pet> . ?t2 a <http://valuenet/ontop/student> . ?t13 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . } group by ?t2_stuid",
+      "gold_answers": [
+        {
+          "aggregation_all": "2",
+          "t2_stuid": "1002"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_stuid": "1001"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of pets for each student who has any pet and student id."
+    },
+    {
+      "id": "Q036",
+      "original_id": "pets_1_036",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t2_stuid where { ?t13 a <http://valuenet/ontop/has_pet> . ?t2 a <http://valuenet/ontop/student> . ?t13 <http://valuenet/ontop/ref-stu> ?t2 . ?t2 <http://valuenet/ontop/stuid> ?t2_stuid . } group by ?t2_stuid",
+      "gold_answers": [
+        {
+          "aggregation_all": "2",
+          "t2_stuid": "1002"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_stuid": "1001"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "For students who have pets , how many pets does each student have ? list their ids instead of names ."
+    },
+    {
+      "id": "Q037",
+      "original_id": "pets_1_037",
+      "gold_sparql": "select ?t1_fname ?t1_sex where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/sex> ?t1_sex . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . } group by ?t1_fname ?t1_sex having(count( *) > 1)",
+      "gold_answers": [
+        {
+          "t1_fname": "Tracy",
+          "t1_sex": "F"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the first name and gender of student who have more than one pet."
+    },
+    {
+      "id": "Q038",
+      "original_id": "pets_1_038",
+      "gold_sparql": "select ?t1_fname ?t1_sex where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/fname> ?t1_fname . ?t1 <http://valuenet/ontop/sex> ?t1_sex . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . } group by ?t1_fname ?t1_sex having(count( *) > 1)",
+      "gold_answers": [
+        {
+          "t1_fname": "Tracy",
+          "t1_sex": "F"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the first name and gender of the all the students who have more than one pet?"
+    },
+    {
+      "id": "Q039",
+      "original_id": "pets_1_039",
+      "gold_sparql": "select ?t1_lname where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/lname> ?t1_lname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pet_age> ?t3_pet_age . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/lname> ?t1_lname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pet_age> ?t3_pet_age . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . FILTER(?t3_pet_age = 3 && ?t3_pettype = 'cat') . }",
+      "gold_answers": [
+        {
+          "t1_lname": "Smith"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the last name of the student who has a cat that is age 3."
+    },
+    {
+      "id": "Q040",
+      "original_id": "pets_1_040",
+      "gold_sparql": "select ?t1_lname where { ?t1 a <http://valuenet/ontop/student> . ?t2 a <http://valuenet/ontop/has_pet> . ?t2 <http://valuenet/ontop/ref-stu> ?t1 . ?t1 <http://valuenet/ontop/lname> ?t1_lname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pet_age> ?t3_pet_age . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . ?t3 a <http://valuenet/ontop/pets> . ?t2 <http://valuenet/ontop/ref-pet> ?t3 . ?t1 <http://valuenet/ontop/lname> ?t1_lname . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . ?t3 <http://valuenet/ontop/pet_age> ?t3_pet_age . ?t3 <http://valuenet/ontop/pettype> ?t3_pettype . FILTER(?t3_pet_age = 3 && ?t3_pettype = 'cat') . }",
+      "gold_answers": [
+        {
+          "t1_lname": "Smith"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the last name of the student who has a cat that is 3 years old?"
+    },
+    {
+      "id": "Q041",
+      "original_id": "pets_1_041",
+      "gold_sparql": "select (avg( ?t1_age) as ?aggregation_t1_age_47 ) where { ?t1 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . Filter not exists {{select ?t22_stuid where { ?t22 a <http://valuenet/ontop/student> . ?t23 a <http://valuenet/ontop/has_pet> . ?t23 <http://valuenet/ontop/ref-stu> ?t22 . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . } } FILTER (?t1_stuid in (?t22_stuid))} }",
+      "gold_answers": [
+        {
+          "aggregation_t1_age_47": "19.625"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the average age of students who do not have any pet ."
+    },
+    {
+      "id": "Q042",
+      "original_id": "pets_1_042",
+      "gold_sparql": "select (avg( ?t1_age) as ?aggregation_t1_age_47 ) where { ?t1 a <http://valuenet/ontop/student> . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/stuid> ?t1_stuid . Filter not exists {{select ?t22_stuid where { ?t22 a <http://valuenet/ontop/student> . ?t23 a <http://valuenet/ontop/has_pet> . ?t23 <http://valuenet/ontop/ref-stu> ?t22 . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . ?t22 <http://valuenet/ontop/stuid> ?t22_stuid . } } FILTER (?t1_stuid in (?t22_stuid))} }",
+      "gold_answers": [
+        {
+          "aggregation_t1_age_47": "19.625"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average age for all students who do not own any pets ?"
+    }
+  ]
+}

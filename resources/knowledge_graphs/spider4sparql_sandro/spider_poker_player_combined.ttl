@@ -1,0 +1,155 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/people#> .
+@prefix ns2: <http://valuenet/ontop/poker_player#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns1:birth_date a owl:DatatypeProperty ;
+    rdfs:domain :people ;
+    rdfs:range xsd:string .
+
+ns1:height a owl:DatatypeProperty ;
+    rdfs:domain :people ;
+    rdfs:range xsd:double .
+
+ns1:name a owl:DatatypeProperty ;
+    rdfs:domain :people ;
+    rdfs:range xsd:string .
+
+ns1:nationality a owl:DatatypeProperty ;
+    rdfs:domain :people ;
+    rdfs:range xsd:string .
+
+ns1:people_id a owl:DatatypeProperty ;
+    rdfs:domain :people ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/people/people_id=3> a :people ;
+    ns1:birth_date "April 17, 1987" ;
+    ns1:height 1.87e+02 ;
+    ns1:name "Roman Bragin" ;
+    ns1:nationality "Russia" ;
+    ns1:people_id 3 .
+
+<http://valuenet/ontop/people/people_id=4> a :people ;
+    ns1:birth_date "January 22, 1987" ;
+    ns1:height 1.93e+02 ;
+    ns1:name "Sergey Grankin" ;
+    ns1:nationality "Russia" ;
+    ns1:people_id 4 .
+
+ns2:best_finish a owl:DatatypeProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range xsd:double .
+
+ns2:earnings a owl:DatatypeProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range xsd:double .
+
+ns2:final_table_made a owl:DatatypeProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range xsd:double .
+
+ns2:money_rank a owl:DatatypeProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range xsd:double .
+
+ns2:people_id a owl:DatatypeProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range xsd:integer .
+
+ns2:poker_player_id a owl:DatatypeProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range xsd:integer .
+
+ns2:ref-people_id a owl:ObjectProperty ;
+    rdfs:domain :poker_player ;
+    rdfs:range :people .
+
+<http://valuenet/ontop/poker_player/poker_player_id=1> a :poker_player ;
+    ns2:best_finish 1e+00 ;
+    ns2:earnings 4.7609e+05 ;
+    ns2:final_table_made 4.2e+01 ;
+    ns2:money_rank 6.8e+01 ;
+    ns2:people_id 1 ;
+    ns2:poker_player_id 1 ;
+    ns2:ref-people_id <http://valuenet/ontop/people/people_id=1> .
+
+<http://valuenet/ontop/poker_player/poker_player_id=2> a :poker_player ;
+    ns2:best_finish 2e+00 ;
+    ns2:earnings 1.89233e+05 ;
+    ns2:final_table_made 1e+01 ;
+    ns2:money_rank 1.41e+02 ;
+    ns2:people_id 2 ;
+    ns2:poker_player_id 2 ;
+    ns2:ref-people_id <http://valuenet/ontop/people/people_id=2> .
+
+<http://valuenet/ontop/poker_player/poker_player_id=3> a :poker_player ;
+    ns2:best_finish 1e+00 ;
+    ns2:earnings 1.04871e+05 ;
+    ns2:final_table_made 2.1e+01 ;
+    ns2:money_rank 1.66e+02 ;
+    ns2:people_id 5 ;
+    ns2:poker_player_id 3 ;
+    ns2:ref-people_id <http://valuenet/ontop/people/people_id=5> .
+
+<http://valuenet/ontop/poker_player/poker_player_id=4> a :poker_player ;
+    ns2:best_finish 2e+00 ;
+    ns2:earnings 5.96462e+05 ;
+    ns2:final_table_made 1.9e+01 ;
+    ns2:money_rank 5.8e+01 ;
+    ns2:people_id 6 ;
+    ns2:poker_player_id 4 ;
+    ns2:ref-people_id <http://valuenet/ontop/people/people_id=6> .
+
+<http://valuenet/ontop/poker_player/poker_player_id=5> a :poker_player ;
+    ns2:best_finish 3e+00 ;
+    ns2:earnings 1.428e+05 ;
+    ns2:final_table_made 2.6e+01 ;
+    ns2:money_rank 1.54e+02 ;
+    ns2:people_id 7 ;
+    ns2:poker_player_id 5 ;
+    ns2:ref-people_id <http://valuenet/ontop/people/people_id=7> .
+
+<http://valuenet/ontop/people/people_id=1> a :people ;
+    ns1:birth_date "May 26, 1986" ;
+    ns1:height 2.07e+02 ;
+    ns1:name "Aleksey Ostapenko" ;
+    ns1:nationality "Russia" ;
+    ns1:people_id 1 .
+
+<http://valuenet/ontop/people/people_id=2> a :people ;
+    ns1:birth_date "August 16, 1982" ;
+    ns1:height 1.82e+02 ;
+    ns1:name "Teodor Salparov" ;
+    ns1:nationality "Bulgaria" ;
+    ns1:people_id 2 .
+
+<http://valuenet/ontop/people/people_id=5> a :people ;
+    ns1:birth_date "August 8, 1986" ;
+    ns1:height 1.96e+02 ;
+    ns1:name "Yevgeni Sivozhelez" ;
+    ns1:nationality "Russia" ;
+    ns1:people_id 5 .
+
+<http://valuenet/ontop/people/people_id=6> a :people ;
+    ns1:birth_date "July 14, 1983" ;
+    ns1:height 1.94e+02 ;
+    ns1:name "Maksim Botin" ;
+    ns1:nationality "Russia" ;
+    ns1:people_id 6 .
+
+<http://valuenet/ontop/people/people_id=7> a :people ;
+    ns1:birth_date "February 8, 1981" ;
+    ns1:height 2.05e+02 ;
+    ns1:name "Semen Poltavskiy" ;
+    ns1:nationality "Russia" ;
+    ns1:people_id 7 .
+
+:poker_player a owl:Class .
+
+:people a owl:Class .
+

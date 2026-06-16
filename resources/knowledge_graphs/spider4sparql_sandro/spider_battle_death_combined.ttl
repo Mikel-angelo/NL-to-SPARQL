@@ -1,0 +1,334 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/battle#> .
+@prefix ns2: <http://valuenet/ontop/death#> .
+@prefix ns3: <http://valuenet/ontop/ship#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns1:bulgarian_commander a owl:DatatypeProperty ;
+    rdfs:domain :battle ;
+    rdfs:range xsd:string .
+
+ns1:date a owl:DatatypeProperty ;
+    rdfs:domain :battle ;
+    rdfs:range xsd:string .
+
+ns1:id a owl:DatatypeProperty ;
+    rdfs:domain :battle ;
+    rdfs:range xsd:integer .
+
+ns1:latin_commander a owl:DatatypeProperty ;
+    rdfs:domain :battle ;
+    rdfs:range xsd:string .
+
+ns1:name a owl:DatatypeProperty ;
+    rdfs:domain :battle ;
+    rdfs:range xsd:string .
+
+ns1:result a owl:DatatypeProperty ;
+    rdfs:domain :battle ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/battle/id=1> a :battle ;
+    ns1:bulgarian_commander "Kaloyan" ;
+    ns1:date "14 April 1205" ;
+    ns1:id 1 ;
+    ns1:latin_commander "Baldwin I" ;
+    ns1:name "Battle of Adrianople" ;
+    ns1:result "Bulgarian victory" .
+
+<http://valuenet/ontop/battle/id=2> a :battle ;
+    ns1:bulgarian_commander "Kaloyan" ;
+    ns1:date "June 1205" ;
+    ns1:id 2 ;
+    ns1:latin_commander "Unknown" ;
+    ns1:name "Battle of Serres" ;
+    ns1:result "Bulgarian victory" .
+
+<http://valuenet/ontop/battle/id=3> a :battle ;
+    ns1:bulgarian_commander "Kaloyan" ;
+    ns1:date "31 January 1206" ;
+    ns1:id 3 ;
+    ns1:latin_commander "Thierry de Termond" ;
+    ns1:name "Battle of Rusion" ;
+    ns1:result "Bulgarian victory" .
+
+ns2:caused_by_ship_id a owl:DatatypeProperty ;
+    rdfs:domain :death ;
+    rdfs:range xsd:integer .
+
+ns2:id a owl:DatatypeProperty ;
+    rdfs:domain :death ;
+    rdfs:range xsd:integer .
+
+ns2:injured a owl:DatatypeProperty ;
+    rdfs:domain :death ;
+    rdfs:range xsd:integer .
+
+ns2:killed a owl:DatatypeProperty ;
+    rdfs:domain :death ;
+    rdfs:range xsd:integer .
+
+ns2:note a owl:DatatypeProperty ;
+    rdfs:domain :death ;
+    rdfs:range xsd:string .
+
+ns2:ref-caused_by_ship_id a owl:ObjectProperty ;
+    rdfs:domain :death ;
+    rdfs:range :ship .
+
+<http://valuenet/ontop/death/id=1> a :death ;
+    ns2:caused_by_ship_id 1 ;
+    ns2:id 1 ;
+    ns2:injured 0 ;
+    ns2:killed 8 ;
+    ns2:note "Dantewada, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=1> .
+
+<http://valuenet/ontop/death/id=10> a :death ;
+    ns2:caused_by_ship_id 3 ;
+    ns2:id 10 ;
+    ns2:injured 0 ;
+    ns2:killed 0 ;
+    ns2:note "WestMidnapore, West Bengal" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=3> .
+
+<http://valuenet/ontop/death/id=11> a :death ;
+    ns2:caused_by_ship_id 2 ;
+    ns2:id 11 ;
+    ns2:injured 0 ;
+    ns2:killed 0 ;
+    ns2:note "Bastar, Chattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=2> .
+
+<http://valuenet/ontop/death/id=12> a :death ;
+    ns2:caused_by_ship_id 5 ;
+    ns2:id 12 ;
+    ns2:injured 0 ;
+    ns2:killed 14 ;
+    ns2:note "Bokaro, Jharkhand" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=5> .
+
+<http://valuenet/ontop/death/id=13> a :death ;
+    ns2:caused_by_ship_id 3 ;
+    ns2:id 13 ;
+    ns2:injured 0 ;
+    ns2:killed 25 ;
+    ns2:note "Erraboru, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=3> .
+
+<http://valuenet/ontop/death/id=2> a :death ;
+    ns2:caused_by_ship_id 2 ;
+    ns2:id 2 ;
+    ns2:injured 0 ;
+    ns2:killed 3 ;
+    ns2:note "Dantewada, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=2> .
+
+<http://valuenet/ontop/death/id=3> a :death ;
+    ns2:caused_by_ship_id 3 ;
+    ns2:id 3 ;
+    ns2:injured 0 ;
+    ns2:killed 2 ;
+    ns2:note "East Champaran, Bihar" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=3> .
+
+<http://valuenet/ontop/death/id=4> a :death ;
+    ns2:caused_by_ship_id 4 ;
+    ns2:id 4 ;
+    ns2:injured 0 ;
+    ns2:killed 3 ;
+    ns2:note "Gajapati, Odisha" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=4> .
+
+<http://valuenet/ontop/death/id=5> a :death ;
+    ns2:caused_by_ship_id 4 ;
+    ns2:id 5 ;
+    ns2:injured 9 ;
+    ns2:killed 0 ;
+    ns2:note "Sundargarh, Odisha" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=4> .
+
+<http://valuenet/ontop/death/id=6> a :death ;
+    ns2:caused_by_ship_id 5 ;
+    ns2:id 6 ;
+    ns2:injured 0 ;
+    ns2:killed 0 ;
+    ns2:note "Dantewada, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=5> .
+
+<http://valuenet/ontop/death/id=7> a :death ;
+    ns2:caused_by_ship_id 5 ;
+    ns2:id 7 ;
+    ns2:injured 5 ;
+    ns2:killed 4 ;
+    ns2:note "Dantewada, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=5> .
+
+<http://valuenet/ontop/death/id=8> a :death ;
+    ns2:caused_by_ship_id 6 ;
+    ns2:id 8 ;
+    ns2:injured 0 ;
+    ns2:killed 0 ;
+    ns2:note "Kanker, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=6> .
+
+<http://valuenet/ontop/death/id=9> a :death ;
+    ns2:caused_by_ship_id 1 ;
+    ns2:id 9 ;
+    ns2:injured 0 ;
+    ns2:killed 29 ;
+    ns2:note "Dantewada, Chhattisgarh" ;
+    ns2:ref-caused_by_ship_id <http://valuenet/ontop/ship/id=1> .
+
+ns3:disposition_of_ship a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:string .
+
+ns3:id a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:integer .
+
+ns3:location a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:string .
+
+ns3:lost_in_battle a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:integer .
+
+ns3:name a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:string .
+
+ns3:ref-lost_in_battle a owl:ObjectProperty ;
+    rdfs:domain :ship ;
+    rdfs:range :battle .
+
+ns3:ship_type a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:string .
+
+ns3:tonnage a owl:DatatypeProperty ;
+    rdfs:domain :ship ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/ship/id=7> a :ship ;
+    ns3:disposition_of_ship "Captured" ;
+    ns3:id 7 ;
+    ns3:location "Mid-Atlantic" ;
+    ns3:lost_in_battle 8 ;
+    ns3:name "HMS Atalanta" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=8> ;
+    ns3:ship_type "8 gun Brig" ;
+    ns3:tonnage "225" .
+
+<http://valuenet/ontop/battle/id=4> a :battle ;
+    ns1:bulgarian_commander "Kaloyan" ;
+    ns1:date "February 1206" ;
+    ns1:id 4 ;
+    ns1:latin_commander "Unknown" ;
+    ns1:name "Battle of Rodosto" ;
+    ns1:result "Bulgarian victory" .
+
+<http://valuenet/ontop/battle/id=6> a :battle ;
+    ns1:bulgarian_commander "Boril" ;
+    ns1:date "June 1205" ;
+    ns1:id 6 ;
+    ns1:latin_commander "Henry I" ;
+    ns1:name "Battle of Boruy" ;
+    ns1:result "Bulgarian victory" .
+
+<http://valuenet/ontop/battle/id=7> a :battle ;
+    ns1:bulgarian_commander "Boril" ;
+    ns1:date "31 June 1208" ;
+    ns1:id 7 ;
+    ns1:latin_commander "Henry I" ;
+    ns1:name "Battle of Philippopolis" ;
+    ns1:result "Latin victory" .
+
+<http://valuenet/ontop/ship/id=6> a :ship ;
+    ns3:disposition_of_ship "Sank" ;
+    ns3:id 6 ;
+    ns3:location "English Channel" ;
+    ns3:lost_in_battle 4 ;
+    ns3:name "Bacchus" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=4> ;
+    ns3:ship_type "Brig" ;
+    ns3:tonnage "t" .
+
+<http://valuenet/ontop/battle/id=5> a :battle ;
+    ns1:bulgarian_commander "Unknown" ;
+    ns1:date "4 September 1207" ;
+    ns1:id 5 ;
+    ns1:latin_commander "Boniface of Montferrat" ;
+    ns1:name "Battle of Messinopolis" ;
+    ns1:result "Bulgarian victory" .
+
+<http://valuenet/ontop/battle/id=8> a :battle ;
+    ns1:bulgarian_commander "Ivan Asen II" ;
+    ns1:date "1235" ;
+    ns1:id 8 ;
+    ns1:latin_commander "John of Brienne" ;
+    ns1:name "Siege of Constantinople" ;
+    ns1:result "Two Year Truce" .
+
+<http://valuenet/ontop/ship/id=1> a :ship ;
+    ns3:disposition_of_ship "Captured" ;
+    ns3:id 1 ;
+    ns3:location "English Channel" ;
+    ns3:lost_in_battle 8 ;
+    ns3:name "Lettice" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=8> ;
+    ns3:ship_type "Brig" ;
+    ns3:tonnage "t" .
+
+<http://valuenet/ontop/ship/id=2> a :ship ;
+    ns3:disposition_of_ship "Captured" ;
+    ns3:id 2 ;
+    ns3:location "English Channel" ;
+    ns3:lost_in_battle 7 ;
+    ns3:name "Bon Accord" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=7> ;
+    ns3:ship_type "Brig" ;
+    ns3:tonnage "t" .
+
+<http://valuenet/ontop/ship/id=4> a :ship ;
+    ns3:disposition_of_ship "Wrecked" ;
+    ns3:id 4 ;
+    ns3:location "English Channel" ;
+    ns3:lost_in_battle 5 ;
+    ns3:name "HMS Avon" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=5> ;
+    ns3:ship_type "18-gun Brig" ;
+    ns3:tonnage "391" .
+
+<http://valuenet/ontop/ship/id=3> a :ship ;
+    ns3:disposition_of_ship "Captured" ;
+    ns3:id 3 ;
+    ns3:location "English Channel" ;
+    ns3:lost_in_battle 6 ;
+    ns3:name "Mary" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=6> ;
+    ns3:ship_type "Brig" ;
+    ns3:tonnage "t" .
+
+<http://valuenet/ontop/ship/id=5> a :ship ;
+    ns3:disposition_of_ship "Scuttled" ;
+    ns3:id 5 ;
+    ns3:location "SW Approaches" ;
+    ns3:lost_in_battle 5 ;
+    ns3:name "Three Brothers" ;
+    ns3:ref-lost_in_battle <http://valuenet/ontop/battle/id=5> ;
+    ns3:ship_type "Brig" ;
+    ns3:tonnage "t" .
+
+:battle a owl:Class .
+
+:ship a owl:Class .
+
+:death a owl:Class .
+

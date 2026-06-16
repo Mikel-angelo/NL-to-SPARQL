@@ -1,0 +1,4601 @@
+{
+  "dataset_name": "spider_car_1_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for car_1. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/car_1.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "car_1_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/continents> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "5"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many continents are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "car_1_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/continents> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "5"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of continents?"
+    },
+    {
+      "id": "Q003",
+      "original_id": "car_1_003",
+      "gold_sparql": "select ?t1_contid ?t1_continent (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/continents> . ?t2 a <http://valuenet/ontop/countries> . ?t2 <http://valuenet/ontop/ref-continent> ?t1 . ?t1 <http://valuenet/ontop/contid> ?t1_contid . ?t1 <http://valuenet/ontop/continents-continent> ?t1_continent . } group by ?t1_contid ?t1_continent",
+      "gold_answers": [
+        {
+          "t1_contid": "5",
+          "t1_continent": "australia",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_contid": "3",
+          "t1_continent": "asia",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_contid": "1",
+          "t1_continent": "america",
+          "aggregation_all": "3"
+        },
+        {
+          "t1_contid": "4",
+          "t1_continent": "africa",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_contid": "2",
+          "t1_continent": "europe",
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many countries does each continent have? List the continent id, continent name and the number of countries."
+    },
+    {
+      "id": "Q004",
+      "original_id": "car_1_004",
+      "gold_sparql": "select ?t1_contid ?t1_continent (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/continents> . ?t2 a <http://valuenet/ontop/countries> . ?t2 <http://valuenet/ontop/ref-continent> ?t1 . ?t1 <http://valuenet/ontop/contid> ?t1_contid . ?t1 <http://valuenet/ontop/continents-continent> ?t1_continent . } group by ?t1_contid ?t1_continent",
+      "gold_answers": [
+        {
+          "t1_contid": "5",
+          "t1_continent": "australia",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_contid": "3",
+          "t1_continent": "asia",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_contid": "1",
+          "t1_continent": "america",
+          "aggregation_all": "3"
+        },
+        {
+          "t1_contid": "4",
+          "t1_continent": "africa",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_contid": "2",
+          "t1_continent": "europe",
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "For each continent, list its id, name, and how many countries it has?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "car_1_005",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/countries> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "15"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many countries are listed?"
+    },
+    {
+      "id": "Q006",
+      "original_id": "car_1_006",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/countries> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "15"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many countries exist?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "car_1_007",
+      "gold_sparql": "SELECT ?T1_fullname ?T1_id (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/car_makers> . ?T2 a <http://valuenet/ontop/model_list> . ?T2 <http://valuenet/ontop/ref-maker> ?T1 . ?T1 <http://valuenet/ontop/fullname> ?T1_fullname . ?T1 <http://valuenet/ontop/id> ?T1_id . } GROUP BY ?T1_fullname ?T1_id",
+      "gold_answers": [
+        {
+          "T1_fullname": "Triumph",
+          "T1_id": "20",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Kia Motors",
+          "T1_id": "22",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Volkswagen",
+          "T1_id": "2",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Citroen",
+          "T1_id": "7",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Toyota",
+          "T1_id": "19",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Subaru",
+          "T1_id": "18",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Ford Motor Company",
+          "T1_id": "5",
+          "aggregation_all": "3"
+        },
+        {
+          "T1_fullname": "Datsun",
+          "T1_id": "10",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Renault",
+          "T1_id": "16",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "BMW",
+          "T1_id": "3",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Fiat",
+          "T1_id": "9",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Honda",
+          "T1_id": "11",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Peugeaut",
+          "T1_id": "15",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Hyundai",
+          "T1_id": "23",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Opel",
+          "T1_id": "14",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Chrysler",
+          "T1_id": "6",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_fullname": "General Motors",
+          "T1_id": "4",
+          "aggregation_all": "5"
+        },
+        {
+          "T1_fullname": "Daimler Benz",
+          "T1_id": "13",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Volvo",
+          "T1_id": "21",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Nissan Motors",
+          "T1_id": "8",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Mazda",
+          "T1_id": "12",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Saab",
+          "T1_id": "17",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "American Motor Company",
+          "T1_id": "1",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many models does each car maker produce? List maker full name, id and the number."
+    },
+    {
+      "id": "Q008",
+      "original_id": "car_1_008",
+      "gold_sparql": "SELECT ?T1_fullname ?T1_id (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/car_makers> . ?T2 a <http://valuenet/ontop/model_list> . ?T2 <http://valuenet/ontop/ref-maker> ?T1 . ?T1 <http://valuenet/ontop/fullname> ?T1_fullname . ?T1 <http://valuenet/ontop/id> ?T1_id . } GROUP BY ?T1_fullname ?T1_id",
+      "gold_answers": [
+        {
+          "T1_fullname": "Triumph",
+          "T1_id": "20",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Kia Motors",
+          "T1_id": "22",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Volkswagen",
+          "T1_id": "2",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Citroen",
+          "T1_id": "7",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Toyota",
+          "T1_id": "19",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Subaru",
+          "T1_id": "18",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Ford Motor Company",
+          "T1_id": "5",
+          "aggregation_all": "3"
+        },
+        {
+          "T1_fullname": "Datsun",
+          "T1_id": "10",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Renault",
+          "T1_id": "16",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "BMW",
+          "T1_id": "3",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Fiat",
+          "T1_id": "9",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Honda",
+          "T1_id": "11",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Peugeaut",
+          "T1_id": "15",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Hyundai",
+          "T1_id": "23",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Opel",
+          "T1_id": "14",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Chrysler",
+          "T1_id": "6",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_fullname": "General Motors",
+          "T1_id": "4",
+          "aggregation_all": "5"
+        },
+        {
+          "T1_fullname": "Daimler Benz",
+          "T1_id": "13",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Volvo",
+          "T1_id": "21",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Nissan Motors",
+          "T1_id": "8",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_fullname": "Mazda",
+          "T1_id": "12",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "Saab",
+          "T1_id": "17",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_fullname": "American Motor Company",
+          "T1_id": "1",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the full name of each car maker, along with its id and how many models it produces?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "car_1_009",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/horsepower> ?t2_horsepower . } order by asc (?t2_horsepower) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "ford"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which model of the car has the minimum horsepower?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "car_1_010",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/horsepower> ?t2_horsepower . } order by asc (?t2_horsepower) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "ford"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the model of the car with the smallest amount of horsepower?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "car_1_011",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/weight> ?t2_weight . FILTER(?t2_weight < ?aggregation_t23_weight_100) . {select (avg( ?t23_weight) as ?aggregation_t23_weight_100 ) where { ?t23 a <http://valuenet/ontop/cars_data> . ?t23 <http://valuenet/ontop/weight> ?t23_weight . } } }",
+      "gold_answers": [
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "nissan"
+        },
+        {
+          "t1_model": "triumph"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "bmw"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "capri"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "bmw"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "dodge"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the model of the car whose weight is below the average weight."
+    },
+    {
+      "id": "Q012",
+      "original_id": "car_1_012",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/weight> ?t2_weight . FILTER(?t2_weight < ?aggregation_t23_weight_100) . {select (avg( ?t23_weight) as ?aggregation_t23_weight_100 ) where { ?t23 a <http://valuenet/ontop/cars_data> . ?t23 <http://valuenet/ontop/weight> ?t23_weight . } } }",
+      "gold_answers": [
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "nissan"
+        },
+        {
+          "t1_model": "triumph"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "bmw"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "capri"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "bmw"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "subaru"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "dodge"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the model for the car with a weight smaller than the average?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "car_1_013",
+      "gold_sparql": "SELECT DISTINCT ?T1_maker WHERE { ?T1 a <http://valuenet/ontop/car_makers> . ?T13 a <http://valuenet/ontop/model_list> . ?T13 <http://valuenet/ontop/ref-maker> ?T1 . ?T1 <http://valuenet/ontop/car_makers-maker> ?T1_maker . ?T2 <http://valuenet/ontop/year> ?T2_year . ?T14 a <http://valuenet/ontop/car_names> . ?T14 <http://valuenet/ontop/ref-model> ?T13 . ?T1 <http://valuenet/ontop/car_makers-maker> ?T1_maker . ?T2 <http://valuenet/ontop/year> ?T2_year . ?T2 a <http://valuenet/ontop/cars_data> . ?T2 <http://valuenet/ontop/ref> ?T14 . ?T1 <http://valuenet/ontop/car_makers-maker> ?T1_maker . ?T2 <http://valuenet/ontop/year> ?T2_year . FILTER(?T2_year = 1970) . }",
+      "gold_answers": [
+        {
+          "T1_maker": "chrysler"
+        },
+        {
+          "T1_maker": "gm"
+        },
+        {
+          "T1_maker": "peugeaut"
+        },
+        {
+          "T1_maker": "amc"
+        },
+        {
+          "T1_maker": "volkswagen"
+        },
+        {
+          "T1_maker": "ford"
+        },
+        {
+          "T1_maker": "nissan"
+        },
+        {
+          "T1_maker": "toyota"
+        },
+        {
+          "T1_maker": "saab"
+        },
+        {
+          "T1_maker": "datsun"
+        },
+        {
+          "T1_maker": "bmw"
+        },
+        {
+          "T1_maker": "citroen"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the name of the makers that produced some cars in the year of 1970?"
+    },
+    {
+      "id": "Q014",
+      "original_id": "car_1_014",
+      "gold_sparql": "SELECT DISTINCT ?T1_maker WHERE { ?T1 a <http://valuenet/ontop/car_makers> . ?T13 a <http://valuenet/ontop/model_list> . ?T13 <http://valuenet/ontop/ref-maker> ?T1 . ?T1 <http://valuenet/ontop/car_makers-maker> ?T1_maker . ?T2 <http://valuenet/ontop/year> ?T2_year . ?T14 a <http://valuenet/ontop/car_names> . ?T14 <http://valuenet/ontop/ref-model> ?T13 . ?T1 <http://valuenet/ontop/car_makers-maker> ?T1_maker . ?T2 <http://valuenet/ontop/year> ?T2_year . ?T2 a <http://valuenet/ontop/cars_data> . ?T2 <http://valuenet/ontop/ref> ?T14 . ?T1 <http://valuenet/ontop/car_makers-maker> ?T1_maker . ?T2 <http://valuenet/ontop/year> ?T2_year . FILTER(?T2_year = 1970) . }",
+      "gold_answers": [
+        {
+          "T1_maker": "chrysler"
+        },
+        {
+          "T1_maker": "gm"
+        },
+        {
+          "T1_maker": "peugeaut"
+        },
+        {
+          "T1_maker": "amc"
+        },
+        {
+          "T1_maker": "volkswagen"
+        },
+        {
+          "T1_maker": "ford"
+        },
+        {
+          "T1_maker": "nissan"
+        },
+        {
+          "T1_maker": "toyota"
+        },
+        {
+          "T1_maker": "saab"
+        },
+        {
+          "T1_maker": "datsun"
+        },
+        {
+          "T1_maker": "bmw"
+        },
+        {
+          "T1_maker": "citroen"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name of the different car makers who produced a car in 1970?"
+    },
+    {
+      "id": "Q015",
+      "original_id": "car_1_015",
+      "gold_sparql": "select ?t1_make ?t2_year where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/make> ?t1_make . ?t2 <http://valuenet/ontop/year> ?t2_year . ?t2 <http://valuenet/ontop/year> ?t2_year . FILTER(?t2_year = ?aggregation_t23_year_172) . {select (min( ?t23_year) as ?aggregation_t23_year_172 ) where { ?t23 a <http://valuenet/ontop/cars_data> . ?t23 <http://valuenet/ontop/year> ?t23_year . } } }",
+      "gold_answers": [
+        {
+          "t1_make": "plymouth satellite (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet monte carlo",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth duster",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth cuda 340",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc ambassador dpl",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "peugeot 504",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc rebel sst (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford mustang boss 302",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "citroen ds-21 pallas",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "toyota corona mark ii",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford torino",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "buick skylark 320",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth fury iii",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc rebel sst",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "volkswagen 1131 deluxe sedan",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet chevelle malibu",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford galaxie 500",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc gremlin",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "audi 100 ls",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet chevelle concours (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford maverick",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "saab 99e",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc hornet",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevy c20",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet impala",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "bmw 2002",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford torino (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "dodge challenger se",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford f250",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "pontiac catalina",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "dodge d200",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "datsun pl510",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "buick estate wagon (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth satellite",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "hi 1200d",
+          "t2_year": "1970"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the make and production time of the cars that were produced in the earliest year?"
+    },
+    {
+      "id": "Q016",
+      "original_id": "car_1_016",
+      "gold_sparql": "select ?t1_make ?t2_year where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/make> ?t1_make . ?t2 <http://valuenet/ontop/year> ?t2_year . ?t2 <http://valuenet/ontop/year> ?t2_year . FILTER(?t2_year = ?aggregation_t23_year_172) . {select (min( ?t23_year) as ?aggregation_t23_year_172 ) where { ?t23 a <http://valuenet/ontop/cars_data> . ?t23 <http://valuenet/ontop/year> ?t23_year . } } }",
+      "gold_answers": [
+        {
+          "t1_make": "plymouth satellite (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet monte carlo",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth duster",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth cuda 340",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc ambassador dpl",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "peugeot 504",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc rebel sst (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford mustang boss 302",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "citroen ds-21 pallas",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "toyota corona mark ii",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford torino",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "buick skylark 320",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth fury iii",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc rebel sst",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "volkswagen 1131 deluxe sedan",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet chevelle malibu",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford galaxie 500",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc gremlin",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "audi 100 ls",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet chevelle concours (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford maverick",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "saab 99e",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "amc hornet",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevy c20",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "chevrolet impala",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "bmw 2002",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford torino (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "dodge challenger se",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "ford f250",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "pontiac catalina",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "dodge d200",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "datsun pl510",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "buick estate wagon (sw)",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "plymouth satellite",
+          "t2_year": "1970"
+        },
+        {
+          "t1_make": "hi 1200d",
+          "t2_year": "1970"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maker of the carr produced in the earliest year and what year was it?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "car_1_017",
+      "gold_sparql": "select distinct ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_names> . ?t2 <http://valuenet/ontop/ref-model> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/year> ?t3_year . ?t3 a <http://valuenet/ontop/cars_data> . ?t3 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/year> ?t3_year . FILTER(?t3_year > 1980) . }",
+      "gold_answers": [
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "nissan"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "subaru"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which distinct car models are the produced after 1980?"
+    },
+    {
+      "id": "Q018",
+      "original_id": "car_1_018",
+      "gold_sparql": "select distinct ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_names> . ?t2 <http://valuenet/ontop/ref-model> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/year> ?t3_year . ?t3 a <http://valuenet/ontop/cars_data> . ?t3 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/year> ?t3_year . FILTER(?t3_year > 1980) . }",
+      "gold_answers": [
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "nissan"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "subaru"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the different models for the cards produced after 1980?"
+    },
+    {
+      "id": "Q019",
+      "original_id": "car_1_019",
+      "gold_sparql": "select ?t1_continent (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/continents> . ?t13 a <http://valuenet/ontop/countries> . ?t13 <http://valuenet/ontop/ref-continent> ?t1 . ?t1 <http://valuenet/ontop/continents-continent> ?t1_continent . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t13 . ?t1 <http://valuenet/ontop/continents-continent> ?t1_continent . } group by ?t1_continent",
+      "gold_answers": [
+        {
+          "t1_continent": "asia",
+          "aggregation_all": "8"
+        },
+        {
+          "t1_continent": "america",
+          "aggregation_all": "4"
+        },
+        {
+          "t1_continent": "europe",
+          "aggregation_all": "11"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many car makers are there in each continents? List the continent name and the count."
+    },
+    {
+      "id": "Q020",
+      "original_id": "car_1_020",
+      "gold_sparql": "select ?t1_continent (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/continents> . ?t13 a <http://valuenet/ontop/countries> . ?t13 <http://valuenet/ontop/ref-continent> ?t1 . ?t1 <http://valuenet/ontop/continents-continent> ?t1_continent . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t13 . ?t1 <http://valuenet/ontop/continents-continent> ?t1_continent . } group by ?t1_continent",
+      "gold_answers": [
+        {
+          "t1_continent": "asia",
+          "aggregation_all": "8"
+        },
+        {
+          "t1_continent": "america",
+          "aggregation_all": "4"
+        },
+        {
+          "t1_continent": "europe",
+          "aggregation_all": "11"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the name of each continent and how many car makers are there in each one?"
+    },
+    {
+      "id": "Q021",
+      "original_id": "car_1_021",
+      "gold_sparql": "select ?t1_countryname (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/countries> . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . } group by ?t1_countryname order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_countryname": "japan",
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which of the countries has the most car makers? List the country name."
+    },
+    {
+      "id": "Q022",
+      "original_id": "car_1_022",
+      "gold_sparql": "select ?t1_countryname (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/countries> . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . } group by ?t1_countryname order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_countryname": "japan",
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the name of the country with the most car makers?"
+    },
+    {
+      "id": "Q023",
+      "original_id": "car_1_023",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) ?T2_fullname WHERE { ?T1 a <http://valuenet/ontop/model_list> . ?T2 a <http://valuenet/ontop/car_makers> . ?T1 <http://valuenet/ontop/ref-maker> ?T2 . ?T2 <http://valuenet/ontop/fullname> ?T2_fullname . } GROUP BY ?T2_fullname",
+      "gold_answers": [
+        {
+          "aggregation_all": "3",
+          "T2_fullname": "Ford Motor Company"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Kia Motors"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Fiat"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Datsun"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Nissan Motors"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Citroen"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Triumph"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Volkswagen"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Subaru"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Peugeaut"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Opel"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Toyota"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Renault"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Daimler Benz"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Honda"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Hyundai"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "American Motor Company"
+        },
+        {
+          "aggregation_all": "5",
+          "T2_fullname": "General Motors"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "BMW"
+        },
+        {
+          "aggregation_all": "4",
+          "T2_fullname": "Chrysler"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Mazda"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Saab"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Volvo"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many car models are produced by each maker ? Only list the count and the maker full name ."
+    },
+    {
+      "id": "Q024",
+      "original_id": "car_1_024",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) ?T2_fullname WHERE { ?T1 a <http://valuenet/ontop/model_list> . ?T2 a <http://valuenet/ontop/car_makers> . ?T1 <http://valuenet/ontop/ref-maker> ?T2 . ?T2 <http://valuenet/ontop/fullname> ?T2_fullname . } GROUP BY ?T2_fullname",
+      "gold_answers": [
+        {
+          "aggregation_all": "3",
+          "T2_fullname": "Ford Motor Company"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Kia Motors"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Fiat"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Datsun"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Nissan Motors"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Citroen"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Triumph"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Volkswagen"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Subaru"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Peugeaut"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Opel"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Toyota"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Renault"
+        },
+        {
+          "aggregation_all": "2",
+          "T2_fullname": "Daimler Benz"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Honda"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Hyundai"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "American Motor Company"
+        },
+        {
+          "aggregation_all": "5",
+          "T2_fullname": "General Motors"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "BMW"
+        },
+        {
+          "aggregation_all": "4",
+          "T2_fullname": "Chrysler"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Mazda"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Saab"
+        },
+        {
+          "aggregation_all": "1",
+          "T2_fullname": "Volvo"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of car models that are produced by each maker and what is the id and full name of each maker?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "car_1_025",
+      "gold_sparql": "select ?t1_accelerate where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . ?t2 <http://valuenet/ontop/make> ?t2_make . FILTER(?t2_make = 'amc hornet sportabout (sw)') . }",
+      "gold_answers": [
+        {
+          "t1_accelerate": "13.5"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the accelerate of the car make amc hornet sportabout (sw)?"
+    },
+    {
+      "id": "Q026",
+      "original_id": "car_1_026",
+      "gold_sparql": "select ?t1_accelerate where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . ?t2 <http://valuenet/ontop/make> ?t2_make . FILTER(?t2_make = 'amc hornet sportabout (sw)') . }",
+      "gold_answers": [
+        {
+          "t1_accelerate": "13.5"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "How much does the car accelerate that makes amc hornet sportabout (sw)?"
+    },
+    {
+      "id": "Q027",
+      "original_id": "car_1_027",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/car_makers> . ?t2 a <http://valuenet/ontop/countries> . ?t1 <http://valuenet/ontop/ref-country> ?t2 . ?t2 <http://valuenet/ontop/countryname> ?t2_countryname . FILTER(?t2_countryname = 'france') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many car makers are there in france?"
+    },
+    {
+      "id": "Q028",
+      "original_id": "car_1_028",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/car_makers> . ?t2 a <http://valuenet/ontop/countries> . ?t1 <http://valuenet/ontop/ref-country> ?t2 . ?t2 <http://valuenet/ontop/countryname> ?t2_countryname . FILTER(?t2_countryname = 'france') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of makers of care in France?"
+    },
+    {
+      "id": "Q029",
+      "original_id": "car_1_029",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t2 . ?t1 <http://valuenet/ontop/model_list-maker> ?t1_maker . ?t3 <http://valuenet/ontop/countryname> ?t3_countryname . ?t3 a <http://valuenet/ontop/countries> . ?t2 <http://valuenet/ontop/ref-country> ?t3 . ?t1 <http://valuenet/ontop/model_list-maker> ?t1_maker . ?t3 <http://valuenet/ontop/countryname> ?t3_countryname . FILTER(?t3_countryname = 'usa') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "13"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many car models are produced in the usa?"
+    },
+    {
+      "id": "Q030",
+      "original_id": "car_1_030",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t2 . ?t1 <http://valuenet/ontop/model_list-maker> ?t1_maker . ?t3 <http://valuenet/ontop/countryname> ?t3_countryname . ?t3 a <http://valuenet/ontop/countries> . ?t2 <http://valuenet/ontop/ref-country> ?t3 . ?t1 <http://valuenet/ontop/model_list-maker> ?t1_maker . ?t3 <http://valuenet/ontop/countryname> ?t3_countryname . FILTER(?t3_countryname = 'usa') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "13"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the count of the car models produced in the United States?"
+    },
+    {
+      "id": "Q031",
+      "original_id": "car_1_031",
+      "gold_sparql": "select (avg( ?t1_mpg) as ?aggregation_t1_mpg_144 ) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/mpg> ?t1_mpg . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders = 4) . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_mpg_144": "28.862318794202898550724638"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average miles per gallon(mpg) of the cars with 4 cylinders?"
+    },
+    {
+      "id": "Q032",
+      "original_id": "car_1_032",
+      "gold_sparql": "select (avg( ?t1_mpg) as ?aggregation_t1_mpg_144 ) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/mpg> ?t1_mpg . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders = 4) . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_mpg_144": "28.862318794202898550724638"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average miles per gallon of all the cards with 4 cylinders?"
+    },
+    {
+      "id": "Q033",
+      "original_id": "car_1_033",
+      "gold_sparql": "select ?t1_weight where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_cylinders = 4 && ?t1_year = 1974) . } order by asc (?t1_weight) limit 1",
+      "gold_answers": [
+        {
+          "t1_weight": "1649"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the smallest weight of the car produced with 8 cylinders on 1974 ?"
+    },
+    {
+      "id": "Q034",
+      "original_id": "car_1_034",
+      "gold_sparql": "select ?t1_weight where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_cylinders = 4 && ?t1_year = 1974) . } order by asc (?t1_weight) limit 1",
+      "gold_answers": [
+        {
+          "t1_weight": "1649"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the minimum weight of the car with 8 cylinders produced in 1974 ?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "car_1_035",
+      "gold_sparql": "select ?t1_maker ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t1 <http://valuenet/ontop/model_list-maker> ?t1_maker . ?t1 <http://valuenet/ontop/model> ?t1_model . }",
+      "gold_answers": [
+        {
+          "t1_maker": "5",
+          "t1_model": "ford"
+        },
+        {
+          "t1_maker": "14",
+          "t1_model": "opel"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "dodge"
+        },
+        {
+          "t1_maker": "9",
+          "t1_model": "fiat"
+        },
+        {
+          "t1_maker": "8",
+          "t1_model": "datsun"
+        },
+        {
+          "t1_maker": "13",
+          "t1_model": "mercedes"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_maker": "15",
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "buick"
+        },
+        {
+          "t1_maker": "11",
+          "t1_model": "honda"
+        },
+        {
+          "t1_maker": "5",
+          "t1_model": "mercury"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_maker": "12",
+          "t1_model": "mazda"
+        },
+        {
+          "t1_maker": "1",
+          "t1_model": "amc"
+        },
+        {
+          "t1_maker": "2",
+          "t1_model": "audi"
+        },
+        {
+          "t1_maker": "19",
+          "t1_model": "toyota"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_maker": "2",
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_maker": "8",
+          "t1_model": "nissan"
+        },
+        {
+          "t1_maker": "20",
+          "t1_model": "triumph"
+        },
+        {
+          "t1_maker": "21",
+          "t1_model": "volvo"
+        },
+        {
+          "t1_maker": "17",
+          "t1_model": "saab"
+        },
+        {
+          "t1_maker": "16",
+          "t1_model": "renault"
+        },
+        {
+          "t1_maker": "7",
+          "t1_model": "citroen"
+        },
+        {
+          "t1_maker": "3",
+          "t1_model": "bmw"
+        },
+        {
+          "t1_maker": "23",
+          "t1_model": "hyundai"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "cadillac"
+        },
+        {
+          "t1_maker": "19",
+          "t1_model": "scion"
+        },
+        {
+          "t1_maker": "13",
+          "t1_model": "mercedes-benz"
+        },
+        {
+          "t1_maker": "18",
+          "t1_model": "subaru"
+        },
+        {
+          "t1_maker": "5",
+          "t1_model": "capri"
+        },
+        {
+          "t1_maker": "10",
+          "t1_model": "hi"
+        },
+        {
+          "t1_maker": "22",
+          "t1_model": "kia"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "jeep"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are all the makers and models?"
+    },
+    {
+      "id": "Q036",
+      "original_id": "car_1_036",
+      "gold_sparql": "select ?t1_maker ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t1 <http://valuenet/ontop/model_list-maker> ?t1_maker . ?t1 <http://valuenet/ontop/model> ?t1_model . }",
+      "gold_answers": [
+        {
+          "t1_maker": "5",
+          "t1_model": "ford"
+        },
+        {
+          "t1_maker": "14",
+          "t1_model": "opel"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "dodge"
+        },
+        {
+          "t1_maker": "9",
+          "t1_model": "fiat"
+        },
+        {
+          "t1_maker": "8",
+          "t1_model": "datsun"
+        },
+        {
+          "t1_maker": "13",
+          "t1_model": "mercedes"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_maker": "15",
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "buick"
+        },
+        {
+          "t1_maker": "11",
+          "t1_model": "honda"
+        },
+        {
+          "t1_maker": "5",
+          "t1_model": "mercury"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_maker": "12",
+          "t1_model": "mazda"
+        },
+        {
+          "t1_maker": "1",
+          "t1_model": "amc"
+        },
+        {
+          "t1_maker": "2",
+          "t1_model": "audi"
+        },
+        {
+          "t1_maker": "19",
+          "t1_model": "toyota"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_maker": "2",
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_maker": "8",
+          "t1_model": "nissan"
+        },
+        {
+          "t1_maker": "20",
+          "t1_model": "triumph"
+        },
+        {
+          "t1_maker": "21",
+          "t1_model": "volvo"
+        },
+        {
+          "t1_maker": "17",
+          "t1_model": "saab"
+        },
+        {
+          "t1_maker": "16",
+          "t1_model": "renault"
+        },
+        {
+          "t1_maker": "7",
+          "t1_model": "citroen"
+        },
+        {
+          "t1_maker": "3",
+          "t1_model": "bmw"
+        },
+        {
+          "t1_maker": "23",
+          "t1_model": "hyundai"
+        },
+        {
+          "t1_maker": "4",
+          "t1_model": "cadillac"
+        },
+        {
+          "t1_maker": "19",
+          "t1_model": "scion"
+        },
+        {
+          "t1_maker": "13",
+          "t1_model": "mercedes-benz"
+        },
+        {
+          "t1_maker": "18",
+          "t1_model": "subaru"
+        },
+        {
+          "t1_maker": "5",
+          "t1_model": "capri"
+        },
+        {
+          "t1_maker": "10",
+          "t1_model": "hi"
+        },
+        {
+          "t1_maker": "22",
+          "t1_model": "kia"
+        },
+        {
+          "t1_maker": "6",
+          "t1_model": "jeep"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the makers and models?"
+    },
+    {
+      "id": "Q037",
+      "original_id": "car_1_037",
+      "gold_sparql": "select ?t1_countryname ?t1_countryid where { ?t1 a <http://valuenet/ontop/countries> . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . } group by ?t1_countryname ?t1_countryid having(count( *) >= 1)",
+      "gold_answers": [
+        {
+          "t1_countryname": "uk",
+          "t1_countryid": "7"
+        },
+        {
+          "t1_countryname": "italy",
+          "t1_countryid": "5"
+        },
+        {
+          "t1_countryname": "usa",
+          "t1_countryid": "1"
+        },
+        {
+          "t1_countryname": "korea",
+          "t1_countryid": "8"
+        },
+        {
+          "t1_countryname": "france",
+          "t1_countryid": "3"
+        },
+        {
+          "t1_countryname": "germany",
+          "t1_countryid": "2"
+        },
+        {
+          "t1_countryname": "japan",
+          "t1_countryid": "4"
+        },
+        {
+          "t1_countryname": "sweden",
+          "t1_countryid": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the countries having at least one car maker? List name and id."
+    },
+    {
+      "id": "Q038",
+      "original_id": "car_1_038",
+      "gold_sparql": "select ?t1_countryname ?t1_countryid where { ?t1 a <http://valuenet/ontop/countries> . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . } group by ?t1_countryname ?t1_countryid having(count( *) >= 1)",
+      "gold_answers": [
+        {
+          "t1_countryname": "uk",
+          "t1_countryid": "7"
+        },
+        {
+          "t1_countryname": "italy",
+          "t1_countryid": "5"
+        },
+        {
+          "t1_countryname": "usa",
+          "t1_countryid": "1"
+        },
+        {
+          "t1_countryname": "korea",
+          "t1_countryid": "8"
+        },
+        {
+          "t1_countryname": "france",
+          "t1_countryid": "3"
+        },
+        {
+          "t1_countryname": "germany",
+          "t1_countryid": "2"
+        },
+        {
+          "t1_countryname": "japan",
+          "t1_countryid": "4"
+        },
+        {
+          "t1_countryname": "sweden",
+          "t1_countryid": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names and ids of all countries with at least one car maker?"
+    },
+    {
+      "id": "Q039",
+      "original_id": "car_1_039",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . FILTER(?t1_horsepower > 150) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of the cars with horsepower more than 150?"
+    },
+    {
+      "id": "Q040",
+      "original_id": "car_1_040",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . FILTER(?t1_horsepower > 150) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of cars with a horsepower greater than 150?"
+    },
+    {
+      "id": "Q041",
+      "original_id": "car_1_041",
+      "gold_sparql": "select (avg( ?t1_weight) as ?aggregation_t1_weight_5 ) ?t1_year where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/year> ?t1_year . } group by ?t1_year",
+      "gold_answers": [
+        {
+          "aggregation_t1_weight_5": "3055.344827586206896551724138",
+          "t1_year": "1979"
+        },
+        {
+          "aggregation_t1_weight_5": "2997.357142857142857142857143",
+          "t1_year": "1977"
+        },
+        {
+          "aggregation_t1_weight_5": "2861.805555555555555555555556",
+          "t1_year": "1978"
+        },
+        {
+          "aggregation_t1_weight_5": "2960.344827586206896551724138",
+          "t1_year": "1971"
+        },
+        {
+          "aggregation_t1_weight_5": "2453.548387096774193548387097",
+          "t1_year": "1982"
+        },
+        {
+          "aggregation_t1_weight_5": "3237.714285714285714285714286",
+          "t1_year": "1972"
+        },
+        {
+          "aggregation_t1_weight_5": "2436.655172413793103448275862",
+          "t1_year": "1980"
+        },
+        {
+          "aggregation_t1_weight_5": "2532.166666666666666666666667",
+          "t1_year": "1981"
+        },
+        {
+          "aggregation_t1_weight_5": "3441.314285714285714285714286",
+          "t1_year": "1970"
+        },
+        {
+          "aggregation_t1_weight_5": "3176.8",
+          "t1_year": "1975"
+        },
+        {
+          "aggregation_t1_weight_5": "3078.735294117647058823529412",
+          "t1_year": "1976"
+        },
+        {
+          "aggregation_t1_weight_5": "3419.025",
+          "t1_year": "1973"
+        },
+        {
+          "aggregation_t1_weight_5": "2877.925925925925925925925926",
+          "t1_year": "1974"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average weight of cars each year?"
+    },
+    {
+      "id": "Q042",
+      "original_id": "car_1_042",
+      "gold_sparql": "select (avg( ?t1_weight) as ?aggregation_t1_weight_5 ) ?t1_year where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/year> ?t1_year . } group by ?t1_year",
+      "gold_answers": [
+        {
+          "aggregation_t1_weight_5": "3055.344827586206896551724138",
+          "t1_year": "1979"
+        },
+        {
+          "aggregation_t1_weight_5": "2997.357142857142857142857143",
+          "t1_year": "1977"
+        },
+        {
+          "aggregation_t1_weight_5": "2861.805555555555555555555556",
+          "t1_year": "1978"
+        },
+        {
+          "aggregation_t1_weight_5": "2960.344827586206896551724138",
+          "t1_year": "1971"
+        },
+        {
+          "aggregation_t1_weight_5": "2453.548387096774193548387097",
+          "t1_year": "1982"
+        },
+        {
+          "aggregation_t1_weight_5": "3237.714285714285714285714286",
+          "t1_year": "1972"
+        },
+        {
+          "aggregation_t1_weight_5": "2436.655172413793103448275862",
+          "t1_year": "1980"
+        },
+        {
+          "aggregation_t1_weight_5": "2532.166666666666666666666667",
+          "t1_year": "1981"
+        },
+        {
+          "aggregation_t1_weight_5": "3441.314285714285714285714286",
+          "t1_year": "1970"
+        },
+        {
+          "aggregation_t1_weight_5": "3176.8",
+          "t1_year": "1975"
+        },
+        {
+          "aggregation_t1_weight_5": "3078.735294117647058823529412",
+          "t1_year": "1976"
+        },
+        {
+          "aggregation_t1_weight_5": "3419.025",
+          "t1_year": "1973"
+        },
+        {
+          "aggregation_t1_weight_5": "2877.925925925925925925925926",
+          "t1_year": "1974"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average weight and year for each year?"
+    },
+    {
+      "id": "Q043",
+      "original_id": "car_1_043",
+      "gold_sparql": "SELECT ?T1_countryname WHERE { ?T1 a <http://valuenet/ontop/countries> . ?T2 a <http://valuenet/ontop/car_makers> . ?T2 <http://valuenet/ontop/ref-country> ?T1 . ?T1 <http://valuenet/ontop/countryname> ?T1_countryname . ?T1 <http://valuenet/ontop/countryid> ?T1_countryid . ?T3 <http://valuenet/ontop/continents-continent> ?T3_continent . ?T3 a <http://valuenet/ontop/continents> . ?T1 <http://valuenet/ontop/ref-continent> ?T3 . ?T1 <http://valuenet/ontop/countryname> ?T1_countryname . ?T1 <http://valuenet/ontop/countryid> ?T1_countryid . ?T3 <http://valuenet/ontop/continents-continent> ?T3_continent . FILTER(?T3_continent = 'europe') . } GROUP BY ?T1_countryname HAVING(count( *) >= 3)",
+      "gold_answers": [
+        {
+          "T1_countryname": "france"
+        },
+        {
+          "T1_countryname": "germany"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which countries in europe have at least 3 car manufacturers?"
+    },
+    {
+      "id": "Q044",
+      "original_id": "car_1_044",
+      "gold_sparql": "SELECT ?T1_countryname WHERE { ?T1 a <http://valuenet/ontop/countries> . ?T2 a <http://valuenet/ontop/car_makers> . ?T2 <http://valuenet/ontop/ref-country> ?T1 . ?T1 <http://valuenet/ontop/countryname> ?T1_countryname . ?T1 <http://valuenet/ontop/countryid> ?T1_countryid . ?T3 <http://valuenet/ontop/continents-continent> ?T3_continent . ?T3 a <http://valuenet/ontop/continents> . ?T1 <http://valuenet/ontop/ref-continent> ?T3 . ?T1 <http://valuenet/ontop/countryname> ?T1_countryname . ?T1 <http://valuenet/ontop/countryid> ?T1_countryid . ?T3 <http://valuenet/ontop/continents-continent> ?T3_continent . FILTER(?T3_continent = 'europe') . } GROUP BY ?T1_countryname HAVING(count( *) >= 3)",
+      "gold_answers": [
+        {
+          "T1_countryname": "france"
+        },
+        {
+          "T1_countryname": "germany"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of all European countries with at least 3 manufacturers?"
+    },
+    {
+      "id": "Q045",
+      "original_id": "car_1_045",
+      "gold_sparql": "select ?t1_horsepower ?t2_make where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t2 <http://valuenet/ontop/make> ?t2_make . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders = 3) . } order by desc (?t1_horsepower) limit 1",
+      "gold_answers": [
+        {
+          "t1_horsepower": "97",
+          "t2_make": "mazda rx2 coupe"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum horsepower and the make of the car models with 3 cylinders?"
+    },
+    {
+      "id": "Q046",
+      "original_id": "car_1_046",
+      "gold_sparql": "select ?t1_horsepower ?t2_make where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t2 <http://valuenet/ontop/make> ?t2_make . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders = 3) . } order by desc (?t1_horsepower) limit 1",
+      "gold_answers": [
+        {
+          "t1_horsepower": "97",
+          "t2_make": "mazda rx2 coupe"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the largest amount of horsepower for the models with 3 cylinders and what make is it?"
+    },
+    {
+      "id": "Q047",
+      "original_id": "car_1_047",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/mpg> ?t2_mpg . } order by desc (?t2_mpg) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "mazda"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which model saves the most gasoline? That is to say, have the maximum miles per gallon."
+    },
+    {
+      "id": "Q048",
+      "original_id": "car_1_048",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/mpg> ?t2_mpg . } order by desc (?t2_mpg) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "mazda"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the car model with the highest mpg ?"
+    },
+    {
+      "id": "Q049",
+      "original_id": "car_1_049",
+      "gold_sparql": "select (avg( ?t1_horsepower) as ?aggregation_t1_horsepower_96 ) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_year < 1980) . }",
+      "gold_answers": [
+        {}
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average horsepower of the cars before 1980?"
+    },
+    {
+      "id": "Q050",
+      "original_id": "car_1_050",
+      "gold_sparql": "select (avg( ?t1_horsepower) as ?aggregation_t1_horsepower_96 ) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_year < 1980) . }",
+      "gold_answers": [
+        {}
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average horsepower for all cars produced before 1980 ?"
+    },
+    {
+      "id": "Q051",
+      "original_id": "car_1_051",
+      "gold_sparql": "select (avg( ?t1_edispl) as ?aggregation_t1_edispl_65 ) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/edispl> ?t1_edispl . ?t2 <http://valuenet/ontop/model> ?t2_model . FILTER(?t2_model = 'volvo') . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_edispl_65": "133.5"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average edispl of the cars of model volvo?"
+    },
+    {
+      "id": "Q052",
+      "original_id": "car_1_052",
+      "gold_sparql": "select (avg( ?t1_edispl) as ?aggregation_t1_edispl_65 ) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/edispl> ?t1_edispl . ?t2 <http://valuenet/ontop/model> ?t2_model . FILTER(?t2_model = 'volvo') . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_edispl_65": "133.5"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average edispl for all volvos?"
+    },
+    {
+      "id": "Q053",
+      "original_id": "car_1_053",
+      "gold_sparql": "select (max( ?t1_accelerate) as ?aggregation_t1_accelerate_42 ) ?t1_cylinders where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . } group by ?t1_cylinders",
+      "gold_answers": [
+        {
+          "aggregation_t1_accelerate_42": "13.5",
+          "t1_cylinders": "3"
+        },
+        {
+          "aggregation_t1_accelerate_42": "20.1000004",
+          "t1_cylinders": "5"
+        },
+        {
+          "aggregation_t1_accelerate_42": "24.7999992",
+          "t1_cylinders": "4"
+        },
+        {
+          "aggregation_t1_accelerate_42": "21.0",
+          "t1_cylinders": "6"
+        },
+        {
+          "aggregation_t1_accelerate_42": "22.2000008",
+          "t1_cylinders": "8"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum accelerate for different number of cylinders?"
+    },
+    {
+      "id": "Q054",
+      "original_id": "car_1_054",
+      "gold_sparql": "select (max( ?t1_accelerate) as ?aggregation_t1_accelerate_42 ) ?t1_cylinders where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . } group by ?t1_cylinders",
+      "gold_answers": [
+        {
+          "aggregation_t1_accelerate_42": "13.5",
+          "t1_cylinders": "3"
+        },
+        {
+          "aggregation_t1_accelerate_42": "20.1000004",
+          "t1_cylinders": "5"
+        },
+        {
+          "aggregation_t1_accelerate_42": "24.7999992",
+          "t1_cylinders": "4"
+        },
+        {
+          "aggregation_t1_accelerate_42": "21.0",
+          "t1_cylinders": "6"
+        },
+        {
+          "aggregation_t1_accelerate_42": "22.2000008",
+          "t1_cylinders": "8"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum accelerate for all the different cylinders?"
+    },
+    {
+      "id": "Q055",
+      "original_id": "car_1_055",
+      "gold_sparql": "select ?t1_model (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/model> ?t1_model . } group by ?t1_model order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "ford",
+          "aggregation_all": "53"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which model has the most version(make) of cars?"
+    },
+    {
+      "id": "Q056",
+      "original_id": "car_1_056",
+      "gold_sparql": "select ?t1_model (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/model> ?t1_model . } group by ?t1_model order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "ford",
+          "aggregation_all": "53"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What model has the most different versions?"
+    },
+    {
+      "id": "Q057",
+      "original_id": "car_1_057",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders > 4) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "195"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many cars have more than 4 cylinders?"
+    },
+    {
+      "id": "Q058",
+      "original_id": "car_1_058",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders > 4) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "195"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of cars with more than 4 cylinders?"
+    },
+    {
+      "id": "Q059",
+      "original_id": "car_1_059",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_year = 1980) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "29"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "how many cars were produced in 1980?"
+    },
+    {
+      "id": "Q060",
+      "original_id": "car_1_060",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_year = 1980) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "29"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "In 1980, how many cars were made?"
+    },
+    {
+      "id": "Q061",
+      "original_id": "car_1_061",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t2 . ?t2 <http://valuenet/ontop/fullname> ?t2_fullname . FILTER(?t2_fullname = 'American Motor Company') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many car models were produced by the maker with full name American Motor Company?"
+    },
+    {
+      "id": "Q062",
+      "original_id": "car_1_062",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t2 . ?t2 <http://valuenet/ontop/fullname> ?t2_fullname . FILTER(?t2_fullname = 'American Motor Company') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of car models created by the car maker American Motor Company?"
+    },
+    {
+      "id": "Q063",
+      "original_id": "car_1_063",
+      "gold_sparql": "select ?t1_fullname ?t1_id where { ?t1 a <http://valuenet/ontop/car_makers> . ?t2 a <http://valuenet/ontop/model_list> . ?t2 <http://valuenet/ontop/ref-maker> ?t1 . ?t1 <http://valuenet/ontop/fullname> ?t1_fullname . ?t1 <http://valuenet/ontop/id> ?t1_id . ?t1 <http://valuenet/ontop/id> ?t1_id . } group by ?t1_fullname ?t1_id having(count( *) > 3)",
+      "gold_answers": [
+        {
+          "t1_fullname": "Chrysler",
+          "t1_id": "6"
+        },
+        {
+          "t1_fullname": "General Motors",
+          "t1_id": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which makers designed more than 3 car models? List full name and the id."
+    },
+    {
+      "id": "Q064",
+      "original_id": "car_1_064",
+      "gold_sparql": "select ?t1_fullname ?t1_id where { ?t1 a <http://valuenet/ontop/car_makers> . ?t2 a <http://valuenet/ontop/model_list> . ?t2 <http://valuenet/ontop/ref-maker> ?t1 . ?t1 <http://valuenet/ontop/fullname> ?t1_fullname . ?t1 <http://valuenet/ontop/id> ?t1_id . ?t1 <http://valuenet/ontop/id> ?t1_id . } group by ?t1_fullname ?t1_id having(count( *) > 3)",
+      "gold_answers": [
+        {
+          "t1_fullname": "Chrysler",
+          "t1_id": "6"
+        },
+        {
+          "t1_fullname": "General Motors",
+          "t1_id": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names and ids of all makers with more than 3 models?"
+    },
+    {
+      "id": "Q065",
+      "original_id": "car_1_065",
+      "gold_sparql": "select distinct ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_names> . ?t2 <http://valuenet/ontop/ref-model> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/fullname> ?t3_fullname . ?t4 <http://valuenet/ontop/weight> ?t4_weight . ?t3 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t3 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/fullname> ?t3_fullname . ?t4 <http://valuenet/ontop/weight> ?t4_weight . ?t4 a <http://valuenet/ontop/cars_data> . ?t4 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/fullname> ?t3_fullname . ?t4 <http://valuenet/ontop/weight> ?t4_weight . FILTER(?t3_fullname = 'General Motors' || ?t4_weight > 3500) . }",
+      "gold_answers": [
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "cadillac"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "mercedes"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "mercedes-benz"
+        },
+        {
+          "t1_model": "hi"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?"
+    },
+    {
+      "id": "Q066",
+      "original_id": "car_1_066",
+      "gold_sparql": "select distinct ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_names> . ?t2 <http://valuenet/ontop/ref-model> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/fullname> ?t3_fullname . ?t4 <http://valuenet/ontop/weight> ?t4_weight . ?t3 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t3 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/fullname> ?t3_fullname . ?t4 <http://valuenet/ontop/weight> ?t4_weight . ?t4 a <http://valuenet/ontop/cars_data> . ?t4 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/fullname> ?t3_fullname . ?t4 <http://valuenet/ontop/weight> ?t4_weight . FILTER(?t3_fullname = 'General Motors' || ?t4_weight > 3500) . }",
+      "gold_answers": [
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "cadillac"
+        },
+        {
+          "t1_model": "ford"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "mercedes"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "mercury"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "mercedes-benz"
+        },
+        {
+          "t1_model": "hi"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the different models created by either the car maker General Motors or weighed more than 3500?"
+    },
+    {
+      "id": "Q067",
+      "original_id": "car_1_067",
+      "gold_sparql": "select distinct ?t1_year where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/year> ?t1_year . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/weight> ?t1_weight . FILTER(?t1_weight > 3000 && ?t1_weight < 4000) . }",
+      "gold_answers": [
+        {
+          "t1_year": "1976"
+        },
+        {
+          "t1_year": "1971"
+        },
+        {
+          "t1_year": "1979"
+        },
+        {
+          "t1_year": "1970"
+        },
+        {
+          "t1_year": "1972"
+        },
+        {
+          "t1_year": "1974"
+        },
+        {
+          "t1_year": "1978"
+        },
+        {
+          "t1_year": "1975"
+        },
+        {
+          "t1_year": "1981"
+        },
+        {
+          "t1_year": "1973"
+        },
+        {
+          "t1_year": "1982"
+        },
+        {
+          "t1_year": "1977"
+        },
+        {
+          "t1_year": "1980"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "In which years cars were produced weighing no less than 3000 and no more than 4000 ?"
+    },
+    {
+      "id": "Q068",
+      "original_id": "car_1_068",
+      "gold_sparql": "select distinct ?t1_year where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/year> ?t1_year . ?t1 <http://valuenet/ontop/weight> ?t1_weight . ?t1 <http://valuenet/ontop/weight> ?t1_weight . FILTER(?t1_weight > 3000 && ?t1_weight < 4000) . }",
+      "gold_answers": [
+        {
+          "t1_year": "1976"
+        },
+        {
+          "t1_year": "1971"
+        },
+        {
+          "t1_year": "1979"
+        },
+        {
+          "t1_year": "1970"
+        },
+        {
+          "t1_year": "1972"
+        },
+        {
+          "t1_year": "1974"
+        },
+        {
+          "t1_year": "1978"
+        },
+        {
+          "t1_year": "1975"
+        },
+        {
+          "t1_year": "1981"
+        },
+        {
+          "t1_year": "1973"
+        },
+        {
+          "t1_year": "1982"
+        },
+        {
+          "t1_year": "1977"
+        },
+        {
+          "t1_year": "1980"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the different years in which there were cars produced that weighed less than 4000 and also cars that weighted more than 3000 ?"
+    },
+    {
+      "id": "Q069",
+      "original_id": "car_1_069",
+      "gold_sparql": "select ?t1_horsepower where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . } order by desc (?t1_accelerate) limit 1",
+      "gold_answers": [
+        {
+          "t1_horsepower": "71"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the horsepower of the car with the largest accelerate?"
+    },
+    {
+      "id": "Q070",
+      "original_id": "car_1_070",
+      "gold_sparql": "select ?t1_horsepower where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/horsepower> ?t1_horsepower . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . } order by desc (?t1_accelerate) limit 1",
+      "gold_answers": [
+        {
+          "t1_horsepower": "71"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the horsepower of the car with the greatest accelerate?"
+    },
+    {
+      "id": "Q071",
+      "original_id": "car_1_071",
+      "gold_sparql": "select ?t1_cylinders where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . ?t2 <http://valuenet/ontop/model> ?t2_model . FILTER(?t2_model = 'volvo') . } order by asc (?t1_accelerate) limit 1",
+      "gold_answers": [
+        {
+          "t1_cylinders": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "For model volvo, how many cylinders does the car with the least accelerate have?"
+    },
+    {
+      "id": "Q072",
+      "original_id": "car_1_072",
+      "gold_sparql": "select ?t1_cylinders where { ?t1 a <http://valuenet/ontop/cars_data> . ?t2 a <http://valuenet/ontop/car_names> . ?t1 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . ?t2 <http://valuenet/ontop/model> ?t2_model . FILTER(?t2_model = 'volvo') . } order by asc (?t1_accelerate) limit 1",
+      "gold_answers": [
+        {
+          "t1_cylinders": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "For a volvo model, how many cylinders does the version with least accelerate have?"
+    },
+    {
+      "id": "Q073",
+      "original_id": "car_1_073",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . FILTER(?t1_accelerate > ?t22_accelerate) . {select ?t22_accelerate where { ?t22 a <http://valuenet/ontop/cars_data> . ?t22 <http://valuenet/ontop/accelerate> ?t22_accelerate . ?t22 <http://valuenet/ontop/horsepower> ?t22_horsepower . } order by desc (?t22_horsepower) limit 1 } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "249"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many cars have a larger accelerate than the car with the largest horsepower?"
+    },
+    {
+      "id": "Q074",
+      "original_id": "car_1_074",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/accelerate> ?t1_accelerate . FILTER(?t1_accelerate > ?t22_accelerate) . {select ?t22_accelerate where { ?t22 a <http://valuenet/ontop/cars_data> . ?t22 <http://valuenet/ontop/accelerate> ?t22_accelerate . ?t22 <http://valuenet/ontop/horsepower> ?t22_horsepower . } order by desc (?t22_horsepower) limit 1 } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "249"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of cars with a greater accelerate than the one with the most horsepower?"
+    },
+    {
+      "id": "Q075",
+      "original_id": "car_1_075",
+      "gold_sparql": "select (count(*) as ?aggregation) where { ?t1 a <http://valuenet/ontop/countries> . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . } group by ?t1_countryid having (count(*)>2)",
+      "gold_answers": [
+        {
+          "aggregation": "6"
+        },
+        {
+          "aggregation": "4"
+        },
+        {
+          "aggregation": "3"
+        },
+        {
+          "aggregation": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many countries has more than 2 car makers ?"
+    },
+    {
+      "id": "Q076",
+      "original_id": "car_1_076",
+      "gold_sparql": "select (count(*) as ?aggregation) where { ?t1 a <http://valuenet/ontop/countries> . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . } group by ?t1_countryid having (count(*)>2)",
+      "gold_answers": [
+        {
+          "aggregation": "6"
+        },
+        {
+          "aggregation": "4"
+        },
+        {
+          "aggregation": "3"
+        },
+        {
+          "aggregation": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of countries with more than 2 car makers ?"
+    },
+    {
+      "id": "Q077",
+      "original_id": "car_1_077",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders > 6) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "108"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many cars has over 6 cylinders?"
+    },
+    {
+      "id": "Q078",
+      "original_id": "car_1_078",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . FILTER(?t1_cylinders > 6) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "108"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of carsw ith over 6 cylinders?"
+    },
+    {
+      "id": "Q079",
+      "original_id": "car_1_079",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/horsepower> ?t2_horsepower . ?t2 <http://valuenet/ontop/cylinders> ?t2_cylinders . FILTER(?t2_cylinders = 4) . } order by desc (?t2_horsepower) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "volvo"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "For the cars with 4 cylinders, which model has the largest horsepower?"
+    },
+    {
+      "id": "Q080",
+      "original_id": "car_1_080",
+      "gold_sparql": "select ?t1_model where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t2 <http://valuenet/ontop/horsepower> ?t2_horsepower . ?t2 <http://valuenet/ontop/cylinders> ?t2_cylinders . FILTER(?t2_cylinders = 4) . } order by desc (?t2_horsepower) limit 1",
+      "gold_answers": [
+        {
+          "t1_model": "volvo"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "For all of the 4 cylinder cars, which model has the most horsepower?"
+    },
+    {
+      "id": "Q081",
+      "original_id": "car_1_081",
+      "gold_sparql": "select ?t1_makeid ?t1_make where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/makeid> ?t1_makeid . ?t1 <http://valuenet/ontop/make> ?t1_make . ?t2 <http://valuenet/ontop/horsepower> ?t2_horsepower . ?t2 <http://valuenet/ontop/cylinders> ?t2_cylinders . FILTER(?t2_horsepower > ?aggregation_t23_horsepower_8 && ?t2_cylinders <= 3) . {select (min( ?t23_horsepower) as ?aggregation_t23_horsepower_8 ) where { ?t23 a <http://valuenet/ontop/cars_data> . ?t23 <http://valuenet/ontop/horsepower> ?t23_horsepower . } } }",
+      "gold_answers": [
+        {
+          "t1_makeid": "79",
+          "t1_make": "mazda rx2 coupe"
+        },
+        {
+          "t1_makeid": "251",
+          "t1_make": "mazda rx-4"
+        },
+        {
+          "t1_makeid": "119",
+          "t1_make": "mazda rx3"
+        },
+        {
+          "t1_makeid": "342",
+          "t1_make": "mazda rx-7 gs"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Among the cars with more than lowest horsepower, which ones do not have more than 3 cylinders? List the car makeid and make name."
+    },
+    {
+      "id": "Q082",
+      "original_id": "car_1_082",
+      "gold_sparql": "select ?t1_makeid ?t1_make where { ?t1 a <http://valuenet/ontop/car_names> . ?t2 a <http://valuenet/ontop/cars_data> . ?t2 <http://valuenet/ontop/ref> ?t1 . ?t1 <http://valuenet/ontop/makeid> ?t1_makeid . ?t1 <http://valuenet/ontop/make> ?t1_make . ?t2 <http://valuenet/ontop/horsepower> ?t2_horsepower . ?t2 <http://valuenet/ontop/cylinders> ?t2_cylinders . FILTER(?t2_horsepower > ?aggregation_t23_horsepower_8 && ?t2_cylinders <= 3) . {select (min( ?t23_horsepower) as ?aggregation_t23_horsepower_8 ) where { ?t23 a <http://valuenet/ontop/cars_data> . ?t23 <http://valuenet/ontop/horsepower> ?t23_horsepower . } } }",
+      "gold_answers": [
+        {
+          "t1_makeid": "79",
+          "t1_make": "mazda rx2 coupe"
+        },
+        {
+          "t1_makeid": "251",
+          "t1_make": "mazda rx-4"
+        },
+        {
+          "t1_makeid": "119",
+          "t1_make": "mazda rx3"
+        },
+        {
+          "t1_makeid": "342",
+          "t1_make": "mazda rx-7 gs"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Among the cars that do not have the minimum horsepower , what are the make ids and names of all those with less than 4 cylinders ?"
+    },
+    {
+      "id": "Q083",
+      "original_id": "car_1_083",
+      "gold_sparql": "select ?t1_mpg where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/mpg> ?t1_mpg . ?t1 <http://valuenet/ontop/mpg> ?t1_mpg . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_cylinders = 8 || ?t1_year < 1980) . } order by desc (?t1_mpg) limit 1",
+      "gold_answers": [
+        {
+          "t1_mpg": "43.0999985"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum miles per gallon of the car with 8 cylinders or produced before 1980 ?"
+    },
+    {
+      "id": "Q084",
+      "original_id": "car_1_084",
+      "gold_sparql": "select ?t1_mpg where { ?t1 a <http://valuenet/ontop/cars_data> . ?t1 <http://valuenet/ontop/mpg> ?t1_mpg . ?t1 <http://valuenet/ontop/mpg> ?t1_mpg . ?t1 <http://valuenet/ontop/cylinders> ?t1_cylinders . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_cylinders = 8 || ?t1_year < 1980) . } order by desc (?t1_mpg) limit 1",
+      "gold_answers": [
+        {
+          "t1_mpg": "43.0999985"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum mpg of the cars that had 8 cylinders or that were produced before 1980 ?"
+    },
+    {
+      "id": "Q085",
+      "original_id": "car_1_085",
+      "gold_sparql": "select distinct ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_names> . ?t2 <http://valuenet/ontop/ref-model> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/weight> ?t3_weight . ?t4 <http://valuenet/ontop/fullname> ?t4_fullname . ?t3 a <http://valuenet/ontop/cars_data> . ?t3 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/weight> ?t3_weight . ?t4 <http://valuenet/ontop/fullname> ?t4_fullname . ?t4 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t4 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/weight> ?t3_weight . ?t4 <http://valuenet/ontop/fullname> ?t4_fullname . FILTER(?t3_weight < 3500 && ?t4_fullname != 'Ford Motor Company') . }",
+      "gold_answers": [
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "nissan"
+        },
+        {
+          "t1_model": "triumph"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "citroen"
+        },
+        {
+          "t1_model": "bmw"
+        },
+        {
+          "t1_model": "mercedes-benz"
+        },
+        {
+          "t1_model": "subaru"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which models are lighter than 3500 but not built by the 'Ford Motor Company'?"
+    },
+    {
+      "id": "Q086",
+      "original_id": "car_1_086",
+      "gold_sparql": "select distinct ?t1_model where { ?t1 a <http://valuenet/ontop/model_list> . ?t2 a <http://valuenet/ontop/car_names> . ?t2 <http://valuenet/ontop/ref-model> ?t1 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/weight> ?t3_weight . ?t4 <http://valuenet/ontop/fullname> ?t4_fullname . ?t3 a <http://valuenet/ontop/cars_data> . ?t3 <http://valuenet/ontop/ref> ?t2 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/weight> ?t3_weight . ?t4 <http://valuenet/ontop/fullname> ?t4_fullname . ?t4 a <http://valuenet/ontop/car_makers> . ?t1 <http://valuenet/ontop/ref-maker> ?t4 . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t1 <http://valuenet/ontop/model> ?t1_model . ?t3 <http://valuenet/ontop/weight> ?t3_weight . ?t4 <http://valuenet/ontop/fullname> ?t4_fullname . FILTER(?t3_weight < 3500 && ?t4_fullname != 'Ford Motor Company') . }",
+      "gold_answers": [
+        {
+          "t1_model": "opel"
+        },
+        {
+          "t1_model": "chevrolet"
+        },
+        {
+          "t1_model": "dodge"
+        },
+        {
+          "t1_model": "fiat"
+        },
+        {
+          "t1_model": "datsun"
+        },
+        {
+          "t1_model": "plymouth"
+        },
+        {
+          "t1_model": "peugeot"
+        },
+        {
+          "t1_model": "buick"
+        },
+        {
+          "t1_model": "honda"
+        },
+        {
+          "t1_model": "chrysler"
+        },
+        {
+          "t1_model": "mazda"
+        },
+        {
+          "t1_model": "amc"
+        },
+        {
+          "t1_model": "audi"
+        },
+        {
+          "t1_model": "toyota"
+        },
+        {
+          "t1_model": "pontiac"
+        },
+        {
+          "t1_model": "volkswagen"
+        },
+        {
+          "t1_model": "oldsmobile"
+        },
+        {
+          "t1_model": "nissan"
+        },
+        {
+          "t1_model": "triumph"
+        },
+        {
+          "t1_model": "volvo"
+        },
+        {
+          "t1_model": "saab"
+        },
+        {
+          "t1_model": "renault"
+        },
+        {
+          "t1_model": "citroen"
+        },
+        {
+          "t1_model": "bmw"
+        },
+        {
+          "t1_model": "mercedes-benz"
+        },
+        {
+          "t1_model": "subaru"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the different models wthat are lighter than 3500 but were not built by the Ford Motor Company?"
+    },
+    {
+      "id": "Q087",
+      "original_id": "car_1_087",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_countryname as ?col1) where { ?t1 a <http://valuenet/ontop/countries> . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . }} MINUS {select (?t2_countryname as ?col1) where { ?t2 a <http://valuenet/ontop/countries> . ?t3 a <http://valuenet/ontop/car_makers> . ?t3 <http://valuenet/ontop/ref-country> ?t2 . ?t2 <http://valuenet/ontop/countryname> ?t2_countryname . ?t2 <http://valuenet/ontop/countryid> ?t2_countryid . } } }",
+      "gold_answers": [
+        {
+          "col1": "nigeria"
+        },
+        {
+          "col1": "mexico"
+        },
+        {
+          "col1": "brazil"
+        },
+        {
+          "col1": "new zealand"
+        },
+        {
+          "col1": "australia"
+        },
+        {
+          "col1": "egypt"
+        },
+        {
+          "col1": "russia"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the name of the countries where there is not a single car maker?"
+    },
+    {
+      "id": "Q088",
+      "original_id": "car_1_088",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_countryname as ?col1) where { ?t1 a <http://valuenet/ontop/countries> . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . }} MINUS {select (?t2_countryname as ?col1) where { ?t2 a <http://valuenet/ontop/countries> . ?t3 a <http://valuenet/ontop/car_makers> . ?t3 <http://valuenet/ontop/ref-country> ?t2 . ?t2 <http://valuenet/ontop/countryname> ?t2_countryname . ?t2 <http://valuenet/ontop/countryid> ?t2_countryid . } } }",
+      "gold_answers": [
+        {
+          "col1": "nigeria"
+        },
+        {
+          "col1": "mexico"
+        },
+        {
+          "col1": "brazil"
+        },
+        {
+          "col1": "new zealand"
+        },
+        {
+          "col1": "australia"
+        },
+        {
+          "col1": "egypt"
+        },
+        {
+          "col1": "russia"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the countries with no car makers?"
+    },
+    {
+      "id": "Q089",
+      "original_id": "car_1_089",
+      "gold_sparql": "select distinct ?t1_id ?t1_maker where { ?t1 a <http://valuenet/ontop/car_makers> . ?t2 a <http://valuenet/ontop/model_list> . ?t2 <http://valuenet/ontop/ref-maker> ?t1 . ?t1 <http://valuenet/ontop/id> ?t1_id . ?t1 <http://valuenet/ontop/car_makers-maker> ?t1_maker . ?t1 <http://valuenet/ontop/id> ?t1_id .\n ?t3 a <http://valuenet/ontop/car_makers> . ?t4 a <http://valuenet/ontop/model_list> . ?t4 <http://valuenet/ontop/ref-maker> ?t3 . ?t3 <http://valuenet/ontop/id> ?t3_id . ?t3 <http://valuenet/ontop/car_makers-maker> ?t3_maker . ?t3 <http://valuenet/ontop/id> ?t3_id . FILTER (?t1_id in (?t3_id)) . \n FILTER (?t1_maker in (?t3_maker)) . } group by ?t1_id ?t1_maker having(count(?t1_id)>=2 && (count(?t3_maker) > 3))",
+      "gold_answers": [
+        {
+          "t1_id": "19",
+          "t1_maker": "toyota"
+        },
+        {
+          "t1_id": "4",
+          "t1_maker": "gm"
+        },
+        {
+          "t1_id": "5",
+          "t1_maker": "ford"
+        },
+        {
+          "t1_id": "2",
+          "t1_maker": "volkswagen"
+        },
+        {
+          "t1_id": "13",
+          "t1_maker": "daimler benz"
+        },
+        {
+          "t1_id": "6",
+          "t1_maker": "chrysler"
+        },
+        {
+          "t1_id": "8",
+          "t1_maker": "nissan"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which are the car makers which produce at least 2 models and more than 3 car makers ? List the id and the maker ."
+    },
+    {
+      "id": "Q090",
+      "original_id": "car_1_090",
+      "gold_sparql": "select distinct ?t1_id ?t1_maker where { ?t1 a <http://valuenet/ontop/car_makers> . ?t2 a <http://valuenet/ontop/model_list> . ?t2 <http://valuenet/ontop/ref-maker> ?t1 . ?t1 <http://valuenet/ontop/id> ?t1_id . ?t1 <http://valuenet/ontop/car_makers-maker> ?t1_maker . ?t1 <http://valuenet/ontop/id> ?t1_id .\n ?t3 a <http://valuenet/ontop/car_makers> . ?t4 a <http://valuenet/ontop/model_list> . ?t4 <http://valuenet/ontop/ref-maker> ?t3 . ?t3 <http://valuenet/ontop/id> ?t3_id . ?t3 <http://valuenet/ontop/car_makers-maker> ?t3_maker . ?t3 <http://valuenet/ontop/id> ?t3_id . FILTER (?t1_id in (?t3_id)) . \n FILTER (?t1_maker in (?t3_maker)) . } group by ?t1_id ?t1_maker having(count(?t1_id)>=2 && (count(?t3_maker) > 3))",
+      "gold_answers": [
+        {
+          "t1_id": "19",
+          "t1_maker": "toyota"
+        },
+        {
+          "t1_id": "4",
+          "t1_maker": "gm"
+        },
+        {
+          "t1_id": "5",
+          "t1_maker": "ford"
+        },
+        {
+          "t1_id": "2",
+          "t1_maker": "volkswagen"
+        },
+        {
+          "t1_id": "13",
+          "t1_maker": "daimler benz"
+        },
+        {
+          "t1_id": "6",
+          "t1_maker": "chrysler"
+        },
+        {
+          "t1_id": "8",
+          "t1_maker": "nissan"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the ids and makers of all car makers that produce at least 2 models and make more than 3 cars?"
+    },
+    {
+      "id": "Q091",
+      "original_id": "car_1_091",
+      "gold_sparql": "SELECT distinct ?col1 ?col2 WHERE { { select (?t1_countryid as ?col1) (?t1_countryname as ?col2) where { ?t1 a <http://valuenet/ontop/countries> . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . }} UNION {select (?t1_countryid as ?col1) (?t1_countryname as ?col2) where { ?t1 a <http://valuenet/ontop/countries> . ?t2 a <http://valuenet/ontop/car_makers> . ?t2 <http://valuenet/ontop/ref-country> ?t1 . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t3 <http://valuenet/ontop/model> ?t3_model . ?t3 a <http://valuenet/ontop/model_list> . ?t3 <http://valuenet/ontop/ref-maker> ?t2 . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t1 <http://valuenet/ontop/countryname> ?t1_countryname . ?t1 <http://valuenet/ontop/countryid> ?t1_countryid . ?t3 <http://valuenet/ontop/model> ?t3_model . FILTER(?t3_model = 'fiat') . } } } group by ?col1 ?col2 having(count( *) > 3)",
+      "gold_answers": [
+        {
+          "col1": "4",
+          "col2": "japan"
+        },
+        {
+          "col1": "2",
+          "col2": "germany"
+        },
+        {
+          "col1": "1",
+          "col2": "usa"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "flower",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?"
+    }
+  ]
+}

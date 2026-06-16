@@ -1,0 +1,741 @@
+{
+  "dataset_name": "spider_course_teach_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for course_teach. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/course_teach.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "course_teach_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/teacher> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many teachers are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "course_teach_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/teacher> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the total count of teachers?"
+    },
+    {
+      "id": "Q003",
+      "original_id": "course_teach_003",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age)",
+      "gold_answers": [
+        {
+          "t1_name": "Vicente Carretero"
+        },
+        {
+          "t1_name": "Gustaaf Deloor"
+        },
+        {
+          "t1_name": "Joseph Huts"
+        },
+        {
+          "t1_name": "John Deloor"
+        },
+        {
+          "t1_name": "Lucy Wong"
+        },
+        {
+          "t1_name": "Anne Walker"
+        },
+        {
+          "t1_name": "Kearsley Brown"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the names of teachers in ascending order of age."
+    },
+    {
+      "id": "Q004",
+      "original_id": "course_teach_004",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age)",
+      "gold_answers": [
+        {
+          "t1_name": "Vicente Carretero"
+        },
+        {
+          "t1_name": "Gustaaf Deloor"
+        },
+        {
+          "t1_name": "Joseph Huts"
+        },
+        {
+          "t1_name": "John Deloor"
+        },
+        {
+          "t1_name": "Lucy Wong"
+        },
+        {
+          "t1_name": "Anne Walker"
+        },
+        {
+          "t1_name": "Kearsley Brown"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the teachers ordered by ascending age?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "course_teach_005",
+      "gold_sparql": "select ?t1_age ?t1_hometown where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . }",
+      "gold_answers": [
+        {
+          "t1_age": "29",
+          "t1_hometown": "Bolton County Borough"
+        },
+        {
+          "t1_age": "41",
+          "t1_hometown": "Little Lever Urban District"
+        },
+        {
+          "t1_age": "26",
+          "t1_hometown": "Farnworth Municipal Borough"
+        },
+        {
+          "t1_age": "33",
+          "t1_hometown": "Horwich Urban District"
+        },
+        {
+          "t1_age": "39",
+          "t1_hometown": "Turton Urban District"
+        },
+        {
+          "t1_age": "32",
+          "t1_hometown": "Blackrod Urban District"
+        },
+        {
+          "t1_age": "45",
+          "t1_hometown": "Kearsley Urban District"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the age and hometown of teachers?"
+    },
+    {
+      "id": "Q006",
+      "original_id": "course_teach_006",
+      "gold_sparql": "select ?t1_age ?t1_hometown where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . }",
+      "gold_answers": [
+        {
+          "t1_age": "29",
+          "t1_hometown": "Bolton County Borough"
+        },
+        {
+          "t1_age": "41",
+          "t1_hometown": "Little Lever Urban District"
+        },
+        {
+          "t1_age": "26",
+          "t1_hometown": "Farnworth Municipal Borough"
+        },
+        {
+          "t1_age": "33",
+          "t1_hometown": "Horwich Urban District"
+        },
+        {
+          "t1_age": "39",
+          "t1_hometown": "Turton Urban District"
+        },
+        {
+          "t1_age": "32",
+          "t1_hometown": "Blackrod Urban District"
+        },
+        {
+          "t1_age": "45",
+          "t1_hometown": "Kearsley Urban District"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the age and hometown of every teacher?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "course_teach_007",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . FILTER(?t1_hometown != 'Little Lever Urban District') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Gustaaf Deloor"
+        },
+        {
+          "t1_name": "Vicente Carretero"
+        },
+        {
+          "t1_name": "John Deloor"
+        },
+        {
+          "t1_name": "Lucy Wong"
+        },
+        {
+          "t1_name": "Joseph Huts"
+        },
+        {
+          "t1_name": "Kearsley Brown"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the name of teachers whose hometown is not `` Little Lever Urban District '' ."
+    },
+    {
+      "id": "Q008",
+      "original_id": "course_teach_008",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . FILTER(?t1_hometown != 'Little Lever Urban District') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Gustaaf Deloor"
+        },
+        {
+          "t1_name": "Vicente Carretero"
+        },
+        {
+          "t1_name": "John Deloor"
+        },
+        {
+          "t1_name": "Lucy Wong"
+        },
+        {
+          "t1_name": "Joseph Huts"
+        },
+        {
+          "t1_name": "Kearsley Brown"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the teachers whose hometown is not `` Little Lever Urban District '' ?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "course_teach_009",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age = '32' || ?t1_age = '33') . }",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the name of teachers aged either 32 or 33?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "course_teach_010",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age = '32' || ?t1_age = '33') . }",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the teachers who are aged either 32 or 33?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "course_teach_011",
+      "gold_sparql": "select ?t1_hometown where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_hometown": "Farnworth Municipal Borough"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the hometown of the youngest teacher?"
+    },
+    {
+      "id": "Q012",
+      "original_id": "course_teach_012",
+      "gold_sparql": "select ?t1_hometown where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_hometown": "Farnworth Municipal Borough"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Where is the youngest teacher from?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "course_teach_013",
+      "gold_sparql": "select ?t1_hometown (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . } group by ?t1_hometown",
+      "gold_answers": [
+        {
+          "t1_hometown": "Horwich Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Blackrod Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Turton Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Bolton County Borough",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Farnworth Municipal Borough",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Little Lever Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Kearsley Urban District",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show different hometown of teachers and the number of teachers from each hometown."
+    },
+    {
+      "id": "Q014",
+      "original_id": "course_teach_014",
+      "gold_sparql": "select ?t1_hometown (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . } group by ?t1_hometown",
+      "gold_answers": [
+        {
+          "t1_hometown": "Horwich Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Blackrod Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Turton Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Bolton County Borough",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Farnworth Municipal Borough",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Little Lever Urban District",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_hometown": "Kearsley Urban District",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "For each hometown, how many teachers are there?"
+    },
+    {
+      "id": "Q015",
+      "original_id": "course_teach_015",
+      "gold_sparql": "SELECT ?T1_hometown (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/teacher> . ?T1 <http://valuenet/ontop/hometown> ?T1_hometown . } GROUP BY ?T1_hometown ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_hometown": "Blackrod Urban District",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "List the most common hometown of teachers."
+    },
+    {
+      "id": "Q016",
+      "original_id": "course_teach_016",
+      "gold_sparql": "SELECT ?T1_hometown (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/teacher> . ?T1 <http://valuenet/ontop/hometown> ?T1_hometown . } GROUP BY ?T1_hometown ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_hometown": "Blackrod Urban District",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the most commmon hometowns for teachers?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "course_teach_017",
+      "gold_sparql": "select ?t1_hometown where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . } group by ?t1_hometown having(count( *) >= 2)",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the hometowns shared by at least two teachers."
+    },
+    {
+      "id": "Q018",
+      "original_id": "course_teach_018",
+      "gold_sparql": "select ?t1_hometown where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/hometown> ?t1_hometown . } group by ?t1_hometown having(count( *) >= 2)",
+      "gold_answers": [],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the towns from which at least two teachers come from?"
+    },
+    {
+      "id": "Q019",
+      "original_id": "course_teach_019",
+      "gold_sparql": "select ?t1_name ?t2_course where { ?t1 a <http://valuenet/ontop/teacher> . ?t3 a <http://valuenet/ontop/course_arrange> . ?t3 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 a <http://valuenet/ontop/course> . ?t3 <http://valuenet/ontop/ref-course> ?t2 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . }",
+      "gold_answers": [
+        {
+          "t1_name": "Gustaaf Deloor",
+          "t2_course": "Science"
+        },
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "History"
+        },
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "Bible"
+        },
+        {
+          "t1_name": "Vicente Carretero",
+          "t2_course": "Math"
+        },
+        {
+          "t1_name": "Lucy Wong",
+          "t2_course": "Music"
+        },
+        {
+          "t1_name": "Kearsley Brown",
+          "t2_course": "Math"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show names of teachers and the courses they are arranged to teach."
+    },
+    {
+      "id": "Q020",
+      "original_id": "course_teach_020",
+      "gold_sparql": "select ?t1_name ?t2_course where { ?t1 a <http://valuenet/ontop/teacher> . ?t3 a <http://valuenet/ontop/course_arrange> . ?t3 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 a <http://valuenet/ontop/course> . ?t3 <http://valuenet/ontop/ref-course> ?t2 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . }",
+      "gold_answers": [
+        {
+          "t1_name": "Gustaaf Deloor",
+          "t2_course": "Science"
+        },
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "History"
+        },
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "Bible"
+        },
+        {
+          "t1_name": "Vicente Carretero",
+          "t2_course": "Math"
+        },
+        {
+          "t1_name": "Lucy Wong",
+          "t2_course": "Music"
+        },
+        {
+          "t1_name": "Kearsley Brown",
+          "t2_course": "Math"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name of each teacher and what course they teach?"
+    },
+    {
+      "id": "Q021",
+      "original_id": "course_teach_021",
+      "gold_sparql": "select ?t1_name ?t2_course where { ?t1 a <http://valuenet/ontop/teacher> . ?t3 a <http://valuenet/ontop/course_arrange> . ?t3 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 a <http://valuenet/ontop/course> . ?t3 <http://valuenet/ontop/ref-course> ?t2 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . } order by asc (?t1_name)",
+      "gold_answers": [
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "History"
+        },
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "Bible"
+        },
+        {
+          "t1_name": "Gustaaf Deloor",
+          "t2_course": "Science"
+        },
+        {
+          "t1_name": "Kearsley Brown",
+          "t2_course": "Math"
+        },
+        {
+          "t1_name": "Lucy Wong",
+          "t2_course": "Music"
+        },
+        {
+          "t1_name": "Vicente Carretero",
+          "t2_course": "Math"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show names of teachers and the courses they are arranged to teach in ascending alphabetical order of the teacher's name."
+    },
+    {
+      "id": "Q022",
+      "original_id": "course_teach_022",
+      "gold_sparql": "select ?t1_name ?t2_course where { ?t1 a <http://valuenet/ontop/teacher> . ?t3 a <http://valuenet/ontop/course_arrange> . ?t3 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 a <http://valuenet/ontop/course> . ?t3 <http://valuenet/ontop/ref-course> ?t2 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . } order by asc (?t1_name)",
+      "gold_answers": [
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "History"
+        },
+        {
+          "t1_name": "Anne Walker",
+          "t2_course": "Bible"
+        },
+        {
+          "t1_name": "Gustaaf Deloor",
+          "t2_course": "Science"
+        },
+        {
+          "t1_name": "Kearsley Brown",
+          "t2_course": "Math"
+        },
+        {
+          "t1_name": "Lucy Wong",
+          "t2_course": "Music"
+        },
+        {
+          "t1_name": "Vicente Carretero",
+          "t2_course": "Math"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the teachers and the courses they teach in ascending alphabetical order by the name of the teacher?"
+    },
+    {
+      "id": "Q023",
+      "original_id": "course_teach_023",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t3 a <http://valuenet/ontop/course_arrange> . ?t3 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t2 a <http://valuenet/ontop/course> . ?t3 <http://valuenet/ontop/ref-course> ?t2 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 <http://valuenet/ontop/course> ?t2_course . FILTER(?t2_course = 'Math') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Vicente Carretero"
+        },
+        {
+          "t1_name": "Kearsley Brown"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the name of the teacher for the math course."
+    },
+    {
+      "id": "Q024",
+      "original_id": "course_teach_024",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t3 a <http://valuenet/ontop/course_arrange> . ?t3 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 <http://valuenet/ontop/course> ?t2_course . ?t2 a <http://valuenet/ontop/course> . ?t3 <http://valuenet/ontop/ref-course> ?t2 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/course_id> ?t2_course_id . ?t2 <http://valuenet/ontop/course> ?t2_course . FILTER(?t2_course = 'Math') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Vicente Carretero"
+        },
+        {
+          "t1_name": "Kearsley Brown"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the people who teach math courses?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "course_teach_025",
+      "gold_sparql": "select ?t1_name (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/teacher> . ?t13 a <http://valuenet/ontop/course_arrange> . ?t13 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . } group by ?t1_name",
+      "gold_answers": [
+        {
+          "t1_name": "Anne Walker",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_name": "Lucy Wong",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Vicente Carretero",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Kearsley Brown",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Gustaaf Deloor",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show names of teachers and the number of courses they teach."
+    },
+    {
+      "id": "Q026",
+      "original_id": "course_teach_026",
+      "gold_sparql": "select ?t1_name (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/teacher> . ?t13 a <http://valuenet/ontop/course_arrange> . ?t13 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . } group by ?t1_name",
+      "gold_answers": [
+        {
+          "t1_name": "Anne Walker",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_name": "Lucy Wong",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Vicente Carretero",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Kearsley Brown",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Gustaaf Deloor",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of the teachers and how many courses do they teach?"
+    },
+    {
+      "id": "Q027",
+      "original_id": "course_teach_027",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t2 a <http://valuenet/ontop/course_arrange> . ?t2 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/teacher_id> ?t1_teacher_id . } group by ?t1_name having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_name": "Anne Walker"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show names of teachers that teach at least two courses."
+    },
+    {
+      "id": "Q028",
+      "original_id": "course_teach_028",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t2 a <http://valuenet/ontop/course_arrange> . ?t2 <http://valuenet/ontop/ref-teacher> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/teacher_id> ?t1_teacher_id . } group by ?t1_name having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_name": "Anne Walker"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of the teachers who teach at least two courses?"
+    },
+    {
+      "id": "Q029",
+      "original_id": "course_teach_029",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/teacher_id> ?t1_teacher_id . Filter not exists {{select ?t22_teacher_id where { ?t22 a <http://valuenet/ontop/course_arrange> . ?t22 <http://valuenet/ontop/teacher_id> ?t22_teacher_id . } } FILTER (?t1_teacher_id in (?t22_teacher_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "John Deloor"
+        },
+        {
+          "t1_name": "Joseph Huts"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the names of teachers who have not been arranged to teach courses."
+    },
+    {
+      "id": "Q030",
+      "original_id": "course_teach_030",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/teacher> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/teacher_id> ?t1_teacher_id . Filter not exists {{select ?t22_teacher_id where { ?t22 a <http://valuenet/ontop/course_arrange> . ?t22 <http://valuenet/ontop/teacher_id> ?t22_teacher_id . } } FILTER (?t1_teacher_id in (?t22_teacher_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "John Deloor"
+        },
+        {
+          "t1_name": "Joseph Huts"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the teachers whose courses have not been arranged?"
+    }
+  ]
+}

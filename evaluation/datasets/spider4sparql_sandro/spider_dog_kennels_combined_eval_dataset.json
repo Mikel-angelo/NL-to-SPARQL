@@ -1,0 +1,2757 @@
+{
+  "dataset_name": "spider_dog_kennels_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for dog_kennels. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/dog_kennels.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "dog_kennels_001",
+      "gold_sparql": "select distinct ?t1_state where { ?t1 a <http://valuenet/ontop/owners> . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER (?t1_state in (?t2_state)) . ?t2 a <http://valuenet/ontop/professionals> . ?t2 <http://valuenet/ontop/state> ?t2_state . }",
+      "gold_answers": [
+        {
+          "t1_state": "Indiana"
+        },
+        {
+          "t1_state": "Mississippi"
+        },
+        {
+          "t1_state": "Wisconsin"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which states have both owners and professionals living there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "dog_kennels_002",
+      "gold_sparql": "select distinct ?t1_state where { ?t1 a <http://valuenet/ontop/owners> . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER (?t1_state in (?t2_state)) . ?t2 a <http://valuenet/ontop/professionals> . ?t2 <http://valuenet/ontop/state> ?t2_state . }",
+      "gold_answers": [
+        {
+          "t1_state": "Indiana"
+        },
+        {
+          "t1_state": "Mississippi"
+        },
+        {
+          "t1_state": "Wisconsin"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the states where both owners and professionals live."
+    },
+    {
+      "id": "Q003",
+      "original_id": "dog_kennels_003",
+      "gold_sparql": "select (avg( ?t1_age) as ?aggregation_t1_age_5 ) where { ?t1 a <http://valuenet/ontop/dogs> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t1 . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_age_5": "5.466666666666666666666667"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average age of the dogs who have gone through any treatments?"
+    },
+    {
+      "id": "Q004",
+      "original_id": "dog_kennels_004",
+      "gold_sparql": "select (avg( ?t1_age) as ?aggregation_t1_age_5 ) where { ?t1 a <http://valuenet/ontop/dogs> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t1 . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_age_5": "5.466666666666666666666667"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the average age of the dogs who went through treatments."
+    },
+    {
+      "id": "Q005",
+      "original_id": "dog_kennels_005",
+      "gold_sparql": "SELECT distinct?col1?col2?col3 WHERE { { select (?t1_professional_id as ?col1) (?t1_last_name as ?col2) (?t1_cell_number as ?col3) where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(?t1_state = 'Indiana') . }} UNION {select (?t1_professional_id as ?col1) (?t1_last_name as ?col2) (?t1_cell_number as ?col3) where { ?t1 a <http://valuenet/ontop/professionals> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . } group by ?t1_professional_id ?t1_last_name ?t1_cell_number having(count( *) > 2) } }",
+      "gold_answers": [
+        {
+          "col1": "8",
+          "col2": "Hyatt",
+          "col3": "328.842.3792"
+        },
+        {
+          "col1": "1",
+          "col2": "Braun",
+          "col3": "(275)939-2435x80863"
+        },
+        {
+          "col1": "9",
+          "col2": "Kshlerin",
+          "col3": "962-983-8109x3509"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "flower",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which professionals live in the state of Indiana or have done treatment on more than 2 treatments? List his or her id, last name and cell phone."
+    },
+    {
+      "id": "Q006",
+      "original_id": "dog_kennels_006",
+      "gold_sparql": "SELECT distinct?col1?col2?col3 WHERE { { select (?t1_professional_id as ?col1) (?t1_last_name as ?col2) (?t1_cell_number as ?col3) where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(?t1_state = 'Indiana') . }} UNION {select (?t1_professional_id as ?col1) (?t1_last_name as ?col2) (?t1_cell_number as ?col3) where { ?t1 a <http://valuenet/ontop/professionals> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . } group by ?t1_professional_id ?t1_last_name ?t1_cell_number having(count( *) > 2) } }",
+      "gold_answers": [
+        {
+          "col1": "8",
+          "col2": "Hyatt",
+          "col3": "328.842.3792"
+        },
+        {
+          "col1": "1",
+          "col2": "Braun",
+          "col3": "(275)939-2435x80863"
+        },
+        {
+          "col1": "9",
+          "col2": "Kshlerin",
+          "col3": "962-983-8109x3509"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "flower",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the id, last name and cell phone of the professionals who live in the state of Indiana or have performed more than two treatments."
+    },
+    {
+      "id": "Q007",
+      "original_id": "dog_kennels_007",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . Filter not exists {{select ?t22_dog_id where { ?t22 a <http://valuenet/ontop/treatments> . ?t22 <http://valuenet/ontop/dog_id> ?t22_dog_id . ?t22 <http://valuenet/ontop/cost_of_treatment> ?t22_cost_of_treatment . } group by ?t22_dog_id having(sum( ?t22_cost_of_treatment) > 1000)} FILTER (?t1_dog_id in (?t22_dog_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Hipolito"
+        },
+        {
+          "t1_name": "Narciso"
+        },
+        {
+          "t1_name": "Houston"
+        },
+        {
+          "t1_name": "Jeffrey"
+        },
+        {
+          "t1_name": "Holden"
+        },
+        {
+          "t1_name": "Bessie"
+        },
+        {
+          "t1_name": "Merritt"
+        },
+        {
+          "t1_name": "Kacey"
+        },
+        {
+          "t1_name": "Jesus"
+        },
+        {
+          "t1_name": "George"
+        },
+        {
+          "t1_name": "Betty"
+        },
+        {
+          "t1_name": "Mavis"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which dogs have not cost their owner more than 1000 for treatment ? List the dog names ."
+    },
+    {
+      "id": "Q008",
+      "original_id": "dog_kennels_008",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . Filter not exists {{select ?t22_dog_id where { ?t22 a <http://valuenet/ontop/treatments> . ?t22 <http://valuenet/ontop/dog_id> ?t22_dog_id . ?t22 <http://valuenet/ontop/cost_of_treatment> ?t22_cost_of_treatment . } group by ?t22_dog_id having(sum( ?t22_cost_of_treatment) > 1000)} FILTER (?t1_dog_id in (?t22_dog_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Hipolito"
+        },
+        {
+          "t1_name": "Narciso"
+        },
+        {
+          "t1_name": "Houston"
+        },
+        {
+          "t1_name": "Jeffrey"
+        },
+        {
+          "t1_name": "Holden"
+        },
+        {
+          "t1_name": "Bessie"
+        },
+        {
+          "t1_name": "Merritt"
+        },
+        {
+          "t1_name": "Kacey"
+        },
+        {
+          "t1_name": "Jesus"
+        },
+        {
+          "t1_name": "George"
+        },
+        {
+          "t1_name": "Betty"
+        },
+        {
+          "t1_name": "Mavis"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the dogs for which the owner has not spend more than 1000 for treatment ?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "dog_kennels_009",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_first_name as ?col1) where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . }} UNION {select (?t1_first_name as ?col1) where { ?t1 a <http://valuenet/ontop/owners> . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . } } }",
+      "gold_answers": [
+        {
+          "col1": "Domenica"
+        },
+        {
+          "col1": "Velva"
+        },
+        {
+          "col1": "Karley"
+        },
+        {
+          "col1": "Monte"
+        },
+        {
+          "col1": "Sigurd"
+        },
+        {
+          "col1": "Danny"
+        },
+        {
+          "col1": "Brady"
+        },
+        {
+          "col1": "Vernice"
+        },
+        {
+          "col1": "Winfield"
+        },
+        {
+          "col1": "Ericka"
+        },
+        {
+          "col1": "Lesly"
+        },
+        {
+          "col1": "Jayson"
+        },
+        {
+          "col1": "Ruben"
+        },
+        {
+          "col1": "Taryn"
+        },
+        {
+          "col1": "Olaf"
+        },
+        {
+          "col1": "Rachelle"
+        },
+        {
+          "col1": "Gay"
+        },
+        {
+          "col1": "Johann"
+        },
+        {
+          "col1": "Jaclyn"
+        },
+        {
+          "col1": "Melisa"
+        },
+        {
+          "col1": "Emelie"
+        },
+        {
+          "col1": "Cindy"
+        },
+        {
+          "col1": "Kade"
+        },
+        {
+          "col1": "Orlando"
+        },
+        {
+          "col1": "Lorenz"
+        },
+        {
+          "col1": "Adelle"
+        },
+        {
+          "col1": "Rolando"
+        },
+        {
+          "col1": "Nora"
+        },
+        {
+          "col1": "Heather"
+        },
+        {
+          "col1": "Tre"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "flower",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which first names are used for professionals or owners but are not used as dog names?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "dog_kennels_010",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_first_name as ?col1) where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . }} UNION {select (?t1_first_name as ?col1) where { ?t1 a <http://valuenet/ontop/owners> . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . } } }",
+      "gold_answers": [
+        {
+          "col1": "Domenica"
+        },
+        {
+          "col1": "Velva"
+        },
+        {
+          "col1": "Karley"
+        },
+        {
+          "col1": "Monte"
+        },
+        {
+          "col1": "Sigurd"
+        },
+        {
+          "col1": "Danny"
+        },
+        {
+          "col1": "Brady"
+        },
+        {
+          "col1": "Vernice"
+        },
+        {
+          "col1": "Winfield"
+        },
+        {
+          "col1": "Ericka"
+        },
+        {
+          "col1": "Lesly"
+        },
+        {
+          "col1": "Jayson"
+        },
+        {
+          "col1": "Ruben"
+        },
+        {
+          "col1": "Taryn"
+        },
+        {
+          "col1": "Olaf"
+        },
+        {
+          "col1": "Rachelle"
+        },
+        {
+          "col1": "Gay"
+        },
+        {
+          "col1": "Johann"
+        },
+        {
+          "col1": "Jaclyn"
+        },
+        {
+          "col1": "Melisa"
+        },
+        {
+          "col1": "Emelie"
+        },
+        {
+          "col1": "Cindy"
+        },
+        {
+          "col1": "Kade"
+        },
+        {
+          "col1": "Orlando"
+        },
+        {
+          "col1": "Lorenz"
+        },
+        {
+          "col1": "Adelle"
+        },
+        {
+          "col1": "Rolando"
+        },
+        {
+          "col1": "Nora"
+        },
+        {
+          "col1": "Heather"
+        },
+        {
+          "col1": "Tre"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "flower",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the first names that are used for professionals or owners but are not used as dog names."
+    },
+    {
+      "id": "Q011",
+      "original_id": "dog_kennels_011",
+      "gold_sparql": "SELECT distinct?col1?col2?col3 WHERE { { select (?t1_professional_id as ?col1) (?t1_role_code as ?col2) (?t1_email_address as ?col3) where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/role_code> ?t1_role_code . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . }} MINUS {select (?t2_professional_id as ?col1) (?t2_role_code as ?col2) (?t2_email_address as ?col3) where { ?t2 a <http://valuenet/ontop/professionals> . ?t3 a <http://valuenet/ontop/treatments> . ?t3 <http://valuenet/ontop/ref-professional> ?t2 . ?t2 <http://valuenet/ontop/professional_id> ?t2_professional_id . ?t2 <http://valuenet/ontop/role_code> ?t2_role_code . ?t2 <http://valuenet/ontop/email_address> ?t2_email_address . ?t2 <http://valuenet/ontop/professional_id> ?t2_professional_id . } } }",
+      "gold_answers": [
+        {
+          "col1": "11",
+          "col2": "Employee",
+          "col3": "west.eula@example.net"
+        },
+        {
+          "col1": "12",
+          "col2": "Veterenarian",
+          "col3": "marquardt.furman@example.org"
+        },
+        {
+          "col1": "13",
+          "col2": "Veterenarian",
+          "col3": "delphine29@example.com"
+        },
+        {
+          "col1": "15",
+          "col2": "Employee",
+          "col3": "jeichmann@example.com"
+        },
+        {
+          "col1": "2",
+          "col2": "Employee",
+          "col3": "lucile.shanahan@example.org"
+        },
+        {
+          "col1": "1",
+          "col2": "Employee",
+          "col3": "deanna.schuster@example.com"
+        },
+        {
+          "col1": "3",
+          "col2": "Employee",
+          "col3": "uboehm@example.org"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which professional did not operate any treatment on dogs? List the professional's id, role and email."
+    },
+    {
+      "id": "Q012",
+      "original_id": "dog_kennels_012",
+      "gold_sparql": "SELECT distinct?col1?col2?col3 WHERE { { select (?t1_professional_id as ?col1) (?t1_role_code as ?col2) (?t1_email_address as ?col3) where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/role_code> ?t1_role_code . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . }} MINUS {select (?t2_professional_id as ?col1) (?t2_role_code as ?col2) (?t2_email_address as ?col3) where { ?t2 a <http://valuenet/ontop/professionals> . ?t3 a <http://valuenet/ontop/treatments> . ?t3 <http://valuenet/ontop/ref-professional> ?t2 . ?t2 <http://valuenet/ontop/professional_id> ?t2_professional_id . ?t2 <http://valuenet/ontop/role_code> ?t2_role_code . ?t2 <http://valuenet/ontop/email_address> ?t2_email_address . ?t2 <http://valuenet/ontop/professional_id> ?t2_professional_id . } } }",
+      "gold_answers": [
+        {
+          "col1": "11",
+          "col2": "Employee",
+          "col3": "west.eula@example.net"
+        },
+        {
+          "col1": "12",
+          "col2": "Veterenarian",
+          "col3": "marquardt.furman@example.org"
+        },
+        {
+          "col1": "13",
+          "col2": "Veterenarian",
+          "col3": "delphine29@example.com"
+        },
+        {
+          "col1": "15",
+          "col2": "Employee",
+          "col3": "jeichmann@example.com"
+        },
+        {
+          "col1": "2",
+          "col2": "Employee",
+          "col3": "lucile.shanahan@example.org"
+        },
+        {
+          "col1": "1",
+          "col2": "Employee",
+          "col3": "deanna.schuster@example.com"
+        },
+        {
+          "col1": "3",
+          "col2": "Employee",
+          "col3": "uboehm@example.org"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give me the id, role and email of the professionals who did not perform any treatment on dogs."
+    },
+    {
+      "id": "Q013",
+      "original_id": "dog_kennels_013",
+      "gold_sparql": "SELECT ?T1_owner_id (count( *) as ?aggregation_all) ?T2_first_name ?T2_last_name WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T2 a <http://valuenet/ontop/owners> . ?T1 <http://valuenet/ontop/ref-owner> ?T2 . ?T1 <http://valuenet/ontop/owner_id> ?T1_owner_id . ?T2 <http://valuenet/ontop/first_name> ?T2_first_name . ?T2 <http://valuenet/ontop/last_name> ?T2_last_name . } GROUP BY ?T1_owner_id ?T2_first_name ?T2_last_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_owner_id": "14",
+          "aggregation_all": "3",
+          "T2_first_name": "Rachelle",
+          "T2_last_name": "Funk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which owner owns the most dogs? List the owner id, first name and last name."
+    },
+    {
+      "id": "Q014",
+      "original_id": "dog_kennels_014",
+      "gold_sparql": "SELECT ?T1_owner_id (count( *) as ?aggregation_all) ?T2_first_name ?T2_last_name WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T2 a <http://valuenet/ontop/owners> . ?T1 <http://valuenet/ontop/ref-owner> ?T2 . ?T1 <http://valuenet/ontop/owner_id> ?T1_owner_id . ?T2 <http://valuenet/ontop/first_name> ?T2_first_name . ?T2 <http://valuenet/ontop/last_name> ?T2_last_name . } GROUP BY ?T1_owner_id ?T2_first_name ?T2_last_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_owner_id": "14",
+          "aggregation_all": "3",
+          "T2_first_name": "Rachelle",
+          "T2_last_name": "Funk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the owner id, first name and last name of the owner who has the most dogs."
+    },
+    {
+      "id": "Q015",
+      "original_id": "dog_kennels_015",
+      "gold_sparql": "select ?t1_professional_id ?t1_role_code ?t1_first_name where { ?t1 a <http://valuenet/ontop/professionals> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/role_code> ?t1_role_code . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . } group by ?t1_professional_id ?t1_role_code ?t1_first_name having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_professional_id": "9",
+          "t1_role_code": "Veterenarian",
+          "t1_first_name": "Monte"
+        },
+        {
+          "t1_professional_id": "4",
+          "t1_role_code": "Veterenarian",
+          "t1_first_name": "Vernice"
+        },
+        {
+          "t1_professional_id": "10",
+          "t1_role_code": "Employee",
+          "t1_first_name": "Domenica"
+        },
+        {
+          "t1_professional_id": "8",
+          "t1_role_code": "Employee",
+          "t1_first_name": "Karley"
+        },
+        {
+          "t1_professional_id": "14",
+          "t1_role_code": "Employee",
+          "t1_first_name": "Sigurd"
+        },
+        {
+          "t1_professional_id": "6",
+          "t1_role_code": "Veterenarian",
+          "t1_first_name": "Ruben"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which professionals have done at least two treatments? List the professional's id, role, and first name."
+    },
+    {
+      "id": "Q016",
+      "original_id": "dog_kennels_016",
+      "gold_sparql": "select ?t1_professional_id ?t1_role_code ?t1_first_name where { ?t1 a <http://valuenet/ontop/professionals> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/role_code> ?t1_role_code . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . } group by ?t1_professional_id ?t1_role_code ?t1_first_name having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_professional_id": "9",
+          "t1_role_code": "Veterenarian",
+          "t1_first_name": "Monte"
+        },
+        {
+          "t1_professional_id": "4",
+          "t1_role_code": "Veterenarian",
+          "t1_first_name": "Vernice"
+        },
+        {
+          "t1_professional_id": "10",
+          "t1_role_code": "Employee",
+          "t1_first_name": "Domenica"
+        },
+        {
+          "t1_professional_id": "8",
+          "t1_role_code": "Employee",
+          "t1_first_name": "Karley"
+        },
+        {
+          "t1_professional_id": "14",
+          "t1_role_code": "Employee",
+          "t1_first_name": "Sigurd"
+        },
+        {
+          "t1_professional_id": "6",
+          "t1_role_code": "Veterenarian",
+          "t1_first_name": "Ruben"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the id, role, and first name of the professionals who have performed two or more treatments?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "dog_kennels_017",
+      "gold_sparql": "SELECT ?T1_breed_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/breeds> . ?T3 a <http://valuenet/ontop/dogs> . ?T3 <http://valuenet/ontop/ref-breed_code> ?T1 . ?T1 <http://valuenet/ontop/breed_name> ?T1_breed_name . ?T1 <http://valuenet/ontop/breed_code> ?T1_breed_code . } GROUP BY ?T1_breed_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_breed_name": "Bulldog",
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the name of the breed with the most dogs?"
+    },
+    {
+      "id": "Q018",
+      "original_id": "dog_kennels_018",
+      "gold_sparql": "SELECT ?T1_breed_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/breeds> . ?T3 a <http://valuenet/ontop/dogs> . ?T3 <http://valuenet/ontop/ref-breed_code> ?T1 . ?T1 <http://valuenet/ontop/breed_name> ?T1_breed_name . ?T1 <http://valuenet/ontop/breed_code> ?T1_breed_code . } GROUP BY ?T1_breed_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_breed_name": "Bulldog",
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which breed do the most dogs have? Give me the breed name."
+    },
+    {
+      "id": "Q019",
+      "original_id": "dog_kennels_019",
+      "gold_sparql": "SELECT ?T1_owner_id (count( *) as ?aggregation_all) ?T1_last_name WHERE { ?T1 a <http://valuenet/ontop/owners> . ?T2 a <http://valuenet/ontop/dogs> . ?T3 a <http://valuenet/ontop/treatments> . ?T1 <http://valuenet/ontop/owner_id> ?T1_owner_id . ?T2 <http://valuenet/ontop/dog_id> ?T2_dog_id . ?T3 <http://valuenet/ontop/ref-dog> ?T2 . ?T2 <http://valuenet/ontop/ref-owner> ?T1 . ?T1 <http://valuenet/ontop/last_name> ?T1_last_name . } GROUP BY ?T1_owner_id ?T1_last_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_owner_id": "14",
+          "aggregation_all": "4",
+          "T1_last_name": "Funk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which owner has paid for the most treatments on his or her dogs? List the owner id and last name."
+    },
+    {
+      "id": "Q020",
+      "original_id": "dog_kennels_020",
+      "gold_sparql": "SELECT ?T1_owner_id (count( *) as ?aggregation_all) ?T1_last_name WHERE { ?T1 a <http://valuenet/ontop/owners> . ?T2 a <http://valuenet/ontop/dogs> . ?T3 a <http://valuenet/ontop/treatments> . ?T1 <http://valuenet/ontop/owner_id> ?T1_owner_id . ?T2 <http://valuenet/ontop/dog_id> ?T2_dog_id . ?T3 <http://valuenet/ontop/ref-dog> ?T2 . ?T2 <http://valuenet/ontop/ref-owner> ?T1 . ?T1 <http://valuenet/ontop/last_name> ?T1_last_name . } GROUP BY ?T1_owner_id ?T1_last_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_owner_id": "14",
+          "aggregation_all": "4",
+          "T1_last_name": "Funk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Tell me the owner id and last name of the owner who spent the most on treatments of his or her dogs."
+    },
+    {
+      "id": "Q021",
+      "original_id": "dog_kennels_021",
+      "gold_sparql": "select ?t1_treatment_type_description where { ?t1 a <http://valuenet/ontop/treatment_types> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-treatment_type_code> ?t1 . ?t1 <http://valuenet/ontop/treatment_type_description> ?t1_treatment_type_description . ?t2 <http://valuenet/ontop/cost_of_treatment> ?t2_cost_of_treatment . } group by ?t1_treatment_type_description order by asc (sum( ?t2_cost_of_treatment) ) limit 1",
+      "gold_answers": [
+        {
+          "t1_treatment_type_description": "Take for a Walk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the description of the treatment type that costs the least money in total?"
+    },
+    {
+      "id": "Q022",
+      "original_id": "dog_kennels_022",
+      "gold_sparql": "select ?t1_treatment_type_description where { ?t1 a <http://valuenet/ontop/treatment_types> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-treatment_type_code> ?t1 . ?t1 <http://valuenet/ontop/treatment_type_description> ?t1_treatment_type_description . ?t2 <http://valuenet/ontop/cost_of_treatment> ?t2_cost_of_treatment . } group by ?t1_treatment_type_description order by asc (sum( ?t2_cost_of_treatment) ) limit 1",
+      "gold_answers": [
+        {
+          "t1_treatment_type_description": "Take for a Walk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give me the description of the treatment type whose total cost is the lowest."
+    },
+    {
+      "id": "Q023",
+      "original_id": "dog_kennels_023",
+      "gold_sparql": "select ?t1_owner_id ?t1_zip_code where { ?t1 a <http://valuenet/ontop/owners> . ?t3 a <http://valuenet/ontop/dogs> . ?t3 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . ?t1 <http://valuenet/ontop/zip_code> ?t1_zip_code . ?t2 <http://valuenet/ontop/cost_of_treatment> ?t2_cost_of_treatment . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t3 . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . ?t1 <http://valuenet/ontop/zip_code> ?t1_zip_code . ?t2 <http://valuenet/ontop/cost_of_treatment> ?t2_cost_of_treatment . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . } group by ?t1_owner_id ?t1_zip_code order by desc (sum( ?t2_cost_of_treatment)) limit 1",
+      "gold_answers": [
+        {
+          "t1_owner_id": "3",
+          "t1_zip_code": "02647"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which owner has paid the largest amount of money in total for their dogs? Show the owner id and zip code."
+    },
+    {
+      "id": "Q024",
+      "original_id": "dog_kennels_024",
+      "gold_sparql": "select ?t1_owner_id ?t1_zip_code where { ?t1 a <http://valuenet/ontop/owners> . ?t3 a <http://valuenet/ontop/dogs> . ?t3 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . ?t1 <http://valuenet/ontop/zip_code> ?t1_zip_code . ?t2 <http://valuenet/ontop/cost_of_treatment> ?t2_cost_of_treatment . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t3 . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . ?t1 <http://valuenet/ontop/zip_code> ?t1_zip_code . ?t2 <http://valuenet/ontop/cost_of_treatment> ?t2_cost_of_treatment . ?t1 <http://valuenet/ontop/owner_id> ?t1_owner_id . } group by ?t1_owner_id ?t1_zip_code order by desc (sum( ?t2_cost_of_treatment)) limit 1",
+      "gold_answers": [
+        {
+          "t1_owner_id": "3",
+          "t1_zip_code": "02647"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the owner id and zip code of the owner who spent the most money in total for his or her dogs."
+    },
+    {
+      "id": "Q025",
+      "original_id": "dog_kennels_025",
+      "gold_sparql": "select ?t1_professional_id ?t1_cell_number where { ?t1 a <http://valuenet/ontop/professionals> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t3 a <http://valuenet/ontop/treatment_types> . ?t2 <http://valuenet/ontop/ref-treatment_type_code> ?t3 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . } group by ?t1_professional_id ?t1_cell_number having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_professional_id": "8",
+          "t1_cell_number": "328.842.3792"
+        },
+        {
+          "t1_professional_id": "9",
+          "t1_cell_number": "962-983-8109x3509"
+        },
+        {
+          "t1_professional_id": "10",
+          "t1_cell_number": "461-801-2600"
+        },
+        {
+          "t1_professional_id": "14",
+          "t1_cell_number": "1-185-137-1945x409"
+        },
+        {
+          "t1_professional_id": "4",
+          "t1_cell_number": "00230569697"
+        },
+        {
+          "t1_professional_id": "6",
+          "t1_cell_number": "139- 321- 7313"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which professionals have done at least two types of treatments? List the professional id and cell phone."
+    },
+    {
+      "id": "Q026",
+      "original_id": "dog_kennels_026",
+      "gold_sparql": "select ?t1_professional_id ?t1_cell_number where { ?t1 a <http://valuenet/ontop/professionals> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t3 a <http://valuenet/ontop/treatment_types> . ?t2 <http://valuenet/ontop/ref-treatment_type_code> ?t3 . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . } group by ?t1_professional_id ?t1_cell_number having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_professional_id": "8",
+          "t1_cell_number": "328.842.3792"
+        },
+        {
+          "t1_professional_id": "9",
+          "t1_cell_number": "962-983-8109x3509"
+        },
+        {
+          "t1_professional_id": "10",
+          "t1_cell_number": "461-801-2600"
+        },
+        {
+          "t1_professional_id": "14",
+          "t1_cell_number": "1-185-137-1945x409"
+        },
+        {
+          "t1_professional_id": "4",
+          "t1_cell_number": "00230569697"
+        },
+        {
+          "t1_professional_id": "6",
+          "t1_cell_number": "139- 321- 7313"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the id and cell phone of the professionals who operate two or more types of treatments."
+    },
+    {
+      "id": "Q027",
+      "original_id": "dog_kennels_027",
+      "gold_sparql": "SELECT DISTINCT ?T1_first_name ?T1_last_name WHERE { ?T1 a <http://valuenet/ontop/professionals> . ?T2 a <http://valuenet/ontop/treatments> . ?T2 <http://valuenet/ontop/ref-professional> ?T1 . ?T1 <http://valuenet/ontop/first_name> ?T1_first_name . ?T1 <http://valuenet/ontop/last_name> ?T1_last_name . ?T2 <http://valuenet/ontop/cost_of_treatment> ?T2_cost_of_treatment . FILTER(?T2_cost_of_treatment < ?aggregation_T23_cost_of_treatment_180) . {SELECT (avg( ?T23_cost_of_treatment) as ?aggregation_T23_cost_of_treatment_180 ) WHERE { ?T23 a <http://valuenet/ontop/treatments> . ?T23 <http://valuenet/ontop/cost_of_treatment> ?T23_cost_of_treatment . } } }",
+      "gold_answers": [
+        {
+          "T1_first_name": "Domenica",
+          "T1_last_name": "Jacobs"
+        },
+        {
+          "T1_first_name": "Karley",
+          "T1_last_name": "Hyatt"
+        },
+        {
+          "T1_first_name": "Monte",
+          "T1_last_name": "Kshlerin"
+        },
+        {
+          "T1_first_name": "Vernice",
+          "T1_last_name": "Tillman"
+        },
+        {
+          "T1_first_name": "Ruben",
+          "T1_last_name": "O'Reilly"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the first name and last name of the professionals who have done treatment with cost below average?"
+    },
+    {
+      "id": "Q028",
+      "original_id": "dog_kennels_028",
+      "gold_sparql": "SELECT DISTINCT ?T1_first_name ?T1_last_name WHERE { ?T1 a <http://valuenet/ontop/professionals> . ?T2 a <http://valuenet/ontop/treatments> . ?T2 <http://valuenet/ontop/ref-professional> ?T1 . ?T1 <http://valuenet/ontop/first_name> ?T1_first_name . ?T1 <http://valuenet/ontop/last_name> ?T1_last_name . ?T2 <http://valuenet/ontop/cost_of_treatment> ?T2_cost_of_treatment . FILTER(?T2_cost_of_treatment < ?aggregation_T23_cost_of_treatment_180) . {SELECT (avg( ?T23_cost_of_treatment) as ?aggregation_T23_cost_of_treatment_180 ) WHERE { ?T23 a <http://valuenet/ontop/treatments> . ?T23 <http://valuenet/ontop/cost_of_treatment> ?T23_cost_of_treatment . } } }",
+      "gold_answers": [
+        {
+          "T1_first_name": "Domenica",
+          "T1_last_name": "Jacobs"
+        },
+        {
+          "T1_first_name": "Karley",
+          "T1_last_name": "Hyatt"
+        },
+        {
+          "T1_first_name": "Monte",
+          "T1_last_name": "Kshlerin"
+        },
+        {
+          "T1_first_name": "Vernice",
+          "T1_last_name": "Tillman"
+        },
+        {
+          "T1_first_name": "Ruben",
+          "T1_last_name": "O'Reilly"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which professionals have operated a treatment that costs less than the average? Give me theor first names and last names."
+    },
+    {
+      "id": "Q029",
+      "original_id": "dog_kennels_029",
+      "gold_sparql": "select ?t1_date_of_treatment ?t2_first_name where { ?t1 a <http://valuenet/ontop/treatments> . ?t2 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/ref-professional> ?t2 . ?t1 <http://valuenet/ontop/date_of_treatment> ?t1_date_of_treatment . ?t2 <http://valuenet/ontop/first_name> ?t2_first_name . }",
+      "gold_answers": [
+        {
+          "t1_date_of_treatment": "2018-03-14T19:10:40",
+          "t2_first_name": "Domenica"
+        },
+        {
+          "t1_date_of_treatment": "2018-02-26T09:08:53",
+          "t2_first_name": "Karley"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-15T20:25:34",
+          "t2_first_name": "Domenica"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-19T04:39:54",
+          "t2_first_name": "Monte"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-04T20:33:43",
+          "t2_first_name": "Monte"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-23T13:52:10",
+          "t2_first_name": "Sigurd"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-13T12:22:58",
+          "t2_first_name": "Danny"
+        },
+        {
+          "t1_date_of_treatment": "2018-02-28T17:09:43",
+          "t2_first_name": "Velva"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-10T11:45:58",
+          "t2_first_name": "Sigurd"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-01T04:14:46",
+          "t2_first_name": "Karley"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-08T05:26:23",
+          "t2_first_name": "Vernice"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-24T22:25:58",
+          "t2_first_name": "Ruben"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-15T19:10:02",
+          "t2_first_name": "Ruben"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-16T10:27:36",
+          "t2_first_name": "Monte"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-11T04:23:15",
+          "t2_first_name": "Vernice"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the date of each treatment, together with the first name of the professional who operated it."
+    },
+    {
+      "id": "Q030",
+      "original_id": "dog_kennels_030",
+      "gold_sparql": "select ?t1_date_of_treatment ?t2_first_name where { ?t1 a <http://valuenet/ontop/treatments> . ?t2 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/ref-professional> ?t2 . ?t1 <http://valuenet/ontop/date_of_treatment> ?t1_date_of_treatment . ?t2 <http://valuenet/ontop/first_name> ?t2_first_name . }",
+      "gold_answers": [
+        {
+          "t1_date_of_treatment": "2018-03-14T19:10:40",
+          "t2_first_name": "Domenica"
+        },
+        {
+          "t1_date_of_treatment": "2018-02-26T09:08:53",
+          "t2_first_name": "Karley"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-15T20:25:34",
+          "t2_first_name": "Domenica"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-19T04:39:54",
+          "t2_first_name": "Monte"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-04T20:33:43",
+          "t2_first_name": "Monte"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-23T13:52:10",
+          "t2_first_name": "Sigurd"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-13T12:22:58",
+          "t2_first_name": "Danny"
+        },
+        {
+          "t1_date_of_treatment": "2018-02-28T17:09:43",
+          "t2_first_name": "Velva"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-10T11:45:58",
+          "t2_first_name": "Sigurd"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-01T04:14:46",
+          "t2_first_name": "Karley"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-08T05:26:23",
+          "t2_first_name": "Vernice"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-24T22:25:58",
+          "t2_first_name": "Ruben"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-15T19:10:02",
+          "t2_first_name": "Ruben"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-16T10:27:36",
+          "t2_first_name": "Monte"
+        },
+        {
+          "t1_date_of_treatment": "2018-03-11T04:23:15",
+          "t2_first_name": "Vernice"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the date and the operating professional's first name of each treatment?"
+    },
+    {
+      "id": "Q031",
+      "original_id": "dog_kennels_031",
+      "gold_sparql": "select ?t1_cost_of_treatment ?t2_treatment_type_description where { ?t1 a <http://valuenet/ontop/treatments> . ?t2 a <http://valuenet/ontop/treatment_types> . ?t1 <http://valuenet/ontop/ref-treatment_type_code> ?t2 . ?t1 <http://valuenet/ontop/cost_of_treatment> ?t1_cost_of_treatment . ?t2 <http://valuenet/ontop/treatment_type_description> ?t2_treatment_type_description . }",
+      "gold_answers": [
+        {
+          "t1_cost_of_treatment": "139.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "945.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "147.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "567.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "349.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "668.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "514.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "681.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "852.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "266.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "429.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "407.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "656.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "428.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "313.0",
+          "t2_treatment_type_description": "Physical examination"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the cost of each treatment and the corresponding treatment type description."
+    },
+    {
+      "id": "Q032",
+      "original_id": "dog_kennels_032",
+      "gold_sparql": "select ?t1_cost_of_treatment ?t2_treatment_type_description where { ?t1 a <http://valuenet/ontop/treatments> . ?t2 a <http://valuenet/ontop/treatment_types> . ?t1 <http://valuenet/ontop/ref-treatment_type_code> ?t2 . ?t1 <http://valuenet/ontop/cost_of_treatment> ?t1_cost_of_treatment . ?t2 <http://valuenet/ontop/treatment_type_description> ?t2_treatment_type_description . }",
+      "gold_answers": [
+        {
+          "t1_cost_of_treatment": "139.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "945.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "147.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "567.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "349.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "668.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "514.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "681.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "852.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "266.0",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_cost_of_treatment": "429.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "407.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "656.0",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_cost_of_treatment": "428.0",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_cost_of_treatment": "313.0",
+          "t2_treatment_type_description": "Physical examination"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the cost and treatment type description of each treatment?"
+    },
+    {
+      "id": "Q033",
+      "original_id": "dog_kennels_033",
+      "gold_sparql": "select ?t1_first_name ?t1_last_name ?t2_size_code where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t2 <http://valuenet/ontop/size_code> ?t2_size_code . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Rachelle",
+          "t1_last_name": "Funk",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t1_last_name": "Funk",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t1_last_name": "Funk",
+          "t2_size_code": "SML"
+        },
+        {
+          "t1_first_name": "Gay",
+          "t1_last_name": "Feil",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Johann",
+          "t1_last_name": "Fisher",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t1_last_name": "Stoltenberg",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t1_last_name": "Stoltenberg",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Melisa",
+          "t1_last_name": "DuBuque",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Emelie",
+          "t1_last_name": "Mertz",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Cindy",
+          "t1_last_name": "Schmitt",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Kade",
+          "t1_last_name": "Rippin",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Orlando",
+          "t1_last_name": "Price",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Lorenz",
+          "t1_last_name": "Nicolas",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Rolando",
+          "t1_last_name": "Prohaska",
+          "t2_size_code": "SML"
+        },
+        {
+          "t1_first_name": "Nora",
+          "t1_last_name": "Haley",
+          "t2_size_code": "MED"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List each owner's first name, last name, and the size of his for her dog."
+    },
+    {
+      "id": "Q034",
+      "original_id": "dog_kennels_034",
+      "gold_sparql": "select ?t1_first_name ?t1_last_name ?t2_size_code where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t2 <http://valuenet/ontop/size_code> ?t2_size_code . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Rachelle",
+          "t1_last_name": "Funk",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t1_last_name": "Funk",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t1_last_name": "Funk",
+          "t2_size_code": "SML"
+        },
+        {
+          "t1_first_name": "Gay",
+          "t1_last_name": "Feil",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Johann",
+          "t1_last_name": "Fisher",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t1_last_name": "Stoltenberg",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t1_last_name": "Stoltenberg",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Melisa",
+          "t1_last_name": "DuBuque",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Emelie",
+          "t1_last_name": "Mertz",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Cindy",
+          "t1_last_name": "Schmitt",
+          "t2_size_code": "LGE"
+        },
+        {
+          "t1_first_name": "Kade",
+          "t1_last_name": "Rippin",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Orlando",
+          "t1_last_name": "Price",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Lorenz",
+          "t1_last_name": "Nicolas",
+          "t2_size_code": "MED"
+        },
+        {
+          "t1_first_name": "Rolando",
+          "t1_last_name": "Prohaska",
+          "t2_size_code": "SML"
+        },
+        {
+          "t1_first_name": "Nora",
+          "t1_last_name": "Haley",
+          "t2_size_code": "MED"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are each owner's first name, last name, and the size of their dog?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "dog_kennels_035",
+      "gold_sparql": "select ?t1_first_name ?t2_name where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/name> ?t2_name . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Rachelle",
+          "t2_name": "Lyric"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t2_name": "Houston"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t2_name": "George"
+        },
+        {
+          "t1_first_name": "Gay",
+          "t2_name": "Hipolito"
+        },
+        {
+          "t1_first_name": "Johann",
+          "t2_name": "Merritt"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t2_name": "Narciso"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t2_name": "Kacey"
+        },
+        {
+          "t1_first_name": "Melisa",
+          "t2_name": "Bessie"
+        },
+        {
+          "t1_first_name": "Emelie",
+          "t2_name": "Jeffrey"
+        },
+        {
+          "t1_first_name": "Cindy",
+          "t2_name": "Betty"
+        },
+        {
+          "t1_first_name": "Kade",
+          "t2_name": "Troy"
+        },
+        {
+          "t1_first_name": "Orlando",
+          "t2_name": "Holden"
+        },
+        {
+          "t1_first_name": "Lorenz",
+          "t2_name": "Evangeline"
+        },
+        {
+          "t1_first_name": "Rolando",
+          "t2_name": "Jesus"
+        },
+        {
+          "t1_first_name": "Nora",
+          "t2_name": "Mavis"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List pairs of the owner's first name and the dogs's name."
+    },
+    {
+      "id": "Q036",
+      "original_id": "dog_kennels_036",
+      "gold_sparql": "select ?t1_first_name ?t2_name where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/name> ?t2_name . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Rachelle",
+          "t2_name": "Lyric"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t2_name": "Houston"
+        },
+        {
+          "t1_first_name": "Rachelle",
+          "t2_name": "George"
+        },
+        {
+          "t1_first_name": "Gay",
+          "t2_name": "Hipolito"
+        },
+        {
+          "t1_first_name": "Johann",
+          "t2_name": "Merritt"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t2_name": "Narciso"
+        },
+        {
+          "t1_first_name": "Jaclyn",
+          "t2_name": "Kacey"
+        },
+        {
+          "t1_first_name": "Melisa",
+          "t2_name": "Bessie"
+        },
+        {
+          "t1_first_name": "Emelie",
+          "t2_name": "Jeffrey"
+        },
+        {
+          "t1_first_name": "Cindy",
+          "t2_name": "Betty"
+        },
+        {
+          "t1_first_name": "Kade",
+          "t2_name": "Troy"
+        },
+        {
+          "t1_first_name": "Orlando",
+          "t2_name": "Holden"
+        },
+        {
+          "t1_first_name": "Lorenz",
+          "t2_name": "Evangeline"
+        },
+        {
+          "t1_first_name": "Rolando",
+          "t2_name": "Jesus"
+        },
+        {
+          "t1_first_name": "Nora",
+          "t2_name": "Mavis"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are each owner's first name and their dogs's name?"
+    },
+    {
+      "id": "Q037",
+      "original_id": "dog_kennels_037",
+      "gold_sparql": "select ?t1_name ?t2_date_of_treatment where { ?t1 a <http://valuenet/ontop/dogs> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/date_of_treatment> ?t2_date_of_treatment . ?t1 <http://valuenet/ontop/breed_code> ?t1_breed_code . FILTER(?t1_breed_code = ?t23_breed_code) . {select ?t23_breed_code (count( *) as ?aggregation_all) where { ?t23 a <http://valuenet/ontop/dogs> . ?t23 <http://valuenet/ontop/breed_code> ?t23_breed_code . } group by ?t23_breed_code order by asc (?aggregation_all) limit 1 } }",
+      "gold_answers": [
+        {
+          "t1_name": "Lyric",
+          "t2_date_of_treatment": "2018-03-14T19:10:40"
+        },
+        {
+          "t1_name": "Lyric",
+          "t2_date_of_treatment": "2018-03-19T04:39:54"
+        },
+        {
+          "t1_name": "Lyric",
+          "t2_date_of_treatment": "2018-03-08T05:26:23"
+        },
+        {
+          "t1_name": "Houston",
+          "t2_date_of_treatment": "2018-03-15T20:25:34"
+        },
+        {
+          "t1_name": "Kacey",
+          "t2_date_of_treatment": "2018-03-15T19:10:02"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "List the names of the dogs of the rarest breed and the treatment dates of them."
+    },
+    {
+      "id": "Q038",
+      "original_id": "dog_kennels_038",
+      "gold_sparql": "select ?t1_name ?t2_date_of_treatment where { ?t1 a <http://valuenet/ontop/dogs> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/date_of_treatment> ?t2_date_of_treatment . ?t1 <http://valuenet/ontop/breed_code> ?t1_breed_code . FILTER(?t1_breed_code = ?t23_breed_code) . {select ?t23_breed_code (count( *) as ?aggregation_all) where { ?t23 a <http://valuenet/ontop/dogs> . ?t23 <http://valuenet/ontop/breed_code> ?t23_breed_code . } group by ?t23_breed_code order by asc (?aggregation_all) limit 1 } }",
+      "gold_answers": [
+        {
+          "t1_name": "Lyric",
+          "t2_date_of_treatment": "2018-03-14T19:10:40"
+        },
+        {
+          "t1_name": "Lyric",
+          "t2_date_of_treatment": "2018-03-19T04:39:54"
+        },
+        {
+          "t1_name": "Lyric",
+          "t2_date_of_treatment": "2018-03-08T05:26:23"
+        },
+        {
+          "t1_name": "Houston",
+          "t2_date_of_treatment": "2018-03-15T20:25:34"
+        },
+        {
+          "t1_name": "Kacey",
+          "t2_date_of_treatment": "2018-03-15T19:10:02"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which dogs are of the rarest breed? Show their names and treatment dates."
+    },
+    {
+      "id": "Q039",
+      "original_id": "dog_kennels_039",
+      "gold_sparql": "select ?t1_first_name ?t2_name where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/name> ?t2_name . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(?t1_state = 'Virginia') . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Melisa",
+          "t2_name": "Bessie"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which dogs are owned by someone who lives in Virginia? List the owner's first name and the dog's name."
+    },
+    {
+      "id": "Q040",
+      "original_id": "dog_kennels_040",
+      "gold_sparql": "select ?t1_first_name ?t2_name where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/name> ?t2_name . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(?t1_state = 'Virginia') . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Melisa",
+          "t2_name": "Bessie"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the first names of owners living in Virginia and the names of dogs they own."
+    },
+    {
+      "id": "Q041",
+      "original_id": "dog_kennels_041",
+      "gold_sparql": "select distinct ?t1_date_arrived ?t1_date_departed where { ?t1 a <http://valuenet/ontop/dogs> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t1 . ?t1 <http://valuenet/ontop/date_arrived> ?t1_date_arrived . ?t1 <http://valuenet/ontop/date_departed> ?t1_date_departed . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . }",
+      "gold_answers": [
+        {
+          "t1_date_arrived": "2017-06-18T19:45:38",
+          "t1_date_departed": "2018-03-24T23:48:59"
+        },
+        {
+          "t1_date_arrived": "2017-12-22T05:02:02",
+          "t1_date_departed": "2018-03-25T02:11:32"
+        },
+        {
+          "t1_date_arrived": "2017-05-06T08:03:52",
+          "t1_date_departed": "2018-03-25T06:29:10"
+        },
+        {
+          "t1_date_arrived": "2017-04-20T00:58:55",
+          "t1_date_departed": "2018-03-24T19:12:22"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T06:08:26",
+          "t1_date_departed": "2018-03-25T04:42:14"
+        },
+        {
+          "t1_date_arrived": "2017-10-24T04:45:13",
+          "t1_date_departed": "2018-03-25T14:15:41"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T23:24:13",
+          "t1_date_departed": "2018-03-24T19:36:59"
+        },
+        {
+          "t1_date_arrived": "2017-09-08T20:10:13",
+          "t1_date_departed": "2018-03-25T06:58:44"
+        },
+        {
+          "t1_date_arrived": "2018-01-02T03:15:29",
+          "t1_date_departed": "2018-03-25T05:07:47"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the arriving date and the departing date of the dogs who have gone through a treatment?"
+    },
+    {
+      "id": "Q042",
+      "original_id": "dog_kennels_042",
+      "gold_sparql": "select distinct ?t1_date_arrived ?t1_date_departed where { ?t1 a <http://valuenet/ontop/dogs> . ?t2 a <http://valuenet/ontop/treatments> . ?t2 <http://valuenet/ontop/ref-dog> ?t1 . ?t1 <http://valuenet/ontop/date_arrived> ?t1_date_arrived . ?t1 <http://valuenet/ontop/date_departed> ?t1_date_departed . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . }",
+      "gold_answers": [
+        {
+          "t1_date_arrived": "2017-06-18T19:45:38",
+          "t1_date_departed": "2018-03-24T23:48:59"
+        },
+        {
+          "t1_date_arrived": "2017-12-22T05:02:02",
+          "t1_date_departed": "2018-03-25T02:11:32"
+        },
+        {
+          "t1_date_arrived": "2017-05-06T08:03:52",
+          "t1_date_departed": "2018-03-25T06:29:10"
+        },
+        {
+          "t1_date_arrived": "2017-04-20T00:58:55",
+          "t1_date_departed": "2018-03-24T19:12:22"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T06:08:26",
+          "t1_date_departed": "2018-03-25T04:42:14"
+        },
+        {
+          "t1_date_arrived": "2017-10-24T04:45:13",
+          "t1_date_departed": "2018-03-25T14:15:41"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T23:24:13",
+          "t1_date_departed": "2018-03-24T19:36:59"
+        },
+        {
+          "t1_date_arrived": "2017-09-08T20:10:13",
+          "t1_date_departed": "2018-03-25T06:58:44"
+        },
+        {
+          "t1_date_arrived": "2018-01-02T03:15:29",
+          "t1_date_departed": "2018-03-25T05:07:47"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the arriving date and the departing date of the dogs that received a treatment."
+    },
+    {
+      "id": "Q043",
+      "original_id": "dog_kennels_043",
+      "gold_sparql": "select ?t1_last_name where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t2 <http://valuenet/ontop/age> ?t2_age . FILTER(?t2_age = ?aggregation_t23_age_85) . {select (max( ?t23_age) as ?aggregation_t23_age_85 ) where { ?t23 a <http://valuenet/ontop/dogs> . ?t23 <http://valuenet/ontop/age> ?t23_age . } } }",
+      "gold_answers": [
+        {
+          "t1_last_name": "Feil"
+        },
+        {
+          "t1_last_name": "Fisher"
+        },
+        {
+          "t1_last_name": "Rippin"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the last name of the owner owning the youngest dog."
+    },
+    {
+      "id": "Q044",
+      "original_id": "dog_kennels_044",
+      "gold_sparql": "select ?t1_last_name where { ?t1 a <http://valuenet/ontop/owners> . ?t2 a <http://valuenet/ontop/dogs> . ?t2 <http://valuenet/ontop/ref-owner> ?t1 . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t2 <http://valuenet/ontop/age> ?t2_age . FILTER(?t2_age = ?aggregation_t23_age_85) . {select (max( ?t23_age) as ?aggregation_t23_age_85 ) where { ?t23 a <http://valuenet/ontop/dogs> . ?t23 <http://valuenet/ontop/age> ?t23_age . } } }",
+      "gold_answers": [
+        {
+          "t1_last_name": "Feil"
+        },
+        {
+          "t1_last_name": "Fisher"
+        },
+        {
+          "t1_last_name": "Rippin"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Who owns the youngest dog? Give me his or her last name."
+    },
+    {
+      "id": "Q045",
+      "original_id": "dog_kennels_045",
+      "gold_sparql": "select ?t1_email_address where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . ?t1 <http://valuenet/ontop/state> ?t1_state . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(?t1_state = 'Hawaii' || ?t1_state = 'Wisconsin') . }",
+      "gold_answers": [
+        {
+          "t1_email_address": "mekhi.little@example.org"
+        },
+        {
+          "t1_email_address": "uboehm@example.org"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the emails of the professionals who live in the state of Hawaii or the state of Wisconsin."
+    },
+    {
+      "id": "Q046",
+      "original_id": "dog_kennels_046",
+      "gold_sparql": "select ?t1_email_address where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . ?t1 <http://valuenet/ontop/state> ?t1_state . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(?t1_state = 'Hawaii' || ?t1_state = 'Wisconsin') . }",
+      "gold_answers": [
+        {
+          "t1_email_address": "mekhi.little@example.org"
+        },
+        {
+          "t1_email_address": "uboehm@example.org"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the emails of the professionals living in either the state of Hawaii or the state of Wisconsin?"
+    },
+    {
+      "id": "Q047",
+      "original_id": "dog_kennels_047",
+      "gold_sparql": "select ?t1_date_arrived ?t1_date_departed where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/date_arrived> ?t1_date_arrived . ?t1 <http://valuenet/ontop/date_departed> ?t1_date_departed . }",
+      "gold_answers": [
+        {
+          "t1_date_arrived": "2017-06-18T19:45:38",
+          "t1_date_departed": "2018-03-24T23:48:59"
+        },
+        {
+          "t1_date_arrived": "2017-12-22T05:02:02",
+          "t1_date_departed": "2018-03-25T02:11:32"
+        },
+        {
+          "t1_date_arrived": "2017-05-06T08:03:52",
+          "t1_date_departed": "2018-03-25T06:29:10"
+        },
+        {
+          "t1_date_arrived": "2017-04-20T00:58:55",
+          "t1_date_departed": "2018-03-24T19:12:22"
+        },
+        {
+          "t1_date_arrived": "2017-10-25T00:55:34",
+          "t1_date_departed": "2018-03-25T04:50:22"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T06:08:26",
+          "t1_date_departed": "2018-03-25T04:42:14"
+        },
+        {
+          "t1_date_arrived": "2017-10-24T04:45:13",
+          "t1_date_departed": "2018-03-25T14:15:41"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T23:24:13",
+          "t1_date_departed": "2018-03-24T19:36:59"
+        },
+        {
+          "t1_date_arrived": "2018-01-17T11:44:16",
+          "t1_date_departed": "2018-03-25T06:46:07"
+        },
+        {
+          "t1_date_arrived": "2017-04-15T09:25:31",
+          "t1_date_departed": "2018-03-25T13:07:04"
+        },
+        {
+          "t1_date_arrived": "2017-09-08T20:10:13",
+          "t1_date_departed": "2018-03-25T06:58:44"
+        },
+        {
+          "t1_date_arrived": "2018-01-02T03:15:29",
+          "t1_date_departed": "2018-03-25T05:07:47"
+        },
+        {
+          "t1_date_arrived": "2017-10-16T20:06:21",
+          "t1_date_departed": "2018-03-25T02:47:40"
+        },
+        {
+          "t1_date_arrived": "2017-07-25T15:19:07",
+          "t1_date_departed": "2018-03-25T15:05:16"
+        },
+        {
+          "t1_date_arrived": "2017-06-25T10:14:05",
+          "t1_date_departed": "2018-03-25T10:25:46"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the arriving date and the departing date of all the dogs?"
+    },
+    {
+      "id": "Q048",
+      "original_id": "dog_kennels_048",
+      "gold_sparql": "select ?t1_date_arrived ?t1_date_departed where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/date_arrived> ?t1_date_arrived . ?t1 <http://valuenet/ontop/date_departed> ?t1_date_departed . }",
+      "gold_answers": [
+        {
+          "t1_date_arrived": "2017-06-18T19:45:38",
+          "t1_date_departed": "2018-03-24T23:48:59"
+        },
+        {
+          "t1_date_arrived": "2017-12-22T05:02:02",
+          "t1_date_departed": "2018-03-25T02:11:32"
+        },
+        {
+          "t1_date_arrived": "2017-05-06T08:03:52",
+          "t1_date_departed": "2018-03-25T06:29:10"
+        },
+        {
+          "t1_date_arrived": "2017-04-20T00:58:55",
+          "t1_date_departed": "2018-03-24T19:12:22"
+        },
+        {
+          "t1_date_arrived": "2017-10-25T00:55:34",
+          "t1_date_departed": "2018-03-25T04:50:22"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T06:08:26",
+          "t1_date_departed": "2018-03-25T04:42:14"
+        },
+        {
+          "t1_date_arrived": "2017-10-24T04:45:13",
+          "t1_date_departed": "2018-03-25T14:15:41"
+        },
+        {
+          "t1_date_arrived": "2017-12-29T23:24:13",
+          "t1_date_departed": "2018-03-24T19:36:59"
+        },
+        {
+          "t1_date_arrived": "2018-01-17T11:44:16",
+          "t1_date_departed": "2018-03-25T06:46:07"
+        },
+        {
+          "t1_date_arrived": "2017-04-15T09:25:31",
+          "t1_date_departed": "2018-03-25T13:07:04"
+        },
+        {
+          "t1_date_arrived": "2017-09-08T20:10:13",
+          "t1_date_departed": "2018-03-25T06:58:44"
+        },
+        {
+          "t1_date_arrived": "2018-01-02T03:15:29",
+          "t1_date_departed": "2018-03-25T05:07:47"
+        },
+        {
+          "t1_date_arrived": "2017-10-16T20:06:21",
+          "t1_date_departed": "2018-03-25T02:47:40"
+        },
+        {
+          "t1_date_arrived": "2017-07-25T15:19:07",
+          "t1_date_departed": "2018-03-25T15:05:16"
+        },
+        {
+          "t1_date_arrived": "2017-06-25T10:14:05",
+          "t1_date_departed": "2018-03-25T10:25:46"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the arrival date and the departure date for all the dogs."
+    },
+    {
+      "id": "Q049",
+      "original_id": "dog_kennels_049",
+      "gold_sparql": "select distinct (count(distinct ?t1_dog_id) as ?aggregation_t1_dog_id_182 ) where { ?t1 a <http://valuenet/ontop/treatments> . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_dog_id_182": "9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many dogs went through any treatments?"
+    },
+    {
+      "id": "Q050",
+      "original_id": "dog_kennels_050",
+      "gold_sparql": "select distinct (count(distinct ?t1_dog_id) as ?aggregation_t1_dog_id_182 ) where { ?t1 a <http://valuenet/ontop/treatments> . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_dog_id_182": "9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of dogs that went through a treatment."
+    },
+    {
+      "id": "Q051",
+      "original_id": "dog_kennels_051",
+      "gold_sparql": "select distinct (count(distinct ?t1_professional_id) as ?aggregation_t1_professional_id_132 ) where { ?t1 a <http://valuenet/ontop/treatments> . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_professional_id_132": "8"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many professionals have performed any treatment to dogs?"
+    },
+    {
+      "id": "Q052",
+      "original_id": "dog_kennels_052",
+      "gold_sparql": "select distinct (count(distinct ?t1_professional_id) as ?aggregation_t1_professional_id_132 ) where { ?t1 a <http://valuenet/ontop/treatments> . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_professional_id_132": "8"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of professionals who have ever treated dogs."
+    },
+    {
+      "id": "Q053",
+      "original_id": "dog_kennels_053",
+      "gold_sparql": "SELECT ?T1_role_code ?T1_street ?T1_city ?T1_state WHERE { ?T1 a <http://valuenet/ontop/professionals> . ?T1 <http://valuenet/ontop/role_code> ?T1_role_code . ?T1 <http://valuenet/ontop/street> ?T1_street . ?T1 <http://valuenet/ontop/city> ?T1_city . ?T1 <http://valuenet/ontop/state> ?T1_state . ?T1 <http://valuenet/ontop/city> ?T1_city . FILTER(contains (?T1_city, 'West')) . }",
+      "gold_answers": [
+        {
+          "T1_role_code": "Employee",
+          "T1_street": "6915 Oberbrunner Point Suite 491 Gleasonville, LA",
+          "T1_city": "West Heidi",
+          "T1_state": "Indiana"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which professionals live in a city containing the substring 'West'? List his or her role, street, city and state."
+    },
+    {
+      "id": "Q054",
+      "original_id": "dog_kennels_054",
+      "gold_sparql": "SELECT ?T1_role_code ?T1_street ?T1_city ?T1_state WHERE { ?T1 a <http://valuenet/ontop/professionals> . ?T1 <http://valuenet/ontop/role_code> ?T1_role_code . ?T1 <http://valuenet/ontop/street> ?T1_street . ?T1 <http://valuenet/ontop/city> ?T1_city . ?T1 <http://valuenet/ontop/state> ?T1_state . ?T1 <http://valuenet/ontop/city> ?T1_city . FILTER(contains (?T1_city, 'West')) . }",
+      "gold_answers": [
+        {
+          "T1_role_code": "Employee",
+          "T1_street": "6915 Oberbrunner Point Suite 491 Gleasonville, LA",
+          "T1_city": "West Heidi",
+          "T1_state": "Indiana"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the role, street, city and state of the professionals living in a city that contains the substring 'West'."
+    },
+    {
+      "id": "Q055",
+      "original_id": "dog_kennels_055",
+      "gold_sparql": "select ?t1_first_name ?t1_last_name ?t1_email_address where { ?t1 a <http://valuenet/ontop/owners> . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(contains (?t1_state, 'North')) . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Johann",
+          "t1_last_name": "Fisher",
+          "t1_email_address": "zboncak.madonna@example.net"
+        },
+        {
+          "t1_first_name": "Cindy",
+          "t1_last_name": "Schmitt",
+          "t1_email_address": "wpfeffer@example.net"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which owners live in the state whose name contains the substring 'North'? List his first name, last name and email."
+    },
+    {
+      "id": "Q056",
+      "original_id": "dog_kennels_056",
+      "gold_sparql": "select ?t1_first_name ?t1_last_name ?t1_email_address where { ?t1 a <http://valuenet/ontop/owners> . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t1 <http://valuenet/ontop/last_name> ?t1_last_name . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . ?t1 <http://valuenet/ontop/state> ?t1_state . FILTER(contains (?t1_state, 'North')) . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Johann",
+          "t1_last_name": "Fisher",
+          "t1_email_address": "zboncak.madonna@example.net"
+        },
+        {
+          "t1_first_name": "Cindy",
+          "t1_last_name": "Schmitt",
+          "t1_email_address": "wpfeffer@example.net"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the first name, last name and email of the owners living in a state whose name contains the substring 'North'."
+    },
+    {
+      "id": "Q057",
+      "original_id": "dog_kennels_057",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age < ?aggregation_t22_age_5) . {select (avg( ?t22_age) as ?aggregation_t22_age_5 ) where { ?t22 a <http://valuenet/ontop/dogs> . ?t22 <http://valuenet/ontop/age> ?t22_age . } } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "9"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many dogs have an age below the average?"
+    },
+    {
+      "id": "Q058",
+      "original_id": "dog_kennels_058",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age < ?aggregation_t22_age_5) . {select (avg( ?t22_age) as ?aggregation_t22_age_5 ) where { ?t22 a <http://valuenet/ontop/dogs> . ?t22 <http://valuenet/ontop/age> ?t22_age . } } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "9"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of dogs of an age below the average."
+    },
+    {
+      "id": "Q059",
+      "original_id": "dog_kennels_059",
+      "gold_sparql": "select ?t1_cost_of_treatment where { ?t1 a <http://valuenet/ontop/treatments> . ?t1 <http://valuenet/ontop/cost_of_treatment> ?t1_cost_of_treatment . ?t1 <http://valuenet/ontop/date_of_treatment> ?t1_date_of_treatment . } order by desc (?t1_date_of_treatment) limit 1",
+      "gold_answers": [
+        {
+          "t1_cost_of_treatment": "407.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "How much does the most recent treatment cost?"
+    },
+    {
+      "id": "Q060",
+      "original_id": "dog_kennels_060",
+      "gold_sparql": "select ?t1_cost_of_treatment where { ?t1 a <http://valuenet/ontop/treatments> . ?t1 <http://valuenet/ontop/cost_of_treatment> ?t1_cost_of_treatment . ?t1 <http://valuenet/ontop/date_of_treatment> ?t1_date_of_treatment . } order by desc (?t1_date_of_treatment) limit 1",
+      "gold_answers": [
+        {
+          "t1_cost_of_treatment": "407.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show me the cost of the most recently performed treatment."
+    },
+    {
+      "id": "Q061",
+      "original_id": "dog_kennels_061",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/dog_id> ?t1_dog_id . Filter not exists {{select ?t22_dog_id where { ?t22 a <http://valuenet/ontop/treatments> . ?t22 <http://valuenet/ontop/dog_id> ?t22_dog_id . } } FILTER (?t1_dog_id in (?t22_dog_id))} }",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many dogs have not gone through any treatment?"
+    },
+    {
+      "id": "Q062",
+      "original_id": "dog_kennels_062",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/dog_id> ?T1_dog_id . FILTER NOT EXISTS{{ SELECT ?T22_dog_id WHERE { ?T22 a <http://valuenet/ontop/treatments> . ?T22 <http://valuenet/ontop/dog_id> ?T22_dog_id . }} FILTER(?T1_dog_id in (?T22_dog_id)) . }}",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Tell me the number of dogs that have not received any treatment ."
+    },
+    {
+      "id": "Q063",
+      "original_id": "dog_kennels_063",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/owners> . ?T1 <http://valuenet/ontop/owner_id> ?T1_owner_id . FILTER NOT EXISTS {{SELECT ?T22_owner_id WHERE { ?T22 a <http://valuenet/ontop/dogs> . ?T22 <http://valuenet/ontop/owner_id> ?T22_owner_id . }} FILTER(?T1_owner_id in (?T22_owner_id)) } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many owners temporarily do not have any dogs?"
+    },
+    {
+      "id": "Q064",
+      "original_id": "dog_kennels_064",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/owners> . ?T1 <http://valuenet/ontop/owner_id> ?T1_owner_id . FILTER NOT EXISTS {{SELECT ?T22_owner_id WHERE { ?T22 a <http://valuenet/ontop/dogs> . ?T22 <http://valuenet/ontop/owner_id> ?T22_owner_id . }} FILTER(?T1_owner_id in (?T22_owner_id)) } }",
+      "gold_answers": [
+        {
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of owners who do not own any dogs at this moment."
+    },
+    {
+      "id": "Q065",
+      "original_id": "dog_kennels_065",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/professionals> . ?T1 <http://valuenet/ontop/professional_id> ?T1_professional_id . FILTER NOT EXISTS {{SELECT ?T22_professional_id WHERE { ?T22 a <http://valuenet/ontop/treatments> . ?T22 <http://valuenet/ontop/professional_id> ?T22_professional_id . } }FILTER(?T1_professional_id in (?T22_professional_id)) .} }",
+      "gold_answers": [
+        {
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many professionals did not operate any treatment on dogs?"
+    },
+    {
+      "id": "Q066",
+      "original_id": "dog_kennels_066",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/professionals> . ?T1 <http://valuenet/ontop/professional_id> ?T1_professional_id . FILTER NOT EXISTS {{SELECT ?T22_professional_id WHERE { ?T22 a <http://valuenet/ontop/treatments> . ?T22 <http://valuenet/ontop/professional_id> ?T22_professional_id . } }FILTER(?T1_professional_id in (?T22_professional_id)) .} }",
+      "gold_answers": [
+        {
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of professionals who have not treated any dogs."
+    },
+    {
+      "id": "Q067",
+      "original_id": "dog_kennels_067",
+      "gold_sparql": "SELECT ?T1_name ?T1_age ?T1_weight WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/age> ?T1_age . ?T1 <http://valuenet/ontop/weight> ?T1_weight . ?T1 <http://valuenet/ontop/abandoned_yn> ?T1_abandoned_yn . FILTER(?T1_abandoned_yn = '1') . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the dog name, age and weight of the dogs who have been abandoned? 1 stands for yes, and 0 stands for no."
+    },
+    {
+      "id": "Q068",
+      "original_id": "dog_kennels_068",
+      "gold_sparql": "SELECT ?T1_name ?T1_age ?T1_weight WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/age> ?T1_age . ?T1 <http://valuenet/ontop/weight> ?T1_weight . ?T1 <http://valuenet/ontop/abandoned_yn> ?T1_abandoned_yn . FILTER(?T1_abandoned_yn = '1') . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the dog name, age and weight of the dogs that were abandoned? Note that 1 stands for yes, and 0 stands for no in the tables."
+    },
+    {
+      "id": "Q069",
+      "original_id": "dog_kennels_069",
+      "gold_sparql": "SELECT (avg( ?T1_age) as ?aggregation_T1_age_71 ) WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/age> ?T1_age . }",
+      "gold_answers": [
+        {
+          "aggregation_T1_age_71": "5.066666666666666666666667"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average age of all the dogs?"
+    },
+    {
+      "id": "Q070",
+      "original_id": "dog_kennels_070",
+      "gold_sparql": "SELECT (avg( ?T1_age) as ?aggregation_T1_age_71 ) WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/age> ?T1_age . }",
+      "gold_answers": [
+        {
+          "aggregation_T1_age_71": "5.066666666666666666666667"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Compute the average age of all the dogs."
+    },
+    {
+      "id": "Q071",
+      "original_id": "dog_kennels_071",
+      "gold_sparql": "SELECT (max( ?T1_age) as ?aggregation_T1_age_59 ) WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/age> ?T1_age . }",
+      "gold_answers": [
+        {
+          "aggregation_T1_age_59": "9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the age of the oldest dog?"
+    },
+    {
+      "id": "Q072",
+      "original_id": "dog_kennels_072",
+      "gold_sparql": "SELECT (max( ?T1_age) as ?aggregation_T1_age_59 ) WHERE { ?T1 a <http://valuenet/ontop/dogs> . ?T1 <http://valuenet/ontop/age> ?T1_age . }",
+      "gold_answers": [
+        {
+          "aggregation_T1_age_59": "9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Tell me the age of the oldest dog."
+    },
+    {
+      "id": "Q073",
+      "original_id": "dog_kennels_073",
+      "gold_sparql": "select ?t1_charge_type ?t1_charge_amount where { ?t1 a <http://valuenet/ontop/charges> . ?t1 <http://valuenet/ontop/charge_type> ?t1_charge_type . ?t1 <http://valuenet/ontop/charge_amount> ?t1_charge_amount . }",
+      "gold_answers": [
+        {
+          "t1_charge_type": "Health Check",
+          "t1_charge_amount": "640.0"
+        },
+        {
+          "t1_charge_type": "Daily Accommodation",
+          "t1_charge_amount": "98.0"
+        },
+        {
+          "t1_charge_type": "Drugs",
+          "t1_charge_amount": "322.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "How much does each charge type costs? List both charge type and amount."
+    },
+    {
+      "id": "Q074",
+      "original_id": "dog_kennels_074",
+      "gold_sparql": "select ?t1_charge_type ?t1_charge_amount where { ?t1 a <http://valuenet/ontop/charges> . ?t1 <http://valuenet/ontop/charge_type> ?t1_charge_type . ?t1 <http://valuenet/ontop/charge_amount> ?t1_charge_amount . }",
+      "gold_answers": [
+        {
+          "t1_charge_type": "Health Check",
+          "t1_charge_amount": "640.0"
+        },
+        {
+          "t1_charge_type": "Daily Accommodation",
+          "t1_charge_amount": "98.0"
+        },
+        {
+          "t1_charge_type": "Drugs",
+          "t1_charge_amount": "322.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List each charge type and its amount."
+    },
+    {
+      "id": "Q075",
+      "original_id": "dog_kennels_075",
+      "gold_sparql": "select (max( ?t1_charge_amount) as ?aggregation_t1_charge_amount_72 ) where { ?t1 a <http://valuenet/ontop/charges> . ?t1 <http://valuenet/ontop/charge_amount> ?t1_charge_amount . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_charge_amount_72": "640.0"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "How much does the most expensive charge type costs?"
+    },
+    {
+      "id": "Q076",
+      "original_id": "dog_kennels_076",
+      "gold_sparql": "select (max( ?t1_charge_amount) as ?aggregation_t1_charge_amount_72 ) where { ?t1 a <http://valuenet/ontop/charges> . ?t1 <http://valuenet/ontop/charge_amount> ?t1_charge_amount . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_charge_amount_72": "640.0"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the charge amount of the most expensive charge type?"
+    },
+    {
+      "id": "Q077",
+      "original_id": "dog_kennels_077",
+      "gold_sparql": "select ?t1_email_address ?t1_cell_number ?t1_home_phone where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/home_phone> ?t1_home_phone . }",
+      "gold_answers": [
+        {
+          "t1_email_address": "jerrod.bahringer@example.org",
+          "t1_cell_number": "461-801-2600",
+          "t1_home_phone": "(230)338-3342x585"
+        },
+        {
+          "t1_email_address": "lambert62@example.org",
+          "t1_cell_number": "499- 434- 0215x1628",
+          "t1_home_phone": "022.529.0550x1319"
+        },
+        {
+          "t1_email_address": "goyette.roosevelt@example.net",
+          "t1_cell_number": "328.842.3792",
+          "t1_home_phone": "891.475.2256"
+        },
+        {
+          "t1_email_address": "schneider.kathryne@example.org",
+          "t1_cell_number": "962-983-8109x3509",
+          "t1_home_phone": "320-508-6023"
+        },
+        {
+          "t1_email_address": "cole.margarita@example.org",
+          "t1_cell_number": "1-185-137-1945x409",
+          "t1_home_phone": "971.048.3763x9404"
+        },
+        {
+          "t1_email_address": "mekhi.little@example.org",
+          "t1_cell_number": "011.193.9081x3186",
+          "t1_home_phone": "1-609-566-2752x25197"
+        },
+        {
+          "t1_email_address": "west.eula@example.net",
+          "t1_cell_number": "609- 405- 2990",
+          "t1_home_phone": "(920)304-4499x59146"
+        },
+        {
+          "t1_email_address": "lourdes.lowe@example.net",
+          "t1_cell_number": "00230569697",
+          "t1_home_phone": "312.216.3352"
+        },
+        {
+          "t1_email_address": "marquardt.furman@example.org",
+          "t1_cell_number": "1-181-670-9466",
+          "t1_home_phone": "246-951-0080x76716"
+        },
+        {
+          "t1_email_address": "delphine29@example.com",
+          "t1_cell_number": "880-659-7577x736",
+          "t1_home_phone": "346.594.3739"
+        },
+        {
+          "t1_email_address": "jeichmann@example.com",
+          "t1_cell_number": "1-258-285-4707x8020",
+          "t1_home_phone": "1-138-287-3775"
+        },
+        {
+          "t1_email_address": "lucile.shanahan@example.org",
+          "t1_cell_number": "889- 940- 2676",
+          "t1_home_phone": "+ 02(1)0259033559"
+        },
+        {
+          "t1_email_address": "jacynthe.mclaughlin@example.net",
+          "t1_cell_number": "139- 321- 7313",
+          "t1_home_phone": "+ 43(5)1132733868"
+        },
+        {
+          "t1_email_address": "deanna.schuster@example.com",
+          "t1_cell_number": "(275)939-2435x80863",
+          "t1_home_phone": "+ 71(6)2898266914"
+        },
+        {
+          "t1_email_address": "uboehm@example.org",
+          "t1_cell_number": "(369)908-7311x065",
+          "t1_home_phone": "325- 155- 0801x7005"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the email, cell phone and home phone of all the professionals."
+    },
+    {
+      "id": "Q078",
+      "original_id": "dog_kennels_078",
+      "gold_sparql": "select ?t1_email_address ?t1_cell_number ?t1_home_phone where { ?t1 a <http://valuenet/ontop/professionals> . ?t1 <http://valuenet/ontop/email_address> ?t1_email_address . ?t1 <http://valuenet/ontop/cell_number> ?t1_cell_number . ?t1 <http://valuenet/ontop/home_phone> ?t1_home_phone . }",
+      "gold_answers": [
+        {
+          "t1_email_address": "jerrod.bahringer@example.org",
+          "t1_cell_number": "461-801-2600",
+          "t1_home_phone": "(230)338-3342x585"
+        },
+        {
+          "t1_email_address": "lambert62@example.org",
+          "t1_cell_number": "499- 434- 0215x1628",
+          "t1_home_phone": "022.529.0550x1319"
+        },
+        {
+          "t1_email_address": "goyette.roosevelt@example.net",
+          "t1_cell_number": "328.842.3792",
+          "t1_home_phone": "891.475.2256"
+        },
+        {
+          "t1_email_address": "schneider.kathryne@example.org",
+          "t1_cell_number": "962-983-8109x3509",
+          "t1_home_phone": "320-508-6023"
+        },
+        {
+          "t1_email_address": "cole.margarita@example.org",
+          "t1_cell_number": "1-185-137-1945x409",
+          "t1_home_phone": "971.048.3763x9404"
+        },
+        {
+          "t1_email_address": "mekhi.little@example.org",
+          "t1_cell_number": "011.193.9081x3186",
+          "t1_home_phone": "1-609-566-2752x25197"
+        },
+        {
+          "t1_email_address": "west.eula@example.net",
+          "t1_cell_number": "609- 405- 2990",
+          "t1_home_phone": "(920)304-4499x59146"
+        },
+        {
+          "t1_email_address": "lourdes.lowe@example.net",
+          "t1_cell_number": "00230569697",
+          "t1_home_phone": "312.216.3352"
+        },
+        {
+          "t1_email_address": "marquardt.furman@example.org",
+          "t1_cell_number": "1-181-670-9466",
+          "t1_home_phone": "246-951-0080x76716"
+        },
+        {
+          "t1_email_address": "delphine29@example.com",
+          "t1_cell_number": "880-659-7577x736",
+          "t1_home_phone": "346.594.3739"
+        },
+        {
+          "t1_email_address": "jeichmann@example.com",
+          "t1_cell_number": "1-258-285-4707x8020",
+          "t1_home_phone": "1-138-287-3775"
+        },
+        {
+          "t1_email_address": "lucile.shanahan@example.org",
+          "t1_cell_number": "889- 940- 2676",
+          "t1_home_phone": "+ 02(1)0259033559"
+        },
+        {
+          "t1_email_address": "jacynthe.mclaughlin@example.net",
+          "t1_cell_number": "139- 321- 7313",
+          "t1_home_phone": "+ 43(5)1132733868"
+        },
+        {
+          "t1_email_address": "deanna.schuster@example.com",
+          "t1_cell_number": "(275)939-2435x80863",
+          "t1_home_phone": "+ 71(6)2898266914"
+        },
+        {
+          "t1_email_address": "uboehm@example.org",
+          "t1_cell_number": "(369)908-7311x065",
+          "t1_home_phone": "325- 155- 0801x7005"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the email, cell phone and home phone of each professional?"
+    },
+    {
+      "id": "Q079",
+      "original_id": "dog_kennels_079",
+      "gold_sparql": "select distinct ?t1_breed_code ?t1_size_code where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/breed_code> ?t1_breed_code . ?t1 <http://valuenet/ontop/size_code> ?t1_size_code . }",
+      "gold_answers": [
+        {
+          "t1_breed_code": "ESK",
+          "t1_size_code": "MED"
+        },
+        {
+          "t1_breed_code": "BUL",
+          "t1_size_code": "LGE"
+        },
+        {
+          "t1_breed_code": "BUL",
+          "t1_size_code": "MED"
+        },
+        {
+          "t1_breed_code": "ESK",
+          "t1_size_code": "LGE"
+        },
+        {
+          "t1_breed_code": "HUS",
+          "t1_size_code": "MED"
+        },
+        {
+          "t1_breed_code": "HUS",
+          "t1_size_code": "SML"
+        },
+        {
+          "t1_breed_code": "ESK",
+          "t1_size_code": "SML"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are all the possible breed type and size type combinations?"
+    },
+    {
+      "id": "Q080",
+      "original_id": "dog_kennels_080",
+      "gold_sparql": "select distinct ?t1_breed_code ?t1_size_code where { ?t1 a <http://valuenet/ontop/dogs> . ?t1 <http://valuenet/ontop/breed_code> ?t1_breed_code . ?t1 <http://valuenet/ontop/size_code> ?t1_size_code . }",
+      "gold_answers": [
+        {
+          "t1_breed_code": "ESK",
+          "t1_size_code": "MED"
+        },
+        {
+          "t1_breed_code": "BUL",
+          "t1_size_code": "LGE"
+        },
+        {
+          "t1_breed_code": "BUL",
+          "t1_size_code": "MED"
+        },
+        {
+          "t1_breed_code": "ESK",
+          "t1_size_code": "LGE"
+        },
+        {
+          "t1_breed_code": "HUS",
+          "t1_size_code": "MED"
+        },
+        {
+          "t1_breed_code": "HUS",
+          "t1_size_code": "SML"
+        },
+        {
+          "t1_breed_code": "ESK",
+          "t1_size_code": "SML"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the distinct breed type and size type combinations for dogs."
+    },
+    {
+      "id": "Q081",
+      "original_id": "dog_kennels_081",
+      "gold_sparql": "select distinct ?t1_first_name ?t2_treatment_type_description where { ?t1 a <http://valuenet/ontop/professionals> . ?t3 a <http://valuenet/ontop/treatments> . ?t3 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/treatment_type_description> ?t2_treatment_type_description . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t2 a <http://valuenet/ontop/treatment_types> . ?t3 <http://valuenet/ontop/ref-treatment_type_code> ?t2 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/treatment_type_description> ?t2_treatment_type_description . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Domenica",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_first_name": "Domenica",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Velva",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_first_name": "Karley",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Monte",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_first_name": "Monte",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Sigurd",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Sigurd",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Danny",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Vernice",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Ruben",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Ruben",
+          "t2_treatment_type_description": "Take for a Walk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the first name of all the professionals along with the description of the treatment they have done."
+    },
+    {
+      "id": "Q082",
+      "original_id": "dog_kennels_082",
+      "gold_sparql": "select distinct ?t1_first_name ?t2_treatment_type_description where { ?t1 a <http://valuenet/ontop/professionals> . ?t3 a <http://valuenet/ontop/treatments> . ?t3 <http://valuenet/ontop/ref-professional> ?t1 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/treatment_type_description> ?t2_treatment_type_description . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . ?t2 a <http://valuenet/ontop/treatment_types> . ?t3 <http://valuenet/ontop/ref-treatment_type_code> ?t2 . ?t1 <http://valuenet/ontop/first_name> ?t1_first_name . ?t2 <http://valuenet/ontop/treatment_type_description> ?t2_treatment_type_description . ?t1 <http://valuenet/ontop/professional_id> ?t1_professional_id . }",
+      "gold_answers": [
+        {
+          "t1_first_name": "Domenica",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_first_name": "Domenica",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Velva",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_first_name": "Karley",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Monte",
+          "t2_treatment_type_description": "Take for a Walk"
+        },
+        {
+          "t1_first_name": "Monte",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Sigurd",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Sigurd",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Danny",
+          "t2_treatment_type_description": "Vaccination"
+        },
+        {
+          "t1_first_name": "Vernice",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Ruben",
+          "t2_treatment_type_description": "Physical examination"
+        },
+        {
+          "t1_first_name": "Ruben",
+          "t2_treatment_type_description": "Take for a Walk"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are each professional's first name and description of the treatment they have performed?"
+    }
+  ]
+}

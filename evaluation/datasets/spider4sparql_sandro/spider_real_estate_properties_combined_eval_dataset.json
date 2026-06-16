@@ -1,0 +1,60 @@
+{
+  "dataset_name": "spider_real_estate_properties_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for real_estate_properties. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/real_estate_properties.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "real_estate_properties_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/other_available_features> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many available features are there in total?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "real_estate_properties_002",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_property_name as ?col1) where { ?t1 a <http://valuenet/ontop/properties> . ?t1 <http://valuenet/ontop/property_name> ?t1_property_name . ?t1 <http://valuenet/ontop/property_type_code> ?t1_property_type_code . FILTER(?t1_property_type_code = 'House') . }} UNION {select (?t1_property_name as ?col1) where { ?t1 a <http://valuenet/ontop/properties> . ?t1 <http://valuenet/ontop/property_name> ?t1_property_name . ?t1 <http://valuenet/ontop/property_type_code> ?t1_property_type_code . ?t1 <http://valuenet/ontop/room_count> ?t1_room_count . FILTER(?t1_property_type_code = 'Apartment' && ?t1_room_count > 1) . } } }",
+      "gold_answers": [
+        {
+          "col1": "park"
+        },
+        {
+          "col1": "the cole"
+        },
+        {
+          "col1": "parc east"
+        },
+        {
+          "col1": "ten tower"
+        },
+        {
+          "col1": "parc coliseum"
+        },
+        {
+          "col1": "longacre"
+        },
+        {
+          "col1": "renoir"
+        },
+        {
+          "col1": "vogue"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "flower",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of properties that are either houses or apartments with more than 1 room?"
+    }
+  ]
+}

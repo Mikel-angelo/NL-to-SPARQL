@@ -1,0 +1,1279 @@
+{
+  "dataset_name": "spider_flight_2_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for flight_2. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/flight_2.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "flight_2_001",
+      "gold_sparql": "select ?t1_country where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . FILTER(?t1_airline = 'JetBlue Airways') . }",
+      "gold_answers": [
+        {
+          "t1_country": "USA"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which country does Airline 'JetBlue Airways' belong to?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "flight_2_002",
+      "gold_sparql": "select ?t1_country where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . FILTER(?t1_airline = 'JetBlue Airways') . }",
+      "gold_answers": [
+        {
+          "t1_country": "USA"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What country is Jetblue Airways affiliated with?"
+    },
+    {
+      "id": "Q003",
+      "original_id": "flight_2_003",
+      "gold_sparql": "select ?t1_abbreviation where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/abbreviation> ?t1_abbreviation . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . FILTER(?t1_airline = 'JetBlue Airways') . }",
+      "gold_answers": [
+        {
+          "t1_abbreviation": "JetBlue"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the abbreviation of Airline 'JetBlue Airways'?"
+    },
+    {
+      "id": "Q004",
+      "original_id": "flight_2_004",
+      "gold_sparql": "select ?t1_abbreviation where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/abbreviation> ?t1_abbreviation . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . FILTER(?t1_airline = 'JetBlue Airways') . }",
+      "gold_answers": [
+        {
+          "t1_abbreviation": "JetBlue"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which abbreviation corresponds to Jetblue Airways?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "flight_2_005",
+      "gold_sparql": "select ?t1_airline ?t1_abbreviation where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . ?t1 <http://valuenet/ontop/abbreviation> ?t1_abbreviation . ?t1 <http://valuenet/ontop/country> ?t1_country . FILTER(?t1_country = 'USA') . }",
+      "gold_answers": [
+        {
+          "t1_airline": "JetBlue Airways",
+          "t1_abbreviation": "JetBlue"
+        },
+        {
+          "t1_airline": "Virgin America",
+          "t1_abbreviation": "Virgin"
+        },
+        {
+          "t1_airline": "Southwest Airlines",
+          "t1_abbreviation": "Southwest"
+        },
+        {
+          "t1_airline": "US Airways",
+          "t1_abbreviation": "USAir"
+        },
+        {
+          "t1_airline": "Northwest Airlines",
+          "t1_abbreviation": "Northwest"
+        },
+        {
+          "t1_airline": "American Airlines",
+          "t1_abbreviation": "American"
+        },
+        {
+          "t1_airline": "Allegiant Air",
+          "t1_abbreviation": "Allegiant"
+        },
+        {
+          "t1_airline": "Delta Airlines",
+          "t1_abbreviation": "Delta"
+        },
+        {
+          "t1_airline": "United Airlines",
+          "t1_abbreviation": "UAL"
+        },
+        {
+          "t1_airline": "AirTran Airways",
+          "t1_abbreviation": "AirTran"
+        },
+        {
+          "t1_airline": "Frontier Airlines",
+          "t1_abbreviation": "Frontier"
+        },
+        {
+          "t1_airline": "Continental Airlines",
+          "t1_abbreviation": "Continental"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List all airline names and their abbreviations in 'USA'."
+    },
+    {
+      "id": "Q006",
+      "original_id": "flight_2_006",
+      "gold_sparql": "select ?t1_airline ?t1_abbreviation where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . ?t1 <http://valuenet/ontop/abbreviation> ?t1_abbreviation . ?t1 <http://valuenet/ontop/country> ?t1_country . FILTER(?t1_country = 'USA') . }",
+      "gold_answers": [
+        {
+          "t1_airline": "JetBlue Airways",
+          "t1_abbreviation": "JetBlue"
+        },
+        {
+          "t1_airline": "Virgin America",
+          "t1_abbreviation": "Virgin"
+        },
+        {
+          "t1_airline": "Southwest Airlines",
+          "t1_abbreviation": "Southwest"
+        },
+        {
+          "t1_airline": "US Airways",
+          "t1_abbreviation": "USAir"
+        },
+        {
+          "t1_airline": "Northwest Airlines",
+          "t1_abbreviation": "Northwest"
+        },
+        {
+          "t1_airline": "American Airlines",
+          "t1_abbreviation": "American"
+        },
+        {
+          "t1_airline": "Allegiant Air",
+          "t1_abbreviation": "Allegiant"
+        },
+        {
+          "t1_airline": "Delta Airlines",
+          "t1_abbreviation": "Delta"
+        },
+        {
+          "t1_airline": "United Airlines",
+          "t1_abbreviation": "UAL"
+        },
+        {
+          "t1_airline": "AirTran Airways",
+          "t1_abbreviation": "AirTran"
+        },
+        {
+          "t1_airline": "Frontier Airlines",
+          "t1_abbreviation": "Frontier"
+        },
+        {
+          "t1_airline": "Continental Airlines",
+          "t1_abbreviation": "Continental"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the airline names and abbreviations for airlines in the USA?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "flight_2_007",
+      "gold_sparql": "select ?t1_airportcode ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportcode> ?t1_airportcode . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/city> ?t1_city . FILTER(?t1_city = 'Anthony') . }",
+      "gold_answers": [
+        {
+          "t1_airportcode": "ANY",
+          "t1_airportname": "Anthony"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the airport code and name in the city of Anthony."
+    },
+    {
+      "id": "Q008",
+      "original_id": "flight_2_008",
+      "gold_sparql": "select ?t1_airportcode ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportcode> ?t1_airportcode . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/city> ?t1_city . FILTER(?t1_city = 'Anthony') . }",
+      "gold_answers": [
+        {
+          "t1_airportcode": "ANY",
+          "t1_airportname": "Anthony"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the airport code and airport name corresonding to the city Anthony."
+    },
+    {
+      "id": "Q009",
+      "original_id": "flight_2_009",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/airlines> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "12"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many airlines do we have?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "flight_2_010",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/airlines> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "12"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the total number of airlines?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "flight_2_011",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/airports> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "100"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many airports do we have?"
+    },
+    {
+      "id": "Q012",
+      "original_id": "flight_2_012",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/airports> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "100"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the number of  airports."
+    },
+    {
+      "id": "Q013",
+      "original_id": "flight_2_013",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "1200"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights do we have?"
+    },
+    {
+      "id": "Q014",
+      "original_id": "flight_2_014",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "1200"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the number of flights."
+    },
+    {
+      "id": "Q015",
+      "original_id": "flight_2_015",
+      "gold_sparql": "select ?t1_airline where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . ?t1 <http://valuenet/ontop/abbreviation> ?t1_abbreviation . FILTER(?t1_abbreviation = 'UAL') . }",
+      "gold_answers": [
+        {
+          "t1_airline": "United Airlines"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which airline has abbreviation 'UAL'?"
+    },
+    {
+      "id": "Q016",
+      "original_id": "flight_2_016",
+      "gold_sparql": "select ?t1_airline where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/airlines-airline> ?t1_airline . ?t1 <http://valuenet/ontop/abbreviation> ?t1_abbreviation . FILTER(?t1_abbreviation = 'UAL') . }",
+      "gold_answers": [
+        {
+          "t1_airline": "United Airlines"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the airline with abbreviation 'UAL'."
+    },
+    {
+      "id": "Q017",
+      "original_id": "flight_2_017",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/country> ?t1_country . FILTER(?t1_country = 'USA') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "12"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many airlines are from USA?"
+    },
+    {
+      "id": "Q018",
+      "original_id": "flight_2_018",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/airlines> . ?t1 <http://valuenet/ontop/country> ?t1_country . FILTER(?t1_country = 'USA') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "12"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the number of airlines in the USA."
+    },
+    {
+      "id": "Q019",
+      "original_id": "flight_2_019",
+      "gold_sparql": "select ?t1_city ?t1_country where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/city> ?t1_city . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . FILTER(?t1_airportname = 'Alton') . }",
+      "gold_answers": [
+        {
+          "t1_city": "Alton",
+          "t1_country": "United States"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which city and country is the Alton airport at?"
+    },
+    {
+      "id": "Q020",
+      "original_id": "flight_2_020",
+      "gold_sparql": "select ?t1_city ?t1_country where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/city> ?t1_city . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . FILTER(?t1_airportname = 'Alton') . }",
+      "gold_answers": [
+        {
+          "t1_city": "Alton",
+          "t1_country": "United States"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the city and country for the Alton airport."
+    },
+    {
+      "id": "Q021",
+      "original_id": "flight_2_021",
+      "gold_sparql": "select ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/airportcode> ?t1_airportcode . FILTER(?t1_airportcode = 'AKO') . }",
+      "gold_answers": [
+        {
+          "t1_airportname": "Colorado Plains Regional Airport"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the airport name for airport 'AKO'?"
+    },
+    {
+      "id": "Q022",
+      "original_id": "flight_2_022",
+      "gold_sparql": "select ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/airportcode> ?t1_airportcode . FILTER(?t1_airportcode = 'AKO') . }",
+      "gold_answers": [
+        {
+          "t1_airportname": "Colorado Plains Regional Airport"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the name of the airport with code 'AKO'."
+    },
+    {
+      "id": "Q023",
+      "original_id": "flight_2_023",
+      "gold_sparql": "select ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/city> ?t1_city . FILTER(?t1_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "t1_airportname": "Municipal"
+        },
+        {
+          "t1_airportname": "Phillips AAF"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are airport names at City 'Aberdeen'?"
+    },
+    {
+      "id": "Q024",
+      "original_id": "flight_2_024",
+      "gold_sparql": "select ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/city> ?t1_city . FILTER(?t1_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "t1_airportname": "Municipal"
+        },
+        {
+          "t1_airportname": "Phillips AAF"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of airports in Aberdeen?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "flight_2_025",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/sourceairport> ?t1_sourceairport . FILTER(?t1_sourceairport = 'APG') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "11"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights depart from 'APG'?"
+    },
+    {
+      "id": "Q026",
+      "original_id": "flight_2_026",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/sourceairport> ?t1_sourceairport . FILTER(?t1_sourceairport = 'APG') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "11"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of flights departing from 'APG'."
+    },
+    {
+      "id": "Q027",
+      "original_id": "flight_2_027",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/destairport> ?t1_destairport . FILTER(?t1_destairport = 'ATO') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights have destination ATO?"
+    },
+    {
+      "id": "Q028",
+      "original_id": "flight_2_028",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/destairport> ?t1_destairport . FILTER(?t1_destairport = 'ATO') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "7"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of flights into ATO."
+    },
+    {
+      "id": "Q029",
+      "original_id": "flight_2_029",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "21"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights depart from City Aberdeen?"
+    },
+    {
+      "id": "Q030",
+      "original_id": "flight_2_030",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "21"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the number of flights departing from Aberdeen."
+    },
+    {
+      "id": "Q031",
+      "original_id": "flight_2_031",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "21"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights arriving in Aberdeen city?"
+    },
+    {
+      "id": "Q032",
+      "original_id": "flight_2_032",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "21"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the number of flights arriving in Aberdeen."
+    },
+    {
+      "id": "Q033",
+      "original_id": "flight_2_033",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Ashley' && ?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights depart from City 'Aberdeen' and have destination City 'Ashley'?"
+    },
+    {
+      "id": "Q034",
+      "original_id": "flight_2_034",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Ashley' && ?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights fly from Aberdeen to Ashley?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "flight_2_035",
+      "gold_sparql": "SELECT ?T1_city (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/city> ?T1_city . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_city ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_city": "Albany",
+          "aggregation_all": "57"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which city has most number of arriving flights?"
+    },
+    {
+      "id": "Q036",
+      "original_id": "flight_2_036",
+      "gold_sparql": "SELECT ?T1_city (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/city> ?T1_city . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_city ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_city": "Albany",
+          "aggregation_all": "57"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which city has the most frequent destination airport?"
+    },
+    {
+      "id": "Q037",
+      "original_id": "flight_2_037",
+      "gold_sparql": "SELECT ?T1_city (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/city> ?T1_city . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_city ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_city": "Albany",
+          "aggregation_all": "57"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which city has most number of departing flights?"
+    },
+    {
+      "id": "Q038",
+      "original_id": "flight_2_038",
+      "gold_sparql": "SELECT ?T1_city (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/city> ?T1_city . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_city ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_city": "Albany",
+          "aggregation_all": "57"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which city is the most frequent source airport?"
+    },
+    {
+      "id": "Q039",
+      "original_id": "flight_2_039",
+      "gold_sparql": "SELECT ?T1_airportcode (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_airportcode ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_airportcode": "AAF",
+          "aggregation_all": "20"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the code of airport that has the highest number of flights?"
+    },
+    {
+      "id": "Q040",
+      "original_id": "flight_2_040",
+      "gold_sparql": "SELECT ?T1_airportcode (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_airportcode ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_airportcode": "AAF",
+          "aggregation_all": "20"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the airport code of the airport with the most flights?"
+    },
+    {
+      "id": "Q041",
+      "original_id": "flight_2_041",
+      "gold_sparql": "SELECT ?T1_airportcode (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_airportcode ORDER BY ASC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_airportcode": "AID",
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the code of airport that has fewest number of flights?"
+    },
+    {
+      "id": "Q042",
+      "original_id": "flight_2_042",
+      "gold_sparql": "SELECT ?T1_airportcode (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/airports> . ?T3 a <http://valuenet/ontop/flights> . ?T3 <http://valuenet/ontop/ref-destairport> ?T1 . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . ?T1 <http://valuenet/ontop/airportcode> ?T1_airportcode . } GROUP BY ?T1_airportcode ORDER BY ASC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_airportcode": "AID",
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Give the code of the airport with the least flights."
+    },
+    {
+      "id": "Q043",
+      "original_id": "flight_2_043",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t1 <http://valuenet/ontop/sourceairport> ?t1_sourceairport . FILTER(?t1_sourceairport = 'APG') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "143"
+        },
+        {
+          "t1_flightno": "743"
+        },
+        {
+          "t1_flightno": "1377"
+        },
+        {
+          "t1_flightno": "101"
+        },
+        {
+          "t1_flightno": "1275"
+        },
+        {
+          "t1_flightno": "29"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "382"
+        },
+        {
+          "t1_flightno": "478"
+        },
+        {
+          "t1_flightno": "489"
+        },
+        {
+          "t1_flightno": "1172"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are flight numbers of flights departing from Airport 'APG'?"
+    },
+    {
+      "id": "Q044",
+      "original_id": "flight_2_044",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t1 <http://valuenet/ontop/sourceairport> ?t1_sourceairport . FILTER(?t1_sourceairport = 'APG') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "143"
+        },
+        {
+          "t1_flightno": "743"
+        },
+        {
+          "t1_flightno": "1377"
+        },
+        {
+          "t1_flightno": "101"
+        },
+        {
+          "t1_flightno": "1275"
+        },
+        {
+          "t1_flightno": "29"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "382"
+        },
+        {
+          "t1_flightno": "478"
+        },
+        {
+          "t1_flightno": "489"
+        },
+        {
+          "t1_flightno": "1172"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the flight numbers of flights leaving from APG."
+    },
+    {
+      "id": "Q045",
+      "original_id": "flight_2_045",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t1 <http://valuenet/ontop/destairport> ?t1_destairport . FILTER(?t1_destairport = 'APG') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "100"
+        },
+        {
+          "t1_flightno": "383"
+        },
+        {
+          "t1_flightno": "742"
+        },
+        {
+          "t1_flightno": "1173"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "488"
+        },
+        {
+          "t1_flightno": "1376"
+        },
+        {
+          "t1_flightno": "479"
+        },
+        {
+          "t1_flightno": "1274"
+        },
+        {
+          "t1_flightno": "142"
+        },
+        {
+          "t1_flightno": "29"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are flight numbers of flights arriving at Airport 'APG'?"
+    },
+    {
+      "id": "Q046",
+      "original_id": "flight_2_046",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t1 <http://valuenet/ontop/destairport> ?t1_destairport . FILTER(?t1_destairport = 'APG') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "100"
+        },
+        {
+          "t1_flightno": "383"
+        },
+        {
+          "t1_flightno": "742"
+        },
+        {
+          "t1_flightno": "1173"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "488"
+        },
+        {
+          "t1_flightno": "1376"
+        },
+        {
+          "t1_flightno": "479"
+        },
+        {
+          "t1_flightno": "1274"
+        },
+        {
+          "t1_flightno": "142"
+        },
+        {
+          "t1_flightno": "29"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the flight numbers of flights landing at APG."
+    },
+    {
+      "id": "Q047",
+      "original_id": "flight_2_047",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "512"
+        },
+        {
+          "t1_flightno": "44"
+        },
+        {
+          "t1_flightno": "90"
+        },
+        {
+          "t1_flightno": "1139"
+        },
+        {
+          "t1_flightno": "755"
+        },
+        {
+          "t1_flightno": "1249"
+        },
+        {
+          "t1_flightno": "400"
+        },
+        {
+          "t1_flightno": "843"
+        },
+        {
+          "t1_flightno": "1070"
+        },
+        {
+          "t1_flightno": "908"
+        },
+        {
+          "t1_flightno": "100"
+        },
+        {
+          "t1_flightno": "383"
+        },
+        {
+          "t1_flightno": "742"
+        },
+        {
+          "t1_flightno": "1173"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "488"
+        },
+        {
+          "t1_flightno": "1376"
+        },
+        {
+          "t1_flightno": "479"
+        },
+        {
+          "t1_flightno": "1274"
+        },
+        {
+          "t1_flightno": "142"
+        },
+        {
+          "t1_flightno": "29"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are flight numbers of flights departing from City 'Aberdeen '?"
+    },
+    {
+      "id": "Q048",
+      "original_id": "flight_2_048",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "512"
+        },
+        {
+          "t1_flightno": "44"
+        },
+        {
+          "t1_flightno": "90"
+        },
+        {
+          "t1_flightno": "1139"
+        },
+        {
+          "t1_flightno": "755"
+        },
+        {
+          "t1_flightno": "1249"
+        },
+        {
+          "t1_flightno": "400"
+        },
+        {
+          "t1_flightno": "843"
+        },
+        {
+          "t1_flightno": "1070"
+        },
+        {
+          "t1_flightno": "908"
+        },
+        {
+          "t1_flightno": "100"
+        },
+        {
+          "t1_flightno": "383"
+        },
+        {
+          "t1_flightno": "742"
+        },
+        {
+          "t1_flightno": "1173"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "488"
+        },
+        {
+          "t1_flightno": "1376"
+        },
+        {
+          "t1_flightno": "479"
+        },
+        {
+          "t1_flightno": "1274"
+        },
+        {
+          "t1_flightno": "142"
+        },
+        {
+          "t1_flightno": "29"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the flight numbers of flights leaving from Aberdeen."
+    },
+    {
+      "id": "Q049",
+      "original_id": "flight_2_049",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "512"
+        },
+        {
+          "t1_flightno": "44"
+        },
+        {
+          "t1_flightno": "90"
+        },
+        {
+          "t1_flightno": "1139"
+        },
+        {
+          "t1_flightno": "755"
+        },
+        {
+          "t1_flightno": "1249"
+        },
+        {
+          "t1_flightno": "400"
+        },
+        {
+          "t1_flightno": "843"
+        },
+        {
+          "t1_flightno": "1070"
+        },
+        {
+          "t1_flightno": "908"
+        },
+        {
+          "t1_flightno": "100"
+        },
+        {
+          "t1_flightno": "383"
+        },
+        {
+          "t1_flightno": "742"
+        },
+        {
+          "t1_flightno": "1173"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "488"
+        },
+        {
+          "t1_flightno": "1376"
+        },
+        {
+          "t1_flightno": "479"
+        },
+        {
+          "t1_flightno": "1274"
+        },
+        {
+          "t1_flightno": "142"
+        },
+        {
+          "t1_flightno": "29"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are flight numbers of flights arriving at City 'Aberdeen'?"
+    },
+    {
+      "id": "Q050",
+      "original_id": "flight_2_050",
+      "gold_sparql": "select ?t1_flightno where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t1 <http://valuenet/ontop/flightno> ?t1_flightno . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen') . }",
+      "gold_answers": [
+        {
+          "t1_flightno": "512"
+        },
+        {
+          "t1_flightno": "44"
+        },
+        {
+          "t1_flightno": "90"
+        },
+        {
+          "t1_flightno": "1139"
+        },
+        {
+          "t1_flightno": "755"
+        },
+        {
+          "t1_flightno": "1249"
+        },
+        {
+          "t1_flightno": "400"
+        },
+        {
+          "t1_flightno": "843"
+        },
+        {
+          "t1_flightno": "1070"
+        },
+        {
+          "t1_flightno": "908"
+        },
+        {
+          "t1_flightno": "100"
+        },
+        {
+          "t1_flightno": "383"
+        },
+        {
+          "t1_flightno": "742"
+        },
+        {
+          "t1_flightno": "1173"
+        },
+        {
+          "t1_flightno": "28"
+        },
+        {
+          "t1_flightno": "488"
+        },
+        {
+          "t1_flightno": "1376"
+        },
+        {
+          "t1_flightno": "479"
+        },
+        {
+          "t1_flightno": "1274"
+        },
+        {
+          "t1_flightno": "142"
+        },
+        {
+          "t1_flightno": "29"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the flight numbers of flights arriving in Aberdeen."
+    },
+    {
+      "id": "Q051",
+      "original_id": "flight_2_051",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen' || ?t2_city = 'Abilene') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "47"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of flights landing in the city of Aberdeen or Abilene."
+    },
+    {
+      "id": "Q052",
+      "original_id": "flight_2_052",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/flights> . ?t2 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/ref-destairport> ?t2 . ?t2 <http://valuenet/ontop/city> ?t2_city . ?t2 <http://valuenet/ontop/city> ?t2_city . FILTER(?t2_city = 'Aberdeen' || ?t2_city = 'Abilene') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "47"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many flights land in Aberdeen or Abilene?"
+    },
+    {
+      "id": "Q053",
+      "original_id": "flight_2_053",
+      "gold_sparql": "select ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/airportcode> ?t1_airportcode . Filter not exists {{select ?t22_sourceairport where { ?t22 a <http://valuenet/ontop/flights> . ?t22 <http://valuenet/ontop/sourceairport> ?t22_sourceairport . } } FILTER (?t1_airportcode in (?t22_sourceairport))} }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the name of airports which do not have any flight in and out."
+    },
+    {
+      "id": "Q054",
+      "original_id": "flight_2_054",
+      "gold_sparql": "select ?t1_airportname where { ?t1 a <http://valuenet/ontop/airports> . ?t1 <http://valuenet/ontop/airportname> ?t1_airportname . ?t1 <http://valuenet/ontop/airportcode> ?t1_airportcode . Filter not exists {{select ?t22_sourceairport where { ?t22 a <http://valuenet/ontop/flights> . ?t22 <http://valuenet/ontop/sourceairport> ?t22_sourceairport . } } FILTER (?t1_airportcode in (?t22_sourceairport))} }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which airports do not have departing or arriving flights?"
+    }
+  ]
+}

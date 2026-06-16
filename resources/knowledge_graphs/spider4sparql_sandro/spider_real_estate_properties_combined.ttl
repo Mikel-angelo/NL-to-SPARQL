@@ -1,0 +1,580 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/properties#> .
+@prefix ns2: <http://valuenet/ontop/other_available_features#> .
+@prefix ns3: <http://valuenet/ontop/other_property_features#> .
+@prefix ns4: <http://valuenet/ontop/ref_property_types#> .
+@prefix ns5: <http://valuenet/ontop/ref_feature_types#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns2:feature_description a owl:DatatypeProperty ;
+    rdfs:domain :other_available_features ;
+    rdfs:range xsd:string .
+
+ns2:feature_id a owl:DatatypeProperty ;
+    rdfs:domain :other_available_features ;
+    rdfs:range xsd:integer .
+
+ns2:feature_name a owl:DatatypeProperty ;
+    rdfs:domain :other_available_features ;
+    rdfs:range xsd:string .
+
+ns2:feature_type_code a owl:DatatypeProperty ;
+    rdfs:domain :other_available_features ;
+    rdfs:range xsd:string .
+
+ns2:ref-feature_type_code a owl:ObjectProperty ;
+    rdfs:domain :other_available_features ;
+    rdfs:range :ref_feature_types .
+
+ns3:feature_id a owl:DatatypeProperty ;
+    rdfs:domain :other_property_features ;
+    rdfs:range xsd:integer .
+
+ns3:property_feature_description a owl:DatatypeProperty ;
+    rdfs:domain :other_property_features ;
+    rdfs:range xsd:string .
+
+ns3:property_id a owl:DatatypeProperty ;
+    rdfs:domain :other_property_features ;
+    rdfs:range xsd:integer .
+
+ns3:ref-feature_id a owl:ObjectProperty ;
+    rdfs:domain :other_property_features ;
+    rdfs:range :other_available_features .
+
+ns3:ref-property_id a owl:ObjectProperty ;
+    rdfs:domain :other_property_features ;
+    rdfs:range :properties .
+
+ns1:agreed_selling_price a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:decimal .
+
+ns1:apt_feature_1 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:apt_feature_2 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:apt_feature_3 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:buyer_offered_price a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:decimal .
+
+ns1:date_on_market a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:dateTime .
+
+ns1:date_sold a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:dateTime .
+
+ns1:fld_feature_1 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:fld_feature_2 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:fld_feature_3 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:hse_feature_1 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:hse_feature_2 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:hse_feature_3 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:oth_feature_1 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:oth_feature_2 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:oth_feature_3 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:other_property_details a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:property_address a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:property_id a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:integer .
+
+ns1:property_name a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:property_type_code a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:ref-property_type_code a owl:ObjectProperty ;
+    rdfs:domain :properties ;
+    rdfs:range :ref_property_types .
+
+ns1:room_count a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:integer .
+
+ns1:shp_feature_1 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:shp_feature_2 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:shp_feature_3 a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:string .
+
+ns1:vendor_requested_price a owl:DatatypeProperty ;
+    rdfs:domain :properties ;
+    rdfs:range xsd:decimal .
+
+<http://valuenet/ontop/properties/property_id=10> a :properties ;
+    ns1:agreed_selling_price 244353758.1824 ;
+    ns1:apt_feature_1 "consequatur" ;
+    ns1:apt_feature_2 "vero" ;
+    ns1:buyer_offered_price 1.5509 ;
+    ns1:date_on_market "2003-12-25T16:13:19"^^xsd:dateTime ;
+    ns1:date_sold "1997-01-07T19:52:45"^^xsd:dateTime ;
+    ns1:property_address """084 Lakin Vista Apt. 394
+Fishertown, MA 16876""" ;
+    ns1:property_id 10 ;
+    ns1:property_name "renoir" ;
+    ns1:property_type_code "Apartment" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Apartment> ;
+    ns1:room_count 9 ;
+    ns1:vendor_requested_price 77172926.3000 .
+
+<http://valuenet/ontop/properties/property_id=2> a :properties ;
+    ns1:agreed_selling_price 21769471.8328 ;
+    ns1:apt_feature_1 "est" ;
+    ns1:apt_feature_2 "est" ;
+    ns1:buyer_offered_price 8.7122 ;
+    ns1:date_on_market "1990-05-25T23:01:51"^^xsd:dateTime ;
+    ns1:date_sold "1990-11-14T19:16:38"^^xsd:dateTime ;
+    ns1:property_address """098 Tremaine Highway Suite 569
+South Wilford, NJ 46587-3537""" ;
+    ns1:property_id 2 ;
+    ns1:property_name "the cole" ;
+    ns1:property_type_code "House" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=House> ;
+    ns1:room_count 1 ;
+    ns1:vendor_requested_price 661536468.4429 .
+
+<http://valuenet/ontop/properties/property_id=5> a :properties ;
+    ns1:agreed_selling_price 1.0012 ;
+    ns1:apt_feature_1 "quo" ;
+    ns1:apt_feature_2 "sequi" ;
+    ns1:buyer_offered_price 10.1067 ;
+    ns1:date_on_market "2016-05-06T16:53:39"^^xsd:dateTime ;
+    ns1:date_sold "2012-08-19T07:36:57"^^xsd:dateTime ;
+    ns1:property_address """2765 Schulist Stream
+Lindmouth, UT 03391-3817""" ;
+    ns1:property_id 5 ;
+    ns1:property_name "parc east" ;
+    ns1:property_type_code "Apartment" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Apartment> ;
+    ns1:room_count 5 ;
+    ns1:vendor_requested_price 983.8596 .
+
+<http://valuenet/ontop/properties/property_id=8> a :properties ;
+    ns1:agreed_selling_price 0.0000 ;
+    ns1:apt_feature_1 "fuga" ;
+    ns1:apt_feature_2 "odio" ;
+    ns1:buyer_offered_price 0.0000 ;
+    ns1:date_on_market "1976-06-10T20:25:38"^^xsd:dateTime ;
+    ns1:date_sold "2001-11-09T04:37:33"^^xsd:dateTime ;
+    ns1:property_address """24365 Ulices Run
+Homenicktown, MD 88485-6198""" ;
+    ns1:property_id 8 ;
+    ns1:property_name "vogue" ;
+    ns1:property_type_code "Apartment" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Apartment> ;
+    ns1:room_count 9 ;
+    ns1:vendor_requested_price 13.4715 .
+
+ns5:feature_type_code a owl:DatatypeProperty ;
+    rdfs:domain :ref_feature_types ;
+    rdfs:range xsd:string .
+
+ns5:feature_type_name a owl:DatatypeProperty ;
+    rdfs:domain :ref_feature_types ;
+    rdfs:range xsd:string .
+
+ns4:property_type_code a owl:DatatypeProperty ;
+    rdfs:domain :ref_property_types ;
+    rdfs:range xsd:string .
+
+ns4:property_type_description a owl:DatatypeProperty ;
+    rdfs:domain :ref_property_types ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/properties/property_id=1> a :properties ;
+    ns1:agreed_selling_price 4201.8000 ;
+    ns1:apt_feature_1 "aut" ;
+    ns1:apt_feature_2 "suscipit" ;
+    ns1:buyer_offered_price 1.6800 ;
+    ns1:date_on_market "1991-06-21T23:52:10"^^xsd:dateTime ;
+    ns1:date_sold "1979-05-13T16:58:06"^^xsd:dateTime ;
+    ns1:property_address """4745 Emerson Stravenue Suite 829
+South Garret, IN 16772-5682""" ;
+    ns1:property_id 1 ;
+    ns1:property_name "park" ;
+    ns1:property_type_code "House" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=House> ;
+    ns1:room_count 7 ;
+    ns1:vendor_requested_price 372652.2909 .
+
+<http://valuenet/ontop/properties/property_id=11> a :properties ;
+    ns1:agreed_selling_price 170766.4720 ;
+    ns1:apt_feature_1 "et" ;
+    ns1:apt_feature_2 "est" ;
+    ns1:buyer_offered_price 13991131.4340 ;
+    ns1:date_on_market "1981-08-23T05:40:38"^^xsd:dateTime ;
+    ns1:date_sold "1997-11-07T20:22:05"^^xsd:dateTime ;
+    ns1:property_address """2088 Bashirian Fork Suite 337
+Faustinoport, MT 16771-9320""" ;
+    ns1:property_id 11 ;
+    ns1:property_name "murray hill" ;
+    ns1:property_type_code "Other" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Other> ;
+    ns1:room_count 2 ;
+    ns1:vendor_requested_price 6713620.9000 .
+
+<http://valuenet/ontop/properties/property_id=12> a :properties ;
+    ns1:agreed_selling_price 456840888.1600 ;
+    ns1:apt_feature_1 "qui" ;
+    ns1:apt_feature_2 "autem" ;
+    ns1:buyer_offered_price 2.0000 ;
+    ns1:date_on_market "2016-05-24T09:57:45"^^xsd:dateTime ;
+    ns1:date_sold "1980-07-08T16:13:17"^^xsd:dateTime ;
+    ns1:property_address """743 Ephraim Greens
+Anniemouth, HI 47084-3853""" ;
+    ns1:property_id 12 ;
+    ns1:property_name "ten tower" ;
+    ns1:property_type_code "Apartment" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Apartment> ;
+    ns1:room_count 5 ;
+    ns1:vendor_requested_price 305.0000 .
+
+<http://valuenet/ontop/properties/property_id=13> a :properties ;
+    ns1:agreed_selling_price 44132.4621 ;
+    ns1:apt_feature_1 "fuga" ;
+    ns1:apt_feature_2 "aut" ;
+    ns1:buyer_offered_price 0.0000 ;
+    ns1:date_on_market "2000-08-07T06:59:14"^^xsd:dateTime ;
+    ns1:date_sold "1973-02-24T02:56:06"^^xsd:dateTime ;
+    ns1:property_address """60845 Else Highway Apt. 826
+South Dougfort, CO 43200-4258""" ;
+    ns1:property_id 13 ;
+    ns1:property_name "chelsea" ;
+    ns1:property_type_code "Other" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Other> ;
+    ns1:room_count 2 ;
+    ns1:vendor_requested_price 2198735.0950 .
+
+<http://valuenet/ontop/properties/property_id=15> a :properties ;
+    ns1:agreed_selling_price 2574.0000 ;
+    ns1:apt_feature_1 "aut" ;
+    ns1:apt_feature_2 "iusto" ;
+    ns1:buyer_offered_price 27537286.0000 ;
+    ns1:date_on_market "1993-08-04T10:49:04"^^xsd:dateTime ;
+    ns1:date_sold "1984-02-01T19:54:54"^^xsd:dateTime ;
+    ns1:property_address """986 Hagenes Drives
+Draketon, UT 83411-3393""" ;
+    ns1:property_id 15 ;
+    ns1:property_name "parc coliseum" ;
+    ns1:property_type_code "Apartment" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Apartment> ;
+    ns1:room_count 3 ;
+    ns1:vendor_requested_price 331.0000 .
+
+<http://valuenet/ontop/properties/property_id=3> a :properties ;
+    ns1:agreed_selling_price 5.0000 ;
+    ns1:apt_feature_1 "ut" ;
+    ns1:apt_feature_2 "et" ;
+    ns1:buyer_offered_price 11375259.5020 ;
+    ns1:date_on_market "1986-11-26T04:12:18"^^xsd:dateTime ;
+    ns1:date_sold "1981-06-26T21:28:28"^^xsd:dateTime ;
+    ns1:property_address """062 Micaela Court Apt. 707
+Margretville, WV 51628-3617""" ;
+    ns1:property_id 3 ;
+    ns1:property_name "prism" ;
+    ns1:property_type_code "Other" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Other> ;
+    ns1:room_count 8 ;
+    ns1:vendor_requested_price 1337.0000 .
+
+<http://valuenet/ontop/properties/property_id=4> a :properties ;
+    ns1:agreed_selling_price 4514.8070 ;
+    ns1:apt_feature_1 "nesciunt" ;
+    ns1:apt_feature_2 "adipisci" ;
+    ns1:buyer_offered_price 15.1700 ;
+    ns1:date_on_market "2017-09-14T15:49:23"^^xsd:dateTime ;
+    ns1:date_sold "2003-02-27T18:17:11"^^xsd:dateTime ;
+    ns1:property_address """49578 Ayden Mountains
+New Russellhaven, UT 46626""" ;
+    ns1:property_id 4 ;
+    ns1:property_name "riverside" ;
+    ns1:property_type_code "Field" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Field> ;
+    ns1:room_count 6 ;
+    ns1:vendor_requested_price 192374065.8000 .
+
+<http://valuenet/ontop/properties/property_id=7> a :properties ;
+    ns1:agreed_selling_price 2794972.2495 ;
+    ns1:apt_feature_1 "quos" ;
+    ns1:apt_feature_2 "est" ;
+    ns1:buyer_offered_price 296733.0000 ;
+    ns1:date_on_market "1996-09-16T22:04:27"^^xsd:dateTime ;
+    ns1:date_sold "1998-09-15T05:26:22"^^xsd:dateTime ;
+    ns1:property_address """092 Paucek Highway Apt. 772
+East Erika, IA 61358""" ;
+    ns1:property_id 7 ;
+    ns1:property_name "avalon" ;
+    ns1:property_type_code "Shop" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Shop> ;
+    ns1:room_count 8 ;
+    ns1:vendor_requested_price 150045.7568 .
+
+<http://valuenet/ontop/properties/property_id=9> a :properties ;
+    ns1:agreed_selling_price 3344706.5755 ;
+    ns1:apt_feature_1 "enim" ;
+    ns1:apt_feature_2 "sit" ;
+    ns1:buyer_offered_price 3520911.5258 ;
+    ns1:date_on_market "1978-05-15T10:53:37"^^xsd:dateTime ;
+    ns1:date_sold "1971-04-14T03:23:49"^^xsd:dateTime ;
+    ns1:property_address """107 Roob Courts
+Erdmanburgh, IA 42926-0873""" ;
+    ns1:property_id 9 ;
+    ns1:property_name "longacre" ;
+    ns1:property_type_code "Apartment" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Apartment> ;
+    ns1:room_count 5 ;
+    ns1:vendor_requested_price 2219.6778 .
+
+<http://valuenet/ontop/ref_feature_types/feature_type_code=Security> a :ref_feature_types ;
+    ns5:feature_type_code "Security" ;
+    ns5:feature_type_name "Securiyt, eg Burglar Alarm." .
+
+<http://valuenet/ontop/ref_property_types/property_type_code=Field> a :ref_property_types ;
+    ns4:property_type_code "Field" ;
+    ns4:property_type_description "Field, Meadow." .
+
+<http://valuenet/ontop/properties/property_id=14> a :properties ;
+    ns1:agreed_selling_price 0.0000 ;
+    ns1:apt_feature_1 "et" ;
+    ns1:apt_feature_2 "eos" ;
+    ns1:buyer_offered_price 2449185.2000 ;
+    ns1:date_on_market "1986-12-31T10:05:32"^^xsd:dateTime ;
+    ns1:date_sold "1987-12-07T07:41:27"^^xsd:dateTime ;
+    ns1:property_address """1474 Dibbert Fields Suite 055
+South Renee, IN 58286-3097""" ;
+    ns1:property_id 14 ;
+    ns1:property_name "wall street" ;
+    ns1:property_type_code "Other" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Other> ;
+    ns1:room_count 7 ;
+    ns1:vendor_requested_price 78.7208 .
+
+<http://valuenet/ontop/ref_feature_types/feature_type_code=Amenity> a :ref_feature_types ;
+    ns5:feature_type_code "Amenity" ;
+    ns5:feature_type_name "Amenity, eg Pool." .
+
+<http://valuenet/ontop/ref_property_types/property_type_code=House> a :ref_property_types ;
+    ns4:property_type_code "House" ;
+    ns4:property_type_description "House, Bungalow, etc." .
+
+<http://valuenet/ontop/ref_property_types/property_type_code=Shop> a :ref_property_types ;
+    ns4:property_type_code "Shop" ;
+    ns4:property_type_description "Shop, Retail Outlet." .
+
+<http://valuenet/ontop/other_available_features/feature_id=4> a :other_available_features ;
+    ns2:feature_description "Burglar Alarm" ;
+    ns2:feature_id 4 ;
+    ns2:feature_name "BurglarAlarm" ;
+    ns2:feature_type_code "Security" ;
+    ns2:ref-feature_type_code <http://valuenet/ontop/ref_feature_types/feature_type_code=Security> .
+
+<http://valuenet/ontop/properties/property_id=6> a :properties ;
+    ns1:agreed_selling_price 476919.3000 ;
+    ns1:apt_feature_1 "sed" ;
+    ns1:apt_feature_2 "culpa" ;
+    ns1:buyer_offered_price 0.0000 ;
+    ns1:date_on_market "1994-02-14T02:27:13"^^xsd:dateTime ;
+    ns1:date_sold "1995-01-31T11:18:42"^^xsd:dateTime ;
+    ns1:property_address """6837 Darien Views Apt. 475
+South Maraview, KS 77770""" ;
+    ns1:property_id 6 ;
+    ns1:property_name "high line" ;
+    ns1:property_type_code "Shop" ;
+    ns1:ref-property_type_code <http://valuenet/ontop/ref_property_types/property_type_code=Shop> ;
+    ns1:room_count 9 ;
+    ns1:vendor_requested_price 2573.0000 .
+
+<http://valuenet/ontop/ref_property_types/property_type_code=Other> a :ref_property_types ;
+    ns4:property_type_code "Other" ;
+    ns4:property_type_description "Other, to be determined." .
+
+<http://valuenet/ontop/other_available_features/feature_id=2> a :other_available_features ;
+    ns2:feature_description "Air Conditioning." ;
+    ns2:feature_id 2 ;
+    ns2:feature_name "AirCon" ;
+    ns2:feature_type_code "Amenity" ;
+    ns2:ref-feature_type_code <http://valuenet/ontop/ref_feature_types/feature_type_code=Amenity> .
+
+:ref_feature_types a owl:Class .
+
+<http://valuenet/ontop/other_available_features/feature_id=3> a :other_available_features ;
+    ns2:feature_description "Swimming Pool." ;
+    ns2:feature_id 3 ;
+    ns2:feature_name "Pool" ;
+    ns2:feature_type_code "Amenity" ;
+    ns2:ref-feature_type_code <http://valuenet/ontop/ref_feature_types/feature_type_code=Amenity> .
+
+<http://valuenet/ontop/ref_property_types/property_type_code=Apartment> a :ref_property_types ;
+    ns4:property_type_code "Apartment" ;
+    ns4:property_type_description "Apartment, Flat, Condo, etc." .
+
+:ref_property_types a owl:Class .
+
+:other_available_features a owl:Class .
+
+:other_property_features a owl:Class .
+
+:properties a owl:Class .
+
+[] a :other_property_features ;
+    ns3:feature_id 3 ;
+    ns3:property_feature_description "quo" ;
+    ns3:property_id 9 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=3> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=9> .
+
+[] a :other_property_features ;
+    ns3:feature_id 3 ;
+    ns3:property_feature_description "dolorem" ;
+    ns3:property_id 15 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=3> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=15> .
+
+[] a :other_property_features ;
+    ns3:feature_id 4 ;
+    ns3:property_feature_description "vitae" ;
+    ns3:property_id 11 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=4> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=11> .
+
+[] a :other_property_features ;
+    ns3:feature_id 2 ;
+    ns3:property_feature_description "autem" ;
+    ns3:property_id 13 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=2> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=13> .
+
+[] a :other_property_features ;
+    ns3:feature_id 2 ;
+    ns3:property_feature_description "cumque" ;
+    ns3:property_id 3 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=2> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=3> .
+
+[] a :other_property_features ;
+    ns3:feature_id 4 ;
+    ns3:property_feature_description "modi" ;
+    ns3:property_id 14 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=4> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=14> .
+
+[] a :other_property_features ;
+    ns3:feature_id 4 ;
+    ns3:property_feature_description "earum" ;
+    ns3:property_id 12 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=4> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=12> .
+
+[] a :other_property_features ;
+    ns3:feature_id 2 ;
+    ns3:property_feature_description "illo" ;
+    ns3:property_id 6 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=2> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=6> .
+
+[] a :other_property_features ;
+    ns3:feature_id 4 ;
+    ns3:property_feature_description "quo" ;
+    ns3:property_id 14 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=4> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=14> .
+
+[] a :other_property_features ;
+    ns3:feature_id 3 ;
+    ns3:property_feature_description "doloribus" ;
+    ns3:property_id 6 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=3> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=6> .
+
+[] a :other_property_features ;
+    ns3:feature_id 3 ;
+    ns3:property_feature_description "odio" ;
+    ns3:property_id 4 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=3> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=4> .
+
+[] a :other_property_features ;
+    ns3:feature_id 3 ;
+    ns3:property_feature_description "corrupti" ;
+    ns3:property_id 6 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=3> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=6> .
+
+[] a :other_property_features ;
+    ns3:feature_id 2 ;
+    ns3:property_feature_description "ad" ;
+    ns3:property_id 1 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=2> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=1> .
+
+[] a :other_property_features ;
+    ns3:feature_id 2 ;
+    ns3:property_feature_description "hic" ;
+    ns3:property_id 7 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=2> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=7> .
+
+[] a :other_property_features ;
+    ns3:feature_id 3 ;
+    ns3:property_feature_description "et" ;
+    ns3:property_id 6 ;
+    ns3:ref-feature_id <http://valuenet/ontop/other_available_features/feature_id=3> ;
+    ns3:ref-property_id <http://valuenet/ontop/properties/property_id=6> .
+

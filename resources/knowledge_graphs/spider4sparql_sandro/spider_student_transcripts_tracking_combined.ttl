@@ -1,0 +1,1508 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/students#> .
+@prefix ns10: <http://valuenet/ontop/sections#> .
+@prefix ns11: <http://valuenet/ontop/courses#> .
+@prefix ns2: <http://valuenet/ontop/student_enrolment_courses#> .
+@prefix ns3: <http://valuenet/ontop/addresses#> .
+@prefix ns4: <http://valuenet/ontop/transcripts#> .
+@prefix ns5: <http://valuenet/ontop/semesters#> .
+@prefix ns6: <http://valuenet/ontop/transcript_contents#> .
+@prefix ns7: <http://valuenet/ontop/student_enrolment#> .
+@prefix ns8: <http://valuenet/ontop/departments#> .
+@prefix ns9: <http://valuenet/ontop/degree_programs#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns3:address_id a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:integer .
+
+ns3:city a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:country a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:line_1 a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:line_2 a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:line_3 a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:other_address_details a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:state_province_county a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+ns3:zip_postcode a owl:DatatypeProperty ;
+    rdfs:domain :addresses ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/addresses/address_id=13> a :addresses ;
+    ns3:address_id 13 ;
+    ns3:city "New Clemensburgh" ;
+    ns3:country "Samoa" ;
+    ns3:line_1 "492 Wilkinson Route" ;
+    ns3:line_2 "Suite 865" ;
+    ns3:state_province_county "Florida" ;
+    ns3:zip_postcode "386" .
+
+ns11:course_description a owl:DatatypeProperty ;
+    rdfs:domain :courses ;
+    rdfs:range xsd:string .
+
+ns11:course_id a owl:DatatypeProperty ;
+    rdfs:domain :courses ;
+    rdfs:range xsd:integer .
+
+ns11:course_name a owl:DatatypeProperty ;
+    rdfs:domain :courses ;
+    rdfs:range xsd:string .
+
+ns11:other_details a owl:DatatypeProperty ;
+    rdfs:domain :courses ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/courses/course_id=15> a :courses ;
+    ns11:course_description "d" ;
+    ns11:course_id 15 ;
+    ns11:course_name "oop" .
+
+ns9:degree_program_id a owl:DatatypeProperty ;
+    rdfs:domain :degree_programs ;
+    rdfs:range xsd:integer .
+
+ns9:degree_summary_description a owl:DatatypeProperty ;
+    rdfs:domain :degree_programs ;
+    rdfs:range xsd:string .
+
+ns9:degree_summary_name a owl:DatatypeProperty ;
+    rdfs:domain :degree_programs ;
+    rdfs:range xsd:string .
+
+ns9:department_id a owl:DatatypeProperty ;
+    rdfs:domain :degree_programs ;
+    rdfs:range xsd:integer .
+
+ns9:other_details a owl:DatatypeProperty ;
+    rdfs:domain :degree_programs ;
+    rdfs:range xsd:string .
+
+ns9:ref-department_id a owl:ObjectProperty ;
+    rdfs:domain :degree_programs ;
+    rdfs:range :departments .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=1> a :degree_programs ;
+    ns9:degree_program_id 1 ;
+    ns9:degree_summary_description "architecto" ;
+    ns9:degree_summary_name "Master" ;
+    ns9:department_id 13 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=13> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=13> a :degree_programs ;
+    ns9:degree_program_id 13 ;
+    ns9:degree_summary_description "quam" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 7 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=7> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=14> a :degree_programs ;
+    ns9:degree_program_id 14 ;
+    ns9:degree_summary_description "et" ;
+    ns9:degree_summary_name "PHD" ;
+    ns9:department_id 2 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=2> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=15> a :degree_programs ;
+    ns9:degree_program_id 15 ;
+    ns9:degree_summary_description "esse" ;
+    ns9:degree_summary_name "PHD" ;
+    ns9:department_id 12 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=12> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=6> a :degree_programs ;
+    ns9:degree_program_id 6 ;
+    ns9:degree_summary_description "aperiam" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 8 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=8> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=7> a :degree_programs ;
+    ns9:degree_program_id 7 ;
+    ns9:degree_summary_description "assumenda" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 14 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=14> .
+
+ns8:department_description a owl:DatatypeProperty ;
+    rdfs:domain :departments ;
+    rdfs:range xsd:string .
+
+ns8:department_id a owl:DatatypeProperty ;
+    rdfs:domain :departments ;
+    rdfs:range xsd:integer .
+
+ns8:department_name a owl:DatatypeProperty ;
+    rdfs:domain :departments ;
+    rdfs:range xsd:string .
+
+ns8:other_details a owl:DatatypeProperty ;
+    rdfs:domain :departments ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/departments/department_id=1> a :departments ;
+    ns8:department_description "error" ;
+    ns8:department_id 1 ;
+    ns8:department_name "computer science" .
+
+<http://valuenet/ontop/departments/department_id=10> a :departments ;
+    ns8:department_description "non" ;
+    ns8:department_id 10 ;
+    ns8:department_name "economics" .
+
+<http://valuenet/ontop/departments/department_id=5> a :departments ;
+    ns8:department_description "nihil" ;
+    ns8:department_id 5 ;
+    ns8:department_name "management" .
+
+<http://valuenet/ontop/departments/department_id=6> a :departments ;
+    ns8:department_description "autem" ;
+    ns8:department_id 6 ;
+    ns8:department_name "engineer" .
+
+<http://valuenet/ontop/departments/department_id=9> a :departments ;
+    ns8:department_description "dolorem" ;
+    ns8:department_id 9 ;
+    ns8:department_name "law" .
+
+ns10:course_id a owl:DatatypeProperty ;
+    rdfs:domain :sections ;
+    rdfs:range xsd:integer .
+
+ns10:other_details a owl:DatatypeProperty ;
+    rdfs:domain :sections ;
+    rdfs:range xsd:string .
+
+ns10:ref-course_id a owl:ObjectProperty ;
+    rdfs:domain :sections ;
+    rdfs:range :courses .
+
+ns10:section_description a owl:DatatypeProperty ;
+    rdfs:domain :sections ;
+    rdfs:range xsd:string .
+
+ns10:section_id a owl:DatatypeProperty ;
+    rdfs:domain :sections ;
+    rdfs:range xsd:integer .
+
+ns10:section_name a owl:DatatypeProperty ;
+    rdfs:domain :sections ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/sections/section_id=1> a :sections ;
+    ns10:course_id 9 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=9> ;
+    ns10:section_description "non" ;
+    ns10:section_id 1 ;
+    ns10:section_name "a" .
+
+<http://valuenet/ontop/sections/section_id=10> a :sections ;
+    ns10:course_id 14 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=14> ;
+    ns10:section_description "nesciunt" ;
+    ns10:section_id 10 ;
+    ns10:section_name "k" .
+
+<http://valuenet/ontop/sections/section_id=11> a :sections ;
+    ns10:course_id 1 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=1> ;
+    ns10:section_description "ad" ;
+    ns10:section_id 11 ;
+    ns10:section_name "l" .
+
+<http://valuenet/ontop/sections/section_id=12> a :sections ;
+    ns10:course_id 4 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=4> ;
+    ns10:section_description "et" ;
+    ns10:section_id 12 ;
+    ns10:section_name "o" .
+
+<http://valuenet/ontop/sections/section_id=13> a :sections ;
+    ns10:course_id 5 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=5> ;
+    ns10:section_description "facilis" ;
+    ns10:section_id 13 ;
+    ns10:section_name "p" .
+
+<http://valuenet/ontop/sections/section_id=14> a :sections ;
+    ns10:course_id 6 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=6> ;
+    ns10:section_description "reprehenderit" ;
+    ns10:section_id 14 ;
+    ns10:section_name "u" .
+
+<http://valuenet/ontop/sections/section_id=15> a :sections ;
+    ns10:course_id 10 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=10> ;
+    ns10:section_description "qui" ;
+    ns10:section_id 15 ;
+    ns10:section_name "y" .
+
+<http://valuenet/ontop/sections/section_id=2> a :sections ;
+    ns10:course_id 2 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=2> ;
+    ns10:section_description "voluptatem" ;
+    ns10:section_id 2 ;
+    ns10:section_name "b" .
+
+<http://valuenet/ontop/sections/section_id=3> a :sections ;
+    ns10:course_id 8 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=8> ;
+    ns10:section_description "qui" ;
+    ns10:section_id 3 ;
+    ns10:section_name "c" .
+
+<http://valuenet/ontop/sections/section_id=4> a :sections ;
+    ns10:course_id 1 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=1> ;
+    ns10:section_description "voluptas" ;
+    ns10:section_id 4 ;
+    ns10:section_name "d" .
+
+<http://valuenet/ontop/sections/section_id=5> a :sections ;
+    ns10:course_id 5 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=5> ;
+    ns10:section_description "ex" ;
+    ns10:section_id 5 ;
+    ns10:section_name "e" .
+
+<http://valuenet/ontop/sections/section_id=6> a :sections ;
+    ns10:course_id 7 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=7> ;
+    ns10:section_description "doloremque" ;
+    ns10:section_id 6 ;
+    ns10:section_name "f" .
+
+<http://valuenet/ontop/sections/section_id=7> a :sections ;
+    ns10:course_id 12 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=12> ;
+    ns10:section_description "provident" ;
+    ns10:section_id 7 ;
+    ns10:section_name "g" .
+
+<http://valuenet/ontop/sections/section_id=8> a :sections ;
+    ns10:course_id 14 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=14> ;
+    ns10:section_description "et" ;
+    ns10:section_id 8 ;
+    ns10:section_name "h" .
+
+<http://valuenet/ontop/sections/section_id=9> a :sections ;
+    ns10:course_id 8 ;
+    ns10:ref-course_id <http://valuenet/ontop/courses/course_id=8> ;
+    ns10:section_description "quis" ;
+    ns10:section_id 9 ;
+    ns10:section_name "j" .
+
+ns5:other_details a owl:DatatypeProperty ;
+    rdfs:domain :semesters ;
+    rdfs:range xsd:string .
+
+ns5:semester_description a owl:DatatypeProperty ;
+    rdfs:domain :semesters ;
+    rdfs:range xsd:string .
+
+ns5:semester_id a owl:DatatypeProperty ;
+    rdfs:domain :semesters ;
+    rdfs:range xsd:integer .
+
+ns5:semester_name a owl:DatatypeProperty ;
+    rdfs:domain :semesters ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/semesters/semester_id=10> a :semesters ;
+    ns5:semester_description "f" ;
+    ns5:semester_id 10 ;
+    ns5:semester_name "spring 2016" .
+
+<http://valuenet/ontop/semesters/semester_id=11> a :semesters ;
+    ns5:semester_description "g" ;
+    ns5:semester_id 11 ;
+    ns5:semester_name "spring 2017" .
+
+<http://valuenet/ontop/semesters/semester_id=14> a :semesters ;
+    ns5:semester_description "t" ;
+    ns5:semester_id 14 ;
+    ns5:semester_name "winter 2018" .
+
+<http://valuenet/ontop/semesters/semester_id=3> a :semesters ;
+    ns5:semester_description "w" ;
+    ns5:semester_id 3 ;
+    ns5:semester_name "fall 2010" .
+
+<http://valuenet/ontop/semesters/semester_id=7> a :semesters ;
+    ns5:semester_description "y" ;
+    ns5:semester_id 7 ;
+    ns5:semester_name "spring 2013" .
+
+<http://valuenet/ontop/semesters/semester_id=8> a :semesters ;
+    ns5:semester_description "x" ;
+    ns5:semester_id 8 ;
+    ns5:semester_name "spring 2014" .
+
+ns7:degree_program_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range xsd:integer .
+
+ns7:other_details a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range xsd:string .
+
+ns7:ref-degree_program_id a owl:ObjectProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range :degree_programs .
+
+ns7:ref-semester_id a owl:ObjectProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range :semesters .
+
+ns7:ref-student_id a owl:ObjectProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range :students .
+
+ns7:semester_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range xsd:integer .
+
+ns7:student_enrolment_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range xsd:integer .
+
+ns7:student_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=1> a :student_enrolment ;
+    ns7:degree_program_id 12 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=12> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=13> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=14> ;
+    ns7:semester_id 13 ;
+    ns7:student_enrolment_id 1 ;
+    ns7:student_id 14 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=11> a :student_enrolment ;
+    ns7:degree_program_id 10 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=10> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=13> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=4> ;
+    ns7:semester_id 13 ;
+    ns7:student_enrolment_id 11 ;
+    ns7:student_id 4 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=12> a :student_enrolment ;
+    ns7:degree_program_id 9 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=9> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=2> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=5> ;
+    ns7:semester_id 2 ;
+    ns7:student_enrolment_id 12 ;
+    ns7:student_id 5 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=15> a :student_enrolment ;
+    ns7:degree_program_id 2 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=2> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=4> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=6> ;
+    ns7:semester_id 4 ;
+    ns7:student_enrolment_id 15 ;
+    ns7:student_id 6 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=3> a :student_enrolment ;
+    ns7:degree_program_id 10 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=10> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=2> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=7> ;
+    ns7:semester_id 2 ;
+    ns7:student_enrolment_id 3 ;
+    ns7:student_id 7 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=7> a :student_enrolment ;
+    ns7:degree_program_id 9 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=9> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=9> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=4> ;
+    ns7:semester_id 9 ;
+    ns7:student_enrolment_id 7 ;
+    ns7:student_id 4 .
+
+ns2:course_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment_courses ;
+    rdfs:range xsd:integer .
+
+ns2:ref-course_id a owl:ObjectProperty ;
+    rdfs:domain :student_enrolment_courses ;
+    rdfs:range :courses .
+
+ns2:ref-student_enrolment_id a owl:ObjectProperty ;
+    rdfs:domain :student_enrolment_courses ;
+    rdfs:range :student_enrolment .
+
+ns2:student_course_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment_courses ;
+    rdfs:range xsd:integer .
+
+ns2:student_enrolment_id a owl:DatatypeProperty ;
+    rdfs:domain :student_enrolment_courses ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=1> a :student_enrolment_courses ;
+    ns2:course_id 6 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=6> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=8> ;
+    ns2:student_course_id 1 ;
+    ns2:student_enrolment_id 8 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=438800> a :student_enrolment_courses ;
+    ns2:course_id 3 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=3> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=4> ;
+    ns2:student_course_id 438800 ;
+    ns2:student_enrolment_id 4 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=604750> a :student_enrolment_courses ;
+    ns2:course_id 4 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=4> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=6> ;
+    ns2:student_course_id 604750 ;
+    ns2:student_enrolment_id 6 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=681404> a :student_enrolment_courses ;
+    ns2:course_id 10 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=10> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=4> ;
+    ns2:student_course_id 681404 ;
+    ns2:student_enrolment_id 4 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=83814225> a :student_enrolment_courses ;
+    ns2:course_id 12 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=12> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=14> ;
+    ns2:student_course_id 83814225 ;
+    ns2:student_enrolment_id 14 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=9860> a :student_enrolment_courses ;
+    ns2:course_id 14 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=14> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=10> ;
+    ns2:student_course_id 9860 ;
+    ns2:student_enrolment_id 10 .
+
+ns1:cell_mobile_number a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:current_address_id a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:integer .
+
+ns1:date_first_registered a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:dateTime .
+
+ns1:date_left a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:dateTime .
+
+ns1:email_address a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:first_name a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:last_name a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:middle_name a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:other_student_details a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:permanent_address_id a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:integer .
+
+ns1:ref-current_address_id a owl:ObjectProperty ;
+    rdfs:domain :students ;
+    rdfs:range :addresses .
+
+ns1:ref-permanent_address_id a owl:ObjectProperty ;
+    rdfs:domain :students ;
+    rdfs:range :addresses .
+
+ns1:ssn a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:string .
+
+ns1:student_id a owl:DatatypeProperty ;
+    rdfs:domain :students ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/students/student_id=10> a :students ;
+    ns1:cell_mobile_number "677.401.9382" ;
+    ns1:current_address_id 15 ;
+    ns1:date_first_registered "2009-09-25T00:14:25"^^xsd:dateTime ;
+    ns1:date_left "2017-07-09T21:38:43"^^xsd:dateTime ;
+    ns1:email_address "nya.lesch@example.net" ;
+    ns1:first_name "Helga" ;
+    ns1:last_name "Mohr" ;
+    ns1:middle_name "Cleve" ;
+    ns1:other_student_details "rerum" ;
+    ns1:permanent_address_id 14 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=15> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=14> ;
+    ns1:ssn "43" ;
+    ns1:student_id 10 .
+
+<http://valuenet/ontop/students/student_id=11> a :students ;
+    ns1:cell_mobile_number "(462)246-7921" ;
+    ns1:current_address_id 14 ;
+    ns1:date_first_registered "1989-05-24T23:31:29"^^xsd:dateTime ;
+    ns1:date_left "1975-10-09T00:49:27"^^xsd:dateTime ;
+    ns1:email_address "nbruen@example.org" ;
+    ns1:first_name "Gregg" ;
+    ns1:last_name "Schuppe" ;
+    ns1:middle_name "Mossie" ;
+    ns1:other_student_details "omnis" ;
+    ns1:permanent_address_id 4 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=14> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=4> ;
+    ns1:ssn "494" ;
+    ns1:student_id 11 .
+
+<http://valuenet/ontop/students/student_id=13> a :students ;
+    ns1:cell_mobile_number "(213)445-0399x85208" ;
+    ns1:current_address_id 9 ;
+    ns1:date_first_registered "1986-02-24T21:12:23"^^xsd:dateTime ;
+    ns1:date_left "2014-05-30T23:32:02"^^xsd:dateTime ;
+    ns1:email_address "jhuel@example.com" ;
+    ns1:first_name "Deon" ;
+    ns1:last_name "Weimann" ;
+    ns1:middle_name "Brooklyn" ;
+    ns1:other_student_details "assumenda" ;
+    ns1:permanent_address_id 8 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=9> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=8> ;
+    ns1:ssn "68095" ;
+    ns1:student_id 13 .
+
+<http://valuenet/ontop/students/student_id=15> a :students ;
+    ns1:cell_mobile_number "877.549.9067x8723" ;
+    ns1:current_address_id 2 ;
+    ns1:date_first_registered "1982-06-19T13:15:18"^^xsd:dateTime ;
+    ns1:date_left "1982-06-11T00:25:39"^^xsd:dateTime ;
+    ns1:email_address "mya88@example.org" ;
+    ns1:first_name "Jett" ;
+    ns1:last_name "Jaskolski" ;
+    ns1:middle_name "Alberta" ;
+    ns1:other_student_details "omnis" ;
+    ns1:permanent_address_id 9 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=2> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=9> ;
+    ns1:ssn "156" ;
+    ns1:student_id 15 .
+
+<http://valuenet/ontop/students/student_id=2> a :students ;
+    ns1:cell_mobile_number "1-009-710-5151" ;
+    ns1:current_address_id 12 ;
+    ns1:date_first_registered "1976-10-26T02:33:06"^^xsd:dateTime ;
+    ns1:date_left "2013-10-05T17:41:28"^^xsd:dateTime ;
+    ns1:email_address "swift.kolby@example.com" ;
+    ns1:first_name "Hobart" ;
+    ns1:last_name "Balistreri" ;
+    ns1:middle_name "Lorenz" ;
+    ns1:other_student_details "autem" ;
+    ns1:permanent_address_id 5 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=12> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=5> ;
+    ns1:ssn "304246" ;
+    ns1:student_id 2 .
+
+<http://valuenet/ontop/students/student_id=3> a :students ;
+    ns1:cell_mobile_number "07661787471" ;
+    ns1:current_address_id 9 ;
+    ns1:date_first_registered "2007-08-29T23:25:41"^^xsd:dateTime ;
+    ns1:date_left "2007-03-31T09:53:19"^^xsd:dateTime ;
+    ns1:email_address "johns.unique@example.net" ;
+    ns1:first_name "Warren" ;
+    ns1:last_name "Gleichner" ;
+    ns1:middle_name "Violet" ;
+    ns1:other_student_details "facilis" ;
+    ns1:permanent_address_id 5 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=9> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=5> ;
+    ns1:ssn "3" ;
+    ns1:student_id 3 .
+
+<http://valuenet/ontop/students/student_id=8> a :students ;
+    ns1:cell_mobile_number "03174364122" ;
+    ns1:current_address_id 1 ;
+    ns1:date_first_registered "1982-02-14T08:46:35"^^xsd:dateTime ;
+    ns1:date_left "2004-12-08T05:29:11"^^xsd:dateTime ;
+    ns1:email_address "dell43@example.net" ;
+    ns1:first_name "Delaney" ;
+    ns1:last_name "Ankunding" ;
+    ns1:middle_name "Judd" ;
+    ns1:other_student_details "voluptatem" ;
+    ns1:permanent_address_id 5 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=1> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=5> ;
+    ns1:ssn "402" ;
+    ns1:student_id 8 .
+
+ns6:ref-student_course_id a owl:ObjectProperty ;
+    rdfs:domain :transcript_contents ;
+    rdfs:range :student_enrolment_courses .
+
+ns6:ref-transcript_id a owl:ObjectProperty ;
+    rdfs:domain :transcript_contents ;
+    rdfs:range :transcripts .
+
+ns6:student_course_id a owl:DatatypeProperty ;
+    rdfs:domain :transcript_contents ;
+    rdfs:range xsd:integer .
+
+ns6:transcript_id a owl:DatatypeProperty ;
+    rdfs:domain :transcript_contents ;
+    rdfs:range xsd:integer .
+
+ns4:other_details a owl:DatatypeProperty ;
+    rdfs:domain :transcripts ;
+    rdfs:range xsd:string .
+
+ns4:transcript_date a owl:DatatypeProperty ;
+    rdfs:domain :transcripts ;
+    rdfs:range xsd:dateTime .
+
+ns4:transcript_id a owl:DatatypeProperty ;
+    rdfs:domain :transcripts ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/transcripts/transcript_id=1> a :transcripts ;
+    ns4:transcript_date "1988-04-30T01:19:47"^^xsd:dateTime ;
+    ns4:transcript_id 1 .
+
+<http://valuenet/ontop/transcripts/transcript_id=10> a :transcripts ;
+    ns4:transcript_date "1975-05-20T18:31:21"^^xsd:dateTime ;
+    ns4:transcript_id 10 .
+
+<http://valuenet/ontop/transcripts/transcript_id=14> a :transcripts ;
+    ns4:transcript_date "2002-09-24T06:11:49"^^xsd:dateTime ;
+    ns4:transcript_id 14 .
+
+<http://valuenet/ontop/transcripts/transcript_id=3> a :transcripts ;
+    ns4:transcript_date "1984-12-19T00:37:21"^^xsd:dateTime ;
+    ns4:transcript_id 3 .
+
+<http://valuenet/ontop/transcripts/transcript_id=7> a :transcripts ;
+    ns4:transcript_date "1990-03-05T11:59:41"^^xsd:dateTime ;
+    ns4:transcript_id 7 .
+
+<http://valuenet/ontop/addresses/address_id=1> a :addresses ;
+    ns3:address_id 1 ;
+    ns3:city "Port Chelsea" ;
+    ns3:country "Iceland" ;
+    ns3:line_1 "2294 Grant Square Apt. 235" ;
+    ns3:line_2 "Apt. 370" ;
+    ns3:state_province_county "Virginia" ;
+    ns3:zip_postcode "148" .
+
+<http://valuenet/ontop/addresses/address_id=10> a :addresses ;
+    ns3:address_id 10 ;
+    ns3:city "Rutherfordtown" ;
+    ns3:country "Kyrgyz Republic" ;
+    ns3:line_1 "7081 Eda Center" ;
+    ns3:line_2 "Suite 830" ;
+    ns3:state_province_county "Delaware" ;
+    ns3:zip_postcode "839" .
+
+<http://valuenet/ontop/addresses/address_id=4> a :addresses ;
+    ns3:address_id 4 ;
+    ns3:city "Port Evanston" ;
+    ns3:country "Angola" ;
+    ns3:line_1 "0144 Lamar Plaza Apt. 346" ;
+    ns3:line_2 "Suite 703" ;
+    ns3:state_province_county "Washington" ;
+    ns3:zip_postcode "847" .
+
+<http://valuenet/ontop/addresses/address_id=6> a :addresses ;
+    ns3:address_id 6 ;
+    ns3:city "North Omer" ;
+    ns3:country "Gibraltar" ;
+    ns3:line_1 "16998 Mraz Lodge" ;
+    ns3:line_2 "Apt. 689" ;
+    ns3:state_province_county "Kentucky" ;
+    ns3:zip_postcode "902" .
+
+<http://valuenet/ontop/addresses/address_id=7> a :addresses ;
+    ns3:address_id 7 ;
+    ns3:city "Herzoghaven" ;
+    ns3:country "Cook Islands" ;
+    ns3:line_1 "193 Marlin Brook" ;
+    ns3:line_2 "Apt. 406" ;
+    ns3:state_province_county "Arkansas" ;
+    ns3:zip_postcode "068" .
+
+<http://valuenet/ontop/addresses/address_id=8> a :addresses ;
+    ns3:address_id 8 ;
+    ns3:city "Mariliehaven" ;
+    ns3:country "Croatia" ;
+    ns3:line_1 "202 Hessel Views Apt. 468" ;
+    ns3:line_2 "Apt. 305" ;
+    ns3:state_province_county "Idaho" ;
+    ns3:zip_postcode "638" .
+
+<http://valuenet/ontop/courses/course_id=11> a :courses ;
+    ns11:course_description "w" ;
+    ns11:course_id 11 ;
+    ns11:course_name "ai" .
+
+<http://valuenet/ontop/courses/course_id=3> a :courses ;
+    ns11:course_description "v" ;
+    ns11:course_id 3 ;
+    ns11:course_name "os" .
+
+<http://valuenet/ontop/courses/course_id=7> a :courses ;
+    ns11:course_description "l" ;
+    ns11:course_id 7 ;
+    ns11:course_name "cal" .
+
+<http://valuenet/ontop/courses/course_id=9> a :courses ;
+    ns11:course_description "l" ;
+    ns11:course_id 9 ;
+    ns11:course_name "dl" .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=11> a :degree_programs ;
+    ns9:degree_program_id 11 ;
+    ns9:degree_summary_description "aut" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 14 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=14> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=3> a :degree_programs ;
+    ns9:degree_program_id 3 ;
+    ns9:degree_summary_description "placeat" ;
+    ns9:degree_summary_name "Master" ;
+    ns9:department_id 13 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=13> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=5> a :degree_programs ;
+    ns9:degree_program_id 5 ;
+    ns9:degree_summary_description "officiis" ;
+    ns9:degree_summary_name "Master" ;
+    ns9:department_id 11 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=11> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=8> a :degree_programs ;
+    ns9:degree_program_id 8 ;
+    ns9:degree_summary_description "earum" ;
+    ns9:degree_summary_name "Master" ;
+    ns9:department_id 15 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=15> .
+
+<http://valuenet/ontop/departments/department_id=11> a :departments ;
+    ns8:department_description "consequatur" ;
+    ns8:department_id 11 ;
+    ns8:department_name "biology" .
+
+<http://valuenet/ontop/departments/department_id=12> a :departments ;
+    ns8:department_description "ea" ;
+    ns8:department_id 12 ;
+    ns8:department_name "medical" .
+
+<http://valuenet/ontop/departments/department_id=15> a :departments ;
+    ns8:department_description "nisi" ;
+    ns8:department_id 15 ;
+    ns8:department_name "geography" .
+
+<http://valuenet/ontop/departments/department_id=3> a :departments ;
+    ns8:department_description "aliquam" ;
+    ns8:department_id 3 ;
+    ns8:department_name "art" .
+
+<http://valuenet/ontop/departments/department_id=4> a :departments ;
+    ns8:department_description "natus" ;
+    ns8:department_id 4 ;
+    ns8:department_name "linguistic" .
+
+<http://valuenet/ontop/departments/department_id=7> a :departments ;
+    ns8:department_description "doloribus" ;
+    ns8:department_id 7 ;
+    ns8:department_name "math" .
+
+<http://valuenet/ontop/semesters/semester_id=1> a :semesters ;
+    ns5:semester_description "x" ;
+    ns5:semester_id 1 ;
+    ns5:semester_name "spring 2010" .
+
+<http://valuenet/ontop/semesters/semester_id=12> a :semesters ;
+    ns5:semester_description "m" ;
+    ns5:semester_id 12 ;
+    ns5:semester_name "spring 2018" .
+
+<http://valuenet/ontop/semesters/semester_id=4> a :semesters ;
+    ns5:semester_description "c" ;
+    ns5:semester_id 4 ;
+    ns5:semester_name "winter 2010" .
+
+<http://valuenet/ontop/semesters/semester_id=5> a :semesters ;
+    ns5:semester_description "c" ;
+    ns5:semester_id 5 ;
+    ns5:semester_name "spring 2018" .
+
+<http://valuenet/ontop/semesters/semester_id=6> a :semesters ;
+    ns5:semester_description "l" ;
+    ns5:semester_id 6 ;
+    ns5:semester_name "spring 2012" .
+
+<http://valuenet/ontop/semesters/semester_id=9> a :semesters ;
+    ns5:semester_description "x" ;
+    ns5:semester_id 9 ;
+    ns5:semester_name "spring 2015" .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=10> a :student_enrolment ;
+    ns7:degree_program_id 11 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=11> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=2> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=7> ;
+    ns7:semester_id 2 ;
+    ns7:student_enrolment_id 10 ;
+    ns7:student_id 7 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=13> a :student_enrolment ;
+    ns7:degree_program_id 2 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=2> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=12> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=6> ;
+    ns7:semester_id 12 ;
+    ns7:student_enrolment_id 13 ;
+    ns7:student_id 6 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=2> a :student_enrolment ;
+    ns7:degree_program_id 4 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=4> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=2> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=9> ;
+    ns7:semester_id 2 ;
+    ns7:student_enrolment_id 2 ;
+    ns7:student_id 9 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=6> a :student_enrolment ;
+    ns7:degree_program_id 3 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=3> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=13> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=1> ;
+    ns7:semester_id 13 ;
+    ns7:student_enrolment_id 6 ;
+    ns7:student_id 1 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=8> a :student_enrolment ;
+    ns7:degree_program_id 8 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=8> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=5> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=12> ;
+    ns7:semester_id 5 ;
+    ns7:student_enrolment_id 8 ;
+    ns7:student_id 12 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=2> a :student_enrolment_courses ;
+    ns2:course_id 14 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=14> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=5> ;
+    ns2:student_course_id 2 ;
+    ns2:student_enrolment_id 5 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=28982908> a :student_enrolment_courses ;
+    ns2:course_id 8 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=8> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=9> ;
+    ns2:student_course_id 28982908 ;
+    ns2:student_enrolment_id 9 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=45105806> a :student_enrolment_courses ;
+    ns2:course_id 13 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=13> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=14> ;
+    ns2:student_course_id 45105806 ;
+    ns2:student_enrolment_id 14 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=7> a :student_enrolment_courses ;
+    ns2:course_id 11 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=11> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=5> ;
+    ns2:student_course_id 7 ;
+    ns2:student_enrolment_id 5 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=70882679> a :student_enrolment_courses ;
+    ns2:course_id 13 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=13> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=9> ;
+    ns2:student_course_id 70882679 ;
+    ns2:student_enrolment_id 9 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=8> a :student_enrolment_courses ;
+    ns2:course_id 2 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=2> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=5> ;
+    ns2:student_course_id 8 ;
+    ns2:student_enrolment_id 5 .
+
+<http://valuenet/ontop/students/student_id=1> a :students ;
+    ns1:cell_mobile_number "(096)889-8954x524" ;
+    ns1:current_address_id 10 ;
+    ns1:date_first_registered "1971-02-05T07:28:23"^^xsd:dateTime ;
+    ns1:date_left "1971-05-17T19:28:49"^^xsd:dateTime ;
+    ns1:email_address "erwin.zboncak@example.com" ;
+    ns1:first_name "Timmothy" ;
+    ns1:last_name "Ward" ;
+    ns1:middle_name "Anna" ;
+    ns1:other_student_details "quia" ;
+    ns1:permanent_address_id 15 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=10> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=15> ;
+    ns1:ssn "965" ;
+    ns1:student_id 1 .
+
+<http://valuenet/ontop/students/student_id=12> a :students ;
+    ns1:cell_mobile_number "(982)153-1469x1733" ;
+    ns1:current_address_id 14 ;
+    ns1:date_first_registered "2005-12-15T08:42:10"^^xsd:dateTime ;
+    ns1:date_left "2006-08-04T17:26:49"^^xsd:dateTime ;
+    ns1:email_address "beth42@example.org" ;
+    ns1:first_name "Orrin" ;
+    ns1:last_name "Kemmer" ;
+    ns1:middle_name "Neal" ;
+    ns1:other_student_details "non" ;
+    ns1:permanent_address_id 9 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=14> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=9> ;
+    ns1:ssn "6274274" ;
+    ns1:student_id 12 .
+
+<http://valuenet/ontop/students/student_id=5> a :students ;
+    ns1:cell_mobile_number "171-642-5684" ;
+    ns1:current_address_id 9 ;
+    ns1:date_first_registered "1973-05-19T19:12:46"^^xsd:dateTime ;
+    ns1:date_left "2007-11-28T12:50:21"^^xsd:dateTime ;
+    ns1:email_address "lhartmann@example.org" ;
+    ns1:first_name "Milton" ;
+    ns1:last_name "Christiansen" ;
+    ns1:middle_name "Vaughn" ;
+    ns1:other_student_details "laborum" ;
+    ns1:permanent_address_id 9 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=9> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=9> ;
+    ns1:ssn "" ;
+    ns1:student_id 5 .
+
+<http://valuenet/ontop/transcripts/transcript_id=11> a :transcripts ;
+    ns4:transcript_date "1986-07-12T07:27:29"^^xsd:dateTime ;
+    ns4:transcript_id 11 .
+
+<http://valuenet/ontop/transcripts/transcript_id=12> a :transcripts ;
+    ns4:transcript_date "1985-08-21T09:32:39"^^xsd:dateTime ;
+    ns4:transcript_id 12 .
+
+<http://valuenet/ontop/transcripts/transcript_id=13> a :transcripts ;
+    ns4:transcript_date "1985-04-29T01:20:20"^^xsd:dateTime ;
+    ns4:transcript_id 13 .
+
+<http://valuenet/ontop/transcripts/transcript_id=2> a :transcripts ;
+    ns4:transcript_date "1975-10-28T15:16:51"^^xsd:dateTime ;
+    ns4:transcript_id 2 .
+
+<http://valuenet/ontop/transcripts/transcript_id=4> a :transcripts ;
+    ns4:transcript_date "1999-01-06T20:06:46"^^xsd:dateTime ;
+    ns4:transcript_id 4 .
+
+<http://valuenet/ontop/transcripts/transcript_id=9> a :transcripts ;
+    ns4:transcript_date "1984-01-18T23:07:07"^^xsd:dateTime ;
+    ns4:transcript_id 9 .
+
+<http://valuenet/ontop/addresses/address_id=11> a :addresses ;
+    ns3:address_id 11 ;
+    ns3:city "South Palma" ;
+    ns3:country "Bermuda" ;
+    ns3:line_1 "9283 Schulist Falls Apt. 037" ;
+    ns3:line_2 "Suite 239" ;
+    ns3:state_province_county "WestVirginia" ;
+    ns3:zip_postcode "400" .
+
+<http://valuenet/ontop/addresses/address_id=12> a :addresses ;
+    ns3:address_id 12 ;
+    ns3:city "Prohaskafort" ;
+    ns3:country "Lesotho" ;
+    ns3:line_1 "979 Haag Shores Suite 656" ;
+    ns3:line_2 "Apt. 468" ;
+    ns3:state_province_county "SouthDakota" ;
+    ns3:zip_postcode "590" .
+
+<http://valuenet/ontop/addresses/address_id=2> a :addresses ;
+    ns3:address_id 2 ;
+    ns3:city "Lake Laishafurt" ;
+    ns3:country "Burundi" ;
+    ns3:line_1 "3999 Aufderhar Ways Suite 593" ;
+    ns3:line_2 "Apt. 388" ;
+    ns3:state_province_county "Kentucky" ;
+    ns3:zip_postcode "943" .
+
+<http://valuenet/ontop/addresses/address_id=3> a :addresses ;
+    ns3:address_id 3 ;
+    ns3:city "Goodwinhaven" ;
+    ns3:country "Saudi Arabia" ;
+    ns3:line_1 "67942 Carlotta Ferry Apt. 686" ;
+    ns3:line_2 "Apt. 583" ;
+    ns3:state_province_county "Kansas" ;
+    ns3:zip_postcode "541" .
+
+<http://valuenet/ontop/courses/course_id=1> a :courses ;
+    ns11:course_description "p" ;
+    ns11:course_id 1 ;
+    ns11:course_name "ds" .
+
+<http://valuenet/ontop/courses/course_id=12> a :courses ;
+    ns11:course_description "q" ;
+    ns11:course_id 12 ;
+    ns11:course_name "db" .
+
+<http://valuenet/ontop/courses/course_id=13> a :courses ;
+    ns11:course_description "v" ;
+    ns11:course_id 13 ;
+    ns11:course_name "rs" .
+
+<http://valuenet/ontop/courses/course_id=4> a :courses ;
+    ns11:course_description "k" ;
+    ns11:course_id 4 ;
+    ns11:course_name "en" .
+
+<http://valuenet/ontop/courses/course_id=5> a :courses ;
+    ns11:course_description "c" ;
+    ns11:course_id 5 ;
+    ns11:course_name "fr" .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=10> a :degree_programs ;
+    ns9:degree_program_id 10 ;
+    ns9:degree_summary_description "aut" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 8 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=8> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=12> a :degree_programs ;
+    ns9:degree_program_id 12 ;
+    ns9:degree_summary_description "qui" ;
+    ns9:degree_summary_name "Master" ;
+    ns9:department_id 4 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=4> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=2> a :degree_programs ;
+    ns9:degree_program_id 2 ;
+    ns9:degree_summary_description "cumque" ;
+    ns9:degree_summary_name "Master" ;
+    ns9:department_id 2 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=2> .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=4> a :degree_programs ;
+    ns9:degree_program_id 4 ;
+    ns9:degree_summary_description "unde" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 8 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=8> .
+
+<http://valuenet/ontop/departments/department_id=13> a :departments ;
+    ns8:department_description "consequatur" ;
+    ns8:department_id 13 ;
+    ns8:department_name "dance" .
+
+<http://valuenet/ontop/departments/department_id=14> a :departments ;
+    ns8:department_description "in" ;
+    ns8:department_id 14 ;
+    ns8:department_name "drama" .
+
+<http://valuenet/ontop/departments/department_id=2> a :departments ;
+    ns8:department_description "nostrum" ;
+    ns8:department_id 2 ;
+    ns8:department_name "history" .
+
+<http://valuenet/ontop/semesters/semester_id=15> a :semesters ;
+    ns5:semester_description "o" ;
+    ns5:semester_id 15 ;
+    ns5:semester_name "spring 2019" .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=14> a :student_enrolment ;
+    ns7:degree_program_id 9 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=9> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=15> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=6> ;
+    ns7:semester_id 15 ;
+    ns7:student_enrolment_id 14 ;
+    ns7:student_id 6 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=9> a :student_enrolment ;
+    ns7:degree_program_id 12 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=12> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=6> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=7> ;
+    ns7:semester_id 6 ;
+    ns7:student_enrolment_id 9 ;
+    ns7:student_id 7 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=96> a :student_enrolment_courses ;
+    ns2:course_id 2 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=2> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=4> ;
+    ns2:student_course_id 96 ;
+    ns2:student_enrolment_id 4 .
+
+<http://valuenet/ontop/students/student_id=14> a :students ;
+    ns1:cell_mobile_number "(605)919-3594x3661" ;
+    ns1:current_address_id 12 ;
+    ns1:date_first_registered "2004-12-24T12:36:46"^^xsd:dateTime ;
+    ns1:date_left "1999-08-24T00:07:10"^^xsd:dateTime ;
+    ns1:email_address "gracie29@example.com" ;
+    ns1:first_name "Jordy" ;
+    ns1:last_name "Rempel" ;
+    ns1:middle_name "Osborne" ;
+    ns1:other_student_details "et" ;
+    ns1:permanent_address_id 11 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=12> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=11> ;
+    ns1:ssn "34458427" ;
+    ns1:student_id 14 .
+
+<http://valuenet/ontop/students/student_id=4> a :students ;
+    ns1:cell_mobile_number "09700166582" ;
+    ns1:current_address_id 7 ;
+    ns1:date_first_registered "2014-03-28T05:48:23"^^xsd:dateTime ;
+    ns1:date_left "2007-08-02T04:12:58"^^xsd:dateTime ;
+    ns1:email_address "jillian26@example.net" ;
+    ns1:first_name "Jarvis" ;
+    ns1:last_name "Carroll" ;
+    ns1:middle_name "Aaliyah" ;
+    ns1:other_student_details "atque" ;
+    ns1:permanent_address_id 11 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=7> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=11> ;
+    ns1:ssn "141072406" ;
+    ns1:student_id 4 .
+
+<http://valuenet/ontop/students/student_id=9> a :students ;
+    ns1:cell_mobile_number "(507)365-8405" ;
+    ns1:current_address_id 2 ;
+    ns1:date_first_registered "2017-01-04T08:10:25"^^xsd:dateTime ;
+    ns1:date_left "1990-09-01T05:03:27"^^xsd:dateTime ;
+    ns1:email_address "qo'kon@example.com" ;
+    ns1:first_name "Reva" ;
+    ns1:last_name "Osinski" ;
+    ns1:middle_name "Golda" ;
+    ns1:other_student_details "nesciunt" ;
+    ns1:permanent_address_id 15 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=2> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=15> ;
+    ns1:ssn "39" ;
+    ns1:student_id 9 .
+
+<http://valuenet/ontop/transcripts/transcript_id=15> a :transcripts ;
+    ns4:transcript_date "1998-11-22T12:18:29"^^xsd:dateTime ;
+    ns4:transcript_id 15 .
+
+<http://valuenet/ontop/transcripts/transcript_id=5> a :transcripts ;
+    ns4:transcript_date "2013-06-30T13:01:40"^^xsd:dateTime ;
+    ns4:transcript_id 5 .
+
+<http://valuenet/ontop/transcripts/transcript_id=6> a :transcripts ;
+    ns4:transcript_date "2010-12-13T10:55:15"^^xsd:dateTime ;
+    ns4:transcript_id 6 .
+
+<http://valuenet/ontop/addresses/address_id=14> a :addresses ;
+    ns3:address_id 14 ;
+    ns3:city "Lake Careyberg" ;
+    ns3:country "New Caledonia" ;
+    ns3:line_1 "186 Evan Motorway Apt. 409" ;
+    ns3:line_2 "Suite 079" ;
+    ns3:state_province_county "Kentucky" ;
+    ns3:zip_postcode "895" .
+
+<http://valuenet/ontop/addresses/address_id=5> a :addresses ;
+    ns3:address_id 5 ;
+    ns3:city "Michelleburgh" ;
+    ns3:country "Haiti" ;
+    ns3:line_1 "858 Peggie Bypass Suite 212" ;
+    ns3:line_2 "Apt. 335" ;
+    ns3:state_province_county "Hawaii" ;
+    ns3:zip_postcode "446" .
+
+<http://valuenet/ontop/courses/course_id=10> a :courses ;
+    ns11:course_description "b" ;
+    ns11:course_id 10 ;
+    ns11:course_name "ml" .
+
+<http://valuenet/ontop/courses/course_id=2> a :courses ;
+    ns11:course_description "q" ;
+    ns11:course_id 2 ;
+    ns11:course_name "math" .
+
+<http://valuenet/ontop/courses/course_id=6> a :courses ;
+    ns11:course_description "n" ;
+    ns11:course_id 6 ;
+    ns11:course_name "la" .
+
+<http://valuenet/ontop/courses/course_id=8> a :courses ;
+    ns11:course_description "q" ;
+    ns11:course_id 8 ;
+    ns11:course_name "nlp" .
+
+<http://valuenet/ontop/degree_programs/degree_program_id=9> a :degree_programs ;
+    ns9:degree_program_id 9 ;
+    ns9:degree_summary_description "voluptas" ;
+    ns9:degree_summary_name "Bachelor" ;
+    ns9:department_id 3 ;
+    ns9:ref-department_id <http://valuenet/ontop/departments/department_id=3> .
+
+<http://valuenet/ontop/departments/department_id=8> a :departments ;
+    ns8:department_description "nihil" ;
+    ns8:department_id 8 ;
+    ns8:department_name "statistics" .
+
+<http://valuenet/ontop/semesters/semester_id=13> a :semesters ;
+    ns5:semester_description "q" ;
+    ns5:semester_id 13 ;
+    ns5:semester_name "fall 2018" .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=4> a :student_enrolment ;
+    ns7:degree_program_id 4 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=4> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=15> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=9> ;
+    ns7:semester_id 15 ;
+    ns7:student_enrolment_id 4 ;
+    ns7:student_id 9 .
+
+<http://valuenet/ontop/student_enrolment/student_enrolment_id=5> a :student_enrolment ;
+    ns7:degree_program_id 5 ;
+    ns7:ref-degree_program_id <http://valuenet/ontop/degree_programs/degree_program_id=5> ;
+    ns7:ref-semester_id <http://valuenet/ontop/semesters/semester_id=1> ;
+    ns7:ref-student_id <http://valuenet/ontop/students/student_id=14> ;
+    ns7:semester_id 1 ;
+    ns7:student_enrolment_id 5 ;
+    ns7:student_id 14 .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=76> a :student_enrolment_courses ;
+    ns2:course_id 10 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=10> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=13> ;
+    ns2:student_course_id 76 ;
+    ns2:student_enrolment_id 13 .
+
+<http://valuenet/ontop/students/student_id=6> a :students ;
+    ns1:cell_mobile_number "436.613.7683" ;
+    ns1:current_address_id 6 ;
+    ns1:date_first_registered "1997-03-20T16:47:25"^^xsd:dateTime ;
+    ns1:date_left "2016-04-09T12:27:04"^^xsd:dateTime ;
+    ns1:email_address "skassulke@example.net" ;
+    ns1:first_name "Stanford" ;
+    ns1:last_name "Rogahn" ;
+    ns1:middle_name "Mona" ;
+    ns1:other_student_details "qui" ;
+    ns1:permanent_address_id 3 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=6> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=3> ;
+    ns1:ssn "248" ;
+    ns1:student_id 6 .
+
+<http://valuenet/ontop/students/student_id=7> a :students ;
+    ns1:cell_mobile_number "1-879-796-8987x164" ;
+    ns1:current_address_id 15 ;
+    ns1:date_first_registered "2018-03-13T09:56:22"^^xsd:dateTime ;
+    ns1:date_left "1997-11-16T08:54:33"^^xsd:dateTime ;
+    ns1:email_address "baumbach.lucious@example.org" ;
+    ns1:first_name "Frida" ;
+    ns1:last_name "Huel" ;
+    ns1:middle_name "Aisha" ;
+    ns1:other_student_details "dolorum" ;
+    ns1:permanent_address_id 3 ;
+    ns1:ref-current_address_id <http://valuenet/ontop/addresses/address_id=15> ;
+    ns1:ref-permanent_address_id <http://valuenet/ontop/addresses/address_id=3> ;
+    ns1:ssn "668" ;
+    ns1:student_id 7 .
+
+<http://valuenet/ontop/transcripts/transcript_id=8> a :transcripts ;
+    ns4:transcript_date "1975-05-06T12:04:47"^^xsd:dateTime ;
+    ns4:transcript_id 8 .
+
+<http://valuenet/ontop/addresses/address_id=15> a :addresses ;
+    ns3:address_id 15 ;
+    ns3:city "Port Oceane" ;
+    ns3:country "Norfolk Island" ;
+    ns3:line_1 "74046 Metz Walk Apt. 113" ;
+    ns3:line_2 "Suite 674" ;
+    ns3:state_province_county "Wyoming" ;
+    ns3:zip_postcode "669" .
+
+<http://valuenet/ontop/courses/course_id=14> a :courses ;
+    ns11:course_description "p" ;
+    ns11:course_id 14 ;
+    ns11:course_name "pl" .
+
+<http://valuenet/ontop/semesters/semester_id=2> a :semesters ;
+    ns5:semester_description "g" ;
+    ns5:semester_id 2 ;
+    ns5:semester_name "summer 2010" .
+
+<http://valuenet/ontop/student_enrolment_courses/student_course_id=0> a :student_enrolment_courses ;
+    ns2:course_id 6 ;
+    ns2:ref-course_id <http://valuenet/ontop/courses/course_id=6> ;
+    ns2:ref-student_enrolment_id <http://valuenet/ontop/student_enrolment/student_enrolment_id=2> ;
+    ns2:student_course_id 0 ;
+    ns2:student_enrolment_id 2 .
+
+<http://valuenet/ontop/addresses/address_id=9> a :addresses ;
+    ns3:address_id 9 ;
+    ns3:city "Port Elvisfurt" ;
+    ns3:country "Gabon" ;
+    ns3:line_1 "0643 Muller Vista" ;
+    ns3:line_2 "Suite 383" ;
+    ns3:state_province_county "NorthCarolina" ;
+    ns3:zip_postcode "777" .
+
+:transcript_contents a owl:Class .
+
+:transcripts a owl:Class .
+
+:departments a owl:Class .
+
+:semesters a owl:Class .
+
+:courses a owl:Class .
+
+:sections a owl:Class .
+
+:student_enrolment_courses a owl:Class .
+
+:degree_programs a owl:Class .
+
+:student_enrolment a owl:Class .
+
+:addresses a owl:Class .
+
+:students a owl:Class .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=0> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=5> ;
+    ns6:student_course_id 0 ;
+    ns6:transcript_id 5 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=0> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=6> ;
+    ns6:student_course_id 0 ;
+    ns6:transcript_id 6 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=76> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=12> ;
+    ns6:student_course_id 76 ;
+    ns6:transcript_id 12 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=7> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=4> ;
+    ns6:student_course_id 7 ;
+    ns6:transcript_id 4 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=28982908> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=11> ;
+    ns6:student_course_id 28982908 ;
+    ns6:transcript_id 11 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=2> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=8> ;
+    ns6:student_course_id 2 ;
+    ns6:transcript_id 8 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=70882679> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=6> ;
+    ns6:student_course_id 70882679 ;
+    ns6:transcript_id 6 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=96> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=8> ;
+    ns6:student_course_id 96 ;
+    ns6:transcript_id 8 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=76> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=15> ;
+    ns6:student_course_id 76 ;
+    ns6:transcript_id 15 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=96> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=13> ;
+    ns6:student_course_id 96 ;
+    ns6:transcript_id 13 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=8> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=5> ;
+    ns6:student_course_id 8 ;
+    ns6:transcript_id 5 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=0> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=15> ;
+    ns6:student_course_id 0 ;
+    ns6:transcript_id 15 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=45105806> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=8> ;
+    ns6:student_course_id 45105806 ;
+    ns6:transcript_id 8 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=0> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=2> ;
+    ns6:student_course_id 0 ;
+    ns6:transcript_id 2 .
+
+[] a :transcript_contents ;
+    ns6:ref-student_course_id <http://valuenet/ontop/student_enrolment_courses/student_course_id=76> ;
+    ns6:ref-transcript_id <http://valuenet/ontop/transcripts/transcript_id=9> ;
+    ns6:student_course_id 76 ;
+    ns6:transcript_id 9 .
+

@@ -1,0 +1,177 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/song#> .
+@prefix ns2: <http://valuenet/ontop/singer#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns2:birth_year a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:double .
+
+ns2:citizenship a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:string .
+
+ns2:name a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:string .
+
+ns2:net_worth_millions a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:double .
+
+ns2:singer_id a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/singer/singer_id=3> a :singer ;
+    ns2:birth_year 1.949e+03 ;
+    ns2:citizenship "United States" ;
+    ns2:name "Alice Walton" ;
+    ns2:net_worth_millions 2.63e+01 ;
+    ns2:singer_id 3 .
+
+<http://valuenet/ontop/singer/singer_id=8> a :singer ;
+    ns2:birth_year 1.961e+03 ;
+    ns2:citizenship "United States" ;
+    ns2:name "Abigail Johnson" ;
+    ns2:net_worth_millions 1.27e+01 ;
+    ns2:singer_id 8 .
+
+ns1:highest_position a owl:DatatypeProperty ;
+    rdfs:domain :song ;
+    rdfs:range xsd:double .
+
+ns1:ref-singer_id a owl:ObjectProperty ;
+    rdfs:domain :song ;
+    rdfs:range :singer .
+
+ns1:sales a owl:DatatypeProperty ;
+    rdfs:domain :song ;
+    rdfs:range xsd:double .
+
+ns1:singer_id a owl:DatatypeProperty ;
+    rdfs:domain :song ;
+    rdfs:range xsd:integer .
+
+ns1:song_id a owl:DatatypeProperty ;
+    rdfs:domain :song ;
+    rdfs:range xsd:integer .
+
+ns1:title a owl:DatatypeProperty ;
+    rdfs:domain :song ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/song/song_id=1> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=1> ;
+    ns1:sales 1.094e+06 ;
+    ns1:singer_id 1 ;
+    ns1:song_id 1 ;
+    ns1:title "Do They Know It's Christmas" .
+
+<http://valuenet/ontop/song/song_id=2> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=1> ;
+    ns1:sales 5.52407e+05 ;
+    ns1:singer_id 1 ;
+    ns1:song_id 2 ;
+    ns1:title "F**k It (I Don't Want You Back)" .
+
+<http://valuenet/ontop/song/song_id=3> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=2> ;
+    ns1:sales 3.51421e+05 ;
+    ns1:singer_id 2 ;
+    ns1:song_id 3 ;
+    ns1:title "Cha Cha Slide" .
+
+<http://valuenet/ontop/song/song_id=4> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=4> ;
+    ns1:sales 3.35e+05 ;
+    ns1:singer_id 4 ;
+    ns1:song_id 4 ;
+    ns1:title "Call on Me" .
+
+<http://valuenet/ontop/song/song_id=5> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=2> ;
+    ns1:sales 3e+05 ;
+    ns1:singer_id 2 ;
+    ns1:song_id 5 ;
+    ns1:title "Yeah" .
+
+<http://valuenet/ontop/song/song_id=6> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=6> ;
+    ns1:sales 2.92e+05 ;
+    ns1:singer_id 6 ;
+    ns1:song_id 6 ;
+    ns1:title "All This Time" .
+
+<http://valuenet/ontop/song/song_id=7> a :song ;
+    ns1:highest_position 3e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=5> ;
+    ns1:sales 2.75e+05 ;
+    ns1:singer_id 5 ;
+    ns1:song_id 7 ;
+    ns1:title "Left Outside Alone" .
+
+<http://valuenet/ontop/song/song_id=8> a :song ;
+    ns1:highest_position 1e+00 ;
+    ns1:ref-singer_id <http://valuenet/ontop/singer/singer_id=7> ;
+    ns1:sales 2.61e+05 ;
+    ns1:singer_id 7 ;
+    ns1:song_id 8 ;
+    ns1:title "Mysterious Girl" .
+
+<http://valuenet/ontop/singer/singer_id=4> a :singer ;
+    ns2:birth_year 1.942e+03 ;
+    ns2:citizenship "Chile" ;
+    ns2:name "Iris Fontbona" ;
+    ns2:net_worth_millions 1.74e+01 ;
+    ns2:singer_id 4 .
+
+<http://valuenet/ontop/singer/singer_id=5> a :singer ;
+    ns2:birth_year 1.94e+03 ;
+    ns2:citizenship "United States" ;
+    ns2:name "Jacqueline Mars" ;
+    ns2:net_worth_millions 1.78e+01 ;
+    ns2:singer_id 5 .
+
+<http://valuenet/ontop/singer/singer_id=6> a :singer ;
+    ns2:birth_year 1.953e+03 ;
+    ns2:citizenship "Australia" ;
+    ns2:name "Gina Rinehart" ;
+    ns2:net_worth_millions 1.7e+01 ;
+    ns2:singer_id 6 .
+
+<http://valuenet/ontop/singer/singer_id=7> a :singer ;
+    ns2:birth_year 1.962e+03 ;
+    ns2:citizenship "Germany" ;
+    ns2:name "Susanne Klatten" ;
+    ns2:net_worth_millions 1.43e+01 ;
+    ns2:singer_id 7 .
+
+<http://valuenet/ontop/singer/singer_id=1> a :singer ;
+    ns2:birth_year 1.944e+03 ;
+    ns2:citizenship "France" ;
+    ns2:name "Liliane Bettencourt" ;
+    ns2:net_worth_millions 3e+01 ;
+    ns2:singer_id 1 .
+
+<http://valuenet/ontop/singer/singer_id=2> a :singer ;
+    ns2:birth_year 1.948e+03 ;
+    ns2:citizenship "United States" ;
+    ns2:name "Christy Walton" ;
+    ns2:net_worth_millions 2.88e+01 ;
+    ns2:singer_id 2 .
+
+:singer a owl:Class .
+
+:song a owl:Class .
+

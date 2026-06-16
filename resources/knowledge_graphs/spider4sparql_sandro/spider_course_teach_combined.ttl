@@ -1,0 +1,198 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/teacher#> .
+@prefix ns2: <http://valuenet/ontop/course#> .
+@prefix ns3: <http://valuenet/ontop/course_arrange#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns2:course a owl:DatatypeProperty ;
+    rdfs:domain :course ;
+    rdfs:range xsd:string .
+
+ns2:course_id a owl:DatatypeProperty ;
+    rdfs:domain :course ;
+    rdfs:range xsd:integer .
+
+ns2:staring_date a owl:DatatypeProperty ;
+    rdfs:domain :course ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/course/course_id=1> a :course ;
+    ns2:course "Language Arts" ;
+    ns2:course_id 1 ;
+    ns2:staring_date "5 May" .
+
+<http://valuenet/ontop/course/course_id=6> a :course ;
+    ns2:course "Geography" ;
+    ns2:course_id 6 ;
+    ns2:staring_date "11 May" .
+
+<http://valuenet/ontop/course/course_id=7> a :course ;
+    ns2:course "Sports" ;
+    ns2:course_id 7 ;
+    ns2:staring_date "13 May" .
+
+<http://valuenet/ontop/course/course_id=8> a :course ;
+    ns2:course "French" ;
+    ns2:course_id 8 ;
+    ns2:staring_date "14 May" .
+
+<http://valuenet/ontop/course/course_id=9> a :course ;
+    ns2:course "Health" ;
+    ns2:course_id 9 ;
+    ns2:staring_date "15 May" .
+
+ns3:course_id a owl:DatatypeProperty ;
+    rdfs:domain :course_arrange ;
+    rdfs:range xsd:integer .
+
+ns3:grade a owl:DatatypeProperty ;
+    rdfs:domain :course_arrange ;
+    rdfs:range xsd:integer .
+
+ns3:ref-course_id a owl:ObjectProperty ;
+    rdfs:domain :course_arrange ;
+    rdfs:range :course .
+
+ns3:ref-teacher_id a owl:ObjectProperty ;
+    rdfs:domain :course_arrange ;
+    rdfs:range :teacher .
+
+ns3:teacher_id a owl:DatatypeProperty ;
+    rdfs:domain :course_arrange ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/course_arrange/course_id=10;teacher_id=7;grade=4> a :course_arrange ;
+    ns3:course_id 10 ;
+    ns3:grade 4 ;
+    ns3:ref-course_id <http://valuenet/ontop/course/course_id=10> ;
+    ns3:ref-teacher_id <http://valuenet/ontop/teacher/teacher_id=7> ;
+    ns3:teacher_id 7 .
+
+<http://valuenet/ontop/course_arrange/course_id=2;teacher_id=3;grade=3> a :course_arrange ;
+    ns3:course_id 2 ;
+    ns3:grade 3 ;
+    ns3:ref-course_id <http://valuenet/ontop/course/course_id=2> ;
+    ns3:ref-teacher_id <http://valuenet/ontop/teacher/teacher_id=3> ;
+    ns3:teacher_id 3 .
+
+<http://valuenet/ontop/course_arrange/course_id=2;teacher_id=5;grade=1> a :course_arrange ;
+    ns3:course_id 2 ;
+    ns3:grade 1 ;
+    ns3:ref-course_id <http://valuenet/ontop/course/course_id=2> ;
+    ns3:ref-teacher_id <http://valuenet/ontop/teacher/teacher_id=5> ;
+    ns3:teacher_id 5 .
+
+<http://valuenet/ontop/course_arrange/course_id=3;teacher_id=2;grade=5> a :course_arrange ;
+    ns3:course_id 3 ;
+    ns3:grade 5 ;
+    ns3:ref-course_id <http://valuenet/ontop/course/course_id=3> ;
+    ns3:ref-teacher_id <http://valuenet/ontop/teacher/teacher_id=2> ;
+    ns3:teacher_id 2 .
+
+<http://valuenet/ontop/course_arrange/course_id=4;teacher_id=6;grade=7> a :course_arrange ;
+    ns3:course_id 4 ;
+    ns3:grade 7 ;
+    ns3:ref-course_id <http://valuenet/ontop/course/course_id=4> ;
+    ns3:ref-teacher_id <http://valuenet/ontop/teacher/teacher_id=6> ;
+    ns3:teacher_id 6 .
+
+<http://valuenet/ontop/course_arrange/course_id=5;teacher_id=6;grade=1> a :course_arrange ;
+    ns3:course_id 5 ;
+    ns3:grade 1 ;
+    ns3:ref-course_id <http://valuenet/ontop/course/course_id=5> ;
+    ns3:ref-teacher_id <http://valuenet/ontop/teacher/teacher_id=6> ;
+    ns3:teacher_id 6 .
+
+ns1:age a owl:DatatypeProperty ;
+    rdfs:domain :teacher ;
+    rdfs:range xsd:integer .
+
+ns1:hometown a owl:DatatypeProperty ;
+    rdfs:domain :teacher ;
+    rdfs:range xsd:string .
+
+ns1:name a owl:DatatypeProperty ;
+    rdfs:domain :teacher ;
+    rdfs:range xsd:string .
+
+ns1:teacher_id a owl:DatatypeProperty ;
+    rdfs:domain :teacher ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/teacher/teacher_id=1> a :teacher ;
+    ns1:age 32 ;
+    ns1:hometown "Blackrod Urban District" ;
+    ns1:name "Joseph Huts" ;
+    ns1:teacher_id 1 .
+
+<http://valuenet/ontop/teacher/teacher_id=4> a :teacher ;
+    ns1:age 33 ;
+    ns1:hometown "Horwich Urban District" ;
+    ns1:name "John Deloor" ;
+    ns1:teacher_id 4 .
+
+<http://valuenet/ontop/course/course_id=10> a :course ;
+    ns2:course "Music" ;
+    ns2:course_id 10 ;
+    ns2:staring_date "17 May" .
+
+<http://valuenet/ontop/course/course_id=3> a :course ;
+    ns2:course "Science" ;
+    ns2:course_id 3 ;
+    ns2:staring_date "7 May" .
+
+<http://valuenet/ontop/course/course_id=4> a :course ;
+    ns2:course "History" ;
+    ns2:course_id 4 ;
+    ns2:staring_date "9 May" .
+
+<http://valuenet/ontop/course/course_id=5> a :course ;
+    ns2:course "Bible" ;
+    ns2:course_id 5 ;
+    ns2:staring_date "10 May" .
+
+<http://valuenet/ontop/teacher/teacher_id=2> a :teacher ;
+    ns1:age 29 ;
+    ns1:hometown "Bolton County Borough" ;
+    ns1:name "Gustaaf Deloor" ;
+    ns1:teacher_id 2 .
+
+<http://valuenet/ontop/teacher/teacher_id=3> a :teacher ;
+    ns1:age 26 ;
+    ns1:hometown "Farnworth Municipal Borough" ;
+    ns1:name "Vicente Carretero" ;
+    ns1:teacher_id 3 .
+
+<http://valuenet/ontop/teacher/teacher_id=5> a :teacher ;
+    ns1:age 45 ;
+    ns1:hometown "Kearsley Urban District" ;
+    ns1:name "Kearsley Brown" ;
+    ns1:teacher_id 5 .
+
+<http://valuenet/ontop/teacher/teacher_id=7> a :teacher ;
+    ns1:age 39 ;
+    ns1:hometown "Turton Urban District" ;
+    ns1:name "Lucy Wong" ;
+    ns1:teacher_id 7 .
+
+<http://valuenet/ontop/course/course_id=2> a :course ;
+    ns2:course "Math" ;
+    ns2:course_id 2 ;
+    ns2:staring_date "6 May" .
+
+<http://valuenet/ontop/teacher/teacher_id=6> a :teacher ;
+    ns1:age 41 ;
+    ns1:hometown "Little Lever Urban District" ;
+    ns1:name "Anne Walker" ;
+    ns1:teacher_id 6 .
+
+:course_arrange a owl:Class .
+
+:teacher a owl:Class .
+
+:course a owl:Class .
+

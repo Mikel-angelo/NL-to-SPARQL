@@ -1,0 +1,943 @@
+{
+  "dataset_name": "spider_employee_hire_evaluation_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for employee_hire_evaluation. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/employee_hire_evaluation.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "employee_hire_evaluation_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/employee> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "10"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many employees are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "employee_hire_evaluation_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/employee> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "10"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of employees"
+    },
+    {
+      "id": "Q003",
+      "original_id": "employee_hire_evaluation_003",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age)",
+      "gold_answers": [
+        {
+          "t1_name": "George Chuter"
+        },
+        {
+          "t1_name": "Andrew Sheridan"
+        },
+        {
+          "t1_name": "Lee Mears"
+        },
+        {
+          "t1_name": "Tim Payne"
+        },
+        {
+          "t1_name": "Matt Stevens"
+        },
+        {
+          "t1_name": "Jason Hobson"
+        },
+        {
+          "t1_name": "Steve Borthwick"
+        },
+        {
+          "t1_name": "Louis Deacon"
+        },
+        {
+          "t1_name": "Phil Vickery"
+        },
+        {
+          "t1_name": "Mark Regan"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Sort employee names by their age in ascending order."
+    },
+    {
+      "id": "Q004",
+      "original_id": "employee_hire_evaluation_004",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age)",
+      "gold_answers": [
+        {
+          "t1_name": "George Chuter"
+        },
+        {
+          "t1_name": "Andrew Sheridan"
+        },
+        {
+          "t1_name": "Lee Mears"
+        },
+        {
+          "t1_name": "Tim Payne"
+        },
+        {
+          "t1_name": "Matt Stevens"
+        },
+        {
+          "t1_name": "Jason Hobson"
+        },
+        {
+          "t1_name": "Steve Borthwick"
+        },
+        {
+          "t1_name": "Louis Deacon"
+        },
+        {
+          "t1_name": "Phil Vickery"
+        },
+        {
+          "t1_name": "Mark Regan"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the names of employees and sort in ascending order of age."
+    },
+    {
+      "id": "Q005",
+      "original_id": "employee_hire_evaluation_005",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t1_city where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/city> ?t1_city . } group by ?t1_city",
+      "gold_answers": [
+        {
+          "aggregation_all": "2",
+          "t1_city": "Wasps"
+        },
+        {
+          "aggregation_all": "3",
+          "t1_city": "Bristol"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_city": "Sale"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_city": "Leicester"
+        },
+        {
+          "aggregation_all": "3",
+          "t1_city": "Bath"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the number of employees from each city?"
+    },
+    {
+      "id": "Q006",
+      "original_id": "employee_hire_evaluation_006",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t1_city where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/city> ?t1_city . } group by ?t1_city",
+      "gold_answers": [
+        {
+          "aggregation_all": "2",
+          "t1_city": "Wasps"
+        },
+        {
+          "aggregation_all": "3",
+          "t1_city": "Bristol"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_city": "Sale"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_city": "Leicester"
+        },
+        {
+          "aggregation_all": "3",
+          "t1_city": "Bath"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of employees for each city."
+    },
+    {
+      "id": "Q007",
+      "original_id": "employee_hire_evaluation_007",
+      "gold_sparql": "select ?t1_city where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/city> ?t1_city . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age < 30) . } group by ?t1_city having(count( *) > 1)",
+      "gold_answers": [
+        {
+          "t1_city": "Bath"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which cities do more than one employee under age 30 come from?"
+    },
+    {
+      "id": "Q008",
+      "original_id": "employee_hire_evaluation_008",
+      "gold_sparql": "select ?t1_city where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/city> ?t1_city . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age < 30) . } group by ?t1_city having(count( *) > 1)",
+      "gold_answers": [
+        {
+          "t1_city": "Bath"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the cities that have more than one employee under age 30."
+    },
+    {
+      "id": "Q009",
+      "original_id": "employee_hire_evaluation_009",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t1_location where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/location> ?t1_location . } group by ?t1_location",
+      "gold_answers": [
+        {
+          "aggregation_all": "1",
+          "t1_location": "Jakobstad"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Espoo"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Mariehamn"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Lahti"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Kotka"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Helsinki"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Turku"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Valkeakoski"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Kuopio"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of shops in each location."
+    },
+    {
+      "id": "Q010",
+      "original_id": "employee_hire_evaluation_010",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t1_location where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/location> ?t1_location . } group by ?t1_location",
+      "gold_answers": [
+        {
+          "aggregation_all": "1",
+          "t1_location": "Jakobstad"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Espoo"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Mariehamn"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Lahti"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Kotka"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Helsinki"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Turku"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Valkeakoski"
+        },
+        {
+          "aggregation_all": "1",
+          "t1_location": "Kuopio"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many shops are there in each location?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "employee_hire_evaluation_011",
+      "gold_sparql": "select ?t1_manager_name ?t1_district where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/manager_name> ?t1_manager_name . ?t1 <http://valuenet/ontop/district> ?t1_district . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . } order by desc (?t1_number_products) limit 1",
+      "gold_answers": [
+        {
+          "t1_manager_name": "Ilkka Mäkelä",
+          "t1_district": "Lahden Stadion"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the manager name and district of the shop whose number of products is the largest."
+    },
+    {
+      "id": "Q012",
+      "original_id": "employee_hire_evaluation_012",
+      "gold_sparql": "select ?t1_manager_name ?t1_district where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/manager_name> ?t1_manager_name . ?t1 <http://valuenet/ontop/district> ?t1_district . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . } order by desc (?t1_number_products) limit 1",
+      "gold_answers": [
+        {
+          "t1_manager_name": "Ilkka Mäkelä",
+          "t1_district": "Lahden Stadion"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the manager name and district of the shop that sells the largest number of products?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "employee_hire_evaluation_013",
+      "gold_sparql": "select (min( ?t1_number_products) as ?aggregation_t1_number_products_113 ) (max( ?t1_number_products) as ?aggregation_t1_number_products_116 ) where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_number_products_113": "1600",
+          "aggregation_t1_number_products_116": "15000"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "find the minimum and maximum number of products of all stores."
+    },
+    {
+      "id": "Q014",
+      "original_id": "employee_hire_evaluation_014",
+      "gold_sparql": "select (min( ?t1_number_products) as ?aggregation_t1_number_products_113 ) (max( ?t1_number_products) as ?aggregation_t1_number_products_116 ) where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_number_products_113": "1600",
+          "aggregation_t1_number_products_116": "15000"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the minimum and maximum number of products across all the shops?"
+    },
+    {
+      "id": "Q015",
+      "original_id": "employee_hire_evaluation_015",
+      "gold_sparql": "select ?t1_name ?t1_location ?t1_district where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/location> ?t1_location . ?t1 <http://valuenet/ontop/district> ?t1_district . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . } order by desc (?t1_number_products)",
+      "gold_answers": [
+        {
+          "t1_name": "FC Lahti",
+          "t1_location": "Lahti",
+          "t1_district": "Lahden Stadion"
+        },
+        {
+          "t1_name": "HJK",
+          "t1_location": "Helsinki",
+          "t1_district": "Finnair Stadium"
+        },
+        {
+          "t1_name": "FC Inter",
+          "t1_location": "Turku",
+          "t1_district": "Veritas Stadion"
+        },
+        {
+          "t1_name": "FC Honka",
+          "t1_location": "Espoo",
+          "t1_district": "Tapiolan Urheilupuisto"
+        },
+        {
+          "t1_name": "FF Jaro",
+          "t1_location": "Jakobstad",
+          "t1_district": "Jakobstads Centralplan"
+        },
+        {
+          "t1_name": "FC KooTeePee",
+          "t1_location": "Kotka",
+          "t1_district": "Arto Tolsa Areena"
+        },
+        {
+          "t1_name": "FC Haka",
+          "t1_location": "Valkeakoski",
+          "t1_district": "Tehtaan kenttä"
+        },
+        {
+          "t1_name": "KuPS",
+          "t1_location": "Kuopio",
+          "t1_district": "Magnum Areena"
+        },
+        {
+          "t1_name": "IFK Mariehamn",
+          "t1_location": "Mariehamn",
+          "t1_district": "Wiklöf Holding Arena"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the name, location and district of all shops in descending order of number of products."
+    },
+    {
+      "id": "Q016",
+      "original_id": "employee_hire_evaluation_016",
+      "gold_sparql": "select ?t1_name ?t1_location ?t1_district where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/location> ?t1_location . ?t1 <http://valuenet/ontop/district> ?t1_district . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . } order by desc (?t1_number_products)",
+      "gold_answers": [
+        {
+          "t1_name": "FC Lahti",
+          "t1_location": "Lahti",
+          "t1_district": "Lahden Stadion"
+        },
+        {
+          "t1_name": "HJK",
+          "t1_location": "Helsinki",
+          "t1_district": "Finnair Stadium"
+        },
+        {
+          "t1_name": "FC Inter",
+          "t1_location": "Turku",
+          "t1_district": "Veritas Stadion"
+        },
+        {
+          "t1_name": "FC Honka",
+          "t1_location": "Espoo",
+          "t1_district": "Tapiolan Urheilupuisto"
+        },
+        {
+          "t1_name": "FF Jaro",
+          "t1_location": "Jakobstad",
+          "t1_district": "Jakobstads Centralplan"
+        },
+        {
+          "t1_name": "FC KooTeePee",
+          "t1_location": "Kotka",
+          "t1_district": "Arto Tolsa Areena"
+        },
+        {
+          "t1_name": "FC Haka",
+          "t1_location": "Valkeakoski",
+          "t1_district": "Tehtaan kenttä"
+        },
+        {
+          "t1_name": "KuPS",
+          "t1_location": "Kuopio",
+          "t1_district": "Magnum Areena"
+        },
+        {
+          "t1_name": "IFK Mariehamn",
+          "t1_location": "Mariehamn",
+          "t1_district": "Wiklöf Holding Arena"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Sort all the shops by number products in descending order, and return the name, location and district of each shop."
+    },
+    {
+      "id": "Q017",
+      "original_id": "employee_hire_evaluation_017",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . FILTER(?t1_number_products > ?aggregation_t22_number_products_63) . {select (avg( ?t22_number_products) as ?aggregation_t22_number_products_63 ) where { ?t22 a <http://valuenet/ontop/shop> . ?t22 <http://valuenet/ontop/number_products> ?t22_number_products . } } }",
+      "gold_answers": [
+        {
+          "t1_name": "FC Lahti"
+        },
+        {
+          "t1_name": "HJK"
+        },
+        {
+          "t1_name": "FC Inter"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the names of stores whose number products is more than the average number of products."
+    },
+    {
+      "id": "Q018",
+      "original_id": "employee_hire_evaluation_018",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . FILTER(?t1_number_products > ?aggregation_t22_number_products_63) . {select (avg( ?t22_number_products) as ?aggregation_t22_number_products_63 ) where { ?t22 a <http://valuenet/ontop/shop> . ?t22 <http://valuenet/ontop/number_products> ?t22_number_products . } } }",
+      "gold_answers": [
+        {
+          "t1_name": "FC Lahti"
+        },
+        {
+          "t1_name": "HJK"
+        },
+        {
+          "t1_name": "FC Inter"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which shops' number products is above the average? Give me the shop names."
+    },
+    {
+      "id": "Q019",
+      "original_id": "employee_hire_evaluation_019",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/employee> . ?T3 a <http://valuenet/ontop/evaluation> . ?T3 <http://valuenet/ontop/ref-employee> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/employee_id> ?T1_employee_id . } GROUP BY ?T1_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_name": "George Chuter",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "find the name of employee who was awarded the most times in the evaluation."
+    },
+    {
+      "id": "Q020",
+      "original_id": "employee_hire_evaluation_020",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/employee> . ?T3 a <http://valuenet/ontop/evaluation> . ?T3 <http://valuenet/ontop/ref-employee> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/employee_id> ?T1_employee_id . } GROUP BY ?T1_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_name": "George Chuter",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which employee received the most awards in evaluations? Give me the employee name."
+    },
+    {
+      "id": "Q021",
+      "original_id": "employee_hire_evaluation_021",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/employee> . ?t2 a <http://valuenet/ontop/evaluation> . ?t2 <http://valuenet/ontop/ref-employee> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/bonus> ?t2_bonus . } order by desc (?t2_bonus) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Louis Deacon"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the name of the employee who got the highest one time bonus."
+    },
+    {
+      "id": "Q022",
+      "original_id": "employee_hire_evaluation_022",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/employee> . ?t2 a <http://valuenet/ontop/evaluation> . ?t2 <http://valuenet/ontop/ref-employee> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/bonus> ?t2_bonus . } order by desc (?t2_bonus) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Louis Deacon"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which employee received the biggest bonus? Give me the employee name."
+    },
+    {
+      "id": "Q023",
+      "original_id": "employee_hire_evaluation_023",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/employee_id> ?t1_employee_id . Filter not exists {{select ?t22_employee_id where { ?t22 a <http://valuenet/ontop/evaluation> . ?t22 <http://valuenet/ontop/employee_id> ?t22_employee_id . } } FILTER (?t1_employee_id in (?t22_employee_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Mark Regan"
+        },
+        {
+          "t1_name": "Andrew Sheridan"
+        },
+        {
+          "t1_name": "Tim Payne"
+        },
+        {
+          "t1_name": "Steve Borthwick"
+        },
+        {
+          "t1_name": "Phil Vickery"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the names of employees who never won any award in the evaluation."
+    },
+    {
+      "id": "Q024",
+      "original_id": "employee_hire_evaluation_024",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/employee> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/employee_id> ?t1_employee_id . Filter not exists {{select ?t22_employee_id where { ?t22 a <http://valuenet/ontop/evaluation> . ?t22 <http://valuenet/ontop/employee_id> ?t22_employee_id . } } FILTER (?t1_employee_id in (?t22_employee_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Mark Regan"
+        },
+        {
+          "t1_name": "Andrew Sheridan"
+        },
+        {
+          "t1_name": "Tim Payne"
+        },
+        {
+          "t1_name": "Steve Borthwick"
+        },
+        {
+          "t1_name": "Phil Vickery"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the employees who never received any evaluation?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "employee_hire_evaluation_025",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/shop> . ?T3 a <http://valuenet/ontop/hiring> . ?T3 <http://valuenet/ontop/ref-shop> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/shop_id> ?T1_shop_id . } GROUP BY ?T1_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_name": "FC Haka",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the name of the shop that is hiring the largest number of employees?"
+    },
+    {
+      "id": "Q026",
+      "original_id": "employee_hire_evaluation_026",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/shop> . ?T3 a <http://valuenet/ontop/hiring> . ?T3 <http://valuenet/ontop/ref-shop> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/shop_id> ?T1_shop_id . } GROUP BY ?T1_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_name": "FC Haka",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which shop has the most employees? Give me the shop name."
+    },
+    {
+      "id": "Q027",
+      "original_id": "employee_hire_evaluation_027",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/shop_id> ?t1_shop_id . Filter not exists {{select ?t22_shop_id where { ?t22 a <http://valuenet/ontop/hiring> . ?t22 <http://valuenet/ontop/shop_id> ?t22_shop_id . } } FILTER (?t1_shop_id in (?t22_shop_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "IFK Mariehamn"
+        },
+        {
+          "t1_name": "FC Honka"
+        },
+        {
+          "t1_name": "KuPS"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the name of the shops that do not hire any employee."
+    },
+    {
+      "id": "Q028",
+      "original_id": "employee_hire_evaluation_028",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/shop_id> ?t1_shop_id . Filter not exists {{select ?t22_shop_id where { ?t22 a <http://valuenet/ontop/hiring> . ?t22 <http://valuenet/ontop/shop_id> ?t22_shop_id . } } FILTER (?t1_shop_id in (?t22_shop_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "IFK Mariehamn"
+        },
+        {
+          "t1_name": "FC Honka"
+        },
+        {
+          "t1_name": "KuPS"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which shops run with no employees? Find the shop names"
+    },
+    {
+      "id": "Q029",
+      "original_id": "employee_hire_evaluation_029",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t2_name where { ?t13 a <http://valuenet/ontop/hiring> . ?t2 a <http://valuenet/ontop/shop> . ?t13 <http://valuenet/ontop/ref-shop> ?t2 . ?t2 <http://valuenet/ontop/name> ?t2_name . } group by ?t2_name",
+      "gold_answers": [
+        {
+          "aggregation_all": "2",
+          "t2_name": "FC Haka"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FF Jaro"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FC Lahti"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FC KooTeePee"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FC Inter"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "HJK"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of employees hired in each shop; show the shop name as well."
+    },
+    {
+      "id": "Q030",
+      "original_id": "employee_hire_evaluation_030",
+      "gold_sparql": "select (count( *) as ?aggregation_all) ?t2_name where { ?t13 a <http://valuenet/ontop/hiring> . ?t2 a <http://valuenet/ontop/shop> . ?t13 <http://valuenet/ontop/ref-shop> ?t2 . ?t2 <http://valuenet/ontop/name> ?t2_name . } group by ?t2_name",
+      "gold_answers": [
+        {
+          "aggregation_all": "2",
+          "t2_name": "FC Haka"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FF Jaro"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FC Lahti"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FC KooTeePee"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "FC Inter"
+        },
+        {
+          "aggregation_all": "1",
+          "t2_name": "HJK"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "For each shop, return the number of employees working there and the name of the shop."
+    },
+    {
+      "id": "Q031",
+      "original_id": "employee_hire_evaluation_031",
+      "gold_sparql": "select (sum( ?t1_bonus) as ?aggregation_t1_bonus_61 ) where { ?t1 a <http://valuenet/ontop/evaluation> . ?t1 <http://valuenet/ontop/bonus> ?t1_bonus . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_bonus_61": "19500.0"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is total bonus given in all evaluations?"
+    },
+    {
+      "id": "Q032",
+      "original_id": "employee_hire_evaluation_032",
+      "gold_sparql": "select (sum( ?t1_bonus) as ?aggregation_t1_bonus_61 ) where { ?t1 a <http://valuenet/ontop/evaluation> . ?t1 <http://valuenet/ontop/bonus> ?t1_bonus . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_bonus_61": "19500.0"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the total amount of bonus given in all the evaluations."
+    },
+    {
+      "id": "Q033",
+      "original_id": "employee_hire_evaluation_033",
+      "gold_sparql": "SELECT * WHERE { ?T1 a <http://valuenet/ontop/hiring> . }",
+      "gold_answers": [
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-3"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-6"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-4"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-1"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-5"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-2"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-7"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give me all the information about hiring."
+    },
+    {
+      "id": "Q034",
+      "original_id": "employee_hire_evaluation_034",
+      "gold_sparql": "SELECT * WHERE { ?T1 a <http://valuenet/ontop/hiring> . }",
+      "gold_answers": [
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-3"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-6"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-4"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-1"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-5"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-2"
+        },
+        {
+          "T1": "http://valuenet/ontop/hiring/employee_id-7"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is all the information about hiring?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "employee_hire_evaluation_035",
+      "gold_sparql": "select distinct ?t1_district where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/district> ?t1_district . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . FILTER(?t1_number_products < 3000) . FILTER (?t1_district in (?t2_district)) . ?t2 a <http://valuenet/ontop/shop> . ?t2 <http://valuenet/ontop/district> ?t2_district . ?t2 <http://valuenet/ontop/number_products> ?t2_number_products . FILTER(?t2_number_products > 10000) . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Which district has both stores with less than 3000 products and stores with more than 10000 products?"
+    },
+    {
+      "id": "Q036",
+      "original_id": "employee_hire_evaluation_036",
+      "gold_sparql": "select distinct ?t1_district where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/district> ?t1_district . ?t1 <http://valuenet/ontop/number_products> ?t1_number_products . FILTER(?t1_number_products < 3000) . FILTER (?t1_district in (?t2_district)) . ?t2 a <http://valuenet/ontop/shop> . ?t2 <http://valuenet/ontop/district> ?t2_district . ?t2 <http://valuenet/ontop/number_products> ?t2_number_products . FILTER(?t2_number_products > 10000) . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products."
+    },
+    {
+      "id": "Q037",
+      "original_id": "employee_hire_evaluation_037",
+      "gold_sparql": "select distinct (count(distinct ?t1_location) as ?aggregation_t1_location_78 ) where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/location> ?t1_location . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_location_78": "9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many different store locations are there?"
+    },
+    {
+      "id": "Q038",
+      "original_id": "employee_hire_evaluation_038",
+      "gold_sparql": "select distinct (count(distinct ?t1_location) as ?aggregation_t1_location_78 ) where { ?t1 a <http://valuenet/ontop/shop> . ?t1 <http://valuenet/ontop/location> ?t1_location . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_location_78": "9"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of distinct store locations."
+    }
+  ]
+}

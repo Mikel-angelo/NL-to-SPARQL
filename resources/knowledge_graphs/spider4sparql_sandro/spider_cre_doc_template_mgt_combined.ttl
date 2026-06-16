@@ -1,0 +1,494 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/templates#> .
+@prefix ns2: <http://valuenet/ontop/documents#> .
+@prefix ns3: <http://valuenet/ontop/paragraphs#> .
+@prefix ns4: <http://valuenet/ontop/ref_template_types#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns2:document_description a owl:DatatypeProperty ;
+    rdfs:domain :documents ;
+    rdfs:range xsd:string .
+
+ns2:document_id a owl:DatatypeProperty ;
+    rdfs:domain :documents ;
+    rdfs:range xsd:integer .
+
+ns2:document_name a owl:DatatypeProperty ;
+    rdfs:domain :documents ;
+    rdfs:range xsd:string .
+
+ns2:other_details a owl:DatatypeProperty ;
+    rdfs:domain :documents ;
+    rdfs:range xsd:string .
+
+ns2:ref-template_id a owl:ObjectProperty ;
+    rdfs:domain :documents ;
+    rdfs:range :templates .
+
+ns2:template_id a owl:DatatypeProperty ;
+    rdfs:domain :documents ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/documents/document_id=0> a :documents ;
+    ns2:document_description "n" ;
+    ns2:document_id 0 ;
+    ns2:document_name "Introduction of OS" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=7> ;
+    ns2:template_id 7 .
+
+<http://valuenet/ontop/documents/document_id=1> a :documents ;
+    ns2:document_description "y" ;
+    ns2:document_id 1 ;
+    ns2:document_name "Understanding DB" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=25> ;
+    ns2:template_id 25 .
+
+<http://valuenet/ontop/documents/document_id=76> a :documents ;
+    ns2:document_description "y" ;
+    ns2:document_id 76 ;
+    ns2:document_name "Robbin CV" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=20> ;
+    ns2:template_id 20 .
+
+<http://valuenet/ontop/documents/document_id=801801> a :documents ;
+    ns2:document_description "w" ;
+    ns2:document_id 801801 ;
+    ns2:document_name "How to read a book" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=4> ;
+    ns2:template_id 4 .
+
+<http://valuenet/ontop/documents/document_id=82> a :documents ;
+    ns2:document_description "w" ;
+    ns2:document_id 82 ;
+    ns2:document_name "Data base" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=11> ;
+    ns2:template_id 11 .
+
+ns3:document_id a owl:DatatypeProperty ;
+    rdfs:domain :paragraphs ;
+    rdfs:range xsd:integer .
+
+ns3:other_details a owl:DatatypeProperty ;
+    rdfs:domain :paragraphs ;
+    rdfs:range xsd:string .
+
+ns3:paragraph_id a owl:DatatypeProperty ;
+    rdfs:domain :paragraphs ;
+    rdfs:range xsd:integer .
+
+ns3:paragraph_text a owl:DatatypeProperty ;
+    rdfs:domain :paragraphs ;
+    rdfs:range xsd:string .
+
+ns3:ref-document_id a owl:ObjectProperty ;
+    rdfs:domain :paragraphs ;
+    rdfs:range :documents .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=1104059> a :paragraphs ;
+    ns3:document_id 3830 ;
+    ns3:paragraph_id 1104059 ;
+    ns3:paragraph_text "Senegal" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=3830> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=16615> a :paragraphs ;
+    ns3:document_id 80 ;
+    ns3:paragraph_id 16615 ;
+    ns3:paragraph_text "Japan" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=80> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=241> a :paragraphs ;
+    ns3:document_id 651512 ;
+    ns3:paragraph_id 241 ;
+    ns3:paragraph_text "Jersey" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=651512> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=243399026> a :paragraphs ;
+    ns3:document_id 651512 ;
+    ns3:paragraph_id 243399026 ;
+    ns3:paragraph_text "Indonesia" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=651512> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=280120913> a :paragraphs ;
+    ns3:document_id 2394 ;
+    ns3:paragraph_id 280120913 ;
+    ns3:paragraph_text "Ukraine" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=2394> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=3708> a :paragraphs ;
+    ns3:document_id 33930 ;
+    ns3:paragraph_id 3708 ;
+    ns3:paragraph_text "UK" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=33930> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=510442723> a :paragraphs ;
+    ns3:document_id 2394 ;
+    ns3:paragraph_id 510442723 ;
+    ns3:paragraph_text "Korea" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=2394> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=571212310> a :paragraphs ;
+    ns3:document_id 16514113 ;
+    ns3:paragraph_id 571212310 ;
+    ns3:paragraph_text "Brazil" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=16514113> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=608931827> a :paragraphs ;
+    ns3:document_id 80 ;
+    ns3:paragraph_id 608931827 ;
+    ns3:paragraph_text "Micronesia" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=80> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=65> a :paragraphs ;
+    ns3:document_id 50123 ;
+    ns3:paragraph_id 65 ;
+    ns3:paragraph_text "Palestinian Territory" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=50123> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=7> a :paragraphs ;
+    ns3:document_id 2394 ;
+    ns3:paragraph_id 7 ;
+    ns3:paragraph_text "Korea" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=2394> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=765713812> a :paragraphs ;
+    ns3:document_id 16514113 ;
+    ns3:paragraph_id 765713812 ;
+    ns3:paragraph_text "Ireland" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=16514113> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=9> a :paragraphs ;
+    ns3:document_id 3 ;
+    ns3:paragraph_id 9 ;
+    ns3:paragraph_text "Somalia" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=3> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=946335436> a :paragraphs ;
+    ns3:document_id 3540024 ;
+    ns3:paragraph_id 946335436 ;
+    ns3:paragraph_text "Papua New Guinea" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=3540024> .
+
+<http://valuenet/ontop/paragraphs/paragraph_id=9946> a :paragraphs ;
+    ns3:document_id 385906526 ;
+    ns3:paragraph_id 9946 ;
+    ns3:paragraph_text "Fiji" ;
+    ns3:ref-document_id <http://valuenet/ontop/documents/document_id=385906526> .
+
+ns4:template_type_code a owl:DatatypeProperty ;
+    rdfs:domain :ref_template_types ;
+    rdfs:range xsd:string .
+
+ns4:template_type_description a owl:DatatypeProperty ;
+    rdfs:domain :ref_template_types ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/ref_template_types/template_type_code=AD%20%20%20%20%20%20%20%20%20%20%20%20%20> a :ref_template_types ;
+    ns4:template_type_code "AD             " ;
+    ns4:template_type_description "Advertisement" .
+
+<http://valuenet/ontop/ref_template_types/template_type_code=BK%20%20%20%20%20%20%20%20%20%20%20%20%20> a :ref_template_types ;
+    ns4:template_type_code "BK             " ;
+    ns4:template_type_description "Book" .
+
+<http://valuenet/ontop/ref_template_types/template_type_code=CV%20%20%20%20%20%20%20%20%20%20%20%20%20> a :ref_template_types ;
+    ns4:template_type_code "CV             " ;
+    ns4:template_type_description "CV" .
+
+<http://valuenet/ontop/ref_template_types/template_type_code=PP%20%20%20%20%20%20%20%20%20%20%20%20%20> a :ref_template_types ;
+    ns4:template_type_code "PP             " ;
+    ns4:template_type_description "Paper" .
+
+<http://valuenet/ontop/ref_template_types/template_type_code=PPT%20%20%20%20%20%20%20%20%20%20%20%20> a :ref_template_types ;
+    ns4:template_type_code "PPT            " ;
+    ns4:template_type_description "Presentation" .
+
+ns1:date_effective_from a owl:DatatypeProperty ;
+    rdfs:domain :templates ;
+    rdfs:range xsd:dateTime .
+
+ns1:date_effective_to a owl:DatatypeProperty ;
+    rdfs:domain :templates ;
+    rdfs:range xsd:dateTime .
+
+ns1:ref-template_type_code a owl:ObjectProperty ;
+    rdfs:domain :templates ;
+    rdfs:range :ref_template_types .
+
+ns1:template_details a owl:DatatypeProperty ;
+    rdfs:domain :templates ;
+    rdfs:range xsd:string .
+
+ns1:template_id a owl:DatatypeProperty ;
+    rdfs:domain :templates ;
+    rdfs:range xsd:integer .
+
+ns1:template_type_code a owl:DatatypeProperty ;
+    rdfs:domain :templates ;
+    rdfs:range xsd:string .
+
+ns1:version_number a owl:DatatypeProperty ;
+    rdfs:domain :templates ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/templates/template_id=0> a :templates ;
+    ns1:date_effective_from "2005-11-12T07:09:48"^^xsd:dateTime ;
+    ns1:date_effective_to "2008-01-05T14:19:28"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PP> ;
+    ns1:template_details "" ;
+    ns1:template_id 0 ;
+    ns1:template_type_code "PP" ;
+    ns1:version_number 5 .
+
+<http://valuenet/ontop/templates/template_id=15> a :templates ;
+    ns1:date_effective_from "1986-12-09T14:51:36"^^xsd:dateTime ;
+    ns1:date_effective_to "1993-03-24T14:30:23"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=CV> ;
+    ns1:template_details "" ;
+    ns1:template_id 15 ;
+    ns1:template_type_code "CV" ;
+    ns1:version_number 9 .
+
+<http://valuenet/ontop/templates/template_id=16> a :templates ;
+    ns1:date_effective_from "2012-04-05T07:11:42"^^xsd:dateTime ;
+    ns1:date_effective_to "1980-05-07T12:15:47"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=CV> ;
+    ns1:template_details "" ;
+    ns1:template_id 16 ;
+    ns1:template_type_code "CV" ;
+    ns1:version_number 5 .
+
+<http://valuenet/ontop/templates/template_id=18> a :templates ;
+    ns1:date_effective_from "1984-08-07T13:36:26"^^xsd:dateTime ;
+    ns1:date_effective_to "1998-05-12T12:51:29"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PP> ;
+    ns1:template_details "" ;
+    ns1:template_id 18 ;
+    ns1:template_type_code "PP" ;
+    ns1:version_number 5 .
+
+<http://valuenet/ontop/templates/template_id=19> a :templates ;
+    ns1:date_effective_from "1999-06-21T11:10:30"^^xsd:dateTime ;
+    ns1:date_effective_to "1974-09-14T06:34:39"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=AD> ;
+    ns1:template_details "" ;
+    ns1:template_id 19 ;
+    ns1:template_type_code "AD" ;
+    ns1:version_number 7 .
+
+<http://valuenet/ontop/templates/template_id=23> a :templates ;
+    ns1:date_effective_from "1979-12-24T10:28:16"^^xsd:dateTime ;
+    ns1:date_effective_to "2000-10-22T11:57:12"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=BK> ;
+    ns1:template_details "" ;
+    ns1:template_id 23 ;
+    ns1:template_type_code "BK" ;
+    ns1:version_number 2 .
+
+<http://valuenet/ontop/templates/template_id=24> a :templates ;
+    ns1:date_effective_from "2008-08-01T13:57:26"^^xsd:dateTime ;
+    ns1:date_effective_to "1973-01-12T14:13:34"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PP> ;
+    ns1:template_details "" ;
+    ns1:template_id 24 ;
+    ns1:template_type_code "PP" ;
+    ns1:version_number 8 .
+
+<http://valuenet/ontop/templates/template_id=9> a :templates ;
+    ns1:date_effective_from "1997-04-17T08:29:44"^^xsd:dateTime ;
+    ns1:date_effective_to "1994-12-07T13:26:23"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=BK> ;
+    ns1:template_details "" ;
+    ns1:template_id 9 ;
+    ns1:template_type_code "BK" ;
+    ns1:version_number 2 .
+
+<http://valuenet/ontop/documents/document_id=3> a :documents ;
+    ns2:document_description "u" ;
+    ns2:document_id 3 ;
+    ns2:document_name "Summer Show" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=6> ;
+    ns2:template_id 6 .
+
+<http://valuenet/ontop/documents/document_id=33930> a :documents ;
+    ns2:document_description "z" ;
+    ns2:document_id 33930 ;
+    ns2:document_name "How Google people work" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=1> ;
+    ns2:template_id 1 .
+
+<http://valuenet/ontop/documents/document_id=3540024> a :documents ;
+    ns2:document_description "y" ;
+    ns2:document_id 3540024 ;
+    ns2:document_name "Palm reading" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=8> ;
+    ns2:template_id 8 .
+
+<http://valuenet/ontop/documents/document_id=3830> a :documents ;
+    ns2:document_description "k" ;
+    ns2:document_id 3830 ;
+    ns2:document_name "Do not panic" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=14> ;
+    ns2:template_id 14 .
+
+<http://valuenet/ontop/documents/document_id=385906526> a :documents ;
+    ns2:document_description "b" ;
+    ns2:document_id 385906526 ;
+    ns2:document_name "About Korea" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=11> ;
+    ns2:template_id 11 .
+
+<http://valuenet/ontop/documents/document_id=50123> a :documents ;
+    ns2:document_description "r" ;
+    ns2:document_id 50123 ;
+    ns2:document_name "Learning French" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=22> ;
+    ns2:template_id 22 .
+
+<http://valuenet/ontop/templates/template_id=1> a :templates ;
+    ns1:date_effective_from "2010-09-24T01:15:11"^^xsd:dateTime ;
+    ns1:date_effective_to "1999-07-08T03:31:04"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PP> ;
+    ns1:template_details "" ;
+    ns1:template_id 1 ;
+    ns1:template_type_code "PP" ;
+    ns1:version_number 9 .
+
+<http://valuenet/ontop/templates/template_id=10> a :templates ;
+    ns1:date_effective_from "2003-06-05T04:03:45"^^xsd:dateTime ;
+    ns1:date_effective_to "2007-06-06T06:18:53"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PPT> ;
+    ns1:template_details "" ;
+    ns1:template_id 10 ;
+    ns1:template_type_code "PPT" ;
+    ns1:version_number 1 .
+
+<http://valuenet/ontop/templates/template_id=20> a :templates ;
+    ns1:date_effective_from "1986-11-14T12:20:18"^^xsd:dateTime ;
+    ns1:date_effective_to "2008-08-08T18:36:43"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=BK> ;
+    ns1:template_details "" ;
+    ns1:template_id 20 ;
+    ns1:template_type_code "BK" ;
+    ns1:version_number 6 .
+
+<http://valuenet/ontop/templates/template_id=21> a :templates ;
+    ns1:date_effective_from "2002-08-25T13:26:23"^^xsd:dateTime ;
+    ns1:date_effective_to "2015-09-06T01:08:44"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=AD> ;
+    ns1:template_details "" ;
+    ns1:template_id 21 ;
+    ns1:template_type_code "AD" ;
+    ns1:version_number 9 .
+
+<http://valuenet/ontop/templates/template_id=22> a :templates ;
+    ns1:date_effective_from "2005-02-20T00:31:34"^^xsd:dateTime ;
+    ns1:date_effective_to "1989-11-24T19:06:06"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PP> ;
+    ns1:template_details "" ;
+    ns1:template_id 22 ;
+    ns1:template_type_code "PP" ;
+    ns1:version_number 0 .
+
+<http://valuenet/ontop/templates/template_id=4> a :templates ;
+    ns1:date_effective_from "2002-03-02T14:39:49"^^xsd:dateTime ;
+    ns1:date_effective_to "2001-04-18T09:29:52"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=BK> ;
+    ns1:template_details "" ;
+    ns1:template_id 4 ;
+    ns1:template_type_code "BK" ;
+    ns1:version_number 4 .
+
+<http://valuenet/ontop/templates/template_id=6> a :templates ;
+    ns1:date_effective_from "1975-05-20T22:51:19"^^xsd:dateTime ;
+    ns1:date_effective_to "1992-05-02T20:06:11"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PPT> ;
+    ns1:template_details "" ;
+    ns1:template_id 6 ;
+    ns1:template_type_code "PPT" ;
+    ns1:version_number 2 .
+
+<http://valuenet/ontop/templates/template_id=7> a :templates ;
+    ns1:date_effective_from "1993-10-07T02:33:04"^^xsd:dateTime ;
+    ns1:date_effective_to "1975-07-16T04:52:10"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PPT> ;
+    ns1:template_details "" ;
+    ns1:template_id 7 ;
+    ns1:template_type_code "PPT" ;
+    ns1:version_number 8 .
+
+<http://valuenet/ontop/templates/template_id=8> a :templates ;
+    ns1:date_effective_from "1983-07-16T21:16:16"^^xsd:dateTime ;
+    ns1:date_effective_to "1976-10-28T10:08:50"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=BK> ;
+    ns1:template_details "" ;
+    ns1:template_id 8 ;
+    ns1:template_type_code "BK" ;
+    ns1:version_number 3 .
+
+<http://valuenet/ontop/documents/document_id=16514113> a :documents ;
+    ns2:document_description "h" ;
+    ns2:document_id 16514113 ;
+    ns2:document_name "A history of Arts" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=25> ;
+    ns2:template_id 25 .
+
+<http://valuenet/ontop/documents/document_id=651512> a :documents ;
+    ns2:document_description "f" ;
+    ns2:document_id 651512 ;
+    ns2:document_name "How to write a CV" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=21> ;
+    ns2:template_id 21 .
+
+<http://valuenet/ontop/documents/document_id=80> a :documents ;
+    ns2:document_description "h" ;
+    ns2:document_id 80 ;
+    ns2:document_name "Welcome to NY" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=14> ;
+    ns2:template_id 14 .
+
+<http://valuenet/ontop/templates/template_id=11> a :templates ;
+    ns1:date_effective_from "1996-02-04T11:27:24"^^xsd:dateTime ;
+    ns1:date_effective_to "1995-09-19T22:27:48"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=BK> ;
+    ns1:template_details "" ;
+    ns1:template_id 11 ;
+    ns1:template_type_code "BK" ;
+    ns1:version_number 6 .
+
+<http://valuenet/ontop/templates/template_id=14> a :templates ;
+    ns1:date_effective_from "1975-10-20T02:28:58"^^xsd:dateTime ;
+    ns1:date_effective_to "1979-11-04T08:58:39"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=AD> ;
+    ns1:template_details "" ;
+    ns1:template_id 14 ;
+    ns1:template_type_code "AD" ;
+    ns1:version_number 7 .
+
+<http://valuenet/ontop/templates/template_id=25> a :templates ;
+    ns1:date_effective_from "1979-10-20T21:23:20"^^xsd:dateTime ;
+    ns1:date_effective_to "2006-02-06T23:52:04"^^xsd:dateTime ;
+    ns1:ref-template_type_code <http://valuenet/ontop/ref_template_types/template_type_code=PP> ;
+    ns1:template_details "" ;
+    ns1:template_id 25 ;
+    ns1:template_type_code "PP" ;
+    ns1:version_number 5 .
+
+<http://valuenet/ontop/documents/document_id=2394> a :documents ;
+    ns2:document_description "y" ;
+    ns2:document_id 2394 ;
+    ns2:document_name "Customer reviews" ;
+    ns2:ref-template_id <http://valuenet/ontop/templates/template_id=10> ;
+    ns2:template_id 10 .
+
+:ref_template_types a owl:Class .
+
+:paragraphs a owl:Class .
+
+:documents a owl:Class .
+
+:templates a owl:Class .
+

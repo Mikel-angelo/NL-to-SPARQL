@@ -1,0 +1,1565 @@
+{
+  "dataset_name": "spider_network_1_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for network_1. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/network_1.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "network_1_001",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "16"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many high schoolers are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "network_1_002",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "16"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of high schoolers."
+    },
+    {
+      "id": "Q003",
+      "original_id": "network_1_003",
+      "gold_sparql": "SELECT ?T1_name ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/grade> ?T1_grade . }",
+      "gold_answers": [
+        {
+          "T1_name": "Cassandra",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Austin",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Gabriel",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Jordan",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Andrew",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "Jordan",
+          "T1_grade": "12"
+        },
+        {
+          "T1_name": "Haley",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "John",
+          "T1_grade": "12"
+        },
+        {
+          "T1_name": "Jessica",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Gabriel",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Kris",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "Alexis",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Tiffany",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Logan",
+          "T1_grade": "12"
+        },
+        {
+          "T1_name": "Brittany",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "Kyle",
+          "T1_grade": "12"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the names and grades of each high schooler."
+    },
+    {
+      "id": "Q004",
+      "original_id": "network_1_004",
+      "gold_sparql": "SELECT ?T1_name ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/grade> ?T1_grade . }",
+      "gold_answers": [
+        {
+          "T1_name": "Cassandra",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Austin",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Gabriel",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Jordan",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Andrew",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "Jordan",
+          "T1_grade": "12"
+        },
+        {
+          "T1_name": "Haley",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "John",
+          "T1_grade": "12"
+        },
+        {
+          "T1_name": "Jessica",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Gabriel",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Kris",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "Alexis",
+          "T1_grade": "11"
+        },
+        {
+          "T1_name": "Tiffany",
+          "T1_grade": "9"
+        },
+        {
+          "T1_name": "Logan",
+          "T1_grade": "12"
+        },
+        {
+          "T1_name": "Brittany",
+          "T1_grade": "10"
+        },
+        {
+          "T1_name": "Kyle",
+          "T1_grade": "12"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names and grades for each high schooler?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "network_1_005",
+      "gold_sparql": "SELECT ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . }",
+      "gold_answers": [
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "12"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show all the grades of the high schoolers."
+    },
+    {
+      "id": "Q006",
+      "original_id": "network_1_006",
+      "gold_sparql": "SELECT ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . }",
+      "gold_answers": [
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "10"
+        },
+        {
+          "T1_grade": "12"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the grade of each high schooler?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "network_1_007",
+      "gold_sparql": "SELECT ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/name> ?T1_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "T1_grade": "12"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What grade is Kyle in?"
+    },
+    {
+      "id": "Q008",
+      "original_id": "network_1_008",
+      "gold_sparql": "SELECT ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/name> ?T1_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "T1_grade": "12"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the grade for the high schooler named Kyle."
+    },
+    {
+      "id": "Q009",
+      "original_id": "network_1_009",
+      "gold_sparql": "SELECT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/grade> ?T1_grade . FILTER(?T1_grade = 10) . }",
+      "gold_answers": [
+        {
+          "T1_name": "Andrew"
+        },
+        {
+          "T1_name": "Haley"
+        },
+        {
+          "T1_name": "Kris"
+        },
+        {
+          "T1_name": "Brittany"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the names of all high schoolers in grade 10."
+    },
+    {
+      "id": "Q010",
+      "original_id": "network_1_010",
+      "gold_sparql": "SELECT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/grade> ?T1_grade . FILTER(?T1_grade = 10) . }",
+      "gold_answers": [
+        {
+          "T1_name": "Andrew"
+        },
+        {
+          "T1_name": "Haley"
+        },
+        {
+          "T1_name": "Kris"
+        },
+        {
+          "T1_name": "Brittany"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of all high schoolers in grade 10?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "network_1_011",
+      "gold_sparql": "SELECT ?T1_id WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T1 <http://valuenet/ontop/name> ?T1_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "T1_id": "1934"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the ID of the high schooler named Kyle."
+    },
+    {
+      "id": "Q012",
+      "original_id": "network_1_012",
+      "gold_sparql": "SELECT ?T1_id WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T1 <http://valuenet/ontop/name> ?T1_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "T1_id": "1934"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is Kyle's id?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "network_1_013",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/grade> ?T1_grade . FILTER(?T1_grade = 9 || ?T1_grade = 10) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "8"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many high schoolers are there in grade 9 or 10?"
+    },
+    {
+      "id": "Q014",
+      "original_id": "network_1_014",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/grade> ?T1_grade . FILTER(?T1_grade = 9 || ?T1_grade = 10) . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "8"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of high schoolers in grades 9 or 10."
+    },
+    {
+      "id": "Q015",
+      "original_id": "network_1_015",
+      "gold_sparql": "SELECT ?T1_grade (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . } GROUP BY ?T1_grade",
+      "gold_answers": [
+        {
+          "T1_grade": "9",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_grade": "12",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_grade": "11",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_grade": "10",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the number of high schoolers for each grade."
+    },
+    {
+      "id": "Q016",
+      "original_id": "network_1_016",
+      "gold_sparql": "SELECT ?T1_grade (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . } GROUP BY ?T1_grade",
+      "gold_answers": [
+        {
+          "T1_grade": "9",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_grade": "12",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_grade": "11",
+          "aggregation_all": "4"
+        },
+        {
+          "T1_grade": "10",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many high schoolers are in each grade?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "network_1_017",
+      "gold_sparql": "SELECT ?T1_grade (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . } GROUP BY ?T1_grade ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_grade": "10",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which grade has the most high schoolers?"
+    },
+    {
+      "id": "Q018",
+      "original_id": "network_1_018",
+      "gold_sparql": "SELECT ?T1_grade (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . } GROUP BY ?T1_grade ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_grade": "10",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the grade that has the greatest number of high schoolers."
+    },
+    {
+      "id": "Q019",
+      "original_id": "network_1_019",
+      "gold_sparql": "SELECT ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . } GROUP BY ?T1_grade HAVING(count( *) >= 4)",
+      "gold_answers": [
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "10"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show me all grades that have at least 4 students."
+    },
+    {
+      "id": "Q020",
+      "original_id": "network_1_020",
+      "gold_sparql": "SELECT ?T1_grade WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . } GROUP BY ?T1_grade HAVING(count( *) >= 4)",
+      "gold_answers": [
+        {
+          "T1_grade": "9"
+        },
+        {
+          "T1_grade": "12"
+        },
+        {
+          "T1_grade": "11"
+        },
+        {
+          "T1_grade": "10"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which grades have 4 or more high schoolers?"
+    },
+    {
+      "id": "Q021",
+      "original_id": "network_1_021",
+      "gold_sparql": "select ?t1_student_id (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/friend> . ?t1 <http://valuenet/ontop/student_id> ?t1_student_id . } group by ?t1_student_id",
+      "gold_answers": [
+        {
+          "t1_student_id": "1101",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1934",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1501",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1381",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1510",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_student_id": "1304",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1316",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1709",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1911",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1782",
+          "aggregation_all": "3"
+        },
+        {
+          "t1_student_id": "1247",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_student_id": "1661",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1468",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_student_id": "1689",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the student IDs and numbers of friends corresponding to each."
+    },
+    {
+      "id": "Q022",
+      "original_id": "network_1_022",
+      "gold_sparql": "select ?t1_student_id (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/friend> . ?t1 <http://valuenet/ontop/student_id> ?t1_student_id . } group by ?t1_student_id",
+      "gold_answers": [
+        {
+          "t1_student_id": "1101",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1934",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1501",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1381",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1510",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_student_id": "1304",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1316",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1709",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1911",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1782",
+          "aggregation_all": "3"
+        },
+        {
+          "t1_student_id": "1247",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_student_id": "1661",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1468",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_student_id": "1689",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many friends does each student have?"
+    },
+    {
+      "id": "Q023",
+      "original_id": "network_1_023",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/friend> . ?T2 <http://valuenet/ontop/ref-friend> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . } GROUP BY ?T1_name",
+      "gold_answers": [
+        {
+          "T1_name": "Andrew",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "John",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Cassandra",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Kris",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Jordan",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Jessica",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Logan",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Kyle",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Tiffany",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Austin",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Alexis",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Haley",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Brittany",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the names of high school students and their corresponding number of friends."
+    },
+    {
+      "id": "Q024",
+      "original_id": "network_1_024",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/friend> . ?T2 <http://valuenet/ontop/ref-friend> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . } GROUP BY ?T1_name",
+      "gold_answers": [
+        {
+          "T1_name": "Andrew",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "John",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Cassandra",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Kris",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Jordan",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Jessica",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Logan",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Kyle",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Tiffany",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Austin",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Alexis",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Haley",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Brittany",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of the high schoolers and how many friends does each have?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "network_1_025",
+      "gold_sparql": "SELECT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/friend> . ?T2 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/id> ?T1_id . } GROUP BY ?T1_id ?T1_name HAVING(count( *) >= 3)",
+      "gold_answers": [
+        {
+          "T1_name": "Andrew"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the names of high schoolers who have at least 3 friends."
+    },
+    {
+      "id": "Q026",
+      "original_id": "network_1_026",
+      "gold_sparql": "SELECT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/friend> . ?T2 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/id> ?T1_id . } GROUP BY ?T1_id ?T1_name HAVING(count( *) >= 3)",
+      "gold_answers": [
+        {
+          "T1_name": "Andrew"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of high schoolers who have 3 or more friends?"
+    },
+    {
+      "id": "Q027",
+      "original_id": "network_1_027",
+      "gold_sparql": "SELECT ?T5_name WHERE { ?T3 a <http://valuenet/ontop/friend> . ?T3 <http://valuenet/ontop/ref-friend> ?T5 . ?T3 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T5 <http://valuenet/ontop/id> ?T5_id . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T5 <http://valuenet/ontop/name> ?T5_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "T5_name": "Jordan"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the names of all of the high schooler Kyle's friends."
+    },
+    {
+      "id": "Q028",
+      "original_id": "network_1_028",
+      "gold_sparql": "SELECT ?T5_name WHERE { ?T3 a <http://valuenet/ontop/friend> . ?T3 <http://valuenet/ontop/ref-friend> ?T5 . ?T3 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T5 <http://valuenet/ontop/id> ?T5_id . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T5 <http://valuenet/ontop/name> ?T5_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "T5_name": "Jordan"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the names of friends of the high school student Kyle."
+    },
+    {
+      "id": "Q029",
+      "original_id": "network_1_029",
+      "gold_sparql": "SELECT (count(*) as ?agg) WHERE { ?T3 a <http://valuenet/ontop/friend> . ?T3 <http://valuenet/ontop/ref-friend> ?T5 . ?T3 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T5 <http://valuenet/ontop/id> ?T5_id . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T5 <http://valuenet/ontop/name> ?T5_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "agg": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many friends does the high school student Kyle have?"
+    },
+    {
+      "id": "Q030",
+      "original_id": "network_1_030",
+      "gold_sparql": "SELECT (count(*) as ?agg) WHERE { ?T3 a <http://valuenet/ontop/friend> . ?T3 <http://valuenet/ontop/ref-friend> ?T5 . ?T3 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T5 <http://valuenet/ontop/id> ?T5_id . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T5 <http://valuenet/ontop/name> ?T5_name . FILTER(?T1_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "agg": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of friends Kyle has."
+    },
+    {
+      "id": "Q031",
+      "original_id": "network_1_031",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { SELECT (?T1_id as ?col1) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/id> ?T1_id . }} MINUS {SELECT (?T2_student_id as ?col1) WHERE { ?T2 a <http://valuenet/ontop/friend> . ?T2 <http://valuenet/ontop/student_id> ?T2_student_id . } } }",
+      "gold_answers": [
+        {
+          "col1": "1025"
+        },
+        {
+          "col1": "1641"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show ids of all students who do not have any friends."
+    },
+    {
+      "id": "Q032",
+      "original_id": "network_1_032",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { SELECT (?T1_id as ?col1) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/id> ?T1_id . }} MINUS {SELECT (?T2_student_id as ?col1) WHERE { ?T2 a <http://valuenet/ontop/friend> . ?T2 <http://valuenet/ontop/student_id> ?T2_student_id . } } }",
+      "gold_answers": [
+        {
+          "col1": "1025"
+        },
+        {
+          "col1": "1641"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the ids of high school students who do not have friends?"
+    },
+    {
+      "id": "Q033",
+      "original_id": "network_1_033",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { SELECT (?T1_name as ?col1) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . }} MINUS {SELECT (?T2_name as ?col1) WHERE { ?T2 a <http://valuenet/ontop/highschooler> . ?T3 a <http://valuenet/ontop/friend> . ?T3 <http://valuenet/ontop/ref-student> ?T2. ?T2 <http://valuenet/ontop/name> ?T2_name . ?T2 <http://valuenet/ontop/id> ?T2_id . } } }",
+      "gold_answers": [
+        {
+          "col1": "John"
+        },
+        {
+          "col1": "Brittany"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show names of all high school students who do not have any friends."
+    },
+    {
+      "id": "Q034",
+      "original_id": "network_1_034",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { SELECT (?T1_name as ?col1) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . }} MINUS {SELECT (?T2_name as ?col1) WHERE { ?T2 a <http://valuenet/ontop/highschooler> . ?T3 a <http://valuenet/ontop/friend> . ?T3 <http://valuenet/ontop/ref-student> ?T2. ?T2 <http://valuenet/ontop/name> ?T2_name . ?T2 <http://valuenet/ontop/id> ?T2_id . } } }",
+      "gold_answers": [
+        {
+          "col1": "John"
+        },
+        {
+          "col1": "Brittany"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of students who have no friends?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "network_1_035",
+      "gold_sparql": "select distinct ?t1_student_id where { ?t1 a <http://valuenet/ontop/friend> . ?t1 <http://valuenet/ontop/student_id> ?t1_student_id . FILTER (?t1_student_id in (?t2_liked_id)) . ?t2 a <http://valuenet/ontop/likes> . ?t2 <http://valuenet/ontop/liked_id> ?t2_liked_id . }",
+      "gold_answers": [
+        {
+          "t1_student_id": "1468"
+        },
+        {
+          "t1_student_id": "1304"
+        },
+        {
+          "t1_student_id": "1247"
+        },
+        {
+          "t1_student_id": "1689"
+        },
+        {
+          "t1_student_id": "1101"
+        },
+        {
+          "t1_student_id": "1934"
+        },
+        {
+          "t1_student_id": "1501"
+        },
+        {
+          "t1_student_id": "1709"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the ids of high schoolers who have friends and are also liked by someone else."
+    },
+    {
+      "id": "Q036",
+      "original_id": "network_1_036",
+      "gold_sparql": "select distinct ?t1_student_id where { ?t1 a <http://valuenet/ontop/friend> . ?t1 <http://valuenet/ontop/student_id> ?t1_student_id . FILTER (?t1_student_id in (?t2_liked_id)) . ?t2 a <http://valuenet/ontop/likes> . ?t2 <http://valuenet/ontop/liked_id> ?t2_liked_id . }",
+      "gold_answers": [
+        {
+          "t1_student_id": "1468"
+        },
+        {
+          "t1_student_id": "1304"
+        },
+        {
+          "t1_student_id": "1247"
+        },
+        {
+          "t1_student_id": "1689"
+        },
+        {
+          "t1_student_id": "1101"
+        },
+        {
+          "t1_student_id": "1934"
+        },
+        {
+          "t1_student_id": "1501"
+        },
+        {
+          "t1_student_id": "1709"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the ids of students who both have friends and are liked?"
+    },
+    {
+      "id": "Q037",
+      "original_id": "network_1_037",
+      "gold_sparql": "SELECT DISTINCT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T4 a <http://valuenet/ontop/friend> . ?T4 <http://valuenet/ontop/ref-student> ?T1 . FILTER (?T1_name in (?T2_name)) . ?T2 a <http://valuenet/ontop/highschooler> . ?T3 a <http://valuenet/ontop/likes> . ?T3 <http://valuenet/ontop/ref-liked> ?T2 .?T2 <http://valuenet/ontop/name> ?T2_name . ?T2 <http://valuenet/ontop/id> ?T2_id . }",
+      "gold_answers": [
+        {
+          "T1_name": "Cassandra"
+        },
+        {
+          "T1_name": "Gabriel"
+        },
+        {
+          "T1_name": "Jordan"
+        },
+        {
+          "T1_name": "Haley"
+        },
+        {
+          "T1_name": "Jessica"
+        },
+        {
+          "T1_name": "Kris"
+        },
+        {
+          "T1_name": "Alexis"
+        },
+        {
+          "T1_name": "Kyle"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show name of all students who have some friends and also are liked by someone else."
+    },
+    {
+      "id": "Q038",
+      "original_id": "network_1_038",
+      "gold_sparql": "SELECT DISTINCT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T4 a <http://valuenet/ontop/friend> . ?T4 <http://valuenet/ontop/ref-student> ?T1 . FILTER (?T1_name in (?T2_name)) . ?T2 a <http://valuenet/ontop/highschooler> . ?T3 a <http://valuenet/ontop/likes> . ?T3 <http://valuenet/ontop/ref-liked> ?T2 .?T2 <http://valuenet/ontop/name> ?T2_name . ?T2 <http://valuenet/ontop/id> ?T2_id . }",
+      "gold_answers": [
+        {
+          "T1_name": "Cassandra"
+        },
+        {
+          "T1_name": "Gabriel"
+        },
+        {
+          "T1_name": "Jordan"
+        },
+        {
+          "T1_name": "Haley"
+        },
+        {
+          "T1_name": "Jessica"
+        },
+        {
+          "T1_name": "Kris"
+        },
+        {
+          "T1_name": "Alexis"
+        },
+        {
+          "T1_name": "Kyle"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of high schoolers who both have friends and are liked?"
+    },
+    {
+      "id": "Q039",
+      "original_id": "network_1_039",
+      "gold_sparql": "select ?t1_student_id (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/likes> . ?t1 <http://valuenet/ontop/student_id> ?t1_student_id . } group by ?t1_student_id",
+      "gold_answers": [
+        {
+          "t1_student_id": "1025",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1247",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1934",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1501",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1641",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1316",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1709",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1911",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1782",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1689",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of likes for each student id."
+    },
+    {
+      "id": "Q040",
+      "original_id": "network_1_040",
+      "gold_sparql": "select ?t1_student_id (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/likes> . ?t1 <http://valuenet/ontop/student_id> ?t1_student_id . } group by ?t1_student_id",
+      "gold_answers": [
+        {
+          "t1_student_id": "1025",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1247",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1934",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1501",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1641",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1316",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1709",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1911",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1782",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_student_id": "1689",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many likes correspond to each student id?"
+    },
+    {
+      "id": "Q041",
+      "original_id": "network_1_041",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/likes> . ?T2 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T2 <http://valuenet/ontop/student_id> ?T2_student_id } GROUP BY ?T2_student_id ?T1_name",
+      "gold_answers": [
+        {
+          "T1_name": "Alexis",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "John",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Jessica",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Kyle",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Brittany",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Cassandra",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Austin",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Andrew",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the names of high schoolers who have likes, and numbers of likes for each."
+    },
+    {
+      "id": "Q042",
+      "original_id": "network_1_042",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/likes> . ?T2 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T2 <http://valuenet/ontop/student_id> ?T2_student_id } GROUP BY ?T2_student_id ?T1_name",
+      "gold_answers": [
+        {
+          "T1_name": "Alexis",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "John",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Jessica",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Kyle",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Brittany",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Cassandra",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Austin",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Andrew",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of high schoolers who have likes, and how many likes does each have?"
+    },
+    {
+      "id": "Q043",
+      "original_id": "network_1_043",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T3 a <http://valuenet/ontop/likes> . ?T3 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/id> ?T1_id . } GROUP BY ?T1_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the name of the high schooler who has the greatest number of likes?"
+    },
+    {
+      "id": "Q044",
+      "original_id": "network_1_044",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T3 a <http://valuenet/ontop/likes> . ?T3 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/id> ?T1_id . } GROUP BY ?T1_name ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_name": "Gabriel",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Give the name of the student with the most likes."
+    },
+    {
+      "id": "Q045",
+      "original_id": "network_1_045",
+      "gold_sparql": "SELECT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/likes> . ?T2 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T2 <http://valuenet/ontop/student_id> ?T2_student_id } GROUP BY ?T2_student_id ?T1_name HAVING(count( *) >= 2)",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the names of students who have at least 2 likes."
+    },
+    {
+      "id": "Q046",
+      "original_id": "network_1_046",
+      "gold_sparql": "SELECT ?T1_name WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T2 a <http://valuenet/ontop/likes> . ?T2 <http://valuenet/ontop/ref-student> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . ?T1 <http://valuenet/ontop/id> ?T1_id . ?T2 <http://valuenet/ontop/student_id> ?T2_student_id } GROUP BY ?T2_student_id ?T1_name HAVING(count( *) >= 2)",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of students who have 2 or more likes?"
+    },
+    {
+      "id": "Q047",
+      "original_id": "network_1_047",
+      "gold_sparql": "SELECT ?T1_name WHERE { \n ?T1 a <http://valuenet/ontop/highschooler> . \n ?T2 a <http://valuenet/ontop/friend> . \n ?T2 <http://valuenet/ontop/ref-student> ?T1 . \n ?T1 <http://valuenet/ontop/name> ?T1_name . \n ?T1 <http://valuenet/ontop/id> ?T1_id . \n ?T2 <http://valuenet/ontop/student_id> ?T2_student_id .\n ?T1 <http://valuenet/ontop/grade> ?T1_grade . \n FILTER(?T1_grade > 5) . } GROUP BY ?T2_student_id ?T1_name HAVING(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "T1_name": "Kris"
+        },
+        {
+          "T1_name": "Alexis"
+        },
+        {
+          "T1_name": "Gabriel"
+        },
+        {
+          "T1_name": "Jordan"
+        },
+        {
+          "T1_name": "Andrew"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the names of students who have a grade higher than 5 and have at least 2 friends."
+    },
+    {
+      "id": "Q048",
+      "original_id": "network_1_048",
+      "gold_sparql": "SELECT ?T1_name WHERE { \n ?T1 a <http://valuenet/ontop/highschooler> . \n ?T2 a <http://valuenet/ontop/friend> . \n ?T2 <http://valuenet/ontop/ref-student> ?T1 . \n ?T1 <http://valuenet/ontop/name> ?T1_name . \n ?T1 <http://valuenet/ontop/id> ?T1_id . \n ?T2 <http://valuenet/ontop/student_id> ?T2_student_id .\n ?T1 <http://valuenet/ontop/grade> ?T1_grade . \n FILTER(?T1_grade > 5) . } GROUP BY ?T2_student_id ?T1_name HAVING(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "T1_name": "Kris"
+        },
+        {
+          "T1_name": "Alexis"
+        },
+        {
+          "T1_name": "Gabriel"
+        },
+        {
+          "T1_name": "Jordan"
+        },
+        {
+          "T1_name": "Andrew"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of high schoolers who have a grade of over 5 and have 2 or more friends?"
+    },
+    {
+      "id": "Q049",
+      "original_id": "network_1_049",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/likes> . ?T2 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/ref-student> ?T2 . ?T2 <http://valuenet/ontop/name> ?T2_name . FILTER(?T2_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many likes does Kyle have?"
+    },
+    {
+      "id": "Q050",
+      "original_id": "network_1_050",
+      "gold_sparql": "SELECT (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/likes> . ?T2 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/ref-student> ?T2 . ?T2 <http://valuenet/ontop/name> ?T2_name . FILTER(?T2_name = 'Kyle') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the number of likes that the high schooler named Kyle has."
+    },
+    {
+      "id": "Q051",
+      "original_id": "network_1_051",
+      "gold_sparql": "SELECT (avg(?T1_grade) as ?avg) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/id> ?T1_id .FILTER(?T1_id in (?T22_student_id)) . {SELECT DISTINCT ?T22_student_id WHERE { ?T22 a <http://valuenet/ontop/friend> . ?T23 a <http://valuenet/ontop/highschooler> . ?T22 <http://valuenet/ontop/ref-friend> ?T23 . ?T22 <http://valuenet/ontop/student_id> ?T22_student_id . } } }",
+      "gold_answers": [
+        {
+          "avg": "10.428571428571428571428571"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the average grade of all students who have some friends."
+    },
+    {
+      "id": "Q052",
+      "original_id": "network_1_052",
+      "gold_sparql": "SELECT (avg(?T1_grade) as ?avg) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/id> ?T1_id .FILTER(?T1_id in (?T22_student_id)) . {SELECT DISTINCT ?T22_student_id WHERE { ?T22 a <http://valuenet/ontop/friend> . ?T23 a <http://valuenet/ontop/highschooler> . ?T22 <http://valuenet/ontop/ref-friend> ?T23 . ?T22 <http://valuenet/ontop/student_id> ?T22_student_id . } } }",
+      "gold_answers": [
+        {
+          "avg": "10.428571428571428571428571"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average grade of students who have friends?"
+    },
+    {
+      "id": "Q053",
+      "original_id": "network_1_053",
+      "gold_sparql": "SELECT (min( ?T1_grade) as ?aggregation_T1_grade_3 ) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/id> ?T1_id . FILTER NOT EXISTS {{SELECT ?T22_student_id WHERE { ?T22 a <http://valuenet/ontop/friend> . ?T23 a <http://valuenet/ontop/highschooler> . ?T22 <http://valuenet/ontop/ref-friend> ?T23 . ?T22 <http://valuenet/ontop/student_id> ?T22_student_id . ?T22 <http://valuenet/ontop/student_id> ?T22_student_id . } }}FILTER(?T1_id not in (?T22_student_id)) . }",
+      "gold_answers": [
+        {}
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the minimum grade of students who have no friends."
+    },
+    {
+      "id": "Q054",
+      "original_id": "network_1_054",
+      "gold_sparql": "SELECT (min( ?T1_grade) as ?aggregation_T1_grade_3 ) WHERE { ?T1 a <http://valuenet/ontop/highschooler> . ?T1 <http://valuenet/ontop/grade> ?T1_grade . ?T1 <http://valuenet/ontop/id> ?T1_id . FILTER NOT EXISTS {{SELECT ?T22_student_id WHERE { ?T22 a <http://valuenet/ontop/friend> . ?T23 a <http://valuenet/ontop/highschooler> . ?T22 <http://valuenet/ontop/ref-friend> ?T23 . ?T22 <http://valuenet/ontop/student_id> ?T22_student_id . ?T22 <http://valuenet/ontop/student_id> ?T22_student_id . } }}FILTER(?T1_id not in (?T22_student_id)) . }",
+      "gold_answers": [
+        {}
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the lowest grade of students who do not have any friends?"
+    }
+  ]
+}

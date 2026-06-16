@@ -1,0 +1,553 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/cartoon#> .
+@prefix ns2: <http://valuenet/ontop/tv_channel#> .
+@prefix ns3: <http://valuenet/ontop/tv_series#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns1:channel a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:string .
+
+ns1:directed_by a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:string .
+
+ns1:id a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:double .
+
+ns1:original_air_date a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:string .
+
+ns1:production_code a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:double .
+
+ns1:ref-channel a owl:ObjectProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range :tv_channel .
+
+ns1:title a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:string .
+
+ns1:written_by a owl:DatatypeProperty ;
+    rdfs:domain :cartoon ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/cartoon/id=1> a :cartoon ;
+    ns1:channel "700" ;
+    ns1:directed_by "Ben Jones" ;
+    ns1:id 1e+00 ;
+    ns1:original_air_date "November14,2008" ;
+    ns1:production_code 1.01e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=700> ;
+    ns1:title "The Rise of the Blue Beetle!" ;
+    ns1:written_by "Michael Jelenic" .
+
+<http://valuenet/ontop/cartoon/id=10> a :cartoon ;
+    ns1:channel "728" ;
+    ns1:directed_by "Ben Jones" ;
+    ns1:id 1e+01 ;
+    ns1:original_air_date "February6,2009" ;
+    ns1:production_code 1.1e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=728> ;
+    ns1:title "The Eyes of Despero!" ;
+    ns1:written_by "J. M. DeMatteis" .
+
+<http://valuenet/ontop/cartoon/id=11> a :cartoon ;
+    ns1:channel "700" ;
+    ns1:directed_by "Brandon Vietti" ;
+    ns1:id 1.1e+01 ;
+    ns1:original_air_date "February20,2009" ;
+    ns1:production_code 1.11e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=700> ;
+    ns1:title "Return of the Fearsome Fangs!" ;
+    ns1:written_by "Todd Casey" .
+
+<http://valuenet/ontop/cartoon/id=12> a :cartoon ;
+    ns1:channel "707" ;
+    ns1:directed_by "Michael Chang" ;
+    ns1:id 1.2e+01 ;
+    ns1:original_air_date "February27,2009" ;
+    ns1:production_code 1.12e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=707> ;
+    ns1:title "Deep Cover for Batman!" ;
+    ns1:written_by "Joseph Kuhr" .
+
+<http://valuenet/ontop/cartoon/id=2> a :cartoon ;
+    ns1:channel "701" ;
+    ns1:directed_by "Brandon Vietti" ;
+    ns1:id 2e+00 ;
+    ns1:original_air_date "November21,2008" ;
+    ns1:production_code 1.02e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=701> ;
+    ns1:title "Terror on Dinosaur Island!" ;
+    ns1:written_by "Steven Melching" .
+
+<http://valuenet/ontop/cartoon/id=3> a :cartoon ;
+    ns1:channel "703" ;
+    ns1:directed_by "Michael Chang" ;
+    ns1:id 3e+00 ;
+    ns1:original_air_date "December5,2008" ;
+    ns1:production_code 1.03e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=703> ;
+    ns1:title "Evil Under the Sea!" ;
+    ns1:written_by "Joseph Kuhr" .
+
+<http://valuenet/ontop/cartoon/id=4> a :cartoon ;
+    ns1:channel "704" ;
+    ns1:directed_by "Ben Jones" ;
+    ns1:id 4e+00 ;
+    ns1:original_air_date "January2,2009" ;
+    ns1:production_code 1.04e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=704> ;
+    ns1:title "Day of the Dark Knight!" ;
+    ns1:written_by "J. M. DeMatteis" .
+
+<http://valuenet/ontop/cartoon/id=5> a :cartoon ;
+    ns1:channel "705" ;
+    ns1:directed_by "Brandon Vietti" ;
+    ns1:id 5e+00 ;
+    ns1:original_air_date "December12,2008" ;
+    ns1:production_code 1.05e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=705> ;
+    ns1:title "Invasion of the Secret Santas!" ;
+    ns1:written_by "Adam Beechen" .
+
+<http://valuenet/ontop/cartoon/id=6> a :cartoon ;
+    ns1:channel "706" ;
+    ns1:directed_by "Michael Chang" ;
+    ns1:id 6e+00 ;
+    ns1:original_air_date "January9,2009" ;
+    ns1:production_code 1.06e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=706> ;
+    ns1:title "Enter the Outsiders!" ;
+    ns1:written_by "Todd Casey" .
+
+<http://valuenet/ontop/cartoon/id=7> a :cartoon ;
+    ns1:channel "707" ;
+    ns1:directed_by "Ben Jones" ;
+    ns1:id 7e+00 ;
+    ns1:original_air_date "January16,2009" ;
+    ns1:production_code 1.07e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=707> ;
+    ns1:title "Dawn of the Dead Man!" ;
+    ns1:written_by "Steven Melching" .
+
+<http://valuenet/ontop/cartoon/id=8> a :cartoon ;
+    ns1:channel "708" ;
+    ns1:directed_by "Brandon Vietti" ;
+    ns1:id 8e+00 ;
+    ns1:original_air_date "January23,2009" ;
+    ns1:production_code 1.08e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=708> ;
+    ns1:title "Fall of the Blue Beetle!" ;
+    ns1:written_by "James Krieg" .
+
+<http://valuenet/ontop/cartoon/id=9> a :cartoon ;
+    ns1:channel "707" ;
+    ns1:directed_by "Michael Chang" ;
+    ns1:id 9e+00 ;
+    ns1:original_air_date "January30,2009" ;
+    ns1:production_code 1.09e+02 ;
+    ns1:ref-channel <http://valuenet/ontop/tv_channel/id=707> ;
+    ns1:title "Journey to the Center of the Bat!" ;
+    ns1:written_by "Matt Wayne" .
+
+ns2:content a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:country a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:high_definition_tv a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:id a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:language a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:package_option a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:pay_per_view_ppv a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:pixel_aspect_ratio_par a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+ns2:series_name a owl:DatatypeProperty ;
+    rdfs:domain :tv_channel ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/tv_channel/id=709> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Poland" ;
+    ns2:high_definition_tv "yes" ;
+    ns2:id "709" ;
+    ns2:language "English" ;
+    ns2:package_option "Sky Famiglia + Sky HD" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "16:9" ;
+    ns2:series_name "MTV Live HD" .
+
+<http://valuenet/ontop/tv_channel/id=715> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "715" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3 / 16:9" ;
+    ns2:series_name "Match Music" .
+
+ns3:air_date a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:string .
+
+ns3:channel a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:string .
+
+ns3:episode a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:string .
+
+ns3:id a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:double .
+
+ns3:rating a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:string .
+
+ns3:rating_share a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:string .
+
+ns3:ref-channel a owl:ObjectProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range :tv_channel .
+
+ns3:share a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:double .
+
+ns3:viewers_m a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:string .
+
+ns3:weekly_rank a owl:DatatypeProperty ;
+    rdfs:domain :tv_series ;
+    rdfs:range xsd:double .
+
+<http://valuenet/ontop/tv_series/id=1> a :tv_series ;
+    ns3:air_date "September 24, 2007" ;
+    ns3:channel "700" ;
+    ns3:episode "A Love of a Lifetime" ;
+    ns3:id 1e+00 ;
+    ns3:rating "5.8" ;
+    ns3:rating_share "3.5/9" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=700> ;
+    ns3:share 9e+00 ;
+    ns3:viewers_m "9.16" ;
+    ns3:weekly_rank 4.3e+01 .
+
+<http://valuenet/ontop/tv_series/id=10> a :tv_series ;
+    ns3:air_date "November 26, 2007" ;
+    ns3:channel "719" ;
+    ns3:episode "Blowback" ;
+    ns3:id 1e+01 ;
+    ns3:rating "3.7" ;
+    ns3:rating_share "2.4/6" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=719> ;
+    ns3:share 6e+00 ;
+    ns3:viewers_m "6.05" ;
+    ns3:weekly_rank 6.8e+01 .
+
+<http://valuenet/ontop/tv_series/id=11> a :tv_series ;
+    ns3:air_date "December 10, 2007" ;
+    ns3:channel "728" ;
+    ns3:episode "Home By Another Way" ;
+    ns3:id 1.1e+01 ;
+    ns3:rating "3.5" ;
+    ns3:rating_share "1.7/5" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=728> ;
+    ns3:share 6e+00 ;
+    ns3:viewers_m "5.28" ;
+    ns3:weekly_rank 6.2e+01 .
+
+<http://valuenet/ontop/tv_series/id=12> a :tv_series ;
+    ns3:air_date "December 17, 2007" ;
+    ns3:channel "714" ;
+    ns3:episode "The Hanged Man" ;
+    ns3:id 1.2e+01 ;
+    ns3:rating "3.0" ;
+    ns3:rating_share "1.5/4" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=714> ;
+    ns3:share 5e+00 ;
+    ns3:viewers_m "4.24" ;
+    ns3:weekly_rank 6.5e+01 .
+
+<http://valuenet/ontop/tv_series/id=2> a :tv_series ;
+    ns3:air_date "October 1, 2007" ;
+    ns3:channel "701" ;
+    ns3:episode "Friendly Skies" ;
+    ns3:id 2e+00 ;
+    ns3:rating "5.3" ;
+    ns3:rating_share "3.2/8" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=701> ;
+    ns3:share 9e+00 ;
+    ns3:viewers_m "8.23" ;
+    ns3:weekly_rank 5e+01 .
+
+<http://valuenet/ontop/tv_series/id=3> a :tv_series ;
+    ns3:air_date "October 8, 2007" ;
+    ns3:channel "707" ;
+    ns3:episode "Game Three" ;
+    ns3:id 3e+00 ;
+    ns3:rating "4.4" ;
+    ns3:rating_share "2.9/7" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=707> ;
+    ns3:share 7e+00 ;
+    ns3:viewers_m "6.94" ;
+    ns3:weekly_rank 6.1e+01 .
+
+<http://valuenet/ontop/tv_series/id=4> a :tv_series ;
+    ns3:air_date "October 15, 2007" ;
+    ns3:channel "713" ;
+    ns3:episode "The Year of the Rabbit" ;
+    ns3:id 4e+00 ;
+    ns3:rating "4.3" ;
+    ns3:rating_share "2.7/7" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=713> ;
+    ns3:share 7e+00 ;
+    ns3:viewers_m "6.75" ;
+    ns3:weekly_rank 6.7e+01 .
+
+<http://valuenet/ontop/tv_series/id=5> a :tv_series ;
+    ns3:air_date "October 22, 2007" ;
+    ns3:channel "714" ;
+    ns3:episode "The Legend of Dylan McCleen" ;
+    ns3:id 5e+00 ;
+    ns3:rating "3.8" ;
+    ns3:rating_share "2.4/6" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=714> ;
+    ns3:share 6e+00 ;
+    ns3:viewers_m "6.06" ;
+    ns3:weekly_rank 7.2e+01 .
+
+<http://valuenet/ontop/tv_series/id=6> a :tv_series ;
+    ns3:air_date "October 29, 2007" ;
+    ns3:channel "700" ;
+    ns3:episode "Keepers" ;
+    ns3:id 6e+00 ;
+    ns3:rating "3.7" ;
+    ns3:rating_share "2.2/6" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=700> ;
+    ns3:share 6e+00 ;
+    ns3:viewers_m "5.75" ;
+    ns3:weekly_rank 7.1e+01 .
+
+<http://valuenet/ontop/tv_series/id=7> a :tv_series ;
+    ns3:air_date "November 5, 2007" ;
+    ns3:channel "708" ;
+    ns3:episode "Double Down" ;
+    ns3:id 7e+00 ;
+    ns3:rating "3.4" ;
+    ns3:rating_share "2.1/5" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=708> ;
+    ns3:share 6e+00 ;
+    ns3:viewers_m "5.13" ;
+    ns3:weekly_rank 8e+01 .
+
+<http://valuenet/ontop/tv_series/id=8> a :tv_series ;
+    ns3:air_date "November 12, 2007" ;
+    ns3:channel "707" ;
+    ns3:episode "Winterland" ;
+    ns3:id 8e+00 ;
+    ns3:rating "4.0" ;
+    ns3:rating_share "2.4/6" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=707> ;
+    ns3:share 7e+00 ;
+    ns3:viewers_m "6.09" ;
+    ns3:weekly_rank 7e+01 .
+
+<http://valuenet/ontop/tv_series/id=9> a :tv_series ;
+    ns3:air_date "November 19, 2007" ;
+    ns3:channel "717" ;
+    ns3:episode "Emily" ;
+    ns3:id 9e+00 ;
+    ns3:rating "3.7" ;
+    ns3:rating_share "2.2/6" ;
+    ns3:ref-channel <http://valuenet/ontop/tv_channel/id=717> ;
+    ns3:share 6e+00 ;
+    ns3:viewers_m "5.61" ;
+    ns3:weekly_rank 6.6e+01 .
+
+<http://valuenet/ontop/tv_channel/id=703> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "703" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3 / 16:9" ;
+    ns2:series_name "Music Box Italia" .
+
+<http://valuenet/ontop/tv_channel/id=704> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "704" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "16:9" ;
+    ns2:series_name "MTV Hits" .
+
+<http://valuenet/ontop/tv_channel/id=705> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "705" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3" ;
+    ns2:series_name "MTV Classic" .
+
+<http://valuenet/ontop/tv_channel/id=706> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "United Kingdom" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "706" ;
+    ns2:language "English" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "16:9" ;
+    ns2:series_name "MTV Rocks" .
+
+<http://valuenet/ontop/tv_channel/id=713> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "713" ;
+    ns2:language "Italian" ;
+    ns2:package_option "no ( FTV )" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3" ;
+    ns2:series_name "Radio Capital TiVù" .
+
+<http://valuenet/ontop/tv_channel/id=717> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "717" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3 / 16:9" ;
+    ns2:series_name "Rock TV" .
+
+<http://valuenet/ontop/tv_channel/id=719> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "719" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3" ;
+    ns2:series_name "Hip Hop TV" .
+
+<http://valuenet/ontop/tv_channel/id=701> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "701" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3" ;
+    ns2:series_name "Sky Music" .
+
+<http://valuenet/ontop/tv_channel/id=708> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "708" ;
+    ns2:language "Italian" ;
+    ns2:package_option "no ( FTV )" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "16:9" ;
+    ns2:series_name "MTV Music" .
+
+<http://valuenet/ontop/tv_channel/id=714> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "714" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "16:9" ;
+    ns2:series_name "myDeejay" .
+
+<http://valuenet/ontop/tv_channel/id=728> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "728" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Option" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3" ;
+    ns2:series_name "Classica" .
+
+<http://valuenet/ontop/tv_channel/id=700> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "Italy" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "700" ;
+    ns2:language "Italian" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "4:3" ;
+    ns2:series_name "Sky Radio" .
+
+<http://valuenet/ontop/tv_channel/id=707> a :tv_channel ;
+    ns2:content "music" ;
+    ns2:country "United Kingdom" ;
+    ns2:high_definition_tv "no" ;
+    ns2:id "707" ;
+    ns2:language "English" ;
+    ns2:package_option "Sky Famiglia" ;
+    ns2:pay_per_view_ppv "no" ;
+    ns2:pixel_aspect_ratio_par "16:9" ;
+    ns2:series_name "MTV Dance" .
+
+:cartoon a owl:Class .
+
+:tv_series a owl:Class .
+
+:tv_channel a owl:Class .
+

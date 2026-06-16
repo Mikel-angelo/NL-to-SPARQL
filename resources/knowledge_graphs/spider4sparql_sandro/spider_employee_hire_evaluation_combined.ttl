@@ -1,0 +1,323 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/hiring#> .
+@prefix ns2: <http://valuenet/ontop/shop#> .
+@prefix ns3: <http://valuenet/ontop/employee#> .
+@prefix ns4: <http://valuenet/ontop/evaluation#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns3:age a owl:DatatypeProperty ;
+    rdfs:domain :employee ;
+    rdfs:range xsd:integer .
+
+ns3:city a owl:DatatypeProperty ;
+    rdfs:domain :employee ;
+    rdfs:range xsd:string .
+
+ns3:employee_id a owl:DatatypeProperty ;
+    rdfs:domain :employee ;
+    rdfs:range xsd:integer .
+
+ns3:name a owl:DatatypeProperty ;
+    rdfs:domain :employee ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/employee/employee_id=8> a :employee ;
+    ns3:age 40 ;
+    ns3:city "Wasps" ;
+    ns3:employee_id 8 ;
+    ns3:name "Phil Vickery" .
+
+<http://valuenet/ontop/employee/employee_id=9> a :employee ;
+    ns3:age 32 ;
+    ns3:city "Bath" ;
+    ns3:employee_id 9 ;
+    ns3:name "Steve Borthwick" .
+
+ns4:bonus a owl:DatatypeProperty ;
+    rdfs:domain :evaluation ;
+    rdfs:range xsd:double .
+
+ns4:employee_id a owl:DatatypeProperty ;
+    rdfs:domain :evaluation ;
+    rdfs:range xsd:integer .
+
+ns4:ref-employee_id a owl:ObjectProperty ;
+    rdfs:domain :evaluation ;
+    rdfs:range :employee .
+
+ns4:year_awarded a owl:DatatypeProperty ;
+    rdfs:domain :evaluation ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/evaluation/employee_id=10;year_awarded=2016> a :evaluation ;
+    ns4:bonus 4e+03 ;
+    ns4:employee_id 10 ;
+    ns4:ref-employee_id <http://valuenet/ontop/employee/employee_id=10> ;
+    ns4:year_awarded "2016" .
+
+<http://valuenet/ontop/evaluation/employee_id=1;year_awarded=2011> a :evaluation ;
+    ns4:bonus 3e+03 ;
+    ns4:employee_id 1 ;
+    ns4:ref-employee_id <http://valuenet/ontop/employee/employee_id=1> ;
+    ns4:year_awarded "2011" .
+
+<http://valuenet/ontop/evaluation/employee_id=1;year_awarded=2016> a :evaluation ;
+    ns4:bonus 2.9e+03 ;
+    ns4:employee_id 1 ;
+    ns4:ref-employee_id <http://valuenet/ontop/employee/employee_id=1> ;
+    ns4:year_awarded "2016" .
+
+<http://valuenet/ontop/evaluation/employee_id=2;year_awarded=2015> a :evaluation ;
+    ns4:bonus 3.2e+03 ;
+    ns4:employee_id 2 ;
+    ns4:ref-employee_id <http://valuenet/ontop/employee/employee_id=2> ;
+    ns4:year_awarded "2015" .
+
+<http://valuenet/ontop/evaluation/employee_id=4;year_awarded=2017> a :evaluation ;
+    ns4:bonus 3.2e+03 ;
+    ns4:employee_id 4 ;
+    ns4:ref-employee_id <http://valuenet/ontop/employee/employee_id=4> ;
+    ns4:year_awarded "2017" .
+
+<http://valuenet/ontop/evaluation/employee_id=7;year_awarded=2018> a :evaluation ;
+    ns4:bonus 3.2e+03 ;
+    ns4:employee_id 7 ;
+    ns4:ref-employee_id <http://valuenet/ontop/employee/employee_id=7> ;
+    ns4:year_awarded "2018" .
+
+ns1:employee_id a owl:DatatypeProperty ;
+    rdfs:domain :hiring ;
+    rdfs:range xsd:integer .
+
+ns1:is_full_time a owl:DatatypeProperty ;
+    rdfs:domain :hiring ;
+    rdfs:range xsd:boolean .
+
+ns1:ref-employee_id a owl:ObjectProperty ;
+    rdfs:domain :hiring ;
+    rdfs:range :employee .
+
+ns1:ref-shop_id a owl:ObjectProperty ;
+    rdfs:domain :hiring ;
+    rdfs:range :shop .
+
+ns1:shop_id a owl:DatatypeProperty ;
+    rdfs:domain :hiring ;
+    rdfs:range xsd:integer .
+
+ns1:start_from a owl:DatatypeProperty ;
+    rdfs:domain :hiring ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/hiring/employee_id=1> a :hiring ;
+    ns1:employee_id 1 ;
+    ns1:is_full_time true ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=1> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=1> ;
+    ns1:shop_id 1 ;
+    ns1:start_from "2009" .
+
+<http://valuenet/ontop/hiring/employee_id=2> a :hiring ;
+    ns1:employee_id 2 ;
+    ns1:is_full_time true ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=2> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=1> ;
+    ns1:shop_id 1 ;
+    ns1:start_from "2003" .
+
+<http://valuenet/ontop/hiring/employee_id=3> a :hiring ;
+    ns1:employee_id 3 ;
+    ns1:is_full_time false ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=3> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=8> ;
+    ns1:shop_id 8 ;
+    ns1:start_from "2011" .
+
+<http://valuenet/ontop/hiring/employee_id=4> a :hiring ;
+    ns1:employee_id 4 ;
+    ns1:is_full_time true ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=4> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=4> ;
+    ns1:shop_id 4 ;
+    ns1:start_from "2012" .
+
+<http://valuenet/ontop/hiring/employee_id=5> a :hiring ;
+    ns1:employee_id 5 ;
+    ns1:is_full_time true ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=5> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=5> ;
+    ns1:shop_id 5 ;
+    ns1:start_from "2013" .
+
+<http://valuenet/ontop/hiring/employee_id=6> a :hiring ;
+    ns1:employee_id 6 ;
+    ns1:is_full_time false ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=6> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=2> ;
+    ns1:shop_id 2 ;
+    ns1:start_from "2010" .
+
+<http://valuenet/ontop/hiring/employee_id=7> a :hiring ;
+    ns1:employee_id 7 ;
+    ns1:is_full_time true ;
+    ns1:ref-employee_id <http://valuenet/ontop/employee/employee_id=7> ;
+    ns1:ref-shop_id <http://valuenet/ontop/shop/shop_id=6> ;
+    ns1:shop_id 6 ;
+    ns1:start_from "2008" .
+
+ns2:district a owl:DatatypeProperty ;
+    rdfs:domain :shop ;
+    rdfs:range xsd:string .
+
+ns2:location a owl:DatatypeProperty ;
+    rdfs:domain :shop ;
+    rdfs:range xsd:string .
+
+ns2:manager_name a owl:DatatypeProperty ;
+    rdfs:domain :shop ;
+    rdfs:range xsd:string .
+
+ns2:name a owl:DatatypeProperty ;
+    rdfs:domain :shop ;
+    rdfs:range xsd:string .
+
+ns2:number_products a owl:DatatypeProperty ;
+    rdfs:domain :shop ;
+    rdfs:range xsd:integer .
+
+ns2:shop_id a owl:DatatypeProperty ;
+    rdfs:domain :shop ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/shop/shop_id=3> a :shop ;
+    ns2:district "Tapiolan Urheilupuisto" ;
+    ns2:location "Espoo" ;
+    ns2:manager_name "Mika Lehkosuo" ;
+    ns2:name "FC Honka" ;
+    ns2:number_products 6000 ;
+    ns2:shop_id 3 .
+
+<http://valuenet/ontop/shop/shop_id=7> a :shop ;
+    ns2:district "Magnum Areena" ;
+    ns2:location "Kuopio" ;
+    ns2:manager_name "Kai Nyyssönen" ;
+    ns2:name "KuPS" ;
+    ns2:number_products 3500 ;
+    ns2:shop_id 7 .
+
+<http://valuenet/ontop/shop/shop_id=9> a :shop ;
+    ns2:district "Wiklöf Holding Arena" ;
+    ns2:location "Mariehamn" ;
+    ns2:manager_name "Pekka Lyyski" ;
+    ns2:name "IFK Mariehamn" ;
+    ns2:number_products 1600 ;
+    ns2:shop_id 9 .
+
+<http://valuenet/ontop/employee/employee_id=10> a :employee ;
+    ns3:age 36 ;
+    ns3:city "Leicester" ;
+    ns3:employee_id 10 ;
+    ns3:name "Louis Deacon" .
+
+<http://valuenet/ontop/employee/employee_id=3> a :employee ;
+    ns3:age 43 ;
+    ns3:city "Bristol" ;
+    ns3:employee_id 3 ;
+    ns3:name "Mark Regan" .
+
+<http://valuenet/ontop/employee/employee_id=5> a :employee ;
+    ns3:age 29 ;
+    ns3:city "Wasps" ;
+    ns3:employee_id 5 ;
+    ns3:name "Tim Payne" .
+
+<http://valuenet/ontop/employee/employee_id=6> a :employee ;
+    ns3:age 28 ;
+    ns3:city "Sale" ;
+    ns3:employee_id 6 ;
+    ns3:name "Andrew Sheridan" .
+
+<http://valuenet/ontop/shop/shop_id=2> a :shop ;
+    ns2:district "Finnair Stadium" ;
+    ns2:location "Helsinki" ;
+    ns2:manager_name "Antti Muurinen" ;
+    ns2:name "HJK" ;
+    ns2:number_products 10770 ;
+    ns2:shop_id 2 .
+
+<http://valuenet/ontop/shop/shop_id=4> a :shop ;
+    ns2:district "Veritas Stadion" ;
+    ns2:location "Turku" ;
+    ns2:manager_name "Job Dragtsma" ;
+    ns2:name "FC Inter" ;
+    ns2:number_products 10000 ;
+    ns2:shop_id 4 .
+
+<http://valuenet/ontop/shop/shop_id=5> a :shop ;
+    ns2:district "Jakobstads Centralplan" ;
+    ns2:location "Jakobstad" ;
+    ns2:manager_name "Mika Laurikainen" ;
+    ns2:name "FF Jaro" ;
+    ns2:number_products 5000 ;
+    ns2:shop_id 5 .
+
+<http://valuenet/ontop/shop/shop_id=6> a :shop ;
+    ns2:district "Arto Tolsa Areena" ;
+    ns2:location "Kotka" ;
+    ns2:manager_name "Tommi Kautonen" ;
+    ns2:name "FC KooTeePee" ;
+    ns2:number_products 4780 ;
+    ns2:shop_id 6 .
+
+<http://valuenet/ontop/shop/shop_id=8> a :shop ;
+    ns2:district "Lahden Stadion" ;
+    ns2:location "Lahti" ;
+    ns2:manager_name "Ilkka Mäkelä" ;
+    ns2:name "FC Lahti" ;
+    ns2:number_products 15000 ;
+    ns2:shop_id 8 .
+
+<http://valuenet/ontop/employee/employee_id=2> a :employee ;
+    ns3:age 29 ;
+    ns3:city "Bath" ;
+    ns3:employee_id 2 ;
+    ns3:name "Lee Mears" .
+
+<http://valuenet/ontop/employee/employee_id=4> a :employee ;
+    ns3:age 30 ;
+    ns3:city "Bristol" ;
+    ns3:employee_id 4 ;
+    ns3:name "Jason Hobson" .
+
+<http://valuenet/ontop/employee/employee_id=7> a :employee ;
+    ns3:age 29 ;
+    ns3:city "Bath" ;
+    ns3:employee_id 7 ;
+    ns3:name "Matt Stevens" .
+
+<http://valuenet/ontop/shop/shop_id=1> a :shop ;
+    ns2:district "Tehtaan kenttä" ;
+    ns2:location "Valkeakoski" ;
+    ns2:manager_name "Olli Huttunen" ;
+    ns2:name "FC Haka" ;
+    ns2:number_products 3516 ;
+    ns2:shop_id 1 .
+
+<http://valuenet/ontop/employee/employee_id=1> a :employee ;
+    ns3:age 23 ;
+    ns3:city "Bristol" ;
+    ns3:employee_id 1 ;
+    ns3:name "George Chuter" .
+
+:evaluation a owl:Class .
+
+:hiring a owl:Class .
+
+:employee a owl:Class .
+
+:shop a owl:Class .
+

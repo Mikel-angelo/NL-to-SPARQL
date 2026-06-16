@@ -1,0 +1,320 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/highschooler#> .
+@prefix ns2: <http://valuenet/ontop/friend#> .
+@prefix ns3: <http://valuenet/ontop/likes#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns2:friend_id a owl:DatatypeProperty ;
+    rdfs:domain :friend ;
+    rdfs:range xsd:integer .
+
+ns2:ref-friend_id a owl:ObjectProperty ;
+    rdfs:domain :friend ;
+    rdfs:range :highschooler .
+
+ns2:ref-student_id a owl:ObjectProperty ;
+    rdfs:domain :friend ;
+    rdfs:range :highschooler .
+
+ns2:student_id a owl:DatatypeProperty ;
+    rdfs:domain :friend ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/friend/student_id=1101;friend_id=1641> a :friend ;
+    ns2:friend_id 1641 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1641> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1101> ;
+    ns2:student_id 1101 .
+
+<http://valuenet/ontop/friend/student_id=1247;friend_id=1501> a :friend ;
+    ns2:friend_id 1501 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1501> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1247> ;
+    ns2:student_id 1247 .
+
+<http://valuenet/ontop/friend/student_id=1247;friend_id=1911> a :friend ;
+    ns2:friend_id 1911 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1911> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1247> ;
+    ns2:student_id 1247 .
+
+<http://valuenet/ontop/friend/student_id=1304;friend_id=1661> a :friend ;
+    ns2:friend_id 1661 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1661> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1304> ;
+    ns2:student_id 1304 .
+
+<http://valuenet/ontop/friend/student_id=1316;friend_id=1934> a :friend ;
+    ns2:friend_id 1934 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1934> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1316> ;
+    ns2:student_id 1316 .
+
+<http://valuenet/ontop/friend/student_id=1381;friend_id=1247> a :friend ;
+    ns2:friend_id 1247 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1247> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1381> ;
+    ns2:student_id 1381 .
+
+<http://valuenet/ontop/friend/student_id=1468;friend_id=1101> a :friend ;
+    ns2:friend_id 1101 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1101> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1468> ;
+    ns2:student_id 1468 .
+
+<http://valuenet/ontop/friend/student_id=1468;friend_id=1641> a :friend ;
+    ns2:friend_id 1641 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1641> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1468> ;
+    ns2:student_id 1468 .
+
+<http://valuenet/ontop/friend/student_id=1501;friend_id=1934> a :friend ;
+    ns2:friend_id 1934 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1934> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1501> ;
+    ns2:student_id 1501 .
+
+<http://valuenet/ontop/friend/student_id=1510;friend_id=1381> a :friend ;
+    ns2:friend_id 1381 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1381> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1510> ;
+    ns2:student_id 1510 .
+
+<http://valuenet/ontop/friend/student_id=1510;friend_id=1689> a :friend ;
+    ns2:friend_id 1689 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1689> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1510> ;
+    ns2:student_id 1510 .
+
+<http://valuenet/ontop/friend/student_id=1661;friend_id=1025> a :friend ;
+    ns2:friend_id 1025 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1025> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1661> ;
+    ns2:student_id 1661 .
+
+<http://valuenet/ontop/friend/student_id=1689;friend_id=1709> a :friend ;
+    ns2:friend_id 1709 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1709> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1689> ;
+    ns2:student_id 1689 .
+
+<http://valuenet/ontop/friend/student_id=1689;friend_id=1782> a :friend ;
+    ns2:friend_id 1782 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1782> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1689> ;
+    ns2:student_id 1689 .
+
+<http://valuenet/ontop/friend/student_id=1709;friend_id=1247> a :friend ;
+    ns2:friend_id 1247 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1247> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1709> ;
+    ns2:student_id 1709 .
+
+<http://valuenet/ontop/friend/student_id=1782;friend_id=1304> a :friend ;
+    ns2:friend_id 1304 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1304> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1782> ;
+    ns2:student_id 1782 .
+
+<http://valuenet/ontop/friend/student_id=1782;friend_id=1316> a :friend ;
+    ns2:friend_id 1316 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1316> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1782> ;
+    ns2:student_id 1782 .
+
+<http://valuenet/ontop/friend/student_id=1782;friend_id=1468> a :friend ;
+    ns2:friend_id 1468 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1468> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1782> ;
+    ns2:student_id 1782 .
+
+<http://valuenet/ontop/friend/student_id=1911;friend_id=1501> a :friend ;
+    ns2:friend_id 1501 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1501> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1911> ;
+    ns2:student_id 1911 .
+
+<http://valuenet/ontop/friend/student_id=1934;friend_id=1304> a :friend ;
+    ns2:friend_id 1304 ;
+    ns2:ref-friend_id <http://valuenet/ontop/highschooler/id=1304> ;
+    ns2:ref-student_id <http://valuenet/ontop/highschooler/id=1934> ;
+    ns2:student_id 1934 .
+
+ns1:grade a owl:DatatypeProperty ;
+    rdfs:domain :highschooler ;
+    rdfs:range xsd:integer .
+
+ns1:id a owl:DatatypeProperty ;
+    rdfs:domain :highschooler ;
+    rdfs:range xsd:integer .
+
+ns1:name a owl:DatatypeProperty ;
+    rdfs:domain :highschooler ;
+    rdfs:range xsd:string .
+
+ns3:liked_id a owl:DatatypeProperty ;
+    rdfs:domain :likes ;
+    rdfs:range xsd:integer .
+
+ns3:ref-liked_id a owl:ObjectProperty ;
+    rdfs:domain :likes ;
+    rdfs:range :highschooler .
+
+ns3:ref-student_id a owl:ObjectProperty ;
+    rdfs:domain :likes ;
+    rdfs:range :highschooler .
+
+ns3:student_id a owl:DatatypeProperty ;
+    rdfs:domain :likes ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/likes/student_id=1025;liked_id=1101> a :likes ;
+    ns3:liked_id 1101 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1101> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1025> ;
+    ns3:student_id 1025 .
+
+<http://valuenet/ontop/likes/student_id=1247;liked_id=1468> a :likes ;
+    ns3:liked_id 1468 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1468> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1247> ;
+    ns3:student_id 1247 .
+
+<http://valuenet/ontop/likes/student_id=1316;liked_id=1304> a :likes ;
+    ns3:liked_id 1304 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1304> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1316> ;
+    ns3:student_id 1316 .
+
+<http://valuenet/ontop/likes/student_id=1501;liked_id=1934> a :likes ;
+    ns3:liked_id 1934 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1934> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1501> ;
+    ns3:student_id 1501 .
+
+<http://valuenet/ontop/likes/student_id=1641;liked_id=1468> a :likes ;
+    ns3:liked_id 1468 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1468> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1641> ;
+    ns3:student_id 1641 .
+
+<http://valuenet/ontop/likes/student_id=1689;liked_id=1709> a :likes ;
+    ns3:liked_id 1709 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1709> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1689> ;
+    ns3:student_id 1689 .
+
+<http://valuenet/ontop/likes/student_id=1709;liked_id=1689> a :likes ;
+    ns3:liked_id 1689 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1689> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1709> ;
+    ns3:student_id 1709 .
+
+<http://valuenet/ontop/likes/student_id=1782;liked_id=1709> a :likes ;
+    ns3:liked_id 1709 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1709> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1782> ;
+    ns3:student_id 1782 .
+
+<http://valuenet/ontop/likes/student_id=1911;liked_id=1247> a :likes ;
+    ns3:liked_id 1247 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1247> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1911> ;
+    ns3:student_id 1911 .
+
+<http://valuenet/ontop/likes/student_id=1934;liked_id=1501> a :likes ;
+    ns3:liked_id 1501 ;
+    ns3:ref-liked_id <http://valuenet/ontop/highschooler/id=1501> ;
+    ns3:ref-student_id <http://valuenet/ontop/highschooler/id=1934> ;
+    ns3:student_id 1934 .
+
+<http://valuenet/ontop/highschooler/id=1025> a :highschooler ;
+    ns1:grade 12 ;
+    ns1:id 1025 ;
+    ns1:name "John" .
+
+<http://valuenet/ontop/highschooler/id=1381> a :highschooler ;
+    ns1:grade 9 ;
+    ns1:id 1381 ;
+    ns1:name "Tiffany" .
+
+<http://valuenet/ontop/highschooler/id=1510> a :highschooler ;
+    ns1:grade 9 ;
+    ns1:id 1510 ;
+    ns1:name "Jordan" .
+
+<http://valuenet/ontop/highschooler/id=1661> a :highschooler ;
+    ns1:grade 12 ;
+    ns1:id 1661 ;
+    ns1:name "Logan" .
+
+<http://valuenet/ontop/highschooler/id=1101> a :highschooler ;
+    ns1:grade 10 ;
+    ns1:id 1101 ;
+    ns1:name "Haley" .
+
+<http://valuenet/ontop/highschooler/id=1316> a :highschooler ;
+    ns1:grade 11 ;
+    ns1:id 1316 ;
+    ns1:name "Austin" .
+
+<http://valuenet/ontop/highschooler/id=1641> a :highschooler ;
+    ns1:grade 10 ;
+    ns1:id 1641 ;
+    ns1:name "Brittany" .
+
+<http://valuenet/ontop/highschooler/id=1911> a :highschooler ;
+    ns1:grade 11 ;
+    ns1:id 1911 ;
+    ns1:name "Gabriel" .
+
+<http://valuenet/ontop/highschooler/id=1304> a :highschooler ;
+    ns1:grade 12 ;
+    ns1:id 1304 ;
+    ns1:name "Jordan" .
+
+<http://valuenet/ontop/highschooler/id=1468> a :highschooler ;
+    ns1:grade 10 ;
+    ns1:id 1468 ;
+    ns1:name "Kris" .
+
+<http://valuenet/ontop/highschooler/id=1501> a :highschooler ;
+    ns1:grade 11 ;
+    ns1:id 1501 ;
+    ns1:name "Jessica" .
+
+<http://valuenet/ontop/highschooler/id=1689> a :highschooler ;
+    ns1:grade 9 ;
+    ns1:id 1689 ;
+    ns1:name "Gabriel" .
+
+<http://valuenet/ontop/highschooler/id=1709> a :highschooler ;
+    ns1:grade 9 ;
+    ns1:id 1709 ;
+    ns1:name "Cassandra" .
+
+<http://valuenet/ontop/highschooler/id=1782> a :highschooler ;
+    ns1:grade 10 ;
+    ns1:id 1782 ;
+    ns1:name "Andrew" .
+
+<http://valuenet/ontop/highschooler/id=1934> a :highschooler ;
+    ns1:grade 12 ;
+    ns1:id 1934 ;
+    ns1:name "Kyle" .
+
+<http://valuenet/ontop/highschooler/id=1247> a :highschooler ;
+    ns1:grade 11 ;
+    ns1:id 1247 ;
+    ns1:name "Alexis" .
+
+:likes a owl:Class .
+
+:highschooler a owl:Class .
+
+:friend a owl:Class .
+

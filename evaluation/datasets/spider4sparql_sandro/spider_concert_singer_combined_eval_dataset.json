@@ -1,0 +1,1056 @@
+{
+  "dataset_name": "spider_concert_singer_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for concert_singer. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/concert_singer.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "concert_singer_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many singers do we have?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "concert_singer_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the total number of singers?"
+    },
+    {
+      "id": "Q003",
+      "original_id": "concert_singer_003",
+      "gold_sparql": "select ?t1_name ?t1_country ?t1_age where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by desc (?t1_age)",
+      "gold_answers": [
+        {
+          "t1_name": "Joe Sharp",
+          "t1_country": "Netherlands",
+          "t1_age": "52"
+        },
+        {
+          "t1_name": "John Nizinik",
+          "t1_country": "France",
+          "t1_age": "43"
+        },
+        {
+          "t1_name": "Rose White",
+          "t1_country": "France",
+          "t1_age": "41"
+        },
+        {
+          "t1_name": "Timbaland",
+          "t1_country": "United States",
+          "t1_age": "32"
+        },
+        {
+          "t1_name": "Justin Brown",
+          "t1_country": "France",
+          "t1_age": "29"
+        },
+        {
+          "t1_name": "Tribal King",
+          "t1_country": "France",
+          "t1_age": "25"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show name, country, age for all singers ordered by age from the oldest to the youngest."
+    },
+    {
+      "id": "Q004",
+      "original_id": "concert_singer_004",
+      "gold_sparql": "select ?t1_name ?t1_country ?t1_age where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by desc (?t1_age)",
+      "gold_answers": [
+        {
+          "t1_name": "Joe Sharp",
+          "t1_country": "Netherlands",
+          "t1_age": "52"
+        },
+        {
+          "t1_name": "John Nizinik",
+          "t1_country": "France",
+          "t1_age": "43"
+        },
+        {
+          "t1_name": "Rose White",
+          "t1_country": "France",
+          "t1_age": "41"
+        },
+        {
+          "t1_name": "Timbaland",
+          "t1_country": "United States",
+          "t1_age": "32"
+        },
+        {
+          "t1_name": "Justin Brown",
+          "t1_country": "France",
+          "t1_age": "29"
+        },
+        {
+          "t1_name": "Tribal King",
+          "t1_country": "France",
+          "t1_age": "25"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names, countries, and ages for every singer in descending order of age?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "concert_singer_005",
+      "gold_sparql": "select (avg( ?t1_age) as ?aggregation_t1_age_25 ) (min( ?t1_age) as ?aggregation_t1_age_52 ) (max( ?t1_age) as ?aggregation_t1_age_136 ) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/country> ?t1_country . FILTER(?t1_country = 'France') . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_age_25": "34.5",
+          "aggregation_t1_age_52": "25",
+          "aggregation_t1_age_136": "43"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average, minimum, and maximum age of all singers from France?"
+    },
+    {
+      "id": "Q006",
+      "original_id": "concert_singer_006",
+      "gold_sparql": "select (avg( ?t1_age) as ?aggregation_t1_age_25 ) (min( ?t1_age) as ?aggregation_t1_age_52 ) (max( ?t1_age) as ?aggregation_t1_age_136 ) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/age> ?t1_age . ?t1 <http://valuenet/ontop/country> ?t1_country . FILTER(?t1_country = 'France') . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_age_25": "34.5",
+          "aggregation_t1_age_52": "25",
+          "aggregation_t1_age_136": "43"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average, minimum, and maximum age for all French singers?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "concert_singer_007",
+      "gold_sparql": "select ?t1_song_name ?t1_song_release_year where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/song_name> ?t1_song_name . ?t1 <http://valuenet/ontop/song_release_year> ?t1_song_release_year . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_song_name": "Love",
+          "t1_song_release_year": "2016"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the name and the release year of the song by the youngest singer."
+    },
+    {
+      "id": "Q008",
+      "original_id": "concert_singer_008",
+      "gold_sparql": "select ?t1_song_name ?t1_song_release_year where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/song_name> ?t1_song_name . ?t1 <http://valuenet/ontop/song_release_year> ?t1_song_release_year . ?t1 <http://valuenet/ontop/age> ?t1_age . } order by asc (?t1_age) limit 1",
+      "gold_answers": [
+        {
+          "t1_song_name": "Love",
+          "t1_song_release_year": "2016"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names and release years for all the songs of the youngest singer?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "concert_singer_009",
+      "gold_sparql": "select distinct ?t1_country where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age > 20) . }",
+      "gold_answers": [
+        {
+          "t1_country": "France"
+        },
+        {
+          "t1_country": "Netherlands"
+        },
+        {
+          "t1_country": "United States"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are all distinct countries where singers above age 20 are from?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "concert_singer_010",
+      "gold_sparql": "select distinct ?t1_country where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age > 20) . }",
+      "gold_answers": [
+        {
+          "t1_country": "France"
+        },
+        {
+          "t1_country": "Netherlands"
+        },
+        {
+          "t1_country": "United States"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are  the different countries with singers above age 20?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "concert_singer_011",
+      "gold_sparql": "select ?t1_country (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/country> ?t1_country . } group by ?t1_country",
+      "gold_answers": [
+        {
+          "t1_country": "Netherlands",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_country": "United States",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_country": "France",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show all countries and the number of singers in each country."
+    },
+    {
+      "id": "Q012",
+      "original_id": "concert_singer_012",
+      "gold_sparql": "select ?t1_country (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/country> ?t1_country . } group by ?t1_country",
+      "gold_answers": [
+        {
+          "t1_country": "Netherlands",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_country": "United States",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_country": "France",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many singers are from each country?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "concert_singer_013",
+      "gold_sparql": "select ?t1_song_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/song_name> ?t1_song_name . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age > ?aggregation_t22_age_61) . {select (avg( ?t22_age) as ?aggregation_t22_age_61 ) where { ?t22 a <http://valuenet/ontop/singer> . ?t22 <http://valuenet/ontop/age> ?t22_age . } } }",
+      "gold_answers": [
+        {
+          "t1_song_name": "Gentleman"
+        },
+        {
+          "t1_song_name": "You"
+        },
+        {
+          "t1_song_name": "Sun"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List all song names by singers above the average age."
+    },
+    {
+      "id": "Q014",
+      "original_id": "concert_singer_014",
+      "gold_sparql": "select ?t1_song_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/song_name> ?t1_song_name . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age > ?aggregation_t22_age_61) . {select (avg( ?t22_age) as ?aggregation_t22_age_61 ) where { ?t22 a <http://valuenet/ontop/singer> . ?t22 <http://valuenet/ontop/age> ?t22_age . } } }",
+      "gold_answers": [
+        {
+          "t1_song_name": "Gentleman"
+        },
+        {
+          "t1_song_name": "You"
+        },
+        {
+          "t1_song_name": "Sun"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are all the song names by singers who are older than average?"
+    },
+    {
+      "id": "Q015",
+      "original_id": "concert_singer_015",
+      "gold_sparql": "select ?t1_location ?t1_name where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/location> ?t1_location . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . FILTER(?t1_capacity >= 5000 && ?t1_capacity <= 10000) . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show location and name for all stadiums with a capacity between 5000 and 10000."
+    },
+    {
+      "id": "Q016",
+      "original_id": "concert_singer_016",
+      "gold_sparql": "select ?t1_location ?t1_name where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/location> ?t1_location . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . FILTER(?t1_capacity >= 5000 && ?t1_capacity <= 10000) . }",
+      "gold_answers": [],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the locations and names of all stations with capacity between 5000 and 10000?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "concert_singer_017",
+      "gold_sparql": "SELECT (max( ?T1_capacity) as ?aggregation_T1_capacity_127 ) ?T1_average WHERE { ?T1 a <http://valuenet/ontop/stadium> . ?T1 <http://valuenet/ontop/capacity> ?T1_capacity . ?T1 <http://valuenet/ontop/average> ?T1_average . } GROUP BY ?T1_average",
+      "gold_answers": [
+        {
+          "aggregation_T1_capacity_127": "3100",
+          "T1_average": "637"
+        },
+        {
+          "aggregation_T1_capacity_127": "4000",
+          "T1_average": "615"
+        },
+        {
+          "aggregation_T1_capacity_127": "4125",
+          "T1_average": "638"
+        },
+        {
+          "aggregation_T1_capacity_127": "11998",
+          "T1_average": "1477"
+        },
+        {
+          "aggregation_T1_capacity_127": "10104",
+          "T1_average": "2106"
+        },
+        {
+          "aggregation_T1_capacity_127": "3960",
+          "T1_average": "552"
+        },
+        {
+          "aggregation_T1_capacity_127": "2000",
+          "T1_average": "864"
+        },
+        {
+          "aggregation_T1_capacity_127": "52500",
+          "T1_average": "730"
+        },
+        {
+          "aggregation_T1_capacity_127": "3808",
+          "T1_average": "642"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum capacity and the average of all stadiums ?"
+    },
+    {
+      "id": "Q018",
+      "original_id": "concert_singer_018",
+      "gold_sparql": "SELECT (max( ?T1_capacity) as ?aggregation_T1_capacity_127 ) ?T1_average WHERE { ?T1 a <http://valuenet/ontop/stadium> . ?T1 <http://valuenet/ontop/capacity> ?T1_capacity . ?T1 <http://valuenet/ontop/average> ?T1_average . } GROUP BY ?T1_average",
+      "gold_answers": [
+        {
+          "aggregation_T1_capacity_127": "3100",
+          "T1_average": "637"
+        },
+        {
+          "aggregation_T1_capacity_127": "4000",
+          "T1_average": "615"
+        },
+        {
+          "aggregation_T1_capacity_127": "4125",
+          "T1_average": "638"
+        },
+        {
+          "aggregation_T1_capacity_127": "11998",
+          "T1_average": "1477"
+        },
+        {
+          "aggregation_T1_capacity_127": "10104",
+          "T1_average": "2106"
+        },
+        {
+          "aggregation_T1_capacity_127": "3960",
+          "T1_average": "552"
+        },
+        {
+          "aggregation_T1_capacity_127": "2000",
+          "T1_average": "864"
+        },
+        {
+          "aggregation_T1_capacity_127": "52500",
+          "T1_average": "730"
+        },
+        {
+          "aggregation_T1_capacity_127": "3808",
+          "T1_average": "642"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average and maximum capacities for all stadiums ?"
+    },
+    {
+      "id": "Q019",
+      "original_id": "concert_singer_019",
+      "gold_sparql": "select ?t1_name ?t1_capacity where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . ?t1 <http://valuenet/ontop/average> ?t1_average . } order by desc (?t1_average) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Stark's Park",
+          "t1_capacity": "10104"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name and capacity for the stadium with highest average attendance?"
+    },
+    {
+      "id": "Q020",
+      "original_id": "concert_singer_020",
+      "gold_sparql": "select ?t1_name ?t1_capacity where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . ?t1 <http://valuenet/ontop/average> ?t1_average . } order by desc (?t1_average) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Stark's Park",
+          "t1_capacity": "10104"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name and capacity for the stadium with the highest average attendance?"
+    },
+    {
+      "id": "Q021",
+      "original_id": "concert_singer_021",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t1 <http://valuenet/ontop/year> ?t1_year . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_year = '2014' || ?t1_year = '2015') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many concerts are there in year 2014 or 2015?"
+    },
+    {
+      "id": "Q022",
+      "original_id": "concert_singer_022",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t1 <http://valuenet/ontop/year> ?t1_year . ?t1 <http://valuenet/ontop/year> ?t1_year . FILTER(?t1_year = '2014' || ?t1_year = '2015') . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many concerts occurred in 2014 or 2015?"
+    },
+    {
+      "id": "Q023",
+      "original_id": "concert_singer_023",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/stadium> . ?T2 a <http://valuenet/ontop/concert> . ?T2 <http://valuenet/ontop/ref-stadium> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . } GROUP BY ?T1_name",
+      "gold_answers": [
+        {
+          "T1_name": "Somerset Park",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Stark's Park",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Glebe Park",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Recreation Park",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Balmoor",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the stadium name and the number of concerts in each stadium."
+    },
+    {
+      "id": "Q024",
+      "original_id": "concert_singer_024",
+      "gold_sparql": "SELECT ?T1_name (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/stadium> . ?T2 a <http://valuenet/ontop/concert> . ?T2 <http://valuenet/ontop/ref-stadium> ?T1 . ?T1 <http://valuenet/ontop/name> ?T1_name . } GROUP BY ?T1_name",
+      "gold_answers": [
+        {
+          "T1_name": "Somerset Park",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_name": "Stark's Park",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Glebe Park",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Recreation Park",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_name": "Balmoor",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "For each stadium, how many concerts play there?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "concert_singer_025",
+      "gold_sparql": "select ?t1_name (count( *) as ?aggregation_all) ?t1_capacity where { ?t1 a <http://valuenet/ontop/stadium> . ?t2 a <http://valuenet/ontop/concert> . ?t2 <http://valuenet/ontop/ref-stadium> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . ?t2 <http://valuenet/ontop/year> ?t2_year . FILTER(?t2_year >= '2014') . } group by ?t1_name ?t1_capacity order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Somerset Park",
+          "aggregation_all": "2",
+          "t1_capacity": "11998"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the stadium name and capacity with most number of concerts in year 2014 or after."
+    },
+    {
+      "id": "Q026",
+      "original_id": "concert_singer_026",
+      "gold_sparql": "select ?t1_name (count( *) as ?aggregation_all) ?t1_capacity where { ?t1 a <http://valuenet/ontop/stadium> . ?t2 a <http://valuenet/ontop/concert> . ?t2 <http://valuenet/ontop/ref-stadium> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/capacity> ?t1_capacity . ?t2 <http://valuenet/ontop/year> ?t2_year . FILTER(?t2_year >= '2014') . } group by ?t1_name ?t1_capacity order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Somerset Park",
+          "aggregation_all": "2",
+          "t1_capacity": "11998"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the name and capacity of the stadium with the most concerts after 2013 ?"
+    },
+    {
+      "id": "Q027",
+      "original_id": "concert_singer_027",
+      "gold_sparql": "select ?t1_year (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t1 <http://valuenet/ontop/year> ?t1_year . } group by ?t1_year order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_year": "2014",
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Which year has most number of concerts?"
+    },
+    {
+      "id": "Q028",
+      "original_id": "concert_singer_028",
+      "gold_sparql": "select ?t1_year (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t1 <http://valuenet/ontop/year> ?t1_year . } group by ?t1_year order by desc (?aggregation_all) limit 1",
+      "gold_answers": [
+        {
+          "t1_year": "2014",
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the year that had the most concerts?"
+    },
+    {
+      "id": "Q029",
+      "original_id": "concert_singer_029",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/stadium_id> ?t1_stadium_id . Filter not exists {{select ?t22_stadium_id where { ?t22 a <http://valuenet/ontop/concert> . ?t22 <http://valuenet/ontop/stadium_id> ?t22_stadium_id . } } FILTER (?t1_stadium_id in (?t22_stadium_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Forthbank Stadium"
+        },
+        {
+          "t1_name": "Hampden Park"
+        },
+        {
+          "t1_name": "Gayfield Park"
+        },
+        {
+          "t1_name": "Bayview Stadium"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the stadium names without any concert."
+    },
+    {
+      "id": "Q030",
+      "original_id": "concert_singer_030",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/stadium_id> ?t1_stadium_id . Filter not exists {{select ?t22_stadium_id where { ?t22 a <http://valuenet/ontop/concert> . ?t22 <http://valuenet/ontop/stadium_id> ?t22_stadium_id . } } FILTER (?t1_stadium_id in (?t22_stadium_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Forthbank Stadium"
+        },
+        {
+          "t1_name": "Hampden Park"
+        },
+        {
+          "t1_name": "Gayfield Park"
+        },
+        {
+          "t1_name": "Bayview Stadium"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the stadiums without any concerts?"
+    },
+    {
+      "id": "Q031",
+      "original_id": "concert_singer_031",
+      "gold_sparql": "select distinct ?t1_country where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/age> ?t1_age . FILTER(?t1_age > 40) . FILTER (?t1_country in (?t2_country)) . ?t2 a <http://valuenet/ontop/singer> . ?t2 <http://valuenet/ontop/country> ?t2_country . ?t2 <http://valuenet/ontop/age> ?t2_age . FILTER(?t2_age < 30) . }",
+      "gold_answers": [
+        {
+          "t1_country": "France"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show countries where a singer above age 40 and a singer below 30 are from."
+    },
+    {
+      "id": "Q032",
+      "original_id": "concert_singer_032",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_name as ?col1) where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/name> ?t1_name . }} MINUS {select (?t2_name as ?col1) where { ?t2 a <http://valuenet/ontop/stadium> . ?t3 a <http://valuenet/ontop/concert> . ?t3 <http://valuenet/ontop/ref-stadium> ?t2 . ?t2 <http://valuenet/ontop/name> ?t2_name . ?t3 <http://valuenet/ontop/year> ?t3_year . FILTER(?t3_year = '2014') . } } }",
+      "gold_answers": [
+        {
+          "col1": "Balmoor"
+        },
+        {
+          "col1": "Recreation Park"
+        },
+        {
+          "col1": "Forthbank Stadium"
+        },
+        {
+          "col1": "Hampden Park"
+        },
+        {
+          "col1": "Gayfield Park"
+        },
+        {
+          "col1": "Bayview Stadium"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show names for all stadiums except for stadiums having a concert in year 2014."
+    },
+    {
+      "id": "Q033",
+      "original_id": "concert_singer_033",
+      "gold_sparql": "SELECT distinct?col1 WHERE { { select (?t1_name as ?col1) where { ?t1 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/name> ?t1_name . }} MINUS {select (?t2_name as ?col1) where { ?t2 a <http://valuenet/ontop/stadium> . ?t3 a <http://valuenet/ontop/concert> . ?t3 <http://valuenet/ontop/ref-stadium> ?t2 . ?t2 <http://valuenet/ontop/name> ?t2_name . ?t3 <http://valuenet/ontop/year> ?t3_year . FILTER(?t3_year = '2014') . } } }",
+      "gold_answers": [
+        {
+          "col1": "Balmoor"
+        },
+        {
+          "col1": "Recreation Park"
+        },
+        {
+          "col1": "Forthbank Stadium"
+        },
+        {
+          "col1": "Hampden Park"
+        },
+        {
+          "col1": "Gayfield Park"
+        },
+        {
+          "col1": "Bayview Stadium"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of all stadiums that did not have a concert in 2014?"
+    },
+    {
+      "id": "Q034",
+      "original_id": "concert_singer_034",
+      "gold_sparql": "select ?t1_concert_name ?t1_theme (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t13 a <http://valuenet/ontop/singer_in_concert> . ?t13 <http://valuenet/ontop/ref-concert> ?t1 . ?t1 <http://valuenet/ontop/concert_name> ?t1_concert_name . ?t1 <http://valuenet/ontop/theme> ?t1_theme . } group by ?t1_concert_name ?t1_theme",
+      "gold_answers": [
+        {
+          "t1_concert_name": "Week 1",
+          "t1_theme": "Happy Tonight",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_concert_name": "Week 2",
+          "t1_theme": "Party All Night",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_concert_name": "Super bootcamp",
+          "t1_theme": "Free choice 2",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_concert_name": "Week 1",
+          "t1_theme": "Wide Awake",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_concert_name": "Home Visits",
+          "t1_theme": "Bleeding Love",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_concert_name": "Auditions",
+          "t1_theme": "Free choice",
+          "aggregation_all": "3"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the name and theme for all concerts and the number of singers in each concert."
+    },
+    {
+      "id": "Q035",
+      "original_id": "concert_singer_035",
+      "gold_sparql": "SELECT ?T1_concert_name ?T1_theme (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/concert> . ?T13 a <http://valuenet/ontop/singer_in_concert> . ?T13 <http://valuenet/ontop/ref-concert> ?T1 . ?T1 <http://valuenet/ontop/concert_name> ?T1_concert_name . ?T1 <http://valuenet/ontop/theme> ?T1_theme . } GROUP BY ?T1_concert_name ?T1_theme",
+      "gold_answers": [
+        {
+          "T1_concert_name": "Week 2",
+          "T1_theme": "Party All Night",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_concert_name": "Super bootcamp",
+          "T1_theme": "Free choice 2",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_concert_name": "Week 1",
+          "T1_theme": "Happy Tonight",
+          "aggregation_all": "2"
+        },
+        {
+          "T1_concert_name": "Home Visits",
+          "T1_theme": "Bleeding Love",
+          "aggregation_all": "1"
+        },
+        {
+          "T1_concert_name": "Auditions",
+          "T1_theme": "Free choice",
+          "aggregation_all": "3"
+        },
+        {
+          "T1_concert_name": "Week 1",
+          "T1_theme": "Wide Awake",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names , themes , and number of singers for every concert ?"
+    },
+    {
+      "id": "Q036",
+      "original_id": "concert_singer_036",
+      "gold_sparql": "select ?t1_name (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . ?t13 a <http://valuenet/ontop/singer_in_concert> . ?t13 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . } group by ?t1_name",
+      "gold_answers": [
+        {
+          "t1_name": "Rose White",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Justin Brown",
+          "aggregation_all": "3"
+        },
+        {
+          "t1_name": "Tribal King",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_name": "John Nizinik",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_name": "Timbaland",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "List singer names and number of concerts for each singer."
+    },
+    {
+      "id": "Q037",
+      "original_id": "concert_singer_037",
+      "gold_sparql": "select ?t1_name (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . ?t13 a <http://valuenet/ontop/singer_in_concert> . ?t13 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . } group by ?t1_name",
+      "gold_answers": [
+        {
+          "t1_name": "Rose White",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_name": "Justin Brown",
+          "aggregation_all": "3"
+        },
+        {
+          "t1_name": "Tribal King",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_name": "John Nizinik",
+          "aggregation_all": "2"
+        },
+        {
+          "t1_name": "Timbaland",
+          "aggregation_all": "2"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of the singers and number of concerts for each person?"
+    },
+    {
+      "id": "Q038",
+      "original_id": "concert_singer_038",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/singer_in_concert> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . ?t3 <http://valuenet/ontop/year> ?t3_year . ?t3 a <http://valuenet/ontop/concert> . ?t2 <http://valuenet/ontop/ref-concert> ?t3 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . ?t3 <http://valuenet/ontop/year> ?t3_year . FILTER(?t3_year = '2014') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Tribal King"
+        },
+        {
+          "t1_name": "Justin Brown"
+        },
+        {
+          "t1_name": "Rose White"
+        },
+        {
+          "t1_name": "John Nizinik"
+        },
+        {
+          "t1_name": "Justin Brown"
+        },
+        {
+          "t1_name": "Timbaland"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List all singer names in concerts in year 2014."
+    },
+    {
+      "id": "Q039",
+      "original_id": "concert_singer_039",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/singer_in_concert> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . ?t3 <http://valuenet/ontop/year> ?t3_year . ?t3 a <http://valuenet/ontop/concert> . ?t2 <http://valuenet/ontop/ref-concert> ?t3 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . ?t3 <http://valuenet/ontop/year> ?t3_year . FILTER(?t3_year = '2014') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Tribal King"
+        },
+        {
+          "t1_name": "Justin Brown"
+        },
+        {
+          "t1_name": "Rose White"
+        },
+        {
+          "t1_name": "John Nizinik"
+        },
+        {
+          "t1_name": "Justin Brown"
+        },
+        {
+          "t1_name": "Timbaland"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the singers who performed in a concert in 2014?"
+    },
+    {
+      "id": "Q040",
+      "original_id": "concert_singer_040",
+      "gold_sparql": "select ?t1_name ?t1_country where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/song_name> ?t1_song_name . FILTER(contains (?t1_song_name, 'Hey')) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Justin Brown",
+          "t1_country": "France"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "what is the name and nation of the singer who have a song having 'Hey' in its name?"
+    },
+    {
+      "id": "Q041",
+      "original_id": "concert_singer_041",
+      "gold_sparql": "select ?t1_name ?t1_country where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/country> ?t1_country . ?t1 <http://valuenet/ontop/song_name> ?t1_song_name . FILTER(contains (?t1_song_name, 'Hey')) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Justin Brown",
+          "t1_country": "France"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name and country of origin of every singer who has a song with the word 'Hey' in its title?"
+    },
+    {
+      "id": "Q042",
+      "original_id": "concert_singer_042",
+      "gold_sparql": "select distinct ?t1_name ?t1_location where { ?t1 a <http://valuenet/ontop/stadium> . ?t2 a <http://valuenet/ontop/concert> . ?t2 <http://valuenet/ontop/ref-stadium> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/location> ?t1_location . ?t2 <http://valuenet/ontop/year> ?t2_year . FILTER(?t2_year = '2014') . FILTER (?t1_name in (?t3_name)) . FILTER (?t1_location in (?t3_location)) . ?t3 a <http://valuenet/ontop/stadium> . ?t4 a <http://valuenet/ontop/concert> . ?t4 <http://valuenet/ontop/ref-stadium> ?t3 . ?t3 <http://valuenet/ontop/name> ?t3_name . ?t3 <http://valuenet/ontop/location> ?t3_location . ?t4 <http://valuenet/ontop/year> ?t4_year . FILTER(?t4_year = '2015') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Somerset Park",
+          "t1_location": "Ayr United"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015."
+    },
+    {
+      "id": "Q043",
+      "original_id": "concert_singer_043",
+      "gold_sparql": "select distinct ?t1_name ?t1_location where { ?t1 a <http://valuenet/ontop/stadium> . ?t2 a <http://valuenet/ontop/concert> . ?t2 <http://valuenet/ontop/ref-stadium> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/location> ?t1_location . ?t2 <http://valuenet/ontop/year> ?t2_year . FILTER(?t2_year = '2014') . FILTER (?t1_name in (?t3_name)) . FILTER (?t1_location in (?t3_location)) . ?t3 a <http://valuenet/ontop/stadium> . ?t4 a <http://valuenet/ontop/concert> . ?t4 <http://valuenet/ontop/ref-stadium> ?t3 . ?t3 <http://valuenet/ontop/name> ?t3_name . ?t3 <http://valuenet/ontop/location> ?t3_location . ?t4 <http://valuenet/ontop/year> ?t4_year . FILTER(?t4_year = '2015') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Somerset Park",
+          "t1_location": "Ayr United"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015?"
+    },
+    {
+      "id": "Q044",
+      "original_id": "concert_singer_044",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t2 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/ref-stadium> ?t2 . ?t2 <http://valuenet/ontop/capacity> ?t2_capacity . } order by desc (?t2_capacity) limit 1",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Find the number of concerts happened in the stadium with the highest capacity ."
+    },
+    {
+      "id": "Q045",
+      "original_id": "concert_singer_045",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/concert> . ?t2 a <http://valuenet/ontop/stadium> . ?t1 <http://valuenet/ontop/ref-stadium> ?t2 . ?t2 <http://valuenet/ontop/capacity> ?t2_capacity . } order by desc (?t2_capacity) limit 1",
+      "gold_answers": [
+        {
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the number of concerts that occurred in the stadium with the largest capacity ?"
+    }
+  ]
+}

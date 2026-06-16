@@ -1,0 +1,795 @@
+{
+  "dataset_name": "spider_singer_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for singer. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/singer.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "singer_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "8"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many singers are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "singer_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "8"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the count of singers?"
+    },
+    {
+      "id": "Q003",
+      "original_id": "singer_003",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/net_worth_millions> ?t1_net_worth_millions . } order by asc (?t1_net_worth_millions)",
+      "gold_answers": [
+        {
+          "t1_name": "Abigail Johnson"
+        },
+        {
+          "t1_name": "Susanne Klatten"
+        },
+        {
+          "t1_name": "Gina Rinehart"
+        },
+        {
+          "t1_name": "Iris Fontbona"
+        },
+        {
+          "t1_name": "Jacqueline Mars"
+        },
+        {
+          "t1_name": "Alice Walton"
+        },
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Liliane Bettencourt"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the name of singers in ascending order of net worth."
+    },
+    {
+      "id": "Q004",
+      "original_id": "singer_004",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/net_worth_millions> ?t1_net_worth_millions . } order by asc (?t1_net_worth_millions)",
+      "gold_answers": [
+        {
+          "t1_name": "Abigail Johnson"
+        },
+        {
+          "t1_name": "Susanne Klatten"
+        },
+        {
+          "t1_name": "Gina Rinehart"
+        },
+        {
+          "t1_name": "Iris Fontbona"
+        },
+        {
+          "t1_name": "Jacqueline Mars"
+        },
+        {
+          "t1_name": "Alice Walton"
+        },
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Liliane Bettencourt"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of singers ordered by ascending net worth?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "singer_005",
+      "gold_sparql": "select ?t1_birth_year ?t1_citizenship where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . }",
+      "gold_answers": [
+        {
+          "t1_birth_year": "1953.0",
+          "t1_citizenship": "Australia"
+        },
+        {
+          "t1_birth_year": "1944.0",
+          "t1_citizenship": "France"
+        },
+        {
+          "t1_birth_year": "1948.0",
+          "t1_citizenship": "United States"
+        },
+        {
+          "t1_birth_year": "1942.0",
+          "t1_citizenship": "Chile"
+        },
+        {
+          "t1_birth_year": "1940.0",
+          "t1_citizenship": "United States"
+        },
+        {
+          "t1_birth_year": "1962.0",
+          "t1_citizenship": "Germany"
+        },
+        {
+          "t1_birth_year": "1949.0",
+          "t1_citizenship": "United States"
+        },
+        {
+          "t1_birth_year": "1961.0",
+          "t1_citizenship": "United States"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the birth year and citizenship of singers?"
+    },
+    {
+      "id": "Q006",
+      "original_id": "singer_006",
+      "gold_sparql": "select ?t1_birth_year ?t1_citizenship where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . }",
+      "gold_answers": [
+        {
+          "t1_birth_year": "1953.0",
+          "t1_citizenship": "Australia"
+        },
+        {
+          "t1_birth_year": "1944.0",
+          "t1_citizenship": "France"
+        },
+        {
+          "t1_birth_year": "1948.0",
+          "t1_citizenship": "United States"
+        },
+        {
+          "t1_birth_year": "1942.0",
+          "t1_citizenship": "Chile"
+        },
+        {
+          "t1_birth_year": "1940.0",
+          "t1_citizenship": "United States"
+        },
+        {
+          "t1_birth_year": "1962.0",
+          "t1_citizenship": "Germany"
+        },
+        {
+          "t1_birth_year": "1949.0",
+          "t1_citizenship": "United States"
+        },
+        {
+          "t1_birth_year": "1961.0",
+          "t1_citizenship": "United States"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the birth years and citizenships of the singers?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "singer_007",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . FILTER(?t1_citizenship != 'France') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Gina Rinehart"
+        },
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Iris Fontbona"
+        },
+        {
+          "t1_name": "Jacqueline Mars"
+        },
+        {
+          "t1_name": "Susanne Klatten"
+        },
+        {
+          "t1_name": "Alice Walton"
+        },
+        {
+          "t1_name": "Abigail Johnson"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the name of singers whose citizenship is not 'France'."
+    },
+    {
+      "id": "Q008",
+      "original_id": "singer_008",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . FILTER(?t1_citizenship != 'France') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Gina Rinehart"
+        },
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Iris Fontbona"
+        },
+        {
+          "t1_name": "Jacqueline Mars"
+        },
+        {
+          "t1_name": "Susanne Klatten"
+        },
+        {
+          "t1_name": "Alice Walton"
+        },
+        {
+          "t1_name": "Abigail Johnson"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the singers who are not French citizens?"
+    },
+    {
+      "id": "Q009",
+      "original_id": "singer_009",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . FILTER(?t1_birth_year = 1948 || ?t1_birth_year = 1949) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Alice Walton"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the name of singers whose birth year is either 1948 or 1949?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "singer_010",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . FILTER(?t1_birth_year = 1948 || ?t1_birth_year = 1949) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Alice Walton"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of the singers whose birth years are either 1948 or 1949?"
+    },
+    {
+      "id": "Q011",
+      "original_id": "singer_011",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/net_worth_millions> ?t1_net_worth_millions . } order by desc (?t1_net_worth_millions) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Liliane Bettencourt"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name of the singer with the largest net worth?"
+    },
+    {
+      "id": "Q012",
+      "original_id": "singer_012",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/net_worth_millions> ?t1_net_worth_millions . } order by desc (?t1_net_worth_millions) limit 1",
+      "gold_answers": [
+        {
+          "t1_name": "Liliane Bettencourt"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name of the singer who is worth the most?"
+    },
+    {
+      "id": "Q013",
+      "original_id": "singer_013",
+      "gold_sparql": "select ?t1_citizenship (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . } group by ?t1_citizenship",
+      "gold_answers": [
+        {
+          "t1_citizenship": "United States",
+          "aggregation_all": "4"
+        },
+        {
+          "t1_citizenship": "Chile",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_citizenship": "Australia",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_citizenship": "France",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_citizenship": "Germany",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show different citizenship of singers and the number of singers of each citizenship."
+    },
+    {
+      "id": "Q014",
+      "original_id": "singer_014",
+      "gold_sparql": "select ?t1_citizenship (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . } group by ?t1_citizenship",
+      "gold_answers": [
+        {
+          "t1_citizenship": "United States",
+          "aggregation_all": "4"
+        },
+        {
+          "t1_citizenship": "Chile",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_citizenship": "Australia",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_citizenship": "France",
+          "aggregation_all": "1"
+        },
+        {
+          "t1_citizenship": "Germany",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "For each citizenship, how many singers are from that country?"
+    },
+    {
+      "id": "Q015",
+      "original_id": "singer_015",
+      "gold_sparql": "SELECT ?T1_citizenship (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/singer> . ?T1 <http://valuenet/ontop/citizenship> ?T1_citizenship . } GROUP BY ?T1_citizenship ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_citizenship": "United States",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Please show the most common citizenship of singers."
+    },
+    {
+      "id": "Q016",
+      "original_id": "singer_016",
+      "gold_sparql": "SELECT ?T1_citizenship (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/singer> . ?T1 <http://valuenet/ontop/citizenship> ?T1_citizenship . } GROUP BY ?T1_citizenship ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_citizenship": "United States",
+          "aggregation_all": "4"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the most common singer citizenship ?"
+    },
+    {
+      "id": "Q017",
+      "original_id": "singer_017",
+      "gold_sparql": "select ?t1_citizenship (max( ?t1_net_worth_millions) as ?aggregation_t1_net_worth_millions_168 ) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . ?t1 <http://valuenet/ontop/net_worth_millions> ?t1_net_worth_millions . } group by ?t1_citizenship",
+      "gold_answers": [
+        {
+          "t1_citizenship": "United States",
+          "aggregation_t1_net_worth_millions_168": "28.7999992"
+        },
+        {
+          "t1_citizenship": "Chile",
+          "aggregation_t1_net_worth_millions_168": "17.3999996"
+        },
+        {
+          "t1_citizenship": "Australia",
+          "aggregation_t1_net_worth_millions_168": "17.0"
+        },
+        {
+          "t1_citizenship": "France",
+          "aggregation_t1_net_worth_millions_168": "30.0"
+        },
+        {
+          "t1_citizenship": "Germany",
+          "aggregation_t1_net_worth_millions_168": "14.3000002"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show different citizenships and the maximum net worth of singers of each citizenship."
+    },
+    {
+      "id": "Q018",
+      "original_id": "singer_018",
+      "gold_sparql": "select ?t1_citizenship (max( ?t1_net_worth_millions) as ?aggregation_t1_net_worth_millions_168 ) where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . ?t1 <http://valuenet/ontop/net_worth_millions> ?t1_net_worth_millions . } group by ?t1_citizenship",
+      "gold_answers": [
+        {
+          "t1_citizenship": "United States",
+          "aggregation_t1_net_worth_millions_168": "28.7999992"
+        },
+        {
+          "t1_citizenship": "Chile",
+          "aggregation_t1_net_worth_millions_168": "17.3999996"
+        },
+        {
+          "t1_citizenship": "Australia",
+          "aggregation_t1_net_worth_millions_168": "17.0"
+        },
+        {
+          "t1_citizenship": "France",
+          "aggregation_t1_net_worth_millions_168": "30.0"
+        },
+        {
+          "t1_citizenship": "Germany",
+          "aggregation_t1_net_worth_millions_168": "14.3000002"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "For each citizenship, what is the maximum net worth?"
+    },
+    {
+      "id": "Q019",
+      "original_id": "singer_019",
+      "gold_sparql": "select ?t1_title ?t2_name where { ?t1 a <http://valuenet/ontop/song> . ?t2 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/ref-singer> ?t2 . ?t1 <http://valuenet/ontop/title> ?t1_title . ?t2 <http://valuenet/ontop/name> ?t2_name . }",
+      "gold_answers": [
+        {
+          "t1_title": "Left Outside Alone",
+          "t2_name": "Jacqueline Mars"
+        },
+        {
+          "t1_title": "F**k It (I Don't Want You Back)",
+          "t2_name": "Liliane Bettencourt"
+        },
+        {
+          "t1_title": "Mysterious Girl",
+          "t2_name": "Susanne Klatten"
+        },
+        {
+          "t1_title": "Yeah",
+          "t2_name": "Christy Walton"
+        },
+        {
+          "t1_title": "Call on Me",
+          "t2_name": "Iris Fontbona"
+        },
+        {
+          "t1_title": "Do They Know It's Christmas",
+          "t2_name": "Liliane Bettencourt"
+        },
+        {
+          "t1_title": "Cha Cha Slide",
+          "t2_name": "Christy Walton"
+        },
+        {
+          "t1_title": "All This Time",
+          "t2_name": "Gina Rinehart"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show titles of songs and names of singers."
+    },
+    {
+      "id": "Q020",
+      "original_id": "singer_020",
+      "gold_sparql": "select ?t1_title ?t2_name where { ?t1 a <http://valuenet/ontop/song> . ?t2 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/ref-singer> ?t2 . ?t1 <http://valuenet/ontop/title> ?t1_title . ?t2 <http://valuenet/ontop/name> ?t2_name . }",
+      "gold_answers": [
+        {
+          "t1_title": "Left Outside Alone",
+          "t2_name": "Jacqueline Mars"
+        },
+        {
+          "t1_title": "F**k It (I Don't Want You Back)",
+          "t2_name": "Liliane Bettencourt"
+        },
+        {
+          "t1_title": "Mysterious Girl",
+          "t2_name": "Susanne Klatten"
+        },
+        {
+          "t1_title": "Yeah",
+          "t2_name": "Christy Walton"
+        },
+        {
+          "t1_title": "Call on Me",
+          "t2_name": "Iris Fontbona"
+        },
+        {
+          "t1_title": "Do They Know It's Christmas",
+          "t2_name": "Liliane Bettencourt"
+        },
+        {
+          "t1_title": "Cha Cha Slide",
+          "t2_name": "Christy Walton"
+        },
+        {
+          "t1_title": "All This Time",
+          "t2_name": "Gina Rinehart"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the song titles and singer names?"
+    },
+    {
+      "id": "Q021",
+      "original_id": "singer_021",
+      "gold_sparql": "select distinct ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/song> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/sales> ?t2_sales . FILTER(?t2_sales > 300000) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Liliane Bettencourt"
+        },
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Iris Fontbona"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show distinct names of singers that have songs with sales more than 300000."
+    },
+    {
+      "id": "Q022",
+      "original_id": "singer_022",
+      "gold_sparql": "select distinct ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/song> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/sales> ?t2_sales . FILTER(?t2_sales > 300000) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Liliane Bettencourt"
+        },
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Iris Fontbona"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "what are the different names of the singers that have sales more than 300000?"
+    },
+    {
+      "id": "Q023",
+      "original_id": "singer_023",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/song> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . } group by ?t1_name having(count( *) > 1)",
+      "gold_answers": [
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Liliane Bettencourt"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Show the names of singers that have more than one song."
+    },
+    {
+      "id": "Q024",
+      "original_id": "singer_024",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/song> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . } group by ?t1_name having(count( *) > 1)",
+      "gold_answers": [
+        {
+          "t1_name": "Christy Walton"
+        },
+        {
+          "t1_name": "Liliane Bettencourt"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the names of the singers that have more than one songs?"
+    },
+    {
+      "id": "Q025",
+      "original_id": "singer_025",
+      "gold_sparql": "select ?t1_name (sum( ?t2_sales) as ?aggregation_t2_sales_149 ) where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/song> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/sales> ?t2_sales . } group by ?t1_name",
+      "gold_answers": [
+        {
+          "t1_name": "Gina Rinehart",
+          "aggregation_t2_sales_149": "292000.0"
+        },
+        {
+          "t1_name": "Christy Walton",
+          "aggregation_t2_sales_149": "651421.0"
+        },
+        {
+          "t1_name": "Susanne Klatten",
+          "aggregation_t2_sales_149": "261000.0"
+        },
+        {
+          "t1_name": "Liliane Bettencourt",
+          "aggregation_t2_sales_149": "1646407.0"
+        },
+        {
+          "t1_name": "Iris Fontbona",
+          "aggregation_t2_sales_149": "335000.0"
+        },
+        {
+          "t1_name": "Jacqueline Mars",
+          "aggregation_t2_sales_149": "275000.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the names of singers and the total sales of their songs."
+    },
+    {
+      "id": "Q026",
+      "original_id": "singer_026",
+      "gold_sparql": "select ?t1_name (sum( ?t2_sales) as ?aggregation_t2_sales_149 ) where { ?t1 a <http://valuenet/ontop/singer> . ?t2 a <http://valuenet/ontop/song> . ?t2 <http://valuenet/ontop/ref-singer> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/sales> ?t2_sales . } group by ?t1_name",
+      "gold_answers": [
+        {
+          "t1_name": "Gina Rinehart",
+          "aggregation_t2_sales_149": "292000.0"
+        },
+        {
+          "t1_name": "Christy Walton",
+          "aggregation_t2_sales_149": "651421.0"
+        },
+        {
+          "t1_name": "Susanne Klatten",
+          "aggregation_t2_sales_149": "261000.0"
+        },
+        {
+          "t1_name": "Liliane Bettencourt",
+          "aggregation_t2_sales_149": "1646407.0"
+        },
+        {
+          "t1_name": "Iris Fontbona",
+          "aggregation_t2_sales_149": "335000.0"
+        },
+        {
+          "t1_name": "Jacqueline Mars",
+          "aggregation_t2_sales_149": "275000.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "For each singer name, what is the total sales for their songs?"
+    },
+    {
+      "id": "Q027",
+      "original_id": "singer_027",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . Filter not exists {{select ?t22_singer_id where { ?t22 a <http://valuenet/ontop/song> . ?t22 <http://valuenet/ontop/singer_id> ?t22_singer_id . } } FILTER (?t1_singer_id in (?t22_singer_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Alice Walton"
+        },
+        {
+          "t1_name": "Abigail Johnson"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the name of singers that do not have any song."
+    },
+    {
+      "id": "Q028",
+      "original_id": "singer_028",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/singer_id> ?t1_singer_id . Filter not exists {{select ?t22_singer_id where { ?t22 a <http://valuenet/ontop/song> . ?t22 <http://valuenet/ontop/singer_id> ?t22_singer_id . } } FILTER (?t1_singer_id in (?t22_singer_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Alice Walton"
+        },
+        {
+          "t1_name": "Abigail Johnson"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the name of every singer that does not have any song?"
+    },
+    {
+      "id": "Q029",
+      "original_id": "singer_029",
+      "gold_sparql": "select distinct ?t1_citizenship where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . FILTER(?t1_birth_year < 1945) . FILTER (?t1_citizenship in (?t2_citizenship)) . ?t2 a <http://valuenet/ontop/singer> . ?t2 <http://valuenet/ontop/citizenship> ?t2_citizenship . ?t2 <http://valuenet/ontop/birth_year> ?t2_birth_year . FILTER(?t2_birth_year > 1955) . }",
+      "gold_answers": [
+        {
+          "t1_citizenship": "United States"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show the citizenship shared by singers with birth year before 1945 and after 1955."
+    },
+    {
+      "id": "Q030",
+      "original_id": "singer_030",
+      "gold_sparql": "select distinct ?t1_citizenship where { ?t1 a <http://valuenet/ontop/singer> . ?t1 <http://valuenet/ontop/citizenship> ?t1_citizenship . ?t1 <http://valuenet/ontop/birth_year> ?t1_birth_year . FILTER(?t1_birth_year < 1945) . FILTER (?t1_citizenship in (?t2_citizenship)) . ?t2 a <http://valuenet/ontop/singer> . ?t2 <http://valuenet/ontop/citizenship> ?t2_citizenship . ?t2 <http://valuenet/ontop/birth_year> ?t2_birth_year . FILTER(?t2_birth_year > 1955) . }",
+      "gold_answers": [
+        {
+          "t1_citizenship": "United States"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the citizenships that are shared by singers with a birth year before 1945 and after 1955?"
+    }
+  ]
+}

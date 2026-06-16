@@ -1,0 +1,456 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/student#> .
+@prefix ns2: <http://valuenet/ontop/has_pet#> .
+@prefix ns3: <http://valuenet/ontop/pets#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns2:petid a owl:DatatypeProperty ;
+    rdfs:domain :has_pet ;
+    rdfs:range xsd:integer .
+
+ns2:ref-petid a owl:ObjectProperty ;
+    rdfs:domain :has_pet ;
+    rdfs:range :pets .
+
+ns2:ref-stuid a owl:ObjectProperty ;
+    rdfs:domain :has_pet ;
+    rdfs:range :student .
+
+ns2:stuid a owl:DatatypeProperty ;
+    rdfs:domain :has_pet ;
+    rdfs:range xsd:integer .
+
+ns3:pet_age a owl:DatatypeProperty ;
+    rdfs:domain :pets ;
+    rdfs:range xsd:integer .
+
+ns3:petid a owl:DatatypeProperty ;
+    rdfs:domain :pets ;
+    rdfs:range xsd:integer .
+
+ns3:pettype a owl:DatatypeProperty ;
+    rdfs:domain :pets ;
+    rdfs:range xsd:string .
+
+ns3:weight a owl:DatatypeProperty ;
+    rdfs:domain :pets ;
+    rdfs:range xsd:double .
+
+ns1:advisor a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:integer .
+
+ns1:age a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:integer .
+
+ns1:city_code a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:string .
+
+ns1:fname a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:string .
+
+ns1:lname a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:string .
+
+ns1:major a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:integer .
+
+ns1:sex a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:string .
+
+ns1:stuid a owl:DatatypeProperty ;
+    rdfs:domain :student ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/student/stuid=1003> a :student ;
+    ns1:advisor 7792 ;
+    ns1:age 21 ;
+    ns1:city_code "WAS" ;
+    ns1:fname "Shiela" ;
+    ns1:lname "Jones" ;
+    ns1:major 600 ;
+    ns1:sex "F" ;
+    ns1:stuid 1003 .
+
+<http://valuenet/ontop/student/stuid=1004> a :student ;
+    ns1:advisor 8423 ;
+    ns1:age 20 ;
+    ns1:city_code "CHI" ;
+    ns1:fname "Dinesh" ;
+    ns1:lname "Kumar" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1004 .
+
+<http://valuenet/ontop/student/stuid=1005> a :student ;
+    ns1:advisor 1121 ;
+    ns1:age 26 ;
+    ns1:city_code "YYZ" ;
+    ns1:fname "Paul" ;
+    ns1:lname "Gompers" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1005 .
+
+<http://valuenet/ontop/student/stuid=1006> a :student ;
+    ns1:advisor 1148 ;
+    ns1:age 18 ;
+    ns1:city_code "BAL" ;
+    ns1:fname "Andy" ;
+    ns1:lname "Schultz" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1006 .
+
+<http://valuenet/ontop/student/stuid=1007> a :student ;
+    ns1:advisor 8918 ;
+    ns1:age 18 ;
+    ns1:city_code "PIT" ;
+    ns1:fname "Lisa" ;
+    ns1:lname "Apap" ;
+    ns1:major 600 ;
+    ns1:sex "F" ;
+    ns1:stuid 1007 .
+
+<http://valuenet/ontop/student/stuid=1008> a :student ;
+    ns1:advisor 9172 ;
+    ns1:age 20 ;
+    ns1:city_code "BAL" ;
+    ns1:fname "Jandy" ;
+    ns1:lname "Nelson" ;
+    ns1:major 600 ;
+    ns1:sex "F" ;
+    ns1:stuid 1008 .
+
+<http://valuenet/ontop/student/stuid=1009> a :student ;
+    ns1:advisor 2192 ;
+    ns1:age 19 ;
+    ns1:city_code "YYZ" ;
+    ns1:fname "Eric" ;
+    ns1:lname "Tai" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1009 .
+
+<http://valuenet/ontop/student/stuid=1010> a :student ;
+    ns1:advisor 2192 ;
+    ns1:age 17 ;
+    ns1:city_code "HOU" ;
+    ns1:fname "Derek" ;
+    ns1:lname "Lee" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1010 .
+
+<http://valuenet/ontop/student/stuid=1011> a :student ;
+    ns1:advisor 1148 ;
+    ns1:age 22 ;
+    ns1:city_code "PHL" ;
+    ns1:fname "David" ;
+    ns1:lname "Adams" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1011 .
+
+<http://valuenet/ontop/student/stuid=1012> a :student ;
+    ns1:advisor 7723 ;
+    ns1:age 20 ;
+    ns1:city_code "PIT" ;
+    ns1:fname "Steven" ;
+    ns1:lname "Davis" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1012 .
+
+<http://valuenet/ontop/student/stuid=1014> a :student ;
+    ns1:advisor 8741 ;
+    ns1:age 18 ;
+    ns1:city_code "DAL" ;
+    ns1:fname "Charles" ;
+    ns1:lname "Norris" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1014 .
+
+<http://valuenet/ontop/student/stuid=1015> a :student ;
+    ns1:advisor 8721 ;
+    ns1:age 16 ;
+    ns1:city_code "HKG" ;
+    ns1:fname "Susan" ;
+    ns1:lname "Lee" ;
+    ns1:major 600 ;
+    ns1:sex "F" ;
+    ns1:stuid 1015 .
+
+<http://valuenet/ontop/student/stuid=1016> a :student ;
+    ns1:advisor 2192 ;
+    ns1:age 17 ;
+    ns1:city_code "DET" ;
+    ns1:fname "Mark" ;
+    ns1:lname "Schwartz" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1016 .
+
+<http://valuenet/ontop/student/stuid=1017> a :student ;
+    ns1:advisor 1148 ;
+    ns1:age 27 ;
+    ns1:city_code "LON" ;
+    ns1:fname "Bruce" ;
+    ns1:lname "Wilson" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1017 .
+
+<http://valuenet/ontop/student/stuid=1018> a :student ;
+    ns1:advisor 1121 ;
+    ns1:age 20 ;
+    ns1:city_code "PIT" ;
+    ns1:fname "Michael" ;
+    ns1:lname "Leighton" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1018 .
+
+<http://valuenet/ontop/student/stuid=1019> a :student ;
+    ns1:advisor 2192 ;
+    ns1:age 18 ;
+    ns1:city_code "WAS" ;
+    ns1:fname "Arthur" ;
+    ns1:lname "Pang" ;
+    ns1:major 600 ;
+    ns1:sex "M" ;
+    ns1:stuid 1019 .
+
+<http://valuenet/ontop/student/stuid=1020> a :student ;
+    ns1:advisor 7271 ;
+    ns1:age 22 ;
+    ns1:city_code "NYC" ;
+    ns1:fname "Ian" ;
+    ns1:lname "Thornton" ;
+    ns1:major 520 ;
+    ns1:sex "M" ;
+    ns1:stuid 1020 .
+
+<http://valuenet/ontop/student/stuid=1021> a :student ;
+    ns1:advisor 8722 ;
+    ns1:age 19 ;
+    ns1:city_code "NYC" ;
+    ns1:fname "George" ;
+    ns1:lname "Andreou" ;
+    ns1:major 520 ;
+    ns1:sex "M" ;
+    ns1:stuid 1021 .
+
+<http://valuenet/ontop/student/stuid=1022> a :student ;
+    ns1:advisor 8722 ;
+    ns1:age 17 ;
+    ns1:city_code "PHL" ;
+    ns1:fname "Michael" ;
+    ns1:lname "Woods" ;
+    ns1:major 540 ;
+    ns1:sex "M" ;
+    ns1:stuid 1022 .
+
+<http://valuenet/ontop/student/stuid=1023> a :student ;
+    ns1:advisor 8722 ;
+    ns1:age 20 ;
+    ns1:city_code "NYC" ;
+    ns1:fname "David" ;
+    ns1:lname "Shieber" ;
+    ns1:major 520 ;
+    ns1:sex "M" ;
+    ns1:stuid 1023 .
+
+<http://valuenet/ontop/student/stuid=1024> a :student ;
+    ns1:advisor 7271 ;
+    ns1:age 18 ;
+    ns1:city_code "BAL" ;
+    ns1:fname "Stacy" ;
+    ns1:lname "Prater" ;
+    ns1:major 540 ;
+    ns1:sex "F" ;
+    ns1:stuid 1024 .
+
+<http://valuenet/ontop/student/stuid=1025> a :student ;
+    ns1:advisor 7134 ;
+    ns1:age 18 ;
+    ns1:city_code "PIT" ;
+    ns1:fname "Mark" ;
+    ns1:lname "Goldman" ;
+    ns1:major 520 ;
+    ns1:sex "M" ;
+    ns1:stuid 1025 .
+
+<http://valuenet/ontop/student/stuid=1026> a :student ;
+    ns1:advisor 7134 ;
+    ns1:age 19 ;
+    ns1:city_code "HKG" ;
+    ns1:fname "Eric" ;
+    ns1:lname "Pang" ;
+    ns1:major 520 ;
+    ns1:sex "M" ;
+    ns1:stuid 1026 .
+
+<http://valuenet/ontop/student/stuid=1027> a :student ;
+    ns1:advisor 8723 ;
+    ns1:age 18 ;
+    ns1:city_code "LOS" ;
+    ns1:fname "Paul" ;
+    ns1:lname "Brody" ;
+    ns1:major 520 ;
+    ns1:sex "M" ;
+    ns1:stuid 1027 .
+
+<http://valuenet/ontop/student/stuid=1028> a :student ;
+    ns1:advisor 2311 ;
+    ns1:age 20 ;
+    ns1:city_code "ROC" ;
+    ns1:fname "Eric" ;
+    ns1:lname "Rugh" ;
+    ns1:major 550 ;
+    ns1:sex "M" ;
+    ns1:stuid 1028 .
+
+<http://valuenet/ontop/student/stuid=1029> a :student ;
+    ns1:advisor 2311 ;
+    ns1:age 17 ;
+    ns1:city_code "PEK" ;
+    ns1:fname "Jun" ;
+    ns1:lname "Han" ;
+    ns1:major 100 ;
+    ns1:sex "M" ;
+    ns1:stuid 1029 .
+
+<http://valuenet/ontop/student/stuid=1030> a :student ;
+    ns1:advisor 2311 ;
+    ns1:age 21 ;
+    ns1:city_code "SFO" ;
+    ns1:fname "Lisa" ;
+    ns1:lname "Cheng" ;
+    ns1:major 550 ;
+    ns1:sex "F" ;
+    ns1:stuid 1030 .
+
+<http://valuenet/ontop/student/stuid=1031> a :student ;
+    ns1:advisor 8772 ;
+    ns1:age 20 ;
+    ns1:city_code "PHL" ;
+    ns1:fname "Sarah" ;
+    ns1:lname "Smith" ;
+    ns1:major 550 ;
+    ns1:sex "F" ;
+    ns1:stuid 1031 .
+
+<http://valuenet/ontop/student/stuid=1032> a :student ;
+    ns1:advisor 8772 ;
+    ns1:age 20 ;
+    ns1:city_code "ATL" ;
+    ns1:fname "Eric" ;
+    ns1:lname "Brown" ;
+    ns1:major 550 ;
+    ns1:sex "M" ;
+    ns1:stuid 1032 .
+
+<http://valuenet/ontop/student/stuid=1033> a :student ;
+    ns1:advisor 8772 ;
+    ns1:age 18 ;
+    ns1:city_code "NAR" ;
+    ns1:fname "William" ;
+    ns1:lname "Simms" ;
+    ns1:major 550 ;
+    ns1:sex "M" ;
+    ns1:stuid 1033 .
+
+<http://valuenet/ontop/student/stuid=1034> a :student ;
+    ns1:advisor 5718 ;
+    ns1:age 18 ;
+    ns1:city_code "BOS" ;
+    ns1:fname "Eric" ;
+    ns1:lname "Epp" ;
+    ns1:major 50 ;
+    ns1:sex "M" ;
+    ns1:stuid 1034 .
+
+<http://valuenet/ontop/student/stuid=1035> a :student ;
+    ns1:advisor 5718 ;
+    ns1:age 26 ;
+    ns1:city_code "WAS" ;
+    ns1:fname "Sarah" ;
+    ns1:lname "Schmidt" ;
+    ns1:major 50 ;
+    ns1:sex "F" ;
+    ns1:stuid 1035 .
+
+<http://valuenet/ontop/pets/petid=2001> a :pets ;
+    ns3:pet_age 3 ;
+    ns3:petid 2001 ;
+    ns3:pettype "cat" ;
+    ns3:weight 1.2e+01 .
+
+<http://valuenet/ontop/pets/petid=2002> a :pets ;
+    ns3:pet_age 2 ;
+    ns3:petid 2002 ;
+    ns3:pettype "dog" ;
+    ns3:weight 1.34e+01 .
+
+<http://valuenet/ontop/pets/petid=2003> a :pets ;
+    ns3:pet_age 1 ;
+    ns3:petid 2003 ;
+    ns3:pettype "dog" ;
+    ns3:weight 9.3e+00 .
+
+<http://valuenet/ontop/student/stuid=1001> a :student ;
+    ns1:advisor 1121 ;
+    ns1:age 18 ;
+    ns1:city_code "BAL" ;
+    ns1:fname "Linda" ;
+    ns1:lname "Smith" ;
+    ns1:major 600 ;
+    ns1:sex "F" ;
+    ns1:stuid 1001 .
+
+<http://valuenet/ontop/student/stuid=1002> a :student ;
+    ns1:advisor 7712 ;
+    ns1:age 19 ;
+    ns1:city_code "HKG" ;
+    ns1:fname "Tracy" ;
+    ns1:lname "Kim" ;
+    ns1:major 600 ;
+    ns1:sex "F" ;
+    ns1:stuid 1002 .
+
+:has_pet a owl:Class .
+
+:pets a owl:Class .
+
+:student a owl:Class .
+
+[] a :has_pet ;
+    ns2:petid 2002 ;
+    ns2:ref-petid <http://valuenet/ontop/pets/petid=2002> ;
+    ns2:ref-stuid <http://valuenet/ontop/student/stuid=1002> ;
+    ns2:stuid 1002 .
+
+[] a :has_pet ;
+    ns2:petid 2003 ;
+    ns2:ref-petid <http://valuenet/ontop/pets/petid=2003> ;
+    ns2:ref-stuid <http://valuenet/ontop/student/stuid=1002> ;
+    ns2:stuid 1002 .
+
+[] a :has_pet ;
+    ns2:petid 2001 ;
+    ns2:ref-petid <http://valuenet/ontop/pets/petid=2001> ;
+    ns2:ref-stuid <http://valuenet/ontop/student/stuid=1001> ;
+    ns2:stuid 1001 .
+

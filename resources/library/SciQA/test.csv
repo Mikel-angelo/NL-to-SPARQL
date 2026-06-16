@@ -1,0 +1,999 @@
+11,"Physical Sciences & Mathematics -> 
+Computer Sciences -> 
+Artificial Intelligence","Factoid
+Superlative",tree,"SELECT
+WHERE
+BIND
+ORDER BY
+LIMIT",4,comparison-based,WHICH-WHAT,R6946,"- Which system is the worst in terms of recall?
+- Which system has the lowest recall score?
+- Which system has the lowest sensitivity?",Which system has the worst recall?,"Which system has the worst recall in ""QA evaluations on QALD-5""?","SELECT ?evaluation ?system_name
+WHERE {
+  orkgr:R6946 orkgp:compareContribution ?cont.
+  ?cont o:evaluation ?evaluation.
+  ?evaluation o:recall ?recall;
+              rdfs:label ?system_name.
+  BIND(xsd:float(?recall) AS ?r)
+}
+ORDER BY ?r
+LIMIT 1","SELECT ?evaluation ?system_name
+WHERE {
+  orkgr:R6946 orkgp:compareContribution ?cont.
+  ?cont orkgp:evaluation ?evaluation.
+  ?evaluation orkgp:recall ?recall;
+              rdfs:label ?system_name.
+  BIND(xsd:float(?recall) AS ?r)
+}
+ORDER BY ?r
+LIMIT 1","SELECT ?evaluation ?system_name
+WHERE {
+  orkgr:R6946 orkgp:compareContribution ?cont.
+  ?cont orkgp:evaluation ?evaluation.
+  ?evaluation orkgp:recall ?recall;
+              rdfs:label ?system_name.
+  BIND(xsd:float(?recall) AS ?r)
+}
+ORDER BY ?r
+LIMIT 1","""http://orkg.org/orkg/resource/R6379"", ""YodaQA""
+",#N/A,"SELECT ?evaluation ?system_name
+WHERE {
+  orkgr:R6946 orkgp:compareContribution ?cont.
+  ?cont orkgp:P34 ?evaluation.
+  ?evaluation orkgp:P5015 ?recall;
+              rdfs:label ?system_name.
+  BIND(xsd:float(?recall) AS ?r)
+}
+ORDER BY ?r
+LIMIT 1",
+66,Physical Sciences & Mathematics ->Chemistry,"Factoid
+Superlative",chain,"SELECT
+WHERE
+ORDER BY
+DESC
+COUNT
+LIMIT",2,comparison-based,WHICH-WHAT,R25900,Which substrate is most commonly used as a catalyst in the papers?,What is the most common substrate for catalysts?,"What is the most common substrate in ""Catalysts for the Liquid-Phase Hydrogenation of Alkynes overview""?","SELECT ?substrate
+WHERE {
+  orkgr:R25900 orkgp:compareContribution ?contrib.
+  ?contrib o:substrate ?substrate.
+}
+ORDER BY DESC(COUNT(?substrate))
+LIMIT 1","SELECT ?substrate
+WHERE {
+  orkgr:R25900 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:substrate ?substrate.
+}
+ORDER BY DESC(COUNT(?substrate))
+LIMIT 1","SELECT ?substrate
+WHERE {
+  orkgr:R25900 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:substrate ?substrate.
+}
+ORDER BY DESC(COUNT(?substrate))
+LIMIT 1","""phenylacetylene""",#N/A,"SELECT ?substrate
+WHERE {
+  orkgr:R25900 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15090 ?substrate.
+}
+ORDER BY DESC(COUNT(?substrate))
+LIMIT 1",
+41,"Life Sciences -> 
+Entomology Food Science -> 
+Food Processing",Factoid,edge,"SELECT
+DISTINCT",1,comparison-based,WHAT-WHEN,R111117,What can be used as a substitute for wheat flour in composite bread?,What can one use instead of wheat flour?,Which non-wheat flours are suggested in research papers about the optimal composition of non-wheat flours in composite bread?,"SELECT DISTINCT ?flour
+WHERE {
+  ?_ o:non_wheat_flour ?flour.
+}","SELECT DISTINCT ?flour
+WHERE {
+  ?_ orkgp:nonWheatFlour ?flour.
+}","SELECT DISTINCT ?flour
+WHERE {
+  ?_ orkgp:nonWheatFlour ?flour.
+}","banana
+lupin
+Cassava and African Yam Bean",#N/A,"SELECT DISTINCT ?flour
+WHERE {
+  ?_ orkgp:P37571 ?flour.
+}",
+36,Physical Sciences & Mathematics -> Computer Sciences -> Graphics,Factoid,tree,"SELECT
+WHERE
+FILTER
+REGEX",4,comparison-based,WHICH-WHAT,R8342,"What does abbreviation ""EXPO"" in the title of corresponding ontology correspond?",What is the full name of the EXPO ontology?,"What is the full name of the EXPO ontology in ""Ontologies for describing scholarly articles""?","SELECT ?full_name
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont o:ontology ?ontology.
+  ?ontology rdfs:label ?ont_lbl;
+            o:full_name ?full_name. 
+  FILTER(REGEX(STR(?ont_lbl), ""expo"", ""i""))
+}","SELECT ?full_name
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont orkgp:ontology ?ontology.
+  ?ontology rdfs:label ?ont_lbl;
+            orkgp:fullName ?full_name. 
+  FILTER(REGEX(STR(?ont_lbl), ""expo"", ""i""))
+}","SELECT ?full_name
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont orkgp:ontology ?ontology.
+  ?ontology rdfs:label ?ont_lbl;
+            orkgp:fullName ?full_name. 
+  FILTER(REGEX(STR(?ont_lbl), ""expo"", ""i""))
+}",NO ANSWER,#N/A,"SELECT ?full_name
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont orkgp:P7034 ?ontology.
+  ?ontology rdfs:label ?ont_lbl;
+            orkgp:P7035 ?full_name. 
+  FILTER(REGEX(STR(?ont_lbl), ""expo"", ""i""))
+}",
+25,"Physical Sciences & Mathematics -> 
+Computer Sciences -> 
+Databases/Information Systems",Factoid,tree,"SELECT
+WHERE
+FILTER
+REGEX",3,comparison-based,WHICH-WHAT,R78023,"- Which graphs have RDF support?
+- What is the list of all graphs which are compatible with RDF?
+- Which graphs are able to work with RDF?",Which scholarly knowledge graphs support RDF?,"Which scholarly knowledge graphs in ""Comparison of scholarly knowledge graphs support RDF""?","SELECT ?title
+WHERE {
+  orkgr:R78023 orkgp:compareContribution ?cont.
+  ?cont o:supports_rdf ?has_rdf.
+  FILTER(REGEX(?has_rdf, ""T""))
+  ?cont rdfs:label ?title
+}","SELECT ?title
+WHERE {
+  orkgr:R78023 orkgp:compareContribution ?cont.
+  ?cont orkgp:supportsRdf ?has_rdf.
+  FILTER(REGEX(?has_rdf, ""T""))
+  ?cont rdfs:label ?title
+}","SELECT ?title
+WHERE {
+  orkgr:R78023 orkgp:compareContribution ?cont.
+  ?cont orkgp:supportsRdf ?has_rdf.
+  FILTER(REGEX(?has_rdf, ""T""))
+  ?cont rdfs:label ?title
+}","SciGraph
+ResearchGraph",#N/A,"SELECT ?title
+WHERE {
+  orkgr:R78023 orkgp:compareContribution ?cont.
+  ?cont orkgp:P7009 ?has_rdf.
+  FILTER(REGEX(?has_rdf, ""T""))
+  ?cont rdfs:label ?title
+}",
+57,Physical Sciences & Mathematics -> Computer Sciences -> Software Engineering,Non-factoid,chain,"SELECT
+DISTINCT
+WHERE
+FILTER
+REGEX
+",2,comparison-based,WHICH-WHAT,R112387,What are URLs for the considered studies?,Where can all the data sets used in the compared studies be found?,"Where can all the data sets used in the compared studies of ""Overview of Approaches that Classify User Feedback as Feature Request"" be found?","SELECT DISTINCT ?URL
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib o:has_dataset ?URL.
+  FILTER(!REGEX(?URL, ""Not""))
+}","SELECT DISTINCT ?URL
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:hasDataset ?URL.
+  FILTER(!REGEX(?URL, ""Not""))
+}","SELECT DISTINCT ?URL
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:hasDataset ?URL.
+  FILTER(!REGEX(?URL, ""Not""))
+}","https://seel.cse.lsu.edu/data/re17.zip
+https://mast.informatik.uni-hamburg.de/wp-content/uploads/2014/03/REJ_data.zip
+https://seel.cse.lsu.edu/data/refsq17.zip
+https://sites.google.com/site/appsuserreviews/
+https://mast.informatik.uni-hamburg.de/wp-content/uploads/2014/03/REJ_data.zip
+https://zenodo.org/record/56907#.YKT_NudCRPY
+https://sites.google.com/site/appsimilarity/
+https://github.com/saltlab/Minning-App-Stores
+https://github.com/SAILResearch/replication-prioritize_devices_test_app",#N/A,"SELECT DISTINCT ?URL
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:HAS_DATASET ?URL.
+  FILTER(!REGEX(?URL, ""Not""))
+}",
+8,"Physical Sciences & Mathematics -> 
+Computer Sciences","Factoid
+Superlative",forest,"SELECT
+DISTINCT
+WHERE
+COUNT
+GROUP BY
+ORDER BY
+LIMIT
+HAVING",8,paper-based,WHICH-WHAT,no comparison used,What metric is the least frequently used in studies?,What is the least common metric used?,no comparison used,"SELECT DISTINCT ?name
+WHERE {
+ ?paper a orkgc:Paper;
+ o:has_contribution [
+   o:performance_metric [
+     rdfs:label ?name
+   ]
+ ].
+ {
+   SELECT DISTINCT (COUNT(?paper_) AS ?min_papers)
+   WHERE {
+    ?paper_ a orkgc:Paper;
+    o:has_contribution [
+      o:performance_metric [
+      rdfs:label ?name_
+      ]
+    ].
+  }
+  GROUP BY ?name_
+  ORDER BY ?min_papers
+  LIMIT 1
+ }
+}
+GROUP BY ?name ?min_papers
+HAVING(COUNT(?paper) = ?min_papers)
+ORDER BY ?name","SELECT DISTINCT ?name
+WHERE {
+ ?paper a orkgc:Paper;
+ orkgp:hasContribution [
+   orkgp:performanceMetric [
+     rdfs:label ?name
+   ]
+ ].
+ {
+   SELECT DISTINCT (COUNT(?paper_) AS ?min_papers)
+   WHERE {
+    ?paper_ a orkgc:Paper;
+    orkgp:hasContribution [
+      orkgp:performanceMetric [
+      rdfs:label ?name_
+      ]
+    ].
+  }
+  GROUP BY ?name_
+  ORDER BY ?min_papers
+  LIMIT 1
+ }
+}
+GROUP BY ?name ?min_papers
+HAVING(COUNT(?paper) = ?min_papers)
+ORDER BY ?name","SELECT DISTINCT ?name
+WHERE {
+ ?paper a orkgc:Paper;
+ orkgp:hasContribution [
+   orkgp:performanceMetric [
+     rdfs:label ?name
+   ]
+ ].
+ {
+   SELECT DISTINCT (COUNT(?paper_) AS ?min_papers)
+   WHERE {
+    ?paper_ a orkgc:Paper;
+    orkgp:hasContribution [
+      orkgp:performanceMetric [
+      rdfs:label ?name_
+      ]
+    ].
+  }
+  GROUP BY ?name_
+  ORDER BY ?min_papers
+  LIMIT 1
+ }
+}
+GROUP BY ?name ?min_papers
+HAVING(COUNT(?paper) = ?min_papers)
+ORDER BY ?name","Cluster F1
+Error rate
+H-index error
+Mean of test accuracy
+Misclassification error rate
+Pairwise Recall
+Standard Deviation of test accuracy",#N/A,"SELECT DISTINCT ?name
+WHERE {
+ ?paper a orkgc:Paper;
+ orkgp:P31 [
+   orkgp:P5003 [
+     rdfs:label ?name
+   ]
+ ].
+ {
+   SELECT DISTINCT (COUNT(?paper_) AS ?min_papers)
+   WHERE {
+    ?paper_ a orkgc:Paper;
+    orkgp:P31 [
+      orkgp:P5003 [
+      rdfs:label ?name_
+      ]
+    ].
+  }
+  GROUP BY ?name_
+  ORDER BY ?min_papers
+  LIMIT 1
+ }
+}
+GROUP BY ?name ?min_papers
+HAVING(COUNT(?paper) = ?min_papers)
+ORDER BY ?name",
+2,"Physical Sciences & Mathematics -> 
+Computer Sciences -> 
+Databases/Information Systems",Factoid,chain,"SELECT
+WHERE
+FILTER
+REGEX
+STR",5,comparison-based,WHICH-WHAT,R8364,"-What type of scope does ""paper title"" consider?","What is the scope of ""Decentralised Authoring, Annotations and Notifications for a Read-Write Web with Dokieli""?","What is the scope of ""Decentralised Authoring, Annotations and Notifications for a Read-Write Web with Dokieli"" in ""Semantic representations of scholarly communication""?","SELECT ?scope 
+WHERE {
+  orkgr:R8364 orkgp:compareContribution ?cont.
+  ?paper o:has_contribution ?cont;
+         rdfs:label ?title.
+  ?cont o:semantic_representation ?sys.
+  ?sys o:scope ?scope.
+  FILTER(REGEX(STR(?title), ""Decentralised Authoring, Annotations and Notifications for a Read-Write Web with dokieli""))
+}","SELECT ?scope 
+WHERE {
+  orkgr:R8364 orkgp:compareContribution ?cont.
+  ?paper orkgp:hasContribution ?cont;
+         rdfs:label ?title.
+  ?cont orkgp:semanticRepresentation ?sys.
+  ?sys orkgp:scope ?scope.
+  FILTER(REGEX(STR(?title), ""Decentralised Authoring, Annotations and Notifications for a Read-Write Web with dokieli""))
+}","SELECT ?scope 
+WHERE {
+  orkgr:R8364 orkgp:compareContribution ?cont.
+  ?paper orkgp:hasContribution ?cont;
+         rdfs:label ?title.
+  ?cont orkgp:semanticRepresentation ?sys.
+  ?sys orkgp:scope ?scope.
+  FILTER(REGEX(STR(?title), ""Decentralised Authoring, Annotations and Notifications for a Read-Write Web with dokieli""))
+}","""Full paper""",#N/A,"SELECT ?scope 
+WHERE {
+  orkgr:R8364 orkgp:compareContribution ?cont.
+  ?paper orkgp:P31 ?cont;
+         rdfs:label ?title.
+  ?cont orkgp:P7046 ?sys.
+  ?sys orkgp:P7047 ?scope.
+  FILTER(REGEX(STR(?title), ""Decentralised Authoring, Annotations and Notifications for a Read-Write Web with dokieli""))
+}",
+14,"Physical Sciences & Mathematics -> 
+Computer Sciences -> 
+Artificial Intelligence",Non-factoid,tree,"SELECT
+WHERE
+FILTER
+REGEX
+",5,paper-based,WHICH-WHAT,R6947,"What evaluation metrics are used by the paper ""Using NMF-based text summarization to improve supervised and unsupervised classification?","What are the metrics used by paper ""Using NMF-based text summarization to improve supervised and unsupervised classification?",no comparison used,"SELECT ?metrics, ?metrics_labels
+WHERE {
+  ?papers rdfs:label ?title.
+  FILTER(REGEX(?title, ""NMF-based text summarization""))
+  ?papers o:has_contribution ?cont.
+  ?cont o:evaluation ?eval.
+  ?eval o:metric ?metrics.
+  ?metrics rdfs:label ?metrics_labels.
+}","SELECT ?metrics, ?metrics_labels
+WHERE {
+  ?papers rdfs:label ?title.
+  FILTER(REGEX(?title, ""NMF-based text summarization""))
+  ?papers orkgp:hasContribution ?cont.
+  ?cont orkgp:evaluation ?eval.
+  ?eval orkgp:metric ?metrics.
+  ?metrics rdfs:label ?metrics_labels.
+}","SELECT ?metrics, ?metrics_labels
+WHERE {
+  ?papers rdfs:label ?title.
+  FILTER(REGEX(?title, ""NMF-based text summarization""))
+  ?papers orkgp:hasContribution ?cont.
+  ?cont orkgp:evaluation ?eval.
+  ?eval orkgp:metric ?metrics.
+  ?metrics rdfs:label ?metrics_labels.
+}","""http://orkg.org/orkg/resource/R6552"", ""ROUGE 1""
+""http://orkg.org/orkg/resource/R6553"", ""ROUGE 2""
+""http://orkg.org/orkg/resource/R6554"", ""ROUGE L""
+""http://orkg.org/orkg/resource/R6555"", ""ROUGE W""
+""http://orkg.org/orkg/resource/R6556"", ""ROUGE SU4""",#N/A,"SELECT ?metrics, ?metrics_labels
+WHERE {
+  ?papers rdfs:label ?title.
+  FILTER(REGEX(?title, ""NMF-based text summarization""))
+  ?papers orkgp:P31 ?cont.
+  ?cont orkgp:P34 ?eval.
+  ?eval orkgp:P2006 ?metrics.
+  ?metrics rdfs:label ?metrics_labels.
+}",
+58,Physical Sciences & Mathematics -> Computer Sciences -> Software Engineering,Non-factoid,tree,"SELECT
+WHERE
+FILTER
+REGEX",10,comparison-based,WHICH-WHAT,R112387,"What are the values of precision, recall and f1 metrics of models using naive bayes and bag of words algorithms for user feedback classification?","What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words to classfy user feedback as feature request? ","What are the precision, recall, and f1 values of all compared studies that used the algorithm naive bayes in combination with the machine learning feature bag of words in ""Overview of Approaches that Classify User Feedback as Feature Request""? ","SELECT ?precision, ?recall, ?f1
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib o:machine_learning_algorithms ?algorithms.
+  ?algorithms rdfs:label ?alg_names.
+  FILTER(REGEX(?alg_names, ""Naive bayes""))
+  ?algorithms o:machine_learning_feature ?features.
+  ?features rdfs:label ?fea_names.
+  FILTER(REGEX(?fea_names, ""Bag of words""))
+  ?features o:classification_category ?categories.
+  ?categories rdfs:label ?cat_names.
+  FILTER(REGEX(?cat_names, ""Feature request""))
+  ?categories o:precision ?precision;
+              o:recall ?recall;
+              o:f1 ?f1.
+}","SELECT ?precision, ?recall, ?f1
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:machineLearningAlgorithms ?algorithms.
+  ?algorithms rdfs:label ?alg_names.
+  FILTER(REGEX(?alg_names, ""Naive bayes""))
+  ?algorithms orkgp:machineLearningFeature ?features.
+  ?features rdfs:label ?fea_names.
+  FILTER(REGEX(?fea_names, ""Bag of words""))
+  ?features orkgp:classificationCategory ?categories.
+  ?categories rdfs:label ?cat_names.
+  FILTER(REGEX(?cat_names, ""Feature request""))
+  ?categories orkgp:precision ?precision;
+              orkgp:recall ?recall;
+              orkgp:f1 ?f1.
+}","SELECT ?precision, ?recall, ?f1
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:machineLearningAlgorithms ?algorithms.
+  ?algorithms rdfs:label ?alg_names.
+  FILTER(REGEX(?alg_names, ""Naive bayes""))
+  ?algorithms orkgp:machineLearningFeature ?features.
+  ?features rdfs:label ?fea_names.
+  FILTER(REGEX(?fea_names, ""Bag of words""))
+  ?features orkgp:classificationCategory ?categories.
+  ?categories rdfs:label ?cat_names.
+  FILTER(REGEX(?cat_names, ""Feature request""))
+  ?categories orkgp:precision ?precision;
+              orkgp:recall ?recall;
+              orkgp:f1 ?f1.
+}","0.72	0.90	0.80
+0.71	0.79	0.75
+0.77	0.58	0.66
+0.28	0.62	0.39
+0.67	0.64	0.65
+0.20	1.00	0.33
+0.89	0.81	0.85
+0.67	0.58	0.62",#N/A,"SELECT ?precision, ?recall, ?f1
+WHERE {
+  orkgr:R112387 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15006 ?algorithms.
+  ?algorithms rdfs:label ?alg_names.
+  FILTER(REGEX(?alg_names, ""Naive bayes""))
+  ?algorithms orkgp:P36075 ?features.
+  ?features rdfs:label ?fea_names.
+  FILTER(REGEX(?fea_names, ""Bag of words""))
+  ?features orkgp:P37029 ?categories.
+  ?categories rdfs:label ?cat_names.
+  FILTER(REGEX(?cat_names, ""Feature request""))
+  ?categories orkgp:P3004 ?precision;
+              orkgp:P5015 ?recall;
+              orkgp:P18037 ?f1.
+}",
+20,Physical Sciences & Mathematics -> Computer Sciences -> Graphics,"Factoid
+Superlative",tree,"SELECT
+WHERE
+ORDER BY
+DESC
+MAX
+LIMIT",4,comparison-based,WHICH-WHAT,R8342,Which ontology has the largest number of classes?,Which ontology has the most classes?,"Which ontology has the most classes in ""Ontologies for describing scholarly articles""?","SELECT ?ont ?ont_label
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont o:ontology ?ont.
+  ?ont o:class_count ?cls_cnt;
+       rdfs:label ?ont_label.
+}
+ORDER BY DESC(MAX(xsd:int(?cls_cnt)))
+LIMIT 1","SELECT ?ont ?ont_label
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont orkgp:ontology ?ont.
+  ?ont orkgp:classCount ?cls_cnt;
+       rdfs:label ?ont_label.
+}
+ORDER BY DESC(MAX(xsd:int(?cls_cnt)))
+LIMIT 1","SELECT ?ont ?ont_label
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont orkgp:ontology ?ont.
+  ?ont orkgp:classCount ?cls_cnt;
+       rdfs:label ?ont_label.
+}
+ORDER BY DESC(MAX(xsd:int(?cls_cnt)))
+LIMIT 1","""http://orkg.org/orkg/resource/R8332"", ""EXPO""",#N/A,"SELECT ?ont ?ont_label
+WHERE {
+  orkgr:R8342 orkgp:compareContribution ?cont.
+  ?cont orkgp:P7034 ?ont.
+  ?ont orkgp:P7038 ?cls_cnt;
+       rdfs:label ?ont_label.
+}
+ORDER BY DESC(MAX(xsd:int(?cls_cnt)))
+LIMIT 1",
+98,"Physical Sciences & Mathematics -> 
+Computer Sciences -> 
+Artificial Intelligence",Factoid,tree,"ASK
+FILTER",3,paper-based,BOOLEAN,no comparison used,Are integrity constraints involved in OWLMAP?,Does OWLMAP imply integrity constraints?,no comparison used,"ASK {
+  ?approach rdfs:label ""OWLMAP""^^xsd:string.
+  ?contrib ?predicate ?approach.
+  ?contrib o:integrity_constraints ?integrity_constraints.
+  FILTER(?integrity_constraints = ""t""^^xsd:string)
+}","ASK {
+  ?approach rdfs:label ""OWLMAP""^^xsd:string.
+  ?contrib ?predicate ?approach.
+  ?contrib orkgp:integrityConstraints ?integrity_constraints.
+  FILTER(?integrity_constraints = ""t""^^xsd:string)
+}","ASK {
+  ?approach rdfs:label ""OWLMAP""^^xsd:string.
+  ?contrib ?predicate ?approach.
+  ?contrib orkgp:integrityConstraints ?integrity_constraints.
+  FILTER(?integrity_constraints = ""t""^^xsd:string)
+}",TRUE,#N/A,"ASK {
+  ?approach rdfs:label ""OWLMAP""^^xsd:string.
+  ?contrib ?predicate ?approach.
+  ?contrib orkgp:P41333 ?integrity_constraints.
+  FILTER(?integrity_constraints = ""t""^^xsd:string)
+}",
+12,Physical Sciences & Mathematics -> Computer Sciences -> Graphics,Factoid,tree,"SELECT
+WHERE
+FILTER
+REGEX
+BIND
+IF",2,paper-based,WHICH-WHAT,R6756,"Does the paper ""paper title"" uses filters?","Does ""ZoomRDF"" uses filters?",no comparison used,"SELECT ?uses_filter
+WHERE {
+  ?paper o:filter ?filter;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, ""ZoomRDF""))
+  BIND(
+    IF(?filter = ""T""^^xsd:string, ""Yes"", ""No"")
+    AS ?uses_filter
+  )
+}","SELECT ?uses_filter
+WHERE {
+  ?paper orkgp:filter ?filter;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, ""ZoomRDF""))
+  BIND(
+    IF(?filter = ""T""^^xsd:string, ""Yes"", ""No"")
+    AS ?uses_filter
+  )
+}","SELECT ?uses_filter
+WHERE {
+  ?paper orkgp:filter ?filter;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, ""ZoomRDF""))
+  BIND(
+    IF(?filter = ""T""^^xsd:string, ""Yes"", ""No"")
+    AS ?uses_filter
+  )
+}",No,#N/A,"SELECT ?uses_filter
+WHERE {
+  ?paper orkgp:P5025 ?filter;
+         rdfs:label ?title.
+  FILTER(REGEX(?title, ""ZoomRDF""))
+  BIND(
+    IF(?filter = ""T""^^xsd:string, ""Yes"", ""No"")
+    AS ?uses_filter
+  )
+}",
+39,All research fields,"Non-factoid
+Count
+Negation",chain,"SELECT
+COUNT
+FILTER
+NOT EXISTS
+BIND
+CONCAT
+ROUND",3,comparison-based,WHICH-WHAT,all comparisons,What percentage of comparisons is without class link?,How many comparisons are there which don't have a class link?,all comparisons,"SELECT ?ratio
+WHERE {
+  {
+    SELECT (COUNT(?comparison) AS ?n_valid_comparisons)
+    WHERE {
+      ?comparison a orkgc:Comparison.
+    }
+  }
+  {
+    SELECT (COUNT(DISTINCT ?comparison_) AS ?n_comparisons_with_missing_class) {
+      ?comparison_ orkgp:compareContribution ?contribution.
+      FILTER(
+        NOT EXISTS {
+            ?comparison_ a orkgc:Comparison
+          }
+       )
+     }
+   }
+   BIND(
+     CONCAT(
+       ROUND(
+         xsd:double(?n_comparisons_with_missing_class) / xsd:double(?n_valid_comparisons + ?n_comparisons_with_missing_class) * 100
+       ),
+       "" %""
+     ) AS ?ratio
+   )
+}","SELECT ?ratio
+WHERE {
+  {
+    SELECT (COUNT(?comparison) AS ?n_valid_comparisons)
+    WHERE {
+      ?comparison a orkgc:Comparison.
+    }
+  }
+  {
+    SELECT (COUNT(DISTINCT ?comparison_) AS ?n_comparisons_with_missing_class) {
+      ?comparison_ orkgp:compareContribution ?contribution.
+      FILTER(
+        NOT EXISTS {
+            ?comparison_ a orkgc:Comparison
+          }
+       )
+     }
+   }
+   BIND(
+     CONCAT(
+       ROUND(
+         xsd:double(?n_comparisons_with_missing_class) / xsd:double(?n_valid_comparisons + ?n_comparisons_with_missing_class) * 100
+       ),
+       "" %""
+     ) AS ?ratio
+   )
+}","SELECT ?ratio
+WHERE {
+  {
+    SELECT (COUNT(?comparison) AS ?n_valid_comparisons)
+    WHERE {
+      ?comparison a orkgc:Comparison.
+    }
+  }
+  {
+    SELECT (COUNT(DISTINCT ?comparison_) AS ?n_comparisons_with_missing_class) {
+      ?comparison_ orkgp:compareContribution ?contribution.
+      FILTER(
+        NOT EXISTS {
+            ?comparison_ a orkgc:Comparison
+          }
+       )
+     }
+   }
+   BIND(
+     CONCAT(
+       ROUND(
+         xsd:double(?n_comparisons_with_missing_class) / xsd:double(?n_valid_comparisons + ?n_comparisons_with_missing_class) * 100
+       ),
+       "" %""
+     ) AS ?ratio
+   )
+}",1 %,#N/A,"SELECT ?ratio
+WHERE {
+  {
+    SELECT (COUNT(?comparison) AS ?n_valid_comparisons)
+    WHERE {
+      ?comparison a orkgc:Comparison.
+    }
+  }
+  {
+    SELECT (COUNT(DISTINCT ?comparison_) AS ?n_comparisons_with_missing_class) {
+      ?comparison_ orkgp:compareContribution ?contribution.
+      FILTER(
+        NOT EXISTS {
+            ?comparison_ a orkgc:Comparison
+          }
+       )
+     }
+   }
+   BIND(
+     CONCAT(
+       ROUND(
+         xsd:double(?n_comparisons_with_missing_class) / xsd:double(?n_valid_comparisons + ?n_comparisons_with_missing_class) * 100
+       ),
+       "" %""
+     ) AS ?ratio
+   )
+}",
+99,Engineering,Factoid,tree,"SELECT
+WHERE
+ORDER BY
+ASC
+LIMIT",3,comparison-based,WHICH-WHAT,R138374,Which piezoresistive material is characterized by the minimum response time in the experiments?,For what piezoresistive material the least response time was obtained?,"For what piezoresistive material the least response time was obtained in ""Comparison of flexible piezoresistive pressure sensors based on different materials""?","SELECT ?piezoresistive_materials WHERE {
+  orkgr:R138374 orkgp:compareContribution ?contrib.
+  ?contrib o:piezoresistive_material ?piezoresistive_materials.
+  ?contrib o:response_time ?response_time.
+}
+ORDER BY ASC(?response_time)
+LIMIT 1","SELECT ?piezoresistive_materials WHERE {
+  orkgr:R138374 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:piezoresistiveMaterial ?piezoresistive_materials.
+  ?contrib orkgp:responseTime ?response_time.
+}
+ORDER BY ASC(?response_time)
+LIMIT 1","SELECT ?piezoresistive_materials WHERE {
+  orkgr:R138374 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:piezoresistiveMaterial ?piezoresistive_materials.
+  ?contrib orkgp:responseTime ?response_time.
+}
+ORDER BY ASC(?response_time)
+LIMIT 1","""Graphene-based cellular elastomer (G-elastomer)""",#N/A,"SELECT ?piezoresistive_materials WHERE {
+  orkgr:R138374 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P41021 ?piezoresistive_materials.
+  ?contrib orkgp:P41022 ?response_time.
+}
+ORDER BY ASC(?response_time)
+LIMIT 1",
+55,Engineering -> Mechanical Engineering -> Energy Systems,"Non-factoid
+Count",tree,"SELECT
+AVG
+WHERE
+BIND
+VALUES
+FILTER
+ORDER BY
+ASC",7,comparison-based,WHICH-WHAT,R153801,What are the mean values of energy generation for 5 years intervals grouped by energy source? ,What is the average energy generation for each energy source considered in 5 year intervals?,"What is the average energy generation for each energy source considered in 5 year intervals in ""Greenhouse Gas Reduction Scenarios for Germany""?","SELECT ?rangeId ?energy_sources_labels (AVG(?eng_gen_value) AS ?avg_eng_gen_value)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?paper o:has_contribution ?contrib;
+         o:has_publication_year ?year.
+  BIND(xsd:int(?year) AS ?y).
+  VALUES (?rangeId ?min ?max) {
+    (""2001-2005"" 2001 2005)
+    (""2006-2010"" 2006 2010)
+    (""2011-2015"" 2011 2015)
+    (""2016-2020"" 2016 2020)
+  }
+  FILTER(?min <= ?y && ?y <= ?max).
+  ?contrib o:has_energy_sources ?energy_sources.
+  ?energy_sources rdfs:label ?energy_sources_labels;
+                  o:has_electricity_generation ?energy_generation.
+  ?energy_generation o:has_value ?value.
+  BIND(xsd:float(?value) AS ?eng_gen_value).
+}
+ORDER BY ASC(?rangeId)","SELECT ?rangeId ?energy_sources_labels (AVG(?eng_gen_value) AS ?avg_eng_gen_value)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?paper orkgp:hasContribution ?contrib;
+         orkgp:hasPublicationYear ?year.
+  BIND(xsd:int(?year) AS ?y).
+  VALUES (?rangeId ?min ?max) {
+    (""2001-2005"" 2001 2005)
+    (""2006-2010"" 2006 2010)
+    (""2011-2015"" 2011 2015)
+    (""2016-2020"" 2016 2020)
+  }
+  FILTER(?min <= ?y && ?y <= ?max).
+  ?contrib orkgp:hasEnergySources ?energy_sources.
+  ?energy_sources rdfs:label ?energy_sources_labels;
+                  orkgp:hasElectricityGeneration ?energy_generation.
+  ?energy_generation orkgp:hasValue ?value.
+  BIND(xsd:float(?value) AS ?eng_gen_value).
+}
+ORDER BY ASC(?rangeId)","SELECT ?rangeId ?energy_sources_labels (AVG(?eng_gen_value) AS ?avg_eng_gen_value)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?paper orkgp:hasContribution ?contrib;
+         orkgp:hasPublicationYear ?year.
+  BIND(xsd:int(?year) AS ?y).
+  VALUES (?rangeId ?min ?max) {
+    (""2001-2005"" 2001 2005)
+    (""2006-2010"" 2006 2010)
+    (""2011-2015"" 2011 2015)
+    (""2016-2020"" 2016 2020)
+  }
+  FILTER(?min <= ?y && ?y <= ?max).
+  ?contrib orkgp:hasEnergySources ?energy_sources.
+  ?energy_sources rdfs:label ?energy_sources_labels;
+                  orkgp:hasElectricityGeneration ?energy_generation.
+  ?energy_generation orkgp:hasValue ?value.
+  BIND(xsd:float(?value) AS ?eng_gen_value).
+}
+ORDER BY ASC(?rangeId)",Short URL to the result https://tinyurl.com/yynlf9h4,#N/A,"SELECT ?rangeId ?energy_sources_labels (AVG(?eng_gen_value) AS ?avg_eng_gen_value)
+WHERE {
+  orkgr:R153801 orkgp:compareContribution ?contrib.
+  ?paper orkgp:P31 ?contrib;
+         orkgp:P29 ?year.
+  BIND(xsd:int(?year) AS ?y).
+  VALUES (?rangeId ?min ?max) {
+    (""2001-2005"" 2001 2005)
+    (""2006-2010"" 2006 2010)
+    (""2011-2015"" 2011 2015)
+    (""2016-2020"" 2016 2020)
+  }
+  FILTER(?min <= ?y && ?y <= ?max).
+  ?contrib orkgp:P43135 ?energy_sources.
+  ?energy_sources rdfs:label ?energy_sources_labels;
+                  orkgp:P43134 ?energy_generation.
+  ?energy_generation orkgp:HAS_VALUE ?value.
+  BIND(xsd:float(?value) AS ?eng_gen_value).
+}
+ORDER BY ASC(?rangeId)",
+72,"Life Sciences -> Nursing Pharmacology, Toxicology and Environmental Health ->                   Medicinal Chemistry and Pharmaceutics","Factoid
+Superlative",chain,"SELECT
+WHERE
+ORDER BY
+DESC
+LIMIT",3,comparison-based,WHICH-WHAT,R155621,What drug is the most frequently appeared in the contributions?,What is the most common drug in the studies?,"What is the most common drug in ""Examples of cyclodextrin-containing formulations for drug delivery via ocular, nasal and pulmonary routes""?","SELECT ?drug, ?drug_labels
+WHERE {
+  orkgr:R155621 orkgp:compareContribution ?contrib.
+  ?contrib o:uses_drug ?drug.
+  ?drug rdfs:label ?drug_labels.
+}
+ORDER BY DESC(COUNT(?drug))
+LIMIT 1","SELECT ?drug, ?drug_labels
+WHERE {
+  orkgr:R155621 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:usesDrug ?drug.
+  ?drug rdfs:label ?drug_labels.
+}
+ORDER BY DESC(COUNT(?drug))
+LIMIT 1","SELECT ?drug, ?drug_labels
+WHERE {
+  orkgr:R155621 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:usesDrug ?drug.
+  ?drug rdfs:label ?drug_labels.
+}
+ORDER BY DESC(COUNT(?drug))
+LIMIT 1","“http://orkg.org/orkg/resource/R144473”, ""Insulin""",#N/A,"SELECT ?drug, ?drug_labels
+WHERE {
+  orkgr:R155621 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P37578 ?drug.
+  ?drug rdfs:label ?drug_labels.
+}
+ORDER BY DESC(COUNT(?drug))
+LIMIT 1",
+31,Physical Sciences & Mathematics -> Computer Sciences -> Numerical Analysis/Scientific Computing,Factoid,tree,"SELECT
+WHERE
+FILTER
+REGEX",5,paper-based,WHICH-WHAT,no comparison used,What is the collant used by the ASTRID reactor?,What coolant does ASTRID reactor use?,no comparison used,"SELECT ?coolant ?coolant_label
+WHERE {
+  ?ASTRID_reactor ?rdfs_label ""ASTRID""^^xsd:string.
+  ?contrib ?reactor_predicate ?ASTRID_reactor.
+  ?contrib ?predicates ?coolant.
+  ?predicates rdfs:label ?predicates_label.
+  FILTER(REGEX(?predicates_label, ""coolant""))
+  ?coolant rdfs:label ?coolant_label.
+}","SELECT ?coolant ?coolant_label
+WHERE {
+  ?ASTRID_reactor ?rdfs_label ""ASTRID""^^xsd:string.
+  ?contrib ?reactor_predicate ?ASTRID_reactor.
+  ?contrib ?predicates ?coolant.
+  ?predicates rdfs:label ?predicates_label.
+  FILTER(REGEX(?predicates_label, ""coolant""))
+  ?coolant rdfs:label ?coolant_label.
+}","SELECT ?coolant ?coolant_label
+WHERE {
+  ?ASTRID_reactor ?rdfs_label ""ASTRID""^^xsd:string.
+  ?contrib ?reactor_predicate ?ASTRID_reactor.
+  ?contrib ?predicates ?coolant.
+  ?predicates rdfs:label ?predicates_label.
+  FILTER(REGEX(?predicates_label, ""coolant""))
+  ?coolant rdfs:label ?coolant_label.
+}","""http://orkg.org/orkg/resource/R109906"", ""sodium""",#N/A,"SELECT ?coolant ?coolant_label
+WHERE {
+  ?ASTRID_reactor ?rdfs_label ""ASTRID""^^xsd:string.
+  ?contrib ?reactor_predicate ?ASTRID_reactor.
+  ?contrib ?predicates ?coolant.
+  ?predicates rdfs:label ?predicates_label.
+  FILTER(REGEX(?predicates_label, ""coolant""))
+  ?coolant rdfs:label ?coolant_label.
+}",
+27,"Life Sciences -> 
+Immunology and Infectious Disease -> 
+Immunology of Infectious Disease","Factoid
+Superlative",tree,"SELECT
+WHERE
+ORDER BY
+DESC
+LIMIT",5,comparison-based,WHICH-WHAT,R110655,In which country is the overall prevalence of epilepsy the highest?,For which country of study overall prevalence of epilepsy is the highest?,"For which country of study overall prevalence of epilepsy is the highest in ""Expression of monocytic human leukocyte antigen receptor in the critically ill""?","SELECT ?country, ?country_label
+WHERE {
+  orkgr:R75729 orkgp:compareContribution ?contrib.
+  ?contrib o:country_of_study ?country.
+  ?contrib o:overall ?overall_prevalence.
+  ?country rdfs:label ?country_label.
+  ?overall_prevalence rdfs:label ?overall_prevalence_value
+}
+ORDER BY DESC(?overall_prevalence_value)
+LIMIT 1","SELECT ?country, ?country_label
+WHERE {
+  orkgr:R75729 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:countryOfStudy ?country.
+  ?contrib orkgp:overall ?overall_prevalence.
+  ?country rdfs:label ?country_label.
+  ?overall_prevalence rdfs:label ?overall_prevalence_value
+}
+ORDER BY DESC(?overall_prevalence_value)
+LIMIT 1","SELECT ?country, ?country_label
+WHERE {
+  orkgr:R75729 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:countryOfStudy ?country.
+  ?contrib orkgp:overall ?overall_prevalence.
+  ?country rdfs:label ?country_label.
+  ?overall_prevalence rdfs:label ?overall_prevalence_value
+}
+ORDER BY DESC(?overall_prevalence_value)
+LIMIT 1","""http://orkg.org/orkg/resource/R74057"", ""England""",#N/A,"SELECT ?country, ?country_label
+WHERE {
+  orkgr:R75729 orkgp:compareContribution ?contrib.
+  ?contrib orkgp:P15512 ?country.
+  ?contrib orkgp:P16013 ?overall_prevalence.
+  ?country rdfs:label ?country_label.
+  ?overall_prevalence rdfs:label ?overall_prevalence_value
+}
+ORDER BY DESC(?overall_prevalence_value)
+LIMIT 1",
+59,All research fields,"Non-factoid
+Superlative",chain,"SELECT
+WHERE
+ORDER BY
+DESC
+COUNT
+LIMIT",2,paper-based,WHICH-WHAT,no comparison used,What are the top five used research fields in papers?,Which are five the most common research fields for papers?,no comparison used,"SELECT ?research_field, ?research_field_labels
+WHERE {
+  ?papers o:has_research_field ?research_field.
+  ?research_field rdfs:label ?research_field_labels.
+}
+ORDER BY DESC(COUNT(?research_field_labels))
+LIMIT 5","SELECT ?research_field, ?research_field_labels
+WHERE {
+  ?papers orkgp:hasResearchField ?research_field.
+  ?research_field rdfs:label ?research_field_labels.
+}
+ORDER BY DESC(COUNT(?research_field_labels))
+LIMIT 5","SELECT ?research_field, ?research_field_labels
+WHERE {
+  ?papers orkgp:hasResearchField ?research_field.
+  ?research_field rdfs:label ?research_field_labels.
+}
+ORDER BY DESC(COUNT(?research_field_labels))
+LIMIT 5","orkgr:R11	Science
+orkgr:R50	Motor Control
+orkgr:R278	Information Science
+orkgr:R133	Artificial Intelligence
+orkgr:R69	Toxicology",#N/A,"SELECT ?research_field, ?research_field_labels
+WHERE {
+  ?papers orkgp:P30 ?research_field.
+  ?research_field rdfs:label ?research_field_labels.
+}
+ORDER BY DESC(COUNT(?research_field_labels))
+LIMIT 5",
+7,"Physical Sciences & Mathematics -> 
+Computer Sciences -> 
+Databases/Information Systems",Non-factoid,tree,"SELECT
+DISTINCT
+WHERE
+ORDER BY",4,paper-based,WHICH-WHAT,no comparison used,Which papers analyze DBLP as a dataset?,Which papers use the dataset DBLP?,no comparison used,"SELECT DISTINCT ?title
+WHERE {
+ ?paper a orkgc:Paper;
+ o:has_contribution [
+   o:dataset [
+     rdfs:label ""DBLP""^^xsd:string
+   ]
+ ];
+ rdfs:label ?title.
+}
+ORDER BY ?title","SELECT DISTINCT ?title
+WHERE {
+ ?paper a orkgc:Paper;
+ orkgp:hasContribution [
+   orkgp:dataset [
+     rdfs:label ""DBLP""^^xsd:string
+   ]
+ ];
+ rdfs:label ?title.
+}
+ORDER BY ?title","SELECT DISTINCT ?title
+WHERE {
+ ?paper a orkgc:Paper;
+ orkgp:hasContribution [
+   orkgp:dataset [
+     rdfs:label ""DBLP""^^xsd:string
+   ]
+ ];
+ rdfs:label ?title.
+}
+ORDER BY ?title","A Real-time Heuristic-based Unsupervised Method for Name Disambiguation in Digital Libraries
+A fast method based on multiple clustering for name disambiguation in bibliographic citations
+Author name disambiguation using a graph model with node splitting and merging based on bibliographic information
+Disambiguating authors in citations on the web and authorship correlations
+Evaluating the Use of Social Networks in Author Name Disambiguation in Digital Libraries
+On the combination of domain-specific heuristics for author name disambiguation: the nearest cluster method
+Robust hybrid name disambiguation framework for large databases
+Self-training author name disambiguation for information scarce scenarios
+Unsupervised author disambiguation using Dempster–Shafer theory",#N/A,"SELECT DISTINCT ?title
+WHERE {
+ ?paper a orkgc:Paper;
+ orkgp:P31 [
+   orkgp:P2005 [
+     rdfs:label ""DBLP""^^xsd:string
+   ]
+ ];
+ rdfs:label ?title.
+}
+ORDER BY ?title",

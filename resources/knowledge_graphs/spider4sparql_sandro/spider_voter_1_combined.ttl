@@ -1,0 +1,1368 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/area_code_state#> .
+@prefix ns2: <http://valuenet/ontop/contestants#> .
+@prefix ns3: <http://valuenet/ontop/votes#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns1:area_code a owl:DatatypeProperty ;
+    rdfs:domain :area_code_state ;
+    rdfs:range xsd:integer .
+
+ns1:state a owl:DatatypeProperty ;
+    rdfs:domain :area_code_state ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/area_code_state/area_code=201> a :area_code_state ;
+    ns1:area_code 201 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=202> a :area_code_state ;
+    ns1:area_code 202 ;
+    ns1:state "DC" .
+
+<http://valuenet/ontop/area_code_state/area_code=203> a :area_code_state ;
+    ns1:area_code 203 ;
+    ns1:state "CT" .
+
+<http://valuenet/ontop/area_code_state/area_code=205> a :area_code_state ;
+    ns1:area_code 205 ;
+    ns1:state "AL" .
+
+<http://valuenet/ontop/area_code_state/area_code=206> a :area_code_state ;
+    ns1:area_code 206 ;
+    ns1:state "WA" .
+
+<http://valuenet/ontop/area_code_state/area_code=207> a :area_code_state ;
+    ns1:area_code 207 ;
+    ns1:state "ME" .
+
+<http://valuenet/ontop/area_code_state/area_code=208> a :area_code_state ;
+    ns1:area_code 208 ;
+    ns1:state "ID" .
+
+<http://valuenet/ontop/area_code_state/area_code=210> a :area_code_state ;
+    ns1:area_code 210 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=212> a :area_code_state ;
+    ns1:area_code 212 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=213> a :area_code_state ;
+    ns1:area_code 213 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=214> a :area_code_state ;
+    ns1:area_code 214 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=215> a :area_code_state ;
+    ns1:area_code 215 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=216> a :area_code_state ;
+    ns1:area_code 216 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=217> a :area_code_state ;
+    ns1:area_code 217 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=218> a :area_code_state ;
+    ns1:area_code 218 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=219> a :area_code_state ;
+    ns1:area_code 219 ;
+    ns1:state "IN" .
+
+<http://valuenet/ontop/area_code_state/area_code=224> a :area_code_state ;
+    ns1:area_code 224 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=225> a :area_code_state ;
+    ns1:area_code 225 ;
+    ns1:state "LA" .
+
+<http://valuenet/ontop/area_code_state/area_code=228> a :area_code_state ;
+    ns1:area_code 228 ;
+    ns1:state "MS" .
+
+<http://valuenet/ontop/area_code_state/area_code=229> a :area_code_state ;
+    ns1:area_code 229 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=231> a :area_code_state ;
+    ns1:area_code 231 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=234> a :area_code_state ;
+    ns1:area_code 234 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=236> a :area_code_state ;
+    ns1:area_code 236 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=239> a :area_code_state ;
+    ns1:area_code 239 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=240> a :area_code_state ;
+    ns1:area_code 240 ;
+    ns1:state "MD" .
+
+<http://valuenet/ontop/area_code_state/area_code=248> a :area_code_state ;
+    ns1:area_code 248 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=251> a :area_code_state ;
+    ns1:area_code 251 ;
+    ns1:state "AL" .
+
+<http://valuenet/ontop/area_code_state/area_code=252> a :area_code_state ;
+    ns1:area_code 252 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=253> a :area_code_state ;
+    ns1:area_code 253 ;
+    ns1:state "WA" .
+
+<http://valuenet/ontop/area_code_state/area_code=254> a :area_code_state ;
+    ns1:area_code 254 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=256> a :area_code_state ;
+    ns1:area_code 256 ;
+    ns1:state "AL" .
+
+<http://valuenet/ontop/area_code_state/area_code=260> a :area_code_state ;
+    ns1:area_code 260 ;
+    ns1:state "IN" .
+
+<http://valuenet/ontop/area_code_state/area_code=262> a :area_code_state ;
+    ns1:area_code 262 ;
+    ns1:state "WI" .
+
+<http://valuenet/ontop/area_code_state/area_code=267> a :area_code_state ;
+    ns1:area_code 267 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=269> a :area_code_state ;
+    ns1:area_code 269 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=270> a :area_code_state ;
+    ns1:area_code 270 ;
+    ns1:state "KY" .
+
+<http://valuenet/ontop/area_code_state/area_code=276> a :area_code_state ;
+    ns1:area_code 276 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=278> a :area_code_state ;
+    ns1:area_code 278 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=281> a :area_code_state ;
+    ns1:area_code 281 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=283> a :area_code_state ;
+    ns1:area_code 283 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=301> a :area_code_state ;
+    ns1:area_code 301 ;
+    ns1:state "MD" .
+
+<http://valuenet/ontop/area_code_state/area_code=302> a :area_code_state ;
+    ns1:area_code 302 ;
+    ns1:state "DE" .
+
+<http://valuenet/ontop/area_code_state/area_code=303> a :area_code_state ;
+    ns1:area_code 303 ;
+    ns1:state "CO" .
+
+<http://valuenet/ontop/area_code_state/area_code=304> a :area_code_state ;
+    ns1:area_code 304 ;
+    ns1:state "WV" .
+
+<http://valuenet/ontop/area_code_state/area_code=305> a :area_code_state ;
+    ns1:area_code 305 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=307> a :area_code_state ;
+    ns1:area_code 307 ;
+    ns1:state "WY" .
+
+<http://valuenet/ontop/area_code_state/area_code=308> a :area_code_state ;
+    ns1:area_code 308 ;
+    ns1:state "NE" .
+
+<http://valuenet/ontop/area_code_state/area_code=309> a :area_code_state ;
+    ns1:area_code 309 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=310> a :area_code_state ;
+    ns1:area_code 310 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=312> a :area_code_state ;
+    ns1:area_code 312 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=313> a :area_code_state ;
+    ns1:area_code 313 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=314> a :area_code_state ;
+    ns1:area_code 314 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=315> a :area_code_state ;
+    ns1:area_code 315 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=316> a :area_code_state ;
+    ns1:area_code 316 ;
+    ns1:state "KS" .
+
+<http://valuenet/ontop/area_code_state/area_code=317> a :area_code_state ;
+    ns1:area_code 317 ;
+    ns1:state "IN" .
+
+<http://valuenet/ontop/area_code_state/area_code=318> a :area_code_state ;
+    ns1:area_code 318 ;
+    ns1:state "LA" .
+
+<http://valuenet/ontop/area_code_state/area_code=319> a :area_code_state ;
+    ns1:area_code 319 ;
+    ns1:state "IA" .
+
+<http://valuenet/ontop/area_code_state/area_code=320> a :area_code_state ;
+    ns1:area_code 320 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=321> a :area_code_state ;
+    ns1:area_code 321 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=323> a :area_code_state ;
+    ns1:area_code 323 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=325> a :area_code_state ;
+    ns1:area_code 325 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=330> a :area_code_state ;
+    ns1:area_code 330 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=331> a :area_code_state ;
+    ns1:area_code 331 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=334> a :area_code_state ;
+    ns1:area_code 334 ;
+    ns1:state "AL" .
+
+<http://valuenet/ontop/area_code_state/area_code=336> a :area_code_state ;
+    ns1:area_code 336 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=337> a :area_code_state ;
+    ns1:area_code 337 ;
+    ns1:state "LA" .
+
+<http://valuenet/ontop/area_code_state/area_code=339> a :area_code_state ;
+    ns1:area_code 339 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=341> a :area_code_state ;
+    ns1:area_code 341 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=347> a :area_code_state ;
+    ns1:area_code 347 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=351> a :area_code_state ;
+    ns1:area_code 351 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=352> a :area_code_state ;
+    ns1:area_code 352 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=360> a :area_code_state ;
+    ns1:area_code 360 ;
+    ns1:state "WA" .
+
+<http://valuenet/ontop/area_code_state/area_code=361> a :area_code_state ;
+    ns1:area_code 361 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=369> a :area_code_state ;
+    ns1:area_code 369 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=380> a :area_code_state ;
+    ns1:area_code 380 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=385> a :area_code_state ;
+    ns1:area_code 385 ;
+    ns1:state "UT" .
+
+<http://valuenet/ontop/area_code_state/area_code=386> a :area_code_state ;
+    ns1:area_code 386 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=401> a :area_code_state ;
+    ns1:area_code 401 ;
+    ns1:state "RI" .
+
+<http://valuenet/ontop/area_code_state/area_code=402> a :area_code_state ;
+    ns1:area_code 402 ;
+    ns1:state "NE" .
+
+<http://valuenet/ontop/area_code_state/area_code=404> a :area_code_state ;
+    ns1:area_code 404 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=405> a :area_code_state ;
+    ns1:area_code 405 ;
+    ns1:state "OK" .
+
+<http://valuenet/ontop/area_code_state/area_code=406> a :area_code_state ;
+    ns1:area_code 406 ;
+    ns1:state "MT" .
+
+<http://valuenet/ontop/area_code_state/area_code=407> a :area_code_state ;
+    ns1:area_code 407 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=408> a :area_code_state ;
+    ns1:area_code 408 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=409> a :area_code_state ;
+    ns1:area_code 409 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=410> a :area_code_state ;
+    ns1:area_code 410 ;
+    ns1:state "MD" .
+
+<http://valuenet/ontop/area_code_state/area_code=412> a :area_code_state ;
+    ns1:area_code 412 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=413> a :area_code_state ;
+    ns1:area_code 413 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=414> a :area_code_state ;
+    ns1:area_code 414 ;
+    ns1:state "WI" .
+
+<http://valuenet/ontop/area_code_state/area_code=415> a :area_code_state ;
+    ns1:area_code 415 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=417> a :area_code_state ;
+    ns1:area_code 417 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=419> a :area_code_state ;
+    ns1:area_code 419 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=423> a :area_code_state ;
+    ns1:area_code 423 ;
+    ns1:state "TN" .
+
+<http://valuenet/ontop/area_code_state/area_code=424> a :area_code_state ;
+    ns1:area_code 424 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=425> a :area_code_state ;
+    ns1:area_code 425 ;
+    ns1:state "WA" .
+
+<http://valuenet/ontop/area_code_state/area_code=430> a :area_code_state ;
+    ns1:area_code 430 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=432> a :area_code_state ;
+    ns1:area_code 432 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=434> a :area_code_state ;
+    ns1:area_code 434 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=435> a :area_code_state ;
+    ns1:area_code 435 ;
+    ns1:state "UT" .
+
+<http://valuenet/ontop/area_code_state/area_code=440> a :area_code_state ;
+    ns1:area_code 440 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=442> a :area_code_state ;
+    ns1:area_code 442 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=443> a :area_code_state ;
+    ns1:area_code 443 ;
+    ns1:state "MD" .
+
+<http://valuenet/ontop/area_code_state/area_code=464> a :area_code_state ;
+    ns1:area_code 464 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=469> a :area_code_state ;
+    ns1:area_code 469 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=470> a :area_code_state ;
+    ns1:area_code 470 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=475> a :area_code_state ;
+    ns1:area_code 475 ;
+    ns1:state "CT" .
+
+<http://valuenet/ontop/area_code_state/area_code=478> a :area_code_state ;
+    ns1:area_code 478 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=479> a :area_code_state ;
+    ns1:area_code 479 ;
+    ns1:state "AR" .
+
+<http://valuenet/ontop/area_code_state/area_code=480> a :area_code_state ;
+    ns1:area_code 480 ;
+    ns1:state "AZ" .
+
+<http://valuenet/ontop/area_code_state/area_code=484> a :area_code_state ;
+    ns1:area_code 484 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=501> a :area_code_state ;
+    ns1:area_code 501 ;
+    ns1:state "AR" .
+
+<http://valuenet/ontop/area_code_state/area_code=502> a :area_code_state ;
+    ns1:area_code 502 ;
+    ns1:state "KY" .
+
+<http://valuenet/ontop/area_code_state/area_code=503> a :area_code_state ;
+    ns1:area_code 503 ;
+    ns1:state "OR" .
+
+<http://valuenet/ontop/area_code_state/area_code=504> a :area_code_state ;
+    ns1:area_code 504 ;
+    ns1:state "LA" .
+
+<http://valuenet/ontop/area_code_state/area_code=505> a :area_code_state ;
+    ns1:area_code 505 ;
+    ns1:state "NM" .
+
+<http://valuenet/ontop/area_code_state/area_code=507> a :area_code_state ;
+    ns1:area_code 507 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=508> a :area_code_state ;
+    ns1:area_code 508 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=509> a :area_code_state ;
+    ns1:area_code 509 ;
+    ns1:state "WA" .
+
+<http://valuenet/ontop/area_code_state/area_code=510> a :area_code_state ;
+    ns1:area_code 510 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=512> a :area_code_state ;
+    ns1:area_code 512 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=513> a :area_code_state ;
+    ns1:area_code 513 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=515> a :area_code_state ;
+    ns1:area_code 515 ;
+    ns1:state "IA" .
+
+<http://valuenet/ontop/area_code_state/area_code=516> a :area_code_state ;
+    ns1:area_code 516 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=517> a :area_code_state ;
+    ns1:area_code 517 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=518> a :area_code_state ;
+    ns1:area_code 518 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=520> a :area_code_state ;
+    ns1:area_code 520 ;
+    ns1:state "AZ" .
+
+<http://valuenet/ontop/area_code_state/area_code=530> a :area_code_state ;
+    ns1:area_code 530 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=540> a :area_code_state ;
+    ns1:area_code 540 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=541> a :area_code_state ;
+    ns1:area_code 541 ;
+    ns1:state "OR" .
+
+<http://valuenet/ontop/area_code_state/area_code=551> a :area_code_state ;
+    ns1:area_code 551 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=557> a :area_code_state ;
+    ns1:area_code 557 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=559> a :area_code_state ;
+    ns1:area_code 559 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=561> a :area_code_state ;
+    ns1:area_code 561 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=562> a :area_code_state ;
+    ns1:area_code 562 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=563> a :area_code_state ;
+    ns1:area_code 563 ;
+    ns1:state "IA" .
+
+<http://valuenet/ontop/area_code_state/area_code=564> a :area_code_state ;
+    ns1:area_code 564 ;
+    ns1:state "WA" .
+
+<http://valuenet/ontop/area_code_state/area_code=567> a :area_code_state ;
+    ns1:area_code 567 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=570> a :area_code_state ;
+    ns1:area_code 570 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=571> a :area_code_state ;
+    ns1:area_code 571 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=573> a :area_code_state ;
+    ns1:area_code 573 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=574> a :area_code_state ;
+    ns1:area_code 574 ;
+    ns1:state "IN" .
+
+<http://valuenet/ontop/area_code_state/area_code=575> a :area_code_state ;
+    ns1:area_code 575 ;
+    ns1:state "NM" .
+
+<http://valuenet/ontop/area_code_state/area_code=580> a :area_code_state ;
+    ns1:area_code 580 ;
+    ns1:state "OK" .
+
+<http://valuenet/ontop/area_code_state/area_code=585> a :area_code_state ;
+    ns1:area_code 585 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=586> a :area_code_state ;
+    ns1:area_code 586 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=601> a :area_code_state ;
+    ns1:area_code 601 ;
+    ns1:state "MS" .
+
+<http://valuenet/ontop/area_code_state/area_code=602> a :area_code_state ;
+    ns1:area_code 602 ;
+    ns1:state "AZ" .
+
+<http://valuenet/ontop/area_code_state/area_code=603> a :area_code_state ;
+    ns1:area_code 603 ;
+    ns1:state "NH" .
+
+<http://valuenet/ontop/area_code_state/area_code=605> a :area_code_state ;
+    ns1:area_code 605 ;
+    ns1:state "SD" .
+
+<http://valuenet/ontop/area_code_state/area_code=606> a :area_code_state ;
+    ns1:area_code 606 ;
+    ns1:state "KY" .
+
+<http://valuenet/ontop/area_code_state/area_code=607> a :area_code_state ;
+    ns1:area_code 607 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=608> a :area_code_state ;
+    ns1:area_code 608 ;
+    ns1:state "WI" .
+
+<http://valuenet/ontop/area_code_state/area_code=609> a :area_code_state ;
+    ns1:area_code 609 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=610> a :area_code_state ;
+    ns1:area_code 610 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=612> a :area_code_state ;
+    ns1:area_code 612 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=614> a :area_code_state ;
+    ns1:area_code 614 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=615> a :area_code_state ;
+    ns1:area_code 615 ;
+    ns1:state "TN" .
+
+<http://valuenet/ontop/area_code_state/area_code=616> a :area_code_state ;
+    ns1:area_code 616 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=617> a :area_code_state ;
+    ns1:area_code 617 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=618> a :area_code_state ;
+    ns1:area_code 618 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=619> a :area_code_state ;
+    ns1:area_code 619 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=620> a :area_code_state ;
+    ns1:area_code 620 ;
+    ns1:state "KS" .
+
+<http://valuenet/ontop/area_code_state/area_code=623> a :area_code_state ;
+    ns1:area_code 623 ;
+    ns1:state "AZ" .
+
+<http://valuenet/ontop/area_code_state/area_code=626> a :area_code_state ;
+    ns1:area_code 626 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=627> a :area_code_state ;
+    ns1:area_code 627 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=628> a :area_code_state ;
+    ns1:area_code 628 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=630> a :area_code_state ;
+    ns1:area_code 630 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=631> a :area_code_state ;
+    ns1:area_code 631 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=636> a :area_code_state ;
+    ns1:area_code 636 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=641> a :area_code_state ;
+    ns1:area_code 641 ;
+    ns1:state "IA" .
+
+<http://valuenet/ontop/area_code_state/area_code=646> a :area_code_state ;
+    ns1:area_code 646 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=650> a :area_code_state ;
+    ns1:area_code 650 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=651> a :area_code_state ;
+    ns1:area_code 651 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=660> a :area_code_state ;
+    ns1:area_code 660 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=661> a :area_code_state ;
+    ns1:area_code 661 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=662> a :area_code_state ;
+    ns1:area_code 662 ;
+    ns1:state "MS" .
+
+<http://valuenet/ontop/area_code_state/area_code=669> a :area_code_state ;
+    ns1:area_code 669 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=678> a :area_code_state ;
+    ns1:area_code 678 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=679> a :area_code_state ;
+    ns1:area_code 679 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=682> a :area_code_state ;
+    ns1:area_code 682 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=689> a :area_code_state ;
+    ns1:area_code 689 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=701> a :area_code_state ;
+    ns1:area_code 701 ;
+    ns1:state "ND" .
+
+<http://valuenet/ontop/area_code_state/area_code=702> a :area_code_state ;
+    ns1:area_code 702 ;
+    ns1:state "NV" .
+
+<http://valuenet/ontop/area_code_state/area_code=703> a :area_code_state ;
+    ns1:area_code 703 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=704> a :area_code_state ;
+    ns1:area_code 704 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=706> a :area_code_state ;
+    ns1:area_code 706 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=707> a :area_code_state ;
+    ns1:area_code 707 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=708> a :area_code_state ;
+    ns1:area_code 708 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=712> a :area_code_state ;
+    ns1:area_code 712 ;
+    ns1:state "IA" .
+
+<http://valuenet/ontop/area_code_state/area_code=713> a :area_code_state ;
+    ns1:area_code 713 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=714> a :area_code_state ;
+    ns1:area_code 714 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=715> a :area_code_state ;
+    ns1:area_code 715 ;
+    ns1:state "WI" .
+
+<http://valuenet/ontop/area_code_state/area_code=716> a :area_code_state ;
+    ns1:area_code 716 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=717> a :area_code_state ;
+    ns1:area_code 717 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=718> a :area_code_state ;
+    ns1:area_code 718 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=719> a :area_code_state ;
+    ns1:area_code 719 ;
+    ns1:state "CO" .
+
+<http://valuenet/ontop/area_code_state/area_code=720> a :area_code_state ;
+    ns1:area_code 720 ;
+    ns1:state "CO" .
+
+<http://valuenet/ontop/area_code_state/area_code=724> a :area_code_state ;
+    ns1:area_code 724 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=727> a :area_code_state ;
+    ns1:area_code 727 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=731> a :area_code_state ;
+    ns1:area_code 731 ;
+    ns1:state "TN" .
+
+<http://valuenet/ontop/area_code_state/area_code=732> a :area_code_state ;
+    ns1:area_code 732 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=734> a :area_code_state ;
+    ns1:area_code 734 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=737> a :area_code_state ;
+    ns1:area_code 737 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=740> a :area_code_state ;
+    ns1:area_code 740 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=747> a :area_code_state ;
+    ns1:area_code 747 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=754> a :area_code_state ;
+    ns1:area_code 754 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=757> a :area_code_state ;
+    ns1:area_code 757 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=760> a :area_code_state ;
+    ns1:area_code 760 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=762> a :area_code_state ;
+    ns1:area_code 762 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=763> a :area_code_state ;
+    ns1:area_code 763 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=764> a :area_code_state ;
+    ns1:area_code 764 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=765> a :area_code_state ;
+    ns1:area_code 765 ;
+    ns1:state "IN" .
+
+<http://valuenet/ontop/area_code_state/area_code=769> a :area_code_state ;
+    ns1:area_code 769 ;
+    ns1:state "MS" .
+
+<http://valuenet/ontop/area_code_state/area_code=770> a :area_code_state ;
+    ns1:area_code 770 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=772> a :area_code_state ;
+    ns1:area_code 772 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=773> a :area_code_state ;
+    ns1:area_code 773 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=774> a :area_code_state ;
+    ns1:area_code 774 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=775> a :area_code_state ;
+    ns1:area_code 775 ;
+    ns1:state "NV" .
+
+<http://valuenet/ontop/area_code_state/area_code=779> a :area_code_state ;
+    ns1:area_code 779 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=781> a :area_code_state ;
+    ns1:area_code 781 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=785> a :area_code_state ;
+    ns1:area_code 785 ;
+    ns1:state "KS" .
+
+<http://valuenet/ontop/area_code_state/area_code=786> a :area_code_state ;
+    ns1:area_code 786 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=801> a :area_code_state ;
+    ns1:area_code 801 ;
+    ns1:state "UT" .
+
+<http://valuenet/ontop/area_code_state/area_code=802> a :area_code_state ;
+    ns1:area_code 802 ;
+    ns1:state "VT" .
+
+<http://valuenet/ontop/area_code_state/area_code=803> a :area_code_state ;
+    ns1:area_code 803 ;
+    ns1:state "SC" .
+
+<http://valuenet/ontop/area_code_state/area_code=804> a :area_code_state ;
+    ns1:area_code 804 ;
+    ns1:state "VA" .
+
+<http://valuenet/ontop/area_code_state/area_code=805> a :area_code_state ;
+    ns1:area_code 805 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=806> a :area_code_state ;
+    ns1:area_code 806 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=808> a :area_code_state ;
+    ns1:area_code 808 ;
+    ns1:state "HI" .
+
+<http://valuenet/ontop/area_code_state/area_code=810> a :area_code_state ;
+    ns1:area_code 810 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=812> a :area_code_state ;
+    ns1:area_code 812 ;
+    ns1:state "IN" .
+
+<http://valuenet/ontop/area_code_state/area_code=813> a :area_code_state ;
+    ns1:area_code 813 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=814> a :area_code_state ;
+    ns1:area_code 814 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=815> a :area_code_state ;
+    ns1:area_code 815 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=816> a :area_code_state ;
+    ns1:area_code 816 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=817> a :area_code_state ;
+    ns1:area_code 817 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=818> a :area_code_state ;
+    ns1:area_code 818 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=828> a :area_code_state ;
+    ns1:area_code 828 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=830> a :area_code_state ;
+    ns1:area_code 830 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=831> a :area_code_state ;
+    ns1:area_code 831 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=832> a :area_code_state ;
+    ns1:area_code 832 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=835> a :area_code_state ;
+    ns1:area_code 835 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=843> a :area_code_state ;
+    ns1:area_code 843 ;
+    ns1:state "SC" .
+
+<http://valuenet/ontop/area_code_state/area_code=845> a :area_code_state ;
+    ns1:area_code 845 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=847> a :area_code_state ;
+    ns1:area_code 847 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=848> a :area_code_state ;
+    ns1:area_code 848 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=850> a :area_code_state ;
+    ns1:area_code 850 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=856> a :area_code_state ;
+    ns1:area_code 856 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=857> a :area_code_state ;
+    ns1:area_code 857 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=858> a :area_code_state ;
+    ns1:area_code 858 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=859> a :area_code_state ;
+    ns1:area_code 859 ;
+    ns1:state "KY" .
+
+<http://valuenet/ontop/area_code_state/area_code=860> a :area_code_state ;
+    ns1:area_code 860 ;
+    ns1:state "CT" .
+
+<http://valuenet/ontop/area_code_state/area_code=862> a :area_code_state ;
+    ns1:area_code 862 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=863> a :area_code_state ;
+    ns1:area_code 863 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=864> a :area_code_state ;
+    ns1:area_code 864 ;
+    ns1:state "SC" .
+
+<http://valuenet/ontop/area_code_state/area_code=865> a :area_code_state ;
+    ns1:area_code 865 ;
+    ns1:state "TN" .
+
+<http://valuenet/ontop/area_code_state/area_code=870> a :area_code_state ;
+    ns1:area_code 870 ;
+    ns1:state "AR" .
+
+<http://valuenet/ontop/area_code_state/area_code=872> a :area_code_state ;
+    ns1:area_code 872 ;
+    ns1:state "IL" .
+
+<http://valuenet/ontop/area_code_state/area_code=878> a :area_code_state ;
+    ns1:area_code 878 ;
+    ns1:state "PA" .
+
+<http://valuenet/ontop/area_code_state/area_code=901> a :area_code_state ;
+    ns1:area_code 901 ;
+    ns1:state "TN" .
+
+<http://valuenet/ontop/area_code_state/area_code=903> a :area_code_state ;
+    ns1:area_code 903 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=904> a :area_code_state ;
+    ns1:area_code 904 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=906> a :area_code_state ;
+    ns1:area_code 906 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=907> a :area_code_state ;
+    ns1:area_code 907 ;
+    ns1:state "AK" .
+
+<http://valuenet/ontop/area_code_state/area_code=908> a :area_code_state ;
+    ns1:area_code 908 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/area_code_state/area_code=909> a :area_code_state ;
+    ns1:area_code 909 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=910> a :area_code_state ;
+    ns1:area_code 910 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=912> a :area_code_state ;
+    ns1:area_code 912 ;
+    ns1:state "GA" .
+
+<http://valuenet/ontop/area_code_state/area_code=913> a :area_code_state ;
+    ns1:area_code 913 ;
+    ns1:state "KS" .
+
+<http://valuenet/ontop/area_code_state/area_code=915> a :area_code_state ;
+    ns1:area_code 915 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=916> a :area_code_state ;
+    ns1:area_code 916 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=918> a :area_code_state ;
+    ns1:area_code 918 ;
+    ns1:state "OK" .
+
+<http://valuenet/ontop/area_code_state/area_code=919> a :area_code_state ;
+    ns1:area_code 919 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=920> a :area_code_state ;
+    ns1:area_code 920 ;
+    ns1:state "WI" .
+
+<http://valuenet/ontop/area_code_state/area_code=925> a :area_code_state ;
+    ns1:area_code 925 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=927> a :area_code_state ;
+    ns1:area_code 927 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=928> a :area_code_state ;
+    ns1:area_code 928 ;
+    ns1:state "AZ" .
+
+<http://valuenet/ontop/area_code_state/area_code=931> a :area_code_state ;
+    ns1:area_code 931 ;
+    ns1:state "TN" .
+
+<http://valuenet/ontop/area_code_state/area_code=935> a :area_code_state ;
+    ns1:area_code 935 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=936> a :area_code_state ;
+    ns1:area_code 936 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=937> a :area_code_state ;
+    ns1:area_code 937 ;
+    ns1:state "OH" .
+
+<http://valuenet/ontop/area_code_state/area_code=940> a :area_code_state ;
+    ns1:area_code 940 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=941> a :area_code_state ;
+    ns1:area_code 941 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=947> a :area_code_state ;
+    ns1:area_code 947 ;
+    ns1:state "MI" .
+
+<http://valuenet/ontop/area_code_state/area_code=949> a :area_code_state ;
+    ns1:area_code 949 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=951> a :area_code_state ;
+    ns1:area_code 951 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=952> a :area_code_state ;
+    ns1:area_code 952 ;
+    ns1:state "MN" .
+
+<http://valuenet/ontop/area_code_state/area_code=954> a :area_code_state ;
+    ns1:area_code 954 ;
+    ns1:state "FL" .
+
+<http://valuenet/ontop/area_code_state/area_code=956> a :area_code_state ;
+    ns1:area_code 956 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=957> a :area_code_state ;
+    ns1:area_code 957 ;
+    ns1:state "NM" .
+
+<http://valuenet/ontop/area_code_state/area_code=959> a :area_code_state ;
+    ns1:area_code 959 ;
+    ns1:state "CT" .
+
+<http://valuenet/ontop/area_code_state/area_code=970> a :area_code_state ;
+    ns1:area_code 970 ;
+    ns1:state "CO" .
+
+<http://valuenet/ontop/area_code_state/area_code=971> a :area_code_state ;
+    ns1:area_code 971 ;
+    ns1:state "OR" .
+
+<http://valuenet/ontop/area_code_state/area_code=972> a :area_code_state ;
+    ns1:area_code 972 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=975> a :area_code_state ;
+    ns1:area_code 975 ;
+    ns1:state "MO" .
+
+<http://valuenet/ontop/area_code_state/area_code=978> a :area_code_state ;
+    ns1:area_code 978 ;
+    ns1:state "MA" .
+
+<http://valuenet/ontop/area_code_state/area_code=979> a :area_code_state ;
+    ns1:area_code 979 ;
+    ns1:state "TX" .
+
+<http://valuenet/ontop/area_code_state/area_code=980> a :area_code_state ;
+    ns1:area_code 980 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=984> a :area_code_state ;
+    ns1:area_code 984 ;
+    ns1:state "NC" .
+
+<http://valuenet/ontop/area_code_state/area_code=985> a :area_code_state ;
+    ns1:area_code 985 ;
+    ns1:state "LA" .
+
+<http://valuenet/ontop/area_code_state/area_code=989> a :area_code_state ;
+    ns1:area_code 989 ;
+    ns1:state "MI" .
+
+ns2:contestant_name a owl:DatatypeProperty ;
+    rdfs:domain :contestants ;
+    rdfs:range xsd:string .
+
+ns2:contestant_number a owl:DatatypeProperty ;
+    rdfs:domain :contestants ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/contestants/contestant_number=1> a :contestants ;
+    ns2:contestant_name "Edwina Burnam" ;
+    ns2:contestant_number 1 .
+
+<http://valuenet/ontop/contestants/contestant_number=10> a :contestants ;
+    ns2:contestant_name "Ericka Dieter" ;
+    ns2:contestant_number 10 .
+
+<http://valuenet/ontop/contestants/contestant_number=11> a :contestants ;
+    ns2:contestant_name "Loraine NygrenTania Mattioli" ;
+    ns2:contestant_number 11 .
+
+<http://valuenet/ontop/contestants/contestant_number=4> a :contestants ;
+    ns2:contestant_name "Jessie Alloway" ;
+    ns2:contestant_number 4 .
+
+<http://valuenet/ontop/contestants/contestant_number=6> a :contestants ;
+    ns2:contestant_name "Jessie Eichman" ;
+    ns2:contestant_number 6 .
+
+<http://valuenet/ontop/contestants/contestant_number=7> a :contestants ;
+    ns2:contestant_name "Allie Rogalski" ;
+    ns2:contestant_number 7 .
+
+<http://valuenet/ontop/contestants/contestant_number=8> a :contestants ;
+    ns2:contestant_name "Nita Coster" ;
+    ns2:contestant_number 8 .
+
+<http://valuenet/ontop/contestants/contestant_number=9> a :contestants ;
+    ns2:contestant_name "Kurt Walser" ;
+    ns2:contestant_number 9 .
+
+ns3:area_code a owl:DatatypeProperty ;
+    rdfs:domain :votes ;
+    rdfs:range xsd:integer .
+
+ns3:contestant_number a owl:DatatypeProperty ;
+    rdfs:domain :votes ;
+    rdfs:range xsd:integer .
+
+ns3:created a owl:DatatypeProperty ;
+    rdfs:domain :votes ;
+    rdfs:range xsd:dateTime .
+
+ns3:phone_number a owl:DatatypeProperty ;
+    rdfs:domain :votes ;
+    rdfs:range xsd:string .
+
+ns3:ref-area_code a owl:ObjectProperty ;
+    rdfs:domain :votes ;
+    rdfs:range :area_code_state .
+
+ns3:ref-contestant_number a owl:ObjectProperty ;
+    rdfs:domain :votes ;
+    rdfs:range :contestants .
+
+ns3:state a owl:DatatypeProperty ;
+    rdfs:domain :votes ;
+    rdfs:range xsd:string .
+
+ns3:vote_id a owl:DatatypeProperty ;
+    rdfs:domain :votes ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/area_code_state/area_code=209> a :area_code_state ;
+    ns1:area_code 209 ;
+    ns1:state "CA" .
+
+<http://valuenet/ontop/area_code_state/area_code=914> a :area_code_state ;
+    ns1:area_code 914 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=917> a :area_code_state ;
+    ns1:area_code 917 ;
+    ns1:state "NY" .
+
+<http://valuenet/ontop/area_code_state/area_code=973> a :area_code_state ;
+    ns1:area_code 973 ;
+    ns1:state "NJ" .
+
+<http://valuenet/ontop/contestants/contestant_number=2> a :contestants ;
+    ns2:contestant_name "Tabatha Gehling" ;
+    ns2:contestant_number 2 .
+
+<http://valuenet/ontop/contestants/contestant_number=5> a :contestants ;
+    ns2:contestant_name "Alana Bregman" ;
+    ns2:contestant_number 5 .
+
+<http://valuenet/ontop/contestants/contestant_number=3> a :contestants ;
+    ns2:contestant_name "Kelly Clauss" ;
+    ns2:contestant_number 3 .
+
+:votes a owl:Class .
+
+:contestants a owl:Class .
+
+:area_code_state a owl:Class .
+
+[] a :votes ;
+    ns3:area_code 209 ;
+    ns3:contestant_number 3 ;
+    ns3:created "2018-03-09T19:03:39"^^xsd:dateTime ;
+    ns3:phone_number "6209222712" ;
+    ns3:ref-area_code <http://valuenet/ontop/area_code_state/area_code=209> ;
+    ns3:ref-contestant_number <http://valuenet/ontop/contestants/contestant_number=3> ;
+    ns3:state "CA" ;
+    ns3:vote_id 3 .
+
+[] a :votes ;
+    ns3:area_code 917 ;
+    ns3:contestant_number 3 ;
+    ns3:created "2018-03-09T19:03:36"^^xsd:dateTime ;
+    ns3:phone_number "7148407040" ;
+    ns3:ref-area_code <http://valuenet/ontop/area_code_state/area_code=917> ;
+    ns3:ref-contestant_number <http://valuenet/ontop/contestants/contestant_number=3> ;
+    ns3:state "NY" ;
+    ns3:vote_id 2 .
+
+[] a :votes ;
+    ns3:area_code 914 ;
+    ns3:contestant_number 2 ;
+    ns3:created "2018-03-09T19:03:21"^^xsd:dateTime ;
+    ns3:phone_number "7182887233" ;
+    ns3:ref-area_code <http://valuenet/ontop/area_code_state/area_code=914> ;
+    ns3:ref-contestant_number <http://valuenet/ontop/contestants/contestant_number=2> ;
+    ns3:state "NY" ;
+    ns3:vote_id 1 .
+
+[] a :votes ;
+    ns3:area_code 973 ;
+    ns3:contestant_number 5 ;
+    ns3:created "2018-03-09T19:03:40"^^xsd:dateTime ;
+    ns3:phone_number "5112677315" ;
+    ns3:ref-area_code <http://valuenet/ontop/area_code_state/area_code=973> ;
+    ns3:ref-contestant_number <http://valuenet/ontop/contestants/contestant_number=5> ;
+    ns3:state "NJ" ;
+    ns3:vote_id 5 .
+

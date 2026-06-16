@@ -1,0 +1,119 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+<http://valuenet/ontop/conductor#age> a owl:DatatypeProperty ;
+    rdfs:domain :conductor ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/conductor#conductor_id> a owl:DatatypeProperty ;
+    rdfs:domain :conductor ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/conductor#name> a owl:DatatypeProperty ;
+    rdfs:domain :conductor ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/conductor#nationality> a owl:DatatypeProperty ;
+    rdfs:domain :conductor ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/conductor#year_of_work> a owl:DatatypeProperty ;
+    rdfs:domain :conductor ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/orchestra#conductor_id> a owl:DatatypeProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/orchestra#major_record_format> a owl:DatatypeProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/orchestra#orchestra> a owl:DatatypeProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/orchestra#orchestra_id> a owl:DatatypeProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/orchestra#record_company> a owl:DatatypeProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/orchestra#ref-conductor_id> a owl:ObjectProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range :conductor .
+
+<http://valuenet/ontop/orchestra#year_of_founded> a owl:DatatypeProperty ;
+    rdfs:domain :orchestra ;
+    rdfs:range xsd:double .
+
+<http://valuenet/ontop/performance#date> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/performance#official_ratings_millions> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:double .
+
+<http://valuenet/ontop/performance#orchestra_id> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/performance#performance_id> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/performance#ref-orchestra_id> a owl:ObjectProperty ;
+    rdfs:domain :performance ;
+    rdfs:range :orchestra .
+
+<http://valuenet/ontop/performance#share> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/performance#type> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/performance#weekly_rank> a owl:DatatypeProperty ;
+    rdfs:domain :performance ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/show#attendance> a owl:DatatypeProperty ;
+    rdfs:domain :show ;
+    rdfs:range xsd:double .
+
+<http://valuenet/ontop/show#if_first_show> a owl:DatatypeProperty ;
+    rdfs:domain :show ;
+    rdfs:range xsd:boolean .
+
+<http://valuenet/ontop/show#performance_id> a owl:DatatypeProperty ;
+    rdfs:domain :show ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/show#ref-performance_id> a owl:ObjectProperty ;
+    rdfs:domain :show ;
+    rdfs:range :performance .
+
+<http://valuenet/ontop/show#result> a owl:DatatypeProperty ;
+    rdfs:domain :show ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/show#show_id> a owl:DatatypeProperty ;
+    rdfs:domain :show ;
+    rdfs:range xsd:integer .
+
+:conductor a owl:Class .
+
+:show a owl:Class .
+
+:orchestra a owl:Class .
+
+:performance a owl:Class .
+

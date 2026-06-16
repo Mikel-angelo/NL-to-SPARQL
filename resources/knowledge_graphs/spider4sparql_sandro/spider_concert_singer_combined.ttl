@@ -1,0 +1,358 @@
+@prefix : <http://valuenet/ontop/> .
+@prefix ns1: <http://valuenet/ontop/stadium#> .
+@prefix ns2: <http://valuenet/ontop/singer#> .
+@prefix ns3: <http://valuenet/ontop/singer_in_concert#> .
+@prefix ns4: <http://valuenet/ontop/concert#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+: a owl:Ontology .
+
+ns4:concert_id a owl:DatatypeProperty ;
+    rdfs:domain :concert ;
+    rdfs:range xsd:integer .
+
+ns4:concert_name a owl:DatatypeProperty ;
+    rdfs:domain :concert ;
+    rdfs:range xsd:string .
+
+ns4:ref-stadium_id a owl:ObjectProperty ;
+    rdfs:domain :concert ;
+    rdfs:range :stadium .
+
+ns4:stadium_id a owl:DatatypeProperty ;
+    rdfs:domain :concert ;
+    rdfs:range xsd:integer .
+
+ns4:theme a owl:DatatypeProperty ;
+    rdfs:domain :concert ;
+    rdfs:range xsd:string .
+
+ns4:year a owl:DatatypeProperty ;
+    rdfs:domain :concert ;
+    rdfs:range xsd:string .
+
+ns2:age a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:integer .
+
+ns2:country a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:string .
+
+ns2:is_male a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:boolean .
+
+ns2:name a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:string .
+
+ns2:singer_id a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:integer .
+
+ns2:song_name a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:string .
+
+ns2:song_release_year a owl:DatatypeProperty ;
+    rdfs:domain :singer ;
+    rdfs:range xsd:string .
+
+<http://valuenet/ontop/singer/singer_id=1> a :singer ;
+    ns2:age 52 ;
+    ns2:country "Netherlands" ;
+    ns2:is_male false ;
+    ns2:name "Joe Sharp" ;
+    ns2:singer_id 1 ;
+    ns2:song_name "You" ;
+    ns2:song_release_year "1992" .
+
+ns3:concert_id a owl:DatatypeProperty ;
+    rdfs:domain :singer_in_concert ;
+    rdfs:range xsd:integer .
+
+ns3:ref-concert_id a owl:ObjectProperty ;
+    rdfs:domain :singer_in_concert ;
+    rdfs:range :concert .
+
+ns3:ref-singer_id a owl:ObjectProperty ;
+    rdfs:domain :singer_in_concert ;
+    rdfs:range :singer .
+
+ns3:singer_id a owl:DatatypeProperty ;
+    rdfs:domain :singer_in_concert ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=1;singer_id=2> a :singer_in_concert ;
+    ns3:concert_id 1 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=1> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=2> ;
+    ns3:singer_id 2 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=1;singer_id=3> a :singer_in_concert ;
+    ns3:concert_id 1 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=1> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=3> ;
+    ns3:singer_id 3 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=1;singer_id=5> a :singer_in_concert ;
+    ns3:concert_id 1 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=1> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=5> ;
+    ns3:singer_id 5 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=2;singer_id=3> a :singer_in_concert ;
+    ns3:concert_id 2 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=2> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=3> ;
+    ns3:singer_id 3 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=2;singer_id=6> a :singer_in_concert ;
+    ns3:concert_id 2 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=2> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=6> ;
+    ns3:singer_id 6 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=3;singer_id=5> a :singer_in_concert ;
+    ns3:concert_id 3 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=3> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=5> ;
+    ns3:singer_id 5 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=4;singer_id=4> a :singer_in_concert ;
+    ns3:concert_id 4 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=4> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=4> ;
+    ns3:singer_id 4 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=5;singer_id=3> a :singer_in_concert ;
+    ns3:concert_id 5 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=5> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=3> ;
+    ns3:singer_id 3 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=5;singer_id=6> a :singer_in_concert ;
+    ns3:concert_id 5 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=5> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=6> ;
+    ns3:singer_id 6 .
+
+<http://valuenet/ontop/singer_in_concert/concert_id=6;singer_id=2> a :singer_in_concert ;
+    ns3:concert_id 6 ;
+    ns3:ref-concert_id <http://valuenet/ontop/concert/concert_id=6> ;
+    ns3:ref-singer_id <http://valuenet/ontop/singer/singer_id=2> ;
+    ns3:singer_id 2 .
+
+ns1:average a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:integer .
+
+ns1:capacity a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:integer .
+
+ns1:highest a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:integer .
+
+ns1:location a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:string .
+
+ns1:lowest a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:integer .
+
+ns1:name a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:string .
+
+ns1:stadium_id a owl:DatatypeProperty ;
+    rdfs:domain :stadium ;
+    rdfs:range xsd:integer .
+
+<http://valuenet/ontop/stadium/stadium_id=3> a :stadium ;
+    ns1:average 864 ;
+    ns1:capacity 2000 ;
+    ns1:highest 1980 ;
+    ns1:location "East Fife" ;
+    ns1:lowest 533 ;
+    ns1:name "Bayview Stadium" ;
+    ns1:stadium_id 3 .
+
+<http://valuenet/ontop/stadium/stadium_id=4> a :stadium ;
+    ns1:average 730 ;
+    ns1:capacity 52500 ;
+    ns1:highest 1763 ;
+    ns1:location "Queen's Park" ;
+    ns1:lowest 466 ;
+    ns1:name "Hampden Park" ;
+    ns1:stadium_id 4 .
+
+<http://valuenet/ontop/stadium/stadium_id=5> a :stadium ;
+    ns1:average 642 ;
+    ns1:capacity 3808 ;
+    ns1:highest 1125 ;
+    ns1:location "Stirling Albion" ;
+    ns1:lowest 404 ;
+    ns1:name "Forthbank Stadium" ;
+    ns1:stadium_id 5 .
+
+<http://valuenet/ontop/stadium/stadium_id=6> a :stadium ;
+    ns1:average 638 ;
+    ns1:capacity 4125 ;
+    ns1:highest 921 ;
+    ns1:location "Arbroath" ;
+    ns1:lowest 411 ;
+    ns1:name "Gayfield Park" ;
+    ns1:stadium_id 6 .
+
+<http://valuenet/ontop/concert/concert_id=3> a :concert ;
+    ns4:concert_id 3 ;
+    ns4:concert_name "Home Visits" ;
+    ns4:ref-stadium_id <http://valuenet/ontop/stadium/stadium_id=2> ;
+    ns4:stadium_id 2 ;
+    ns4:theme "Bleeding Love" ;
+    ns4:year "2015" .
+
+<http://valuenet/ontop/concert/concert_id=4> a :concert ;
+    ns4:concert_id 4 ;
+    ns4:concert_name "Week 1" ;
+    ns4:ref-stadium_id <http://valuenet/ontop/stadium/stadium_id=10> ;
+    ns4:stadium_id 10 ;
+    ns4:theme "Wide Awake" ;
+    ns4:year "2014" .
+
+<http://valuenet/ontop/concert/concert_id=6> a :concert ;
+    ns4:concert_id 6 ;
+    ns4:concert_name "Week 2" ;
+    ns4:ref-stadium_id <http://valuenet/ontop/stadium/stadium_id=7> ;
+    ns4:stadium_id 7 ;
+    ns4:theme "Party All Night" ;
+    ns4:year "2015" .
+
+<http://valuenet/ontop/singer/singer_id=4> a :singer ;
+    ns2:age 41 ;
+    ns2:country "France" ;
+    ns2:is_male false ;
+    ns2:name "Rose White" ;
+    ns2:singer_id 4 ;
+    ns2:song_name "Sun" ;
+    ns2:song_release_year "2003" .
+
+<http://valuenet/ontop/stadium/stadium_id=1> a :stadium ;
+    ns1:average 2106 ;
+    ns1:capacity 10104 ;
+    ns1:highest 4812 ;
+    ns1:location "Raith Rovers" ;
+    ns1:lowest 1294 ;
+    ns1:name "Stark's Park" ;
+    ns1:stadium_id 1 .
+
+<http://valuenet/ontop/stadium/stadium_id=10> a :stadium ;
+    ns1:average 552 ;
+    ns1:capacity 3960 ;
+    ns1:highest 780 ;
+    ns1:location "Brechin City" ;
+    ns1:lowest 315 ;
+    ns1:name "Glebe Park" ;
+    ns1:stadium_id 10 .
+
+<http://valuenet/ontop/stadium/stadium_id=7> a :stadium ;
+    ns1:average 637 ;
+    ns1:capacity 3100 ;
+    ns1:highest 1057 ;
+    ns1:location "Alloa Athletic" ;
+    ns1:lowest 331 ;
+    ns1:name "Recreation Park" ;
+    ns1:stadium_id 7 .
+
+<http://valuenet/ontop/stadium/stadium_id=9> a :stadium ;
+    ns1:average 615 ;
+    ns1:capacity 4000 ;
+    ns1:highest 837 ;
+    ns1:location "Peterhead" ;
+    ns1:lowest 400 ;
+    ns1:name "Balmoor" ;
+    ns1:stadium_id 9 .
+
+<http://valuenet/ontop/concert/concert_id=2> a :concert ;
+    ns4:concert_id 2 ;
+    ns4:concert_name "Super bootcamp" ;
+    ns4:ref-stadium_id <http://valuenet/ontop/stadium/stadium_id=2> ;
+    ns4:stadium_id 2 ;
+    ns4:theme "Free choice 2" ;
+    ns4:year "2014" .
+
+<http://valuenet/ontop/concert/concert_id=5> a :concert ;
+    ns4:concert_id 5 ;
+    ns4:concert_name "Week 1" ;
+    ns4:ref-stadium_id <http://valuenet/ontop/stadium/stadium_id=9> ;
+    ns4:stadium_id 9 ;
+    ns4:theme "Happy Tonight" ;
+    ns4:year "2015" .
+
+<http://valuenet/ontop/singer/singer_id=2> a :singer ;
+    ns2:age 32 ;
+    ns2:country "United States" ;
+    ns2:is_male true ;
+    ns2:name "Timbaland" ;
+    ns2:singer_id 2 ;
+    ns2:song_name "Dangerous" ;
+    ns2:song_release_year "2008" .
+
+<http://valuenet/ontop/singer/singer_id=5> a :singer ;
+    ns2:age 43 ;
+    ns2:country "France" ;
+    ns2:is_male true ;
+    ns2:name "John Nizinik" ;
+    ns2:singer_id 5 ;
+    ns2:song_name "Gentleman" ;
+    ns2:song_release_year "2014" .
+
+<http://valuenet/ontop/singer/singer_id=6> a :singer ;
+    ns2:age 25 ;
+    ns2:country "France" ;
+    ns2:is_male true ;
+    ns2:name "Tribal King" ;
+    ns2:singer_id 6 ;
+    ns2:song_name "Love" ;
+    ns2:song_release_year "2016" .
+
+<http://valuenet/ontop/stadium/stadium_id=2> a :stadium ;
+    ns1:average 1477 ;
+    ns1:capacity 11998 ;
+    ns1:highest 2363 ;
+    ns1:location "Ayr United" ;
+    ns1:lowest 1057 ;
+    ns1:name "Somerset Park" ;
+    ns1:stadium_id 2 .
+
+<http://valuenet/ontop/concert/concert_id=1> a :concert ;
+    ns4:concert_id 1 ;
+    ns4:concert_name "Auditions" ;
+    ns4:ref-stadium_id <http://valuenet/ontop/stadium/stadium_id=1> ;
+    ns4:stadium_id 1 ;
+    ns4:theme "Free choice" ;
+    ns4:year "2014" .
+
+<http://valuenet/ontop/singer/singer_id=3> a :singer ;
+    ns2:age 29 ;
+    ns2:country "France" ;
+    ns2:is_male true ;
+    ns2:name "Justin Brown" ;
+    ns2:singer_id 3 ;
+    ns2:song_name "Hey Oh" ;
+    ns2:song_release_year "2013" .
+
+:concert a owl:Class .
+
+:singer a owl:Class .
+
+:singer_in_concert a owl:Class .
+
+:stadium a owl:Class .
+

@@ -1,0 +1,813 @@
+{
+  "dataset_name": "spider_poker_player_combined_eval_dataset",
+  "description": "SandroGT Spider4SPARQL processed dev questions for poker_player. Gold answers are populated from the RDF graph.",
+  "source": "spider4sparql",
+  "ontology_file": "sandro_spider4sparql_graphs/poker_player.rdf",
+  "endpoint": null,
+  "questions": [
+    {
+      "id": "Q001",
+      "original_id": "poker_player_001",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/poker_player> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "5"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many poker players are there?"
+    },
+    {
+      "id": "Q002",
+      "original_id": "poker_player_002",
+      "gold_sparql": "select (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/poker_player> . }",
+      "gold_answers": [
+        {
+          "aggregation_all": "5"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "single-edge",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of poker players."
+    },
+    {
+      "id": "Q003",
+      "original_id": "poker_player_003",
+      "gold_sparql": "select ?t1_earnings where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . } order by desc (?t1_earnings)",
+      "gold_answers": [
+        {
+          "t1_earnings": "596462.0"
+        },
+        {
+          "t1_earnings": "476090.0"
+        },
+        {
+          "t1_earnings": "189233.0"
+        },
+        {
+          "t1_earnings": "142800.0"
+        },
+        {
+          "t1_earnings": "104871.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the earnings of poker players in descending order."
+    },
+    {
+      "id": "Q004",
+      "original_id": "poker_player_004",
+      "gold_sparql": "select ?t1_earnings where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . } order by desc (?t1_earnings)",
+      "gold_answers": [
+        {
+          "t1_earnings": "596462.0"
+        },
+        {
+          "t1_earnings": "476090.0"
+        },
+        {
+          "t1_earnings": "189233.0"
+        },
+        {
+          "t1_earnings": "142800.0"
+        },
+        {
+          "t1_earnings": "104871.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the earnings of poker players, ordered descending by value?"
+    },
+    {
+      "id": "Q005",
+      "original_id": "poker_player_005",
+      "gold_sparql": "select ?t1_final_table_made ?t1_best_finish where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/final_table_made> ?t1_final_table_made . ?t1 <http://valuenet/ontop/best_finish> ?t1_best_finish . }",
+      "gold_answers": [
+        {
+          "t1_final_table_made": "19.0",
+          "t1_best_finish": "2.0"
+        },
+        {
+          "t1_final_table_made": "42.0",
+          "t1_best_finish": "1.0"
+        },
+        {
+          "t1_final_table_made": "26.0",
+          "t1_best_finish": "3.0"
+        },
+        {
+          "t1_final_table_made": "10.0",
+          "t1_best_finish": "2.0"
+        },
+        {
+          "t1_final_table_made": "21.0",
+          "t1_best_finish": "1.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the final tables made and the best finishes of poker players."
+    },
+    {
+      "id": "Q006",
+      "original_id": "poker_player_006",
+      "gold_sparql": "select ?t1_final_table_made ?t1_best_finish where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/final_table_made> ?t1_final_table_made . ?t1 <http://valuenet/ontop/best_finish> ?t1_best_finish . }",
+      "gold_answers": [
+        {
+          "t1_final_table_made": "19.0",
+          "t1_best_finish": "2.0"
+        },
+        {
+          "t1_final_table_made": "42.0",
+          "t1_best_finish": "1.0"
+        },
+        {
+          "t1_final_table_made": "26.0",
+          "t1_best_finish": "3.0"
+        },
+        {
+          "t1_final_table_made": "10.0",
+          "t1_best_finish": "2.0"
+        },
+        {
+          "t1_final_table_made": "21.0",
+          "t1_best_finish": "1.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the final tables made and best finishes for all poker players?"
+    },
+    {
+      "id": "Q007",
+      "original_id": "poker_player_007",
+      "gold_sparql": "select (avg( ?t1_earnings) as ?aggregation_t1_earnings_73 ) where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_earnings_73": "301891.2"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average earnings of poker players?"
+    },
+    {
+      "id": "Q008",
+      "original_id": "poker_player_008",
+      "gold_sparql": "select (avg( ?t1_earnings) as ?aggregation_t1_earnings_73 ) where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_earnings_73": "301891.2"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the average earnings across all poker players."
+    },
+    {
+      "id": "Q009",
+      "original_id": "poker_player_009",
+      "gold_sparql": "select ?t1_money_rank where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/money_rank> ?t1_money_rank . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . } order by desc (?t1_earnings) limit 1",
+      "gold_answers": [
+        {
+          "t1_money_rank": "58.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the money rank of the poker player with the highest earnings?"
+    },
+    {
+      "id": "Q010",
+      "original_id": "poker_player_010",
+      "gold_sparql": "select ?t1_money_rank where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/money_rank> ?t1_money_rank . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . } order by desc (?t1_earnings) limit 1",
+      "gold_answers": [
+        {
+          "t1_money_rank": "58.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the money rank of the player with the greatest earnings."
+    },
+    {
+      "id": "Q011",
+      "original_id": "poker_player_011",
+      "gold_sparql": "select (max( ?t1_final_table_made) as ?aggregation_t1_final_table_made_10 ) where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/final_table_made> ?t1_final_table_made . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . FILTER(?t1_earnings < 200000) . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_final_table_made_10": "26.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the maximum number of final tables made among poker players with earnings less than 200000?"
+    },
+    {
+      "id": "Q012",
+      "original_id": "poker_player_012",
+      "gold_sparql": "select (max( ?t1_final_table_made) as ?aggregation_t1_final_table_made_10 ) where { ?t1 a <http://valuenet/ontop/poker_player> . ?t1 <http://valuenet/ontop/final_table_made> ?t1_final_table_made . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . FILTER(?t1_earnings < 200000) . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_final_table_made_10": "26.0"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the maximum final tables made across all poker players who have earnings below 200000."
+    },
+    {
+      "id": "Q013",
+      "original_id": "poker_player_013",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/people_id> ?t1_people_id . }",
+      "gold_answers": [
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Teodor Salparov"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        },
+        {
+          "t1_name": "Semen Poltavskiy"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of poker players?"
+    },
+    {
+      "id": "Q014",
+      "original_id": "poker_player_014",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/people_id> ?t1_people_id . }",
+      "gold_answers": [
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Teodor Salparov"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        },
+        {
+          "t1_name": "Semen Poltavskiy"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the names of all the poker players."
+    },
+    {
+      "id": "Q015",
+      "original_id": "poker_player_015",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/earnings> ?t2_earnings . FILTER(?t2_earnings > 300000) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of poker players whose earnings is higher than 300000?"
+    },
+    {
+      "id": "Q016",
+      "original_id": "poker_player_016",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/earnings> ?t2_earnings . FILTER(?t2_earnings > 300000) . }",
+      "gold_answers": [
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give the names of poker players who have earnings above 300000."
+    },
+    {
+      "id": "Q017",
+      "original_id": "poker_player_017",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/final_table_made> ?t2_final_table_made . } order by asc (?t2_final_table_made)",
+      "gold_answers": [
+        {
+          "t1_name": "Teodor Salparov"
+        },
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez"
+        },
+        {
+          "t1_name": "Semen Poltavskiy"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the names of poker players ordered by the final tables made in ascending order."
+    },
+    {
+      "id": "Q018",
+      "original_id": "poker_player_018",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/final_table_made> ?t2_final_table_made . } order by asc (?t2_final_table_made)",
+      "gold_answers": [
+        {
+          "t1_name": "Teodor Salparov"
+        },
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez"
+        },
+        {
+          "t1_name": "Semen Poltavskiy"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of poker players, ordered ascending by the number of final tables they have made?"
+    },
+    {
+      "id": "Q019",
+      "original_id": "poker_player_019",
+      "gold_sparql": "select ?t1_birth_date where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/birth_date> ?t1_birth_date . ?t2 <http://valuenet/ontop/earnings> ?t2_earnings . } order by asc (?t2_earnings) limit 1",
+      "gold_answers": [
+        {
+          "t1_birth_date": "August 8, 1986"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the birth date of the poker player with the lowest earnings?"
+    },
+    {
+      "id": "Q020",
+      "original_id": "poker_player_020",
+      "gold_sparql": "select ?t1_birth_date where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/birth_date> ?t1_birth_date . ?t2 <http://valuenet/ontop/earnings> ?t2_earnings . } order by asc (?t2_earnings) limit 1",
+      "gold_answers": [
+        {
+          "t1_birth_date": "August 8, 1986"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the birth date of the poker player with the lowest earnings."
+    },
+    {
+      "id": "Q021",
+      "original_id": "poker_player_021",
+      "gold_sparql": "select ?t1_money_rank where { ?t1 a <http://valuenet/ontop/poker_player> . ?t2 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/ref-people> ?t2 . ?t1 <http://valuenet/ontop/money_rank> ?t1_money_rank . ?t2 <http://valuenet/ontop/height> ?t2_height . } order by desc (?t2_height) limit 1",
+      "gold_answers": [
+        {
+          "t1_money_rank": "68.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the money rank of the tallest poker player?"
+    },
+    {
+      "id": "Q022",
+      "original_id": "poker_player_022",
+      "gold_sparql": "select ?t1_money_rank where { ?t1 a <http://valuenet/ontop/poker_player> . ?t2 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/ref-people> ?t2 . ?t1 <http://valuenet/ontop/money_rank> ?t1_money_rank . ?t2 <http://valuenet/ontop/height> ?t2_height . } order by desc (?t2_height) limit 1",
+      "gold_answers": [
+        {
+          "t1_money_rank": "68.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the money rank of the poker player with the greatest height."
+    },
+    {
+      "id": "Q023",
+      "original_id": "poker_player_023",
+      "gold_sparql": "select (avg( ?t1_earnings) as ?aggregation_t1_earnings_12 ) where { ?t1 a <http://valuenet/ontop/poker_player> . ?t2 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/ref-people> ?t2 . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . ?t2 <http://valuenet/ontop/height> ?t2_height . FILTER(?t2_height > 200) . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_earnings_12": "309445.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What is the average earnings of poker players with height higher than 200?"
+    },
+    {
+      "id": "Q024",
+      "original_id": "poker_player_024",
+      "gold_sparql": "select (avg( ?t1_earnings) as ?aggregation_t1_earnings_12 ) where { ?t1 a <http://valuenet/ontop/poker_player> . ?t2 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/ref-people> ?t2 . ?t1 <http://valuenet/ontop/earnings> ?t1_earnings . ?t2 <http://valuenet/ontop/height> ?t2_height . FILTER(?t2_height > 200) . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_earnings_12": "309445.0"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Give average earnings of poker players who are taller than 200."
+    },
+    {
+      "id": "Q025",
+      "original_id": "poker_player_025",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/earnings> ?t2_earnings . } order by desc (?t2_earnings)",
+      "gold_answers": [
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        },
+        {
+          "t1_name": "Teodor Salparov"
+        },
+        {
+          "t1_name": "Semen Poltavskiy"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of poker players in descending order of earnings?"
+    },
+    {
+      "id": "Q026",
+      "original_id": "poker_player_026",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t2 a <http://valuenet/ontop/poker_player> . ?t2 <http://valuenet/ontop/ref-people> ?t1 . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t2 <http://valuenet/ontop/earnings> ?t2_earnings . } order by desc (?t2_earnings)",
+      "gold_answers": [
+        {
+          "t1_name": "Maksim Botin"
+        },
+        {
+          "t1_name": "Aleksey Ostapenko"
+        },
+        {
+          "t1_name": "Teodor Salparov"
+        },
+        {
+          "t1_name": "Semen Poltavskiy"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Return the names of poker players sorted by their earnings descending."
+    },
+    {
+      "id": "Q027",
+      "original_id": "poker_player_027",
+      "gold_sparql": "select ?t1_nationality (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . } group by ?t1_nationality",
+      "gold_answers": [
+        {
+          "t1_nationality": "Russia",
+          "aggregation_all": "6"
+        },
+        {
+          "t1_nationality": "Bulgaria",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are different nationalities of people and the corresponding number of people from each nation?"
+    },
+    {
+      "id": "Q028",
+      "original_id": "poker_player_028",
+      "gold_sparql": "select ?t1_nationality (count( *) as ?aggregation_all) where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . } group by ?t1_nationality",
+      "gold_answers": [
+        {
+          "t1_nationality": "Russia",
+          "aggregation_all": "6"
+        },
+        {
+          "t1_nationality": "Bulgaria",
+          "aggregation_all": "1"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many people are there of each nationality?"
+    },
+    {
+      "id": "Q029",
+      "original_id": "poker_player_029",
+      "gold_sparql": "SELECT ?T1_nationality (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/people> . ?T1 <http://valuenet/ontop/nationality> ?T1_nationality . } GROUP BY ?T1_nationality ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_nationality": "Russia",
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What is the most common nationality of people?"
+    },
+    {
+      "id": "Q030",
+      "original_id": "poker_player_030",
+      "gold_sparql": "SELECT ?T1_nationality (count( *) as ?aggregation_all) WHERE { ?T1 a <http://valuenet/ontop/people> . ?T1 <http://valuenet/ontop/nationality> ?T1_nationality . } GROUP BY ?T1_nationality ORDER BY DESC (?aggregation_all) LIMIT 1",
+      "gold_answers": [
+        {
+          "T1_nationality": "Russia",
+          "aggregation_all": "6"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Give the nationality that is most common across all people."
+    },
+    {
+      "id": "Q031",
+      "original_id": "poker_player_031",
+      "gold_sparql": "select ?t1_nationality where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . } group by ?t1_nationality having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_nationality": "Russia"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "What are the nationalities that are shared by at least two people?"
+    },
+    {
+      "id": "Q032",
+      "original_id": "poker_player_032",
+      "gold_sparql": "select ?t1_nationality where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . } group by ?t1_nationality having(count( *) >= 2)",
+      "gold_answers": [
+        {
+          "t1_nationality": "Russia"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Return the nationalities for which there are two or more people."
+    },
+    {
+      "id": "Q033",
+      "original_id": "poker_player_033",
+      "gold_sparql": "select ?t1_name ?t1_birth_date where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/birth_date> ?t1_birth_date . ?t1 <http://valuenet/ontop/name> ?t1_name . } order by asc (?t1_name)",
+      "gold_answers": [
+        {
+          "t1_name": "Aleksey Ostapenko",
+          "t1_birth_date": "May 26, 1986"
+        },
+        {
+          "t1_name": "Maksim Botin",
+          "t1_birth_date": "July 14, 1983"
+        },
+        {
+          "t1_name": "Roman Bragin",
+          "t1_birth_date": "April 17, 1987"
+        },
+        {
+          "t1_name": "Semen Poltavskiy",
+          "t1_birth_date": "February 8, 1981"
+        },
+        {
+          "t1_name": "Sergey Grankin",
+          "t1_birth_date": "January 22, 1987"
+        },
+        {
+          "t1_name": "Teodor Salparov",
+          "t1_birth_date": "August 16, 1982"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez",
+          "t1_birth_date": "August 8, 1986"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the names and birth dates of people in ascending alphabetical order of name."
+    },
+    {
+      "id": "Q034",
+      "original_id": "poker_player_034",
+      "gold_sparql": "select ?t1_name ?t1_birth_date where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/birth_date> ?t1_birth_date . ?t1 <http://valuenet/ontop/name> ?t1_name . } order by asc (?t1_name)",
+      "gold_answers": [
+        {
+          "t1_name": "Aleksey Ostapenko",
+          "t1_birth_date": "May 26, 1986"
+        },
+        {
+          "t1_name": "Maksim Botin",
+          "t1_birth_date": "July 14, 1983"
+        },
+        {
+          "t1_name": "Roman Bragin",
+          "t1_birth_date": "April 17, 1987"
+        },
+        {
+          "t1_name": "Semen Poltavskiy",
+          "t1_birth_date": "February 8, 1981"
+        },
+        {
+          "t1_name": "Sergey Grankin",
+          "t1_birth_date": "January 22, 1987"
+        },
+        {
+          "t1_name": "Teodor Salparov",
+          "t1_birth_date": "August 16, 1982"
+        },
+        {
+          "t1_name": "Yevgeni Sivozhelez",
+          "t1_birth_date": "August 8, 1986"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names and birth dates of people, ordered by their names in alphabetical order?"
+    },
+    {
+      "id": "Q035",
+      "original_id": "poker_player_035",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . FILTER(?t1_nationality != 'Russia') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Teodor Salparov"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "Show names of people whose nationality is not 'Russia'."
+    },
+    {
+      "id": "Q036",
+      "original_id": "poker_player_036",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . FILTER(?t1_nationality != 'Russia') . }",
+      "gold_answers": [
+        {
+          "t1_name": "Teodor Salparov"
+        }
+      ],
+      "complexity_tier": "medium",
+      "query_shape": "star",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of people who are not from Russia?"
+    },
+    {
+      "id": "Q037",
+      "original_id": "poker_player_037",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/people_id> ?t1_people_id . Filter not exists {{select ?t22_people_id where { ?t22 a <http://valuenet/ontop/poker_player> . ?t22 <http://valuenet/ontop/people_id> ?t22_people_id . } } FILTER (?t1_people_id in (?t22_people_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Sergey Grankin"
+        },
+        {
+          "t1_name": "Roman Bragin"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "List the names of people that are not poker players."
+    },
+    {
+      "id": "Q038",
+      "original_id": "poker_player_038",
+      "gold_sparql": "select ?t1_name where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/name> ?t1_name . ?t1 <http://valuenet/ontop/people_id> ?t1_people_id . Filter not exists {{select ?t22_people_id where { ?t22 a <http://valuenet/ontop/poker_player> . ?t22 <http://valuenet/ontop/people_id> ?t22_people_id . } } FILTER (?t1_people_id in (?t22_people_id))} }",
+      "gold_answers": [
+        {
+          "t1_name": "Sergey Grankin"
+        },
+        {
+          "t1_name": "Roman Bragin"
+        }
+      ],
+      "complexity_tier": "complex",
+      "query_shape": "tree",
+      "question_type": "list",
+      "notes": null,
+      "nl_question": "What are the names of people who do not play poker?"
+    },
+    {
+      "id": "Q039",
+      "original_id": "poker_player_039",
+      "gold_sparql": "select distinct (count(distinct ?t1_nationality) as ?aggregation_t1_nationality_43 ) where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_nationality_43": "2"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "How many distinct nationalities are there?"
+    },
+    {
+      "id": "Q040",
+      "original_id": "poker_player_040",
+      "gold_sparql": "select distinct (count(distinct ?t1_nationality) as ?aggregation_t1_nationality_43 ) where { ?t1 a <http://valuenet/ontop/people> . ?t1 <http://valuenet/ontop/nationality> ?t1_nationality . }",
+      "gold_answers": [
+        {
+          "aggregation_t1_nationality_43": "2"
+        }
+      ],
+      "complexity_tier": "simple",
+      "query_shape": "star",
+      "question_type": "count",
+      "notes": null,
+      "nl_question": "Count the number of different nationalities."
+    }
+  ]
+}
