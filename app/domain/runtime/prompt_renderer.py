@@ -1,4 +1,4 @@
-"""Render runtime LLM prompts from package and retrieval context.
+﻿"""Render runtime LLM prompts from package and retrieval context.
 
 This module is the only runtime layer that knows about the Jinja templates. It
 turns package metadata, retrieved RAG chunks, ontology prefixes, failed queries,
@@ -24,10 +24,30 @@ SYSTEM_ROLE = (
 CORRECTION_SYSTEM_ROLE = (
     "You are an expert SPARQL query generator. "
     "Your previous query failed validation. "
-    "Read the error messages carefully — they identify the exact problem. "
-    "Read the ontology chunks carefully — they contain the correct class and property names. "
+    "Read the error messages carefully â€” they identify the exact problem. "
+    "Read the ontology chunks carefully â€” they contain the correct class and property names. "
     "Fix the query using only URIs that exist in the provided ontology context."
 )
+
+# Previous label-centric entity matching rules, kept for reference:
+# - Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA, :UCLouvain-CTMA).
+# - Instance URIs are opaque identifiers that cannot be guessed from labels.
+# - Always find instances by class and label using this pattern:
+#   ?entity rdf:type :ClassName ; rdfs:label ?label .
+#   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
+# - Use LCASE and CONTAINS for partial, case-insensitive matching.
+# - When the question names a specific entity, extract the key words for the FILTER.
+#   Example: "CAMPUS VESTA" -> FILTER(CONTAINS(LCASE(STR(?label)), "campus vesta"))
+# - When no specific entity is named, omit the FILTER to match all instances.
+#
+# Previous rdfs:label-centric result-shape rules, kept for reference:
+# - If the answer includes an ontology entity/resource and `rdfs:label` is available, return the label variable instead of the entity URI.
+# - Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
+# - Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
+# - For aggregate queries grouped by an ontology entity/resource, do not return only the grouping URI. Join the resource to its label and return the label variable as the displayed answer. Group by both the resource and the label when needed.
+# - If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
+# - Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
+# - Do not invent label properties or label prefixes.
 
 PROMPT_RULES = """Prefix Usage Rules:
 - Use only the prefix declarations listed above.
@@ -36,33 +56,32 @@ PROMPT_RULES = """Prefix Usage Rules:
 - Unknown prefixes will fail validation.
 
 Entity Matching Rules:
-- Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA, :UCLouvain-CTMA).
-- Instance URIs are opaque identifiers that cannot be guessed from labels.
-- Always find instances by class and label using this pattern:
-  ?entity rdf:type :ClassName ; rdfs:label ?label .
+- Do not assume entities use rdfs:label.
+- Use rdfs:label only if it appears in the retrieved ontology chunks or ontology context as a property for that class.
+- If the chunks show a name-like datatype property such as :name, :hasName, :label, or similar, use that property for text matching.
+- If the question names a specific entity and the entity URI is visible in context or clearly present in the ontology namespace, you may use that URI directly.
+- Otherwise match by the most appropriate visible name/label property:
+  ?entity rdf:type :ClassName ;
+          :nameOrLabelProperty ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
-- When the question names a specific entity, extract the key words for the FILTER.
-  Example: "CAMPUS VESTA" → FILTER(CONTAINS(LCASE(STR(?label)), "campus vesta"))
+- Never invent name/label properties. Use only properties shown in the retrieved chunks.
 - When no specific entity is named, omit the FILTER to match all instances.
 
 Result Shape Rules:
-- If the answer includes an ontology entity/resource and `rdfs:label` is available, return the label variable instead of the entity URI.
-- Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
-- Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
-- For aggregate queries grouped by an ontology entity/resource, do not return only the grouping URI. Join the resource to its label and return the label variable as the displayed answer. Group by both the resource and the label when needed.
-- If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
-- Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
+- When returning entity names, use the ontology's visible name/label property if one is provided.
+- If no name/label property is visible, return the entity URI.
+- For aggregate queries grouped by an ontology entity/resource, expose the visible name/label property when available and group by both the resource and the display value when needed.
 - Do not invent label properties or label prefixes.
 
 Result Shape Example:
-For questions that count or group resources, expose the resource label:
+For questions that count or group resources, expose the resource display value when a visible name/label property exists:
 SELECT ?entityLabel (COUNT(?item) AS ?count)
 WHERE {
   ?entity :someProperty ?item .
-  ?entity rdfs:label ?entityLabel .
+  ?entity :nameOrLabelProperty ?entityLabel .
 }
-GROUP BY ?entityLabel
+GROUP BY ?entity ?entityLabel
 
 Strict Constraints:
 - Only use class and property names that appear in the Relevant Ontology Chunks above.
