@@ -131,14 +131,13 @@ class ExperimentRunner:
         prefix_map: dict[str, str] | None,
     ) -> tuple[QuestionResult, ComparisonResult | None]:
         """Run one question through the runtime pipeline and score it if possible."""
-        is_scored = bool(question.gold_answers)
         result = QuestionResult(
             question_id=question.id,
             nl_question=question.nl_question,
             gold_sparql=question.gold_sparql,
             gold_answers=question.gold_answers,
-            scoring_status="scored" if is_scored else "missing_gold",
-            is_scored=is_scored,
+            scoring_status="scored",
+            is_scored=True,
             model_name=self.config.model_name,
             pipeline_config=self.config.to_dict(),
         )

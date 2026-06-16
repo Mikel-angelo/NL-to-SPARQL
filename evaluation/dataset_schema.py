@@ -64,9 +64,8 @@ class EvaluationQuestion(BaseModel):
 
     `nl_question` is sent to the runtime pipeline. `gold_sparql` is the
     reference query used to build or validate `gold_answers`. Non-empty
-    `gold_answers` make the question scored; an empty list currently means the
-    evaluation runner executes the question but excludes it from correctness
-    metrics.
+    `gold_answers` are the expected rows. An empty list is a scored expected
+    empty result set.
     """
 
     id: str = Field(..., description="Unique question identifier, e.g. Q001")
@@ -74,7 +73,7 @@ class EvaluationQuestion(BaseModel):
     gold_sparql: str = Field(..., description="Gold-standard SPARQL query")
     gold_answers: list[dict[str, str]] = Field(
         default_factory=list,
-        description="Expected result rows. Empty means this question is unscored unless the dataset intentionally defines an empty answer set.",
+        description="Expected result rows. Empty means the correct result set has no rows.",
     )
     complexity_tier: ComplexityTier = Field(..., description="Broad complexity category")
     query_shape: QueryShape = Field(..., description="Structural query shape")

@@ -11,9 +11,9 @@ ordinary JSON properties. It is a dataset maintenance tool, not the experiment
 runner.
 
 Examples:
-    python -m evaluation.dataset_builder --dataset evaluation/datasets/enovation_v1.json --endpoint http://127.0.0.1:3030/my-dataset/query --populate
-    python -m evaluation.dataset_builder --dataset evaluation/datasets/enovation_v1.json --endpoint http://127.0.0.1:3030/my-dataset/query --validate
-    python -m evaluation.dataset_builder --dataset evaluation/datasets/enovation_v1.json --stats
+    python -m evaluation.dataset_builder --dataset evaluation/datasets/eNOVATION_eval_dataset.json --endpoint http://127.0.0.1:3030/my-dataset/query --populate
+    python -m evaluation.dataset_builder --dataset evaluation/datasets/eNOVATION_eval_dataset.json --endpoint http://127.0.0.1:3030/my-dataset/query --validate
+    python -m evaluation.dataset_builder --dataset evaluation/datasets/eNOVATION_eval_dataset.json --stats
 """
 
 from __future__ import annotations
@@ -44,6 +44,9 @@ def extract_bindings(raw_result: dict) -> list[dict[str, str]]:
     datatype, and language metadata are ignored here; answer comparison later
     performs its own normalization on the stored strings.
     """
+    if "boolean" in raw_result:
+        return [{"boolean": str(bool(raw_result["boolean"])).lower()}]
+
     bindings = raw_result.get("results", {}).get("bindings", [])
     return [
         {var: binding[var]["value"] for var in binding}

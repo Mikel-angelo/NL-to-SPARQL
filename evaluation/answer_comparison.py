@@ -158,17 +158,11 @@ def compare_results(
     if generated is None:
         result.generated_is_none = True
         result.generated_is_empty = True
-        if result.gold_is_empty:
-            result.exact_match = True
-            result.precision = 1.0
-            result.recall = 1.0
-            result.f1 = 1.0
-        else:
-            result.precision = 1.0
-            result.recall = 0.0
-            result.f1 = 0.0
-            result.gold_size = len(gold)
-            result.false_negatives = len(gold)
+        result.gold_size = len(gold)
+        result.false_negatives = len(gold)
+        result.precision = 1.0
+        result.recall = 0.0
+        result.f1 = 0.0
         return result
 
     result.generated_is_empty = len(generated) == 0
