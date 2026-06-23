@@ -280,14 +280,14 @@ async def run_query_attempts(
                 is_empty = _is_empty_select_result(execution_result, validation_result.normalized_query)
 
                 if is_empty and iteration < max(1, k_max):
-                    # Empty result on a SELECT — trigger correction with guidance
+                    # Empty result on a SELECT - trigger correction with guidance
                     errors = [
                         "Query executed successfully but returned 0 results. "
                         "Common causes: (1) An entity was referenced by a constructed URI "
-                        "instead of using rdfs:label with FILTER — instance URIs cannot be "
+                        "instead of using rdfs:label with FILTER - instance URIs cannot be "
                         "guessed from labels. Use the pattern: ?entity rdf:type :ClassName ; "
                         "rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?label)), \"search term\")). "
-                        "(2) A property name is close but not exactly correct — re-read the "
+                        "(2) A property name is close but not exactly correct - re-read the "
                         "ontology chunks carefully."
                     ]
                     status = "completed"
@@ -295,7 +295,7 @@ async def run_query_attempts(
                     iteration_payload["errors"] = errors
                     iteration_payload["execution"] = execution_stage.to_dict()
                 else:
-                    # Non-empty result or last iteration — accept the result
+                    # Non-empty result or last iteration - accept the result
                     status = "completed"
                     errors = None
                     iteration_payload["status"] = "completed"

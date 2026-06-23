@@ -24,8 +24,8 @@ SYSTEM_ROLE = (
 CORRECTION_SYSTEM_ROLE = (
     "You are an expert SPARQL query generator. "
     "Your previous query failed validation. "
-    "Read the error messages carefully â€” they identify the exact problem. "
-    "Read the ontology chunks carefully â€” they contain the correct class and property names. "
+    "Read the error messages carefully - they identify the exact problem. "
+    "Read the ontology chunks carefully - they contain the correct class and property names. "
     "Fix the query using only URIs that exist in the provided ontology context."
 )
 
