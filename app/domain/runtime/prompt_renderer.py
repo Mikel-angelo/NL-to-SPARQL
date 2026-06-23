@@ -49,13 +49,14 @@ CORRECTION_SYSTEM_ROLE = (
 # - Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
 # - Do not invent label properties or label prefixes.
 
-PROMPT_RULES = """Prefix Usage Rules:
+PREFIX_USAGE_RULES = """Prefix Usage Rules:
 - Use only the prefix declarations listed above.
 - Do not use the ontology label or dataset label as a prefix.
 - If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
 - Unknown prefixes will fail validation.
+"""
 
-Entity Matching Rules:
+ENTITY_MATCHING_RULES = """Entity Matching Rules:
 - Do not assume entities use rdfs:label.
 - Use rdfs:label only if it appears in the retrieved ontology chunks or ontology context as a property for that class.
 - If the chunks show a name-like datatype property such as :name, :hasName, :label, or similar, use that property for text matching.
@@ -67,14 +68,16 @@ Entity Matching Rules:
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
 - Never invent name/label properties. Use only properties shown in the retrieved chunks.
 - When no specific entity is named, omit the FILTER to match all instances.
+"""
 
-Result Shape Rules:
+RESULT_SHAPE_RULES = """Result Shape Rules:
 - When returning entity names, use the ontology's visible name/label property if one is provided.
 - If no name/label property is visible, return the entity URI.
 - For aggregate queries grouped by an ontology entity/resource, expose the visible name/label property when available and group by both the resource and the display value when needed.
 - Do not invent label properties or label prefixes.
+"""
 
-Result Shape Example:
+RESULT_SHAPE_EXAMPLE = """Result Shape Example:
 For questions that count or group resources, expose the resource display value when a visible name/label property exists:
 SELECT ?entityLabel (COUNT(?item) AS ?count)
 WHERE {
@@ -82,13 +85,24 @@ WHERE {
   ?entity :nameOrLabelProperty ?entityLabel .
 }
 GROUP BY ?entity ?entityLabel
+"""
 
-Strict Constraints:
+STRICT_CONSTRAINTS = """Strict Constraints:
 - Only use class and property names that appear in the Relevant Ontology Chunks above.
 - If the exact property name is not visible in the chunks, re-read them carefully before writing the query. Do not guess or invent property names.
 - Every variable in SELECT must appear in the WHERE clause.
 - Do not use OPTIONAL unless the question explicitly implies some data may be missing.
 """
+
+PROMPT_RULE_SECTIONS = (
+    PREFIX_USAGE_RULES,
+    ENTITY_MATCHING_RULES,
+    RESULT_SHAPE_RULES,
+    RESULT_SHAPE_EXAMPLE,
+    STRICT_CONSTRAINTS,
+)
+
+PROMPT_RULES = "\n\n".join(section.strip() for section in PROMPT_RULE_SECTIONS) + "\n"
 
 OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
 - Return only one valid SPARQL query.
