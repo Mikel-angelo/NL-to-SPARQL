@@ -32,10 +32,11 @@ from app.domain.package import (
 )
 from app.domain.rag import RetrievedChunk, retrieve_context
 from app.domain.runtime import query_correction, query_generation, sparql_execution
-from app.domain.runtime.prompt_renderer import render_query_generation_prompt
+from app.domain.runtime.prompt_renderer import SYSTEM_ROLE, render_query_generation_prompt
 from app.domain.runtime.query_trace import write_query_trace, write_readable_query_trace
 from app.domain.runtime.validation import ValidationStageResult, validate_query
 from app.domain.rag.few_shot_retrieval import retrieve_few_shot_examples
+from app.domain.runtime.abox_path_discovery import discover_paths_for_correction
 
 @dataclass(frozen=True)
 class QueryPipelineResult:
@@ -239,10 +240,11 @@ async def run_query_attempts(
     to the correction helper to produce the next candidate until one succeeds or
     `k_max` attempts have been recorded.
     """
-    generated_query = await query_generation.generate_initial_query(
+    generated_query, message_history = await query_generation.generate_initial_query_chat(
         generation_prompt,
         model=model,
         llm_api_url=llm_api_url,
+        system_role=SYSTEM_ROLE,
     )
     current_query = generated_query
     corrected_query = None
@@ -280,16 +282,24 @@ async def run_query_attempts(
                 is_empty = _is_empty_select_result(execution_result, validation_result.normalized_query)
 
                 if is_empty and iteration < max(1, k_max):
-                    # Empty result on a SELECT - trigger correction with guidance
-                    errors = [
+                    # Empty result on a SELECT - discover actual ABox paths for the hint
+                    path_hint = await discover_paths_for_correction(
+                        endpoint_url,
+                        validation_result.normalized_query,
+                        ontology_context,
+                    )
+                    base_message = (
                         "Query executed successfully but returned 0 results. "
                         "Common causes: (1) An entity was referenced by a constructed URI "
                         "instead of using rdfs:label with FILTER - instance URIs cannot be "
                         "guessed from labels. Use the pattern: ?entity rdf:type :ClassName ; "
                         "rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?label)), \"search term\")). "
-                        "(2) A property name is close but not exactly correct - re-read the "
-                        "ontology chunks carefully."
-                    ]
+                        "(2) A property name is close but not exactly correct."
+                    )
+                    if path_hint:
+                        errors = [base_message + "\n\n" + path_hint]
+                    else:
+                        errors = [base_message + " Re-read the ontology chunks carefully."]
                     status = "completed"
                     iteration_payload["status"] = "executed_empty"
                     iteration_payload["errors"] = errors
@@ -319,12 +329,10 @@ async def run_query_attempts(
             final_query = validation_result.normalized_query
             break
 
-        current_query = await query_correction.correct_query(
-            question=question,
-            failed_query=current_query,
-            validation_errors=errors or [],
-            retrieved_context=retrieved_context,
-            ontology_context=ontology_context,
+        correction_message = _build_correction_message(errors or [])
+        current_query, message_history = await query_correction.correct_query_chat(
+            message_history=message_history,
+            correction_message=correction_message,
             model=model,
             llm_api_url=llm_api_url,
         )
@@ -377,6 +385,21 @@ def _validation_summary(validation: dict[str, object]) -> str:
         if isinstance(stage, dict) and not stage.get("passed") and isinstance(stage.get("code"), str)
     ]
     return ", ".join(failed_codes) if failed_codes else "VALIDATION_OK"
+
+
+def _build_correction_message(errors: list[str]) -> str:
+    """Build a concise correction message from validation/execution errors.
+
+    Used as a follow-up user message in the chat conversation. The model already
+    sees its previous query in the history, so this only needs to convey what
+    went wrong and ask for a fix.
+    """
+    error_text = "\n".join(f"- {e}" for e in errors)
+    return (
+        f"Your previous query failed. Errors:\n{error_text}\n\n"
+        f"Fix the query based on these errors. "
+        f"Return only a corrected SPARQL query, no explanations."
+    )
 
 
 def _is_empty_select_result(execution_result: dict[str, object] | None, query: str) -> bool:

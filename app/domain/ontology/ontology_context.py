@@ -36,6 +36,7 @@ def build_ontology_context(
         ],
         "class_hierarchy": _class_hierarchy(graph, class_uris),
         "instance_statistics": _instance_statistics(graph, class_uris),
+        "naming_strategy": _naming_strategy(graph, class_uris),
     }
 
 
@@ -94,6 +95,124 @@ def _instance_statistics(graph: Graph, class_uris: list[URIRef]) -> dict[str, ob
         "total_instances": total_instances,
         "class_instances": sorted(class_instances, key=lambda item: item["class_uri"]),
     }
+
+
+# Datatype-property local names that commonly hold human-readable entity names,
+# ordered by preference. Used only as a tiebreaker when a class has multiple
+# candidate name properties in the actual data.
+_NAME_PROPERTY_PREFERENCE = (
+    "name", "title", "label", "preflabel",
+    "first_name", "fname", "full_name", "fullname",
+    "breed_name", "size_description", "description",
+)
+
+
+def _naming_strategy(graph: Graph, class_uris: list[URIRef]) -> dict[str, object]:
+    """Determine, from actual data, how each class exposes human-readable names.
+
+    For each class that has instances, inspect the instances to see whether they
+    carry rdfs:label. If they do, that class uses "rdfs:label". If they do not,
+    look for the datatype property whose values best serve as the display name
+    (a string-valued property, preferring conventional name properties).
+
+    Returns:
+    {
+      "default": "rdfs:label" | "custom" | "mixed",
+      "uses_rdfs_label": bool,        # true if ANY class uses rdfs:label
+      "per_class": { "<ClassLocalName>": "rdfs:label" | "<propertyLocalName>" }
+    }
+
+    This is ground truth from the data, not a schema heuristic. It works per
+    class, so mixed ontologies (some classes with rdfs:label, some with custom
+    names) are handled correctly.
+    """
+    per_class: dict[str, str] = {}
+    rdfs_label_count = 0
+    custom_count = 0
+
+    for class_uri in class_uris:
+        instances = [s for s in graph.subjects(RDF.type, class_uri) if isinstance(s, URIRef)]
+        if not instances:
+            continue
+
+        class_name = _local_name(class_uri)
+
+        # Check whether instances of this class carry rdfs:label in the data
+        has_rdfs_label = any(
+            isinstance(graph.value(instance, RDFS.label), Literal)
+            for instance in instances
+        )
+
+        if has_rdfs_label:
+            per_class[class_name] = "rdfs:label"
+            rdfs_label_count += 1
+            continue
+
+        # No rdfs:label — find the best string-valued datatype property to use
+        name_property = _detect_name_property(graph, instances)
+        if name_property:
+            per_class[class_name] = name_property
+            custom_count += 1
+
+    # Decide the overall default
+    if rdfs_label_count > 0 and custom_count == 0:
+        default = "rdfs:label"
+    elif custom_count > 0 and rdfs_label_count == 0:
+        default = "custom"
+    elif custom_count > 0 and rdfs_label_count > 0:
+        default = "mixed"
+    else:
+        default = "rdfs:label"  # No instances found at all — safe default
+
+    return {
+        "default": default,
+        "uses_rdfs_label": rdfs_label_count > 0,
+        "per_class": per_class,
+    }
+
+
+def _detect_name_property(graph: Graph, instances: list[URIRef]) -> str | None:
+    """Find the datatype property that best holds the display name for instances.
+
+    Collects all string-valued predicates used by the sampled instances, then
+    picks the one that best matches conventional name properties. Falls back to
+    the most common string property if no conventional name is found.
+    """
+    # Sample up to 10 instances for efficiency
+    sample = instances[:10]
+
+    # Count string-valued predicates across the sample
+    predicate_counts: dict[str, int] = {}
+    for instance in sample:
+        for predicate, obj in graph.predicate_objects(instance):
+            if not isinstance(predicate, URIRef):
+                continue
+            if predicate in (RDF.type, RDFS.label, RDFS.comment):
+                continue
+            if isinstance(obj, Literal):
+                # Prefer string literals (names are strings, not numbers/dates)
+                datatype = getattr(obj, "datatype", None)
+                is_stringy = datatype is None or "string" in str(datatype).lower()
+                if is_stringy:
+                    pred_local = _local_name(predicate)
+                    predicate_counts[pred_local] = predicate_counts.get(pred_local, 0) + 1
+
+    if not predicate_counts:
+        return None
+
+    # First, try conventional name properties in order of preference
+    for preferred in _NAME_PROPERTY_PREFERENCE:
+        for pred_local in predicate_counts:
+            if pred_local.lower() == preferred:
+                return pred_local
+
+    # Then try any property containing "name"
+    for pred_local in predicate_counts:
+        if "name" in pred_local.lower() and "code" not in pred_local.lower():
+            return pred_local
+
+    # Fallback: the most frequently populated string property
+    return max(predicate_counts.items(), key=lambda kv: kv[1])[0]
 
 
 def _subjects_for_types(graph: Graph, rdf_types: set[URIRef]) -> list[URIRef]:

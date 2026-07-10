@@ -119,14 +119,24 @@ def _vocabulary_validation(query: str, ontology_context: dict[str, object]) -> V
     unknown_properties: list[str] = []
     unknown_classes: list[str] = []
 
+    # Build local-name sets for fallback matching (handles namespace mismatches)
+    property_local_names = _local_names_from_uris(property_uris)
+    class_local_names = _local_names_from_uris(class_uris)
+
     for predicate_uri in _predicate_uris(query, prefix_map):
         if _is_builtin_predicate(predicate_uri):
             continue
         if predicate_uri not in property_uris:
+            # Fallback: accept if local name matches a known property
+            if _local_name(predicate_uri) in property_local_names:
+                continue
             unknown_properties.append(predicate_uri)
 
     for class_uri in _rdf_type_object_uris(query, prefix_map):
         if class_uri not in class_uris:
+            # Fallback: accept if local name matches a known class
+            if _local_name(class_uri) in class_local_names:
+                continue
             unknown_classes.append(class_uri)
 
     all_unknown = unknown_properties + unknown_classes
@@ -374,6 +384,16 @@ def _uris_from_entries(entries: object) -> set[str]:
         if isinstance(item, dict) and isinstance(item.get("uri"), str):
             uris.add(str(item["uri"]))
     return uris
+
+
+def _local_names_from_uris(uris: set[str]) -> set[str]:
+    """Extract local names from a set of full URIs for fallback matching.
+
+    When the LLM declares a custom prefix with the wrong namespace, the
+    expanded URI won't match the stored URI even though the local name is
+    correct. This set enables local-name-only matching as a fallback.
+    """
+    return {_local_name(uri) for uri in uris if uri}
 
 
 # ── Fuzzy-match suggestion helpers ────────────────────────────────────────────

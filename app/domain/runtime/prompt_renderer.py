@@ -4,6 +4,10 @@ This module is the only runtime layer that knows about the Jinja templates. It
 turns package metadata, retrieved RAG chunks, ontology prefixes, failed queries,
 and validation/execution feedback into prompt strings. It does not call the LLM
 or decide when prompts should be rendered.
+
+Prompt rules are ontology-adaptive: the module detects whether the ontology uses
+rdfs:label or custom name properties and selects the appropriate entity matching
+and result shape rules automatically.
 """
 
 from __future__ import annotations
@@ -36,20 +40,9 @@ PREFIX_USAGE_RULES = """Prefix Usage Rules:
 - Unknown prefixes will fail validation.
 """
 
-# ENTITY_MATCHING_RULES = """Entity Matching Rules:
-# - Do not assume entities use rdfs:label.
-# - Use rdfs:label only if it appears in the retrieved ontology chunks or ontology context as a property for that class.
-# - If the chunks show a name-like datatype property such as :name, :hasName, :label, or similar, use that property for text matching.
-# - If the question names a specific entity and the entity URI is visible in context or clearly present in the ontology namespace, you may use that URI directly.
-# - Otherwise match by the most appropriate visible name/label property:
-#   ?entity rdf:type :ClassName ;
-#           :nameOrLabelProperty ?label .
-#   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
-# - Use LCASE and CONTAINS for partial, case-insensitive matching.
-# - Never invent name/label properties. Use only properties shown in the retrieved chunks.
-# - When no specific entity is named, omit the FILTER to match all instances.
-# """
-ENTITY_MATCHING_RULES = """ 
+# ── Adaptive Entity Matching Rules ────────────────────────────────────────────
+
+_ENTITY_MATCHING_RULES_RDFS_LABEL = """
 Entity Matching Rules:
 - Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA, :UCLouvain-CTMA).
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
@@ -60,15 +53,38 @@ Entity Matching Rules:
 - When the question names a specific entity, extract the key words for the FILTER.
   Example: "CAMPUS VESTA" -> FILTER(CONTAINS(LCASE(STR(?label)), "campus vesta"))
 - When no specific entity is named, omit the FILTER to match all instances."""
-#
-# new that did not work well with enovation
-# RESULT_SHAPE_RULES = """Result Shape Rules:
-# - When returning entity names, use the ontology's visible name/label property if one is provided.
-# - If no name/label property is visible, return the entity URI.
-# - For aggregate queries grouped by an ontology entity/resource, expose the visible name/label property when available and group by both the resource and the display value when needed.
-# - Do not invent label properties or label prefixes.
-# """
-RESULT_SHAPE_RULES = """Result Shape Rules:
+
+_ENTITY_MATCHING_RULES_CUSTOM = """
+Entity Matching Rules:
+- Never construct individual/instance URIs directly.
+- Instance URIs are opaque identifiers that cannot be guessed.
+- This ontology does NOT use rdfs:label. Do not use rdfs:label for entity names.
+- Instead, use the domain-specific name properties from the ontology chunks.
+- Name properties detected in this ontology:
+{name_property_hints}
+- To find a specific entity by name, use the appropriate name property with FILTER:
+  ?entity rdf:type :ClassName ;
+          :nameProperty ?name .
+  FILTER(CONTAINS(LCASE(STR(?name)), "search term"))
+- Use LCASE and CONTAINS for partial, case-insensitive matching.
+- When no specific entity is named, omit the FILTER to match all instances."""
+
+_ENTITY_MATCHING_RULES_MIXED = """
+Entity Matching Rules:
+- Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA).
+- Instance URIs are opaque identifiers that cannot be guessed from labels.
+- Most classes in this ontology use rdfs:label. As the default, find instances by class and label:
+  ?entity rdf:type :ClassName ; rdfs:label ?label .
+  FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
+- EXCEPTION — the following classes do NOT use rdfs:label. For these, use the listed name property instead of rdfs:label:
+{name_property_exceptions}
+- Use LCASE and CONTAINS for partial, case-insensitive matching.
+- When the question names a specific entity, extract the key words for the FILTER.
+- When no specific entity is named, omit the FILTER to match all instances."""
+
+# ── Adaptive Result Shape Rules ───────────────────────────────────────────────
+
+_RESULT_SHAPE_RULES_RDFS_LABEL = """Result Shape Rules:
 - If the answer includes an ontology entity/resource and `rdfs:label` is available, return the label variable instead of the entity URI.
 - Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
 - Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
@@ -77,23 +93,27 @@ RESULT_SHAPE_RULES = """Result Shape Rules:
 - Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
 - Do not invent label properties or label prefixes."""
 
+_RESULT_SHAPE_RULES_CUSTOM = """Result Shape Rules:
+- This ontology does NOT use rdfs:label for display names. Do not use rdfs:label.
+- When returning entity names, use the domain-specific name property from the ontology chunks (e.g., :name, :first_name, :breed_name).
+- For aggregate queries grouped by an entity, expose the name property and group by both the resource and the name value.
+- If no name property is visible for a class, return the entity URI.
+- Do not invent name or label properties."""
 
-# new that did not work well with enovation
-# RESULT_SHAPE_EXAMPLE = """Result Shape Example:
-# For questions that count or group resources, expose the resource display value when a visible name/label property exists:
-# SELECT ?entityLabel (COUNT(?item) AS ?count)
-# WHERE {
-#   ?entity :someProperty ?item .
-#   ?entity :nameOrLabelProperty ?entityLabel .
-# }
-# GROUP BY ?entity ?entityLabel
-# """
-RESULT_SHAPE_EXAMPLE = """Result Shape Example:
+_RESULT_SHAPE_EXAMPLE_RDFS_LABEL = """Result Shape Example:
 For questions that count or group resources, expose the resource label:
 ...
 ?entity rdfs:label ?entityLabel .
 ...
 GROUP BY ?entityLabel
+"""
+
+_RESULT_SHAPE_EXAMPLE_CUSTOM = """Result Shape Example:
+For questions that count or group resources, expose the resource name:
+...
+?entity :nameProperty ?entityName .
+...
+GROUP BY ?entityName
 """
 
 STRICT_CONSTRAINTS = """Strict Constraints:
@@ -102,16 +122,6 @@ STRICT_CONSTRAINTS = """Strict Constraints:
 - Every variable in SELECT must appear in the WHERE clause.
 - Do not use OPTIONAL unless the question explicitly implies some data may be missing.
 """
-
-PROMPT_RULE_SECTIONS = (
-    PREFIX_USAGE_RULES,
-    ENTITY_MATCHING_RULES,
-    RESULT_SHAPE_RULES,
-    RESULT_SHAPE_EXAMPLE,
-    STRICT_CONSTRAINTS,
-)
-
-PROMPT_RULES = "\n\n".join(section.strip() for section in PROMPT_RULE_SECTIONS) + "\n"
 
 OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
 - Return only one valid SPARQL query.
@@ -130,6 +140,182 @@ CORRECTION_OUTPUT_FORMAT_INSTRUCTIONS = (
 )
 
 
+# ── Adaptive Rule Builder ─────────────────────────────────────────────────────
+
+
+def build_prompt_rules(ontology_context: dict[str, object]) -> str:
+    """Build prompt rules adapted to the ontology's labeling strategy.
+
+    Reads the data-driven `naming_strategy` computed during onboarding (which
+    inspects actual instance data per class). Three cases:
+
+    - "rdfs:label": all classes use rdfs:label → rdfs:label rules
+    - "custom": no class uses rdfs:label → custom-name rules with per-class hints
+    - "mixed": most classes use rdfs:label, a few use custom names → rdfs:label
+      rules as the primary instruction, PLUS a note listing the exception classes
+
+    Falls back to a schema heuristic only for older packages without
+    naming_strategy.
+    """
+    naming = ontology_context.get("naming_strategy")
+
+    if isinstance(naming, dict) and "default" in naming:
+        default = naming.get("default")
+        per_class = naming.get("per_class", {})
+        custom_props = _name_props_from_strategy(per_class)
+
+        if default == "custom":
+            return _render_rules(mode="custom", name_props=custom_props)
+        if default == "mixed":
+            # rdfs:label is primary; list the custom-name exceptions
+            return _render_rules(mode="mixed", name_props=custom_props)
+        # default == "rdfs:label"
+        return _render_rules(mode="rdfs_label", name_props=[])
+
+    # Fallback for packages onboarded before naming_strategy existed
+    name_props = _find_name_properties(ontology_context)
+    use_custom = _should_use_custom_naming(name_props, ontology_context)
+    return _render_rules(
+        mode="custom" if use_custom else "rdfs_label",
+        name_props=name_props if use_custom else [],
+    )
+
+
+def _render_rules(*, mode: str, name_props: list[dict[str, str]]) -> str:
+    """Assemble the full prompt rules for the given naming mode."""
+    if mode == "custom":
+        hints = _build_name_property_hints(name_props)
+        entity_rules = _ENTITY_MATCHING_RULES_CUSTOM.replace("{name_property_hints}", hints)
+        result_rules = _RESULT_SHAPE_RULES_CUSTOM
+        result_example = _RESULT_SHAPE_EXAMPLE_CUSTOM
+    elif mode == "mixed":
+        exceptions = _build_name_property_hints(name_props)
+        entity_rules = _ENTITY_MATCHING_RULES_MIXED.replace("{name_property_exceptions}", exceptions)
+        result_rules = _RESULT_SHAPE_RULES_RDFS_LABEL
+        result_example = _RESULT_SHAPE_EXAMPLE_RDFS_LABEL
+    else:  # rdfs_label
+        entity_rules = _ENTITY_MATCHING_RULES_RDFS_LABEL
+        result_rules = _RESULT_SHAPE_RULES_RDFS_LABEL
+        result_example = _RESULT_SHAPE_EXAMPLE_RDFS_LABEL
+
+    sections = (
+        PREFIX_USAGE_RULES,
+        entity_rules,
+        result_rules,
+        result_example,
+        STRICT_CONSTRAINTS,
+    )
+    return "\n\n".join(section.strip() for section in sections) + "\n"
+
+
+def _name_props_from_strategy(per_class: dict) -> list[dict[str, str]]:
+    """Convert the stored per-class naming map into name-property hint entries.
+
+    Only includes classes that use a custom name property (not rdfs:label),
+    so the hints tell the LLM exactly which property to use for each class.
+    """
+    result: list[dict[str, str]] = []
+    if not isinstance(per_class, dict):
+        return result
+    for class_name, name_property in per_class.items():
+        if isinstance(name_property, str) and name_property != "rdfs:label":
+            result.append({"class": class_name, "property": name_property})
+    return result
+
+
+def _should_use_custom_naming(
+    name_props: list[dict[str, str]],
+    ontology_context: dict[str, object],
+    coverage_threshold: float = 0.25,
+) -> bool:
+    """Decide whether custom name properties are the primary labeling mechanism.
+
+    If name-like properties cover at least 25% of the ontology's classes,
+    the ontology uses custom naming. Otherwise, rdfs:label is assumed.
+
+    Examples:
+    - eNOVATION: 110 classes, name props cover 1 (Person) → 0.9% → rdfs:label
+    - Dog Kennels: 8 classes, name props cover 4 → 50% → custom
+    """
+    if not name_props:
+        return False
+
+    total_classes = len(ontology_context.get("classes", []))
+    if total_classes == 0:
+        return False
+
+    # Count unique classes covered by name properties
+    covered_classes = {p["class"] for p in name_props if p["class"] != "unknown"}
+    coverage = len(covered_classes) / total_classes
+
+    return coverage >= coverage_threshold
+
+
+def _find_name_properties(
+    ontology_context: dict[str, object],
+) -> list[dict[str, str]]:
+    """Find datatype properties that look like name/label/title fields.
+
+    Returns a list of {"property": localName, "class": className} dicts.
+    These are injected into the custom entity matching rules so the LLM
+    knows exactly which property to use for each class.
+    """
+    name_keywords = {"name", "label", "title"}
+    # Exclude properties that are IDs, codes, or other non-name fields
+    exclude_keywords = {"code", "id", "type", "date", "number", "phone", "email",
+                        "address", "street", "city", "state", "zip", "amount",
+                        "cost", "weight", "age", "gender", "description", "yn"}
+    results: list[dict[str, str]] = []
+    seen = set()
+
+    for prop in ontology_context.get("datatype_properties", []):
+        if not isinstance(prop, dict):
+            continue
+        prop_name = (prop.get("name") or "").lower()
+        prop_uri = prop.get("uri", "")
+
+        # Check if any name keyword is in the property name
+        has_name_keyword = any(kw in prop_name for kw in name_keywords)
+        # Check it's not actually an ID/code field that happens to contain "name"
+        is_excluded = any(kw in prop_name for kw in exclude_keywords)
+
+        if has_name_keyword and not is_excluded:
+            domains = prop.get("domain", [])
+            class_name = "unknown"
+            if isinstance(domains, list) and domains:
+                first_domain = domains[0]
+                if isinstance(first_domain, str):
+                    class_name = _local_name(first_domain)
+
+            local = _local_name(prop_uri) if prop_uri else prop.get("name", "")
+            key = f"{class_name}.{local}"
+            if key not in seen:
+                seen.add(key)
+                results.append({"property": local, "class": class_name})
+
+    return results
+
+
+def _build_name_property_hints(name_props: list[dict[str, str]]) -> str:
+    """Format detected name properties as concrete hints for the prompt."""
+    lines = []
+    for prop in name_props:
+        lines.append(f"  - {prop['class']}: use :{prop['property']}")
+    return "\n".join(lines) if lines else "  - (check ontology chunks for name properties)"
+
+
+def _local_name(uri: str) -> str:
+    """Extract local name from a URI."""
+    if "#" in uri:
+        return uri.split("#")[-1]
+    if "/" in uri:
+        return uri.rstrip("/").rsplit("/", 1)[-1]
+    return uri
+
+
+# ── Render Functions ──────────────────────────────────────────────────────────
+
+
 def render_query_generation_prompt(
     *,
     question: str,
@@ -140,9 +326,8 @@ def render_query_generation_prompt(
 ) -> str:
     """Render the first-query generation prompt.
 
-    The prompt contains the user question, retrieved ontology chunk text,
-    available prefix declarations, and output constraints that ask the model to
-    return a single SPARQL query without explanations.
+    Prompt rules are automatically adapted based on the ontology's labeling
+    strategy (rdfs:label vs custom name properties).
     """
     template = _template_environment().get_template("query_generation_prompt.j2")
     return template.render(
@@ -151,7 +336,7 @@ def render_query_generation_prompt(
         dataset_name=metadata.get("dataset_name") if isinstance(metadata.get("dataset_name"), str) else None,
         retrieved_context=[{"rank": item.rank, "text": item.text} for item in retrieved_context],
         prefix_declarations=prefix_declarations(ontology_context),
-        prompt_rules=PROMPT_RULES,
+        prompt_rules=build_prompt_rules(ontology_context),
         few_shot_examples=few_shot_examples or [],
         output_format_instructions=OUTPUT_FORMAT_INSTRUCTIONS,
         user_question=question.strip(),
@@ -166,11 +351,7 @@ def render_correction_prompt(
     retrieved_context: list[RetrievedChunk] | list[dict[str, object]] | None = None,
     ontology_context: dict[str, object] | None = None,
 ) -> str:
-    """Render the correction prompt for one failed runtime attempt.
-
-    The supplied errors may come from formal validation or endpoint execution;
-    both are presented as feedback for the next candidate query.
-    """
+    """Render the correction prompt for one failed runtime attempt."""
     template = _template_environment().get_template("query_correction_prompt.j2")
     return template.render(
         system_role=CORRECTION_SYSTEM_ROLE,
@@ -179,17 +360,13 @@ def render_correction_prompt(
         validation_errors=validation_errors,
         retrieved_context=_retrieved_context_payload(retrieved_context or []),
         prefix_declarations=prefix_declarations(ontology_context or {}),
-        prompt_rules=PROMPT_RULES,
+        prompt_rules=build_prompt_rules(ontology_context or {}),
         output_format_instructions=CORRECTION_OUTPUT_FORMAT_INSTRUCTIONS,
     )
 
 
 def prefix_declarations(ontology_context: dict[str, object]) -> list[str]:
-    """Build SPARQL `PREFIX` declarations from ontology context prefixes.
-
-    `ontology_context.json` stores the default prefix as `":"`; this function
-    converts it back to valid SPARQL declaration syntax.
-    """
+    """Build SPARQL `PREFIX` declarations from ontology context prefixes."""
     prefixes = ontology_context.get("prefixes", [])
     if not isinstance(prefixes, list):
         return []

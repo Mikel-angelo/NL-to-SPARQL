@@ -21,8 +21,9 @@ class Settings:
     default_llm_model: str = "qwen2.5-coder:32b"
     llm_timeout_seconds: float = 120.0
     llm_temperature: float = 0.0
-    llm_num_ctx: int = 16384
+    llm_num_ctx: int = 32768
     correction_max_iterations: int = 3
+    llm_num_predict: int = 2048
 
 
 settings = Settings()
