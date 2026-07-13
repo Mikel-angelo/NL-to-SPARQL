@@ -23,7 +23,10 @@ class Settings:
     llm_temperature: float = 0.0
     llm_num_ctx: int = 32768
     correction_max_iterations: int = 3
-    llm_num_predict: int = 2048
+    # Output token cap. Set high enough for reasoning models (e.g. DeepSeek-R1)
+    # to emit their full <think> block plus the query; the normalizer strips the
+    # reasoning afterward. Applied uniformly to all models.
+    llm_num_predict: int = 8192
 
 
 settings = Settings()
