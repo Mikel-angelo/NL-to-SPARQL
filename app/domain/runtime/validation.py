@@ -119,24 +119,14 @@ def _vocabulary_validation(query: str, ontology_context: dict[str, object]) -> V
     unknown_properties: list[str] = []
     unknown_classes: list[str] = []
 
-    # Build local-name sets for fallback matching (handles namespace mismatches)
-    property_local_names = _local_names_from_uris(property_uris)
-    class_local_names = _local_names_from_uris(class_uris)
-
     for predicate_uri in _predicate_uris(query, prefix_map):
         if _is_builtin_predicate(predicate_uri):
             continue
         if predicate_uri not in property_uris:
-            # Fallback: accept if local name matches a known property
-            if _local_name(predicate_uri) in property_local_names:
-                continue
             unknown_properties.append(predicate_uri)
 
     for class_uri in _rdf_type_object_uris(query, prefix_map):
         if class_uri not in class_uris:
-            # Fallback: accept if local name matches a known class
-            if _local_name(class_uri) in class_local_names:
-                continue
             unknown_classes.append(class_uri)
 
     all_unknown = unknown_properties + unknown_classes
@@ -154,7 +144,7 @@ def _vocabulary_validation(query: str, ontology_context: dict[str, object]) -> V
         suggestions = _suggest_corrections(local_name, property_index)
         if suggestions:
             formatted = "; ".join(
-                f"'{s['local_name']}' ({s['detail']})" for s in suggestions
+                f"'{s['local_name']}' ({s['uri']}; {s['detail']})" for s in suggestions
             )
             suggestion_lines.append(
                 f"Unknown property '{local_name}' — did you mean: {formatted}?"
@@ -169,7 +159,7 @@ def _vocabulary_validation(query: str, ontology_context: dict[str, object]) -> V
         suggestions = _suggest_corrections(local_name, class_index)
         if suggestions:
             formatted = "; ".join(
-                f"'{s['local_name']}' ({s['detail']})" for s in suggestions
+                f"'{s['local_name']}' ({s['uri']}; {s['detail']})" for s in suggestions
             )
             suggestion_lines.append(
                 f"Unknown class '{local_name}' — did you mean: {formatted}?"

@@ -36,7 +36,9 @@ CORRECTION_SYSTEM_ROLE = (
 PREFIX_USAGE_RULES = """Prefix Usage Rules:
 - Use only the prefix declarations listed above.
 - Do not use the ontology label or dataset label as a prefix.
-- If a default prefix declaration is listed as `PREFIX : <...>`, use terms such as `:ClassName` for that namespace.
+- Use the exact prefixed class and property terms shown in the retrieved ontology chunks.
+- Class and property terms may come from different namespaces; do not assume a property uses `:` because its class uses `:`.
+- If a default prefix declaration is listed as `PREFIX : <...>`, use `:` only for terms that belong to that exact namespace.
 - Unknown prefixes will fail validation.
 """
 
@@ -65,8 +67,8 @@ Entity Matching Rules:
 - Name properties detected in this ontology:
 {name_property_hints}
 - To find a specific entity by name, use the appropriate name property with FILTER:
-  ?entity rdf:type :ClassName ;
-          :nameProperty ?name .
+  ?entity rdf:type [exact class term from chunks] ;
+          [exact name property term from chunks] ?name .
   FILTER(CONTAINS(LCASE(STR(?name)), "search term"))
 - If a property links to another resource/class, do not compare that resource variable to string literals. Bind the resource and compare its name value instead.
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
@@ -78,7 +80,7 @@ Entity Matching Rules:
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
 - If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may use that exact URI as a fixed resource in the query.
 - Most classes in this ontology use rdfs:label. As the default fallback, find instances by class and label:
-  ?entity rdf:type :ClassName ; rdfs:label ?label .
+  ?entity rdf:type [exact class term from chunks] ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
 - EXCEPTION — the following classes do NOT use rdfs:label. For these, use the listed name property instead of rdfs:label:
 {name_property_exceptions}
@@ -101,7 +103,7 @@ _RESULT_SHAPE_RULES_RDFS_LABEL = """Result Shape Rules:
 
 _RESULT_SHAPE_RULES_CUSTOM = """Result Shape Rules:
 - This ontology does NOT use rdfs:label for display names. Do not use rdfs:label.
-- When returning entity names, use the domain-specific name property from the ontology chunks (e.g., :name, :first_name, :breed_name).
+- When returning entity names, use the exact domain-specific name property term from the ontology chunks.
 - For aggregate queries grouped by an entity, expose the name property and group by both the resource and the name value.
 - Use URI variables as internal join/grouping helpers when needed, but do not include those helper URI variables in SELECT unless the question explicitly asks for URIs.
 - If no name property is visible for a class, return the entity URI.
@@ -124,8 +126,8 @@ GROUP BY ?entityName
 """
 
 STRICT_CONSTRAINTS = """Strict Constraints:
-- Only use class and property names that appear in the Relevant Ontology Chunks above.
-- If the exact property name is not visible in the chunks, re-read them carefully before writing the query. Do not guess or invent property names.
+- Only use class and property terms that appear in the Relevant Ontology Chunks above.
+- If the exact prefixed property term is not visible in the chunks, re-read them carefully before writing the query. Do not guess or invent property terms.
 - Every variable in SELECT must appear in the WHERE clause.
 - SELECT only the answer variables requested by the question. Do not include helper variables used only for joins, grouping, filtering, or URI grounding.
 - Do not use OPTIONAL unless the question explicitly implies some data may be missing.
@@ -176,7 +178,7 @@ def build_prompt_rules(ontology_context: dict[str, object]) -> str:
     if isinstance(naming, dict) and "default" in naming:
         default = naming.get("default")
         per_class = naming.get("per_class", {})
-        custom_props = _name_props_from_strategy(per_class)
+        custom_props = _name_props_from_strategy(per_class, ontology_context)
 
         if default == "custom":
             return _render_rules(mode="custom", name_props=custom_props)
@@ -223,7 +225,7 @@ def _render_rules(*, mode: str, name_props: list[dict[str, str]]) -> str:
     return "\n\n".join(section.strip() for section in sections) + "\n"
 
 
-def _name_props_from_strategy(per_class: dict) -> list[dict[str, str]]:
+def _name_props_from_strategy(per_class: dict, ontology_context: dict[str, object]) -> list[dict[str, str]]:
     """Convert the stored per-class naming map into name-property hint entries.
 
     Only includes classes that use a custom name property (not rdfs:label),
@@ -234,7 +236,12 @@ def _name_props_from_strategy(per_class: dict) -> list[dict[str, str]]:
         return result
     for class_name, name_property in per_class.items():
         if isinstance(name_property, str) and name_property != "rdfs:label":
-            result.append({"class": class_name, "property": name_property})
+            result.append(
+                {
+                    "class": _compact_class_term(str(class_name), ontology_context),
+                    "property": _compact_property_term(str(name_property), str(class_name), ontology_context),
+                }
+            )
     return result
 
 
@@ -271,7 +278,7 @@ def _find_name_properties(
 ) -> list[dict[str, str]]:
     """Find datatype properties that look like name/label/title fields.
 
-    Returns a list of {"property": localName, "class": className} dicts.
+    Returns a list of {"property": compactTerm, "class": compactTerm} dicts.
     These are injected into the custom entity matching rules so the LLM
     knows exactly which property to use for each class.
     """
@@ -300,9 +307,9 @@ def _find_name_properties(
             if isinstance(domains, list) and domains:
                 first_domain = domains[0]
                 if isinstance(first_domain, str):
-                    class_name = _local_name(first_domain)
+                    class_name = _compact_uri(first_domain, _prefix_map(ontology_context))
 
-            local = _local_name(prop_uri) if prop_uri else prop.get("name", "")
+            local = _compact_uri(prop_uri, _prefix_map(ontology_context)) if prop_uri else prop.get("name", "")
             key = f"{class_name}.{local}"
             if key not in seen:
                 seen.add(key)
@@ -315,8 +322,82 @@ def _build_name_property_hints(name_props: list[dict[str, str]]) -> str:
     """Format detected name properties as concrete hints for the prompt."""
     lines = []
     for prop in name_props:
-        lines.append(f"  - {prop['class']}: use :{prop['property']}")
+        lines.append(f"  - {prop['class']}: use {prop['property']}")
     return "\n".join(lines) if lines else "  - (check ontology chunks for name properties)"
+
+
+def _compact_class_term(class_name: str, ontology_context: dict[str, object]) -> str:
+    prefix_map = _prefix_map(ontology_context)
+    for class_data in ontology_context.get("classes", []):
+        if not isinstance(class_data, dict):
+            continue
+        uri = class_data.get("uri")
+        local = class_data.get("name")
+        if isinstance(uri, str) and (class_name == local or class_name == _local_name(uri) or class_name == uri):
+            return _compact_uri(uri, prefix_map)
+    return class_name
+
+
+def _compact_property_term(property_name: str, class_name: str, ontology_context: dict[str, object]) -> str:
+    prefix_map = _prefix_map(ontology_context)
+    class_uri = _class_uri_for_name(class_name, ontology_context)
+    fallback = property_name
+    for prop in ontology_context.get("datatype_properties", []):
+        if not isinstance(prop, dict):
+            continue
+        uri = prop.get("uri")
+        local = prop.get("name")
+        if not isinstance(uri, str):
+            continue
+        if property_name not in {uri, local, _local_name(uri)}:
+            continue
+        compact = _compact_uri(uri, prefix_map)
+        fallback = compact
+        domains = prop.get("domain", [])
+        if class_uri and isinstance(domains, list) and class_uri in domains:
+            return compact
+    return fallback
+
+
+def _class_uri_for_name(class_name: str, ontology_context: dict[str, object]) -> str | None:
+    for class_data in ontology_context.get("classes", []):
+        if not isinstance(class_data, dict):
+            continue
+        uri = class_data.get("uri")
+        local = class_data.get("name")
+        if isinstance(uri, str) and (class_name == uri or class_name == local or class_name == _local_name(uri)):
+            return uri
+    return None
+
+
+def _prefix_map(ontology_context: dict[str, object]) -> dict[str, str]:
+    prefixes = ontology_context.get("prefixes", [])
+    if not isinstance(prefixes, list):
+        return {}
+    result: dict[str, str] = {}
+    for item in prefixes:
+        if not isinstance(item, dict):
+            continue
+        prefix = item.get("prefix")
+        namespace = item.get("namespace")
+        if isinstance(prefix, str) and isinstance(namespace, str) and namespace:
+            result["" if prefix == ":" else prefix] = namespace
+    return result
+
+
+def _compact_uri(uri: str, prefix_map: dict[str, str]) -> str:
+    best_prefix = None
+    best_namespace = ""
+    for prefix, namespace in prefix_map.items():
+        if uri.startswith(namespace) and len(namespace) > len(best_namespace):
+            best_prefix = prefix
+            best_namespace = namespace
+    if best_prefix is not None:
+        local = uri[len(best_namespace):]
+        return f":{local}" if best_prefix == "" else f"{best_prefix}:{local}"
+    if "://" in uri:
+        return f"<{uri}>"
+    return uri
 
 
 def _local_name(uri: str) -> str:
