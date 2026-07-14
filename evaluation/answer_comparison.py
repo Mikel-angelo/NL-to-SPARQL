@@ -75,6 +75,23 @@ def normalize_literal(value: str) -> str:
     return value.strip()
 
 
+def normalize_answer_surface(value: str, prefix_map: Optional[dict[str, str]] = None) -> str:
+    """Return a lexical answer key that makes URI local names comparable to labels.
+
+    Evaluation datasets sometimes store resource answers as URIs while generated
+    queries return the human-readable name, or the reverse. For answer scoring,
+    `http://example/Karen_Brant`, `ex:Karen_Brant`, and `Karen Brant` should be
+    treated as the same surface answer when their lexical forms agree.
+
+    This is deliberately a scoring normalization only. It does not rewrite the
+    generated SPARQL or the raw answers saved in evaluation logs.
+    """
+    value = normalize_value(value, prefix_map)
+    if value.startswith("http://") or value.startswith("https://"):
+        value = _local_name(value)
+    return _surface_key(value)
+
+
 def normalize_value(value: str, prefix_map: Optional[dict[str, str]] = None) -> str:
     """Normalize one SPARQL result cell as either a URI-like value or a literal."""
     value = value.strip()
@@ -100,9 +117,33 @@ def normalize_row(
 
     Variable names are intentionally ignored. For evaluation, a row containing
     `?x = Alice` is treated the same as a row containing `?label = Alice`.
-    Values are sorted so column order does not affect equality.
+    Values are deduplicated and sorted so column order does not affect equality,
+    and returning both a URI and its matching label does not create a spurious
+    extra-column mismatch.
     """
-    return tuple(sorted(normalize_value(str(value), prefix_map) for value in row.values()))
+    return tuple(sorted({normalize_answer_surface(str(value), prefix_map) for value in row.values()}))
+
+
+def _local_name(uri: str) -> str:
+    if "#" in uri:
+        return uri.rsplit("#", 1)[-1]
+    return uri.rstrip("/").rsplit("/", 1)[-1]
+
+
+def _surface_key(value: str) -> str:
+    value = value.strip()
+    if not value:
+        return ""
+
+    # Split compact terms that remain unresolved, e.g. ex:Karen_Brant.
+    if re.match(r"^[A-Za-z_][\w-]*:[^/].*$", value):
+        value = value.split(":", 1)[1]
+
+    value = re.sub(r"(?<=[a-z0-9])(?=[A-Z])", " ", value)
+    value = re.sub(r"[_\-/]+", " ", value)
+    value = re.sub(r"[^\w\s.]+", " ", value, flags=re.UNICODE)
+    value = re.sub(r"\s+", " ", value).strip().lower()
+    return value
 
 
 def normalize_result_set(
@@ -196,19 +237,58 @@ def compare_results(
     result.gold_size = len(gold_set)
     result.generated_size = len(generated_set)
 
-    true_positives = gold_set & generated_set
-    false_positives = generated_set - gold_set
-    false_negatives = gold_set - generated_set
+    true_positives, false_positives, false_negatives = _match_rows(gold_set, generated_set)
 
-    result.true_positives = len(true_positives)
+    result.true_positives = true_positives
     result.false_positives = len(false_positives)
     result.false_negatives = len(false_negatives)
     result.missing_rows = sorted(false_negatives)
     result.extra_rows = sorted(false_positives)
     result.exact_match = not false_positives and not false_negatives
 
-    result.precision = len(true_positives) / len(generated_set) if generated_set else 0.0
-    result.recall = len(true_positives) / len(gold_set) if gold_set else 0.0
+    result.precision = true_positives / len(generated_set) if generated_set else 0.0
+    result.recall = true_positives / len(gold_set) if gold_set else 0.0
     if result.precision + result.recall > 0:
         result.f1 = 2 * result.precision * result.recall / (result.precision + result.recall)
     return result
+
+
+def _match_rows(
+    gold_set: set[tuple[str, ...]],
+    generated_set: set[tuple[str, ...]],
+) -> tuple[int, set[tuple[str, ...]], set[tuple[str, ...]]]:
+    """Match rows, allowing generated rows to contain extra helper values.
+
+    Exact equality is preferred. After that, a generated row can match a gold row
+    when it is a strict superset of the gold row. This handles generated answers
+    that SELECT both an entity URI and its label while gold stores only the
+    answer label. The reverse is not accepted because fewer generated values
+    means part of the expected answer is missing.
+    """
+    unmatched_gold = set(gold_set)
+    unmatched_generated = set(generated_set)
+
+    exact_matches = unmatched_gold & unmatched_generated
+    unmatched_gold -= exact_matches
+    unmatched_generated -= exact_matches
+    true_positives = len(exact_matches)
+
+    subset_matched_gold: set[tuple[str, ...]] = set()
+    for gold_row in sorted(unmatched_gold):
+        gold_values = set(gold_row)
+        match = next(
+            (
+                generated_row
+                for generated_row in sorted(unmatched_generated)
+                if gold_values < set(generated_row)
+            ),
+            None,
+        )
+        if match is None:
+            continue
+        subset_matched_gold.add(gold_row)
+        unmatched_generated.remove(match)
+        true_positives += 1
+
+    unmatched_gold -= subset_matched_gold
+    return true_positives, unmatched_generated, unmatched_gold
