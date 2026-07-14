@@ -7,7 +7,7 @@ statistics. It does not write the JSON file itself.
 
 from __future__ import annotations
 
-from rdflib import Graph, Literal, RDF, RDFS, URIRef
+from rdflib import BNode, Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import OWL
 
 
@@ -60,18 +60,62 @@ def _property_entry(graph: Graph, subject: URIRef, property_type: str) -> dict[s
         "name": _local_name(subject),
         "label": _label_for(graph, subject),
         "comment": _comment_for(graph, subject),
-        "domain": sorted(
-            str(domain)
-            for domain in graph.objects(subject, RDFS.domain)
-            if isinstance(domain, URIRef)
-        ),
-        "range": sorted(
-            str(range_value)
-            for range_value in graph.objects(subject, RDFS.range)
-            if isinstance(range_value, URIRef)
-        ),
+        "domain": _property_schema_values(graph, subject, RDFS.domain),
+        "range": _property_schema_values(graph, subject, RDFS.range),
+        "inverse_properties": _inverse_properties(graph, subject),
         "property_type": property_type,
     }
+
+
+def _inverse_properties(graph: Graph, subject: URIRef) -> list[str]:
+    inverse_values: set[str] = set()
+    for inverse in graph.objects(subject, OWL.inverseOf):
+        if isinstance(inverse, URIRef):
+            inverse_values.add(str(inverse))
+    for inverse in graph.subjects(OWL.inverseOf, subject):
+        if isinstance(inverse, URIRef):
+            inverse_values.add(str(inverse))
+    return sorted(inverse_values)
+
+
+def _property_schema_values(graph: Graph, subject: URIRef, predicate: URIRef) -> list[str]:
+    values: set[str] = set()
+    for value in graph.objects(subject, predicate):
+        values.update(_class_expression_values(graph, value))
+    return sorted(values)
+
+
+def _class_expression_values(graph: Graph, value: object) -> set[str]:
+    if isinstance(value, URIRef):
+        return {str(value)}
+
+    if not isinstance(value, BNode):
+        return set()
+
+    union_head = graph.value(value, OWL.unionOf)
+    if union_head is None:
+        return set()
+
+    return {
+        str(item)
+        for item in _rdf_list_items(graph, union_head)
+        if isinstance(item, URIRef)
+    }
+
+
+def _rdf_list_items(graph: Graph, head: object) -> list[object]:
+    items: list[object] = []
+    current = head
+    visited: set[object] = set()
+
+    while current and current != RDF.nil and current not in visited:
+        visited.add(current)
+        first = graph.value(current, RDF.first)
+        if first is not None:
+            items.append(first)
+        current = graph.value(current, RDF.rest)
+
+    return items
 
 
 def _class_hierarchy(graph: Graph, class_uris: list[URIRef]) -> list[dict[str, str]]:

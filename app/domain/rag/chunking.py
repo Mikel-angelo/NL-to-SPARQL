@@ -5,6 +5,25 @@ from __future__ import annotations
 
 SUPPORTED_CHUNKING_STRATEGIES = {"class_based", "property_based", "composite"}
 SUPPORTED_CHUNKING_ORDER = ("class_based", "property_based", "composite")
+_DISPLAY_LIKE_GLOBAL_NAMES = {
+    "altlabel",
+    "alternative",
+    "code",
+    "description",
+    "identifier",
+    "label",
+    "name",
+    "preflabel",
+    "title",
+}
+_INFRASTRUCTURE_NAMESPACES = {
+    "http://purl.org/dc/elements/1.1/",
+    "http://purl.org/dc/terms/",
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "http://www.w3.org/2000/01/rdf-schema#",
+    "http://www.w3.org/2002/07/owl#",
+    "http://www.w3.org/2004/02/skos/core#",
+}
 
 
 def build_chunks(ontology_context: dict[str, object], chunking: str) -> list[dict[str, object]]:
@@ -28,6 +47,9 @@ def _build_class_based_chunks(ontology_context: dict[str, object]) -> list[dict[
     if not isinstance(classes, list):
         return class_chunks
 
+    class_names_by_uri = _class_names_by_uri(classes)
+    superclass_closure = _superclass_closure_by_uri(classes)
+
     for class_data in classes:
         if not isinstance(class_data, dict):
             continue
@@ -45,22 +67,39 @@ def _build_class_based_chunks(ontology_context: dict[str, object]) -> list[dict[
             if isinstance(parent_class, str) and parent_class
         ]
         class_uri = class_data.get("uri")
+        class_uri_text = class_uri if isinstance(class_uri, str) else None
 
-        class_object_properties = _properties_for_class(
+        object_sections = _outgoing_property_sections_for_class(
             properties=object_properties if isinstance(object_properties, list) else [],
-            class_uri=class_uri if isinstance(class_uri, str) else None,
+            class_uri=class_uri_text,
+            superclass_uris=superclass_closure.get(class_uri_text or "", set()),
+            class_names_by_uri=class_names_by_uri,
         )
-        class_datatype_properties = _properties_for_class(
+        datatype_sections = _outgoing_property_sections_for_class(
             properties=datatype_properties if isinstance(datatype_properties, list) else [],
-            class_uri=class_uri if isinstance(class_uri, str) else None,
+            class_uri=class_uri_text,
+            superclass_uris=superclass_closure.get(class_uri_text or "", set()),
+            class_names_by_uri=class_names_by_uri,
+        )
+        incoming_object_properties = _incoming_properties_for_class(
+            properties=object_properties if isinstance(object_properties, list) else [],
+            class_uri=class_uri_text,
+            superclass_uris=superclass_closure.get(class_uri_text or "", set()),
+            class_names_by_uri=class_names_by_uri,
         )
 
         text = _build_class_chunk_text(
             class_name=class_name,
             class_label=class_label,
             description=description,
-            object_properties=class_object_properties,
-            datatype_properties=class_datatype_properties,
+            parent_classes=parent_classes,
+            direct_object_properties=object_sections["direct"],
+            inherited_object_properties=object_sections["inherited"],
+            global_object_properties=object_sections["global"],
+            incoming_object_properties=incoming_object_properties,
+            direct_datatype_properties=datatype_sections["direct"],
+            inherited_datatype_properties=datatype_sections["inherited"],
+            global_datatype_properties=datatype_sections["global"],
         )
 
         class_chunks.append(
@@ -73,8 +112,14 @@ def _build_class_based_chunks(ontology_context: dict[str, object]) -> list[dict[
                 "metadata": {
                     "label": class_label,
                     "description": description,
-                    "object_properties": class_object_properties,
-                    "datatype_properties": class_datatype_properties,
+                    "parent_classes": parent_classes,
+                    "object_properties": object_sections["direct"],
+                    "inherited_object_properties": object_sections["inherited"],
+                    "global_object_properties": object_sections["global"],
+                    "incoming_object_properties": incoming_object_properties,
+                    "datatype_properties": datatype_sections["direct"],
+                    "inherited_datatype_properties": datatype_sections["inherited"],
+                    "global_datatype_properties": datatype_sections["global"],
                 },
             }
         )
@@ -100,6 +145,8 @@ def _build_property_based_chunks(ontology_context: dict[str, object]) -> list[di
         property_type = _clean_text(property_data.get("property_type")) or "property"
         domains = _named_uri_values(property_data.get("domain"), class_names_by_uri)
         ranges = _named_uri_values(property_data.get("range"), class_names_by_uri)
+        inverse_properties = _named_uri_values(property_data.get("inverse_properties"), class_names_by_uri={})
+        usage_scope = _usage_scope_for_property(property_data)
 
         text = _build_property_chunk_text(
             property_name=property_name,
@@ -108,6 +155,8 @@ def _build_property_based_chunks(ontology_context: dict[str, object]) -> list[di
             property_type=property_type,
             domains=domains,
             ranges=ranges,
+            inverse_properties=inverse_properties,
+            usage_scope=usage_scope,
         )
 
         property_chunks.append(
@@ -123,6 +172,8 @@ def _build_property_based_chunks(ontology_context: dict[str, object]) -> list[di
                     "property_type": property_type,
                     "domain": domains,
                     "range": ranges,
+                    "inverse_properties": inverse_properties,
+                    "usage_scope": usage_scope,
                 },
             }
         )
@@ -141,6 +192,7 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
 
     children_by_uri = _child_classes_by_uri(classes)
     class_names_by_uri = _class_names_by_uri(classes)
+    superclass_closure = _superclass_closure_by_uri(classes)
 
     for class_data in classes:
         if not isinstance(class_data, dict):
@@ -159,17 +211,22 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
             class_names_by_uri.get(child_uri, _short_name(child_uri))
             for child_uri in children_by_uri.get(class_uri_text or "", [])
         ]
-        class_object_properties = _properties_for_class(
+        object_sections = _outgoing_property_sections_for_class(
             properties=object_properties if isinstance(object_properties, list) else [],
             class_uri=class_uri_text,
+            superclass_uris=superclass_closure.get(class_uri_text or "", set()),
+            class_names_by_uri=class_names_by_uri,
         )
-        class_datatype_properties = _properties_for_class(
+        datatype_sections = _outgoing_property_sections_for_class(
             properties=datatype_properties if isinstance(datatype_properties, list) else [],
             class_uri=class_uri_text,
+            superclass_uris=superclass_closure.get(class_uri_text or "", set()),
+            class_names_by_uri=class_names_by_uri,
         )
         incoming_object_properties = _incoming_properties_for_class(
             properties=object_properties if isinstance(object_properties, list) else [],
             class_uri=class_uri_text,
+            superclass_uris=superclass_closure.get(class_uri_text or "", set()),
             class_names_by_uri=class_names_by_uri,
         )
 
@@ -179,8 +236,12 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
             description=description,
             parent_classes=parent_classes,
             child_classes=child_classes,
-            object_properties=class_object_properties,
-            datatype_properties=class_datatype_properties,
+            direct_object_properties=object_sections["direct"],
+            inherited_object_properties=object_sections["inherited"],
+            global_object_properties=object_sections["global"],
+            direct_datatype_properties=datatype_sections["direct"],
+            inherited_datatype_properties=datatype_sections["inherited"],
+            global_datatype_properties=datatype_sections["global"],
             incoming_object_properties=incoming_object_properties,
         )
 
@@ -196,8 +257,12 @@ def _build_composite_chunks(ontology_context: dict[str, object]) -> list[dict[st
                     "description": description,
                     "parent_classes": parent_classes,
                     "child_classes": child_classes,
-                    "object_properties": class_object_properties,
-                    "datatype_properties": class_datatype_properties,
+                    "object_properties": object_sections["direct"],
+                    "inherited_object_properties": object_sections["inherited"],
+                    "global_object_properties": object_sections["global"],
+                    "datatype_properties": datatype_sections["direct"],
+                    "inherited_datatype_properties": datatype_sections["inherited"],
+                    "global_datatype_properties": datatype_sections["global"],
                     "incoming_object_properties": incoming_object_properties,
                 },
             }
@@ -238,31 +303,75 @@ def _child_classes_by_uri(classes: list[dict[str, object]]) -> dict[str, list[st
     return {parent_uri: sorted(child_uris) for parent_uri, child_uris in child_map.items()}
 
 
-def _properties_for_class(properties: list[dict[str, object]], class_uri: str | None) -> list[str]:
-    if not class_uri:
-        return []
+def _superclass_closure_by_uri(classes: list[dict[str, object]]) -> dict[str, set[str]]:
+    direct_parents: dict[str, set[str]] = {}
+    for class_data in classes:
+        class_uri = class_data.get("uri")
+        if not isinstance(class_uri, str) or not class_uri:
+            continue
+        direct_parents[class_uri] = {
+            parent_uri
+            for parent_uri in class_data.get("parent_classes", [])
+            if isinstance(parent_uri, str) and parent_uri
+        }
 
-    related = []
+    closure: dict[str, set[str]] = {}
+
+    def collect(class_uri: str, seen: set[str]) -> set[str]:
+        if class_uri in closure:
+            return closure[class_uri]
+        parents = direct_parents.get(class_uri, set())
+        result: set[str] = set()
+        for parent_uri in parents:
+            if parent_uri in seen:
+                continue
+            result.add(parent_uri)
+            result.update(collect(parent_uri, seen | {parent_uri}))
+        closure[class_uri] = result
+        return result
+
+    for class_uri in direct_parents:
+        collect(class_uri, {class_uri})
+    return closure
+
+
+def _outgoing_property_sections_for_class(
+    properties: list[dict[str, object]],
+    class_uri: str | None,
+    superclass_uris: set[str],
+    class_names_by_uri: dict[str, str],
+) -> dict[str, list[str]]:
+    sections = {"direct": [], "inherited": [], "global": []}
+    if not class_uri:
+        return sections
+
     for property_data in properties:
         domains = property_data.get("domain", [])
-        if not isinstance(domains, list) or class_uri not in domains:
+        if not isinstance(domains, list):
             continue
-        property_name = property_data.get("name") or property_data.get("label") or property_data.get("uri")
-        if not property_name:
+
+        if class_uri in domains:
+            sections["direct"].append(_property_line(property_data, "range", class_names_by_uri))
             continue
-        ranges = property_data.get("range", [])
-        range_name = "Unknown"
-        if isinstance(ranges, list) and ranges:
-            first_range = ranges[0]
-            if first_range:
-                range_name = _short_name(str(first_range))
-        related.append(f"{_short_name(str(property_name))} -> {range_name}")
-    return sorted(set(related))
+
+        inherited_from = sorted(superclass_uris.intersection(item for item in domains if isinstance(item, str)))
+        if inherited_from:
+            source_text = ", ".join(class_names_by_uri.get(uri, _short_name(uri)) for uri in inherited_from)
+            sections["inherited"].append(
+                f"{_property_line(property_data, 'range', class_names_by_uri)} (from {source_text})"
+            )
+            continue
+
+        if not domains and _should_propagate_global_property(property_data, class_names_by_uri):
+            sections["global"].append(_property_line(property_data, "range", class_names_by_uri))
+
+    return {key: sorted(set(values)) for key, values in sections.items()}
 
 
 def _incoming_properties_for_class(
     properties: list[dict[str, object]],
     class_uri: str | None,
+    superclass_uris: set[str],
     class_names_by_uri: dict[str, str],
 ) -> list[str]:
     """Find properties where this class appears as the range (i.e., is the target).
@@ -275,7 +384,11 @@ def _incoming_properties_for_class(
     incoming = []
     for property_data in properties:
         ranges = property_data.get("range", [])
-        if not isinstance(ranges, list) or class_uri not in ranges:
+        if not isinstance(ranges, list):
+            continue
+        is_direct = class_uri in ranges
+        inherited_from = sorted(superclass_uris.intersection(item for item in ranges if isinstance(item, str)))
+        if not is_direct and not inherited_from:
             continue
         property_name = property_data.get("name") or property_data.get("label") or property_data.get("uri")
         if not property_name:
@@ -287,8 +400,75 @@ def _incoming_properties_for_class(
                 if isinstance(domain_uri, str):
                     source_names.append(class_names_by_uri.get(domain_uri, _short_name(domain_uri)))
         source_text = ", ".join(source_names) if source_names else "unknown source"
-        incoming.append(f"{_short_name(str(property_name))} (from {source_text})")
+        line = f"{_short_name(str(property_name))} <- {source_text}"
+        inverse_text = _inverse_text(property_data)
+        if inverse_text:
+            line = f"{line} (inverse: {inverse_text})"
+        if inherited_from:
+            inherited_text = ", ".join(class_names_by_uri.get(uri, _short_name(uri)) for uri in inherited_from)
+            line = f"{line} (range inherited from {inherited_text})"
+        incoming.append(line)
     return sorted(set(incoming))
+
+
+def _property_line(
+    property_data: dict[str, object],
+    target_key: str,
+    class_names_by_uri: dict[str, str],
+) -> str:
+    property_name = property_data.get("name") or property_data.get("label") or property_data.get("uri")
+    target_values = _named_uri_values(property_data.get(target_key), class_names_by_uri)
+    target_text = ", ".join(target_values) if target_values else "Unknown"
+    line = f"{_short_name(str(property_name))} -> {target_text}"
+    inverse_text = _inverse_text(property_data)
+    if inverse_text:
+        line = f"{line} (inverse: {inverse_text})"
+    return line
+
+
+def _inverse_text(property_data: dict[str, object]) -> str:
+    inverse_values = property_data.get("inverse_properties", [])
+    if not isinstance(inverse_values, list):
+        return ""
+    names = sorted({_short_name(str(value)) for value in inverse_values if isinstance(value, str) and value})
+    return ", ".join(names)
+
+
+def _usage_scope_for_property(property_data: dict[str, object]) -> str:
+    domains = property_data.get("domain", [])
+    ranges = property_data.get("range", [])
+    has_domain = isinstance(domains, list) and bool(domains)
+    has_range = isinstance(ranges, list) and bool(ranges)
+    if has_domain and has_range:
+        return "direct domain/range from ontology"
+    if has_domain:
+        return "direct domain from ontology; range unspecified"
+    if has_range:
+        return "no explicit domain; globally available candidate property with declared range"
+    return "no explicit domain or range; globally available candidate property"
+
+
+def _should_propagate_global_property(
+    property_data: dict[str, object],
+    class_names_by_uri: dict[str, str],
+) -> bool:
+    property_uri = property_data.get("uri")
+    property_name = property_data.get("name") or property_data.get("label") or property_uri
+    if not isinstance(property_uri, str) or not property_uri:
+        return True
+
+    property_namespace = _namespace_for(property_uri)
+    if property_namespace in _INFRASTRUCTURE_NAMESPACES:
+        return bool(property_name and _short_name(str(property_name)).lower() in _DISPLAY_LIKE_GLOBAL_NAMES)
+
+    class_namespaces = {_namespace_for(class_uri) for class_uri in class_names_by_uri}
+    if property_namespace in class_namespaces:
+        return True
+
+    if property_name and _short_name(str(property_name)).lower() in _DISPLAY_LIKE_GLOBAL_NAMES:
+        return True
+
+    return False
 
 
 def _build_class_chunk_text(
@@ -296,11 +476,15 @@ def _build_class_chunk_text(
     class_name: str,
     class_label: str | None,
     description: str,
-    object_properties: list[str],
-    datatype_properties: list[str],
+    parent_classes: list[str],
+    direct_object_properties: list[str],
+    inherited_object_properties: list[str],
+    global_object_properties: list[str],
+    incoming_object_properties: list[str],
+    direct_datatype_properties: list[str],
+    inherited_datatype_properties: list[str],
+    global_datatype_properties: list[str],
 ) -> str:
-    object_property_text = _bullet_list(object_properties)
-    datatype_property_text = _bullet_list(datatype_properties)
     description_text = description or "No description available."
     label_text = class_label or "No label available."
 
@@ -308,8 +492,14 @@ def _build_class_chunk_text(
         f"Class: {class_name}\n\n"
         f"Label: {label_text}\n\n"
         f"Description: {description_text}\n\n"
-        f"Object Properties:\n{object_property_text}\n\n"
-        f"Datatype Properties:\n{datatype_property_text}"
+        f"Parent Classes:\n{_bullet_list(parent_classes, empty_label='None (top-level class)')}\n\n"
+        f"Direct Object Properties:\n{_bullet_list(direct_object_properties)}\n\n"
+        f"Inherited Object Properties:\n{_bullet_list(inherited_object_properties)}\n\n"
+        f"Global Object Properties:\n{_bullet_list(global_object_properties)}\n\n"
+        f"Incoming Object Properties (this class is the target):\n{_bullet_list(incoming_object_properties)}\n\n"
+        f"Direct Datatype Properties:\n{_bullet_list(direct_datatype_properties)}\n\n"
+        f"Inherited Datatype Properties:\n{_bullet_list(inherited_datatype_properties)}\n\n"
+        f"Global Datatype Properties:\n{_bullet_list(global_datatype_properties)}"
     )
 
 
@@ -321,6 +511,8 @@ def _build_property_chunk_text(
     property_type: str,
     domains: list[str],
     ranges: list[str],
+    inverse_properties: list[str],
+    usage_scope: str,
 ) -> str:
     label_text = property_label or "No label available."
     description_text = description or "No description available."
@@ -330,7 +522,9 @@ def _build_property_chunk_text(
         f"Description: {description_text}\n\n"
         f"Type: {property_type}\n\n"
         f"Domain Classes:\n{_bullet_list(domains)}\n\n"
-        f"Range Classes or Datatypes:\n{_bullet_list(ranges)}"
+        f"Range Classes or Datatypes:\n{_bullet_list(ranges)}\n\n"
+        f"Inverse Properties:\n{_bullet_list(inverse_properties)}\n\n"
+        f"Usage Scope:\n- {usage_scope}"
     )
 
 
@@ -341,8 +535,12 @@ def _build_composite_chunk_text(
     description: str,
     parent_classes: list[str],
     child_classes: list[str],
-    object_properties: list[str],
-    datatype_properties: list[str],
+    direct_object_properties: list[str],
+    inherited_object_properties: list[str],
+    global_object_properties: list[str],
+    direct_datatype_properties: list[str],
+    inherited_datatype_properties: list[str],
+    global_datatype_properties: list[str],
     incoming_object_properties: list[str] | None = None,
 ) -> str:
     label_text = class_label or "No label available."
@@ -354,9 +552,13 @@ def _build_composite_chunk_text(
         f"Description: {description_text}\n\n"
         f"Parent Classes:\n{_bullet_list(parent_classes, empty_label='None (top-level class)')}\n\n"
         f"Child Classes:\n{_bullet_list(child_classes)}\n\n"
-        f"Direct Object Properties:\n{_bullet_list(object_properties)}\n\n"
-        f"Direct Datatype Properties:\n{_bullet_list(datatype_properties)}\n\n"
-        f"Incoming Object Properties (this class is the target):\n{incoming_text}"
+        f"Direct Object Properties:\n{_bullet_list(direct_object_properties)}\n\n"
+        f"Inherited Object Properties:\n{_bullet_list(inherited_object_properties)}\n\n"
+        f"Global Object Properties:\n{_bullet_list(global_object_properties)}\n\n"
+        f"Incoming Object Properties (this class is the target):\n{incoming_text}\n\n"
+        f"Direct Datatype Properties:\n{_bullet_list(direct_datatype_properties)}\n\n"
+        f"Inherited Datatype Properties:\n{_bullet_list(inherited_datatype_properties)}\n\n"
+        f"Global Datatype Properties:\n{_bullet_list(global_datatype_properties)}"
     )
 
 
@@ -399,6 +601,14 @@ def _short_name(value: str) -> str:
     if ":" in value:
         return value.rsplit(":", 1)[-1]
     return value
+
+
+def _namespace_for(value: str) -> str:
+    if "#" in value:
+        return value.rsplit("#", 1)[0] + "#"
+    if "/" in value:
+        return value.rstrip("/").rsplit("/", 1)[0] + "/"
+    return ""
 
 
 def _bullet_list(values: list[str], empty_label: str = "None") -> str:
