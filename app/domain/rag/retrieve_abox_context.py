@@ -58,16 +58,21 @@ def retrieve_abox_context(
     search_k = min(max(effective_k * 4, 20), index.ntotal)
     distances, indices = index.search(query_vector, k=search_k)
 
-    candidates: list[tuple[float, float, dict[str, object]]] = []
+    candidates: list[tuple[float, float, dict[str, object], bool]] = []
     for rank, chunk_index in enumerate(indices[0], start=1):
         if chunk_index < 0 or chunk_index >= len(chunks):
             continue
         chunk = chunks[chunk_index]
         distance = float(distances[0][rank - 1])
-        candidates.append((_rerank_score(question, chunk, distance), distance, chunk))
+        name_match = _has_name_match(question, chunk)
+        candidates.append((_rerank_score(question, chunk, distance), distance, chunk, name_match))
+
+    ranked = sorted(candidates, key=lambda item: item[0])
+    if not _should_include_abox_candidates(ranked):
+        return []
 
     results: list[RetrievedABoxChunk] = []
-    for rank, (_, distance, chunk) in enumerate(sorted(candidates, key=lambda item: item[0])[:effective_k], start=1):
+    for rank, (_, distance, chunk, _) in enumerate(ranked[:effective_k], start=1):
         metadata = chunk.get("metadata")
         types = chunk.get("types")
         results.append(
@@ -84,6 +89,16 @@ def retrieve_abox_context(
     return results
 
 
+def _should_include_abox_candidates(
+    ranked: list[tuple[float, float, dict[str, object], bool]],
+) -> bool:
+    """Suppress ABox context when retrieval found only weak generic examples."""
+    if not ranked:
+        return False
+    best_score, best_distance, _, best_name_match = ranked[0]
+    return best_name_match or best_score <= 1.0 or best_distance <= 1.0
+
+
 def _rerank_score(question: str, chunk: dict[str, object], distance: float) -> float:
     """Boost chunks whose concrete names are explicitly mentioned in the question."""
     question_text = question.lower()
@@ -98,6 +113,18 @@ def _rerank_score(question: str, chunk: dict[str, object], distance: float) -> f
         elif _token_overlap(normalized, question_text) >= 0.75:
             score -= 0.4
     return score
+
+
+def _has_name_match(question: str, chunk: dict[str, object]) -> bool:
+    question_text = question.lower()
+    return any(_name_match_strength(name, question_text) for name in _candidate_names(chunk))
+
+
+def _name_match_strength(name: str, question_text: str) -> bool:
+    normalized = name.lower()
+    if len(normalized) < 3:
+        return False
+    return normalized in question_text or _token_overlap(normalized, question_text) >= 0.75
 
 
 def _candidate_names(chunk: dict[str, object]) -> list[str]:
