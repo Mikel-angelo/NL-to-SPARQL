@@ -475,12 +475,25 @@
     {
       "id": "Q020",
       "nl_question": "What exercises does CAMPUS VESTA organize and what type are they?",
-      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?exLabel ?typeLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:organizesExercise ?ex . ?ex rdfs:label ?exLabel . ?ex enov:hasExerciseType ?etype . ?etype rdfs:label ?typeLabel . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"campus\")) }",
-      "gold_answers": [],
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT ?exerciseLabel ?exerciseTypeLabel\nWHERE {\n  ?exercise rdf:type enov:Exercise ;\n            enov:isExerciseOrganizedBy enov:TC2_VESTA ;\n            rdfs:label ?exerciseLabel .\n\n  OPTIONAL {\n    ?exercise enov:hasExerciseType ?exerciseType .\n    ?exerciseType rdfs:label ?exerciseTypeLabel .\n  }\n}\nORDER BY ?exerciseLabel",
+      "gold_answers": [
+        {
+          "exerciseLabel": "Comand post exercise of Campus Vesta"
+        },
+        {
+          "exerciseLabel": "Field exercises of Campus Vesta"
+        },
+        {
+          "exerciseLabel": "Full scale exercises of Campus Vesta"
+        },
+        {
+          "exerciseLabel": "Table top exercise of Campus Vesta"
+        }
+      ],
       "complexity_tier": "medium",
       "query_shape": "tree",
       "question_type": "list",
-      "notes": null
+      "notes": "Exercise type is interpreted as the civil/military ExerciseType vocabulary linked through enov:hasExerciseType. The current source contains no hasExerciseType assertions for CAMPUS VESTA exercises, so exerciseTypeLabel is unbound while the four exercise labels are returned."
     },
     {
       "id": "Q021",
@@ -665,12 +678,73 @@
     {
       "id": "Q023",
       "nl_question": "Which courses have more than 20 total course hours?",
-      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?courseLabel ?hours WHERE { ?course rdf:type enov:TrainingCourse ; rdfs:label ?courseLabel . ?course enov:hasTotalCourseHours ?hours . FILTER(?hours > 20) } ORDER BY DESC(?hours)",
-      "gold_answers": [],
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?courseLabel WHERE { ?course rdf:type enov:TrainingCourse ; rdfs:label ?courseLabel . ?course enov:hasTotalCourseHours ?hours . FILTER(?hours > 20) } ORDER BY ?courseLabel",
+      "gold_answers": [
+        {
+          "courseLabel": "Postgraduate training Disaster management (PGRM)"
+        },
+        {
+          "courseLabel": "Postgraduate Advisor hazardous substances (AT4211)"
+        },
+        {
+          "courseLabel": "CBRN Tactical Advisor Course"
+        },
+        {
+          "courseLabel": "CBRN Trainer Course"
+        },
+        {
+          "courseLabel": "CBRN-E train the trainer (EDA 8121)"
+        },
+        {
+          "courseLabel": "Wearing a gas suit (CG0111)"
+        },
+        {
+          "courseLabel": "CBRN Consequence Management"
+        },
+        {
+          "courseLabel": "Live Agent Training"
+        },
+        {
+          "courseLabel": "International Radiological and Nuclear Training for Emergency Response (I-RAD)"
+        },
+        {
+          "courseLabel": "International CBRN Preparedness and Consequence Management for First Responders"
+        },
+        {
+          "courseLabel": "CBRN Awareness for First Responders"
+        },
+        {
+          "courseLabel": "Police DIM Initial Course"
+        },
+        {
+          "courseLabel": "CBRN Search Course"
+        },
+        {
+          "courseLabel": "CBRN-E thrsseats: Train the trainer (AA7104)"
+        },
+        {
+          "courseLabel": "Strategic CBRN Command Course"
+        },
+        {
+          "courseLabel": "CBRN Disaster Victim Recovery & Identification"
+        },
+        {
+          "courseLabel": "Tactical CBRN Command Course"
+        },
+        {
+          "courseLabel": "Operational CBRN Command Course"
+        },
+        {
+          "courseLabel": "CBRN-E training for specialised members of the TWP labs who have followed CBRN-E training from Defence (EDA 7105)"
+        },
+        {
+          "courseLabel": "CBRN Warning and Reporting Centre Management"
+        }
+      ],
       "complexity_tier": "medium",
       "query_shape": "single-edge",
       "question_type": "list",
-      "notes": null
+      "notes": "Gold answer returns only course labels; hasTotalCourseHours is used as a threshold filter, not an answer variable."
     },
     {
       "id": "Q024",
@@ -913,12 +987,28 @@
     {
       "id": "Q030",
       "nl_question": "What evaluation methods are used by exercises organized by CAMPUS VESTA?",
-      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?methodLabel WHERE { ?tc rdf:type enov:TrainingCentre ; rdfs:label ?tcLabel . ?tc enov:organizesExercise ?ex . ?ex enov:usesEvaluationMethod ?method . ?method rdfs:label ?methodLabel . FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"campus\")) }",
-      "gold_answers": [],
+      "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?methodLabel WHERE {\n  ?tc rdf:type enov:TrainingCentre ;\n      rdfs:label ?tcLabel ;\n      enov:organizesExercise ?ex .\n  ?ex enov:hasExerciseEvaluation ?evaluation .\n  ?evaluation enov:usesEvaluationMethod ?method .\n  ?method rdfs:label ?methodLabel .\n  FILTER(CONTAINS(LCASE(STR(?tcLabel)), \"campus\"))\n}\nORDER BY ?methodLabel",
+      "gold_answers": [
+        {
+          "methodLabel": "Enviroemental risk assesment exercise evaluation method"
+        },
+        {
+          "methodLabel": "Ethics consideration exercise evaluation method"
+        },
+        {
+          "methodLabel": "Observation method exercise evaluation"
+        },
+        {
+          "methodLabel": "Safety Security Plan exercise evaluation method"
+        },
+        {
+          "methodLabel": "Scenario Specific Criteria exercise evaluation method"
+        }
+      ],
       "complexity_tier": "medium",
       "query_shape": "chain",
       "question_type": "list",
-      "notes": null
+      "notes": "Corrected: evaluation methods are reached through Exercise -> hasExerciseEvaluation -> usesEvaluationMethod."
     },
     {
       "id": "Q031",
@@ -1102,12 +1192,14 @@
       "nl_question": "What is the average number of course hours across all training courses?",
       "gold_sparql": "PREFIX enov: <http://www.semanticweb.org/eNOVATION-ontology#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (AVG(?hours) AS ?avgHours) WHERE { ?course rdf:type enov:TrainingCourse . ?course enov:hasTotalCourseHours ?hours . }",
       "gold_answers": [
-        {}
+        {
+          "avgHours": "37.9375"
+        }
       ],
       "complexity_tier": "complex",
       "query_shape": "single-edge",
       "question_type": "factoid",
-      "notes": null
+      "notes": "Gold SPARQL retained unchanged. Gold answer regenerated after hasTotalCourseHours values were converted to xsd:decimal."
     },
     {
       "id": "Q040",

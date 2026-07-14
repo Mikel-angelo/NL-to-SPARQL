@@ -1691,9 +1691,25 @@ owl:topObjectProperty rdf:type owl:ObjectProperty ;
 ###  http://www.semanticweb.org/eNOVATION-ontology#hasTotalCourseHours
 :hasTotalCourseHours rdf:type owl:DatatypeProperty ;
                      rdfs:domain :TrainingCourse ;
-                     rdfs:range xsd:string ;
-                     rdfs:comment "Total course hours of a training course" ;
+                     rdfs:range xsd:decimal ;
+                     rdfs:comment "Total duration of a training course expressed in hours"@en ;
                      rdfs:label "has total course hours"@en .
+
+
+###  http://www.semanticweb.org/eNOVATION-ontology#hasAssessmentHours
+:hasAssessmentHours rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :TrainingCourse ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "Number of course hours allocated to tests or other assessment activities"@en ;
+                    rdfs:label "has assessment hours"@en .
+
+
+###  http://www.semanticweb.org/eNOVATION-ontology#hasModuleCount
+:hasModuleCount rdf:type owl:DatatypeProperty ;
+                rdfs:domain :TrainingCourse ;
+                rdfs:range xsd:integer ;
+                rdfs:comment "Number of modules that constitute a training course"@en ;
+                rdfs:label "has module count"@en .
 
 
 ###  http://www.semanticweb.org/eNOVATION-ontology#hasTrainingFrequency
@@ -5158,7 +5174,7 @@ Chemical Products""" ;
                                        :hasNumberOfParticipants "15 to 20" ;
                                        :hasNumberOfPerformedActivities "4" ;
                                        :hasPricePerCourse "It is managed by University of Rome Tor Vergata" ;
-                                       :hasTotalCourseHours "20" ;
+                                       :hasTotalCourseHours "20"^^xsd:decimal ;
                                        rdfs:label """Biological threats: sampling,  detection, and identification.
 Bio and toxin decontamination 
 (the exact title can be different for each lecture)"""@en .
@@ -5576,7 +5592,7 @@ The same applies to SOPs."""@en ;
             :hasLength "2 days (8 Hr) + 4 Hr" ;
             :hasNumberOfParticipants "Dependend on the size of the class, internal only" ;
             :hasNumberOfPerformedActivities "Dependend on the amount of police classes each year" ;
-            :hasTotalCourseHours "20 hrs" ;
+            :hasTotalCourseHours "20"^^xsd:decimal ;
             :hasTrainingFrequency "Once during police basic training" ;
             rdfs:label "Awareness training for Police in a CBRN-E context (EDA7326) and use of Dosi meter (EDA7327)" .
 
@@ -5604,7 +5620,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced Training" ;
              :hasLength "20 Hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "20 hrs" ;
+             :hasTotalCourseHours "20"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Training of Measuring teams (AT2611)" .
 
@@ -5632,7 +5648,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "16hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "16hrs" ;
+             :hasTotalCourseHours "16"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Incident management hazardous substances (IGS Basic-AT3911)" .
 
@@ -5660,7 +5676,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "16hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "16hrs" ;
+             :hasTotalCourseHours "16"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Incident Hazardous substances: deployment of means and DECON (AT3912)" .
 
@@ -5688,7 +5704,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "16hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "16hrs" ;
+             :hasTotalCourseHours "16"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Advanced training Incident hazardous substances (IGS AT 3913)" .
 
@@ -5716,7 +5732,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "16hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "16hrs" ;
+             :hasTotalCourseHours "16"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Incident hazardous substances: collecting, sealing and pumping (AT3914)" .
 
@@ -5744,7 +5760,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "12hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "12hrs" ;
+             :hasTotalCourseHours "12"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Incident hazardous substances: advanced measurements and deployment of measurement teams (AT3915)" .
 
@@ -5774,7 +5790,7 @@ The same applies to SOPs."""@en ;
              :hasLength "300 hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
              :hasNumberOfPerformedActivities "every 2 years" ;
-             :hasTotalCourseHours "300hrs" ;
+             :hasTotalCourseHours "300"^^xsd:decimal ;
              :hasTrainingFrequency "Yearly" ;
              rdfs:label "Postgraduate Advisor hazardous substances (AT4211)" .
 
@@ -5802,7 +5818,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Refresher course" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              rdfs:label "Theoretical post training advisor dangerous substances (AT4212)" .
 
 
@@ -5829,10 +5845,11 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityForm "Theory and practice" ;
              :hasEducationalActivityType "University post graduate" ;
              :hasLength "11 modules (504 hrs) / 4 modules need to be completed" ;
+             :hasModuleCount "11"^^xsd:integer ;
              :hasNumberOfParticipants "Dependend on size of class" ;
              :hasNumberOfPerformedActivities "yearly" ;
              :hasPricePerCourse "5000" ;
-             :hasTotalCourseHours "11 modules (504 hrs)" ;
+             :hasTotalCourseHours "504"^^xsd:decimal ;
              :hasTrainingFrequency "yearly" ;
              rdfs:label "Postgraduate training Disaster management (PGRM)" .
 
@@ -5860,7 +5877,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Dangerous substances: identification during transport and assessment of direct dangers (AT5711)"@en .
 
@@ -5876,8 +5893,9 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityForm "Theory and tests" ;
             :hasEducationalActivityType "Advanced training" ;
             :hasLength "56 Hrs" ;
+            :hasAssessmentHours "8"^^xsd:decimal ;
             :hasNumberOfParticipants "Depending on police needs" ;
-            :hasTotalCourseHours "56 (including 8 Hrs tests)" ;
+            :hasTotalCourseHours "56"^^xsd:decimal ;
             :hasTrainingFrequency "Depending on police needs" ;
             rdfs:label "CBRN-E train the trainer (EDA 8121)" .
 
@@ -5905,7 +5923,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Dangerous substances: working with the BIG book or chemistry cards (AT5811)" .
 
@@ -5933,7 +5951,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3 hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Nuclear and radiological risks and practical use of Dosimeter (AT7111)" .
 
@@ -5961,7 +5979,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3 hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Gas measurement 1 (AT7411)" .
 
@@ -5989,7 +6007,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3 hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Gas measurement 2 (AT7412)" .
 
@@ -6017,7 +6035,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Scenario training dangerous substances 1 (AT7511)" .
 
@@ -6045,7 +6063,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "4hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "4hrs" ;
+             :hasTotalCourseHours "4"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Scenario training dangerous substances 2 (AT7512)" .
 
@@ -6073,7 +6091,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "3hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "3hrs" ;
+             :hasTotalCourseHours "3"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Presence of narcotics (AT8211)" .
 
@@ -6101,7 +6119,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "4hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "4hrs" ;
+             :hasTotalCourseHours "4"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "CBRN-E awareness (AT10611)" .
 
@@ -6129,7 +6147,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced" ;
              :hasLength "40hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "40hrs" ;
+             :hasTotalCourseHours "40"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Wearing a gas suit (CG0111)" .
 
@@ -6147,7 +6165,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced; train-the-trainer" ;
              :hasLength "36hrs" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "36hrs" ;
+             :hasTotalCourseHours "36"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "CBRN-E thrsseats: Train the trainer (AA7104)" .
 
@@ -6164,7 +6182,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Advanced training" ;
             :hasLength "24HR" ;
             :hasNumberOfParticipants "Depending on police needs" ;
-            :hasTotalCourseHours "24 Hrs" ;
+            :hasTotalCourseHours "24"^^xsd:decimal ;
             :hasTrainingFrequency "Depending on police needs" ;
             rdfs:label "CBRN-E training for specialised members of the TWP labs who have followed CBRN-E training from Defence (EDA 7105)" .
 
@@ -6180,7 +6198,7 @@ The same applies to SOPs."""@en ;
              :hasEducationalActivityType "Advanced; train-the-trainer" ;
              :hasLength "2 days (8hrs each)" ;
              :hasNumberOfParticipants "Dependend on size of class" ;
-             :hasTotalCourseHours "16hrs" ;
+             :hasTotalCourseHours "16"^^xsd:decimal ;
              :hasTrainingFrequency "Dependend on needs" ;
              rdfs:label "Train-the-trainer for MFR on CBRN" .
 
@@ -6196,7 +6214,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Basic training" ;
             :hasLength "1 day" ;
             :hasNumberOfParticipants "Dependend on size of class" ;
-            :hasTotalCourseHours "8Hr" ;
+            :hasTotalCourseHours "8"^^xsd:decimal ;
             :hasTrainingFrequency "Once during police training" ;
             rdfs:label "Explosives Reconnaissance training (EDA 6388)" .
 
@@ -6212,7 +6230,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Basic training" ;
             :hasLength "6 hrs" ;
             :hasNumberOfParticipants "Dependend on size of class" ;
-            :hasTotalCourseHours "6Hr" ;
+            :hasTotalCourseHours "6"^^xsd:decimal ;
             :hasTrainingFrequency "Once during police training" ;
             rdfs:label "A general explosives awareness training (EDA3588)" .
 
@@ -6240,7 +6258,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Basic training" ;
             :hasLength "6 hrs" ;
             :hasNumberOfParticipants "Dependend on size of class" ;
-            :hasTotalCourseHours "6 Hrs" ;
+            :hasTotalCourseHours "6"^^xsd:decimal ;
             :hasTrainingFrequency "Once during basic FF, Police, MFR training" ;
             rdfs:label "Reading and interpreting ADR codes (AT0811)" .
 
@@ -6258,7 +6276,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Basic training for middle and high level FF" ;
             :hasLength "4 Hrs" ;
             :hasNumberOfParticipants "Dependend on size of class" ;
-            :hasTotalCourseHours "4 Hrs" ;
+            :hasTotalCourseHours "4"^^xsd:decimal ;
             :hasTrainingFrequency "Once during training for middle and high grade FF" ;
             rdfs:label "Underground pipelines (AT0211)" .
 
@@ -6276,7 +6294,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Basic training for middle and High level FF" ;
             :hasLength "15Hr" ;
             :hasNumberOfParticipants "Dependend on size of class" ;
-            :hasTotalCourseHours "15Hr" ;
+            :hasTotalCourseHours "15"^^xsd:decimal ;
             :hasTrainingFrequency "Once during training for middle and high grade FF" ;
             rdfs:label "Hazardous substances theory training for NCO's (AT2513)" .
 
@@ -6292,7 +6310,7 @@ The same applies to SOPs."""@en ;
             :hasEducationalActivityType "Basic training for middle and High level FF" ;
             :hasLength "6Hr" ;
             :hasNumberOfParticipants "Dependend on size of class" ;
-            :hasTotalCourseHours "6 hrs" ;
+            :hasTotalCourseHours "6"^^xsd:decimal ;
             :hasTrainingFrequency "Once during training for middle and high grade FF" ;
             rdfs:label "Hazardous substances practical training for NCO's (AT2523)" .
 
@@ -6621,7 +6639,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "3 Days" ;
             :hasNumberOfPerformedActivities "1" ;
             :hasPricePerCourse "200" ;
-            :hasTotalCourseHours "24" ;
+            :hasTotalCourseHours "24"^^xsd:decimal ;
             :hasTrainingFrequency "1/Year" ;
             rdfs:label "CBRN Warning and Reporting Centre Management"@en .
 
@@ -6650,7 +6668,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfPerformedActivities "2" ;
             :hasPricePerCourse "200" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "1/Year" ;
             rdfs:label "CBRN Consequence Management" .
 
@@ -6679,7 +6697,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfPerformedActivities "1" ;
             :hasPricePerCourse "3800" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "1/Year" ;
             rdfs:label "Live Agent Training" .
 
@@ -6708,7 +6726,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfPerformedActivities "3" ;
             :hasPricePerCourse "200" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "2/Year" ;
             rdfs:label "International Radiological and Nuclear Training for Emergency Response (I-RAD)" .
 
@@ -6737,7 +6755,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfPerformedActivities "1" ;
             :hasPricePerCourse "200" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "1/Year" ;
             rdfs:label "International CBRN Preparedness and Consequence Management for First Responders" .
 
@@ -6766,7 +6784,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfPerformedActivities "0" ;
             :hasPricePerCourse "200" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "1/Year" ;
             rdfs:label "CBRN Awareness for First Responders" .
 
@@ -7315,7 +7333,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "4 days" ;
             :hasNumberOfParticipants "16" ;
             :hasNumberOfPerformedActivities "5" ;
-            :hasTotalCourseHours "32" ;
+            :hasTotalCourseHours "32"^^xsd:decimal ;
             :hasTrainingFrequency "5 x year" ;
             rdfs:label "Strategic CBRN Command Course"@en .
 
@@ -7333,7 +7351,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
              :hasLength "1 Day" ;
              :hasNumberOfParticipants "5" ;
              :hasNumberOfPerformedActivities "4" ;
-             :hasTotalCourseHours "8" ;
+             :hasTotalCourseHours "8"^^xsd:decimal ;
              :hasTrainingFrequency "4 x year" ;
              rdfs:label "Respirator Fit-Testing Course" .
 
@@ -7351,7 +7369,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
              :hasLength "4 Days" ;
              :hasNumberOfParticipants "5" ;
              :hasNumberOfPerformedActivities "3" ;
-             :hasTotalCourseHours "32" ;
+             :hasTotalCourseHours "32"^^xsd:decimal ;
              :hasTrainingFrequency "3 x year" ;
              rdfs:label "CBRN Disaster Victim Recovery & Identification" .
 
@@ -7369,7 +7387,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "4 Days" ;
             :hasNumberOfParticipants "20" ;
             :hasNumberOfPerformedActivities "8" ;
-            :hasTotalCourseHours "32" ;
+            :hasTotalCourseHours "32"^^xsd:decimal ;
             :hasTrainingFrequency "8 x year" ;
             rdfs:label "Tactical CBRN Command Course" .
 
@@ -7387,7 +7405,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "4 Days" ;
             :hasNumberOfParticipants "20" ;
             :hasNumberOfPerformedActivities "5" ;
-            :hasTotalCourseHours "32" ;
+            :hasTotalCourseHours "32"^^xsd:decimal ;
             :hasTrainingFrequency "5 x year" ;
             rdfs:label "Operational CBRN Command Course" .
 
@@ -7405,7 +7423,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "10 Days" ;
             :hasNumberOfParticipants "20" ;
             :hasNumberOfPerformedActivities "5" ;
-            :hasTotalCourseHours "80" ;
+            :hasTotalCourseHours "80"^^xsd:decimal ;
             :hasTrainingFrequency "5 x year" ;
             rdfs:label "CBRN Tactical Advisor Course" .
 
@@ -7423,7 +7441,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "10 Days" ;
             :hasNumberOfParticipants "12" ;
             :hasNumberOfPerformedActivities "5" ;
-            :hasTotalCourseHours "80" ;
+            :hasTotalCourseHours "80"^^xsd:decimal ;
             :hasTrainingFrequency "5 x year" ;
             rdfs:label "CBRN Trainer Course" .
 
@@ -7441,7 +7459,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfParticipants "10" ;
             :hasNumberOfPerformedActivities "1" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "1 x year" ;
             rdfs:label "Police DIM Initial Course" .
 
@@ -7459,7 +7477,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "2 Days" ;
             :hasNumberOfParticipants "10" ;
             :hasNumberOfPerformedActivities "8" ;
-            :hasTotalCourseHours "16" ;
+            :hasTotalCourseHours "16"^^xsd:decimal ;
             :hasTrainingFrequency "8 x year" ;
             rdfs:label "Police DIM Refresher Course"@en .
 
@@ -7477,7 +7495,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "5 Days" ;
             :hasNumberOfParticipants "10" ;
             :hasNumberOfPerformedActivities "6" ;
-            :hasTotalCourseHours "40" ;
+            :hasTotalCourseHours "40"^^xsd:decimal ;
             :hasTrainingFrequency "6 x year" ;
             rdfs:label "CBRN Search Course" .
 
@@ -7495,7 +7513,7 @@ Hybrid training capabilities (in-person and virtual via VTC).""" ;
             :hasLength "2 Days" ;
             :hasNumberOfParticipants "15" ;
             :hasNumberOfPerformedActivities "2" ;
-            :hasTotalCourseHours "16" ;
+            :hasTotalCourseHours "16"^^xsd:decimal ;
             :hasTrainingFrequency "2 x year" ;
             rdfs:label "Radiation Protection Supervisor Course" .
 
