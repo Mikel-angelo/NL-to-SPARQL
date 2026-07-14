@@ -91,7 +91,8 @@ _RESULT_SHAPE_RULES_RDFS_LABEL = """Result Shape Rules:
 - Use `rdfs:label` for labels when the `rdfs:` prefix is listed above.
 - Use `skos:prefLabel` as another label option only when the `skos:` prefix is listed above.
 - For aggregate queries grouped by an ontology entity/resource, do not return only the grouping URI. Join the resource to its label and return the label variable as the displayed answer. Group by both the resource and the label when needed.
-- If a label might not exist, use `OPTIONAL` and return both the entity URI and the label variable, or use `COALESCE` to expose the label when present and the URI as fallback.
+- Use URI variables as internal join/grouping helpers when needed, but do not include those helper URI variables in SELECT unless the question explicitly asks for URIs.
+- If a label might not exist, use `OPTIONAL` and `COALESCE` to expose one display variable rather than selecting both the entity URI and label.
 - Return an entity URI only when the question explicitly asks for URIs or no label predicate is available.
 - Do not invent label properties or label prefixes."""
 
@@ -99,6 +100,7 @@ _RESULT_SHAPE_RULES_CUSTOM = """Result Shape Rules:
 - This ontology does NOT use rdfs:label for display names. Do not use rdfs:label.
 - When returning entity names, use the domain-specific name property from the ontology chunks (e.g., :name, :first_name, :breed_name).
 - For aggregate queries grouped by an entity, expose the name property and group by both the resource and the name value.
+- Use URI variables as internal join/grouping helpers when needed, but do not include those helper URI variables in SELECT unless the question explicitly asks for URIs.
 - If no name property is visible for a class, return the entity URI.
 - Do not invent name or label properties."""
 
@@ -122,6 +124,7 @@ STRICT_CONSTRAINTS = """Strict Constraints:
 - Only use class and property names that appear in the Relevant Ontology Chunks above.
 - If the exact property name is not visible in the chunks, re-read them carefully before writing the query. Do not guess or invent property names.
 - Every variable in SELECT must appear in the WHERE clause.
+- SELECT only the answer variables requested by the question. Do not include helper variables used only for joins, grouping, filtering, or URI grounding.
 - Do not use OPTIONAL unless the question explicitly implies some data may be missing.
 """
 
