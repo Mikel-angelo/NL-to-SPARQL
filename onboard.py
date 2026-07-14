@@ -22,6 +22,11 @@ def parse_args() -> argparse.Namespace:
     source_group.add_argument("--sparql-endpoint", help="Existing SPARQL query endpoint to inspect")
     parser.add_argument("--output", required=True, help="Output ontology packages directory")
     parser.add_argument("--name", help="Optional package/dataset name base. A minute timestamp is appended.")
+    parser.add_argument(
+        "--no-abox-index",
+        action="store_true",
+        help="Skip the default instance-level ABox retrieval index build.",
+    )
     return parser.parse_args()
 
 
@@ -38,6 +43,7 @@ async def main() -> None:
             fuseki_service=fuseki_service,
             source_filename=Path(args.ontology).name,
             package_name=args.name,
+            build_abox=not args.no_abox_index,
             status_callback=_print_status,
         )
         print(f"Ontology package: {result.package_dir}")
@@ -45,12 +51,15 @@ async def main() -> None:
         print(f"Dataset endpoint: {result.dataset_endpoint}")
         print(f"Query endpoint: {result.query_endpoint}")
         print(f"Artifacts: {result.chunks_path} | {result.index_path}")
+        if result.abox_index_path:
+            print(f"ABox artifacts: {result.abox_chunks_path} | {result.abox_index_path}")
         return
 
     result = await onboard_sparql_endpoint(
         args.sparql_endpoint,
         packages_root=output_root,
         package_name=args.name,
+        build_abox=not args.no_abox_index,
         status_callback=_print_status,
     )
     print(f"Ontology package: {result.package_dir}")
@@ -63,6 +72,8 @@ def _print_status(event: str, **details: object) -> None:
         print(f"[1/4] Loading source and extracting ontology context from {details.get('source')}")
     elif event == "building_indexes":
         print("[2/4] Building retrieval indexes")
+    elif event == "building_abox_index":
+        print("[2/4] Building ABox retrieval index")
     elif event == "uploading_to_fuseki":
         print(f"[3/4] Uploading dataset to Fuseki: {details.get('dataset_name')}")
     elif event == "package_activated":

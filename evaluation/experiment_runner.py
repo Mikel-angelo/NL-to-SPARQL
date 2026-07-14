@@ -52,6 +52,9 @@ class ExperimentConfig:
     model_name: str
     retrieval_top_k: int
     chunking_strategy: str
+    use_abox_rag: bool
+    abox_retrieval_top_k: int
+    use_reactive_abox_discovery: bool
     correction_max_iterations: int
 
     def to_dict(self) -> dict[str, object]:
@@ -60,6 +63,9 @@ class ExperimentConfig:
             "model_name": self.model_name,
             "retrieval_top_k": self.retrieval_top_k,
             "chunking_strategy": self.chunking_strategy,
+            "use_abox_rag": self.use_abox_rag,
+            "abox_retrieval_top_k": self.abox_retrieval_top_k,
+            "use_reactive_abox_discovery": self.use_reactive_abox_discovery,
             "correction_max_iterations": self.correction_max_iterations,
             "runner": "direct_package",
         }
@@ -150,6 +156,9 @@ class ExperimentRunner:
                 model=self.config.model_name,
                 k=self.config.retrieval_top_k,
                 chunking=self.config.chunking_strategy,
+                use_abox_rag=self.config.use_abox_rag,
+                abox_k=self.config.abox_retrieval_top_k,
+                use_reactive_abox_discovery=self.config.use_reactive_abox_discovery,
                 corrections=self.config.correction_max_iterations,
             )
             result.total_latency_ms = (time.perf_counter() - started) * 1000
@@ -314,6 +323,9 @@ def format_experiment_report(experiment: ExperimentRun, metrics: AggregatedMetri
         f"Model: {experiment.model_name}\n"
         f"Retrieval top-k: {config.get('retrieval_top_k')}\n"
         f"Chunking: {config.get('chunking_strategy')}\n"
+        f"ABox RAG: {config.get('use_abox_rag')}\n"
+        f"ABox top-k: {config.get('abox_retrieval_top_k')}\n"
+        f"Reactive ABox discovery: {config.get('use_reactive_abox_discovery')}\n"
         f"Correction attempts max: {config.get('correction_max_iterations')}\n"
     )
     return header + "\n" + format_metrics_report(metrics)
@@ -394,6 +406,9 @@ def format_question_log(result: QuestionResult) -> str:
             f"Iterations: {result.total_iterations}",
             f"Latency ms: {result.total_latency_ms:.0f}",
             f"Retrieval top-k: {result.pipeline_config.get('retrieval_top_k')}",
+            f"ABox RAG: {result.pipeline_config.get('use_abox_rag')}",
+            f"ABox top-k: {result.pipeline_config.get('abox_retrieval_top_k')}",
+            f"Reactive ABox discovery: {result.pipeline_config.get('use_reactive_abox_discovery')}",
             f"Chunking strategy: {result.pipeline_config.get('chunking_strategy')}",
             f"Correction attempts max: {result.pipeline_config.get('correction_max_iterations')}",
             f"Trace: {result.trace_path or ''}",
@@ -460,6 +475,9 @@ async def run_from_cli(args) -> dict[str, Path]:
         model_name=args.model or settings.default_llm_model,
         retrieval_top_k=args.k or settings.runtime_retrieval_top_k,
         chunking_strategy=args.chunking or settings.default_chunking_strategy,
+        use_abox_rag=bool(args.abox_rag),
+        abox_retrieval_top_k=args.abox_k or settings.runtime_abox_retrieval_top_k,
+        use_reactive_abox_discovery=bool(args.reactive_abox_discovery),
         correction_max_iterations=args.corrections or settings.correction_max_iterations,
     )
     print("Evaluation config")
@@ -468,6 +486,9 @@ async def run_from_cli(args) -> dict[str, Path]:
     print(f"Model: {config.model_name}")
     print(f"Chunking: {config.chunking_strategy}")
     print(f"Retrieval top-k: {config.retrieval_top_k}")
+    print(f"ABox RAG: {config.use_abox_rag}")
+    print(f"ABox top-k: {config.abox_retrieval_top_k}")
+    print(f"Reactive ABox discovery: {config.use_reactive_abox_discovery}")
     print(f"Correction attempts max: {config.correction_max_iterations}")
     print(f"Preflight endpoint: {endpoint}")
     await preflight_endpoint(endpoint, timeout=args.preflight_timeout)

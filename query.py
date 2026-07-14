@@ -21,6 +21,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--question", required=True, help="Natural-language question")
     parser.add_argument("--model", help="Optional model override")
     parser.add_argument("--k", type=int, help="Optional retrieval top-k override")
+    parser.add_argument("--abox-rag", action="store_true", help="Retrieve from the optional ABox instance index")
+    parser.add_argument("--abox-k", type=int, help="Optional ABox retrieval top-k override")
+    parser.add_argument(
+        "--reactive-abox-discovery",
+        action="store_true",
+        help="Enable legacy endpoint-based ABox discovery during empty-result correction",
+    )
     parser.add_argument("--corrections", type=int, help="Optional correction attempt limit")
     parser.add_argument(
         "--chunking",
@@ -52,11 +59,17 @@ async def main() -> None:
         model=args.model,
         k=args.k,
         chunking=args.chunking,
+        use_abox_rag=args.abox_rag,
+        abox_k=args.abox_k,
+        use_reactive_abox_discovery=args.reactive_abox_discovery,
         corrections=args.corrections,
     )
     print(f"Model: {result.model_name}")
     print(f"Chunking: {result.chunking_strategy}")
     print(f"Retrieval top-k: {result.retrieval_top_k}")
+    print(f"ABox RAG: {result.use_abox_rag}")
+    print(f"ABox top-k: {result.abox_retrieval_top_k}")
+    print(f"Reactive ABox discovery: {result.use_reactive_abox_discovery}")
     print(f"Correction attempts max: {result.correction_max_iterations}")
     print(f"Answer: {result.execution_result}")
     print(f"Generated SPARQL:\n{result.generated_sparql or ''}")

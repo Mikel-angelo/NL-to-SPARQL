@@ -16,7 +16,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from app.domain.rag import RetrievedChunk
+from app.domain.rag import RetrievedABoxChunk, RetrievedChunk
 
 
 SYSTEM_ROLE = (
@@ -46,7 +46,8 @@ _ENTITY_MATCHING_RULES_RDFS_LABEL = """
 Entity Matching Rules:
 - Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA, :UCLouvain-CTMA).
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
-- Always find instances by class and label using this pattern:
+- If Matching Instance Candidates provide a URI for the entity named in the question, use that URI directly with VALUES.
+- Otherwise, find instances by class and label using this pattern:
   ?entity rdf:type :ClassName ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
@@ -59,6 +60,7 @@ Entity Matching Rules:
 - Never construct individual/instance URIs directly.
 - Instance URIs are opaque identifiers that cannot be guessed.
 - This ontology does NOT use rdfs:label. Do not use rdfs:label for entity names.
+- If Matching Instance Candidates provide a URI for the entity named in the question, use that URI directly with VALUES.
 - Instead, use the domain-specific name properties from the ontology chunks.
 - Name properties detected in this ontology:
 {name_property_hints}
@@ -73,7 +75,8 @@ _ENTITY_MATCHING_RULES_MIXED = """
 Entity Matching Rules:
 - Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA).
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
-- Most classes in this ontology use rdfs:label. As the default, find instances by class and label:
+- If Matching Instance Candidates provide a URI for the entity named in the question, use that URI directly with VALUES.
+- Most classes in this ontology use rdfs:label. As the default fallback, find instances by class and label:
   ?entity rdf:type :ClassName ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
 - EXCEPTION — the following classes do NOT use rdfs:label. For these, use the listed name property instead of rdfs:label:
@@ -122,6 +125,13 @@ STRICT_CONSTRAINTS = """Strict Constraints:
 - Every variable in SELECT must appear in the WHERE clause.
 - Do not use OPTIONAL unless the question explicitly implies some data may be missing.
 """
+
+ABOX_GROUNDING_RULES = """ABox URI Grounding Rules:
+- Matching Instance Candidates contain actual instance URIs and facts from the data.
+- If the question names a concrete entity and a matching candidate is provided, prefer grounding that entity with its URI using VALUES.
+- Do not guess instance URIs. Use only URIs explicitly shown in Matching Instance Candidates.
+- Use label/name FILTER patterns only when no reliable URI candidate is provided or when the question intentionally asks for broad text matching.
+- Schema classes and properties must still come from the ontology chunks and prefix declarations."""
 
 OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
 - Return only one valid SPARQL query.
@@ -203,6 +213,7 @@ def _render_rules(*, mode: str, name_props: list[dict[str, str]]) -> str:
         entity_rules,
         result_rules,
         result_example,
+        ABOX_GROUNDING_RULES,
         STRICT_CONSTRAINTS,
     )
     return "\n\n".join(section.strip() for section in sections) + "\n"
@@ -320,6 +331,7 @@ def render_query_generation_prompt(
     *,
     question: str,
     retrieved_context: list[RetrievedChunk],
+    retrieved_abox_context: list[RetrievedABoxChunk] | None = None,
     metadata: dict[str, object],
     ontology_context: dict[str, object],
     few_shot_examples: list[dict[str, str]] | None = None,
@@ -335,6 +347,10 @@ def render_query_generation_prompt(
         ontology_name=metadata.get("ontology_name") if isinstance(metadata.get("ontology_name"), str) else None,
         dataset_name=metadata.get("dataset_name") if isinstance(metadata.get("dataset_name"), str) else None,
         retrieved_context=[{"rank": item.rank, "text": item.text} for item in retrieved_context],
+        retrieved_abox_context=[
+            {"rank": item.rank, "uri": item.uri, "display_name": item.display_name, "types": item.types, "text": item.text}
+            for item in (retrieved_abox_context or [])
+        ],
         prefix_declarations=prefix_declarations(ontology_context),
         prompt_rules=build_prompt_rules(ontology_context),
         few_shot_examples=few_shot_examples or [],
@@ -349,6 +365,7 @@ def render_correction_prompt(
     failed_query: str,
     validation_errors: list[str],
     retrieved_context: list[RetrievedChunk] | list[dict[str, object]] | None = None,
+    retrieved_abox_context: list[RetrievedABoxChunk] | list[dict[str, object]] | None = None,
     ontology_context: dict[str, object] | None = None,
 ) -> str:
     """Render the correction prompt for one failed runtime attempt."""
@@ -359,6 +376,7 @@ def render_correction_prompt(
         failed_query=failed_query.strip(),
         validation_errors=validation_errors,
         retrieved_context=_retrieved_context_payload(retrieved_context or []),
+        retrieved_abox_context=_retrieved_abox_context_payload(retrieved_abox_context or []),
         prefix_declarations=prefix_declarations(ontology_context or {}),
         prompt_rules=build_prompt_rules(ontology_context or {}),
         output_format_instructions=CORRECTION_OUTPUT_FORMAT_INSTRUCTIONS,
@@ -397,6 +415,34 @@ def _retrieved_context_payload(
             payload.append(
                 {
                     "rank": item.get("rank", index),
+                    "text": item.get("text", ""),
+                }
+            )
+    return payload
+
+
+def _retrieved_abox_context_payload(
+    retrieved_context: list[RetrievedABoxChunk] | list[dict[str, object]],
+) -> list[dict[str, object]]:
+    payload = []
+    for index, item in enumerate(retrieved_context, 1):
+        if isinstance(item, RetrievedABoxChunk):
+            payload.append(
+                {
+                    "rank": item.rank,
+                    "uri": item.uri,
+                    "display_name": item.display_name,
+                    "types": item.types,
+                    "text": item.text,
+                }
+            )
+        elif isinstance(item, dict):
+            payload.append(
+                {
+                    "rank": item.get("rank", index),
+                    "uri": item.get("uri", ""),
+                    "display_name": item.get("display_name", ""),
+                    "types": item.get("types", []),
                     "text": item.get("text", ""),
                 }
             )

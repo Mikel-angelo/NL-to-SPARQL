@@ -25,7 +25,7 @@ from app.domain.ontology.package_writer import (
 )
 from app.domain.ontology.source_loader import SUPPORTED_SUFFIXES, load_ontology_file, load_sparql_endpoint
 from app.domain.package import get_active_package, set_active_package
-from app.domain.rag import build_all_indexes
+from app.domain.rag import build_abox_index, build_all_indexes
 
 
 @dataclass(frozen=True)
@@ -40,6 +40,9 @@ class OnboardingResult:
     chunks_path: Path
     index_path: Path
     chunk_count: int
+    abox_chunks_path: Path | None = None
+    abox_index_path: Path | None = None
+    abox_chunk_count: int = 0
 
 
 async def onboard_ontology_file(
@@ -50,6 +53,7 @@ async def onboard_ontology_file(
     source_filename: str | None = None,
     package_name: str | None = None,
     activate_package: bool = True,
+    build_abox: bool | None = None,
     status_callback: callable | None = None,
 ) -> OnboardingResult:
     """Build one package from a file, index it, upload it to Fuseki, and optionally activate it."""
@@ -91,6 +95,11 @@ async def onboard_ontology_file(
     _emit_status(status_callback, package_dir, "building_indexes")
     artifact_results = build_all_indexes(package_dir)
     default_artifact_result = _default_index_result(artifact_results, settings.default_chunking_strategy)
+    abox_artifact_result = None
+    should_build_abox = build_abox if build_abox is not None else settings.default_build_abox_index
+    if should_build_abox:
+        _emit_status(status_callback, package_dir, "building_abox_index")
+        abox_artifact_result = build_abox_index(package_dir, final_graph.graph)
 
     _emit_status(status_callback, package_dir, "uploading_to_fuseki", dataset_name=dataset_name)
     uploads = build_fuseki_uploads_from_package(package_dir, dataset_name=dataset_name)
@@ -121,6 +130,9 @@ async def onboard_ontology_file(
         chunks_path=default_artifact_result.chunks_path,
         index_path=default_artifact_result.index_path,
         chunk_count=default_artifact_result.chunk_count,
+        abox_chunks_path=getattr(abox_artifact_result, "chunks_path", None),
+        abox_index_path=getattr(abox_artifact_result, "index_path", None),
+        abox_chunk_count=getattr(abox_artifact_result, "chunk_count", 0),
     )
 
 
@@ -130,6 +142,7 @@ async def onboard_sparql_endpoint(
     packages_root: str | Path,
     package_name: str | None = None,
     activate_package: bool = True,
+    build_abox: bool | None = None,
     status_callback: callable | None = None,
 ) -> OnboardingResult:
     """Build one package from an existing SPARQL endpoint and optionally activate it."""
@@ -160,6 +173,11 @@ async def onboard_sparql_endpoint(
     _emit_status(status_callback, package_dir, "building_indexes")
     artifact_results = build_all_indexes(package_dir)
     default_artifact_result = _default_index_result(artifact_results, settings.default_chunking_strategy)
+    abox_artifact_result = None
+    should_build_abox = build_abox if build_abox is not None else settings.default_build_abox_index
+    if should_build_abox:
+        _emit_status(status_callback, package_dir, "building_abox_index")
+        abox_artifact_result = build_abox_index(package_dir, final_graph.graph)
 
     if activate_package:
         set_active_package(packages_root, package_dir)
@@ -182,6 +200,9 @@ async def onboard_sparql_endpoint(
         chunks_path=default_artifact_result.chunks_path,
         index_path=default_artifact_result.index_path,
         chunk_count=default_artifact_result.chunk_count,
+        abox_chunks_path=getattr(abox_artifact_result, "chunks_path", None),
+        abox_index_path=getattr(abox_artifact_result, "index_path", None),
+        abox_chunk_count=getattr(abox_artifact_result, "chunk_count", 0),
     )
 
 

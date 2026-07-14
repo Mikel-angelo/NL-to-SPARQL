@@ -16,7 +16,11 @@ class Settings:
 
     rag_embedding_model_name: str = "all-MiniLM-L6-v2"
     runtime_retrieval_top_k: int = 10
+    runtime_abox_retrieval_top_k: int = 5
     default_chunking_strategy: str = "class_based"
+    default_build_abox_index: bool = True
+    default_use_abox_rag: bool = False
+    default_use_reactive_abox_discovery: bool = False
     llm_api_url: str = "http://147.102.6.253:11500/api/generate"
     default_llm_model: str = "qwen2.5-coder:32b"
     llm_timeout_seconds: float = 120.0

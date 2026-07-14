@@ -30,7 +30,7 @@ from app.domain.package import (
     resolve_package_dir,
     settings_path,
 )
-from app.domain.rag import RetrievedChunk, retrieve_context
+from app.domain.rag import RetrievedABoxChunk, RetrievedChunk, retrieve_abox_context, retrieve_context
 from app.domain.runtime import query_correction, query_generation, sparql_execution
 from app.domain.runtime.prompt_renderer import SYSTEM_ROLE, render_query_generation_prompt
 from app.domain.runtime.query_trace import write_query_trace, write_readable_query_trace
@@ -53,8 +53,12 @@ class QueryPipelineResult:
     dataset_endpoint: str
     model_name: str
     retrieved_context: list[dict[str, object]]
+    retrieved_abox_context: list[dict[str, object]]
     chunking_strategy: str
     retrieval_top_k: int
+    abox_retrieval_top_k: int
+    use_abox_rag: bool
+    use_reactive_abox_discovery: bool
     correction_max_iterations: int
     generated_sparql: str | None
     validated_sparql: str | None
@@ -72,8 +76,12 @@ class QueryPipelineResult:
             "dataset_endpoint": self.dataset_endpoint,
             "model_name": self.model_name,
             "retrieved_context": self.retrieved_context,
+            "retrieved_abox_context": self.retrieved_abox_context,
             "chunking_strategy": self.chunking_strategy,
             "retrieval_top_k": self.retrieval_top_k,
+            "abox_retrieval_top_k": self.abox_retrieval_top_k,
+            "use_abox_rag": self.use_abox_rag,
+            "use_reactive_abox_discovery": self.use_reactive_abox_discovery,
             "correction_max_iterations": self.correction_max_iterations,
             "generated_sparql": self.generated_sparql,
             "validated_sparql": self.validated_sparql,
@@ -94,6 +102,9 @@ async def run_query_pipeline(
     endpoint: str | None = None,
     k: int | None = None,
     chunking: str | None = None,
+    use_abox_rag: bool | None = None,
+    abox_k: int | None = None,
+    use_reactive_abox_discovery: bool | None = None,
     corrections: int | None = None,
 ) -> QueryPipelineResult:
     """Answer one natural-language question using one ontology package.
@@ -118,7 +129,16 @@ async def run_query_pipeline(
         _string_setting(metadata, "query_endpoint", ""),
     )
     effective_k = k or settings.runtime_retrieval_top_k
+    effective_abox_k = abox_k or settings.runtime_abox_retrieval_top_k
     effective_chunking = chunking or settings.default_chunking_strategy
+    effective_use_abox_rag = (
+        use_abox_rag if use_abox_rag is not None else settings.default_use_abox_rag
+    )
+    effective_use_reactive_abox_discovery = (
+        use_reactive_abox_discovery
+        if use_reactive_abox_discovery is not None
+        else settings.default_use_reactive_abox_discovery
+    )
     max_iterations = corrections or settings.correction_max_iterations
 
     retrieved_context = retrieve_context(
@@ -127,11 +147,18 @@ async def run_query_pipeline(
         k=effective_k,
         chunking=effective_chunking,
     )
+    retrieved_abox_context = (
+        retrieve_abox_context(root, question, k=effective_abox_k)
+        if effective_use_abox_rag
+        else []
+    )
     retrieved_payload = [item.to_dict() for item in retrieved_context]
+    retrieved_abox_payload = [item.to_dict() for item in retrieved_abox_context]
     few_shot_examples = retrieve_few_shot_examples(root, question, n=3)
     prompt = render_query_generation_prompt(
         question=question,
         retrieved_context=retrieved_context,
+        retrieved_abox_context=retrieved_abox_context,
         metadata=metadata,
         ontology_context=ontology_context,
         few_shot_examples=few_shot_examples,
@@ -140,11 +167,13 @@ async def run_query_pipeline(
         question=question,
         generation_prompt=prompt,
         retrieved_context=retrieved_context,
+        retrieved_abox_context=retrieved_abox_context,
         ontology_context=ontology_context,
         endpoint_url=effective_endpoint,
         model=effective_model,
         llm_api_url=settings.llm_api_url,
         k_max=max_iterations,
+        use_reactive_abox_discovery=effective_use_reactive_abox_discovery,
     )
 
     run_at = datetime.now(UTC)
@@ -159,8 +188,12 @@ async def run_query_pipeline(
         "llm_api_url": settings.llm_api_url,
         "chunking_strategy": effective_chunking,
         "retrieval_top_k": effective_k,
+        "abox_retrieval_top_k": effective_abox_k,
+        "use_abox_rag": effective_use_abox_rag,
+        "use_reactive_abox_discovery": effective_use_reactive_abox_discovery,
         "correction_max_iterations": max_iterations,
         "retrieved_context": retrieved_payload,
+        "retrieved_abox_context": retrieved_abox_payload,
         "prompt_generated": prompt,
         "llm_generated_query": attempt_result.original_query,
         "max_correction_iterations": max_iterations,
@@ -186,8 +219,12 @@ async def run_query_pipeline(
         dataset_endpoint=effective_endpoint,
         model_name=effective_model,
         retrieved_context=retrieved_payload,
+        retrieved_abox_context=retrieved_abox_payload,
         chunking_strategy=effective_chunking,
         retrieval_top_k=effective_k,
+        abox_retrieval_top_k=effective_abox_k,
+        use_abox_rag=effective_use_abox_rag,
+        use_reactive_abox_discovery=effective_use_reactive_abox_discovery,
         correction_max_iterations=max_iterations,
         generated_sparql=attempt_result.original_query,
         validated_sparql=attempt_result.validated_query,
@@ -226,11 +263,13 @@ async def run_query_attempts(
     question: str,
     generation_prompt: str,
     retrieved_context: list[RetrievedChunk],
+    retrieved_abox_context: list[RetrievedABoxChunk] | None = None,
     ontology_context: dict[str, object],
     endpoint_url: str,
     model: str,
     llm_api_url: str,
     k_max: int = 3,
+    use_reactive_abox_discovery: bool = False,
 ) -> QueryAttemptResult:
     """Run the generate -> validate -> execute -> correct loop.
 
@@ -282,24 +321,28 @@ async def run_query_attempts(
                 is_empty = _is_empty_select_result(execution_result, validation_result.normalized_query)
 
                 if is_empty and iteration < max(1, k_max):
-                    # Empty result on a SELECT - discover actual ABox paths for the hint
-                    path_hint = await discover_paths_for_correction(
-                        endpoint_url,
-                        validation_result.normalized_query,
-                        ontology_context,
-                    )
+                    path_hint = ""
+                    if use_reactive_abox_discovery:
+                        path_hint = await discover_paths_for_correction(
+                            endpoint_url,
+                            validation_result.normalized_query,
+                            ontology_context,
+                        )
                     base_message = (
                         "Query executed successfully but returned 0 results. "
-                        "Common causes: (1) An entity was referenced by a constructed URI "
-                        "instead of using rdfs:label with FILTER - instance URIs cannot be "
-                        "guessed from labels. Use the pattern: ?entity rdf:type :ClassName ; "
-                        "rdfs:label ?label . FILTER(CONTAINS(LCASE(STR(?label)), \"search term\")). "
-                        "(2) A property name is close but not exactly correct."
+                        "Common causes: (1) a concrete entity was matched through the wrong "
+                        "name/identifier property, (2) an instance URI was guessed instead of "
+                        "using a provided candidate URI, (3) a property path is reversed or "
+                        "close but not exact, or (4) a literal datatype/value does not match "
+                        "the data."
                     )
                     if path_hint:
                         errors = [base_message + "\n\n" + path_hint]
                     else:
-                        errors = [base_message + " Re-read the ontology chunks carefully."]
+                        errors = [
+                            base_message
+                            + " Re-read the schema chunks and matching instance candidates carefully."
+                        ]
                     status = "completed"
                     iteration_payload["status"] = "executed_empty"
                     iteration_payload["errors"] = errors

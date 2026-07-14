@@ -51,12 +51,18 @@ def render_readable_query_trace(payload: dict[str, object]) -> str:
         f"Model: {_text(payload.get('model_name'))}",
         f"Chunking: {_text(payload.get('chunking_strategy'))}",
         f"Retrieval top-k: {_text(payload.get('retrieval_top_k'))}",
+        f"ABox RAG: {_text(payload.get('use_abox_rag'))}",
+        f"ABox top-k: {_text(payload.get('abox_retrieval_top_k'))}",
+        f"Reactive ABox discovery: {_text(payload.get('use_reactive_abox_discovery'))}",
         "",
         "QUESTION",
         _text(payload.get("question_asked")),
         "",
         "GENERATION PROMPT",
         _text(payload.get("prompt_generated")),
+        "",
+        "RETRIEVED ABOX CONTEXT",
+        *_render_retrieved_abox_context(payload.get("retrieved_abox_context")),
         "",
         "INITIAL GENERATED QUERY",
         _text(payload.get("llm_generated_query")),
@@ -133,6 +139,20 @@ def _render_execution_result(value: object) -> list[str]:
                 values.append(f"{var}=")
         lines.append(f"{index}. " + " | ".join(values))
     return lines
+
+
+def _render_retrieved_abox_context(value: object) -> list[str]:
+    if not isinstance(value, list) or not value:
+        return ["None"]
+    lines: list[str] = []
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        display_name = _text(item.get("display_name"))
+        uri = _text(item.get("uri"))
+        score = _text(item.get("score"))
+        lines.append(f"- rank={_text(item.get('rank'))} score={score} name={display_name} uri={uri}")
+    return lines or ["None"]
 
 
 def _items(value: object) -> list[dict[str, object]]:

@@ -97,6 +97,18 @@ def index_path(package_dir: str | Path, chunking: str = "class_based") -> Path:
     return index_strategy_dir(package_dir, chunking) / "index.faiss"
 
 
+def abox_index_dir(package_dir: str | Path) -> Path:
+    return indexes_dir(package_dir) / "abox"
+
+
+def abox_chunks_path(package_dir: str | Path) -> Path:
+    return abox_index_dir(package_dir) / "chunks.json"
+
+
+def abox_index_path(package_dir: str | Path) -> Path:
+    return abox_index_dir(package_dir) / "index.faiss"
+
+
 def read_json_file(path: Path) -> dict[str, object]:
     """Read a JSON object from disk."""
     if not path.exists():
