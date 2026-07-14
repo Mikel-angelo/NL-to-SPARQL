@@ -465,10 +465,10 @@ def _format_abox_candidates_for_correction(
 
     lines = [
         "Matching Instance Candidates from the data:",
-        "- Treat these candidates as evidence, not as a closed world.",
-        "- If the question explicitly mentions a concrete RDF resource and one candidate unambiguously matches it, you may bind that variable with VALUES and the candidate URI.",
-        "- If the question is broad, asks for all resources of a type, counts, rankings, comparisons, or filters over a class of resources, write general graph patterns instead of restricting the query to these candidates.",
-        "- Do not guess instance URIs for concrete resource grounding. If no candidate URI clearly applies, use general graph patterns and name/label matching rules instead.",
+        "- These are examples from the data, not the full answer set.",
+        "- Use a candidate URI with VALUES only when it clearly matches a resource explicitly named in the question.",
+        "- Do not use candidate URIs to limit the variable being asked for in broad list/count/comparison questions.",
+        "- If no candidate clearly matches a named resource, use general graph patterns and the ontology name/label rules.",
     ]
     for item in retrieved_abox_context[:8]:
         type_text = ", ".join(item.types) if item.types else "unknown type"

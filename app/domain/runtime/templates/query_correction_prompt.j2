@@ -18,7 +18,7 @@ No retrieved ontology context was available.
 
 Matching Instance Candidates:
 {% if retrieved_abox_context %}
-Treat these candidates as evidence, not as a closed world. If the question explicitly mentions a concrete RDF resource and one candidate unambiguously matches it, you may bind that variable with VALUES and the candidate URI. For broad questions, counts, rankings, comparisons, or filters over a class of resources, write general graph patterns instead of restricting the query to these candidates. Do not guess instance URIs for concrete resource grounding; if no candidate URI clearly applies, use general graph patterns and name/label matching rules instead.
+These are examples from the data, not the full answer set. Use a candidate URI with VALUES only when it clearly matches a resource explicitly named in the question. Do not use candidate URIs to limit the variable being asked for in broad list/count/comparison questions. If no candidate clearly matches a named resource, use general graph patterns and the ontology name/label rules.
 {% for item in retrieved_abox_context %}
 Candidate {{ item.rank or loop.index }}:
 """

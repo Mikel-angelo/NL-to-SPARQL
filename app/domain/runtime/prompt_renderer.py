@@ -128,14 +128,11 @@ STRICT_CONSTRAINTS = """Strict Constraints:
 - Do not use OPTIONAL unless the question explicitly implies some data may be missing.
 """
 
-ABOX_GROUNDING_RULES = """ABox URI Grounding Rules:
-- Matching Instance Candidates contain actual instance URIs and facts from the data.
-- Treat Matching Instance Candidates as evidence, not as a closed world.
-- If the question explicitly mentions a concrete RDF resource and one candidate unambiguously matches that mention, prefer binding that variable with VALUES and the candidate URI.
-- If the question is broad, asks for all resources of a type, counts, rankings, comparisons, or filters over a class of resources, write general graph patterns instead of restricting the query to retrieved candidates.
-- Do not guess instance URIs for concrete resource grounding. If no candidate URI clearly applies, use general graph patterns and name/label matching rules instead.
-- Use label/name FILTER patterns only when no reliable URI candidate is provided or when the question intentionally asks for broad text matching.
-- Schema classes and properties must still come from the ontology chunks and prefix declarations."""
+ABOX_GROUNDING_RULES = """ABox Grounding Rules:
+- Matching Instance Candidates are examples from the data, not the full answer set.
+- Use a candidate URI with VALUES only when it clearly matches a resource explicitly named in the question.
+- Do not use candidate URIs to limit the variable being asked for in broad list/count/comparison questions.
+- If no candidate clearly matches a named resource, use general graph patterns and the ontology name/label rules."""
 
 OUTPUT_FORMAT_INSTRUCTIONS = """Output Format Instructions:
 - Return only one valid SPARQL query.
