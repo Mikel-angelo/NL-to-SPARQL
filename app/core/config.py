@@ -15,7 +15,7 @@ class Settings:
     ontology_packages_path: str = "ontology_packages"
 
     rag_embedding_model_name: str = "all-MiniLM-L6-v2"
-    runtime_retrieval_top_k: int = 10
+    runtime_retrieval_top_k: int = 5
     runtime_abox_retrieval_top_k: int = 5
     default_chunking_strategy: str = "class_based"
     default_build_abox_index: bool = True
