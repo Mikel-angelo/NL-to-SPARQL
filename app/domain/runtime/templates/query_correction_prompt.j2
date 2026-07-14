@@ -16,6 +16,19 @@ Chunk {{ item.rank or loop.index }}:
 No retrieved ontology context was available.
 {% endif %}
 
+Matching Instance Candidates:
+{% if retrieved_abox_context %}
+Treat these candidates as evidence, not as a closed world. If the question explicitly mentions a concrete RDF resource and one candidate unambiguously matches it, you may bind that variable with VALUES and the candidate URI. For broad questions, counts, rankings, comparisons, or filters over a class of resources, write general graph patterns instead of restricting the query to these candidates. Do not guess instance URIs for concrete resource grounding; if no candidate URI clearly applies, use general graph patterns and name/label matching rules instead.
+{% for item in retrieved_abox_context %}
+Candidate {{ item.rank or loop.index }}:
+"""
+{{ item.text or "" }}
+"""
+{% endfor %}
+{% else %}
+No matching instance candidates were retrieved.
+{% endif %}
+
 Failed query:
 {{ failed_query }}
 

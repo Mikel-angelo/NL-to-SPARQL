@@ -11,7 +11,7 @@ Two modes:
 from __future__ import annotations
 
 from app.clients.llm import chat_completion, generate_text
-from app.domain.rag import RetrievedChunk
+from app.domain.rag import RetrievedABoxChunk, RetrievedChunk
 from app.domain.runtime.prompt_renderer import render_correction_prompt
 from app.domain.runtime.query_generation import normalize_generated_query
 
@@ -22,6 +22,7 @@ async def correct_query(
     failed_query: str,
     validation_errors: list[str],
     retrieved_context: list[RetrievedChunk],
+    retrieved_abox_context: list[RetrievedABoxChunk] | None = None,
     ontology_context: dict[str, object],
     model: str,
     llm_api_url: str,
@@ -32,6 +33,7 @@ async def correct_query(
         failed_query=failed_query,
         validation_errors=validation_errors,
         retrieved_context=retrieved_context,
+        retrieved_abox_context=retrieved_abox_context,
         ontology_context=ontology_context,
     )
     return normalize_generated_query(

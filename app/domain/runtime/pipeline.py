@@ -372,7 +372,10 @@ async def run_query_attempts(
             final_query = validation_result.normalized_query
             break
 
-        correction_message = _build_correction_message(errors or [])
+        correction_message = _build_correction_message(
+            errors or [],
+            retrieved_abox_context=retrieved_abox_context or [],
+        )
         current_query, message_history = await query_correction.correct_query_chat(
             message_history=message_history,
             correction_message=correction_message,
@@ -430,7 +433,11 @@ def _validation_summary(validation: dict[str, object]) -> str:
     return ", ".join(failed_codes) if failed_codes else "VALIDATION_OK"
 
 
-def _build_correction_message(errors: list[str]) -> str:
+def _build_correction_message(
+    errors: list[str],
+    *,
+    retrieved_abox_context: list[RetrievedABoxChunk] | None = None,
+) -> str:
     """Build a concise correction message from validation/execution errors.
 
     Used as a follow-up user message in the chat conversation. The model already
@@ -438,11 +445,37 @@ def _build_correction_message(errors: list[str]) -> str:
     went wrong and ask for a fix.
     """
     error_text = "\n".join(f"- {e}" for e in errors)
+    abox_text = _format_abox_candidates_for_correction(retrieved_abox_context or [])
     return (
         f"Your previous query failed. Errors:\n{error_text}\n\n"
+        f"{abox_text}\n\n"
         f"Fix the query based on these errors. "
         f"Return only a corrected SPARQL query, no explanations."
     )
+
+
+def _format_abox_candidates_for_correction(
+    retrieved_abox_context: list[RetrievedABoxChunk],
+) -> str:
+    if not retrieved_abox_context:
+        return (
+            "No matching instance candidates are available. "
+            "Use general graph patterns and the ontology name/label rules when matching resources."
+        )
+
+    lines = [
+        "Matching Instance Candidates from the data:",
+        "- Treat these candidates as evidence, not as a closed world.",
+        "- If the question explicitly mentions a concrete RDF resource and one candidate unambiguously matches it, you may bind that variable with VALUES and the candidate URI.",
+        "- If the question is broad, asks for all resources of a type, counts, rankings, comparisons, or filters over a class of resources, write general graph patterns instead of restricting the query to these candidates.",
+        "- Do not guess instance URIs for concrete resource grounding. If no candidate URI clearly applies, use general graph patterns and name/label matching rules instead.",
+    ]
+    for item in retrieved_abox_context[:8]:
+        type_text = ", ".join(item.types) if item.types else "unknown type"
+        lines.append(
+            f"* {item.display_name or 'unnamed resource'} | URI: <{item.uri or ''}> | Types: {type_text}"
+        )
+    return "\n".join(lines)
 
 
 def _is_empty_select_result(execution_result: dict[str, object] | None, query: str) -> bool:

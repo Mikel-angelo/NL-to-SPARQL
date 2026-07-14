@@ -44,15 +44,14 @@ PREFIX_USAGE_RULES = """Prefix Usage Rules:
 
 _ENTITY_MATCHING_RULES_RDFS_LABEL = """
 Entity Matching Rules:
-- Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA, :UCLouvain-CTMA).
+- Never construct individual/instance URIs directly from resource names.
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
-- If Matching Instance Candidates provide a URI for the entity named in the question, use that URI directly with VALUES.
+- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may bind that variable with VALUES.
 - Otherwise, find instances by class and label using this pattern:
   ?entity rdf:type :ClassName ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
 - When the question names a specific entity, extract the key words for the FILTER.
-  Example: "CAMPUS VESTA" -> FILTER(CONTAINS(LCASE(STR(?label)), "campus vesta"))
 - When no specific entity is named, omit the FILTER to match all instances."""
 
 _ENTITY_MATCHING_RULES_CUSTOM = """
@@ -60,7 +59,7 @@ Entity Matching Rules:
 - Never construct individual/instance URIs directly.
 - Instance URIs are opaque identifiers that cannot be guessed.
 - This ontology does NOT use rdfs:label. Do not use rdfs:label for entity names.
-- If Matching Instance Candidates provide a URI for the entity named in the question, use that URI directly with VALUES.
+- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may bind that variable with VALUES.
 - Instead, use the domain-specific name properties from the ontology chunks.
 - Name properties detected in this ontology:
 {name_property_hints}
@@ -73,9 +72,9 @@ Entity Matching Rules:
 
 _ENTITY_MATCHING_RULES_MIXED = """
 Entity Matching Rules:
-- Never construct individual/instance URIs directly (e.g., :CAMPUS_VESTA).
+- Never construct individual/instance URIs directly from resource names.
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
-- If Matching Instance Candidates provide a URI for the entity named in the question, use that URI directly with VALUES.
+- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may bind that variable with VALUES.
 - Most classes in this ontology use rdfs:label. As the default fallback, find instances by class and label:
   ?entity rdf:type :ClassName ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
@@ -128,8 +127,10 @@ STRICT_CONSTRAINTS = """Strict Constraints:
 
 ABOX_GROUNDING_RULES = """ABox URI Grounding Rules:
 - Matching Instance Candidates contain actual instance URIs and facts from the data.
-- If the question names a concrete entity and a matching candidate is provided, prefer grounding that entity with its URI using VALUES.
-- Do not guess instance URIs. Use only URIs explicitly shown in Matching Instance Candidates.
+- Treat Matching Instance Candidates as evidence, not as a closed world.
+- If the question explicitly mentions a concrete RDF resource and one candidate unambiguously matches that mention, prefer binding that variable with VALUES and the candidate URI.
+- If the question is broad, asks for all resources of a type, counts, rankings, comparisons, or filters over a class of resources, write general graph patterns instead of restricting the query to retrieved candidates.
+- Do not guess instance URIs for concrete resource grounding. If no candidate URI clearly applies, use general graph patterns and name/label matching rules instead.
 - Use label/name FILTER patterns only when no reliable URI candidate is provided or when the question intentionally asks for broad text matching.
 - Schema classes and properties must still come from the ontology chunks and prefix declarations."""
 
