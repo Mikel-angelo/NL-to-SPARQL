@@ -466,9 +466,10 @@ def _format_abox_candidates_for_correction(
     lines = [
         "Matching Instance Candidates from the data:",
         "- These are examples from the data, not the full answer set.",
-        "- Use a candidate URI with VALUES only when it clearly matches a resource explicitly named in the question.",
+        "- Use a candidate URI only when it clearly matches a resource explicitly named in the question.",
         "- Do not use candidate URIs to limit the variable being asked for in broad list/count/comparison questions.",
         "- If no candidate clearly matches a named resource, use general graph patterns and the ontology name/label rules.",
+        "- If a property links to another resource/class, do not compare that resource variable to string literals; bind the resource and compare its label/name value instead.",
     ]
     for item in retrieved_abox_context[:8]:
         type_text = ", ".join(item.types) if item.types else "unknown type"

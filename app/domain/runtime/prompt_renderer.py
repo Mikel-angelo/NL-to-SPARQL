@@ -46,10 +46,11 @@ _ENTITY_MATCHING_RULES_RDFS_LABEL = """
 Entity Matching Rules:
 - Never construct individual/instance URIs directly from resource names.
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
-- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may bind that variable with VALUES.
+- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may use that exact URI as a fixed resource in the query.
 - Otherwise, find instances by class and label using this pattern:
   ?entity rdf:type :ClassName ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
+- If a property links to another resource/class, do not compare that resource variable to string literals. Bind the resource and compare its label/name value instead.
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
 - When the question names a specific entity, extract the key words for the FILTER.
 - When no specific entity is named, omit the FILTER to match all instances."""
@@ -59,7 +60,7 @@ Entity Matching Rules:
 - Never construct individual/instance URIs directly.
 - Instance URIs are opaque identifiers that cannot be guessed.
 - This ontology does NOT use rdfs:label. Do not use rdfs:label for entity names.
-- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may bind that variable with VALUES.
+- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may use that exact URI as a fixed resource in the query.
 - Instead, use the domain-specific name properties from the ontology chunks.
 - Name properties detected in this ontology:
 {name_property_hints}
@@ -67,6 +68,7 @@ Entity Matching Rules:
   ?entity rdf:type :ClassName ;
           :nameProperty ?name .
   FILTER(CONTAINS(LCASE(STR(?name)), "search term"))
+- If a property links to another resource/class, do not compare that resource variable to string literals. Bind the resource and compare its name value instead.
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
 - When no specific entity is named, omit the FILTER to match all instances."""
 
@@ -74,12 +76,13 @@ _ENTITY_MATCHING_RULES_MIXED = """
 Entity Matching Rules:
 - Never construct individual/instance URIs directly from resource names.
 - Instance URIs are opaque identifiers that cannot be guessed from labels.
-- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may bind that variable with VALUES.
+- If Matching Instance Candidates contain an unambiguous URI for a resource explicitly mentioned in the question, you may use that exact URI as a fixed resource in the query.
 - Most classes in this ontology use rdfs:label. As the default fallback, find instances by class and label:
   ?entity rdf:type :ClassName ; rdfs:label ?label .
   FILTER(CONTAINS(LCASE(STR(?label)), "search term"))
 - EXCEPTION — the following classes do NOT use rdfs:label. For these, use the listed name property instead of rdfs:label:
 {name_property_exceptions}
+- If a property links to another resource/class, do not compare that resource variable to string literals. Bind the resource and compare its label/name value instead.
 - Use LCASE and CONTAINS for partial, case-insensitive matching.
 - When the question names a specific entity, extract the key words for the FILTER.
 - When no specific entity is named, omit the FILTER to match all instances."""
@@ -130,7 +133,7 @@ STRICT_CONSTRAINTS = """Strict Constraints:
 
 ABOX_GROUNDING_RULES = """ABox Grounding Rules:
 - Matching Instance Candidates are examples from the data, not the full answer set.
-- Use a candidate URI with VALUES only when it clearly matches a resource explicitly named in the question.
+- Use a candidate URI only when it clearly matches a resource explicitly named in the question.
 - Do not use candidate URIs to limit the variable being asked for in broad list/count/comparison questions.
 - If no candidate clearly matches a named resource, use general graph patterns and the ontology name/label rules."""
 
