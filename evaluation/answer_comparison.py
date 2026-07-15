@@ -86,8 +86,21 @@ def normalize_answer_surface(value: str, prefix_map: Optional[dict[str, str]] = 
     This is deliberately a scoring normalization only. It does not rewrite the
     generated SPARQL or the raw answers saved in evaluation logs.
     """
+    return normalize_answer_surface_with_aliases(value, prefix_map=prefix_map, answer_aliases=None)
+
+
+def normalize_answer_surface_with_aliases(
+    value: str,
+    *,
+    prefix_map: Optional[dict[str, str]] = None,
+    answer_aliases: Optional[dict[str, list[str]]] = None,
+) -> str:
+    """Return a lexical answer key, resolving URI answers through known aliases."""
     value = normalize_value(value, prefix_map)
     if value.startswith("http://") or value.startswith("https://"):
+        aliases = answer_aliases.get(value, []) if answer_aliases else []
+        if aliases:
+            return _surface_key(aliases[0])
         value = _local_name(value)
     return _surface_key(value)
 
@@ -112,6 +125,7 @@ def normalize_value(value: str, prefix_map: Optional[dict[str, str]] = None) -> 
 def normalize_row(
     row: dict[str, str],
     prefix_map: Optional[dict[str, str]] = None,
+    answer_aliases: Optional[dict[str, list[str]]] = None,
 ) -> tuple[str, ...]:
     """Normalize one result row into a sorted tuple of values.
 
@@ -121,7 +135,18 @@ def normalize_row(
     and returning both a URI and its matching label does not create a spurious
     extra-column mismatch.
     """
-    return tuple(sorted({normalize_answer_surface(str(value), prefix_map) for value in row.values()}))
+    return tuple(
+        sorted(
+            {
+                normalize_answer_surface_with_aliases(
+                    str(value),
+                    prefix_map=prefix_map,
+                    answer_aliases=answer_aliases,
+                )
+                for value in row.values()
+            }
+        )
+    )
 
 
 def _local_name(uri: str) -> str:
@@ -149,9 +174,10 @@ def _surface_key(value: str) -> str:
 def normalize_result_set(
     results: list[dict[str, str]],
     prefix_map: Optional[dict[str, str]] = None,
+    answer_aliases: Optional[dict[str, list[str]]] = None,
 ) -> set[tuple[str, ...]]:
     """Normalize all result rows into a set suitable for exact and partial matching."""
-    return {normalize_row(row, prefix_map) for row in results}
+    return {normalize_row(row, prefix_map, answer_aliases) for row in results}
 
 
 @dataclass
@@ -186,6 +212,7 @@ def compare_results(
     generated: Optional[list[dict[str, str]]],
     gold: list[dict[str, str]],
     prefix_map: Optional[dict[str, str]] = None,
+    answer_aliases: Optional[dict[str, list[str]]] = None,
 ) -> ComparisonResult:
     """Compare generated and gold result sets using normalized row-set overlap.
 
@@ -231,8 +258,8 @@ def compare_results(
         result.f1 = 0.0
         return result
 
-    gold_set = normalize_result_set(gold, prefix_map)
-    generated_set = normalize_result_set(generated, prefix_map)
+    gold_set = normalize_result_set(gold, prefix_map, answer_aliases)
+    generated_set = normalize_result_set(generated, prefix_map, answer_aliases)
 
     result.gold_size = len(gold_set)
     result.generated_size = len(generated_set)

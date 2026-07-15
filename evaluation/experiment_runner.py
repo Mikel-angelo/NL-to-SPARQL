@@ -20,12 +20,15 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
+from rdflib import Graph, Literal, URIRef
+from rdflib.namespace import RDFS, SKOS
 
 from app.core.config import settings
 from app.domain.ontology.package_activation import resolve_package_reference
 from app.domain.package import (
     DomainError,
     get_active_package,
+    metadata_path,
     ontology_context_path,
     read_json_file,
     resolve_package_dir,
@@ -82,6 +85,7 @@ class ExperimentRunner:
         dataset: EvaluationDataset,
         *,
         prefix_map: dict[str, str] | None = None,
+        answer_aliases: dict[str, list[str]] | None = None,
     ) -> tuple[ExperimentRun, AggregatedMetrics]:
         """Run every dataset question and return raw results plus aggregate metrics.
 
@@ -105,7 +109,7 @@ class ExperimentRunner:
         total = len(dataset.questions)
         for index, question in enumerate(dataset.questions, 1):
             print(f"[{index}/{total}] {question.id}: {question.nl_question[:80]}")
-            question_result, comparison = await self._run_single_question(question, prefix_map)
+            question_result, comparison = await self._run_single_question(question, prefix_map, answer_aliases)
             experiment.results.append(question_result)
             metrics.append(
                 compute_question_metrics(
@@ -135,6 +139,7 @@ class ExperimentRunner:
         self,
         question,
         prefix_map: dict[str, str] | None,
+        answer_aliases: dict[str, list[str]] | None,
     ) -> tuple[QuestionResult, ComparisonResult | None]:
         """Run one question through the runtime pipeline and score it if possible."""
         result = QuestionResult(
@@ -182,7 +187,12 @@ class ExperimentRunner:
         if not result.is_scored:
             return result, None
 
-        comparison = compare_results(result.final_answers, question.gold_answers, prefix_map=prefix_map)
+        comparison = compare_results(
+            result.final_answers,
+            question.gold_answers,
+            prefix_map=prefix_map,
+            answer_aliases=answer_aliases,
+        )
         result.comparison = asdict(comparison)
         return result, comparison
 
@@ -442,6 +452,73 @@ def prefix_map_from_package(package_dir: str | Path) -> dict[str, str]:
     return prefix_map
 
 
+def answer_aliases_from_package(package_dir: str | Path) -> dict[str, list[str]]:
+    """Build URI -> lexical aliases from the package source graph for scoring.
+
+    This lets evaluation compare URI gold answers with generated label/name
+    answers without forcing runtime prompts to return a single representation.
+    The extraction is generic: standard labels plus name/title-like literal
+    predicates from any namespace.
+    """
+    root = resolve_package_dir(package_dir)
+    metadata = read_json_file(metadata_path(root))
+    ontology_file = metadata.get("ontology_file")
+    source_file = root / ontology_file if isinstance(ontology_file, str) and ontology_file.strip() else None
+    if source_file is None or not source_file.exists():
+        candidates = sorted((root / "ontology").glob("source.*"))
+        if not candidates:
+            return {}
+        source_file = candidates[0]
+
+    graph = Graph()
+    graph.parse(source_file)
+
+    ranked_aliases: dict[str, list[tuple[int, str]]] = {}
+    for subject, predicate, obj in graph:
+        if not isinstance(subject, URIRef) or not isinstance(predicate, URIRef) or not isinstance(obj, Literal):
+            continue
+        rank = _alias_predicate_rank(predicate)
+        if rank is None:
+            continue
+        text = str(obj).strip()
+        if not text:
+            continue
+        ranked_aliases.setdefault(str(subject), []).append((rank, text))
+
+    aliases: dict[str, list[str]] = {}
+    for uri, values in ranked_aliases.items():
+        ordered = []
+        for _, text in sorted(values, key=lambda item: (item[0], item[1].lower())):
+            if text not in ordered:
+                ordered.append(text)
+        aliases[uri] = ordered
+    return aliases
+
+
+def _alias_predicate_rank(predicate: URIRef) -> int | None:
+    if predicate == RDFS.label:
+        return 0
+    if predicate == SKOS.prefLabel:
+        return 1
+    local = _local_name(str(predicate)).lower()
+    ranks = {
+        "name": 2,
+        "title": 3,
+        "label": 4,
+        "preflabel": 5,
+        "pref_label": 5,
+        "displayname": 6,
+        "display_name": 6,
+    }
+    return ranks.get(local)
+
+
+def _local_name(uri: str) -> str:
+    if "#" in uri:
+        return uri.rsplit("#", 1)[-1]
+    return uri.rstrip("/").rsplit("/", 1)[-1]
+
+
 def default_output_dir(package_dir: str | Path, dataset_name: str) -> Path:
     """Return a timestamped, non-overwriting output directory under the package."""
     root = resolve_package_dir(package_dir) / "evaluation"
@@ -494,7 +571,11 @@ async def run_from_cli(args) -> dict[str, Path]:
     await preflight_endpoint(endpoint, timeout=args.preflight_timeout)
 
     runner = ExperimentRunner(config)
-    experiment, metrics = await runner.run_experiment(dataset, prefix_map=prefix_map_from_package(package_dir))
+    experiment, metrics = await runner.run_experiment(
+        dataset,
+        prefix_map=prefix_map_from_package(package_dir),
+        answer_aliases=answer_aliases_from_package(package_dir),
+    )
     saved = save_experiment(experiment, metrics, output_dir)
 
     print()
