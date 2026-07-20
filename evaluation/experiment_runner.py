@@ -552,9 +552,15 @@ async def run_from_cli(args) -> dict[str, Path]:
         model_name=args.model or settings.default_llm_model,
         retrieval_top_k=args.k or settings.runtime_retrieval_top_k,
         chunking_strategy=args.chunking or settings.default_chunking_strategy,
-        use_abox_rag=bool(args.abox_rag),
+        use_abox_rag=(
+            args.abox_rag if args.abox_rag is not None else settings.default_use_abox_rag
+        ),
         abox_retrieval_top_k=args.abox_k or settings.runtime_abox_retrieval_top_k,
-        use_reactive_abox_discovery=bool(args.reactive_abox_discovery),
+        use_reactive_abox_discovery=(
+            args.reactive_abox_discovery
+            if args.reactive_abox_discovery is not None
+            else settings.default_use_reactive_abox_discovery
+        ),
         correction_max_iterations=args.corrections or settings.correction_max_iterations,
     )
     print("Evaluation config")

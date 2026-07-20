@@ -20,6 +20,7 @@ flowchart TD
     build_all[build_all_indexes]
     chunks[build_chunks per strategy]
     index[build_index per strategy\nembeddings + FAISS]
+    abox[build_abox_index\ninstance chunks + FAISS]
     uploads[build_fuseki_uploads_from_package]
     fuseki[replace_dataset]
     active[set_active_package]
@@ -36,7 +37,9 @@ flowchart TD
     merge --> context
     context --> write
     write --> build_all --> chunks --> index
+    write -->|default unless --no-abox-index| abox
     index --> result
+    abox --> result
 
     write --> uploads
     uploads --> fuseki
@@ -66,6 +69,7 @@ flowchart TD
 | Build chunks | `build_chunks()` in `app/domain/rag/chunking.py` |
 | Build every package index | `build_all_indexes()` in `app/domain/rag/build_index.py` |
 | Build embeddings and one FAISS index | `build_index()` in `app/domain/rag/build_index.py` |
+| Build ABox chunks and index | `build_abox_index()` in `app/domain/rag/build_abox_index.py` |
 | Upload local package data | `FusekiService.replace_dataset()` in `app/clients/fuseki.py` |
 | Mark active package | `set_active_package()` in `app/domain/package.py` |
 
@@ -84,6 +88,8 @@ ontology_packages/<package>/
   indexes/property_based/index.faiss
   indexes/composite/chunks.json
   indexes/composite/index.faiss
+  indexes/abox/chunks.json
+  indexes/abox/index.faiss
   logs/onboard.log
 ```
 
@@ -94,6 +100,7 @@ ontology_packages/<package>/
 - Endpoint onboarding creates a package but does not upload to managed Fuseki.
 - Endpoint onboarding skips external schema downloads by calling `prepare_final_graph(..., resolve_missing_schemas=False)`.
 - Onboarding builds all supported retrieval index strategies into `indexes/<strategy>/`.
-- Model, retrieval top-k, chunking strategy, and correction attempts are not package settings; runtime and evaluation resolve them from explicit inputs or `app/core/config.py`.
+- Onboarding builds `indexes/abox/` by default unless `--no-abox-index` is passed.
+- Model, schema retrieval top-k, ABox retrieval use, ABox top-k, chunking strategy, and correction attempts are not package settings; runtime and evaluation resolve them from explicit inputs or `app/core/config.py`.
 - The ontology mode and schema coverage are saved into `metadata.json`.
 - Package directories are durable artifacts; Fuseki is reloadable runtime state.

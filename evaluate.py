@@ -24,11 +24,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--package", required=True, help="Active package directory path or name")
     parser.add_argument("--model", default="", help="Optional model override")
     parser.add_argument("--k", type=int, default=None, help="Optional retrieval top-k override")
-    parser.add_argument("--abox-rag", action="store_true", help="Retrieve from the optional ABox instance index")
+    parser.add_argument(
+        "--abox-rag",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Enable or disable retrieval from the optional ABox instance index",
+    )
     parser.add_argument("--abox-k", type=int, default=None, help="Optional ABox retrieval top-k override")
     parser.add_argument(
         "--reactive-abox-discovery",
-        action="store_true",
+        action=argparse.BooleanOptionalAction,
+        default=None,
         help="Enable legacy endpoint-based ABox discovery during empty-result correction",
     )
     parser.add_argument(

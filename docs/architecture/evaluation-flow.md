@@ -12,10 +12,10 @@ flowchart TD
     preflight[preflight_endpoint\nASK WHERE before timed run]
     dataset[load_dataset]
     output[choose output directory\n<package>/evaluation/<dataset>-<minute>]
-    config[ExperimentConfig\npackage_dir\nmodel_name\nretrieval top-k\nchunking strategy\ncorrection attempts]
+    config[ExperimentConfig\npackage_dir\nmodel_name\nschema retrieval top-k\nchunking strategy\nABox flags/top-k\ncorrection attempts]
     runner[ExperimentRunner.run_experiment]
     question[for each EvaluationQuestion]
-    pipeline[run_query_pipeline\nuses same package\npasses model + top-k + chunking]
+    pipeline[run_query_pipeline\nuses same package\npasses model + schema top-k + chunking\nplus optional ABox retrieval settings]
     answers[extract_answers_from_sparql_json]
     qresult[QuestionResult\nfinal SPARQL\nanswers\niterations\ntrace paths\nlatency]
     scored{gold_answers present?}
@@ -70,7 +70,7 @@ Each question stores:
 - comparison details for scored questions
 - iteration summaries from the runtime trace
 - trace paths back to package-level query logs
-- latency and pipeline config, including retrieval top-k, chunking strategy, and correction attempts
+- latency and pipeline config, including schema retrieval top-k, ABox retrieval settings, chunking strategy, and correction attempts
 
 ## Metrics Split
 
@@ -108,5 +108,11 @@ ontology_packages/<package>/evaluation/<run>/
 - Unscored questions count toward operational metrics, not correctness metrics.
 - `--k` controls retrieval top-k for the underlying query pipeline.
 - `--chunking` selects one prebuilt package index for the underlying query pipeline.
+- `--abox-rag` enables retrieval from the optional `indexes/abox` instance index.
+- `--no-abox-rag` disables ABox retrieval for one evaluation run.
+- `--abox-k` controls ABox retrieval top-k for the underlying query pipeline.
+- `--reactive-abox-discovery` enables the legacy endpoint-based ABox discovery step during empty-result correction.
+- `--no-reactive-abox-discovery` disables reactive ABox discovery for one evaluation run.
 - `--corrections` controls the maximum correction loop attempts for each evaluated question.
+- When ABox and reactive ABox flags are omitted, `app/core/config.py` supplies the defaults.
 - `run_config.json` is the concentrated record of the actual runtime settings used for the evaluation run.

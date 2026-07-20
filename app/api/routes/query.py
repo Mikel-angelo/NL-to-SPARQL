@@ -20,9 +20,9 @@ class QueryRequest(BaseModel):
     question: str = Field(min_length=1)
     model: str | None = Field(default=None, min_length=1)
     k: int | None = Field(default=None, ge=1)
-    abox_rag: bool = False
+    abox_rag: bool | None = None
     abox_k: int | None = Field(default=None, ge=1)
-    reactive_abox_discovery: bool = False
+    reactive_abox_discovery: bool | None = None
     chunking: Literal["class_based", "property_based", "composite"] | None = None
     corrections: int | None = Field(default=None, ge=1)
 

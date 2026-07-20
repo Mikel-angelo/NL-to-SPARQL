@@ -23,7 +23,12 @@ Default runtime settings live in `app/core/config.py`:
 - Fuseki: `http://127.0.0.1:3030`
 - Fuseki admin login: `admin` / `admin`
 - Embedding model: `all-MiniLM-L6-v2`
-- Default LLM model: `qwen2.5-coder:7b`
+- Default LLM model: `qwen2.5-coder:32b`
+- Default schema chunking strategy: `class_based`
+- Default schema retrieval top-k: `5`
+- Default ABox retrieval top-k: `5`
+- ABox indexes are built during onboarding by default.
+- ABox retrieval uses `settings.default_use_abox_rag`; the current default is `True`.
 - LLM API URL: `http://147.102.6.253:11500/api/generate`
 
 ## Setup
@@ -75,7 +80,7 @@ You must provide exactly one source. Do not pass both `--ontology` and `--sparql
 Basic file onboarding:
 
 ```powershell
-python onboard.py --ontology resources\library\ontologies\eNOVATION.ttl --output ontology_packages
+python onboard.py --ontology resources\knowledge_graphs\eNOVATION.ttl --output ontology_packages --name enovation
 ```
 
 Accepted ontology formats:
@@ -89,8 +94,9 @@ During file onboarding, the CLI:
 - parses the ontology
 - resolves missing schemas when possible
 - extracts a normalized ontology context
-- creates retrieval chunks. right now: "class_based", "property_based", "composite"
-- builds a FAISS index
+- creates schema retrieval chunks for `class_based`, `property_based`, and `composite`
+- builds a FAISS index for each schema chunking strategy
+- builds an ABox instance retrieval index by default
 - uploads the ontology data to Fuseki
 - creates a new package under `ontology_packages/`
 - marks that package as active for the CLI and API
@@ -98,11 +104,12 @@ During file onboarding, the CLI:
 At the end, the command prints values like:
 
 ```text
-Ontology package: C:\...\ontology_packages\enovation-20260427-1840
-Dataset name: enovation-20260427-1840
-Dataset endpoint: http://127.0.0.1:3030/enovation-20260427-1840
-Query endpoint: http://127.0.0.1:3030/enovation-20260427-1840/query
+Ontology package: C:\...\ontology_packages\enovation-<timestamp>
+Dataset name: enovation-<timestamp>
+Dataset endpoint: http://127.0.0.1:3030/enovation-<timestamp>
+Query endpoint: http://127.0.0.1:3030/enovation-<timestamp>/query
 Artifacts: ...\indexes\class_based\chunks.json | ...\indexes\class_based\index.faiss
+ABox artifacts: ...\indexes\abox\chunks.json | ...\indexes\abox\index.faiss
 ```
 
 Use the printed `Ontology package` path with `activate.py` if you later need to switch back to this package.
@@ -118,6 +125,7 @@ This creates the same package structure, but does not upload a new local ontolog
 Optional onboarding arguments:
 
 - `--name`: save a readable package/dataset name base; a minute timestamp is appended
+- `--no-abox-index`: skip the default ABox instance retrieval index
 
 Supported retrieval index strategies:
 
@@ -131,14 +139,14 @@ Example:
 python onboard.py --ontology path\to\ontology.ttl --output ontology_packages --name enovation
 ```
 
-That package contains `class_based`, `property_based`, and `composite` indexes. Model, retrieval top-k, chunking strategy, and correction attempts are runtime/evaluation settings, not package settings.
+That package contains `class_based`, `property_based`, and `composite` schema indexes. It also contains an `abox` index unless onboarding was run with `--no-abox-index`. Model, schema retrieval top-k, ABox retrieval use, ABox top-k, chunking strategy, and correction attempts are runtime/evaluation settings, not package settings.
 
 ### `activate.py`
 
 Use `activate.py` when you want an existing package to become the active runtime package.
 
 ```powershell
-python activate.py --package ontology_packages\enovation-20260427-1840
+python activate.py --package ontology_packages\enovation-<timestamp>
 ```
 
 For file-based packages, activation always reloads the package into Fuseki:
@@ -182,7 +190,7 @@ No active ontology package is set
 Safe query flow for a local file package:
 
 ```powershell
-python activate.py --package ontology_packages\enovation-20260427-1840
+python activate.py --package ontology_packages\enovation-<timestamp>
 python query.py --question "Which training centres offer CBRN exercises?"
 ```
 
@@ -197,6 +205,7 @@ The query command:
 - loads the package artifacts
 - preflights the active package's configured SPARQL endpoint with `ASK WHERE { ?s ?p ?o }`
 - retrieves the most relevant ontology chunks
+- retrieves the most relevant ABox instance chunks when ABox RAG is enabled
 - generates SPARQL with the configured LLM
 - validates each candidate query through formal validation stages
 - executes a candidate only after validation passes
@@ -208,6 +217,8 @@ The output includes:
 
 - `Answer`: raw SPARQL execution result
 - `Generated SPARQL`: the generated query
+- `Chunking` and `Retrieval top-k`: schema retrieval settings used
+- `ABox RAG` and `ABox top-k`: instance retrieval settings used
 - `Trace`: path to the query log
 - `Readable trace`: path to the plain-text query trace
 - `Status`: pipeline status
@@ -233,12 +244,15 @@ Optional query arguments:
 - `--model`: use a different LLM model for this query only
 - `--k`: change the retrieval top-k, meaning how many ontology chunks are retrieved for the prompt
 - `--chunking`: choose which prebuilt package index to retrieve from: `class_based`, `property_based`, or `composite`
+- `--abox-rag` / `--no-abox-rag`: override ABox instance retrieval for this query
+- `--abox-k`: change the ABox retrieval top-k
+- `--reactive-abox-discovery` / `--no-reactive-abox-discovery`: override the legacy endpoint-based ABox discovery step during empty-result correction
 - `--corrections`: change the maximum number of validation/execution correction attempts
 
 Example with query overrides:
 
 ```powershell
-python query.py --question "..." --model qwen2.5-coder:7b --k 5 --chunking property_based --corrections 3
+python query.py --question "..." --model qwen2.5-coder:32b --k 5 --chunking property_based --abox-k 5 --corrections 3
 ```
 
 ## Package Layout
@@ -264,6 +278,9 @@ ontology_packages/
       composite/
         chunks.json
         index.faiss
+      abox/
+        chunks.json
+        index.faiss
     logs/
       onboard.log
       query.log
@@ -278,6 +295,8 @@ Important files:
 - `ontology_context.json`: normalized ontology structure used by the runtime
 - `indexes/<strategy>/chunks.json`: text chunks for one retrieval strategy
 - `indexes/<strategy>/index.faiss`: vector index for one retrieval strategy
+- `indexes/abox/chunks.json`: instance-level ABox chunks, when built
+- `indexes/abox/index.faiss`: vector index for ABox retrieval, when built
 - `logs/onboard.log`: onboarding trace
 - `logs/query.log`: machine-readable query trace JSON
 - `logs/query-latest.txt`: latest human-readable query trace
@@ -296,14 +315,14 @@ The CLI query command and FastAPI routes use this active package. For local file
 Use `evaluate.py` to run a dataset of natural-language questions and gold SPARQL answers against one package.
 
 ```powershell
-python activate.py --package ontology_packages\enovation-20260427-1840
-python evaluate.py --dataset evaluation\datasets\eNOVATION_eval_dataset.json --package ontology_packages\enovation-20260427-1840
+python activate.py --package ontology_packages\enovation-<timestamp>
+python evaluate.py --dataset evaluation\datasets\eNOVATION_eval_dataset.json --package ontology_packages\enovation-<timestamp>
 ```
 
 Example with explicit retrieval settings:
 
 ```powershell
-python evaluate.py --dataset evaluation\datasets\eNOVATION_eval_dataset.json --package ontology_packages\enovation-20260427-1840 --model qwen2.5-coder:32b --k 5 --chunking property_based --corrections 3
+python evaluate.py --dataset evaluation\datasets\eNOVATION_eval_dataset.json --package ontology_packages\enovation-<timestamp> --model qwen2.5-coder:32b --k 5 --chunking property_based --abox-k 5 --corrections 3
 ```
 
 Evaluation calls the runtime pipeline directly, not the HTTP API. This keeps query latency focused on retrieval, generation, validation, correction, and SPARQL execution rather than FastAPI transport overhead.
@@ -318,14 +337,17 @@ Important behavior:
 - unscored questions count toward latency, validation, execution, and correction metrics, but not correctness metrics
 - `--k` is retrieval top-k, not the correction iteration count
 - `--chunking` chooses which prebuilt package index to retrieve from
+- `--abox-rag` / `--no-abox-rag` overrides ABox instance retrieval
+- `--abox-k` controls the ABox retrieval top-k
+- `--reactive-abox-discovery` / `--no-reactive-abox-discovery` overrides legacy endpoint-based ABox discovery during empty-result correction
 - `--corrections` chooses the maximum correction loop attempts for each question
-- when CLI flags are omitted, evaluation uses `app/core/config.py` defaults, not package defaults
-- evaluation records the actual model, retrieval top-k, chunking strategy, and correction attempts in one concentrated file: `run_config.json`
+- when model, schema top-k, chunking, ABox use, ABox top-k, reactive ABox discovery, and corrections are omitted, evaluation uses `app/core/config.py` defaults, not package defaults
+- evaluation records the actual model, schema retrieval top-k, ABox retrieval settings, chunking strategy, and correction attempts in one concentrated file: `run_config.json`
 
 Evaluation output files:
 
 - `index.txt`: one-line status summary for every question
-- `run_config.json`: experiment id, dataset, package, model, retrieval top-k, chunking strategy, and correction attempts
+- `run_config.json`: experiment id, dataset, package, model, schema retrieval top-k, ABox retrieval settings, chunking strategy, and correction attempts
 - `results.json`: per-question pipeline output, answers, traces, and scoring status
 - `metrics.json`: aggregate metrics
 - `report.txt`: readable summary
@@ -363,11 +385,16 @@ The API has no package selector for `/query`. It always queries the active packa
 - `model`: optional LLM model override
 - `k`: optional retrieval top-k override
 - `chunking`: optional retrieval index strategy override, one of `class_based`, `property_based`, or `composite`
+- `abox_rag`: optional boolean for ABox instance retrieval; omitted means use `app/core/config.py`
+- `abox_k`: optional ABox retrieval top-k override
+- `reactive_abox_discovery`: optional boolean for legacy endpoint-based ABox discovery during empty-result correction; omitted means use `app/core/config.py`
 - `corrections`: optional correction attempt limit
 
 `POST /ontology/load` accepts multipart form data:
 
 - `file`: ontology file, required
+
+The API load route follows the default onboarding behavior and builds the ABox index.
 
 The static UI at `GET /` exposes the same upload and query routes.
 
